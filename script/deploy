@@ -1,0 +1,9 @@
+#!/bin/sh
+
+ssh app@APP.SERVER.IP.ADDRESS <<EOF
+  cd ~/AN
+  git pull
+  npm install --production
+  forever restartall
+  exit
+EOF
