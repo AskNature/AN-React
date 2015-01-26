@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ssh app@APP.SERVER.IP.ADDRESS <<EOF
+ssh app@107.170.226.233 <<EOF
   cd ~/AN
   git pull
   npm install --production
