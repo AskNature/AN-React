@@ -1,9 +1,0 @@
-#!/bin/sh
-
-ssh app@107.170.226.233 <<EOF
-  cd ~/AN
-  git pull
-  npm install --production
-  forever restartall
-  exit
-EOF
