@@ -9,6 +9,15 @@ var Defaults = {
         description: 'A React + Flux application',
         keywords: null
 
+    },
+
+    outcome: {
+      results : [
+      {
+        name: 'Outcome Placeholder',
+        description: 'Loading ...'
+      }
+      ]
     }
 
 

@@ -67,3 +67,54 @@
     color: #000;
     padding: 0.5em 0;
 }
+
+/*
+These temp styles were just imported for the filter list demo.
+
+Styleguide 1.0.0.
+*/
+
+h1 {
+  color: white;
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 20px;
+  background: #2c3e50;
+}
+
+.filter-list {
+  margin: auto;
+  width: 300px;
+  background: #3498db;
+  border-radius: 5px;
+  border: 1px solid darken(#3498db, 20%);
+  input {
+    width: 100%;
+    display: block;
+    padding: 10px;
+    border-radius: 5px 5px 0px 0px;
+    border: 0;
+    font-size: 24px;
+    &:focus {
+      outline: none;
+    }
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      list-style-type: none;
+      margin: 0;
+      color: white;
+      padding: 10px 20px;
+      border-top: 1px solid darken(#3498db, 20%);
+      &:hover {
+        background: #2980b9;
+      }
+    }
+  }
+}

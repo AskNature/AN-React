@@ -1,7 +1,13 @@
+/**
+* Index Component
+*/
 'use strict';
 
 var React = require('react');
 var DefaultLayout = require('./layouts/default.jsx');
+
+// For now, this page just displays the OutcomeFilter module */
+var OutcomeFilter = require('./modules/outcomefilter.jsx');
 
 var IndexComponent = React.createClass({
     render: function() {
@@ -10,12 +16,11 @@ var IndexComponent = React.createClass({
             <DefaultLayout>
                 <div className="main-container">
                     <div className="yeogurt-info">
-                        <h1>Welcome to Yeogurt!</h1>
+                        <h1>Welcome to AskNature!</h1>
+                        <h2>Check out these mega-awesome functions:</h2>
+                        <OutcomeFilter name="Outcomes!!" />
                         <p>
                             Take a look at the <a href="https://github.com/larsonjj/generator-yeogurt#yeogurt-generator">documentation</a> and start mixing up something awesome.
-                        </p>
-                        <p>
-                            <img src="/images/yeogurt-swirl.png" width="75px" className="logo" />
                         </p>
                         <p className="links">
                             <a href="/docs/styleguide/index.html">Styleguide</a>
