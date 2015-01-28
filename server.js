@@ -6,14 +6,17 @@
 // Module dependencies.
 var express = require('express');
 
-// Add coloring for console output
-require('colors');
-
 // Create Express server.
 var app = express();
 
+// Database configuration
+var dataconfig = require('./server/config/database')(app);
+
 // Express configuration
 require('./server/config/express')(app, express);
+
+// Add coloring for console output
+require('colors');
 
 // Start Express server.
 app.listen(app.get('port'), function() {
