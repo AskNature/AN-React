@@ -1,9 +1,10 @@
 #!/bin/sh
 
+scp -r dist/. app@107.170.226.233:~/dist
+
 ssh app@107.170.226.233 <<EOF
-  cd ~/AN
-  git pull
-  npm install && bower install --production
-  forever restartall
+  cd ~/dist
+  npm install --production
+  NODE_ENV=production PORT=80 forever restartall
   exit
 EOF
