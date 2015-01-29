@@ -72,40 +72,95 @@ This section may have more to do with our internal processes, but I'm including 
 
 Much of this is pulled from this fantastic presentation from the Envato team: [10 Deploys a Day - A Case Study of Continuous Delivery at Envato](http://webuild.envato.com/blog/10-deploys-a-day-a-case-study-of-continuous-delivery-at-envato/) - January 2014
 
+It's all about _distributed collaboration_ vs central control.
+
 Our process:_ Pull work > Consult product team > Write code > Test code > Deploy code > Verify production
 *Repeat ... about twice a week per developer.*
 
-Now, in a bit more detail:
+Thanks to feature toggles (flippers), we _Always Deploy It_.
 
-1. Start with the story on the wall
-2. Flip or no flip?
-3. Create a branch.
-4. Write failing test.
-5. Write code.
-6. Run local tests.
-7. Run full personal build.
-8. Create pull request.
-9. Advertise pull request.
-10. Wait for code review.
-11. Merge pull request.
-12. Full master build green.
-13. Notify team.
-14. Deploy master to production.
-15. Watch system-monitoring tools.
-16. Rollback if failed.
-17. Rinse and repeat.
+_Everybody knows what's happening without having to ask._ All automated processes feed automated notifications to a centralized IRC channel (or equivalent) — which is also where the team converses.
 
-Optional:
+_Things can break ... and do._ Require multiple quality checkpoints throughout pipeline and make it easy to rollback.
 
-* Deploy to staging.
-* Show product owner.
-* Manual test.
+_You build it you run it._ Each developer is responsible for ongoing quality assurance for code they produce.
 
+*_Fail Fast and Loud_*
 
 ### Practices
 
+Now, in a bit more detail. This process follows [GitHub Flow](http://scottchacon.com/2011/08/31/github-flow.html), and is a marked departure from the previous [Git-flow](http://nvie.com/posts/a-successful-git-branching-model/) process we used on AskNature 1.x:
+
+1. Start with the story
+2. Flip or no flip?
+ * Goal to flip everything
+3. Create a branch off master
+4. Write failing test
+ * Critical!!
+5. Write code
+6. Run local tests
+7. Run full personal build
+8. Create pull request
+ * Github Pull Request
+ * This can be done long before branch is ready to be merged
+9. Advertise pull request
+ * Optional: invite/assign reviewers
+10. Wait for code review
+11. Merge pull request (with master)
+12. Full master build green
+13. Notify team
+14. Deploy master to production
+15. Watch system-monitoring tools
+16. Rollback if failed
+17. Rinse and repeat
+
+Optional:
+
+* Deploy to staging
+* Show product owner
+* Manual test
+
+What we do _not_ do:
+* No - testing role or formal (manual) testing gate
+ * Requires 1000s of automated tests
+ * Use production users as test team
+ * Feature toggles help control rollout
+* No - change control gate
+ * Everyone knows of changes before they happen because they review them as pull requests
+ * Green build = sign off
+ * Developers have skin in the game so they are incentivized for code to work.
+ * Small changes are easier to identify and rollback when things go wrong.
+* No - formal communication of every change
+ * Informal and/or automated communication instead
+* No - release management
+ * Small releases don't require extra definition or documentation.
+ * Instead, commit messages that radiate through IRC (or equivalent).
+* No - Separate deployment team or process
+* No - Separate operations team
+
+
+
 ### Tools
 
+*Version Control*
+[GitHub](http://www.github.com/AskNature/AN). Nuff said.
+
+*Continuous Integration Server*
+We use Jenkins CI on a dedicated DigitalOcean Droplet for automated testing and deployment, but may switch to a hosted service like [Codeship](http://codeship.io) or [CircleCI](https://circleci.com).
+
+*Feature Toggles*
+We are considering options that feature powerful options and a GUI, such as OpenTable's [Hobknob](https://github.com/opentable/hobknob).
+
+*Local Testing & Building*
+We use [Mocha](http://mochajs.org/) for local asynchronous testing, and may augment it with [Chai Assertion Library](http://chaijs.com/).
+
+*Local Task Automation*
+We use [Grunt](http://gruntjs.com/) to automate tasks like builds, tests, and server activities.
+
+*Centralized Updates*
+Consider an installation of [Hubot](https://hubot.github.com/) on Heroku or our testing server so we can have a centralized activity feed.
+
+---
 
 
 ## Initial Installation Procedure
