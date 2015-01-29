@@ -2,6 +2,40 @@
 
 ## The Stack
 
+| Product | Version | What it does | How we use it |
+|---|---|---|---|
+| **Hosting** ||||
+| **Databases** ||||
+| [OrientDB](http://orienttechnologies.com/orientdb/) | 2.0.0 | OrientDB is an Open Source NoSQL DBMS with the features of both Document and Graph DBMSs. | OrientDB is AskNature's primary database, and is used to store and index everything except for some user information. |
+| **Platform** ||||
+| [Node.js](http://node.js) | 0.10.36 | Node.js® is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices. |                                                                                                                   Node provides the foundation of the AskNature application. |
+| [Express.js](http://express.js) |  | Officially, Express.js is a "Fast, unopinionated, minimalist web framework for Node.js." [This article](http://evanhahn.com/understanding-express/) provides a much more nuanced overview and is a great primer for Node & Express. | Express adds a framework on top of Node that AskNature uses for routing, request handling, and a bunch of other cool stuff. |
+| **Client-side Architecture** ||||
+| Flux ||||
+| **Front-end Libraries & Frameworks** ||||
+| React.js ||||
+| Bootstrap ||||
+| etc... ||||
+| **Automation & Testing** ||||
+| Grunt ||||
+| Minifyify ||||
+| Browserify ||||
+| KSS ||||
+| Imagemin ||||
+| Test Runner ||||
+| Karma ||||
+| Connect-Livereload ||||
+| Include-all ||||
+| JSHint ||||
+| JSDoc ||||
+| **Authentication & Security** ||||
+| Lusca ||||
+| Passport | tbd |||
+| **Database Drivers** ||||
+| [Oriento](https://github.com/codemix/oriento) |  | Official node.js driver for OrientDB. Fast, lightweight, uses the binary protocol—which happens to be the fastest option available. | Oriento lets our Node application talk to the database in the most efficient way possible. |
+| **External Services** ||||
+
+
 ## Documentation Principles and Procedures
 
 ### JS
@@ -67,6 +101,8 @@ This section may have more to do with our internal processes, but I'm including 
 [Continuous Deployment of Node.js Applications](http://blog.risingstack.com/continuous-deployment-of-node-js-applications/) - October 2014
 
 [10 Deploys a Day - A Case Study of Continuous Delivery at Envato](http://webuild.envato.com/blog/10-deploys-a-day-a-case-study-of-continuous-delivery-at-envato/) - January 2014
+
+[Quora - What is Continuous Integration?](http://www.quora.com/What-is-continuous-integration)
 
 ### Principles
 
