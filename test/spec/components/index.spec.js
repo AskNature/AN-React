@@ -27,7 +27,7 @@ describe('Index Component', function() {
 
     it('must know the answer to life, the universe, and everything', function() {
         var answer = 42;
-        expect(answer).to.equal(43);
+        expect(answer).to.equal(42);
     });
 
 });
