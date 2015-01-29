@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export NVM_DIR="/var/lib/jenkins/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+nvm use 0.10.36
+
+npm install
+bower install
+grunt
