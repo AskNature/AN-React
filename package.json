@@ -24,7 +24,8 @@
         "express-session": "~1.6.0",
         "lusca": "~1.0.0",
         "morgan": "~1.0.0",
-        "ejs": "~0.8.4"
+        "ejs": "~0.8.4",
+        "oriento": "~1.0.1"
     },
     "devDependencies": {
         "rimraf": "~2.2.8",
