@@ -1,11 +1,10 @@
 #!/bin/sh
 
-scp -r dist app@107.170.226.233:~/dist
+scp -r dist/. app@107.170.226.233:~/dist
 
 ssh app@107.170.226.233 <<EOF
   cd ~/dist
   npm install --production
-  forever stopall
-  NODE_ENV=production PORT=80 forever server
+  NODE_ENV=production PORT=80 forever restartall
   exit
 EOF
