@@ -17,7 +17,7 @@ var IndexComponent = React.createClass({
                 <div className="main-container">
                     <div className="yeogurt-info">
                         <h1>Welcome to AskNature!</h1>
-                        <h2>Check out these mega-awesome functions:</h2>
+                        <h2>Check out these mega-super-awesome functions:</h2>
                         <OutcomeFilter name="Outcomes!!" />
                         <p>
                             Take a look at the <a href="https://github.com/larsonjj/generator-yeogurt#yeogurt-generator">documentation</a> and start mixing up something awesome.
