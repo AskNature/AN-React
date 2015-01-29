@@ -373,4 +373,46 @@ Follow procedure described [here](https://www.digitalocean.com/community/tutoria
 
 ### Remote Staging/Testing Server
 
-For now we're using Jenkins to redeploy to production server, but we haven't set up a working environment or tests yet.
+For now we're using Jenkins to redeploy to production server. The steps to set this server up are encoded below.
+
+```
+// establish a user account with sudo privileges
+
+// update apt
+# sudo apt-get update
+
+// install git
+# sudo apt-get install git
+
+// install fix for phantomjs testing
+# sudo apt-get install libfontconfig
+
+// install jenkins
+# sudo wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
+# sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
+# sudo apt-get update
+# sudo apt-get install jenkins
+
+# sudo su jenkins
+
+// install nvm
+jenkins# curl https://raw.githubusercontent.com/creationix/nvm/v0.23.2/install.sh | bash
+jenkins# export NVM_DIR="/var/lib/jenkins/.nvm"
+jenkins# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+// install node and npm
+jenkins# nvm install 0.10.36
+
+// fix npm for race condition
+jenkins# npm -g install npm@2.1.1
+
+// install grunt and bower
+jenkins# npm install -g bower
+jenkins# npm install -g grunt-cli
+
+jenkins# logout
+
+# sudo /etc/init.d/jenkins start
+```
+
+Now you're ready to use Jenkins! Just set up a Jenkins job that monitors GitHub and calls jenkins/build and jenkins/deploy as independent build steps.
