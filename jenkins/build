@@ -5,5 +5,5 @@ export NVM_DIR="/var/lib/jenkins/.nvm"
 nvm use 0.10.36
 
 npm install
-bower install
+bower install --config.interactive=false
 grunt
