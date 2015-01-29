@@ -25,4 +25,9 @@ describe('Index Component', function() {
         expect(this.indexComponent).to.be.ok;
     });
 
+    it('must pass an impossible test', function() {
+        var answer = 2+2;
+        expect(answer).to.equal(5);
+    });
+
 });

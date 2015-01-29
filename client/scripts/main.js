@@ -47,3 +47,4 @@ Dispatcher.register(function(payload) {
 });
 
 console.log('Welcome to Yeogurt');
+console.log('This shouldn\'t appear');
