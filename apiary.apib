@@ -1,13 +1,13 @@
 FORMAT: 1A
 
 # AskNature
-Notes API is a *short texts saving* service similar to its physical paper presence on your table.
+AskNature API is an *inspiration* service that helps innovators understand how living systems have solved challenges similar to their own.
 
-# Group Notes
-Notes related resources of the **Notes API**
+# Group Functions/Outcomes
+Function/outcome related resources of the **AskNature API**
 
-## Notes Collection [/notes]
-### List all Notes [GET]
+## Functions [/functions]
+### List all Functions [GET]
 + Response 200 (application/json)
 
         [{
@@ -16,7 +16,7 @@ Notes related resources of the **Notes API**
           "id": 2, "title": "Pick-up posters from post-office"
         }]
 
-### Create a Note [POST]
+### Create a Function [POST]
 + Request (application/json)
 
         { "title": "Buy cheese and bread for breakfast." }
@@ -25,13 +25,13 @@ Notes related resources of the **Notes API**
 
         { "id": 3, "title": "Buy cheese and bread for breakfast." }
 
-## Note [/notes/{id}]
-A single Note object with all its details
+## Individual Function [/functions/{id}]
+A single Function object with all its details
 
 + Parameters
     + id (required, number, `1`) ... Numeric `id` of the Note to perform action with. Has example value.
 
-### Retrieve a Note [GET]
+### Retrieve a Function [GET]
 + Response 200 (application/json)
 
     + Header
@@ -42,5 +42,5 @@ A single Note object with all its details
 
             { "id": 2, "title": "Pick-up posters from post-office" }
 
-### Remove a Note [DELETE]
+### Remove a Function [DELETE]
 + Response 204
