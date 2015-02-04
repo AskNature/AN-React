@@ -7,7 +7,7 @@ var React = require('react');
 var DefaultLayout = require('./layouts/default.jsx');
 
 // For now, this page just displays the OutcomeFilter module */
-var OutcomeFilter = require('./modules/outcomefilter.jsx');
+var OutcomeFilter = require('./modules/outcometable.jsx');
 
 var IndexComponent = React.createClass({
     render: function() {
@@ -15,7 +15,7 @@ var IndexComponent = React.createClass({
             /* jshint ignore:start */
             <DefaultLayout>
                 <div className="main-container">
-                    <div className="yeogurt-info">
+                    <div>
                         <h1>Welcome to AskNature!</h1>
                         <h2>Check out these mega-super-ultra-awesome functions:</h2>
                         <OutcomeFilter name="Outcomes!!" />

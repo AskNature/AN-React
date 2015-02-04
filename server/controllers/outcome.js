@@ -10,7 +10,7 @@ var Oriento = require('oriento'),
 // I'm positive there's a cleaner and more efficient way to connect to the db:
 config = require('../config/secrets.json'),
 oriento = Oriento(config.server),
-db = oriento.use('AskNature'),
+db = oriento.use(config.database),
 
 settings = require('../config/env/default'),
 path = require('path');
@@ -39,7 +39,24 @@ var returnOutcomes = function(req, res) {
   .done();
 }
 
+
+/** Return a list of functions, along with the names of each function's children and parent.*/
+
+var returnFunctions = function(req, res) {
+  db
+  .select('name, description, in("ChildOf").name as children, out("ChildOf").name as parent')
+  .from('Function')
+  .all()
+  .then(function (results) {
+      res.send({results: results});
+      console.log('The outcome controller has sent ' + results.length + ' records.');
+      console.log(results);
+  })
+  .done();
+}
+
     module.exports = {
       loadindex: loadindex,
-      returnOutcomes: returnOutcomes
+      returnOutcomes: returnOutcomes,
+      returnFunctions: returnFunctions
     };

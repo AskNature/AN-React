@@ -7,17 +7,18 @@ var taskConfig = function(grunt) {
 
     grunt.config.set('jsdoc', {
         server : {
-            src: ['<%= yeogurt.client %>/scripts/**/*', '*.md'],
+            src: ['<%= yeogurt.client %>/scripts/**/*','<%= yeogurt.server %>/**/*', '*.md'],
             dest: '<%= yeogurt.tmp %>/docs/api',
             options: {
                 template : '<%= yeogurt.client %>/docs/api/theme'
             }
         },
         dist : {
-            src: ['<%= yeogurt.client %>/scripts/**/*', '*.md'],
+            src: ['<%= yeogurt.client %>/scripts/**/*', '<%= yeogurt.server %>/**/*', '*.md'],
             dest: '<%= yeogurt.dist %>/client/docs/api',
             options: {
-                template : '<%= yeogurt.client %>/docs/api/theme'
+                template : 'node_modules/grunt-jsdoc/node_modules/ink-docstrap/template',
+                configure: 'node_modules/grunt-jsdoc/node_modules/ink-docstrap/template/jsdoc.conf.json'
             }
         }
     });

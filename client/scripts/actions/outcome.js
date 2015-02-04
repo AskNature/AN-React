@@ -38,6 +38,7 @@ module.exports = {
         if (res) {
           var outcomesData = res.body;
           self.setOutcome(outcomesData);
+          console.log(res.body);
         }
         if (callback && callback.success) {
           callback.success(res);
