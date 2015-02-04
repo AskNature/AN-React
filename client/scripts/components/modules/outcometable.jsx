@@ -44,7 +44,17 @@ var OutcomeFilter = React.createClass({
   },
   componentWillMount: function(){
     outcomeActions.getOutcomes();
-
+      var items = this.state.items;
+        $('#functions').dataTable({
+       "destroy": true,
+       "data": items,
+       "columns" : [
+       {"data":"name","title": "Short Name"},
+       {"data":"description","title": "Long Name"},
+       {"data":"parent","title": "Parent Function"},
+       {"data":"children","title": "Child Functions"}
+       ]
+     });
 
 
   },
@@ -72,10 +82,10 @@ var OutcomeFilter = React.createClass({
   // Event handler for 'change' events coming from store mixins.
   _onChange: function() {
       this.setState(getState());
-      var yipee = this.state.items;
+      var items = this.state.items;
         $('#functions').dataTable({
        "destroy": true,
-       "data": yipee,
+       "data": items,
        "columns" : [
        {"data":"name","title": "Short Name"},
        {"data":"description","title": "Long Name"},
