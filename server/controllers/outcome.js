@@ -43,6 +43,5 @@ var returnFunctions = function(req, res) {
 
     module.exports = {
       loadindex: loadindex,
-      returnOutcomes: returnOutcomes,
       returnFunctions: returnFunctions
     };
