@@ -197,6 +197,8 @@ We use [Grunt](http://gruntjs.com/) to automate tasks like builds, tests, and se
 Consider an installation of [Hubot](https://hubot.github.com/) on Heroku or our testing server so we can have a centralized activity feed.
 
 ---
+## Database Migration Procedure
+
 
 
 ## Initial Installation Procedure
