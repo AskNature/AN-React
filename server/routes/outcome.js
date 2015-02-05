@@ -9,7 +9,7 @@
 var outcomes = require('../controllers/outcome');
 
 var routes = function (app) {
-  app.get('/outcome/all', outcomes.returnOutcomes);
+  app.get('/outcome/all', outcomes.returnFunctions);
 };
 
 module.exports = routes;

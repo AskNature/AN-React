@@ -14,8 +14,10 @@ var Defaults = {
     outcome: {
       results : [
       {
-        name: 'Outcome Placeholder',
-        description: 'Loading ...'
+        name: 'Loading ...',
+        description: 'Loading ...',
+        parent: 'Loading ...',
+        children: 'Loading ...'
       }
       ]
     }

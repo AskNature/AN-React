@@ -4,7 +4,7 @@
 */
 
 'use strict';
-
+var db = require('../config/database').db;
 var Oriento = require('oriento'),
 
 // I'm positive there's a cleaner and more efficient way to connect to the db:
@@ -26,20 +26,23 @@ var loadindex = function(req, res, next) {
    next();
 };
 
-/**
-* Instruct db to return all records in the "Function" class. This query should be changed to gremlin syntax.
-*/
+/** Return a list of functions, along with the names of each function's children and parent.*/
 
-var returnOutcomes = function(req, res) {
-  db.select().from('Function').all()
+var returnFunctions = function(req, res) {
+  db
+  .select('name, description, in("ChildOf").name as children, out("ChildOf").name as parent')
+  .from('Function')
+  .all()
   .then(function (results) {
       res.send({results: results});
       console.log('The outcome controller has sent ' + results.length + ' records.');
+      console.log(results);
   })
   .done();
 }
 
     module.exports = {
       loadindex: loadindex,
-      returnOutcomes: returnOutcomes
+      returnOutcomes: returnOutcomes,
+      returnFunctions: returnFunctions
     };
