@@ -19,46 +19,63 @@
 // [injector]
 // [endinjector]
 
-.yeogurt-info {
-    text-align: center;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+body {
+  // Compensate for the 50px tall fixed navbar with padding-top
+  padding-top: 70px;
 }
 
-.version {
-    font-size: 14px;
-    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+label {
+  font-weight: normal;
 }
 
-.logo {
-    margin-top: 15px;
+.dataTables_length {
+  float: right !important;
 }
 
-.links a {
-    color: white;
-    margin-right: 5px;
-    margin-top: 20px;
-    border-radius: 4px;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-    background: #ed7c6c;
-    display: inline-block;
-    zoom: 1;
-    line-height: normal;
-    white-space: nowrap;
-    vertical-align: baseline;
-    text-align: center;
-    cursor: pointer;
-    font-size: 100%;
-    padding: .5em 1em;
-    text-decoration: none;
+.dataTables_filter {
+  float: left !important;
+  width: 50% !important;
+  text-align: left !important;
+  label {
+    display: block !important;
+
+  }
 }
 
+.navmenu-fixed-left {
+  top: 70px;
+}
 
+.sidebar-toggle {
+  position: relative;
+  float:left;
+  padding-left: 15px;
+}
 
+.container {
+  max-width: 100%;
+}
+
+@media (min-width: 1px) {
+  .sidebar-toggle {
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navmenu-fixed-left {
+    top: 64px;
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-left: 300px;
+  }
+  .sidebar-toggle {
+    display: none !important;
+  }
+}
 // Styling on warning for users on IE7 or below
 .browsehappy {
     text-align: center;

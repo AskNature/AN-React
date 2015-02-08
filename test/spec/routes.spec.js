@@ -6,7 +6,7 @@
 
 'use strict';
 
-var routes = require('../../client/scripts/routes');
+var routes = require('../../client/scripts/routes.jsx');
 
 describe('Routes for router', function() {
 

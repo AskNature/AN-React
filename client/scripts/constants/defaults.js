@@ -20,6 +20,28 @@ var Defaults = {
         children: 'Loading ...'
       }
       ]
+    },
+
+    strategy: {
+      results : [
+      {
+        function: 'Loading...',
+        name: 'Loading ...',
+        description: 'Loading ...',
+        living_system: 'Loading ...'
+      }
+      ]
+    },
+
+    product: {
+      results : [
+      {
+        function: 'Loading ...',
+        name: 'Loading ...',
+        description: 'Loading ...',
+        inspiredby: 'Loading ...'
+      }
+      ]
     }
 
 
