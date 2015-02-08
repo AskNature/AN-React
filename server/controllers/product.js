@@ -29,8 +29,9 @@ var loadindex = function(req, res, next) {
 
 var returnList = function(req, res) {
   db
-  .select('name, description, in("ChildOf").name as children, out("ChildOf").name as parent')
-  .from('Function')
+  .select('name, headline as description, out("InspiredBy").name as inspiredby, out("HasFunction").description as function')
+  .from('InspiredSolutions')
+  .where({status: 0})
   .all()
   .then(function (results) {
       res.status(200).json({

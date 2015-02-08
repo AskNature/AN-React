@@ -6,10 +6,11 @@
 
 'use strict';
 
-var outcomes = require('../controllers/outcome');
+var focusController = require('../controllers/outcome');
 
 var routes = function (app) {
-  app.get('/outcome/all', outcomes.returnFunctions);
+  app.get('/admin/outcomes', focusController.loadindex, focusController.returnList);
+  app.get('/api/outcomes', focusController.returnList);
 };
 
 module.exports = routes;
