@@ -1,7 +1,7 @@
 'use strict';
 
 var Router = require('director').Router;
-var routes = require('./routes.jsx');
+var routes = require('./routes');
 var Dispatcher = require('./dispatchers/default');
 var pageConstants = require('./constants/page');
 var routesConstants = require('./constants/routes');
