@@ -6,7 +6,7 @@
 
 'use strict';
 
-var outcomeActions = require('../../../client/scripts/actions/Outcome');
+var outcomeActions = require('../../../client/scripts/actions/outcome');
 
 describe('Outcome Actions', function() {
 
