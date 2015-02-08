@@ -21,7 +21,7 @@ var routes = function (app) {
 
     // Home
     app.get('/', indexController.index);
-
+    app.get('*', indexController.index);
 };
 
 module.exports = routes;

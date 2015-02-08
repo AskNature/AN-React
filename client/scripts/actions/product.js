@@ -4,8 +4,8 @@
 'use strict';
 
 var Dispatcher = require('../dispatchers/default');
-var focusConstants = require('../constants/outcome');
-var focusDefaults = require('../constants/defaults').outcome;
+var focusConstants = require('../constants/product');
+var focusDefaults = require('../constants/defaults').strategy;
 var request = require('superagent');
 var assign = require('object-assign');
 
@@ -17,7 +17,7 @@ module.exports = {
 
   setList: function(focus) {
     Dispatcher.handleViewAction({
-      actionType: focusConstants.GET_ALL_OUTCOMES,
+      actionType: focusConstants.GET_ALL_PRODUCTS,
       focus: assign({}, focusDefaults, focus)
     });
     console.log('setList action returning '+focus.results.length + ' results.');
@@ -31,7 +31,7 @@ module.exports = {
   getList: function(callback) {
     var self = this;
     request
-    .get('/api/outcomes')
+    .get('/api/products')
     .type('json')
     .end(function(res) {
       if (res.ok) {

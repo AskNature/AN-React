@@ -7,11 +7,11 @@ var React = require('react');
 
 /** Gets incoming information from the store */
 
-var focusStore = require('../../stores/outcome');
+var focusStore = require('../../stores/product');
 
 /** Sends outgoing requests to an action */
 
-var focusActions = require('../../actions/outcome');
+var focusActions = require('../../actions/product');
 
 /** getState can be called to get state updates from the store.
 * initialItems = entire list that remains static
@@ -35,10 +35,10 @@ var initializeTable = function(state) {
       "lengthMenu": "_MENU_"
     },
     "columns" : [
-    {"data":"name","title": "Short Name"},
-    {"data":"description","title": "Long Name"},
-    {"data":"parent","title": "Parent Function"},
-    {"data":"children","title": "Child Functions"}
+    {"data":"function","title": "Functions"},
+    {"data":"name","title": "Headline"},
+    {"data":"description","title": "Abstract"},
+    {"data":"inspiredby","title": "Inspired By"}
     ]
  });
   $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');

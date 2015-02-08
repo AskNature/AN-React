@@ -2,6 +2,8 @@
 
 var React = require('react');
 var pageStore = require('../../stores/page');
+var Navbar = require('../modules/navbar.jsx');
+var Sidebar = require('../modules/sidebar.jsx');
 
 var getState = function() {
     return {
@@ -21,6 +23,9 @@ var DefaultComponent = React.createClass({
         return (
             /* jshint ignore:start */
             <div>
+            <Sidebar />
+            <Navbar />
+
                 <div className="default">
                     <div className="main-container">
                         <div className="content">

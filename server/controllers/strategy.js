@@ -22,21 +22,23 @@ path = require('path');
 var loadindex = function(req, res, next) {
   // Render index.html to allow application to handle routing
    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
-   console.log('The product page has access to the ' + db.name + ' database.');
+   console.log('The strategy page has access to the ' + db.name + ' database.');
 };
 
 /** Return a list of functions, along with the names of each function's children and parent.*/
 
-var returnList = function(req, res) {
+var returnList = function(req, res, next) {
   db
-  .select('name, description, in("ChildOf").name as children, out("ChildOf").name as parent')
-  .from('Function')
+  .select('name, summary as description, out("HasLivingSystem").name as living_system, out("HasFunction").description as function')
+  .from('Strategy')
+  .where({status: 0})
   .all()
   .then(function (results) {
+
       res.status(200).json({
         results: results
       });
-      console.log('The product controller has sent ' + results.length + ' records.');
+      console.log('The outcome controller has sent ' + results.length + ' records.');
       // console.log(results);
   })
   .done();
