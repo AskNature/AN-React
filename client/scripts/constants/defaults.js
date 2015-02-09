@@ -25,10 +25,25 @@ var Defaults = {
     strategy: {
       results : [
       {
-        function: 'Loading...',
+        function: [],
         name: 'Loading ...',
         description: 'Loading ...',
-        living_system: 'Loading ...'
+        living_system: [],
+        masterid: 'Loading ...'
+      }
+      ]
+    },
+
+    strategy_detail: {
+      results : [
+      {
+          name: 'Nature is Coming...',
+          summary: 'Abstract',
+          masterid: 'masterid',
+          media: [],
+          brief: 'Brief goes here',
+          functions: [],
+          living_systems: []
       }
       ]
     },

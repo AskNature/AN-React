@@ -29,7 +29,7 @@ var loadindex = function(req, res, next) {
 
 var returnList = function(req, res, next) {
   db
-  .select('name, summary as description, out("HasLivingSystem").name as living_system, out("HasFunction").description as function')
+  .select('name, summary as description, out("HasLivingSystem").name as living_system, out("HasFunction").description as function, masterid')
   .from('Strategy')
   .where({status: 0})
   .all()
@@ -38,13 +38,30 @@ var returnList = function(req, res, next) {
       res.status(200).json({
         results: results
       });
-      console.log('The outcome controller has sent ' + results.length + ' records.');
+      console.log('The strategy controller has sent ' + results.length + ' records.');
       // console.log(results);
   })
   .done();
 }
 
+var returnItem = function(req, res, next) {
+  console.log(req.params.id);
+  db
+  .select('name, summary, special_text, brief, out("HasLivingSystem").name as living_system, out("HasFunction").description as functions, out("HasMedia").filename as media, masterid')
+  .from('Strategy')
+  .where('masterid LIKE "' + req.params.id + '"')
+  .all()
+  .then(function (results) {
+      res.status(200).json({
+        results: results
+      });
+  })
+  .done();
+}
+
+
     module.exports = {
       loadindex: loadindex,
-      returnList: returnList
+      returnList: returnList,
+      returnItem: returnItem
     };
