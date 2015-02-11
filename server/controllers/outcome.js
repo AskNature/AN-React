@@ -38,6 +38,7 @@ var returnList = function(req, res) {
       });
       console.log('The product controller has sent ' + results.length + ' records.');
       // console.log(results);
+      console.log("User: " + JSON.stringify(req.user));
   })
   .done();
 }

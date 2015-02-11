@@ -5,6 +5,7 @@
 
 // Module dependencies.
 var express = require('express');
+var passport = require('passport');
 
 // Create Express server.
 var app = express();
@@ -12,8 +13,11 @@ var app = express();
 // Database configuration
 var dataconfig = require('./server/config/database')(app);
 
+// Passport configuration
+require('./server/config/passport')(passport);
+
 // Express configuration
-require('./server/config/express')(app, express);
+require('./server/config/express')(app, express, passport);
 
 // Add coloring for console output
 require('colors');
