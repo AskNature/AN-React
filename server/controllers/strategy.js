@@ -34,7 +34,6 @@ var returnList = function(req, res, next) {
   .where({status: 0})
   .all()
   .then(function (results) {
-
       res.status(200).json({
         results: results
       });
@@ -47,7 +46,7 @@ var returnList = function(req, res, next) {
 var returnItem = function(req, res, next) {
   console.log(req.params.id);
   db
-  .select('name, summary, special_text, brief, out("HasLivingSystem").name as living_system, out("HasFunction").description as functions, out("HasMedia").filename as media, masterid')
+  .select('name, summary, special_text, brief, masterid, out("HasLivingSystem").name as living_system, out("HasFunction").description as functions, out("HasMedia").filename as media, in("InspiredBy").name as products, out("FeaturedIn").name as sources, in("StudiedBy").name as experts, in("Bookmarked").name as collectors, timestamp, entered_by, date_entered, additional_functions, keywords, common_name, other_names, additional_taxa, applications_sector, applications, source_citation, pages_of_excerpt, source, pdf_file_name, image_file_name, additional_reference, video_url, general_strategy, editor_comments, scientific_name, application_1, application_2, application_3, status')
   .from('Strategy')
   .where('masterid LIKE "' + req.params.id + '"')
   .all()

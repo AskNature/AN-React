@@ -27,9 +27,10 @@ var Defaults = {
       {
         function: [],
         name: 'Loading ...',
-        description: 'Loading ...',
+        description: '',
         living_system: [],
-        masterid: 'Loading ...'
+        masterid: '',
+        status: ''
       }
       ]
     },
@@ -38,12 +39,17 @@ var Defaults = {
       results : [
       {
           name: 'Nature is Coming...',
-          summary: 'Abstract',
+          summary: '...and She\'s Pissed',
           masterid: 'masterid',
           media: [],
           brief: 'Brief goes here',
           functions: [],
-          living_systems: []
+          living_system: [],
+          products: [],
+          sources: ['Loading'],
+          collectors: [],
+          experts: [],
+          keywords: 'Tag1, tag2'
       }
       ]
     },

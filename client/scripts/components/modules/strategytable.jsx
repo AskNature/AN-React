@@ -45,7 +45,7 @@ var initializeTable = function(state) {
     {"data":"description","title": "Abstract"},
     {"data":"function","title": "Functions"},
     {"data":"living_system","title": "Living Systems"}
-        ]
+            ]
  });
  $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');
 
