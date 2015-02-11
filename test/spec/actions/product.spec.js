@@ -6,7 +6,7 @@
 
 'use strict';
 
-var productActions = require('../../../client/scripts/actions/Product');
+var productActions = require('../../../client/scripts/actions/product');
 
 describe('Product Actions', function() {
 

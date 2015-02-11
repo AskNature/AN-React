@@ -1,11 +1,11 @@
 'use strict';
 
-var React = require('react');
+var React = require('react/addons');
 var routeActions = require('./actions/routes');
-var IndexPage = require('./components/index.jsx');
-var OutcomesConsole = require('./components/admin/outcomes.jsx');
-var StrategiesConsole = require('./components/admin/strategies.jsx');
-var ProductsConsole = require('./components/admin/products.jsx');
+var IndexPage = React.createFactory(require('./components/index.jsx'));
+var OutcomesConsole = React.createFactory(require('./components/admin/outcomes.jsx'));
+var StrategiesConsole = React.createFactory(require('./components/admin/strategies.jsx'));
+var ProductsConsole = React.createFactory(require('./components/admin/products.jsx'));
 
 var render = function(Page) {
     React.render(new Page(), document.getElementById('app-wrapper'));
