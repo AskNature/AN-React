@@ -1,16 +1,20 @@
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var config = require('./secrets.json');
 
-module.exports = function(passport) {
+module.exports = function(passport, database) {
     passport.serializeUser(function(user, done) {
-	console.log("User: ");
-	console.log(user);
 	done(null, user.id);
     });
 
     passport.deserializeUser(function(id, done) {
-	// fetch the user from orient here
-	done(null, {id: id, name: "Scott Halstvedt"});
+	// fetch the user from orient
+	database.select().from('PassportUser').where({id: id}).limit(1).one().then(function(user) {
+	    if(user) {
+		return done(null, user);
+	    } else {
+		return done("User doesn't exist in database!", null);
+	    }
+	});
     });
 
     passport.use(new GoogleStrategy({
@@ -20,10 +24,22 @@ module.exports = function(passport) {
     },
     function(accessToken, refreshToken, profile, done) {
 	// find or create user in orient
-	// update user with refresh token
-	// return done(err, user)
-	console.log("Hit!");
-	return done(null, {id: 1, name: "Scott Halstvedt"});
+	database.select().from('PassportUser').where({id: profile.id}).limit(1).one().then(function(user) {
+            if(user) {
+		return done(null, user);
+            } else {
+		// create new profile in database
+		database.insert().into('PassportUser')
+		    .set({
+			id: profile.id,
+			username: profile.displayName,
+			email: profile.emails[0].value,
+			google: true
+		    }).one().then(function(user) {
+			return done(null, user);
+		    });
+	    }
+	});
     }
 ));
 }
