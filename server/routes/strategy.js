@@ -9,8 +9,11 @@
 var focusController = require('../controllers/strategy');
 
 var routes = function (app) {
-  app.get('/admin/strategies', focusController.loadindex, focusController.returnList);
+  app.get('/admin/strategies', focusController.loadindex);
   app.get('/api/strategies', focusController.returnList);
+
+  app.get('/strategy/*', focusController.loadindex);
+  app.get('/api/strategy/:id', focusController.returnItem);
 };
 
 module.exports = routes;

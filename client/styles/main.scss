@@ -56,6 +56,18 @@ label {
   max-width: 100%;
 }
 
+// Bootstrap Customizations
+
+.carousel {
+  height: 400px;
+  overflow:hidden;
+  background: #f9f9f9;
+  .carousel-inner > .item > img {
+    position: relative;
+    min-width: 100%;
+  }
+}
+
 @media (min-width: 1px) {
   .sidebar-toggle {
     display: block !important;
