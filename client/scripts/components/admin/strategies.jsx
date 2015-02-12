@@ -1,5 +1,5 @@
 /**
-* Strategy Console
+* PhenomenaConsole
 */
 'use strict';
 
