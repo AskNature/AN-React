@@ -32,9 +32,11 @@ module.exports = function(passport, database) {
 		database.insert().into('PassportUser')
 		    .set({
 			id: profile.id,
-			username: profile.displayName,
+			username: profile.emails[0].value.split("@")[0],
+			firstName: profile.name.givenName,
+			lastName: profile.name.familyName,
 			email: profile.emails[0].value,
-			google: true
+			provider: "Google"
 		    }).one().then(function(user) {
 			return done(null, user);
 		    });
