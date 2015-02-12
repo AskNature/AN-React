@@ -4,27 +4,29 @@
 'use strict';
 
 var Dispatcher = require('../dispatchers/default');
-var focusConstants = require('../constants/strategy');
-var focusDefaults = require('../constants/defaults').strategy;
+var listConstants = require('../constants/strategy');
+var itemConstants = require('../constants/strategy_detail');
+var listDefaults = require('../constants/defaults').strategy;
+var itemDefaults = require('../constants/defaults').strategy_detail;
 var request = require('superagent');
 var assign = require('object-assign');
 
 module.exports = {
 
   /**
-  * setOutcome is called by getOutcomes and sends a request to the dispatcher.
+  * setList is called by getList and sends a request to the dispatcher.
   */
 
   setList: function(focus) {
     Dispatcher.handleViewAction({
-      actionType: focusConstants.GET_ALL_STRATEGIES,
-      focus: assign({}, focusDefaults, focus)
+      actionType: listConstants.GET_ALL_STRATEGIES,
+      focus: assign({}, listDefaults, focus)
     });
     console.log('setList action returning '+focus.results.length + ' results.');
   },
 
   /**
-  * getOutcomes is called by the outcomefilter component. It defines the URI
+  * getList is called by the strategytable component. It defines the URI
   * that the router uses to pass a request to the controller.
   */
 
@@ -55,5 +57,50 @@ module.exports = {
       }
     });
   },
+
+  setItem: function(focus, next) {
+    Dispatcher.handleViewAction({
+      actionType: itemConstants.GET_STRATEGY,
+      focus: assign({}, itemDefaults, focus)
+    });
+    console.log('setItem action returning '+ focus.results + ' result.');
+  },
+
+  /**
+  * getItem is called by the strategytable component. It defines the URI
+  * that the router uses to pass a request to the controller.
+  */
+
+  getItem: function(load, callback) {
+    var self = this;
+    var id = load;
+    request
+    .get('/api'+id)
+    .type('json')
+    .end(function(res) {
+      if (res.ok) {
+        if (res) {
+          var itemData = res.body;
+          self.setItem(itemData);
+          console.log(res.body);
+        }
+        if (callback && callback.success) {
+          callback.success(res);
+        }
+      }
+      else {
+        if (callback && callback.error) {
+          callback.error(res);
+        }
+      }
+
+      if (callback && callback.complete) {
+        callback.complete(res);
+      }
+    });
+  },
+
+
+
 
 };
