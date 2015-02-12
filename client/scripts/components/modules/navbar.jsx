@@ -1,13 +1,6 @@
 'use strict';
 
 var React = require('react');
-var Navbar = require('react-bootstrap').Navbar,
-Nav = require('react-bootstrap').Nav,
-NavItem = require('react-bootstrap').NavItem,
-MenuItem = require('react-bootstrap').MenuItem,
-DropdownButton = require('react-bootstrap').DropdownButton,
-Link = require('./link.jsx');
-
 
 var getState = function() {
     return {
@@ -21,30 +14,42 @@ var NavbarComponent = React.createClass({
         return getState();
     },
     render: function() {
-
-      var brand = <Link url="/">AskNature</Link>;
-
         return (
             /* jshint ignore:start */
-            <Navbar fluid inverse fixedTop role="banner">
-              {/* Temp button for left offcanvas menu */}
+            <div className="navbar navbar-inverse navbar-fixed-top">
+              <div className="container-fluid">
+                <div className="navbar-header">
+                  <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                  </button>
                   <button type="button" className="navbar-toggle sidebar-toggle" data-toggle="offcanvas" data-target=".navmenu-fixed-left">
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                   </button>
-                  <Link className="navbar-brand" url="/">AskNature</Link>
-              {/* End temp button for left offcanvas menu */}
-                  <Nav right navbar role="navigation">
-                    <DropdownButton title="Account">
-                      <MenuItem eventKey="2">Action</MenuItem>
-                      <MenuItem eventKey="3">Another action</MenuItem>
-                      <MenuItem eventKey="4">Something else here</MenuItem>
-                      <MenuItem divider />
-                      <MenuItem eventKey="5">Separated link</MenuItem>
-                    </DropdownButton>
-                  </Nav>
-            </Navbar>
+                  <a className="navbar-brand" href="#">AskNature</a>
+                </div>
+                <div className="navbar-collapse collapse navbar-inverse-collapse">
+
+                  <ul className="nav navbar-nav navbar-right">
+                    <li><a href="#">Link</a></li>
+                    <li className="dropdown">
+                      <a href="#" className="dropdown-toggle" data-toggle="dropdown">Your Account <b className="caret"></b></a>
+                      <ul className="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li className="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
             /* jshint ignore:end */
         );
     },

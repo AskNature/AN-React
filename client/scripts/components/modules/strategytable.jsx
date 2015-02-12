@@ -4,7 +4,6 @@
 'use strict';
 
 var React = require('react');
-var routeActions = require('../../actions/routes');
 
 /** Gets incoming information from the store */
 
@@ -30,24 +29,19 @@ var initializeTable = function(state) {
   $('#list').dataTable({
    "destroy": true,
    "data": listitems,
-   stateSave: true,
    "language": {
       search: "",
       searchPlaceholder: "Filter",
       "lengthMenu": "_MENU_"
     },
     "columns" : [
-    {"data":"name","title": "Headline", "render": function(data,type,row) {
-      var url = '../strategy/'+row['masterid'];
-      return '<a href="'+url+'"><strong>'+data+'</strong></a>';
-    }
-    },
-    {"data":"description","title": "Abstract"},
     {"data":"function","title": "Functions"},
-    {"data":"living_system","title": "Living Systems"}
-            ]
+    {"data":"name","title": "Headline"},
+    {"data":"description","title": "Abstract"},
+    {"data":"living_system","title": "Living System"}
+    ]
  });
- $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');
+  $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');
 
 
 }
@@ -69,17 +63,19 @@ var ItemsFilter = React.createClass({
   componentDidMount: function(){
     focusActions.getList();
     initializeTable(this.state);
-
   },
   render: function() {
-
     return (
       <div>
         <table className='table display' id='list'>
 
         </table>
+        <button className='btn btn-primary' onClick={this.handleClick} label="Reset">Reset</button>
       </div>
     )
+  },
+  handleClick: function() {
+    focusActions.getList();
   },
   // Event handler for 'change' events coming from store mixins.
   _onChange: function() {
