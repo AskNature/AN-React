@@ -22,9 +22,6 @@ var routes = function (app, passport) {
 
     // Home
     app.get('/', indexController.index);
-    /*app.post('/login', passport.authenticate('local'), function(req, res) {
-	res.redirect('/' + req.user.username);
-    });*/
 };
 
 module.exports = routes;
