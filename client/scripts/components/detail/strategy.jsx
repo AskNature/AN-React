@@ -127,13 +127,27 @@ var StrategyDetail = React.createClass({
                   <h3>{detail.name}</h3>
                   <p className="lead">{detail.summary}</p>
                   <ButtonList items={detail.living_system} title="Living Systems"/>
-                  <ButtonList items={detail.functions} title="Outcomes"/>
                 </Col>
+
                 <Col xs={12} md={6}>
-                  <Gallery items={detail} />
+                  <Well bsSize="small">
+                    <Gallery items={detail} />
+                  </Well>
                 </Col>
-                </Row>
-                <Row className="show-grid">
+
+                  <Col xs={12} md={4}>
+                    <Well>
+                      <h6>Challenges</h6>
+                    </Well>
+                  </Col>
+                  <Col xs={6} md={4}>
+                    <Well>
+                      <h6>Mechanisms</h6>
+                    </Well>
+                  </Col>
+                  <Col xs={6} md={4}>
+                    <ButtonList items={detail.functions} title="Outcomes"/>
+                  </Col>
                   <Col xs={12} md={12}>
                     <Well>
                       <h6>The Story</h6>

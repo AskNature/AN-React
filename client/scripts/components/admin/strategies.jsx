@@ -13,7 +13,7 @@ var FocusConsole = React.createClass({
             /* jshint ignore:start */
             <DefaultLayout>
                 <div className="main-container">
-                        <h1>Strategy Console</h1>
+                        <h1>Natural Solutions Console</h1>
                         <FocusTable />
                 </div>
             </DefaultLayout>
