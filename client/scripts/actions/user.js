@@ -18,6 +18,22 @@ module.exports = {
 	});
   },
 
+  createUser: function(data, success) {
+    console.log(data);
+    var self = this;
+    request
+    .post('/api/user/create')
+    .send(data)
+    .end(function(res) {
+	if(res.ok) {
+	    if(res) {
+		self.fetchUser();
+		success();
+	    }
+	}
+    });
+  },
+
   updateUser: function(data) {
     var self = this;
     request

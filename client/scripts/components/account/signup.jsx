@@ -10,8 +10,23 @@ Col = require('react-bootstrap').Col,
 Panel = require('react-bootstrap').Panel,
 Input = require('react-bootstrap').Input;
 
+var FormData = require('react-form-data');
+
+var userActions = require('../../actions/user');
+var routeActions = require('../../actions/routes');
 
 var Login = React.createClass({
+    mixins: [ FormData ],
+
+    createSuccess: function() {
+    	routeActions.setRoute("/settings");
+    },
+
+    handleSubmit: function(e) {
+    	userActions.createUser(this.formData, this.createSuccess);
+	e.preventDefault();
+    },
+
     render: function() {
       var title = (
         <h2>Sign up</h2>
@@ -24,7 +39,7 @@ var Login = React.createClass({
                   <Row className="show-grid">
                     <Col xs={12} md={6} mdOffset={3}>
                       <Panel header={title} id="login-panel">
-                        <form>
+                        <form onChange={this.updateFormData} onSubmit={this.handleSubmit}>
                         <Row className="show-grid">
                         <Col xs={12}>
                         <Button href='/auth/google' target="_blank" bsStyle="primary">Sign up with Google</Button>
@@ -33,8 +48,8 @@ var Login = React.createClass({
                         </Row>
                         <Row className="show-grid">
                           <Col xs={12}>
-                          <Input type="email" placeholder="Email Address" />
-                          <Input type="password" placeholder="Password" />
+                          <Input name="email" type="email" placeholder="Email Address" />
+                          <Input name="password" type="password" placeholder="Password" />
                           <Link className="pull-left" url="#">Already have an account?</Link>
                           <Input className="pull-right" type="submit" value="Sign Up" />
                           </Col>
