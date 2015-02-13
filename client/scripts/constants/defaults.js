@@ -15,7 +15,8 @@ var Defaults = {
 	username: 'john.smith',
 	firstName: 'John',
 	lastName: 'Smith',
-	email: 'john.smith@website.com'
+	email: 'john.smith@website.com',
+  loggedIn: true
     },
 
     outcome: {
