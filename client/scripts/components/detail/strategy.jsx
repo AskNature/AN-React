@@ -51,7 +51,7 @@ var ButtonList = React.createClass({
         {
           items.map(function(item, i){
             return (
-              <OverlayTrigger placement="top" overlay={<Tooltip>{item}</Tooltip>}>
+              <OverlayTrigger placement="top" overlay={<Tooltip>{item}</Tooltip>} key={i}>
                 <Button block>{item}</Button>
               </OverlayTrigger>
             )

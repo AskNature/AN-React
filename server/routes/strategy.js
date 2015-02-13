@@ -12,7 +12,7 @@ var routes = function (app) {
   app.get('/admin/strategies', focusController.loadindex);
   app.get('/api/strategies', focusController.returnList);
 
-  app.get('/strategy/*', focusController.loadindex);
+  app.get('/strategy/:id', focusController.loadindex);
   app.get('/api/strategy/:id', focusController.returnItem);
 };
 

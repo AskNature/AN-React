@@ -24,33 +24,23 @@ var getState = function() {
 
 var LinkComponent = React.createClass({
   render: function(){
-    url ="../strategy/" + this.props.masterid;
-    return <Link url={url}>{this.props.name}</Link>
+    var url ="../strategy/"+ this.props.rowData.masterid;
+    return <Link url={url}>{this.props.data}</Link>
+  },
+  // Event handler for 'change' events coming from store mixins.
+  _onChange: function() {
+      this.setState(getState());
   }
 });
 
 var columnMeta = [
   {
   "columnName": "name",
-  "displayName": "Title",
-  "order": 1,
-  "locked": false,
   "visible": true,
   "customComponent": LinkComponent
-},
-{
-  "columnName": "summary",
-  "visible": false
-},
-{
-  "columnName": "functions",
-  "visible": false
-},
-{
-  "columnName": "living_system",
-  "visible": false
 }
 ];
+
 
 var SidebarFilter = React.createClass({
 
@@ -69,8 +59,8 @@ var SidebarFilter = React.createClass({
 
     return (
       <div>
-        <Griddle results={this.state.items.results} tableClassName="table" showFilter={true}
- showSettings={false} columns={["name","summary","functions","living_system"]} useGriddleStyles={false} enableInfiniteScroll={true} bodyHeight={800} columnMetdata={columnMeta} />
+        <Griddle results={this.state.items.results} columnMetadata={columnMeta} tableClassName="table" showFilter={true}
+ columns={["name"]} useGriddleStyles={false} enableInfiniteScroll={true} bodyHeight={800} noDataMessage={"No data could be found, Mr. Awesomepants."}/>
       </div>
     )
   },
@@ -81,10 +71,6 @@ var SidebarFilter = React.createClass({
 });
 
 var SidebarComponent = React.createClass({
-    // mixins: [userStore.mixin],
-    getInitialState: function() {
-        return getState();
-    },
     render: function() {
         return (
             /* jshint ignore:start */
@@ -114,9 +100,9 @@ var SidebarComponent = React.createClass({
         );
     },
     // Event handler for 'change' events coming from store mixins.
-    _onChange: function() {
-        this.setState(getState());
-    }
+_onChange: function() {
+    this.setState(getState());
+}
 });
 
 module.exports =SidebarComponent;
