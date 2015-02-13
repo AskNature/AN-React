@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('lodash');
 var Store = require('./default');
 var Dispatcher = require('../dispatchers/default');
 var userConstants = require('../constants/user');
@@ -21,7 +22,12 @@ UserStore.dispatcherToken = Dispatcher.register(function(payload) {
     var action = payload.action;
 
     if (action.actionType === userConstants.SET_USER) {
-        _user = action.user;
+        if(_user) {
+	    _.assign(_user, action.user);
+	} else {
+	    _user = action.user;
+	}
+	
 
         UserStore.emitChange();
     }

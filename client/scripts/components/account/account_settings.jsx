@@ -22,7 +22,7 @@ var getState = function() {
 
 var AccountSettings = React.createClass({
 
-    mixins: [ FormData ],
+    mixins: [ FormData, userStore.mixin ],
 
     handleSubmit: function(e) {
         userActions.updateUser(this.formData);
@@ -62,9 +62,9 @@ var AccountSettings = React.createClass({
         );
     },
 
-    /*_onChange: function() {
+    _onChange: function() {
         this.setState(getState());
-    }*/
+    }
 });
 
 module.exports = AccountSettings;
