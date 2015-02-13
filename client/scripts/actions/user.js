@@ -44,14 +44,19 @@ module.exports = {
     });
   },
 
-  loginUser: function(data, callback) {
+  loginUser: function(data, success, failure) {
       var self = this;
       request
       .post('/auth/db')
       .send(data)
       .end(function(res) {
 	  if(res) {
-	      self.fetchUser(callback);
+	      if(res.status === 200) {
+		  self.fetchUser();
+		  success();
+	      } else {
+		  failure();
+	      }
 	  }
       });
   },

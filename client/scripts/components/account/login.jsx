@@ -1,4 +1,3 @@
-
 var React = require('react')
 NoChromeLayout = require('../layouts/nochrome.jsx'),
 Link = require('../modules/link.jsx'),
@@ -18,9 +17,22 @@ var routeActions = require('../../actions/routes');
 var Login = React.createClass({
     mixins: [ FormData ],
 
+    getInitialState: function() {
+        return { style: '' }
+    },
+
+    loginError: function() {
+    	this.setState({style: 'error'});
+    },
+
+    loginSuccess: function() {
+    	this.setState({style: ''});
+	routeActions.setRoute("/");
+    },
+
     handleSubmit: function(e) {
     	console.log("submit handled");
-        userActions.loginUser(this.formData, function(res) { console.log(res) });
+        userActions.loginUser(this.formData, this.loginSuccess, this.loginError);
         e.preventDefault();
     },
 
@@ -39,8 +51,8 @@ var Login = React.createClass({
                         <form onChange={this.updateFormData} onSubmit={this.handleSubmit}>
                         <Row className="show-grid">
                           <Col xs={12}>
-                          <Input name="username" type="email" placeholder="Email Address" />
-                          <Input name="password" type="password" placeholder="Password" />
+                          <Input name="username" type="email" placeholder="Email Address" bsStyle={this.state.style} />
+                          <Input name="password" type="password" placeholder="Password" bsStyle={this.state.style} />
                           <Input type="checkbox" label="Remember Me" checked />
                           <Link className="pull-left" url="#">Create AskNature Account</Link>
                           <Input className="pull-right" type="submit" bsStyle="primary" value="Login" />
