@@ -42,23 +42,32 @@ var updateUser = function(req, res, next) {
 };
 
 var createUser = function(req, res, next) {
-    console.log(JSON.stringify(req.body));
     var name = req.body.email.split("@")[0];
-    db.insert().into('PassportUser')
-    .set({
-	id: name,
-	username: name,
-	firstName: '',
-	lastName: '',
-	email: req.body.email,
-	provider: "Local",
-	password: req.body.password
-    }).one().then(function(user) {
-	console.log("user created");
-	req.login(user, function(err) {
-	    if(err) { return res.status(500).send("failure"); }
-	    return res.status(200).send("success");
-	});
+
+    var conflict = false;
+
+    db.select('count(*)').from('PassportUser').where({email: req.body.email}).scalar().then(function(count) {
+	console.log(JSON.stringify(count));
+	if(count > 0) {
+	    return res.status(400).send("email taken");
+	} else {
+	    db.insert().into('PassportUser')
+		.set({
+		    id: name,
+		    username: name,
+		    firstName: '',
+		    lastName: '',
+		    email: req.body.email,
+		    provider: "Local",
+		    password: req.body.password
+		}).one().then(function(user) {
+		    console.log("user created");
+		    req.login(user, function(err) {
+			if(err) { return res.status(400).send("failure"); }
+			return res.status(201).send("success");
+		    });
+		});	    
+	}
     });
 };
 

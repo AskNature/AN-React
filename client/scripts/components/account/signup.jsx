@@ -18,12 +18,21 @@ var routeActions = require('../../actions/routes');
 var Login = React.createClass({
     mixins: [ FormData ],
 
+    getInitialState: function() {
+    	return { style: '' }
+    },
+
     createSuccess: function() {
     	routeActions.setRoute("/settings");
     },
 
+    createFailure: function(err) {
+    	console.log(err);
+	this.setState({style: 'error'});
+    },
+
     handleSubmit: function(e) {
-    	userActions.createUser(this.formData, this.createSuccess);
+    	userActions.createUser(this.formData, this.createSuccess, this.createFailure);
 	e.preventDefault();
     },
 
@@ -48,7 +57,7 @@ var Login = React.createClass({
                         </Row>
                         <Row className="show-grid">
                           <Col xs={12}>
-                          <Input name="email" type="email" placeholder="Email Address" />
+                          <Input name="email" type="email" placeholder="Email Address" bsStyle={this.state.style} />
                           <Input name="password" type="password" placeholder="Password" />
                           <Link className="pull-left" url="#">Already have an account?</Link>
                           <Input className="pull-right" type="submit" value="Sign Up" />

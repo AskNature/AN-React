@@ -18,7 +18,7 @@ module.exports = {
 	});
   },
 
-  createUser: function(data, success) {
+  createUser: function(data, success, failure) {
     console.log(data);
     var self = this;
     request
@@ -30,6 +30,8 @@ module.exports = {
 		self.fetchUser();
 		success();
 	    }
+	} else {
+	    failure(res.body);
 	}
     });
   },
