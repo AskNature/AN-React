@@ -1,7 +1,7 @@
 
 var React = require('react')
 NoChromeLayout = require('../layouts/nochrome.jsx'),
-Link = require('./modules/link.jsx'),
+Link = require('../modules/link.jsx'),
 
 Button = require('react-bootstrap').Button,
 Grid = require('react-bootstrap').Grid,

@@ -1,4 +1,4 @@
-B1;2c/**
+/**
 * User actions
 */
 'use strict';

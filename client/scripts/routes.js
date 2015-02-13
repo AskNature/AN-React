@@ -7,9 +7,9 @@ var OutcomesConsole = React.createFactory(require('./components/admin/outcomes.j
 var StrategiesConsole = React.createFactory(require('./components/admin/strategies.jsx'));
 var ProductsConsole = React.createFactory(require('./components/admin/products.jsx'));
 var StrategyDetail = React.createFactory(require('./components/detail/strategy.jsx'));
-var Login = React.createFactory(require('./components/modules/login.jsx'));
-var Signup = React.createFactory(require('./components/modules/signup.jsx'));
-var AccountSettings = React.createFactory(require('./components/modules/account_settings.jsx'));
+var Login = React.createFactory(require('./components/account/login.jsx'));
+var Signup = React.createFactory(require('./components/account/signup.jsx'));
+var AccountSettings = React.createFactory(require('./components/account/account_settings.jsx'));
 
 
 var render = function(Page) {
