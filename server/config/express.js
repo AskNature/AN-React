@@ -11,12 +11,13 @@ var logger = require('morgan');
 var path = require('path');
 var methodOverride = require('method-override');
 var errorHandler = require('errorhandler');
+var session = require('express-session');
 
 // Configuration files
 var settings = require('./env/default');
 var security = require('./security');
 
-var expressConfig = function(app, express) {
+var expressConfig = function(app, express, passport) {
 
     var hour = 3600000;
     var day = hour * 24;
@@ -60,6 +61,13 @@ var expressConfig = function(app, express) {
     // Returns middleware that parses cookies
     app.use(cookieParser());
 
+    // Uses Express session middleware
+    app.use(session({secret: "secrets"}));
+
+    // Use Passport middleware that authenticates users
+    app.use(passport.initialize());
+    app.use(passport.session());
+
     // Setup log level for server console output
     app.use(logger(settings.server.logLevel));
 
@@ -75,7 +83,7 @@ var expressConfig = function(app, express) {
     }
 
     // Load routes
-    require(path.join(settings.root,'./server/routes'))(app);
+    require(path.join(settings.root,'./server/routes'))(app, passport);
 
     // 404 Error Handler
     app.use(function(req, res) {

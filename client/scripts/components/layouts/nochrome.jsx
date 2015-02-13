@@ -2,23 +2,15 @@
 
 var React = require('react');
 var pageStore = require('../../stores/page');
-var userStore = require('../../stores/user');
-var userActions = require('../../actions/user');
-var Navbar = require('../modules/navbar.jsx');
-var Sidebar = require('../modules/sidebar.jsx');
 
 var getState = function() {
     return {
-        title: pageStore.get().title,
-	user: userStore.get()
+        title: pageStore.get().title
     };
 };
 
-var DefaultComponent = React.createClass({
-    mixins: [pageStore.mixin, userStore.mixin],
-    componentWillMount: function() {
-    	userActions.fetchUser();
-    },
+var NoChromeComponent = React.createClass({
+    mixins: [pageStore.mixin],
     componentDidMount: function() {
         pageStore.emitChange();
     },
@@ -28,18 +20,13 @@ var DefaultComponent = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <div>
-            <Sidebar />
-            <Navbar user={this.state.user} />
-
-                <div className="default">
+                <div className="fullscreen">
                     <div className="main-container">
                         <div className="content">
                             {this.props.children}
                         </div>
                     </div>
                 </div>
-            </div>
             /* jshint ignore:end */
         );
     },
@@ -49,4 +36,4 @@ var DefaultComponent = React.createClass({
     }
 });
 
-module.exports = DefaultComponent;
+module.exports = NoChromeComponent;

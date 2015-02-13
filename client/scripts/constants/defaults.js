@@ -11,6 +11,10 @@ var Defaults = {
 
     },
 
+    user: {
+        loggedIn: false
+    },
+
     outcome: {
       results : [
       {

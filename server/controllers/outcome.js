@@ -4,14 +4,7 @@
 */
 
 'use strict';
-var db = require('../config/database').db;
-var Oriento = require('oriento'),
-
-// I'm positive there's a cleaner and more efficient way to connect to the db:
-config = require('../config/secrets.json'),
-oriento = Oriento(config.server),
-db = oriento.use(config.database),
-
+var db = require('../config/database').db,
 settings = require('../config/env/default'),
 path = require('path');
 
@@ -38,6 +31,7 @@ var returnList = function(req, res) {
       });
       console.log('The product controller has sent ' + results.length + ' records.');
       // console.log(results);
+      console.log("User: " + JSON.stringify(req.user));
   })
   .done();
 }

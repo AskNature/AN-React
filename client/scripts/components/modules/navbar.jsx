@@ -1,29 +1,41 @@
 'use strict';
 
-var React = require('react');
-var Navbar = require('react-bootstrap').Navbar,
+var React = require('react'),
+Link = require('./link.jsx'),
+
+Navbar = require('react-bootstrap').Navbar,
 Nav = require('react-bootstrap').Nav,
 NavItem = require('react-bootstrap').NavItem,
 MenuItem = require('react-bootstrap').MenuItem,
-DropdownButton = require('react-bootstrap').DropdownButton,
-Link = require('./link.jsx');
+DropdownButton = require('react-bootstrap').DropdownButton;
 
+var routeActions = require('../../actions/routes');
+var userActions = require('../../actions/user');
 
-var getState = function() {
-    return {
-        // user: userStore.get()
-    };
+var transitionRoute = function(eventKey, href) {
+    routeActions.setRoute(href);
 };
 
 var NavbarComponent = React.createClass({
-    // mixins: [userStore.mixin],
-    getInitialState: function() {
-        return getState();
-    },
     render: function() {
-
       var brand = <Link url="/">AskNature</Link>;
-
+      var user = this.props.user;
+      var settingsurl = "/settings";
+      var greeting = 'Howdy '+ (user.firstName ? user.firstName : user.email);
+      var navLinks = user.loggedIn ? (
+        <Nav right navbar role="navigation">
+          <DropdownButton title={greeting}>
+            <MenuItem eventKey="1"><Link url={settingsurl}>My Account</Link></MenuItem>
+            <MenuItem divider />
+            <MenuItem eventKey="2"><a href="#" onClick={userActions.logoutUser}>Log Out</a></MenuItem>
+          </DropdownButton>
+        </Nav>
+      ) : (
+        <Nav right navbar role="navigation">
+          <NavItem href="/login" onSelect={transitionRoute}>Login</NavItem>
+          <NavItem href="/signup" onSelect={transitionRoute}>Create Account</NavItem>
+        </Nav>
+      );
         return (
             /* jshint ignore:start */
             <Navbar fluid inverse fixedTop role="banner">
@@ -35,23 +47,12 @@ var NavbarComponent = React.createClass({
                   </button>
                   <Link className="navbar-brand" url="/">AskNature</Link>
               {/* End temp button for left offcanvas menu */}
-                  <Nav right navbar role="navigation">
-                    <DropdownButton title="Account">
-                      <MenuItem eventKey="2">Action</MenuItem>
-                      <MenuItem eventKey="3">Another action</MenuItem>
-                      <MenuItem eventKey="4">Something else here</MenuItem>
-                      <MenuItem divider />
-                      <MenuItem eventKey="5">Separated link</MenuItem>
-                    </DropdownButton>
-                  </Nav>
+                {navLinks}
+
             </Navbar>
             /* jshint ignore:end */
         );
     },
-    // Event handler for 'change' events coming from store mixins.
-    _onChange: function() {
-        this.setState(getState());
-    }
 });
 
-module.exports =NavbarComponent;
+module.exports = NavbarComponent;
