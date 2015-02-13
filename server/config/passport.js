@@ -38,6 +38,7 @@ module.exports = function(passport, database) {
 			lastName: profile.name.familyName,
 			email: profile.emails[0].value,
 			provider: "Google",
+			role: 'user',
 			password: ''
 		    }).one().then(function(user) {
 			return done(null, user);

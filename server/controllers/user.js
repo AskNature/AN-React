@@ -22,6 +22,7 @@ var returnUser = function(req, res, next) {
 	    firstName: req.user.firstName,
 	    lastName: req.user.lastName,
 	    password: req.user.password,
+	    role: req.user.role,
 	    loggedIn: true
 	});
     } else {
@@ -53,12 +54,13 @@ var createUser = function(req, res, next) {
 	} else {
 	    db.insert().into('PassportUser')
 		.set({
-		    id: name,
+		    id: req.body.email,
 		    username: name,
 		    firstName: '',
 		    lastName: '',
 		    email: req.body.email,
 		    provider: "Local",
+		    role: "user",
 		    password: req.body.password
 		}).one().then(function(user) {
 		    console.log("user created");

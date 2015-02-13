@@ -12,10 +12,6 @@ var Defaults = {
     },
 
     user: {
-	username: '',
-	firstName: '',
-	lastName: '',
-	email: '',
         loggedIn: false
     },
 
