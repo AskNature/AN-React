@@ -9,6 +9,11 @@ var db = require('../config/database').db,
 settings = require('../config/env/default'),
 path = require('path');
 
+var logout = function(req, res, next) {
+    req.logout();
+    res.redirect('/');
+};
+
 var returnUser = function(req, res, next) {
     if(req.user) {
 	res.status(200).json({
@@ -25,6 +30,10 @@ var returnUser = function(req, res, next) {
 
 var updateUser = function(req, res, next) {
     if(req.user) {
+	db.update('PassportUser').set(req.body)
+	    .where({id:req.user.id}).scalar().then(function() {
+		console.log("user updated");
+            });
 	res.status(200).send(req.body);
     } else {
 	res.status(500).send("You're not logged in!");
@@ -33,5 +42,6 @@ var updateUser = function(req, res, next) {
 
 module.exports = {
     returnUser: returnUser,
-    updateUser: updateUser
+    updateUser: updateUser,
+    logout: logout
 };
