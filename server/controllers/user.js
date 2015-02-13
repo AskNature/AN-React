@@ -5,6 +5,9 @@
 
 'use strict';
 
+var settings = require('../config/env/default'),
+path = require('path');
+
 var returnUser = function(req, res, next) {
     if(req.user) {
 	res.status(200).json({
@@ -21,7 +24,7 @@ var returnUser = function(req, res, next) {
 var updateUser = function(req, res, next) {
     if(req.user) {
 	res.status(200).send();
-	
+
     } else {
 	res.status(500).send("You're not logged in!");
     }
