@@ -32,6 +32,18 @@ module.exports = {
     });
   },
 
+  logoutUser: function(data) {
+    request
+    .get('/api/user/logout')
+    .end(function(res) {
+        if(res.ok) {
+            if(res) {
+                module.exports.fetchUser();
+            }
+        }
+    });
+  },
+
   fetchUser: function(callback) {
     var self = this;
     request

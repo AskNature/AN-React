@@ -10,6 +10,7 @@ MenuItem = require('react-bootstrap').MenuItem,
 DropdownButton = require('react-bootstrap').DropdownButton;
 
 var routeActions = require('../../actions/routes');
+var userActions = require('../../actions/user');
 
 var transitionRoute = function(eventKey, href) {
     routeActions.setRoute(href);
@@ -26,7 +27,7 @@ var NavbarComponent = React.createClass({
           <DropdownButton title={greeting}>
             <MenuItem eventKey="1"><Link url={settingsurl}>My Account</Link></MenuItem>
             <MenuItem divider />
-            <MenuItem eventKey="2">Log Out</MenuItem>
+            <MenuItem eventKey="2"><a href="#" onClick={userActions.logoutUser}>Log Out</a></MenuItem>
           </DropdownButton>
         </Nav>
       ) : (
