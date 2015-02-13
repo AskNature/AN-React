@@ -9,6 +9,11 @@ NavItem = require('react-bootstrap').NavItem,
 MenuItem = require('react-bootstrap').MenuItem,
 DropdownButton = require('react-bootstrap').DropdownButton;
 
+var routeActions = require('../../actions/routes');
+
+var transitionRoute = function(eventKey, href) {
+    routeActions.setRoute(href);
+};
 
 var NavbarComponent = React.createClass({
     render: function() {
@@ -26,8 +31,8 @@ var NavbarComponent = React.createClass({
         </Nav>
       ) : (
         <Nav right navbar role="navigation">
-          <NavItem href="/auth/google">Login</NavItem>
-          <NavItem href="/auth/google">Create Account</NavItem>
+          <NavItem href="/login" onSelect={transitionRoute}>Login</NavItem>
+          <NavItem href="/signup" onSelect={transitionRoute}>Create Account</NavItem>
         </Nav>
       );
         return (
