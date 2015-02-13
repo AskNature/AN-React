@@ -21,6 +21,7 @@ var returnUser = function(req, res, next) {
 	    email: req.user.email,
 	    firstName: req.user.firstName,
 	    lastName: req.user.lastName,
+	    password: req.user.password,
 	    loggedIn: true
 	});
     } else {

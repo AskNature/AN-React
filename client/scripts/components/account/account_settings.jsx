@@ -52,6 +52,7 @@ var AccountSettings = React.createClass({
                       <Input type="text" name="firstName" label="First Name" defaultValue={user.firstName} labelClassName="col-xs-3" wrapperClassName="col-xs-9"/>
                       <Input type="text" name="lastName" label="Last Name" defaultValue={user.lastName} labelClassName="col-xs-3" wrapperClassName="col-xs-9" />
                       <Input type="email" name="email" label="Email" defaultValue={user.email} labelClassName="col-xs-3" wrapperClassName="col-xs-9" />
+		      <Input type="password" name="password" label="Password" defaultValue={user.password} labelClassName="col-xs-3" wrapperClassName="col-xs-9" />
                       <Input className="pull-right" type="submit" bsStyle="primary" value="Save" />
                     </Col>
                   </Row>
