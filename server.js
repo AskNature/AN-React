@@ -11,7 +11,7 @@ var passport = require('passport');
 var app = express();
 
 // Database configuration
-var dataconfig = require('./server/config/database')(app);
+var dataconfig = require('./server/config/database').config(app);
 
 // Passport configuration
 require('./server/config/passport')(passport, dataconfig.db);

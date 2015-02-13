@@ -5,7 +5,8 @@
 
 'use strict';
 
-var settings = require('../config/env/default'),
+var db = require('../config/database').db,
+settings = require('../config/env/default'),
 path = require('path');
 
 var returnUser = function(req, res, next) {

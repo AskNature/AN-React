@@ -17,6 +17,8 @@ var databaseConfig = function() {
   // Use the 'AskNature' database
   var db = server.use(config.database);
 
+  module.exports.db = db;
+
   // Import all databases
   server.list()
   .then(function (dbs) {
@@ -39,4 +41,4 @@ var databaseConfig = function() {
 
 };
 
-module.exports = databaseConfig;
+module.exports.config = databaseConfig;
