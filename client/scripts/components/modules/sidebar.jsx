@@ -2,6 +2,8 @@
 
 var React = require('react');
 
+var Griddle = require('griddle-react');
+
 var focusStore = require('../../stores/strategy');
 
 var focusActions = require('../../actions/strategy');
@@ -20,30 +22,35 @@ var getState = function() {
    }
 }
 
-var initializeTable = function(state) {
-  var listitems = state.items.results;
-  $('#sidebar_list').dataTable({
-   "info": false,
-   ordering: false,
-   "pagingType": "simple",
-   "destroy": true,
-   "data": listitems,
-   stateSave: true,
-   "language": {
-      search: "",
-      searchPlaceholder: "Search AskNature",
-      "lengthMenu": "_MENU_"
-    },
-    "columns" : [
-      {"data":"name","title": "Headline", "render": function(data,type,row) {
-          var url = '../strategy/'+row['masterid'];
-          return '<a href="'+url+'"><strong>'+data+'</strong></a>';
-        }
-      }
-    ]
- });
- $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input');
-};
+var LinkComponent = React.createClass({
+  render: function(){
+    url ="../strategy/" + this.props.masterid;
+    return <Link url={url}>{this.props.name}</Link>
+  }
+});
+
+var columnMeta = [
+  {
+  "columnName": "name",
+  "displayName": "Title",
+  "order": 1,
+  "locked": false,
+  "visible": true,
+  "customComponent": LinkComponent
+},
+{
+  "columnName": "summary",
+  "visible": false
+},
+{
+  "columnName": "functions",
+  "visible": false
+},
+{
+  "columnName": "living_system",
+  "visible": false
+}
+];
 
 var SidebarFilter = React.createClass({
 
@@ -57,20 +64,19 @@ var SidebarFilter = React.createClass({
   },
   componentDidMount: function(){
     focusActions.getList();
-    initializeTable(this.state);
   },
   render: function() {
 
     return (
       <div>
-        <Table id='sidebar_list' className='compact, hover' />
+        <Griddle results={this.state.items.results} tableClassName="table" showFilter={true}
+ showSettings={false} columns={["name","summary","functions","living_system"]} useGriddleStyles={false} enableInfiniteScroll={true} bodyHeight={800} columnMetdata={columnMeta} />
       </div>
     )
   },
   // Event handler for 'change' events coming from store mixins.
   _onChange: function() {
       this.setState(getState());
-      initializeTable(this.state);
   }
 });
 
