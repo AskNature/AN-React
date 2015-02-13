@@ -1,4 +1,4 @@
-/**
+B1;2c/**
 * User actions
 */
 'use strict';
@@ -16,6 +16,20 @@ module.exports = {
 	  actionType: userConstants.SET_USER,
 	  user: data
 	});
+  },
+
+  updateUser: function(data) {
+    var self = this;
+    request
+    .post('/api/user')
+    .send(data)
+    .end(function(res) {
+	if(res.ok) {
+	    if(res) {
+		self.setUser(data);
+	    }
+	}
+    });
   },
 
   fetchUser: function(callback) {

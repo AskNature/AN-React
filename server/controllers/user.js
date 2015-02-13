@@ -21,19 +21,13 @@ var returnUser = function(req, res, next) {
     }
 };
 
-var login = function(req, res) {
-    // Render index.html to allow application to handle routing
-    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
-};
+var updateUser = function(req, res, next) {
+    if(req.user) {
+	res.status(200).send();
 
-var signup = function(req, res) {
-    // Render index.html to allow application to handle routing
-    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
-};
-
-var editSettings = function(req, res) {
-  // Render index.html to allow application to handle routing
-    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
+    } else {
+	res.status(500).send("You're not logged in!");
+    }
 };
 
 module.exports = {
