@@ -10,7 +10,20 @@ Col = require('react-bootstrap').Col,
 Panel = require('react-bootstrap').Panel,
 Input = require('react-bootstrap').Input;
 
+var FormData = require('react-form-data');
+
+var userActions = require('../../actions/user');
+var routeActions = require('../../actions/routes');
+
 var Login = React.createClass({
+    mixins: [ FormData ],
+
+    handleSubmit: function(e) {
+    	console.log("submit handled");
+        userActions.loginUser(this.formData, function(res) { console.log(res) });
+        e.preventDefault();
+    },
+
     render: function() {
       var title = (
         <h2>Login</h2>
@@ -23,11 +36,11 @@ var Login = React.createClass({
                   <Row className="show-grid">
                     <Col xs={12} md={6} mdOffset={3}>
                       <Panel header={title} id="login-panel">
-                        <form>
+                        <form onChange={this.updateFormData} onSubmit={this.handleSubmit}>
                         <Row className="show-grid">
                           <Col xs={12}>
-                          <Input type="email" placeholder="Email Address" />
-                          <Input type="password" placeholder="Password" />
+                          <Input name="username" type="email" placeholder="Email Address" />
+                          <Input name="password" type="password" placeholder="Password" />
                           <Input type="checkbox" label="Remember Me" checked />
                           <Link className="pull-left" url="#">Create AskNature Account</Link>
                           <Input className="pull-right" type="submit" bsStyle="primary" value="Login" />

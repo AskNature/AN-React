@@ -44,6 +44,18 @@ module.exports = {
     });
   },
 
+  loginUser: function(data, callback) {
+      var self = this;
+      request
+      .post('/auth/db')
+      .send(data)
+      .end(function(res) {
+	  if(res) {
+	      self.fetchUser(callback);
+	  }
+      });
+  },
+
   fetchUser: function(callback) {
     var self = this;
     request
