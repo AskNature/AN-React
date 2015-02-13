@@ -43,7 +43,7 @@ var initializeTable = function(state) {
     }
     },
     {"data":"description","title": "Abstract"},
-    {"data":"function","title": "Functions"},
+    {"data":"function","title": "Outcomes"},
     {"data":"living_system","title": "Living Systems"}
             ]
  });

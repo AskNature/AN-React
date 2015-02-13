@@ -37,8 +37,8 @@ var initializeTable = function(state) {
     "columns" : [
     {"data":"name","title": "Short Name"},
     {"data":"description","title": "Long Name"},
-    {"data":"parent","title": "Parent Function"},
-    {"data":"children","title": "Child Functions"}
+    {"data":"parent","title": "Parent Outcome"},
+    {"data":"children","title": "Child Outcomes"}
     ]
  });
   $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');
