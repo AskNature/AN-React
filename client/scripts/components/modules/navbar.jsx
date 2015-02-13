@@ -2,8 +2,6 @@
 
 var React = require('react'),
 Link = require('./link.jsx'),
-userActions = require('../../actions/user'),
-userStore = require('../../stores/user'),
 
 Navbar = require('react-bootstrap').Navbar,
 Nav = require('react-bootstrap').Nav,
@@ -12,26 +10,10 @@ MenuItem = require('react-bootstrap').MenuItem,
 DropdownButton = require('react-bootstrap').DropdownButton;
 
 
-var getState = function() {
-    return {
-        user: userStore.get()
-    };
-};
-
 var NavbarComponent = React.createClass({
-    // mixins: [userStore.mixin],
-    getInitialState: function() {
-        return getState();
-    },
-
-    componentDidMount: function() {
-      userActions.fetchUser();
-    },
-
     render: function() {
-
       var brand = <Link url="/">AskNature</Link>;
-      var user = this.state.user;
+      var user = this.props.user;
       var settingsurl = "/settings";
       var greeting = 'Howdy '+ (user.firstName ? user.firstName : user.email);
       var navLinks = user.loggedIn ? (
@@ -65,10 +47,6 @@ var NavbarComponent = React.createClass({
             /* jshint ignore:end */
         );
     },
-    // Event handler for 'change' events coming from store mixins.
-    _onChange: function() {
-        this.setState(getState());
-    }
 });
 
-module.exports =NavbarComponent;
+module.exports = NavbarComponent;

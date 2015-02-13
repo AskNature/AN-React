@@ -2,17 +2,23 @@
 
 var React = require('react');
 var pageStore = require('../../stores/page');
+var userStore = require('../../stores/user');
+var userActions = require('../../actions/user');
 var Navbar = require('../modules/navbar.jsx');
 var Sidebar = require('../modules/sidebar.jsx');
 
 var getState = function() {
     return {
-        title: pageStore.get().title
+        title: pageStore.get().title,
+	user: userStore.get()
     };
 };
 
 var DefaultComponent = React.createClass({
-    mixins: [pageStore.mixin],
+    mixins: [pageStore.mixin, userStore.mixin],
+    componentWillMount: function() {
+    	userActions.fetchUser();
+    },
     componentDidMount: function() {
         pageStore.emitChange();
     },
@@ -24,7 +30,7 @@ var DefaultComponent = React.createClass({
             /* jshint ignore:start */
             <div>
             <Sidebar />
-            <Navbar />
+            <Navbar user={this.state.user} />
 
                 <div className="default">
                     <div className="main-container">
