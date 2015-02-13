@@ -14,22 +14,23 @@ var returnUser = function(req, res, next) {
 	    username: req.user.username,
 	    email: req.user.email,
 	    firstName: req.user.firstName,
-	    lastName: req.user.lastName
+	    lastName: req.user.lastName,
+	    loggedIn: true
 	});
     } else {
-	res.status(500).send("You're not logged in!");
+	res.status(200).json({loggedIn: false});
     }
 };
 
 var updateUser = function(req, res, next) {
     if(req.user) {
-	res.status(200).send();
-
+	res.status(200).send(req.body);
     } else {
 	res.status(500).send("You're not logged in!");
     }
 };
 
 module.exports = {
-    returnUser: returnUser
+    returnUser: returnUser,
+    updateUser: updateUser
 };

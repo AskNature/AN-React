@@ -56,7 +56,7 @@ var routes = {
   '/strategy/:id': detail_strategy,
   '/login': login,
   '/signup': signup,
-  '/settings/:username': account_settings
+  '/settings': account_settings
 };
 
 module.exports = routes;

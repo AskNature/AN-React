@@ -12,11 +12,11 @@ var Defaults = {
     },
 
     user: {
-	username: 'john.smith',
-	firstName: 'John',
-	lastName: 'Smith',
-	email: 'john.smith@website.com',
-  loggedIn: true
+	username: '',
+	firstName: '',
+	lastName: '',
+	email: '',
+        loggedIn: false
     },
 
     outcome: {

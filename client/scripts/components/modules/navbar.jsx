@@ -32,7 +32,7 @@ var NavbarComponent = React.createClass({
 
       var brand = <Link url="/">AskNature</Link>;
       var user = this.state.user;
-      var settingsurl = "/settings/" + user.username;
+      var settingsurl = "/settings";
       var greeting = 'Howdy '+ (user.firstName ? user.firstName : user.email);
       var navLinks = user.loggedIn ? (
         <Nav right navbar role="navigation">
