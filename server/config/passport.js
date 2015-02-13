@@ -48,14 +48,17 @@ module.exports = function(passport, database) {
 ));
 
     passport.use(new LocalStrategy(
-	function(username, password, done) {
-	    database.select().from('PassportUser').where({username: username}).limit(1).one().then(function(user) {
+	function(email, password, done) {
+	    database.select().from('PassportUser').where({email: email}).limit(1).one().then(function(user) {
 		if(!user) {
+		    console.log("no user found in db");
 		    return done(null, false);
 		}
 		if(user.password && user.password != '' && user.password == password) {
+		    console.log("login successful");
 		    return done(null, user);
 		}
+		console.log("password failed");
 		return done(null, false);
 	    });
         }
