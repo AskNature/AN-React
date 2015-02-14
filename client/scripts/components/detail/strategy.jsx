@@ -277,6 +277,9 @@ var StrategyDetail = React.createClass({
         /* jshint ignore:end */
     );
   },
+  componentWillReceiveProps: function () {
+    this.setState(getState());
+  },
 
   // Event handler for 'change' events coming from store mixins.
   _onChange: function() {

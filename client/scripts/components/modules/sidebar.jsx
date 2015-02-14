@@ -64,6 +64,9 @@ var SidebarFilter = React.createClass({
       </div>
     )
   },
+  componentWillReceiveProps: function () {
+    this.setState(getState());
+  },
   // Event handler for 'change' events coming from store mixins.
   _onChange: function() {
       this.setState(getState());
