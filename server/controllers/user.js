@@ -105,23 +105,41 @@ var createUser = function(req, res, next) {
 	if(count > 0) {
 	    return res.status(400).send("email taken");
 	} else {
-	    db.insert().into('PassportUser')
-		.set({
-		    id: req.body.email,
-		    username: name,
-		    firstName: '',
-		    lastName: '',
-		    email: req.body.email,
-		    provider: "Local",
-		    role: "user",
-		    password: req.body.password
-		}).one().then(function(user) {
-		    console.log("user created");
-		    req.login(user, function(err) {
-			if(err) { return res.status(400).send("failure"); }
-			return res.status(201).send("success");
+	    var token = '';
+	    crypto.randomBytes(20, function(err, buf) {
+                var token = buf.toString('hex');
+		db.insert().into('PassportUser')
+		    .set({
+			id: req.body.email,
+			username: name,
+			firstName: '',
+			lastName: '',
+			email: req.body.email,
+			provider: "Local",
+			role: "user",
+			password: req.body.password,
+			verified: false,
+			verifyToken: token
+		    }).one().then(function(user) {
+			console.log("user created");
+			var email = {
+                            from: "support@asknatu.re",
+                            to: user.email,
+                            subject: "AskNatu.re Email Verification",
+                            text: "http://asknatu.re/verify/" + token,
+                            html: "<a href=\"http://asknatu.re/verify/" + token + "\">Verify account</a>"
+                        };
+
+			sendgrid.sendMail(email, function(sgerr, info) {
+			    if(sgerr) { return res.status(500).send("Sendgrid error"); }
+                            req.login(user, function(err) {
+				if(err) { return res.status(500).send("failure"); }
+				return res.status(201).send("success");
+                            });
+			});
+
 		    });
-		});	    
+	    });
 	}
     });
 };

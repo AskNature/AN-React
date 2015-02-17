@@ -20,7 +20,8 @@ var externalLoginFunc = function(database) { return function(accessToken, refres
                     email: profile.emails[0].value,
                     provider: profile.provider,
 		    role: 'user',
-                    password: ''
+                    password: '',
+		    verified: true
                 }).one().then(function(user) {
                     return done(null, user);
                 });
