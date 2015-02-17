@@ -11,6 +11,10 @@ var passport = require('passport');
 var routes = function (app) {
   app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'] }));
   app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login', successRedirect: '/' }));
+
+  app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email' ] }));
+  app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login', successRedirect: '/' }));
+
   app.post('/auth/db', passport.authenticate('local'), function(req, res) { res.send(); });
 };
 
