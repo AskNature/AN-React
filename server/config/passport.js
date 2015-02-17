@@ -19,9 +19,9 @@ module.exports = function(passport, database) {
     });
 
     passport.use(new GoogleStrategy({
-	clientID: config.passport.clientID,
-	clientSecret: config.passport.clientSecret,
-	callbackURL: config.passport.callbackURL
+	clientID: config.passport_google.clientID,
+	clientSecret: config.passport_google.clientSecret,
+	callbackURL: config.passport_google.callbackURL
     },
     function(accessToken, refreshToken, profile, done) {
 	// find or create user in orient
