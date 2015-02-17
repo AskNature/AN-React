@@ -16,6 +16,9 @@ var dataconfig = require('./server/config/database').config(app);
 // Passport configuration
 require('./server/config/passport')(passport, dataconfig.db);
 
+// SendGrid configuration
+require('./server/config/sendgrid')();
+
 // Express configuration
 require('./server/config/express')(app, express, passport);
 

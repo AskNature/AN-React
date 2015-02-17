@@ -31,7 +31,39 @@ module.exports = {
 		success();
 	    }
 	} else {
-	    failure(res.body);
+	    failure(res.text);
+	}
+    });
+  },
+
+  forgotUser: function(data, success, failure) {
+    var self = this;
+    request
+    .post('/api/user/forgot')
+    .send(data)
+    .end(function(res) {
+	if(res.ok) {
+	    if(res) {
+		success();
+	    }
+	} else {
+	    failure(res.text);
+	}
+    });
+  },
+
+  resetUser: function(data, success, failure) {
+    var self = this;
+    request
+    .post('/api/user/reset')
+    .send(data)
+    .end(function(res) {
+	if(res.ok) {
+	    if(res) {
+		success();
+	    }
+	} else {
+	    failure(res.text);
 	}
     });
   },
