@@ -11,6 +11,8 @@ var routes = function (app) {
   app.post('/api/user', userController.updateUser);
   app.get('/api/user/logout', userController.logout);
   app.post('/api/user/create', userController.createUser);
+  app.post('/api/user/forgot', userController.forgotUser);
+  app.post('/api/user/reset', userController.resetUser);
 };
 
 module.exports = routes;

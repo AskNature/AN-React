@@ -24,8 +24,22 @@ var editSettings = function(req, res) {
     res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
 };
 
+var forgot = function(req, res) {
+    if(req.isAuthenticated()) { res.redirect('/') }
+    // Render index.html to allow application to handle routing
+    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
+};
+
+var reset = function(req, res) {
+    if(req.isAuthenticated()) { res.redirect('/') }
+    // Render index.htmlto allow application to handle routing
+    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
+};
+
 module.exports = {
     login: login,
     signup: signup,
-    editSettings: editSettings
+    editSettings: editSettings,
+    forgot: forgot,
+    reset: reset
 };

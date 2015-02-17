@@ -15,7 +15,7 @@ var enablePushState = true;
 var pushState = !!(enablePushState && window.history && window.history.pushState);
 
 // Fix for Facebook hash garbage on OAuth login
-if (window.location.hash && window.location.hash == '#_=_') {
+if (window.location.hash && window.location.hash === '#_=_') {
     window.location = '/';
 }
 
