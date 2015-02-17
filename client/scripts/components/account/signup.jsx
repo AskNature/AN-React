@@ -53,7 +53,7 @@ var Login = React.createClass({
                           <Col xs={12}>
                           <Input name="email" type="email" placeholder="Email Address" bsStyle={this.state.style} />
                           <Input name="password" type="password" placeholder="Password" />
-                          <Link className="pull-left" url="#">Already have an account?</Link>
+                          <Link className="pull-left" url="/login">Already have an account, or want to log in with an external account?</Link>
                           <Input className="pull-right" type="submit" value="Sign Up" />
                           </Col>
                           </Row>

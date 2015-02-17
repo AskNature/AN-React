@@ -54,7 +54,8 @@ var Login = React.createClass({
                           <Input name="username" type="email" placeholder="Email Address" bsStyle={this.state.style} />
                           <Input name="password" type="password" placeholder="Password" bsStyle={this.state.style} />
                           <Input type="checkbox" label="Remember Me" checked />
-                          <Link className="pull-left" url="#">Create AskNature Account</Link>
+                          <Link className="pull-left" url="/signup">Create AskNature Account</Link>
+			  <Link className="pull-left" url="/forgot">Forgot password?</Link>
                           <Input className="pull-right" type="submit" bsStyle="primary" value="Login" />
                           </Col>
                           </Row>
