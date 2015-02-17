@@ -50,12 +50,6 @@ var Login = React.createClass({
                       <Panel header={title} id="login-panel">
                         <form onChange={this.updateFormData} onSubmit={this.handleSubmit}>
                         <Row className="show-grid">
-                        <Col xs={12}>
-                        <Button href='/auth/google' target="_blank" bsStyle="primary">Sign up with Google</Button>
-                        <hr />
-                        </Col>
-                        </Row>
-                        <Row className="show-grid">
                           <Col xs={12}>
                           <Input name="email" type="email" placeholder="Email Address" bsStyle={this.state.style} />
                           <Input name="password" type="password" placeholder="Password" />
