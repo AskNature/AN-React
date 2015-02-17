@@ -6,6 +6,7 @@
 'use strict';
 
 var db = require('../config/database').db,
+sendgrid = require('../config/sendgrid').client,
 settings = require('../config/env/default'),
 crypto = require('crypto'),
 path = require('path');
@@ -26,7 +27,22 @@ var forgotUser = function(req, res, next) {
 		    .where({id: user.id}).scalar().then(function(total) {
 			console.log("generated reset token for " + total + " user.");
 			console.log("User: " + user.email + ", Token: " + token);
-			res.status(200).send();
+			var email = {
+			    from: "support@asknatu.re",
+			    to: user.email,
+			    subject: "AskNatu.re Password Reset",
+			    text: "http://asknatu.re/reset/" + token,
+			    html: "<a href=\"http://asknatu.re/reset/" + token + "\">Reset password</a>"
+			};
+			sendgrid.sendMail(email, function(err, info) {
+			    if(err) {
+				console.log("sendgrid error: " + err);
+				res.status(500).send("Sendgrid error");
+			    } else {
+				console.log("Reset message sent");
+				res.status(200).send();
+			    }
+			});
 		});
 	    });
 	} else {
