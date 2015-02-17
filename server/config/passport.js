@@ -1,5 +1,6 @@
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 var config = require('./secrets.json');
 
@@ -53,6 +54,14 @@ module.exports = function(passport, database) {
 	clientID: config.passport_facebook.clientID,
 	clientSecret: config.passport_facebook.clientSecret,
 	callbackURL: config.passport_facebook.callbackURL
+    }, externalLoginFunc(database)));
+
+    passport.use(new LinkedInStrategy({
+	clientID: config.passport_linkedin.clientID,
+	clientSecret: config.passport_linkedin.clientSecret,
+	callbackURL: config.passport_linkedin.callbackURL,
+	scope: [ 'r_basicprofile', 'r_emailaddress' ],
+	state: true
     }, externalLoginFunc(database)));
 
     passport.use(new LocalStrategy(

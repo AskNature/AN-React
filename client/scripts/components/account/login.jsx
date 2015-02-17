@@ -61,11 +61,14 @@ var Login = React.createClass({
                           <Row className="show-grid">
                           <Col xs={12}>
                           <hr />
-			  <Col xs={6}>
+			  <Col xs={4}>
                           <Button href='/auth/google'>Sign in with Google</Button>
 			  </Col>
-			  <Col xs={6}>
+			  <Col xs={4}>
 			  <Button href='/auth/facebook'>Sign in with Facebook</Button>
+			  </Col>
+			  <Col xs={4}>
+			  <Button href='/auth/linkedin'>Sign in with LinkedIn</Button>
 			  </Col>
                           </Col>
                           </Row>
