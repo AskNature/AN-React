@@ -24,6 +24,7 @@
     "object-assign": "~1.0.0",
     "oriento": "~1.0.1",
     "passport": "^0.2.1",
+    "passport-facebook": "^1.0.3",
     "passport-google-oauth": "^0.1.5",
     "passport-local": "^1.0.0",
     "react": "~0.12.0",

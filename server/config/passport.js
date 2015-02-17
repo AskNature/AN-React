@@ -1,6 +1,31 @@
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 var config = require('./secrets.json');
+
+var externalLoginFunc = function(database) { return function(accessToken, refreshToken, profile, done) {
+    // find or create user in orient
+    database.select().from('PassportUser').where({id: profile.id}).limit(1).one().then(function(user) {
+        if(user) {
+            return done(null, user);
+        } else {
+            // create new profile in database
+            database.insert().into('PassportUser')
+                .set({
+                    id: profile.id,
+                    username: profile.emails[0].value.split("@")[0],
+                    firstName: profile.name.givenName,
+                    lastName: profile.name.familyName,
+                    email: profile.emails[0].value,
+                    provider: profile.provider,
+		    role: 'user',
+                    password: ''
+                }).one().then(function(user) {
+                    return done(null, user);
+                });
+        }
+    });
+}};
 
 module.exports = function(passport, database) {
     passport.serializeUser(function(user, done) {
@@ -22,31 +47,13 @@ module.exports = function(passport, database) {
 	clientID: config.passport_google.clientID,
 	clientSecret: config.passport_google.clientSecret,
 	callbackURL: config.passport_google.callbackURL
-    },
-    function(accessToken, refreshToken, profile, done) {
-	// find or create user in orient
-	database.select().from('PassportUser').where({id: profile.id}).limit(1).one().then(function(user) {
-            if(user) {
-		return done(null, user);
-            } else {
-		// create new profile in database
-		database.insert().into('PassportUser')
-		    .set({
-			id: profile.id,
-			username: profile.emails[0].value.split("@")[0],
-			firstName: profile.name.givenName,
-			lastName: profile.name.familyName,
-			email: profile.emails[0].value,
-			provider: "Google",
-			role: 'user',
-			password: ''
-		    }).one().then(function(user) {
-			return done(null, user);
-		    });
-	    }
-	});
-    }
-));
+    }, externalLoginFunc(database)));
+
+    passport.use(new FacebookStrategy({
+	clientID: config.passport_facebook.clientID,
+	clientSecret: config.passport_facebook.clientSecret,
+	callbackURL: config.passport_facebook.callbackURL
+    }, externalLoginFunc(database)));
 
     passport.use(new LocalStrategy(
 	function(email, password, done) {
