@@ -28,8 +28,21 @@ var InfiniteList = React.createClass({
             isInfiniteLoading: false,
             extendedHeight: 0,
             extendedBlock: undefined,
-            extendedIndex: undefined
+            extendedIndex: undefined,
+            containerHeight: window.innerHeight - 74
         }
+    },
+
+    handleResize: function(e) {
+        this.setState({containerHeight: window.innerHeight - 74});
+    },
+
+    componentDidMount: function() {
+        window.addEventListener('resize', this.handleResize);
+    },
+
+    componentDidUnmount: function() {
+        window.removeEventListener('resize', this.handleResize);
     },
 
     extendListener: function(num) {
@@ -96,7 +109,7 @@ var InfiniteList = React.createClass({
  
     render: function() {
         return <div><Infinite elementHeight={100}
-                         containerHeight={window.innerHeight - 74}
+                         containerHeight={this.state.containerHeight}
                          infiniteLoadBeginBottomOffset={400}
                          onInfiniteLoad={this.handleInfiniteLoad}
                          extendedHeight={this.state.extendedHeight}
