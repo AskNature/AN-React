@@ -24,7 +24,11 @@
     "node-jsx": "~0.12.4",
     "object-assign": "~1.0.0",
     "oriento": "~1.0.1",
+    "passport": "^0.2.1",
+    "passport-google-oauth": "^0.1.5",
+    "passport-local": "^1.0.0",
     "react": "~0.12.0",
+    "react-form-data": "^0.2.0",
     "serve-favicon": "2.0.1",
     "superagent": "~0.21.0"
   },

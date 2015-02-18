@@ -28,6 +28,19 @@ label {
   font-weight: normal;
 }
 
+.fullscreen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #444;
+}
+
+#login-panel {
+  margin-top: 200px;
+}
+
 .dataTables_length {
   float: right !important;
 }

@@ -35,7 +35,7 @@ var initializeTable = function(state) {
       "lengthMenu": "_MENU_"
     },
     "columns" : [
-    {"data":"function","title": "Functions"},
+    {"data":"function","title": "Outcomes"},
     {"data":"name","title": "Headline"},
     {"data":"description","title": "Abstract"},
     {"data":"inspiredby","title": "Inspired By"}

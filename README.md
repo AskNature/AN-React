@@ -29,8 +29,7 @@
 | JSHint ||||
 | JSDoc ||||
 | **Authentication & Security** ||||
-| Lusca ||||
-| Passport | tbd |||
+| Passport | 0.2.1 |Passport is authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped in to any Express-based web application. A comprehensive set of strategies support authentication using a username and password, Facebook, Twitter, and more.|Passport provides authentication and session management for users with AskNature accounts as well as Google, Twitter, Facebook, and LinkedIn.|
 | **Database Drivers** ||||
 | [Oriento](https://github.com/codemix/oriento) |  | Official node.js driver for OrientDB. Fast, lightweight, uses the binary protocol—which happens to be the fastest option available. | Oriento lets our Node application talk to the database in the most efficient way possible. |
 | **External Services** ||||
