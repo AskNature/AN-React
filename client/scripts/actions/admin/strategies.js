@@ -3,11 +3,9 @@
 */
 'use strict';
 
-var Dispatcher = require('../dispatchers/default');
-var listConstants = require('../constants/strategy');
-var itemConstants = require('../constants/strategy_detail');
-var listDefaults = require('../constants/defaults').strategy;
-var itemDefaults = require('../constants/defaults').strategy_detail;
+var Dispatcher = require('../../dispatchers/default');
+var Constants = require('../../constants/strategy');
+var Defaults = require('../../constants/defaults').strategy;
 var request = require('superagent');
 var assign = require('object-assign');
 
@@ -19,8 +17,8 @@ module.exports = {
 
   setList: function(focus) {
     Dispatcher.handleViewAction({
-      actionType: listConstants.GET_ALL_STRATEGIES,
-      focus: assign({}, listDefaults, focus)
+      actionType: Constants.GET_ALL_STRATEGIES,
+      focus: assign({}, Defaults, focus)
     });
     console.log('setList action returning '+focus.results.length + ' results.');
   },
@@ -60,8 +58,8 @@ module.exports = {
 
   setItem: function(focus, next) {
     Dispatcher.handleViewAction({
-      actionType: itemConstants.GET_STRATEGY,
-      focus: assign({}, itemDefaults, focus)
+      actionType: Constants.GET_STRATEGY,
+      focus: assign({}, Defaults, focus)
     });
     console.log('setItem action returning '+ focus.results + ' result.');
   },

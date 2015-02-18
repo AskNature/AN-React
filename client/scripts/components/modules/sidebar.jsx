@@ -19,13 +19,13 @@ Table = require('react-bootstrap').Table;
 var getState = function() {
   return {
     items: focusStore.get()
-   }
-}
+  };
+};
 
 var LinkComponent = React.createClass({
   render: function(){
-    var url ="../strategy/"+ this.props.rowData.masterid;
-    return <Link url={url}>{this.props.data}</Link>
+    var url ='../strategy/'+ this.props.rowData.masterid;
+    return <Link url={url}>{this.props.data}</Link>;
   },
   // Event handler for 'change' events coming from store mixins.
   _onChange: function() {
@@ -35,9 +35,9 @@ var LinkComponent = React.createClass({
 
 var columnMeta = [
   {
-  "columnName": "name",
-  "visible": true,
-  "customComponent": LinkComponent
+  'columnName': 'name',
+  'visible': true,
+  'customComponent': LinkComponent
 }
 ];
 
@@ -60,9 +60,9 @@ var SidebarFilter = React.createClass({
     return (
       <div>
         <Griddle results={this.state.items.results} columnMetadata={columnMeta} tableClassName="table" showFilter={true}
- columns={["name"]} useGriddleStyles={false} enableInfiniteScroll={true} bodyHeight={800} noDataMessage={"No data could be found, Mr. Awesomepants."}/>
+ columns={["name"]} useGriddleStyles={false} enableInfiniteScroll={false} bodyHeight={800} noDataMessage={"No data could be found, Mr. Awesomepants."}/>
       </div>
-    )
+    );
   },
   componentWillReceiveProps: function () {
     this.setState(getState());
@@ -77,23 +77,23 @@ var SidebarComponent = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-              <div className="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
-                <TabbedArea defaultActiveKey={1} justified>
+              <div className="navmenu navmenu-default navmenu-fixed-left offcanvas-xs">
+                <TabbedArea defaultActiveKey={2} justified>
                   <TabPane eventKey={1} tab="Search">
-                    <SidebarFilter />
+                    <p>Placeholder</p>
                   </TabPane>
-                  <TabPane eventKey={2} tab="Console">
+                  <TabPane eventKey={2} tab="Admin">
                     <Nav stacked>
                       <li eventKey={1}><Link url="/">Dashboard</Link></li>
                       <li eventKey={2}><Link url="../admin/outcomes">Phenomena</Link></li>
                       <li eventKey={3}><Link url="../admin/strategies">Natural Solutions</Link></li>
                       <li eventKey={4}><Link url="../admin/products">Inspired Solutions</Link></li>
-                      <li eventKey={5}><Link url="#">Sources</Link></li>
-                      <li eventKey={6}><Link url="#">Challenges</Link></li>
-                      <li eventKey={7}><Link url="#">Users</Link></li>
-                      <li eventKey={8}><Link url="#">Living Systems</Link></li>
-                      <li eventKey={9}><Link url="#">Researchers</Link></li>
-                      <li eventKey={10}><Link url="#">Collections</Link></li>
+                      <li eventKey={5}><Link url="../admin/sources">Sources</Link></li>
+                      <li eventKey={6}><Link url="../admin/challenges">Challenges</Link></li>
+                      <li eventKey={7}><Link url="../admin/users">Users</Link></li>
+                      <li eventKey={8}><Link url="../admin/livingsystems">Living Systems</Link></li>
+                      <li eventKey={9}><Link url="../admin/researchers">Researchers</Link></li>
+                      <li eventKey={10}><Link url="../admin/collections">Collections</Link></li>
                     </Nav>
                   </TabPane>
                 </TabbedArea>

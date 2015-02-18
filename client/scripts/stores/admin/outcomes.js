@@ -3,14 +3,14 @@
 */
 'use strict';
 
-var Store = require('./default');
-var Dispatcher = require('../dispatchers/default');
+var Store = require('../default');
+var Dispatcher = require('../../dispatchers/default');
 
 /** Gets list of actions to listen for */
-var focusConstants = require('../constants/strategy');
+var focusConstants = require('../../constants/outcome');
 
 /** Gets default values to be used until db action is completed */
-var focusDefaults = require('../constants/defaults').strategy;
+var focusDefaults = require('../../constants/defaults').outcome;
 
 var _focus;
 
@@ -35,7 +35,7 @@ FocusStore.dispatcherToken = Dispatcher.register(function(payload) {
 
   var action = payload.action;
 
-  if (action.actionType === focusConstants.GET_ALL_STRATEGIES) {
+  if (action.actionType === focusConstants.GET_ALL_OUTCOMES) {
     _focus = action.focus;
 
     FocusStore.emitChange();

@@ -7,10 +7,10 @@ var Store = require('./default');
 var Dispatcher = require('../dispatchers/default');
 
 /** Gets list of actions to listen for */
-var focusConstants = require('../constants/strategy_detail');
+var focusConstants = require('../constants/strategy');
 
 /** Gets default values to be used until db action is completed */
-var focusDefaults = require('../constants/defaults').strategy_detail;
+var focusDefaults = require('../constants/defaults').strategy;
 
 var _focus;
 
@@ -27,8 +27,8 @@ var FocusStore = new Store({
 });
 
 /** Receives a payload from the dispatcher, matches the payload to one
-* of the actions defined in outcomeConstants, assigns the result to the
-* _outcome variable, and emits a signal alerting the view (component) of
+* of the actions defined in Constants, assigns the result to the
+* _focus variable, and emits a signal alerting the view (component) of
 * the update.
 */
 FocusStore.dispatcherToken = Dispatcher.register(function(payload) {

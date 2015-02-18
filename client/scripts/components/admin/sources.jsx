@@ -1,29 +1,18 @@
 /**
-* Outcome datatable (component)
+* Sources Console Component
 */
 'use strict';
 
 var React = require('react');
-var routeActions = require('../../actions/routes');
-
-/** Gets incoming information from the store */
-
-var focusStore = require('../../stores/strategy');
-
-/** Sends outgoing requests to an action */
-
-var focusActions = require('../../actions/strategy');
-
-/** getState can be called to get state updates from the store.
-* initialItems = entire list that remains static
-* items = dynamic filtered list
-*/
+var DefaultLayout = require('../layouts/default.jsx');
+var focusStore = require('../../stores/admin/sources');
+var focusActions = require('../../actions/admin/sources');
 
 var getState = function() {
   return {
     items: focusStore.get()
-   }
-}
+  };
+};
 
 var initializeTable = function(state) {
   var listitems = state.items.results;
@@ -38,7 +27,7 @@ var initializeTable = function(state) {
     },
     "columns" : [
     {"data":"name","title": "Headline", "render": function(data,type,row) {
-      var url = '../strategy/'+row['masterid'];
+      var url = '../source/'+row['masterid'];
       return '<a href="'+url+'"><strong>'+data+'</strong></a>';
     }
     },
@@ -48,38 +37,39 @@ var initializeTable = function(state) {
             ]
  });
  $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');
+};
 
 
-}
-
-/** OutcomeFilter class contains a search field that filters items in
+/** ItemsFilter class contains a search field that filters items in
 * an unordered list in real time.
 */
 
-var ItemsFilter = React.createClass({
+var FocusTable = React.createClass({
 
   mixins: [focusStore.mixin],
 
   getInitialState: function() {
     return getState();
   },
-  componentWillMount: function() {
 
-  },
   componentDidMount: function(){
     focusActions.getList();
     initializeTable(this.state);
-
   },
-  render: function() {
 
+  render: function() {
     return (
       <div>
         <table className='table display' id='list'>
 
         </table>
+        <button className='btn btn-primary' onClick={this.handleClick} label="Reset">Reset</button>
       </div>
-    )
+    );
+  },
+
+  handleClick: function() {
+    focusActions.getList();
   },
   // Event handler for 'change' events coming from store mixins.
   _onChange: function() {
@@ -88,4 +78,19 @@ var ItemsFilter = React.createClass({
   }
 });
 
-module.exports = ItemsFilter;
+var FocusConsole = React.createClass({
+    render: function() {
+        return (
+            /* jshint ignore:start */
+            <DefaultLayout>
+                <div className="main-container">
+                        <h1>Sources Console</h1>
+                        <FocusTable />
+                </div>
+            </DefaultLayout>
+            /* jshint ignore:end */
+        );
+    }
+});
+
+module.exports = FocusConsole;

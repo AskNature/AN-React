@@ -57,6 +57,7 @@ label {
 
 .navmenu-fixed-left {
   top: 70px;
+  width: 200px;
 }
 
 .sidebar-toggle {
@@ -87,8 +88,17 @@ label {
 }
 
 @media (min-width: 768px) {
+  body {
+    padding-left: 200px;
+  }
+
   .navmenu-fixed-left {
     top: 64px;
+    width: 200px;
+  }
+
+  .sidebar-toggle {
+    display: none !important;
   }
 }
 
@@ -96,8 +106,9 @@ label {
   body {
     padding-left: 300px;
   }
-  .sidebar-toggle {
-    display: none !important;
+
+  .navmenu-fixed-left {
+    width: 300px;
   }
 }
 // Styling on warning for users on IE7 or below
