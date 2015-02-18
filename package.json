@@ -33,6 +33,7 @@
     "passport-local": "^1.0.0",
     "react": "~0.12.0",
     "react-form-data": "^0.2.0",
+    "react-infinite-extended": "^0.3.1",
     "serve-favicon": "2.0.1",
     "superagent": "~0.21.0"
   },
