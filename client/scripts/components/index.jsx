@@ -15,7 +15,7 @@ var IndexComponent = React.createClass({
                   <div className="jumbotron">
                     <h1>Welcome to AskNature!</h1>
                     <p>Where dreams come true.</p>
-                    <p><a className="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                    <p><a className="btn btn-primary btn-lg" href="/infinite_demo" role="button">Infinite scroll demo</a></p>
                   </div>
                 </div>
             </DefaultLayout>
