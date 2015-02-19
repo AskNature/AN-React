@@ -73,7 +73,7 @@ module.exports = {
     var self = this;
     var id = load;
     request
-    .get('/api/collection/'+id)
+    .get('/api'+id)
     .type('json')
     .end(function(res) {
       if (res.ok) {

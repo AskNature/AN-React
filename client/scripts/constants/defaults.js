@@ -104,6 +104,14 @@ var Defaults = {
         }
       ]
     },
+    
+    media: {
+      results : [
+        {
+          name: 'Loading...'
+        }
+      ]
+    },
 
 
 };

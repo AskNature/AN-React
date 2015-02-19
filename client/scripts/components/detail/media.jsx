@@ -1,5 +1,5 @@
 /**
-* Strategy detail (component)
+* Media detail (component)
 */
 'use strict';
 
@@ -24,11 +24,11 @@ var DefaultLayout = require('../layouts/default.jsx');
 
 /** Gets incoming information from the store */
 
-var focusStore = require('../../stores/detail/phenomena');
+var focusStore = require('../../stores/detail/media');
 
 /** Sends outgoing requests to an action */
 
-var focusActions = require('../../actions/phenomena');
+var focusActions = require('../../actions/media');
 
 /** getState can be called to get state updates from the store.
 * initialItems = entire list that remains static
@@ -108,6 +108,8 @@ var DetailComponent = React.createClass({
 
   render: function() {
     var detail = this.state.details.results[0];
+    var legacy_url = 'http://www.asknature.org/media/image/'+detail.id;
+    var image_url = 'http://www.asknature.org/images/uploads/'+detail.entity+'/'+detail.masterid+'/'+detail.filename;
     return (
         /* jshint ignore:start */
         <DefaultLayout>
@@ -115,18 +117,23 @@ var DetailComponent = React.createClass({
               <Row className="show-grid">
                 <Col xs={12} md={12}>
                   <ButtonToolbar>
-                    <Link url="../admin/phenomena"><Button><Glyphicon glyph="chevron-left" /> Phenomena Console</Button></Link>
+                    <Link url="../admin/media"><Button><Glyphicon glyph="chevron-left" /> Media Console</Button></Link>
+
+                    <Button href={legacy_url} target="_blank" bsStyle="primary">View on legacy site</Button>
                   </ButtonToolbar>
                 </Col>
               </Row>
               <Row className="show-grid">
-                <Col xs={12} md={12}>
+                <Col xs={12} sm={6}>
                   <h3>{detail.name}</h3>
-                  <p className="lead">{detail.description}</p>
                 </Col>
 
+                <Col xs={12} sm={6}>
+                  <Well bsSize="small">
+                    <img className='img-responsive' src={image_url} />
+                  </Well>
+                </Col>
               </Row>
-
 
             </Grid>
         </DefaultLayout>

@@ -1,12 +1,12 @@
 /**
-* PhenomenaConsole Component
+* Media Console Component
 */
 'use strict';
 
 var React = require('react');
 var DefaultLayout = require('../layouts/default.jsx');
-var focusStore = require('../../stores/admin/researchers');
-var focusActions = require('../../actions/researchers');
+var focusStore = require('../../stores/admin/media');
+var focusActions = require('../../actions/media');
 
 var getState = function() {
   return {
@@ -26,15 +26,23 @@ var initializeTable = function(state) {
       'lengthMenu': '_MENU_'
     },
     'columns' : [
-      {'data':'name','title': 'Name', 'render': function(data,type,row) {
-          var url = '../researcher/'+row.masterid;
+    {'data':'filename','title': 'Image', 'render': function(data,type,row) {
+        var url = '../media/'+row.masterid;
+        var imageurl = 'http://www.asknature.org/images/uploads/'+row.entity+'/'+row.masterid+'/'+row.filename;
+        return '<a href="'+url+'"><img src='+imageurl+' width="100px" height="auto" /></a>';
+      }
+    },
+    {'data':'name','title': 'Name', 'render': function(data,type,row) {
+          var url = '../media/'+row.masterid;
           return '<a href="'+url+'"><strong>'+data+'</strong></a>';
         }
-      }
+      },
+
     ]
  });
-  $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');
+ $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');
 };
+
 
 /** ItemsFilter class contains a search field that filters items in
 * an unordered list in real time.
@@ -80,7 +88,7 @@ var FocusConsole = React.createClass({
             /* jshint ignore:start */
             <DefaultLayout>
                 <div className="main-container">
-                        <h1>Researchers Console</h1>
+                        <h1>Media Console</h1>
                         <FocusTable />
                 </div>
             </DefaultLayout>

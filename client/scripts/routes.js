@@ -13,6 +13,8 @@ var SourcesConsole = React.createFactory(require('./components/admin/sources.jsx
 var ResearchersConsole = React.createFactory(require('./components/admin/researchers.jsx'));
 var CollectionsConsole = React.createFactory(require('./components/admin/collections.jsx'));
 var UsersConsole = React.createFactory(require('./components/admin/users.jsx'));
+var MediaConsole = React.createFactory(require('./components/admin/media.jsx'));
+
 
 var StrategyDetail = React.createFactory(require('./components/detail/strategy.jsx'));
 var ProductDetail = React.createFactory(require('./components/detail/product.jsx'));
@@ -23,6 +25,8 @@ var SourceDetail = React.createFactory(require('./components/detail/source.jsx')
 var ResearcherDetail = React.createFactory(require('./components/detail/researcher.jsx'));
 var CollectionDetail = React.createFactory(require('./components/detail/collection.jsx'));
 var UserDetail = React.createFactory(require('./components/detail/user.jsx'));
+var MediaDetail = React.createFactory(require('./components/detail/media.jsx'));
+
 
 var Login = React.createFactory(require('./components/account/login.jsx'));
 var Signup = React.createFactory(require('./components/account/signup.jsx'));
@@ -74,6 +78,10 @@ var console_users = function() {
     render(UsersConsole);
 };
 
+var console_media = function() {
+    render(MediaConsole);
+};
+
 var detail_strategy = function() {
     render(StrategyDetail);
 };
@@ -110,6 +118,10 @@ var detail_user = function() {
     render(UserDetail);
 };
 
+var detail_media = function() {
+    render(MediaDetail);
+};
+
 var login = function() {
     render(Login);
 };
@@ -141,15 +153,17 @@ var routes = {
   '/admin/researchers': console_researchers,
   '/admin/collections': console_collections,
   '/admin/users': console_users,
+  '/admin/media': console_media,
   '/strategy/:id': detail_strategy,
   '/product/:id': detail_product,
-  '/living-systems/:id': detail_livingsystems,
+  '/living-system/:id': detail_livingsystems,
   '/phenomenon/:id': detail_phenomenon,
   '/condition/:id': detail_condition,
   '/source/:id': detail_source,
   '/researcher/:id': detail_researcher,
   '/collection/:id': detail_collection,
   '/user/:id': detail_user,
+  '/media/:id': detail_media,
   '/login': login,
   '/signup': signup,
   '/settings': account_settings,

@@ -27,7 +27,7 @@ var initializeTable = function(state) {
     },
     'columns' : [
       {'data':'name','title': 'Name', 'render': function(data,type,row) {
-          var url = '../living-system/'+row.masterid;
+          var url = '../living-system/'+row['@rid'];
           return '<a href="'+url+'"><strong>'+data+'</strong></a>';
         }
       }

@@ -30,6 +30,7 @@ var SidebarComponent = React.createClass({
                       <li eventKey={8}><Link url="../admin/living-systems">Living Systems</Link></li>
                       <li eventKey={9}><Link url="../admin/researchers">Researchers</Link></li>
                       <li eventKey={10}><Link url="../admin/collections">Collections</Link></li>
+                      <li eventKey={11}><Link url="../admin/media">Media</Link></li>
                     </Nav>
                   </TabPane>
                 </TabbedArea>

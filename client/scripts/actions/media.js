@@ -4,34 +4,34 @@
 'use strict';
 
 var Dispatcher = require('../dispatchers/default');
-var Constants = require('../constants/researcher');
-var Defaults = require('../constants/defaults').researcher;
+var Constants = require('../constants/media');
+var Defaults = require('../constants/defaults').media;
 var request = require('superagent');
 var assign = require('object-assign');
 
 module.exports = {
 
   /**
-  * setList is called by getList and sends a request to the dispatcher.
+  * setOutcome is called by getOutcomes and sends a request to the dispatcher.
   */
 
   setList: function(focus) {
     Dispatcher.handleViewAction({
-      actionType: Constants.GET_ALL_RESEARCHERS,
+      actionType: Constants.GET_ALL_MEDIA,
       focus: assign({}, Defaults, focus)
     });
     console.log('setList action returning '+focus.results.length + ' results.');
   },
 
   /**
-  * getList is called by the strategytable component. It defines the URI
+  * getOutcomes is called by the outcomefilter component. It defines the URI
   * that the router uses to pass a request to the controller.
   */
 
   getList: function(callback) {
     var self = this;
     request
-    .get('/api/researchers')
+    .get('/api/media')
     .type('json')
     .end(function(res) {
       if (res.ok) {
@@ -58,16 +58,11 @@ module.exports = {
 
   setItem: function(focus, next) {
     Dispatcher.handleViewAction({
-      actionType: Constants.GET_RESEARCHER,
+      actionType: Constants.GET_MEDIA,
       focus: assign({}, Defaults, focus)
     });
     console.log('setItem action returning '+ focus.results + ' result.');
   },
-
-  /**
-  * getItem is called by the strategytable component. It defines the URI
-  * that the router uses to pass a request to the controller.
-  */
 
   getItem: function(load, callback) {
     var self = this;
@@ -97,8 +92,5 @@ module.exports = {
       }
     });
   },
-
-
-
 
 };
