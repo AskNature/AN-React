@@ -54,14 +54,23 @@ var Login = React.createClass({
                           <Input name="username" type="email" placeholder="Email Address" bsStyle={this.state.style} />
                           <Input name="password" type="password" placeholder="Password" bsStyle={this.state.style} />
                           <Input type="checkbox" label="Remember Me" checked />
-                          <Link className="pull-left" url="#">Create AskNature Account</Link>
+                          <Link className="pull-left" url="/signup">Create AskNature Account</Link>
+			  <Link className="pull-left" url="/forgot">Forgot password?</Link>
                           <Input className="pull-right" type="submit" bsStyle="primary" value="Login" />
                           </Col>
                           </Row>
                           <Row className="show-grid">
                           <Col xs={12}>
                           <hr />
+			  <Col xs={4}>
                           <Button href='/auth/google'>Sign in with Google</Button>
+			  </Col>
+			  <Col xs={4}>
+			  <Button href='/auth/facebook'>Sign in with Facebook</Button>
+			  </Col>
+			  <Col xs={4}>
+			  <Button href='/auth/linkedin'>Sign in with LinkedIn</Button>
+			  </Col>
                           </Col>
                           </Row>
                         </form>

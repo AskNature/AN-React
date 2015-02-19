@@ -15,30 +15,33 @@ var FormData = require('react-form-data');
 var userActions = require('../../actions/user');
 var routeActions = require('../../actions/routes');
 
-var Login = React.createClass({
+var Reset = React.createClass({
     mixins: [ FormData ],
 
     getInitialState: function() {
     	return { style: '' }
     },
 
-    createSuccess: function() {
-    	routeActions.setRoute("/settings");
+    resetSuccess: function() {
+    	console.log("reset");
+	routeActions.setRoute("/login");
     },
 
-    createFailure: function(err) {
+    resetFailure: function(err) {
     	console.log(err);
 	this.setState({style: 'error'});
     },
 
     handleSubmit: function(e) {
-    	userActions.createUser(this.formData, this.createSuccess, this.createFailure);
+    	this.formData.token = window.location.pathname.split('/')[2]; // TODO: grab token from URL. there's a better way...
+    	userActions.resetUser(this.formData, this.resetSuccess, this.resetFailure);
+	console.log(this.formData);
 	e.preventDefault();
     },
 
     render: function() {
       var title = (
-        <h2>Sign up</h2>
+        <h2>Reset password</h2>
       )
         return (
             /* jshint ignore:start */
@@ -51,10 +54,9 @@ var Login = React.createClass({
                         <form onChange={this.updateFormData} onSubmit={this.handleSubmit}>
                         <Row className="show-grid">
                           <Col xs={12}>
-                          <Input name="email" type="email" placeholder="Email Address" bsStyle={this.state.style} />
-                          <Input name="password" type="password" placeholder="Password" />
-                          <Link className="pull-left" url="/login">Already have an account, or want to log in with an external account?</Link>
-                          <Input className="pull-right" type="submit" value="Sign Up" />
+                          <Input name="password" type="password" placeholder="New password" bsStyle={this.state.style} />
+			  <Input name="confirm" type="password" placeholder="Confirm new password" bsStyle={this.state.style} />
+                          <Input className="pull-right" type="submit" value="Reset password" />
                           </Col>
                           </Row>
 
@@ -70,4 +72,4 @@ var Login = React.createClass({
     }
 });
 
-  module.exports = Login;
+  module.exports = Reset;

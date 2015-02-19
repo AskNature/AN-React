@@ -10,7 +10,8 @@ var StrategyDetail = React.createFactory(require('./components/detail/strategy.j
 var Login = React.createFactory(require('./components/account/login.jsx'));
 var Signup = React.createFactory(require('./components/account/signup.jsx'));
 var AccountSettings = React.createFactory(require('./components/account/account_settings.jsx'));
-
+var AccountForgot = React.createFactory(require('./components/account/forgot.jsx'));
+var AccountReset = React.createFactory(require('./components/account/reset.jsx'));
 
 var render = function(Page) {
     React.render(new Page(), document.getElementById('app-wrapper'));
@@ -48,6 +49,14 @@ var account_settings = function() {
     render(AccountSettings);
 };
 
+var account_forgot = function() {
+    render(AccountForgot);
+};
+
+var account_reset = function(token) {
+    render(AccountReset);
+};
+
 var routes = {
   '/': index,
   '/admin/outcomes': console_outcomes,
@@ -56,7 +65,9 @@ var routes = {
   '/strategy/:id': detail_strategy,
   '/login': login,
   '/signup': signup,
-  '/settings': account_settings
+  '/settings': account_settings,
+  '/forgot': account_forgot,
+  '/reset/:token': account_reset
 };
 
 module.exports = routes;

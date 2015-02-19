@@ -15,30 +15,30 @@ var FormData = require('react-form-data');
 var userActions = require('../../actions/user');
 var routeActions = require('../../actions/routes');
 
-var Login = React.createClass({
+var Forgot = React.createClass({
     mixins: [ FormData ],
 
     getInitialState: function() {
     	return { style: '' }
     },
 
-    createSuccess: function() {
-    	routeActions.setRoute("/settings");
+    forgotSuccess: function() {
+    	this.setState({style: 'success'});
     },
 
-    createFailure: function(err) {
+    forgotFailure: function(err) {
     	console.log(err);
 	this.setState({style: 'error'});
     },
 
     handleSubmit: function(e) {
-    	userActions.createUser(this.formData, this.createSuccess, this.createFailure);
+    	userActions.forgotUser(this.formData, this.forgotSuccess, this.forgotFailure);
 	e.preventDefault();
     },
 
     render: function() {
       var title = (
-        <h2>Sign up</h2>
+        <h2>Forgot password</h2>
       )
         return (
             /* jshint ignore:start */
@@ -52,9 +52,7 @@ var Login = React.createClass({
                         <Row className="show-grid">
                           <Col xs={12}>
                           <Input name="email" type="email" placeholder="Email Address" bsStyle={this.state.style} />
-                          <Input name="password" type="password" placeholder="Password" />
-                          <Link className="pull-left" url="/login">Already have an account, or want to log in with an external account?</Link>
-                          <Input className="pull-right" type="submit" value="Sign Up" />
+                          <Input className="pull-right" type="submit" value="Reset password" />
                           </Col>
                           </Row>
 
@@ -70,4 +68,4 @@ var Login = React.createClass({
     }
 });
 
-  module.exports = Login;
+  module.exports = Forgot;
