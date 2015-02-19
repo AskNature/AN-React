@@ -3,14 +3,14 @@
 */
 'use strict';
 
-var Store = require('./default');
-var Dispatcher = require('../dispatchers/default');
+var Store = require('../default');
+var Dispatcher = require('../../dispatchers/default');
 
 /** Gets list of actions to listen for */
-var focusConstants = require('../constants/strategy');
+var focusConstants = require('../../constants/strategy');
 
 /** Gets default values to be used until db action is completed */
-var focusDefaults = require('../constants/defaults').strategy;
+var focusDefaults = require('../../constants/defaults').strategy;
 
 var _focus;
 

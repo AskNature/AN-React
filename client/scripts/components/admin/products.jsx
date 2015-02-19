@@ -6,7 +6,7 @@
 var React = require('react');
 var DefaultLayout = require('../layouts/default.jsx');
 var focusStore = require('../../stores/admin/products');
-var focusActions = require('../../actions/admin/products');
+var focusActions = require('../../actions/products');
 
 var getState = function() {
   return {
@@ -17,21 +17,26 @@ var getState = function() {
 var initializeTable = function(state) {
   var listitems = state.items.results;
   $('#list').dataTable({
-   "destroy": true,
-   "data": listitems,
-   "language": {
-      search: "",
-      searchPlaceholder: "Filter",
-      "lengthMenu": "_MENU_"
+   'destroy': true,
+   'data': listitems,
+   stateSave: true,
+   'language': {
+      search: '',
+      searchPlaceholder: 'Filter',
+      'lengthMenu': '_MENU_'
     },
-    "columns" : [
-    {"data":"name","title": "Headline"},
-    {"data":"description","title": "Abstract"},
-    {"data":"inspiredby","title": "Inspired By"},
-    {"data":"function","title": "Outcomes"}
+    'columns' : [
+      {'data':'name','title': 'Name', 'render': function(data,type,row) {
+          var url = '../product/'+row.masterid;
+          return '<a href="'+url+'"><strong>'+data+'</strong></a>';
+        }
+      },
+      {'data':'description','title': 'Abstract'},
+      {'data':'inspiredby','title': 'Inspired By'},
+      {'data':'functions','title': 'Outcomes'}
     ]
  });
-  $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');
+ $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');
 };
 
 /** ItemsFilter class contains a search field that filters items in

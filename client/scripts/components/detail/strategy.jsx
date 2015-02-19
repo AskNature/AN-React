@@ -24,11 +24,11 @@ var DefaultLayout = require('../layouts/default.jsx');
 
 /** Gets incoming information from the store */
 
-var focusStore = require('../../stores/strategy_detail');
+var focusStore = require('../../stores/detail/strategies');
 
 /** Sends outgoing requests to an action */
 
-var focusActions = require('../../actions/admin/strategies');
+var focusActions = require('../../actions/strategies');
 
 /** getState can be called to get state updates from the store.
 * initialItems = entire list that remains static
@@ -144,7 +144,7 @@ var StrategyDetail = React.createClass({
                       <ButtonList items={detail.mechanisms} title="Mechanisms"/>
                   </Col>
                   <Col xs={6} md={4}>
-                    <ButtonList items={detail.functions} title="Outcomes"/>
+                    <ButtonList items={detail.outcomes} title="Outcomes"/>
                   </Col>
                   <Col xs={12} md={12}>
                     <Well>

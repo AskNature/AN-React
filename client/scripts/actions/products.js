@@ -3,9 +3,9 @@
 */
 'use strict';
 
-var Dispatcher = require('../../dispatchers/default');
-var focusConstants = require('../../constants/product');
-var focusDefaults = require('../../constants/defaults').strategy;
+var Dispatcher = require('../dispatchers/default');
+var Constants = require('../constants/product');
+var Defaults = require('../constants/defaults').product;
 var request = require('superagent');
 var assign = require('object-assign');
 
@@ -17,8 +17,8 @@ module.exports = {
 
   setList: function(focus) {
     Dispatcher.handleViewAction({
-      actionType: focusConstants.GET_ALL_PRODUCTS,
-      focus: assign({}, focusDefaults, focus)
+      actionType: Constants.GET_ALL_PRODUCTS,
+      focus: assign({}, Defaults, focus)
     });
     console.log('setList action returning '+focus.results.length + ' results.');
   },
@@ -56,4 +56,41 @@ module.exports = {
     });
   },
 
-};
+  setItem: function(focus, next) {
+    Dispatcher.handleViewAction({
+      actionType: Constants.GET_PRODUCT,
+      focus: assign({}, Defaults, focus)
+    });
+    console.log('setItem action returning '+ focus.results + ' result.');
+  },
+
+  getItem: function(load, callback) {
+    var self = this;
+    var id = load;
+    request
+    .get('/api/product/'+id)
+    .type('json')
+    .end(function(res) {
+      if (res.ok) {
+        if (res) {
+          var itemData = res.body;
+          self.setItem(itemData);
+          console.log(res.body);
+        }
+        if (callback && callback.success) {
+          callback.success(res);
+        }
+      }
+      else {
+        if (callback && callback.error) {
+          callback.error(res);
+        }
+      }
+
+      if (callback && callback.complete) {
+        callback.complete(res);
+      }
+    });
+  },
+
+  };

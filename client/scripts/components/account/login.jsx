@@ -11,7 +11,7 @@ Input = require('react-bootstrap').Input;
 
 var FormData = require('react-form-data');
 
-var userActions = require('../../actions/user');
+var userActions = require('../../actions/users');
 var routeActions = require('../../actions/routes');
 
 var Login = React.createClass({

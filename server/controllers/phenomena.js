@@ -15,14 +15,14 @@ path = require('path');
 var loadindex = function(req, res, next) {
   // Render index.html to allow application to handle routing
    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
-   console.log('The product page has access to the ' + db.name + ' database.');
+   console.log('The phenomena page has access to the ' + db.name + ' database.');
 };
 
 /** Return a list of functions, along with the names of each function's children and parent.*/
 
 var returnList = function(req, res) {
   db
-  .select('name, description, in("ChildOf").name as children, out("ChildOf").name as parent')
+  .select('name, description, in("ChildOf").name as children, out("ChildOf").name as parent, out("ChildOf").masterid as parentid, masterid')
   .from('Function')
   .all()
   .then(function (results) {
@@ -31,12 +31,28 @@ var returnList = function(req, res) {
       });
       console.log('The product controller has sent ' + results.length + ' records.');
       // console.log(results);
-      console.log("User: " + JSON.stringify(req.user));
+      console.log('User: ' + JSON.stringify(req.user));
   })
   .done();
-}
+};
+
+var returnItem = function(req, res, next) {
+  console.log(req.params.id);
+  db
+  .select('name, description, in("ChildOf").name as children, out("ChildOf").name as parent, out("ChildOf").masterid as parentid, masterid')
+  .from('Function')
+  .where('masterid LIKE "' + req.params.id + '"')
+  .all()
+  .then(function (results) {
+      res.status(200).json({
+        results: results
+      });
+  })
+  .done();
+};
 
     module.exports = {
       loadindex: loadindex,
-      returnList: returnList
+      returnList: returnList,
+      returnItem: returnItem
     };

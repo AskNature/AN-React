@@ -1,6 +1,3 @@
-/**
-* Strategy store
-*/
 'use strict';
 
 var Store = require('../default');

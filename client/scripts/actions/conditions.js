@@ -3,9 +3,9 @@
 */
 'use strict';
 
-var Dispatcher = require('../../dispatchers/default');
-var Constants = require('../../constants/strategy');
-var Defaults = require('../../constants/defaults').strategy;
+var Dispatcher = require('../dispatchers/default');
+var Constants = require('../constants/condition');
+var Defaults = require('../constants/defaults').condition;
 var request = require('superagent');
 var assign = require('object-assign');
 
@@ -17,21 +17,21 @@ module.exports = {
 
   setList: function(focus) {
     Dispatcher.handleViewAction({
-      actionType: Constants.GET_ALL_STRATEGIES,
+      actionType: Constants.GET_ALL_CONDITIONS,
       focus: assign({}, Defaults, focus)
     });
     console.log('setList action returning '+focus.results.length + ' results.');
   },
 
   /**
-  * getList is called by the strategytable component. It defines the URI
+  * getList is called by the collectiontable component. It defines the URI
   * that the router uses to pass a request to the controller.
   */
 
   getList: function(callback) {
     var self = this;
     request
-    .get('/api/strategies')
+    .get('/api/conditions')
     .type('json')
     .end(function(res) {
       if (res.ok) {
@@ -58,14 +58,14 @@ module.exports = {
 
   setItem: function(focus, next) {
     Dispatcher.handleViewAction({
-      actionType: Constants.GET_STRATEGY,
+      actionType: Constants.GET_CONDITION,
       focus: assign({}, Defaults, focus)
     });
     console.log('setItem action returning '+ focus.results + ' result.');
   },
 
   /**
-  * getItem is called by the strategytable component. It defines the URI
+  * getItem is called by the collectiontable component. It defines the URI
   * that the router uses to pass a request to the controller.
   */
 
@@ -73,7 +73,7 @@ module.exports = {
     var self = this;
     var id = load;
     request
-    .get('/api'+id)
+    .get('/api/condition/'+id)
     .type('json')
     .end(function(res) {
       if (res.ok) {

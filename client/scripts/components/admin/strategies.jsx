@@ -6,7 +6,7 @@
 var React = require('react');
 var DefaultLayout = require('../layouts/default.jsx');
 var focusStore = require('../../stores/admin/strategies');
-var focusActions = require('../../actions/admin/strategies');
+var focusActions = require('../../actions/strategies');
 
 var getState = function() {
   return {
@@ -17,28 +17,27 @@ var getState = function() {
 var initializeTable = function(state) {
   var listitems = state.items.results;
   $('#list').dataTable({
-   "destroy": true,
-   "data": listitems,
+   'destroy': true,
+   'data': listitems,
    stateSave: true,
-   "language": {
-      search: "",
-      searchPlaceholder: "Filter",
-      "lengthMenu": "_MENU_"
+   'language': {
+      search: '',
+      searchPlaceholder: 'Filter',
+      'lengthMenu': '_MENU_'
     },
-    "columns" : [
-    {"data":"name","title": "Headline", "render": function(data,type,row) {
-        var url = '../strategy/'+row['masterid'];
+    'columns' : [
+    {'data':'name','title': 'Headline', 'render': function(data,type,row) {
+        var url = '../strategy/'+row.masterid;
         return '<a href="'+url+'"><strong>'+data+'</strong></a>';
       }
     },
-    {"data":"description","title": "Abstract"},
-    {"data":"functions","title": "Outcomes"},
-    {"data":"living_system","title": "Living Systems"}
+    {'data':'outcomes','title': 'Outcomes'},
+    {'data':'description','title': 'Abstract'},
+    {'data':'living_system','title': 'Living Systems'}
             ]
  });
  $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');
 };
-
 
 /** ItemsFilter class contains a search field that filters items in
 * an unordered list in real time.

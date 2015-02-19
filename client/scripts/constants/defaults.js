@@ -12,16 +12,22 @@ var Defaults = {
     },
 
     user: {
-        loggedIn: false
+        loggedIn: false,
+        results : [
+          {
+            name: 'Username'
+          }
+        ]
+
     },
 
-    outcome: {
+    phenomenon: {
       results : [
       {
-        name: 'Loading ...',
+        name: '',
         description: 'Loading ...',
-        parent: 'Loading ...',
-        children: 'Loading ...'
+        parent: '',
+        children: '[]'
       }
       ]
     },
@@ -34,7 +40,7 @@ var Defaults = {
           masterid: 'masterid',
           media: [],
           brief: 'Brief goes here',
-          functions: [],
+          outcomes: [],
           mechanisms: [],
           conditions: [],
           living_system: [],
@@ -51,13 +57,53 @@ var Defaults = {
     product: {
       results : [
       {
-        function: 'Loading ...',
+        functions: [],
         name: 'Loading ...',
         description: 'Loading ...',
         inspiredby: 'Loading ...'
       }
       ]
-    }
+    },
+
+    collection: {
+      results : [
+        {
+          name: 'Loading...'
+        }
+      ]
+    },
+
+    condition: {
+      results : [
+        {
+          name: 'Loading...'
+        }
+      ]
+    },
+
+    livingsystem: {
+      results : [
+        {
+          name: 'Loading...'
+        }
+      ]
+    },
+
+    researcher: {
+      results : [
+        {
+          name: 'Loading...'
+        }
+      ]
+    },
+
+    source: {
+      results : [
+        {
+          name: 'Loading...'
+        }
+      ]
+    },
 
 
 };

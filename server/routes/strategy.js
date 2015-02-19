@@ -6,14 +6,14 @@
 
 'use strict';
 
-var focusController = require('../controllers/strategy');
+var Controller = require('../controllers/strategy');
 
 var routes = function (app) {
-  app.get('/admin/strategies', focusController.loadindex);
-  app.get('/api/strategies', focusController.returnList);
+  app.get('/admin/strategies', Controller.loadindex);
+  app.get('/api/strategies', Controller.returnList);
 
-  app.get('/strategy/:id', focusController.loadindex);
-  app.get('/api/strategy/:id', focusController.returnItem);
+  app.get('/strategy/:id', Controller.loadindex);
+  app.get('/api/strategy/:id', Controller.returnItem);
 };
 
 module.exports = routes;

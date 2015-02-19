@@ -27,7 +27,7 @@ UserStore.dispatcherToken = Dispatcher.register(function(payload) {
 	} else {
 	    _user = action.user;
 	}
-	
+
 
         UserStore.emitChange();
     }

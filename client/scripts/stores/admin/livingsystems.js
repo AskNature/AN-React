@@ -1,16 +1,13 @@
-/**
-* Strategy store
-*/
 'use strict';
 
 var Store = require('../default');
 var Dispatcher = require('../../dispatchers/default');
 
 /** Gets list of actions to listen for */
-var focusConstants = require('../../constants/outcome');
+var focusConstants = require('../../constants/livingsystem');
 
 /** Gets default values to be used until db action is completed */
-var focusDefaults = require('../../constants/defaults').outcome;
+var focusDefaults = require('../../constants/defaults').livingsystem;
 
 var _focus;
 
@@ -35,7 +32,7 @@ FocusStore.dispatcherToken = Dispatcher.register(function(payload) {
 
   var action = payload.action;
 
-  if (action.actionType === focusConstants.GET_ALL_OUTCOMES) {
+  if (action.actionType === focusConstants.GET_ALL_LIVINGSYSTEMS) {
     _focus = action.focus;
 
     FocusStore.emitChange();

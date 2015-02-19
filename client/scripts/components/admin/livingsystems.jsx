@@ -5,8 +5,8 @@
 
 var React = require('react');
 var DefaultLayout = require('../layouts/default.jsx');
-var focusStore = require('../../stores/admin/outcomes');
-var focusActions = require('../../actions/admin/outcomes');
+var focusStore = require('../../stores/admin/livingsystems');
+var focusActions = require('../../actions/livingsystems');
 
 var getState = function() {
   return {
@@ -17,21 +17,23 @@ var getState = function() {
 var initializeTable = function(state) {
   var listitems = state.items.results;
   $('#list').dataTable({
-   "destroy": true,
-   "data": listitems,
-   "language": {
-      search: "",
-      searchPlaceholder: "Filter",
-      "lengthMenu": "_MENU_"
+   'destroy': true,
+   'data': listitems,
+   stateSave: true,
+   'language': {
+      search: '',
+      searchPlaceholder: 'Filter',
+      'lengthMenu': '_MENU_'
     },
-    "columns" : [
-    {"data":"name","title": "Short Name"},
-    {"data":"description","title": "Long Name"},
-    {"data":"parent","title": "Parent Phenomenon"},
-    {"data":"children","title": "Child Phenomena"}
+    'columns' : [
+      {'data':'name','title': 'Name', 'render': function(data,type,row) {
+          var url = '../living-system/'+row.masterid;
+          return '<a href="'+url+'"><strong>'+data+'</strong></a>';
+        }
+      }
     ]
  });
-  $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');
+ $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');
 };
 
 /** ItemsFilter class contains a search field that filters items in
@@ -78,7 +80,7 @@ var FocusConsole = React.createClass({
             /* jshint ignore:start */
             <DefaultLayout>
                 <div className="main-container">
-                        <h1>Phenomena Console</h1>
+                        <h1>Living System Console</h1>
                         <FocusTable />
                 </div>
             </DefaultLayout>

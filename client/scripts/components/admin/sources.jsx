@@ -6,7 +6,7 @@
 var React = require('react');
 var DefaultLayout = require('../layouts/default.jsx');
 var focusStore = require('../../stores/admin/sources');
-var focusActions = require('../../actions/admin/sources');
+var focusActions = require('../../actions/sources');
 
 var getState = function() {
   return {
@@ -17,24 +17,21 @@ var getState = function() {
 var initializeTable = function(state) {
   var listitems = state.items.results;
   $('#list').dataTable({
-   "destroy": true,
-   "data": listitems,
+   'destroy': true,
+   'data': listitems,
    stateSave: true,
-   "language": {
-      search: "",
-      searchPlaceholder: "Filter",
-      "lengthMenu": "_MENU_"
+   'language': {
+      search: '',
+      searchPlaceholder: 'Filter',
+      'lengthMenu': '_MENU_'
     },
-    "columns" : [
-    {"data":"name","title": "Headline", "render": function(data,type,row) {
-      var url = '../source/'+row['masterid'];
-      return '<a href="'+url+'"><strong>'+data+'</strong></a>';
-    }
-    },
-    {"data":"description","title": "Abstract"},
-    {"data":"function","title": "Outcomes"},
-    {"data":"living_system","title": "Living Systems"}
-            ]
+    'columns' : [
+      {'data':'name','title': 'Name', 'render': function(data,type,row) {
+          var url = '../source/'+row.masterid;
+          return '<a href="'+url+'"><strong>'+data+'</strong></a>';
+        }
+      }
+    ]
  });
  $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');
 };
