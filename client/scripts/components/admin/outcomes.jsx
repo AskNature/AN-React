@@ -59,7 +59,7 @@ var FocusTable = React.createClass({
         </table>
         <button className='btn btn-primary' onClick={this.handleClick} label="Reset">Reset</button>
       </div>
-    )
+    );
   },
 
   handleClick: function() {
