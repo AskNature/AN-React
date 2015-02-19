@@ -3,7 +3,7 @@ var Infinite = require('react-infinite-extended');
 
 var ListItem = React.createClass({
     render: function() {
-        return <div className="infinite-list-item" style={{height: "100px", "border-bottom": "1px solid #ddd", cursor: "pointer"}} onClick={this.props.extendListener(this.props.num)}>
+        return <div className="infinite-list-item" style={{height: "500px", "border-bottom": "1px solid #ddd", cursor: "pointer"}} onClick={this.props.extendListener(this.props.num)}>
         List Item {this.props.num}
         </div>;
     }
@@ -15,7 +15,7 @@ var BigListItem = React.createClass({
         this.props.heightUpdateListener(this.getDOMNode().offsetHeight);
     },
     render: function() {
-	return <div className="infinite-list-item" style={{height: "300px", "border-bottom": "1px solid #ddd", cursor: "pointer", "font-size": "32px"}} onClick={this.props.contractListener(this.props.num)}>
+	return <div className="infinite-list-item" style={{height: "1000px", "border-bottom": "1px solid #ddd", cursor: "pointer", "font-size": "32px"}} onClick={this.props.contractListener(this.props.num)}>
 	List Item extended {this.props.num}
 	</div>;
     }
@@ -62,7 +62,7 @@ var InfiniteList = React.createClass({
     },
 
     heightUpdateListener: function(height) {
-        this.setState({extendedHeight: height-100});
+        this.setState({extendedHeight: height-500});
     },
  
     buildElements: function(start, end) {
@@ -97,7 +97,7 @@ var InfiniteList = React.createClass({
     extend: function(num) {
         this.contract(this.state.extendedIndex);
         this.state.elements[num] = <BigListItem num={num} key={num} contractListener={this.contractListener} heightUpdateListener={this.heightUpdateListener} />;
-        this.setState({extendedBlock: Math.floor((num*100)/125), extendedIndex: num});
+        this.setState({extendedBlock: Math.floor((num*500)/125), extendedIndex: num});
     },
 
     contract: function(num) {
@@ -108,7 +108,7 @@ var InfiniteList = React.createClass({
     },
  
     render: function() {
-        return <div><Infinite elementHeight={100}
+        return <div><Infinite elementHeight={500}
                          containerHeight={this.state.containerHeight}
                          infiniteLoadBeginBottomOffset={400}
                          onInfiniteLoad={this.handleInfiniteLoad}
