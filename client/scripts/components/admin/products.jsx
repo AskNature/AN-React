@@ -33,7 +33,7 @@ var initializeTable = function(state) {
       },
       {'data':'description','title': 'Abstract'},
       {'data':'inspiredby','title': 'Inspired By'},
-      {'data':'functions','title': 'Outcomes'}
+      {'data':'outcomes','title': 'Outcomes'}
     ]
  });
  $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');

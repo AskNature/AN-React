@@ -57,11 +57,16 @@ var Defaults = {
     product: {
       results : [
       {
-        functions: [],
+        outcomes: [],
         name: 'Loading ...',
         description: 'Loading ...',
-        inspiredby: 'Loading ...'
-      }
+        inspiredby: [],
+        keywords: 'Tag1,Tag2',
+        collectors: [],
+        media: [],
+        researchers: [],
+        sources: []
+        }
       ]
     },
 
@@ -104,7 +109,7 @@ var Defaults = {
         }
       ]
     },
-    
+
     media: {
       results : [
         {

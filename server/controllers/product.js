@@ -11,7 +11,7 @@ var loadindex = function(req, res, next) {
 
 var returnList = function(req, res) {
   db
-  .select('name, headline as description, out("InspiredBy").name as inspiredby, out("HasFunction").description as functions, masterid')
+  .select('name, headline as description, out("InspiredBy").name as inspiredby, out("HasFunction").description as outcomes, masterid')
   .from('InspiredSolutions')
   .where({status: 0})
   .all()
@@ -27,7 +27,7 @@ var returnList = function(req, res) {
 var returnItem = function(req, res, next) {
   console.log(req.params.id);
   db
-  .select('name, headline as description, out("InspiredBy").name as inspiredby, out("HasFunction").description as functions, masterid')
+  .select('name, headline as description, out("InspiredBy").name as inspiredby, out("HasFunction").description as outcomes, special_text, challenges_solved, how_is_it_different, biomimicry_story, product_type, patent_name, availability, company, phase, patent_number, company_website, strategy, consumer_products, keywords, in("Bookmarked").name as collectors, out("HasMedia").filename as media, out("FeaturedIn").name as sources, out("StudiedBy").name as researchers, status, timestamp, revision, masterid')
   .from('InspiredSolutions')
   .where('masterid LIKE "' + req.params.id + '"')
   .all()

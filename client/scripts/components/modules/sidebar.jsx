@@ -18,9 +18,8 @@ var SidebarComponent = React.createClass({
                   <TabPane eventKey={1} tab="Search">
                     <p>Placeholder</p>
                   </TabPane>
-                  <TabPane eventKey={2} tab="Admin">
+                  <TabPane eventKey={2} tab='Admin'>
                     <Nav stacked>
-                      <li eventKey={1}><Link url="/">Dashboard</Link></li>
                       <li eventKey={2}><Link url="../admin/phenomena">Phenomena</Link></li>
                       <li eventKey={3}><Link url="../admin/strategies">Life's Solutions</Link></li>
                       <li eventKey={4}><Link url="../admin/products">Inspired Solutions</Link></li>
