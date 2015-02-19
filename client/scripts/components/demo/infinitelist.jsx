@@ -4,7 +4,8 @@ var Infinite = require('react-infinite-extended');
 var ListItem = React.createClass({
     render: function() {
         return <div className="infinite-list-item" style={{height: "500px", "border-bottom": "1px solid #ddd", cursor: "pointer"}} onClick={this.props.extendListener(this.props.num)}>
-        List Item {this.props.num}
+        List Item {this.props.num}<br />
+        <img src={"http://thecatapi.com/api/images/get?format=src&type=gif&x=" + this.props.num} />
         </div>;
     }
 });
