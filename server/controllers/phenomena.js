@@ -22,7 +22,7 @@ var loadindex = function(req, res, next) {
 
 var returnList = function(req, res) {
   db
-  .select('name, description, in("ChildOf").name as children, out("ChildOf").name as parent, out("ChildOf").masterid as parentid, masterid')
+  .select('name, short_name, in("ChildOf").name as children, out("ChildOf").name as parent, out("ChildOf").masterid as parentid, masterid')
   .from('Function')
   .all()
   .then(function (results) {
@@ -39,7 +39,7 @@ var returnList = function(req, res) {
 var returnItem = function(req, res, next) {
   console.log(req.params.id);
   db
-  .select('name, description, in("ChildOf").name as children, out("ChildOf").name as parent, out("ChildOf").masterid as parentid, masterid')
+  .select('name, short_name, description, in("ChildOf").name as children, out("ChildOf").name as parent, out("ChildOf").out("ChildOf").name as groupid, out("ChildOf").masterid as parentid, in("HasFunction").name as has_function, masterid')
   .from('Function')
   .where('masterid LIKE "' + req.params.id + '"')
   .all()

@@ -26,12 +26,12 @@ var initializeTable = function(state) {
       'lengthMenu': '_MENU_'
     },
     'columns' : [
-      {'data':'description','title': 'Long Name', 'render': function(data,type,row) {
+      {'data':'name','title': 'Name', 'render': function(data,type,row) {
           var url = '../phenomenon/'+row.masterid;
           return '<a href="'+url+'"><strong>'+data+'</strong></a>';
         }
       },
-      {'data':'name','title': 'Short Name'},
+      {'data':'short_name','title': 'Short Name'},
       {'data':'parent','title': 'Parent Phenomenon', 'render': function(data,type,row) {
           var url = '../phenomenon/'+row.parentid;
           return '<a href="'+url+'"><strong>'+data+'</strong></a>';

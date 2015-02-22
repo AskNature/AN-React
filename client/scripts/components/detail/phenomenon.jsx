@@ -1,5 +1,5 @@
 /**
-* Strategy detail (component)
+* Phenomenon detail (component)
 */
 'use strict';
 
@@ -58,6 +58,23 @@ var ButtonList = React.createClass({
           })
       }
       </Well>
+    );
+  }
+});
+
+var List = React.createClass({
+  render: function() {
+    var items = this.props.items;
+    return (
+      <ul>
+        {
+          items.map(function(item, i){
+            return (
+                <li key={i}>{item}</li>
+            );
+          })
+        }
+      </ul>
     );
   }
 });
@@ -126,7 +143,55 @@ var DetailComponent = React.createClass({
                 </Col>
 
               </Row>
+              <Row className="show-grid">
+                <Col xs={12} md={12}>
+                    <h6>Legacy Data</h6>
+                    <p>This information is all due for eventual deletion, but may be helpful during short-term migration.</p>
+                    <Table striped responsive condensed hover>
+                      <thead>
+                        <tr>
+                          <th>Field Name</th>
+                          <th>Field Value</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>masterid</td>
+                          <td>{detail.masterid}</td>
+                        </tr>
+                        <tr>
+                          <td>name</td>
+                          <td>{detail.name}</td>
+                        </tr>
+                        <tr>
+                          <td>description</td>
+                          <td>{detail.description}</td>
+                        </tr>
+                        <tr>
+                          <td>short_name</td>
+                          <td>{detail.short_name}</td>
+                        </tr>
+                        <tr>
+                          <td>out_ChildOf (parent)</td>
+                          <td>{detail.parent}</td>
+                        </tr>
+                        <tr>
+                          <td>out_ChildOf.out_ChildOf (grandparent)</td>
+                          <td>{detail.groupid}</td>
+                        </tr>
+                        <tr>
+                          <td>in_ChildOf (children)</td>
+                          <td><List items={detail.children} /></td>
+                        </tr>
+                        <tr>
+                          <td>in_HasFunction</td>
+                          <td><List items={detail.has_function} /></td>
+                        </tr>
 
+                      </tbody>
+                    </Table>
+                </Col>
+              </Row>
 
             </Grid>
         </DefaultLayout>

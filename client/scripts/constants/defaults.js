@@ -24,10 +24,13 @@ var Defaults = {
     phenomenon: {
       results : [
       {
-        name: '',
-        description: 'Loading ...',
+        name: 'Loading..',
+        description: '',
+        short_name: '',
         parent: '',
-        children: '[]'
+        children: [],
+        has_function: [],
+        groupid: ''
       }
       ]
     },
