@@ -108,7 +108,13 @@ var Defaults = {
     source: {
       results : [
         {
-          name: 'Loading...'
+          name: 'Loading...',
+          collected: [],
+          featured_in: [],
+          keywords: 'Tag1,Tag2',
+          status: '',
+          type: '',
+          featured_count: ''
         }
       ]
     },

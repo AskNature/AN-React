@@ -30,7 +30,10 @@ var initializeTable = function(state) {
           var url = '../source/'+row.masterid;
           return '<a href="'+url+'"><strong>'+data+'</strong></a>';
         }
-      }
+      },
+      {'data':'status','title': 'Status'},
+      {'data':'type','title': 'Type'},
+      {'data':'featured_count','title': '# of Citations'}
     ]
  });
  $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');

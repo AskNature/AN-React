@@ -62,6 +62,23 @@ var ButtonList = React.createClass({
   }
 });
 
+var List = React.createClass({
+  render: function() {
+    var items = this.props.items;
+    return (
+      <ul>
+        {
+          items.map(function(item, i){
+            return (
+                <li key={i}>{item}</li>
+            );
+          })
+        }
+      </ul>
+    );
+  }
+});
+
 var Gallery = React.createClass({
   render: function() {
     var pictures = this.props.items.media;
@@ -128,7 +145,122 @@ var StrategyDetail = React.createClass({
                 </Col>
 
               </Row>
-
+              <Row className="show-grid">
+                <Col xs={12} md={12}>
+                    <h6>Legacy Data</h6>
+                    <p>This information is all due for eventual deletion, but may be helpful during short-term migration.</p>
+                    <Table striped responsive condensed hover>
+                      <thead>
+                        <tr>
+                          <th>Field Name</th>
+                          <th>Field Value</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>masterid</td>
+                          <td>{detail.masterid}</td>
+                        </tr>
+                        <tr>
+                          <td>name</td>
+                          <td>{detail.name}</td>
+                        </tr>
+                        <tr>
+                          <td>secondary_title</td>
+                          <td>{detail.secondary_title}</td>
+                        </tr>
+                        <tr>
+                          <td>authors</td>
+                          <td>{detail.authors}</td>
+                        </tr>
+                        <tr>
+                          <td>author_address</td>
+                          <td>{detail.author_address}</td>
+                        </tr>
+                        <tr>
+                          <td>publication_year</td>
+                          <td>{detail.publication_year}</td>
+                        </tr>
+                        <tr>
+                          <td>publication_date</td>
+                          <td>{detail.publication_date}</td>
+                        </tr>
+                        <tr>
+                          <td>publisher</td>
+                          <td>{detail.publisher}</td>
+                        </tr>
+                        <tr>
+                          <td>pages</td>
+                          <td>{detail.pages}</td>
+                        </tr>
+                        <tr>
+                          <td>volume</td>
+                          <td>{detail.volume}</td>
+                        </tr>
+                        <tr>
+                          <td>number</td>
+                          <td>{detail.number}</td>
+                        </tr>
+                        <tr>
+                          <td>isbn</td>
+                          <td>{detail.isbn}</td>
+                        </tr>
+                        <tr>
+                          <td>accession_number</td>
+                          <td>{detail.accession_number}</td>
+                        </tr>
+                        <tr>
+                          <td>url</td>
+                          <td><a href={detail.url} target="_blank">{detail.url}</a></td>
+                        </tr>
+                        <tr>
+                          <td>notes</td>
+                          <td>{detail.notes}</td>
+                        </tr>
+                        <tr>
+                          <td>access_date</td>
+                          <td>{detail.access_date}</td>
+                        </tr>
+                        <tr>
+                          <td>abstract_excerpt</td>
+                          <td>{detail.abstract_excerpt}</td>
+                        </tr>
+                        <tr>
+                          <td>published_language</td>
+                          <td>{detail.published_language}</td>
+                        </tr>
+                        <tr>
+                          <td>type_of_work</td>
+                          <td>{detail.type_of_work}</td>
+                        </tr>
+                        <tr>
+                          <td>status</td>
+                          <td>{detail.status}</td>
+                        </tr>
+                        <tr>
+                          <td>type</td>
+                          <td>{detail.type}</td>
+                        </tr>
+                        <tr>
+                          <td>other_information</td>
+                          <td>{detail.other_information}</td>
+                        </tr>
+                        <tr>
+                          <td>keywords</td>
+                          <td><List items={detail.keywords.split(',')} /></td>
+                        </tr>
+                        <tr>
+                          <td>in_FeaturedIn</td>
+                          <td><List items={detail.featured_in} /></td>
+                        </tr>
+                        <tr>
+                          <td>in_Bookmarked</td>
+                          <td><List items={detail.collected} /></td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                </Col>
+              </Row>
             </Grid>
         </DefaultLayout>
         /* jshint ignore:end */

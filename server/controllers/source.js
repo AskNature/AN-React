@@ -11,7 +11,7 @@ var loadindex = function(req, res, next) {
 
 var returnList = function(req, res) {
   db
-  .select('name, masterid')
+  .select('name, masterid, status, type, in("FeaturedIn").size() as featured_count')
   .from('Sources')
   .all()
   .then(function (results) {
@@ -26,7 +26,7 @@ var returnList = function(req, res) {
 var returnItem = function(req, res, next) {
   console.log(req.params.id);
   db
-  .select('name, masterid')
+  .select('name, masterid, status, timestamp, type, secondary_title, authors, author_address, pages, volume, number, publication_year, publisher, isbn, accession_number, url, notes, access_date, keywords, abstract_excerpt, published_language, type_of_work, other_information, in("FeaturedIn").name as featured_in, in("Bookmarked").name as collected')
   .from('Sources')
   .where('masterid LIKE "' + req.params.id + '"')
   .all()
