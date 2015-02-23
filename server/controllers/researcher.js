@@ -26,7 +26,7 @@ var returnList = function(req, res) {
 var returnItem = function(req, res, next) {
   console.log(req.params.id);
   db
-  .select('name, masterid')
+  .select('name, masterid, special_text, revision, status, timestamp, type, people, institution, city, state, province, country, postal_code, url, in("StudiedBy").name as studies, in("Bookmarked").name as collected')
   .from('Experts')
   .where('masterid LIKE "' + req.params.id + '"')
   .all()

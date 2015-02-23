@@ -62,6 +62,23 @@ var ButtonList = React.createClass({
   }
 });
 
+var List = React.createClass({
+  render: function() {
+    var items = this.props.items;
+    return (
+      <ul>
+        {
+          items.map(function(item, i){
+            return (
+                <li key={i}>{item}</li>
+            );
+          })
+        }
+      </ul>
+    );
+  }
+});
+
 var Gallery = React.createClass({
   render: function() {
     var pictures = this.props.items.media;
@@ -127,6 +144,91 @@ var StrategyDetail = React.createClass({
                   <h3>{detail.name}</h3>
                 </Col>
 
+              </Row>
+              <Row className="show-grid">
+                <Col xs={12} md={12}>
+                    <h6>Legacy Data</h6>
+                    <p>This information is all due for eventual deletion, but may be helpful during short-term migration.</p>
+                    <Table striped responsive condensed hover>
+                      <thead>
+                        <tr>
+                          <th>Field Name</th>
+                          <th>Field Value</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>masterid</td>
+                          <td>{detail.masterid}</td>
+                        </tr>
+                        <tr>
+                          <td>name</td>
+                          <td>{detail.name}</td>
+                        </tr>
+                        <tr>
+                          <td>people</td>
+                          <td>{detail.people}</td>
+                        </tr>
+                        <tr>
+                          <td>institution</td>
+                          <td>{detail.institution}</td>
+                        </tr>
+                        <tr>
+                          <td>url</td>
+                          <td><a href={detail.url} target="_blank">{detail.url}</a></td>
+                        </tr>
+                        <tr>
+                          <td>in_StudiedBy</td>
+                          <td><List items={detail.studies} /></td>
+                        </tr>
+                        <tr>
+                          <td>special_text</td>
+                          <td>{detail.special_text}</td>
+                        </tr>
+                        <tr>
+                          <td>city</td>
+                          <td>{detail.city}</td>
+                        </tr>
+                        <tr>
+                          <td>state</td>
+                          <td>{detail.state}</td>
+                        </tr>
+                        <tr>
+                          <td>province</td>
+                          <td>{detail.province}</td>
+                        </tr>
+                        <tr>
+                          <td>country</td>
+                          <td>{detail.country}</td>
+                        </tr>
+                        <tr>
+                          <td>postal_code</td>
+                          <td>{detail.postal_code}</td>
+                        </tr>
+                        <tr>
+                          <td>timestamp</td>
+                          <td>{detail.timestamp}</td>
+                        </tr>
+                        <tr>
+                          <td>revision</td>
+                          <td>{detail.revision}</td>
+                        </tr>
+                        <tr>
+                          <td>status</td>
+                          <td>{detail.status}</td>
+                        </tr>
+                        <tr>
+                          <td>type</td>
+                          <td>{detail.type}</td>
+                        </tr>
+                        <tr>
+                          <td>in_Bookmarked</td>
+                          <td><List items={detail.collected} /></td>
+                        </tr>
+                      
+                      </tbody>
+                    </Table>
+                </Col>
               </Row>
 
             </Grid>

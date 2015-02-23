@@ -107,7 +107,9 @@ var Defaults = {
     researcher: {
       results : [
         {
-          name: 'Loading...'
+          name: 'Loading...',
+          collected: [],
+          studies: []
         }
       ]
     },

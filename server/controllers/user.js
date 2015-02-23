@@ -154,6 +154,7 @@ var returnList = function(req, res) {
   db
   .select('name, masterid')
   .from('Users')
+  .where('out_Flagged IS NULL AND email_confirmed == 1')
   .limit('200')
   .all()
   .then(function (results) {

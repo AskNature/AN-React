@@ -12,7 +12,7 @@ var loadindex = function(req, res, next) {
 
 var returnList = function(req, res, next) {
   db
-  .select('name, summary as description, out("HasLivingSystem").name as living_system, out("HasFunction").description as outcomes, masterid')
+  .select('name, summary as description, out("HasLivingSystem").name as living_system, out("HasFunction").name as outcomes, masterid')
   .from('Strategy')
   .where({status: 0})
   .all()
@@ -28,7 +28,7 @@ var returnList = function(req, res, next) {
 var returnItem = function(req, res, next) {
   console.log(req.params.id);
   db
-  .select('name, summary as description, special_text, brief, masterid, in("Created").name as created_by, out("HasLivingSystem").name as living_system, out("HasFunction").description as outcomes, out("HasMechanism").description as mechanisms, out("HasConditions").description as conditions, out("HasMedia").filename as media, in("InspiredBy").name as products, out("FeaturedIn").name as sources, in("StudiedBy").name as experts, in("Bookmarked").name as collectors, timestamp, entered_by, date_entered, additional_functions, keywords, common_name, other_names, additional_taxa, applications_sector, applications, source_citation, pages_of_excerpt, source, pdf_file_name, image_file_name, additional_reference, video_url, general_strategy, editor_comments, scientific_name, application_1, application_2, application_3, status')
+  .select('name, summary as description, special_text, brief, masterid, in("Created").name as created_by, out("HasLivingSystem").name as living_system, out("HasFunction").name as outcomes, out("HasMechanism").description as mechanisms, out("HasConditions").description as conditions, out("HasMedia").filename as media, in("InspiredBy").name as products, out("FeaturedIn").name as sources, in("StudiedBy").name as experts, in("Bookmarked").name as collectors, timestamp, entered_by, date_entered, additional_functions, keywords, common_name, other_names, additional_taxa, applications_sector, applications, source_citation, pages_of_excerpt, source, pdf_file_name, image_file_name, additional_reference, video_url, general_strategy, editor_comments, scientific_name, application_1, application_2, application_3, status')
   .from('Strategy')
   .where('masterid LIKE "' + req.params.id + '"')
   .all()
