@@ -15,7 +15,14 @@ var Defaults = {
         loggedIn: false,
         results : [
           {
-            name: 'Username'
+            name: 'Username',
+            flagged: [],
+            has_media: [],
+            added_media: [],
+            collected: [],
+            friends: [],
+            roles: '1,2',
+            activities: '1,2'
           }
         ]
 

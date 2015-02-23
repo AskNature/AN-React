@@ -17,7 +17,7 @@ var logout = function(req, res, next) {
 };
 
 var forgotUser = function(req, res, next) {
-    if (req.isAuthenticated()) { res.status(403).send("You're already logged in to an account"); } // user already logged in
+    if (req.isAuthenticated()) { res.status(403).send('You\'re already logged in to an account'); } // user already logged in
     db.select().from('PassportUser').where({email: req.body.email}).limit(1).one().then(function(user) {
 	if(user) {
 	    crypto.randomBytes(20, function(err, buf) {
@@ -168,7 +168,7 @@ var returnList = function(req, res) {
 var returnItem = function(req, res, next) {
   console.log(req.params.id);
   db
-  .select('name, masterid')
+  .select('masterid, name, first, last, email, roles, registration_date, timestamp, out("Flagged").name as flagged, email_confirmed, special_text, activities, address_1, address_2, city, state, postal_code, country, time_zone, phone, extension, tollfree, fax, im, langs_spoken, revision, hide_email, send_email, alert_frequency, last_alerted, status, contact_me, hide_address, hide_phone, gender, custom_avatar, ip_address, out("HasMedia").filename as has_media, out("AddedMedia").filename as added_media, out("Bookmarked").name as collected, out("Friends").name as friends, password, salt, persist, newpassword, email_salt')
   .from('Users')
   .where('masterid LIKE "' + req.params.id + '"')
   .all()
