@@ -16,58 +16,67 @@ var userActions = require('../../actions/user');
 var routeActions = require('../../actions/routes');
 
 var Login = React.createClass({
-    mixins: [ FormData ],
+  mixins: [ FormData ],
 
-    getInitialState: function() {
-    	return { style: '' }
-    },
+  getInitialState: function() {
+    return { style: '' }
+  },
 
-    createSuccess: function() {
-    	routeActions.setRoute("/settings");
-    },
+  createSuccess: function() {
+    routeActions.setRoute("/settings");
+  },
 
-    createFailure: function(err) {
-    	console.log(err);
-	this.setState({style: 'error'});
-    },
+  createFailure: function(err) {
+    console.log(err);
+    this.setState({style: 'error'});
+  },
 
-    handleSubmit: function(e) {
-    	userActions.createUser(this.formData, this.createSuccess, this.createFailure);
-	e.preventDefault();
-    },
+  handleSubmit: function(e) {
+    userActions.createUser(this.formData, this.createSuccess, this.createFailure);
+    e.preventDefault();
+  },
 
-    render: function() {
-      var title = (
-        <h2>Sign up</h2>
-      )
-        return (
-            /* jshint ignore:start */
-            <NoChromeLayout>
-              <div className="main-container">
-                <Grid>
-                  <Row className="show-grid">
-                    <Col xs={12} md={6} mdOffset={3}>
-                      <Panel header={title} id="login-panel">
-                        <form onChange={this.updateFormData} onSubmit={this.handleSubmit}>
-                        <Row className="show-grid">
-                          <Col xs={12}>
-                          <Input name="email" type="email" placeholder="Email Address" bsStyle={this.state.style} />
-                          <Input name="password" type="password" placeholder="Password" />
-                          <Link className="pull-left" url="/login">Already have an account, or want to log in with an external account?</Link>
-                          <Input className="pull-right" type="submit" value="Sign Up" />
-                          </Col>
-                          </Row>
+  render: function() {
+    var title = (
+      <h2>Sign up</h2>
+    )
+    return (
+      /* jshint ignore:start */
+      <NoChromeLayout>
+        <div className="main-container">
+          <Grid>
+            <Row className="show-grid">
+              <Col xs={12} md={6} mdOffset={3}>
+                <Panel header={title} id="login-panel">
+                  <form onChange={this.updateFormData} onSubmit={this.handleSubmit}>
+                    <Row className="show-grid">
+                      <Col xs={12}>
+                        <Input name="email" type="email" placeholder="Email Address" bsStyle={this.state.style} />
+                        <Input name="password" type="password" placeholder="Password" />
+                        <Input className="pull-right" type="submit" bsStyle="primary" value="Sign Up" />
+                      </Col>
+                      <Col xs={12}>
+                        <h6>Or sign up with your existing account:</h6>
+                        <ButtonGroup justified>
+                          <Button href='/auth/google'><Glyphicon glyph="social-google-plus" />Google</Button>
+                          <Button href='/auth/facebook'>Facebook</Button>
+                          <Button href='/auth/linkedin'>LinkedIn</Button>
+                        </ButtonGroup>
+                        <hr />
+                        <Link url="/login">Already have an account?</Link>
+                      </Col>
+                    </Row>
 
-                        </form>
-                      </Panel>
-                    </Col>
-                  </Row>
-                </Grid>
-              </div>
-            </NoChromeLayout>
-            /* jshint ignore:end */
-        );
-    }
+                  </form>
+                </Panel>
+              </Col>
+            </Row>
+          </Grid>
+        </div>
+      </NoChromeLayout>
+      /* jshint ignore:end */
+    );
+  }
 });
 
-  module.exports = Login;
+module.exports = Login;
