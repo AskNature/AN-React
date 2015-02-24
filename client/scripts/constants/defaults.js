@@ -99,7 +99,11 @@ var Defaults = {
     livingsystem: {
       results : [
         {
-          name: 'Loading...'
+          name: 'Loading...',
+          children: [],
+          parent: [],
+          has_living_system: [],
+          has_media: []
         }
       ]
     },
