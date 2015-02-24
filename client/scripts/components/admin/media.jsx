@@ -27,13 +27,13 @@ var initializeTable = function(state) {
     },
     'columns' : [
     {'data':'filename','title': 'Image', 'render': function(data,type,row) {
-        var url = '../media/'+row.masterid;
+        var url = '../media/'+row.id;
         var imageurl = 'http://www.asknature.org/images/uploads/'+row.entity+'/'+row.masterid+'/'+row.filename;
         return '<a href="'+url+'"><img src='+imageurl+' width="100px" height="auto" /></a>';
       }
     },
     {'data':'name','title': 'Name', 'render': function(data,type,row) {
-          var url = '../media/'+row.masterid;
+          var url = '../media/'+row.id;
           return '<a href="'+url+'"><strong>'+data+'</strong></a>';
         }
       },

@@ -62,6 +62,23 @@ var ButtonList = React.createClass({
   }
 });
 
+var List = React.createClass({
+  render: function() {
+    var items = this.props.items;
+    return (
+      <ul>
+        {
+          items.map(function(item, i){
+            return (
+                <li key={i}>{item}</li>
+            );
+          })
+        }
+      </ul>
+    );
+  }
+});
+
 var Gallery = React.createClass({
   render: function() {
     var pictures = this.props.items.media;
@@ -134,7 +151,103 @@ var DetailComponent = React.createClass({
                   </Well>
                 </Col>
               </Row>
+              <Row className="show-grid">
+                <Col xs={12} md={12}>
+                    <h6>Legacy Data</h6>
+                    <p>This information is all due for eventual deletion, but may be helpful during short-term migration.</p>
+                    <Table striped responsive condensed hover>
+                      <thead>
+                        <tr>
+                          <th>Field Name</th>
+                          <th>Field Value</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>filename</td>
+                          <td>{detail.filename}</td>
+                        </tr>
+                        <tr>
+                          <td>name</td>
+                          <td>{detail.name}</td>
+                        </tr>
+                        <tr>
+                          <td>description</td>
+                          <td>{detail.description}</td>
+                        </tr>
+                        <tr>
+                          <td>keywords</td>
+                          <td><List items={detail.keywords.split(',')} /></td>
+                        </tr>
+                        <tr>
+                          <td>in_HasMedia</td>
+                          <td><List items={detail.has_media} /></td>
+                        </tr>
+                        <tr>
+                          <td>in_AddedMedia</td>
+                          <td><List items={detail.added_media} /></td>
+                        </tr>
+                        <tr>
+                          <td>entity</td>
+                          <td>{detail.entity}</td>
+                        </tr>
+                        <tr>
+                          <td>masterid</td>
+                          <td>{detail.masterid}</td>
+                        </tr>
+                        <tr>
+                          <td>mime_type</td>
+                          <td>{detail.mime_type}</td>
+                        </tr>
+                        <tr>
+                          <td>file_type_id</td>
+                          <td>{detail.file_type_id}</td>
+                        </tr>
+                        <tr>
+                          <td>license_id</td>
+                          <td>{detail.license_id}</td>
+                        </tr>
+                        <tr>
+                          <td>author</td>
+                          <td>{detail.author}</td>
+                        </tr>
+                        <tr>
+                          <td>author_url</td>
+                          <td><a href={detail.author_url} target="_blank">{detail.author_url}</a></td>
+                        </tr>
+                        <tr>
+                          <td>source</td>
+                          <td>{detail.source}</td>
+                        </tr>
+                        <tr>
+                          <td>source_url</td>
+                          <td><a href={detail.source_url} target="_blank">{detail.source_url}</a></td>
+                        </tr>
+                        <tr>
+                          <td>timestamp</td>
+                          <td>{detail.timestamp}</td>
+                        </tr>
+                        <tr>
+                          <td>deleted</td>
+                          <td>{detail.deleted}</td>
+                        </tr>
+                        <tr>
+                          <td>featured</td>
+                          <td>{detail.featured}</td>
+                        </tr>
+                        <tr>
+                          <td>popup</td>
+                          <td>{detail.popup}</td>
+                        </tr>
+                        <tr>
+                          <td>sort_order</td>
+                          <td>{detail.sort_order}</td>
+                        </tr>
 
+                      </tbody>
+                    </Table>
+                </Col>
+              </Row>
             </Grid>
         </DefaultLayout>
         /* jshint ignore:end */

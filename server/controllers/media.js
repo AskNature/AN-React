@@ -40,9 +40,9 @@ var returnList = function(req, res) {
 var returnItem = function(req, res, next) {
   console.log(req.params.id);
   db
-  .select('name, masterid, filename, id, entity')
+  .select('id, user_id, entity, masterid, mime_type, file_type_id, filename, author, author_url, source, source_url, license_id, description, deleted, timestamp, name, keywords, featured, popup, sort_order, in("AddedMedia").name as added_media, in("HasMedia").name as has_media')
   .from('Media')
-  .where('masterid LIKE "' + req.params.id + '"')
+  .where('id LIKE "' + req.params.id + '"')
   .all()
   .then(function (results) {
       res.status(200).json({

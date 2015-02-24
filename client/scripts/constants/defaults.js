@@ -131,7 +131,10 @@ var Defaults = {
     media: {
       results : [
         {
-          name: 'Loading...'
+          name: 'Loading...',
+          added_media: [],
+          has_media: [],
+          keywords: '1,2'
         }
       ]
     },
