@@ -56,6 +56,34 @@ module.exports = {
     });
   },
 
+  getListPaginated: function(index, size, callback) {
+    var self = this;
+    request
+    .get('/api/strategies?offset='+index*size+'&limit='+size)
+    .type('json')
+    .end(function(res) {
+      if (res.ok) {
+        if (res) {
+          var listData = res.body;
+          self.setList(listData);
+          console.log(res.body);
+        }
+        if (callback && callback.success) {
+          callback.success(res);
+        }
+      }
+      else {
+        if (callback && callback.error) {
+          callback.error(res);
+        }
+      }
+
+      if (callback && callback.complete) {
+        callback.complete(res);
+      }
+    });    
+  },
+
   setItem: function(focus, next) {
     Dispatcher.handleViewAction({
       actionType: Constants.GET_STRATEGY,

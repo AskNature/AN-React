@@ -15,12 +15,18 @@ var returnList = function(req, res, next) {
   .select('name, summary as description, out("HasLivingSystem").name as living_system, out("HasFunction").name as outcomes, masterid')
   .from('Strategy')
   .where({status: 0})
+  .limit(parseInt(req.query["limit"]))
+  .offset(parseInt(req.query["offset"]))
   .all()
   .then(function (results) {
-      res.status(200).json({
-        results: results
-      });
-      console.log('The strategy controller has sent ' + results.length + ' records.');
+      db.select('count(*)').from('Strategy').where({status: 0}).scalar().then(function(count) {
+	  res.status(200).json({
+              results: results,
+	      count: count,
+	      maxPages: Math.ceil(count/parseInt(req.query["limit"]))
+	  });
+	  console.log('The strategy controller has sent ' + results.length + ' records.');
+      }).done();
   })
   .done();
 };
