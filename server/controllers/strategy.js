@@ -17,6 +17,7 @@ var returnList = function(req, res, next) {
   .where({status: 0})
   .limit(parseInt(req.query["limit"]))
   .offset(parseInt(req.query["offset"]))
+  .order((req.query["order"] ? req.query["order"] : "").substring(1) + (((req.query["order"] ? req.query["order"] : "").substring(0, 1) == "-") ? " desc" : " asc"))
   .all()
   .then(function (results) {
       db.select('count(*)').from('Strategy').where({status: 0}).scalar().then(function(count) {

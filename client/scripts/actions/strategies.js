@@ -59,7 +59,7 @@ module.exports = {
   getListPaginated: function(index, size, callback) {
     var self = this;
     request
-    .get('/api/strategies?offset='+index*size+'&limit='+size)
+    .get('/api/strategies?offset='+index*size+'&limit='+size+'&order='+(asc ? '+' : '-')+sortCol)
     .type('json')
     .end(function(res) {
       if (res.ok) {
