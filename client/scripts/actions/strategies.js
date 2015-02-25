@@ -56,7 +56,7 @@ module.exports = {
     });
   },
 
-  getListPaginated: function(index, size, callback) {
+  getListPaginated: function(index, size, sortCol, asc, callback) {
     var self = this;
     request
     .get('/api/strategies?offset='+index*size+'&limit='+size+'&order='+(asc ? '+' : '-')+sortCol)
