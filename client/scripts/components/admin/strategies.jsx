@@ -5,86 +5,19 @@
 
 var React = require('react');
 var DefaultLayout = require('../layouts/default.jsx');
-var focusStore = require('../../stores/admin/strategies');
-var focusActions = require('../../actions/strategies');
+var strategySt = require('../../stores/admin/strategies');
+var strategyAc = require('../../actions/strategies');
+var GriddleComponent = require('./griddle_component.jsx');
 
-var getState = function() {
-  return {
-    items: focusStore.get()
-  };
-};
-
-var initializeTable = function(state) {
-  var listitems = state.items.results;
-  $('#list').dataTable({
-   'destroy': true,
-   'data': listitems,
-   stateSave: true,
-   'language': {
-      search: '',
-      searchPlaceholder: 'Filter',
-      'lengthMenu': '_MENU_'
-    },
-    'columns' : [
-    {'data':'name','title': 'Headline', 'render': function(data,type,row) {
-        var url = '../strategy/'+row.masterid;
-        return '<a href="'+url+'"><strong>'+data+'</strong></a>';
-      }
-    },
-    {'data':'outcomes','title': 'Outcomes'},
-    {'data':'description','title': 'Abstract'},
-    {'data':'living_system','title': 'Living Systems'}
-            ]
- });
- $('.dataTables_filter input[type="search"], .dataTables_length select').addClass('form-control input-lg');
-};
-
-/** ItemsFilter class contains a search field that filters items in
-* an unordered list in real time.
-*/
-
-var FocusTable = React.createClass({
-
-  mixins: [focusStore.mixin],
-
-  getInitialState: function() {
-    return getState();
-  },
-
-  componentDidMount: function(){
-    focusActions.getList();
-    initializeTable(this.state);
-  },
-
-  render: function() {
-    return (
-      <div>
-        <table className='table display' id='list'>
-
-        </table>
-        <button className='btn btn-primary' onClick={this.handleClick} label="Reset">Reset</button>
-      </div>
-    );
-  },
-
-  handleClick: function() {
-    focusActions.getList();
-  },
-  // Event handler for 'change' events coming from store mixins.
-  _onChange: function() {
-      this.setState(getState());
-      initializeTable(this.state);
-  }
-});
-
-var FocusConsole = React.createClass({
+var StrategyConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
             <DefaultLayout>
                 <div className="main-container">
-                        <h1>Life's Solutions Console</h1>
-                        <FocusTable />
+                        <h1>Life's Solutions Griddle Console</h1>
+                        <GriddleComponent store={strategySt} actions={strategyAc}
+                        columns={["name", "description", "outcomes", "living_system"]} />
                 </div>
             </DefaultLayout>
             /* jshint ignore:end */
@@ -92,4 +25,4 @@ var FocusConsole = React.createClass({
     }
 });
 
-module.exports = FocusConsole;
+module.exports = StrategyConsole;
