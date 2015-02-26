@@ -3,6 +3,13 @@ var db = require('../config/database').db,
 settings = require('../config/env/default'),
 path = require('path');
 
+var Cached = require('cached');
+var strategyCache = Cached('strategy', { backend: {
+    type: 'memcached',
+    hosts: '127.0.0.1:11211'
+}});
+strategyCache.setDefaults({"freshFor": 120});
+
 var loadindex = function(req, res, next) {
   // Render index.html to allow application to handle routing
    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
@@ -30,8 +37,15 @@ var returnList = function(req, res, next) {
       chain.order(order.substring(1) + (order.substring(0,1)=="-" ? " desc" : " asc"));
   }
 
-  chain.all().then(function (results) {
-      db.select('count(*)').from('Strategy').where({status: 0}).scalar().then(function(count) {
+  strategyCache.getOrElse('count', Cached.deferred(function(done) {
+      console.log("cache miss");
+      db.select('count(*)').from('Strategy')
+      .where({status: 0})
+      .scalar().then(function(count) {
+	  done(null, count); // return Cached.deferred
+      }).done();
+  })).then(function(count) {
+      chain.all().then(function(results) {
 	  res.status(200).json({
 	      results: results,
 	      count: count,
@@ -39,7 +53,7 @@ var returnList = function(req, res, next) {
 	  });
 	  console.log('The strategy controller has sent ' + results.length + ' records.');
       }).done();
-  }).done();
+  });
 };
 
 var returnItem = function(req, res, next) {
