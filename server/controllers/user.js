@@ -11,6 +11,13 @@ settings = require('../config/env/default'),
 crypto = require('crypto'),
 path = require('path');
 
+var Cached = require('cached');
+var Memcached = require('memcached');
+var userCache = Cached('user', { backend: {
+    type: 'memcached',
+    client: new Memcached('127.0.0.1:11211')
+}});
+
 var logout = function(req, res, next) {
     req.logout();
     res.redirect('/');
@@ -171,19 +178,24 @@ var returnList = function(req, res) {
       chain.order(order.substring(1) + (order.substring(0,1)=="-" ? " desc" : " asc"));
   }
 
-
-  chain.all().then(function (results) {
+  userCache.getOrElse('count', Cached.deferred(function(done) {
+      console.log("cache miss");
       db.select('count(*)').from('Users')
       .where('out_Flagged IS NULL AND email_confirmed == 1')
       .scalar().then(function(count){
+	  console.log("cache count: " + count);
+	  done(null, count); // return Cached.deferred
+      }).done();
+  })).then(function(count) {
+      chain.all().then(function(results) {
 	  res.status(200).json({
-              results: results,
+	      results: results,
 	      count: count,
 	      maxPages: Math.ceil(count/limit)
 	  });
-	  console.log('The collection controller has sent ' + results.length + ' records.');
+	  console.log('The user collection controller has send '+ results.length + ' records. Count: ' + count);
       }).done();
-  }).done();
+  });
 };
 
 var returnItem = function(req, res, next) {
