@@ -22,6 +22,7 @@ var GriddleComponent = React.createClass({
         this.props.store.removeChangeListener(this._onChange); // can't use conditional mixin
     },
     setPage: function(index) {
+        Pace.restart();
         this.props.actions.getListPaginated(index, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending);
 	this.setState({"currentPage": index});
     },
