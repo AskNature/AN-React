@@ -3,7 +3,6 @@ var db = require('../config/database').db,
 settings = require('../config/env/default'),
 path = require('path');
 
-
 var loadindex = function(req, res, next) {
   // Render index.html to allow application to handle routing
    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
@@ -11,25 +10,36 @@ var loadindex = function(req, res, next) {
 };
 
 var returnList = function(req, res, next) {
-  db
+  var chain = db
   .select('name, summary as description, out("HasLivingSystem").name as living_system, out("HasFunction").name as outcomes, masterid')
   .from('Strategy')
-  .where({status: 0})
-  .limit(parseInt(req.query["limit"]))
-  .offset(parseInt(req.query["offset"]))
-  .order((req.query["order"] ? req.query["order"] : "").substring(1) + (((req.query["order"] ? req.query["order"] : "").substring(0, 1) == "-") ? " desc" : " asc"))
-  .all()
-  .then(function (results) {
+  .where({status: 0});
+
+  var limit = parseInt(req.query["limit"]);
+  if(limit) {
+      chain.limit(limit);
+  }
+
+  var offset = parseInt(req.query["offset"]);
+  if(offset) {
+      chain.offset(offset);
+  }
+
+  var order = req.query["order"];
+  if(order) {
+      chain.order(order.substring(1) + (order.substring(0,1)=="-" ? " desc" : " asc"));
+  }
+
+  chain.all().then(function (results) {
       db.select('count(*)').from('Strategy').where({status: 0}).scalar().then(function(count) {
 	  res.status(200).json({
-              results: results,
+	      results: results,
 	      count: count,
 	      maxPages: Math.ceil(count/parseInt(req.query["limit"]))
 	  });
 	  console.log('The strategy controller has sent ' + results.length + ' records.');
       }).done();
-  })
-  .done();
+  }).done();
 };
 
 var returnItem = function(req, res, next) {

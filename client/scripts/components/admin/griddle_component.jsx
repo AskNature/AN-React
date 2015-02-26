@@ -7,7 +7,7 @@ var GriddleComponent = React.createClass({
             "results": [{"name" : "Loading..."}],
             "currentPage": 0,
             "maxPages": 0,
-            "externalResultsPerPage": 10,
+            "externalResultsPerPage": 5,
             "externalSortColumn": null,
             "externalSortAscending": true
         };
@@ -38,8 +38,14 @@ var GriddleComponent = React.createClass({
     setFilter: function(filter) {
         // TODO: set filter state
     },
+    resetFilterSort: function() {
+        this.changeSort(null, true);
+	// TODO: reset filter state
+    },
     render: function() {
-        return <Griddle useExternal={true}
+        return <div>
+	       <a onClick={this.resetFilterSort}>Reset</a>
+	       <Griddle useExternal={true}
                externalSetPage={this.setPage}
                enableSort={true}
                columns={this.props.columns}
@@ -53,6 +59,7 @@ var GriddleComponent = React.createClass({
                resultsPerPage={this.state.externalResultsPerPage}
                externalSortColumn={this.state.externalSortColumn}
                externalSortAscending={this.state.externalSortAscending} />
+	       </div>
     },
     // Event handler for 'change' events coming from store mixin
     _onChange: function() {

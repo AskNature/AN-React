@@ -58,8 +58,9 @@ module.exports = {
 
   getListPaginated: function(index, size, sortCol, asc, callback) {
     var self = this;
-    request
-    .get('/api/strategies?offset='+index*size+'&limit='+size+'&order='+(asc ? '+' : '-')+sortCol)
+    var getString = '/api/strategies?offset='+index*size+'&limit='+size;
+    if (sortCol) { getString += '&order='+(asc ? '+' : '-')+sortCol; }
+    request.get(getString)
     .type('json')
     .end(function(res) {
       if (res.ok) {
