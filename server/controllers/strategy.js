@@ -35,7 +35,7 @@ var returnList = function(req, res, next) {
 	  res.status(200).json({
 	      results: results,
 	      count: count,
-	      maxPages: Math.ceil(count/parseInt(req.query["limit"]))
+	      maxPages: Math.ceil(count/limit)
 	  });
 	  console.log('The strategy controller has sent ' + results.length + ' records.');
       }).done();
