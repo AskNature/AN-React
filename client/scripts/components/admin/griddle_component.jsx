@@ -1,10 +1,11 @@
 var React = require('react');
 var Griddle = require('griddle-react');
+var Link = require('../modules/link.jsx');
 
 var RowLinkComponent = React.createClass({
     render: function() {
         url = "/"+ this.props.rowData["entityType"] + "/" + this.props.rowData["masterid"];
-	return <a href={url}>{this.props.data}</a>
+	return <Link url={url}>{this.props.data}</Link>
     }
 });
 
