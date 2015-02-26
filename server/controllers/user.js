@@ -183,8 +183,7 @@ var returnList = function(req, res) {
       console.log("cache miss");
       db.select('count(*)').from('Users')
       .where('out_Flagged IS NULL AND email_confirmed == 1')
-      .scalar().then(function(count){
-	  console.log("cache count: " + count);
+      .scalar().then(function(count) {
 	  done(null, count); // return Cached.deferred
       }).done();
   })).then(function(count) {
@@ -194,7 +193,7 @@ var returnList = function(req, res) {
 	      count: count,
 	      maxPages: Math.ceil(count/limit)
 	  });
-	  console.log('The user collection controller has send '+ results.length + ' records. Count: ' + count);
+	  console.log('The user collection controller has send '+ results.length + ' records.');
       }).done();
   });
 };
