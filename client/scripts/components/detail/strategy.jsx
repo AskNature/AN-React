@@ -102,10 +102,43 @@ var Hero = React.createClass({
   }
 });
 
+var LivingSystemList = React.createClass({
+  render: function() {
+    var compound = this.props.map;
+    return (
+
+          <tbody>
+        {
+          compound.name.map(function(item, i){
+            var link = '../living-system/'+ compound.id[i];
+            return (
+              <tr href="#" key={i}>
+
+                <td>{compound.taxon[i]}: <Link url={link}><i>{item}</i></Link></td>
+
+                </tr>
+            );
+          })
+        }
+      </tbody>
+    );
+  }
+});
+
 var ButtonList = React.createClass({
   render: function() {
     var items = this.props.items;
     var title = this.props.title;
+    if(this.props.map) {
+      return (
+        <div>
+        <h6><strong>{title}</strong></h6>
+        <Table striped condensed hover >
+        <LivingSystemList {...this.props} />
+        </Table>
+      </div>
+    );
+    } else {
     return (
       <div>
       <h6><strong>{title}</strong></h6>
@@ -125,6 +158,7 @@ var ButtonList = React.createClass({
       </Table>
     </div>
     );
+  }
   }
 });
 
@@ -233,6 +267,10 @@ var StrategyDetail = React.createClass({
   render: function() {
     var detail = this.state.details.results[0];
     var legacy_url = 'http://www.asknature.org/strategy/'+detail.masterid;
+    var livingSystemTaxon = detail.living_system_taxon;
+    var livingSystemName = detail.living_system;
+    var livingSystemId = detail.living_system_id;
+    var livingSystemMap = {'taxon':livingSystemTaxon, 'name':livingSystemName, 'id':livingSystemId};
     var renderedInstance;
     function handleSelect (selectedKey) {
       renderedInstance.setProps({
@@ -271,7 +309,7 @@ var StrategyDetail = React.createClass({
           </Row>
           <Row className="show-grid">
             <Col xs={12} sm={4}>
-              <ButtonList items={detail.living_system} title="Living Systems"/>
+              <ButtonList map={livingSystemMap} items={detail.living_system} title="Living Systems"/>
               <ButtonList items={detail.conditions} title="Context"/>
             </Col>
             <Col xs={6} sm={4}>
