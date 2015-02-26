@@ -47,9 +47,8 @@ var Defaults = {
       {
           name: 'Nature is Coming...',
           description: '...and She\'s Pissed',
-          masterid: 'masterid',
+          masterid: '',
           media: [],
-          brief: 'Brief goes here',
           outcomes: [],
           mechanisms: [],
           conditions: [],
@@ -69,9 +68,9 @@ var Defaults = {
       {
         outcomes: [],
         name: 'Loading ...',
-        description: 'Loading ...',
+        description: '',
         inspiredby: [],
-        keywords: 'Tag1,Tag2',
+        keywords: 'Tag1, Tag2',
         collectors: [],
         media: [],
         researchers: [],
