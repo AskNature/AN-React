@@ -24,11 +24,11 @@ var DefaultLayout = require('../layouts/default.jsx');
 
 /** Gets incoming information from the store */
 
-var focusStore = require('../../stores/strategy_detail');
+var focusStore = require('../../stores/detail/strategies');
 
 /** Sends outgoing requests to an action */
 
-var focusActions = require('../../actions/strategy');
+var focusActions = require('../../actions/strategies');
 
 /** getState can be called to get state updates from the store.
 * initialItems = entire list that remains static
@@ -38,8 +38,8 @@ var focusActions = require('../../actions/strategy');
 var getState = function() {
   return {
     details: focusStore.get()
-   }
-}
+  };
+};
 
 var ButtonList = React.createClass({
   render: function() {
@@ -51,14 +51,14 @@ var ButtonList = React.createClass({
         {
           items.map(function(item, i){
             return (
-              <OverlayTrigger placement="top" overlay={<Tooltip>{item}</Tooltip>}>
+              <OverlayTrigger placement="top" overlay={<Tooltip>{item}</Tooltip>} key={i}>
                 <Button block>{item}</Button>
               </OverlayTrigger>
-            )
+            );
           })
       }
       </Well>
-    )
+    );
   }
 });
 
@@ -70,18 +70,18 @@ var Gallery = React.createClass({
     <Carousel {...this.props}>
     {
       pictures.map(function(imageurl, i){
-        var mediaurl= "http://www.asknature.org/images/uploads/strategy/"+masterid+"/"+imageurl;
+        var mediaurl= 'http://www.asknature.org/images/uploads/strategy/'+masterid+'/'+imageurl;
         console.log('Looking for image: '+mediaurl);
         return (
           <CarouselItem key={i}>
               <img alt="Image" src={mediaurl} />
               <div className="carousel-caption" />
           </CarouselItem>
-        )
+        );
       })
     }
     </Carousel>
-    )
+  );
 
   }
 });
@@ -108,7 +108,7 @@ var StrategyDetail = React.createClass({
 
   render: function() {
     var detail = this.state.details.results[0];
-    var legacy_url = 'http://www.asknature.org/strategy/'+detail.masterid
+    var legacy_url = 'http://www.asknature.org/strategy/'+detail.masterid;
     return (
         /* jshint ignore:start */
         <DefaultLayout>
@@ -125,15 +125,27 @@ var StrategyDetail = React.createClass({
               <Row className="show-grid">
                 <Col xs={12} md={6}>
                   <h3>{detail.name}</h3>
-                  <p className="lead">{detail.summary}</p>
+                  <p className="lead">{detail.description}</p>
                   <ButtonList items={detail.living_system} title="Living Systems"/>
-                  <ButtonList items={detail.functions} title="Outcomes"/>
+                  <ButtonList items={detail.created_by} title="Created by"/>
                 </Col>
+
                 <Col xs={12} md={6}>
-                  <Gallery items={detail} />
+                  <Well bsSize="small">
+                    <Gallery items={detail} />
+                  </Well>
                 </Col>
-                </Row>
-                <Row className="show-grid">
+              </Row>
+              <Row className="show-grid">
+                  <Col xs={12} md={4}>
+                      <ButtonList items={detail.conditions} title="Challenges"/>
+                  </Col>
+                  <Col xs={6} md={4}>
+                      <ButtonList items={detail.mechanisms} title="Mechanisms"/>
+                  </Col>
+                  <Col xs={6} md={4}>
+                    <ButtonList items={detail.outcomes} title="Outcomes"/>
+                  </Col>
                   <Col xs={12} md={12}>
                     <Well>
                       <h6>The Story</h6>
@@ -262,6 +274,9 @@ var StrategyDetail = React.createClass({
         </DefaultLayout>
         /* jshint ignore:end */
     );
+  },
+  componentWillReceiveProps: function () {
+    this.setState(getState());
   },
 
   // Event handler for 'change' events coming from store mixins.

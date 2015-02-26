@@ -11,13 +11,27 @@ settings = require('../config/env/default'),
 crypto = require('crypto'),
 path = require('path');
 
+var Cached = require('cached');
+var Memcached = require('memcached');
+
+var userCache;
+if(process.env.NODE_ENV == 'production') {
+    userCache = Cached('user', { backend: {
+	type: 'memcached',
+	client: new Memcached('127.0.0.1:11211')
+    }});
+} else {
+    userCache = Cached('user');
+}
+userCache.setDefaults({"freshFor": 120});
+
 var logout = function(req, res, next) {
     req.logout();
     res.redirect('/');
 };
 
 var forgotUser = function(req, res, next) {
-    if (req.isAuthenticated()) { res.status(403).send("You're already logged in to an account"); } // user already logged in
+    if (req.isAuthenticated()) { res.status(403).send('You\'re already logged in to an account'); } // user already logged in
     db.select().from('PassportUser').where({email: req.body.email}).limit(1).one().then(function(user) {
 	if(user) {
 	    crypto.randomBytes(20, function(err, buf) {
@@ -144,11 +158,75 @@ var createUser = function(req, res, next) {
     });
 };
 
+var loadindex = function(req, res, next) {
+  // Render index.html to allow application to handle routing
+   res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
+   console.log('The product page has access to the ' + db.name + ' database.');
+};
+
+var returnList = function(req, res) {
+  var chain = db
+  .select('name, masterid, "user" as entityType')
+  .from('Users')
+  .where('out_Flagged IS NULL AND email_confirmed == 1');
+
+  var limit = parseInt(req.query["limit"]);
+  if(limit) {
+      chain.limit(limit);
+  }
+
+  var offset = parseInt(req.query["offset"]);
+  if(offset) {
+      chain.offset(offset);
+  }
+
+  var order = req.query["order"];
+  if(order) {
+      chain.order(order.substring(1) + (order.substring(0,1)=="-" ? " desc" : " asc"));
+  }
+
+  userCache.getOrElse('count', Cached.deferred(function(done) {
+      console.log("cache miss");
+      db.select('count(*)').from('Users')
+      .where('out_Flagged IS NULL AND email_confirmed == 1')
+      .scalar().then(function(count) {
+	  done(null, count); // return Cached.deferred
+      }).done();
+  })).then(function(count) {
+      chain.all().then(function(results) {
+	  res.status(200).json({
+	      results: results,
+	      count: count,
+	      maxPages: Math.ceil(count/limit)
+	  });
+	  console.log('The user collection controller has send '+ results.length + ' records.');
+      }).done();
+  });
+};
+
+var returnItem = function(req, res, next) {
+  console.log(req.params.id);
+  db
+  .select('masterid, name, first, last, email, roles, registration_date, timestamp, out("Flagged").name as flagged, email_confirmed, special_text, activities, address_1, address_2, city, state, postal_code, country, time_zone, phone, extension, tollfree, fax, im, langs_spoken, revision, hide_email, send_email, alert_frequency, last_alerted, status, contact_me, hide_address, hide_phone, gender, custom_avatar, ip_address, out("HasMedia").filename as has_media, out("AddedMedia").filename as added_media, out("Bookmarked").name as collected, out("Friends").name as friends, password, salt, persist, newpassword, email_salt')
+  .from('Users')
+  .where('masterid LIKE "' + req.params.id + '"')
+  .all()
+  .then(function (results) {
+      res.status(200).json({
+        results: results
+      });
+  })
+  .done();
+};
+
 module.exports = {
     returnUser: returnUser,
     updateUser: updateUser,
     createUser: createUser,
     logout: logout,
     forgotUser: forgotUser,
-    resetUser: resetUser
+    resetUser: resetUser,
+    loadindex: loadindex,
+    returnList: returnList,
+    returnItem: returnItem
 };
