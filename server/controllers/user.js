@@ -151,19 +151,39 @@ var loadindex = function(req, res, next) {
 };
 
 var returnList = function(req, res) {
-  db
+  var chain = db
   .select('name, masterid')
   .from('Users')
-  .where('out_Flagged IS NULL AND email_confirmed == 1')
-  .limit('200')
-  .all()
-  .then(function (results) {
-      res.status(200).json({
-        results: results
-      });
-      console.log('The collection controller has sent ' + results.length + ' records.');
-  })
-  .done();
+  .where('out_Flagged IS NULL AND email_confirmed == 1');
+
+  var limit = parseInt(req.query["limit"]);
+  if(limit) {
+      chain.limit(limit);
+  }
+
+  var offset = parseInt(req.query["offset"]);
+  if(offset) {
+      chain.offset(offset);
+  }
+
+  var order = req.query["order"];
+  if(order) {
+      chain.order(order.substring(1) + (order.substring(0,1)=="-" ? " desc" : " asc"));
+  }
+
+
+  chain.all().then(function (results) {
+      db.select('count(*)').from('Users')
+      .where('out_Flagged IS NULL AND email_confirmed == 1')
+      .scalar().then(function(count){
+	  res.status(200).json({
+              results: results,
+	      count: count,
+	      maxPages: Math.ceil(count/limit)
+	  });
+	  console.log('The collection controller has sent ' + results.length + ' records.');
+      }).done();
+  }).done();
 };
 
 var returnItem = function(req, res, next) {
