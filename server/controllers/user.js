@@ -17,6 +17,7 @@ var userCache = Cached('user', { backend: {
     type: 'memcached',
     client: new Memcached('127.0.0.1:11211')
 }});
+userCache.setDefaults({"freshFor": 120});
 
 var logout = function(req, res, next) {
     req.logout();
