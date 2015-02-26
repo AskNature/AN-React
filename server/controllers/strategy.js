@@ -4,10 +4,16 @@ settings = require('../config/env/default'),
 path = require('path');
 
 var Cached = require('cached');
-var strategyCache = Cached('strategy', { backend: {
-    type: 'memcached',
-    hosts: '127.0.0.1:11211'
-}});
+var strategyCache;
+
+if(process.env.NODE_ENV == 'production') {
+    strategyCache = Cached('strategy', { backend: {
+	type: 'memcached',
+	hosts: '127.0.0.1:11211'
+    }});
+} else {
+    strategyCache = Cached('strategy');
+}
 strategyCache.setDefaults({"freshFor": 120});
 
 var loadindex = function(req, res, next) {

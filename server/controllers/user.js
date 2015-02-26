@@ -13,10 +13,16 @@ path = require('path');
 
 var Cached = require('cached');
 var Memcached = require('memcached');
-var userCache = Cached('user', { backend: {
-    type: 'memcached',
-    client: new Memcached('127.0.0.1:11211')
-}});
+
+var userCache;
+if(process.env.NODE_ENV == 'production') {
+    userCache = Cached('user', { backend: {
+	type: 'memcached',
+	client: new Memcached('127.0.0.1:11211')
+    }});
+} else {
+    userCache = Cached('user');
+}
 userCache.setDefaults({"freshFor": 120});
 
 var logout = function(req, res, next) {
