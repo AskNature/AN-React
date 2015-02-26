@@ -17,7 +17,8 @@ var UserConsole = React.createClass({
                 <div className="main-container">
                         <h1>Users Griddle Console</h1>
                         <GriddleComponent store={userStore} actions={userActions}
-                        columns={["name"]} />
+			linkColumnName={"name"}
+                        columns={["name", "masterid"]} />
                 </div>
             </DefaultLayout>
             /* jshint ignore:end */

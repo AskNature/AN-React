@@ -160,7 +160,7 @@ var loadindex = function(req, res, next) {
 
 var returnList = function(req, res) {
   var chain = db
-  .select('name, masterid')
+  .select('name, masterid, "user" as entityType')
   .from('Users')
   .where('out_Flagged IS NULL AND email_confirmed == 1');
 
