@@ -1,27 +1,6 @@
 var React = require('react');
 var Infinite = require('react-infinite-extended');
 
-var ListItem = React.createClass({
-    render: function() {
-        return <div className="infinite-list-item" style={{height: "500px", "border-bottom": "1px solid #ddd", cursor: "pointer"}} onClick={this.props.extendListener(this.props.num)}>
-        List Item {this.props.num}<br />
-        <img src={"http://thecatapi.com/api/images/get?format=src&type=gif&x=" + this.props.num} />
-        </div>;
-    }
-});
-
-var BigListItem = React.createClass({
-    componentDidMount: function() {
-        console.log(this.getDOMNode().offsetHeight);
-        this.props.heightUpdateListener(this.getDOMNode().offsetHeight);
-    },
-    render: function() {
-	return <div className="infinite-list-item" style={{height: "1000px", "border-bottom": "1px solid #ddd", cursor: "pointer", "font-size": "32px"}} onClick={this.props.contractListener(this.props.num)}>
-	List Item extended {this.props.num}
-	</div>;
-    }
-});
-
 var InfiniteList = React.createClass({
     getInitialState: function() {
         return {
@@ -69,7 +48,7 @@ var InfiniteList = React.createClass({
     buildElements: function(start, end) {
         var elements = [];
         for (var i = start; i < end; i++) {
-            elements.push(<ListItem num={i} key={i} extendListener={this.extendListener} />)
+            elements.push(<this.props.itemComponent num={i} key={i} extendListener={this.extendListener} />)
         }
         return elements;
     },
@@ -97,13 +76,13 @@ var InfiniteList = React.createClass({
 
     extend: function(num) {
         this.contract(this.state.extendedIndex);
-        this.state.elements[num] = <BigListItem num={num} key={num} contractListener={this.contractListener} heightUpdateListener={this.heightUpdateListener} />;
+        this.state.elements[num] = <this.props.extendedItemComponent num={num} key={num} contractListener={this.contractListener} heightUpdateListener={this.heightUpdateListener} />;
         this.setState({extendedBlock: Math.floor((num*500)/125), extendedIndex: num});
     },
 
     contract: function(num) {
         if(num != undefined) {
-            this.state.elements[num] = <ListItem num={num} key={num} extendListener={this.extendListener} />;
+            this.state.elements[num] = <this.props.itemComponent num={num} key={num} extendListener={this.extendListener} />;
             this.setState({extendedHeight: 0, extendedBlock: undefined, extendedIndex: undefined});
         }
     },
