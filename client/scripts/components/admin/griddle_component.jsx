@@ -1,6 +1,13 @@
 var React = require('react');
 var Griddle = require('griddle-react');
 
+var RowLinkComponent = React.createClass({
+    render: function() {
+        url = "/"+ this.props.rowData["entityType"] + "/" + this.props.rowData["masterid"];
+	return <a href={url}>{this.props.data}</a>
+    }
+});
+
 var GriddleComponent = React.createClass({
     getInitialState: function() {
         return {
@@ -11,6 +18,18 @@ var GriddleComponent = React.createClass({
             "externalSortColumn": null,
             "externalSortAscending": true
         };
+    },
+    columnMeta: function() {
+	return this.props.linkColumnName ? [
+	    {
+	        "columnName": this.props.linkColumnName,
+	        "customComponent": RowLinkComponent
+       	    },
+	    {
+	        "columnName": "masterid",
+	        "visible": false
+	    }
+        ] : [];
     },
     componentWillMount: function() {
     },
@@ -57,6 +76,7 @@ var GriddleComponent = React.createClass({
                externalCurrentPage={this.state.currentPage}
                results={this.state.results}
                tableClassName="table"
+	       columnMetadata={this.columnMeta()}
                resultsPerPage={this.state.externalResultsPerPage}
                externalSortColumn={this.state.externalSortColumn}
                externalSortAscending={this.state.externalSortAscending} />

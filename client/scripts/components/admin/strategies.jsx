@@ -17,7 +17,8 @@ var StrategyConsole = React.createClass({
                 <div className="main-container">
                         <h1>Life's Solutions Griddle Console</h1>
                         <GriddleComponent store={strategySt} actions={strategyAc}
-                        columns={["name", "description", "outcomes", "living_system"]} />
+			linkColumnName={"name"}
+                        columns={["name", "description", "outcomes", "living_system", "masterid"]} />
                 </div>
             </DefaultLayout>
             /* jshint ignore:end */
