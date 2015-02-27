@@ -41,6 +41,23 @@ var getState = function() {
   };
 };
 
+var List = React.createClass({
+  render: function() {
+    var items = this.props.items;
+    return (
+      <ul>
+        {
+          items.map(function(item, i){
+            return (
+                <li key={i}>{item}</li>
+            );
+          })
+        }
+      </ul>
+    );
+  }
+});
+
 var ButtonList = React.createClass({
   render: function() {
     var items = this.props.items;
@@ -196,6 +213,83 @@ var StrategyDetail = React.createClass({
                             </tr>
                           </thead>
                           <tbody>
+
+                            <tr>
+                              <td>name</td>
+                              <td>{detail.name}</td>
+                            </tr>
+                            <tr>
+                              <td>description</td>
+                              <td>{detail.description}</td>
+                            </tr>
+                            <tr>
+                              <td>created_by</td>
+                              <td>{detail.created_by}</td>
+                            </tr>
+                            <tr>
+                              <td>entered_by</td>
+                              <td>{detail.entered_by}</td>
+                            </tr>
+                            <tr>
+                              <td>brief</td>
+                              <td>{detail.brief}</td>
+                            </tr>
+                            <tr>
+                              <td>special_text</td>
+                              <td>{detail.special_text}</td>
+                            </tr>
+                            <tr>
+                              <td>out_HasLivingSystem</td>
+                              <td><List items={detail.living_system} /></td>
+                            </tr>
+                            <tr>
+                              <td>out_HasFunction</td>
+                              <td><List items={detail.outcomes} /></td>
+                            </tr>
+                            <tr>
+                              <td>out_HasMechanism</td>
+                              <td><List items={detail.mechanisms} /></td>
+                            </tr>
+                            <tr>
+                              <td>out_HasConditions</td>
+                              <td><List items={detail.conditions} /></td>
+                            </tr>
+                            <tr>
+                              <td>in_InspiredBy</td>
+                              <td><List items={detail.products} /></td>
+                            </tr>
+                            <tr>
+                              <td>applications</td>
+                              <td>{detail.applications}</td>
+                            </tr>
+                            <tr>
+                              <td>application_1</td>
+                              <td>{detail.application_1}</td>
+                            </tr>
+                            <tr>
+                              <td>application_2</td>
+                              <td>{detail.application_2}</td>
+                            </tr>
+                            <tr>
+                              <td>application_3</td>
+                              <td>{detail.application_3}</td>
+                            </tr>
+                            <tr>
+                              <td>out_HasMedia</td>
+                              <td><List items={detail.media} /></td>
+                            </tr>
+                            <tr>
+                              <td>out_FeaturedIn</td>
+                              <td><List items={detail.sources} /></td>
+                            </tr>
+                            <tr>
+                              <td>in_StudiedBy</td>
+                              <td><List items={detail.experts} /></td>
+                            </tr>
+                            <tr>
+                              <td>in_Bookmarked</td>
+                              <td><List items={detail.collectors} /></td>
+                            </tr>
                             <tr>
                               <td>masterid</td>
                               <td>{detail.masterid}</td>
@@ -211,10 +305,6 @@ var StrategyDetail = React.createClass({
                             <tr>
                               <td>date_entered</td>
                               <td>{detail.date_entered}</td>
-                            </tr>
-                            <tr>
-                              <td>entered_by</td>
-                              <td>{detail.entered_by}</td>
                             </tr>
                             <tr>
                               <td>common_name</td>
@@ -264,9 +354,12 @@ var StrategyDetail = React.createClass({
                               <td>pdf_file_name</td>
                               <td>{detail.pdf_file_name}</td>
                             </tr>
+                            <tr>
+                              <td>editor_comments</td>
+                              <td>{detail.editor_comments}</td>
+                            </tr>
                           </tbody>
                         </Table>
-                      <ButtonList items={detail.collectors} title="Bookmarked By" />
                     </Col>
                   </Row>
 
