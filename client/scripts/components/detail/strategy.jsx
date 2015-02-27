@@ -7,7 +7,10 @@ var React = require('react');
 
 var Link = require('../modules/link.jsx'),
 Hero = require('./common/hero.jsx'),
-AdminBar = require('./common/adminbar.jsx');
+AdminBar = require('./common/adminbar.jsx'),
+TextArea = require('./common/textarea.jsx'),
+ImageList = require('./common/imagelist.jsx'),
+ButtonList = require('./common/edgelists.jsx');
 
 var Col = require('react-bootstrap/Col'),
 Well = require('react-bootstrap/Well'),
@@ -53,65 +56,6 @@ var getState = function() {
   };
 };
 
-var LivingSystemList = React.createClass({
-  render: function() {
-    var items = this.props.livingsystemmap;
-    return (
-          <tbody>
-        {
-          items.name.map(function(item, i){
-            var link = '../living-system/'+ items.id[i];
-            return (
-              <tr href="#" key={i}>
-                <td>{items.taxon[i]}: <Link url={link}><i>{item}</i></Link></td>
-                </tr>
-            );
-          })
-        }
-      </tbody>
-    );
-  }
-});
-
-var SourceList = React.createClass({
-  render: function() {
-    var items = this.props.sourcemap;
-    return (
-          <tbody>
-        {
-          items.name.map(function(item, i){
-            var link = '../source/'+ items.id[i];
-            return (
-              <tr key={i}>
-                <td>{items.year[i]}<br/><Link url={link}><strong>{item}</strong></Link><br/>{items.authors[i]}</td>
-                </tr>
-            );
-          })
-        }
-      </tbody>
-    );
-  }
-});
-
-var PhenomenonList = React.createClass({
-  render: function() {
-    var items = this.props.phenomenonmap;
-    return (
-          <tbody>
-        {
-          items.name.map(function(item, i){
-            var link = '../phenomenon/'+ items.id[i];
-            return (
-              <tr key={i}>
-                <td><Link url={link}>{item}</Link></td>
-                </tr>
-            );
-          })
-        }
-      </tbody>
-    );
-  }
-});
 
 var List = React.createClass({
   render: function() {
@@ -121,7 +65,7 @@ var List = React.createClass({
         {
           items.map(function(item, i){
             return (
-                <li key={i}>{item}</li>
+              <li key={i}>{item}</li>
             );
           })
         }
@@ -130,104 +74,7 @@ var List = React.createClass({
   }
 });
 
-var ButtonList = React.createClass({
-  render: function() {
-    var items = this.props.items;
-    var title = this.props.title;
-    return (
-      <div>
-      <h6><strong>{title}</strong></h6>
-      <Table striped condensed hover>
 
-{this.props.livingsystemmap ? (
-
-  <LivingSystemList {...this.props} />
-
-) : this.props.sourcemap ? (
-
-  <SourceList {...this.props} />
-
-) : this.props.phenomenonmap ? (
-
-  <PhenomenonList {...this.props} />
-
-) : (
-          <tbody>
-        {
-          items.map(function(item, i){
-            return (
-              <tr href="#" key={i}>
-                <td>{item}</td>
-                </tr>
-            );
-          })
-        }
-      </tbody>
-    ) }
-      </Table>
-    </div>
-    );
-
-  }
-});
-
-var LinkList = React.createClass({
-  render: function() {
-    var items = this.props.items;
-    var title = this.props.title;
-    var masterids = this.props.masterids;
-    function clickhandler() {
-      window.setInterval(function(){scrollTo(0, 0);},200);
-    }
-    return (
-      <div>
-      <h6><strong>{title}</strong></h6>
-      <ListGroup>
-
-        {
-          items.map(function(item, i){
-            var link = '../product/'+ masterids[i];
-            var mediaurl = 'http://biomimicry.org/wp-content/uploads/2014/07/owlanrefresh_1-e1409954986739.jpeg';
-            var heroStyle = {
-              backgroundImage: 'url(' + mediaurl + ')'
-            };
-            return (
-              <Link url={link}>
-                <ListGroupItem className="minihero" style={heroStyle} key={i}>
-                  <h6>{item}</h6>
-              </ListGroupItem>
-            </Link>
-            );
-          })
-        }
-        <Link url="#">
-          <ListGroupItem>
-            <h6><Glyphicon glyph="plus" /> Connect your {title}</h6>
-          </ListGroupItem>
-        </Link>
-    </ListGroup>
-    </div>
-    );
-  }
-});
-
-var TextArea = React.createClass({
-  render: function() {
-    var item = this.props.item;
-    var title = this.props.title;
-    if(item){
-      return (
-        <div>
-        <h6><strong>{title}</strong></h6>
-        <p dangerouslySetInnerHTML={{__html: item}} />
-        </div>
-      );
-    } else {
-      return <div />;
-    }
-
-  }
-});
 
 var Gallery = React.createClass({
   render: function() {
@@ -251,7 +98,7 @@ var Gallery = React.createClass({
             return (
               <CarouselItem key={i}>
                 <OverlayTrigger placement="bottom" overlay={<Tooltip><strong>{picturenames[i]}</strong></Tooltip>}>
-                <div className="image-bg" style={imgStyle} />
+                  <div className="image-bg" style={imgStyle} />
                 </OverlayTrigger>
               </CarouselItem>
             );
@@ -313,28 +160,28 @@ var StrategyDetail = React.createClass({
             </Col>
             <Col xs={12} sm={4}>
               <Nav bsStyle="pills">
-                  <NavItem>
-                      <Glyphicon glyph="pencil" />
-                  </NavItem>
-                  <NavItem>
-                      <Glyphicon glyph="share-alt" />
-                  </NavItem>
-                  <NavItem>
-                      <Glyphicon glyph="print" />
-                  </NavItem>
-                </Nav>
+                <NavItem>
+                  <Glyphicon glyph="pencil" />
+                </NavItem>
+                <NavItem>
+                  <Glyphicon glyph="share-alt" />
+                </NavItem>
+                <NavItem>
+                  <Glyphicon glyph="print" />
+                </NavItem>
+              </Nav>
             </Col>
           </Row>
           <Row className="show-grid">
             <Col xs={12} sm={4}>
-              <ButtonList livingsystemmap={{'taxon':detail.living_system_taxon, 'name':detail.living_system, 'id':detail.living_system_id}} items={detail.living_system} title="Living Systems"/>
-              <ButtonList items={detail.conditions} title="Context"/>
+              <ButtonList livingsystems items={{'taxon':detail.living_system_taxon, 'name':detail.living_system, 'id':detail.living_system_id}} routename="living-system" title="Living Systems"/>
+              <ButtonList conditions items={{'name': detail.conditions}} title="Context" />
             </Col>
             <Col xs={6} sm={4}>
-              <ButtonList items={detail.mechanisms} title="Mechanisms"/>
+              <ButtonList mechanisms items={{'name': detail.mechanisms}} title="Mechanisms"/>
             </Col>
             <Col xs={6} sm={4}>
-              <ButtonList phenomenonmap={{'name':detail.outcomes,'id':detail.outcomes_id}} items={detail.outcomes} title="Outcomes"/>
+              <ButtonList phenomena items={{'name':detail.outcomes,'id':detail.outcomes_id}} routename="phenomenon" title="Outcomes"/>
             </Col>
           </Row>
         </Grid>
@@ -343,10 +190,10 @@ var StrategyDetail = React.createClass({
             <Grid>
               <Row>
                 <Col xs={12}>
-                    <Gallery items={detail} />
+                  <Gallery items={detail} />
                 </Col>
               </Row>
-<Row>
+              <Row>
                 <Col xs={12} md={12}>
                   <TextArea title='Story' item={detail.brief} />
                   <TextArea title='Citations' item={detail.special_text} />
@@ -356,10 +203,10 @@ var StrategyDetail = React.createClass({
               <Row className="show-grid">
                 <Col xs={12} sm={6}>
 
-                    <h6><strong>Your Inspired Ideas</strong></h6>
+                  <h6><strong>Your Inspired Ideas</strong></h6>
 
-                      <ul className="media-list">
-                        {detail.application_1 ? (
+                  <ul className="media-list">
+                    {detail.application_1 ? (
                       <li className="media">
                         <div className="media-left">
                           <a href="#">
@@ -371,8 +218,8 @@ var StrategyDetail = React.createClass({
                         </div>
                       </li>) : ''
                     }
-                      {detail.application_2 ? (
-                        <li className="media">
+                    {detail.application_2 ? (
+                      <li className="media">
                         <div className="media-left">
                           <a href="#">
                             <img src="https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
@@ -385,215 +232,215 @@ var StrategyDetail = React.createClass({
                     }
                     {detail.application_3 ? (
                       <li className="media">
-                      <div className="media-left">
-                        <a href="#">
-                          <img src="https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
-                        </a>
-                      </div>
-                      <div className="media-body">
-                        <p><a href="#"><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_3}} /> <Label>Sector 4</Label> <Label>Sector 3</Label></p>
-                      </div>
-                    </li>) : ''
-                  }
-                      <li className="media">
                         <div className="media-left">
                           <a href="#">
-                            <img src="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
+                            <img src="https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
                           </a>
                         </div>
                         <div className="media-body">
-                          <form>
-      <Input type="text" className="input-sm" placeholder="Share Your Idea..." />
-      </form>
+                          <p><a href="#"><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_3}} /> <Label>Sector 4</Label> <Label>Sector 3</Label></p>
                         </div>
-                      </li>
-                    </ul>
+                      </li>) : ''
+                    }
+                    <li className="media">
+                      <div className="media-left">
+                        <a href="#">
+                          <img src="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
+                        </a>
+                      </div>
+                      <div className="media-body">
+                        <form>
+                          <Input type="text" className="input-sm" placeholder="Share Your Idea..." />
+                        </form>
+                      </div>
+                    </li>
+                  </ul>
 
                 </Col>
                 <Col xs={12} sm={6}>
-                  <LinkList items={detail.products} masterids={detail.product_masterid} title="Inspired Solutions"/>
+                  <ImageList items={{'name':detail.products,'id':detail.product_masterid}} routename="product" title="Inspired Solutions"/>
                 </Col>
               </Row>
               <Row className="show-grid">
                 {detail.sources[0] ? (
-                <Col xs={12} sm={6}>
-                  <ButtonList sourcemap={{'year':detail.sources_year, 'name':detail.sources, 'authors':detail.sources_authors, 'id':detail.sources_id}} items={detail.sources} title="Sources" />
-                </Col>) : ''
-              }
-              {detail.experts[0] ? (
-                <Col xs={12} sm={6}>
-                  <ButtonList items={detail.experts} title="Studied By" />
-                </Col>) : ''
-              }
+                  <Col xs={12} sm={6}>
+                    <ButtonList sources items={{'year':detail.sources_year, 'name':detail.sources, 'authors':detail.sources_authors, 'id':detail.sources_id}} routename="source" title="Sources" />
+                  </Col>) : ''
+                }
+                {detail.experts[0] ? (
+                  <Col xs={12} sm={6}>
+                    <ButtonList experts items={{'name':detail.experts}} routename="researcher" title="Studied By" />
+                  </Col>) : ''
+                }
               </Row>
             </Grid>
           </Panel>
           <Panel header="Table View" eventKey="2">
-        <Grid>
-          <Row className="show-grid">
-            <Col xs={12} md={12}>
-                <h6>Legacy Data</h6>
-                <p>This information is all due for eventual deletion, but may be helpful during short-term migration.</p>
-                <Table striped responsive condensed hover>
-                  <thead>
-                    <tr>
-                      <th>Field Name</th>
-                      <th>Field Value</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>name</td>
-                      <td>{detail.name}</td>
-                    </tr>
-                    <tr>
-                      <td>description</td>
-                      <td>{detail.description}</td>
-                    </tr>
-                    <tr>
-                      <td>created_by</td>
-                      <td>{detail.created_by}</td>
-                    </tr>
-                    <tr>
-                      <td>entered_by</td>
-                      <td>{detail.entered_by}</td>
-                    </tr>
-                    <tr>
-                      <td>brief</td>
-                      <td>{detail.brief}</td>
-                    </tr>
-                    <tr>
-                      <td>special_text</td>
-                      <td>{detail.special_text}</td>
-                    </tr>
-                    <tr>
-                      <td>out_HasLivingSystem</td>
-                      <td><List items={detail.living_system} /></td>
-                    </tr>
-                    <tr>
-                      <td>out_HasFunction</td>
-                      <td><List items={detail.outcomes} /></td>
-                    </tr>
-                    <tr>
-                      <td>out_HasMechanism</td>
-                      <td><List items={detail.mechanisms} /></td>
-                    </tr>
-                    <tr>
-                      <td>out_HasConditions</td>
-                      <td><List items={detail.conditions} /></td>
-                    </tr>
-                    <tr>
-                      <td>in_InspiredBy</td>
-                      <td><List items={detail.products} /></td>
-                    </tr>
-                    <tr>
-                      <td>applications</td>
-                      <td>{detail.applications}</td>
-                    </tr>
-                    <tr>
-                      <td>application_1</td>
-                      <td>{detail.application_1}</td>
-                    </tr>
-                    <tr>
-                      <td>application_2</td>
-                      <td>{detail.application_2}</td>
-                    </tr>
-                    <tr>
-                      <td>application_3</td>
-                      <td>{detail.application_3}</td>
-                    </tr>
-                    <tr>
-                      <td>out_HasMedia</td>
-                      <td><List items={detail.media} /></td>
-                    </tr>
-                    <tr>
-                      <td>out_FeaturedIn</td>
-                      <td><List items={detail.sources} /></td>
-                    </tr>
-                    <tr>
-                      <td>in_StudiedBy</td>
-                      <td><List items={detail.experts} /></td>
-                    </tr>
-                    <tr>
-                      <td>in_Bookmarked</td>
-                      <td><List items={detail.collectors} /></td>
-                    </tr>
-                    <tr>
-                      <td>masterid</td>
-                      <td>{detail.masterid}</td>
-                    </tr>
-                    <tr>
-                      <td>status</td>
-                      <td>{detail.status}</td>
-                    </tr>
-                    <tr>
-                      <td>timestamp</td>
-                      <td>{detail.timestamp}</td>
-                    </tr>
-                    <tr>
-                      <td>date_entered</td>
-                      <td>{detail.date_entered}</td>
-                    </tr>
-                    <tr>
-                      <td>common_name</td>
-                      <td>{detail.common_name}</td>
-                    </tr>
-                    <tr>
-                      <td>scientific_name</td>
-                      <td>{detail.scientific_name}</td>
-                    </tr>
-                    <tr>
-                      <td>other_names</td>
-                      <td>{detail.other_names}</td>
-                    </tr>
-                    <tr>
-                      <td>additional_taxa</td>
-                      <td>{detail.additional_taxa}</td>
-                    </tr>
-                    <tr>
-                      <td>additional_functions</td>
-                      <td>{detail.additional_functions}</td>
-                    </tr>
-                    <tr>
-                      <td>additional_reference</td>
-                      <td>{detail.additional_reference}</td>
-                    </tr>
-                    <tr>
-                      <td>source</td>
-                      <td>{detail.source}</td>
-                    </tr>
-                    <tr>
-                      <td>source_citation</td>
-                      <td>{detail.source_citation}</td>
-                    </tr>
-                    <tr>
-                      <td>pages_of_excerpt</td>
-                      <td>{detail.pages_of_excerpt}</td>
-                    </tr>
-                    <tr>
-                      <td>image_file_name</td>
-                      <td>{detail.image_file_name}</td>
-                    </tr>
-                    <tr>
-                      <td>video_url</td>
-                      <td><a href={detail.video_url} target="_blank">{detail.video_url}</a></td>
-                    </tr>
-                    <tr>
-                      <td>pdf_file_name</td>
-                      <td>{detail.pdf_file_name}</td>
-                    </tr>
-                    <tr>
-                      <td>editor_comments</td>
-                      <td>{detail.editor_comments}</td>
-                    </tr>
-                  </tbody>
-                </Table>
-            </Col>
-          </Row>
+            <Grid>
+              <Row className="show-grid">
+                <Col xs={12} md={12}>
+                  <h6>Legacy Data</h6>
+                  <p>This information is all due for eventual deletion, but may be helpful during short-term migration.</p>
+                  <Table striped responsive condensed hover>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Field Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>name</td>
+                        <td>{detail.name}</td>
+                      </tr>
+                      <tr>
+                        <td>description</td>
+                        <td>{detail.description}</td>
+                      </tr>
+                      <tr>
+                        <td>created_by</td>
+                        <td>{detail.created_by}</td>
+                      </tr>
+                      <tr>
+                        <td>entered_by</td>
+                        <td>{detail.entered_by}</td>
+                      </tr>
+                      <tr>
+                        <td>brief</td>
+                        <td>{detail.brief}</td>
+                      </tr>
+                      <tr>
+                        <td>special_text</td>
+                        <td>{detail.special_text}</td>
+                      </tr>
+                      <tr>
+                        <td>out_HasLivingSystem</td>
+                        <td><List items={detail.living_system} /></td>
+                      </tr>
+                      <tr>
+                        <td>out_HasFunction</td>
+                        <td><List items={detail.outcomes} /></td>
+                      </tr>
+                      <tr>
+                        <td>out_HasMechanism</td>
+                        <td><List items={detail.mechanisms} /></td>
+                      </tr>
+                      <tr>
+                        <td>out_HasConditions</td>
+                        <td><List items={detail.conditions} /></td>
+                      </tr>
+                      <tr>
+                        <td>in_InspiredBy</td>
+                        <td><List items={detail.products} /></td>
+                      </tr>
+                      <tr>
+                        <td>applications</td>
+                        <td>{detail.applications}</td>
+                      </tr>
+                      <tr>
+                        <td>application_1</td>
+                        <td>{detail.application_1}</td>
+                      </tr>
+                      <tr>
+                        <td>application_2</td>
+                        <td>{detail.application_2}</td>
+                      </tr>
+                      <tr>
+                        <td>application_3</td>
+                        <td>{detail.application_3}</td>
+                      </tr>
+                      <tr>
+                        <td>out_HasMedia</td>
+                        <td><List items={detail.media} /></td>
+                      </tr>
+                      <tr>
+                        <td>out_FeaturedIn</td>
+                        <td><List items={detail.sources} /></td>
+                      </tr>
+                      <tr>
+                        <td>in_StudiedBy</td>
+                        <td><List items={detail.experts} /></td>
+                      </tr>
+                      <tr>
+                        <td>in_Bookmarked</td>
+                        <td><List items={detail.collectors} /></td>
+                      </tr>
+                      <tr>
+                        <td>masterid</td>
+                        <td>{detail.masterid}</td>
+                      </tr>
+                      <tr>
+                        <td>status</td>
+                        <td>{detail.status}</td>
+                      </tr>
+                      <tr>
+                        <td>timestamp</td>
+                        <td>{detail.timestamp}</td>
+                      </tr>
+                      <tr>
+                        <td>date_entered</td>
+                        <td>{detail.date_entered}</td>
+                      </tr>
+                      <tr>
+                        <td>common_name</td>
+                        <td>{detail.common_name}</td>
+                      </tr>
+                      <tr>
+                        <td>scientific_name</td>
+                        <td>{detail.scientific_name}</td>
+                      </tr>
+                      <tr>
+                        <td>other_names</td>
+                        <td>{detail.other_names}</td>
+                      </tr>
+                      <tr>
+                        <td>additional_taxa</td>
+                        <td>{detail.additional_taxa}</td>
+                      </tr>
+                      <tr>
+                        <td>additional_functions</td>
+                        <td>{detail.additional_functions}</td>
+                      </tr>
+                      <tr>
+                        <td>additional_reference</td>
+                        <td>{detail.additional_reference}</td>
+                      </tr>
+                      <tr>
+                        <td>source</td>
+                        <td>{detail.source}</td>
+                      </tr>
+                      <tr>
+                        <td>source_citation</td>
+                        <td>{detail.source_citation}</td>
+                      </tr>
+                      <tr>
+                        <td>pages_of_excerpt</td>
+                        <td>{detail.pages_of_excerpt}</td>
+                      </tr>
+                      <tr>
+                        <td>image_file_name</td>
+                        <td>{detail.image_file_name}</td>
+                      </tr>
+                      <tr>
+                        <td>video_url</td>
+                        <td><a href={detail.video_url} target="_blank">{detail.video_url}</a></td>
+                      </tr>
+                      <tr>
+                        <td>pdf_file_name</td>
+                        <td>{detail.pdf_file_name}</td>
+                      </tr>
+                      <tr>
+                        <td>editor_comments</td>
+                        <td>{detail.editor_comments}</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </Col>
+              </Row>
 
-        </Grid>
-      </Panel>
-    </PanelGroup>
+            </Grid>
+          </Panel>
+        </PanelGroup>
       </DefaultLayout>
       /* jshint ignore:end */
     );

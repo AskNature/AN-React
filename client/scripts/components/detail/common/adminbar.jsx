@@ -11,7 +11,6 @@ ButtonToolbar = require('react-bootstrap').ButtonToolbar,
 Button = require('react-bootstrap').Button,
 Glyphicon = require('react-bootstrap').Glyphicon;
 
-
 var AdminBar = React.createClass({
   render: function() {
     var legacy_url = 'http://www.asknature.org/'+ this.props.routename +'/'+ this.props.masterid;
@@ -25,6 +24,5 @@ var AdminBar = React.createClass({
     );
   }
 });
-
 
 module.exports = AdminBar;
