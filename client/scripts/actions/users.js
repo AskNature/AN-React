@@ -175,6 +175,36 @@ module.exports = {
     });
   },
 
+  getListPaginated: function(index, size, sortCol, asc, callback) {
+    var self = this;
+    var getString = '/api/users?offset='+index*size+'&limit='+size;
+    if (sortCol) { getString += '&order='+(asc ? '+' : '-')+sortCol; }
+    request.get(getString)
+    .type('json')
+    .end(function(res) {
+      if (res.ok) {
+        if (res) {
+          var listData = res.body;
+          self.setList(listData);
+          console.log(res.body);
+        }
+        if (callback && callback.success) {
+          callback.success(res);
+        }
+      }
+      else {
+        if (callback && callback.error) {
+          callback.error(res);
+        }
+      }
+
+      if (callback && callback.complete) {
+        callback.complete(res);
+      }
+    });
+  },
+
+
   setItem: function(focus, next) {
     Dispatcher.handleViewAction({
       actionType: Constants.GET_USER,
