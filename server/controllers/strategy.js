@@ -64,7 +64,7 @@ var returnList = function(req, res, next) {
 };
 
 var updateStrategy = function(req, res, next) {
-    var newData = {summary: req.body.description, name: req.body.name};
+    var newData = {summary: req.body.description, name: req.body.name, special_text: req.body.special_text, brief: req.body.brief, common_name: req.body.common_name, other_names: req.body.other_names, applications: req.body.applications, application_1: req.body.application_1, application_2: req.body.application_2, application_3: req.body.application_3, scientific_name: req.body.scientific_name, editor_comments: req.body.editor_comments};
     console.log(JSON.stringify(newData));
     db.update('Strategy').set(newData)
         .where({masterid:req.body.masterid}).scalar().then(function(count) {
