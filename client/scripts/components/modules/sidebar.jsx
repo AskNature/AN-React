@@ -21,7 +21,7 @@ var SidebarComponent = React.createClass({
                   <TabPane eventKey={2} tab='Admin'>
                     <Nav stacked>
                       <li eventKey={2}><Link url="../admin/phenomena">Phenomena</Link></li>
-                      <li eventKey={3}><Link url="../admin/strategies">Life's Solutions</Link></li>
+                      <li eventKey={3}><Link url="../admin/strategies">Biological Strategies</Link></li>
                       <li eventKey={4}><Link url="../admin/products">Inspired Solutions</Link></li>
                       <li eventKey={5}><Link url="../admin/sources">Sources</Link></li>
                       <li eventKey={6}><Link url="../admin/conditions">Challenges</Link></li>
