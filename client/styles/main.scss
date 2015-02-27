@@ -21,7 +21,7 @@
 
 body {
   // Compensate for the 50px tall fixed navbar with padding-top
-  padding-top: 64px;
+  padding-top: 85px;
 }
 
 label {
@@ -189,6 +189,10 @@ Hero
 
 }
 
+.navbar-header.pull-right.nav li {
+  float: left;
+}
+
 @media (min-width: 1px) {
   .sidebar-toggle {
     display: block !important;
@@ -198,6 +202,7 @@ Hero
 @media (min-width: 768px) {
   body {
     padding-left: 200px;
+    padding-top: 64px;
   }
 
   .navmenu-fixed-left {
