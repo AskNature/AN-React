@@ -4,6 +4,7 @@
 'use strict';
 
 var React = require('react');
+var TextField = require('../../modules/textfield.jsx');
 
 var TextArea = React.createClass({
   render: function() {
@@ -13,7 +14,7 @@ var TextArea = React.createClass({
       return (
         <div>
           <h6><strong>{title}</strong></h6>
-          <p dangerouslySetInnerHTML={{__html: item}} />
+          {this.props.editable? <span><p><TextField store={this.props.store} actions={this.props.actions} enableBlockMode={false} fieldName={this.props.fieldName} initialValue={this.props.item} editable={this.props.editable} /></p></span>:<span><p dangerouslySetInnerHTML={{__html: item}} /></span>}
         </div>
       );
     } else {
