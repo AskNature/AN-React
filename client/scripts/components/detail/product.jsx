@@ -1,5 +1,5 @@
 /**
-* Strategy detail (component)
+* Product detail (component)
 */
 'use strict';
 

@@ -3,21 +3,28 @@
 */
 'use strict';
 
-var React = require('react');
+var React = require('react'),
 
-var Link = require('../modules/link.jsx');
-var Col = require('react-bootstrap/Col'),
-Well = require('react-bootstrap/Well'),
-Button = require('react-bootstrap/Button'),
-ButtonToolbar = require('react-bootstrap/ButtonToolbar'),
-OverlayTrigger = require('react-bootstrap/OverlayTrigger'),
-Tooltip = require('react-bootstrap/Tooltip'),
+Link = require('../modules/link.jsx'),
+DefaultLayout = require('../layouts/default.jsx'),
+Hero = require('./common/hero.jsx'),
+SubHero = require('./common/subhero.jsx'),
+AdminBar = require('./common/adminbar.jsx'),
+CreatorMast = require('./common/creatormast.jsx'),
+TextArea = require('./common/textarea.jsx'),
+ImageList = require('./common/imagelist.jsx'),
+ButtonList = require('./common/edgelists.jsx'),
+Gallery = require('./common/gallery.jsx'),
+
+Label = require('react-bootstrap/Label'),
+Col = require('react-bootstrap/Col'),
+Panel = require('react-bootstrap/Panel'),
+PanelGroup = require('react-bootstrap/PanelGroup'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid'),
-Glyphicon = require('react-bootstrap/Glyphicon'),
-Carousel = require('react-bootstrap/Carousel'),
-CarouselItem = require('react-bootstrap/CarouselItem'),
-Table = require('react-bootstrap/Table');
+Table = require('react-bootstrap/Table'),
+Input = require('react-bootstrap/Input');
+
 
 var DefaultLayout = require('../layouts/default.jsx');
 
@@ -41,27 +48,6 @@ var getState = function() {
   };
 };
 
-var ButtonList = React.createClass({
-  render: function() {
-    var items = this.props.items;
-    var title = this.props.title;
-    return (
-      <Well bsSize="small">
-        <h6>{title}</h6>
-        {
-          items.map(function(item, i){
-            return (
-              <OverlayTrigger placement="top" overlay={<Tooltip>{item}</Tooltip>} key={i}>
-                <Button block>{item}</Button>
-              </OverlayTrigger>
-            );
-          })
-      }
-      </Well>
-    );
-  }
-});
-
 var List = React.createClass({
   render: function() {
     var items = this.props.items;
@@ -78,33 +64,6 @@ var List = React.createClass({
     );
   }
 });
-
-var Gallery = React.createClass({
-  render: function() {
-    var pictures = this.props.items.media;
-    var masterid = this.props.items.masterid;
-    return (
-    <Carousel {...this.props}>
-    {
-      pictures.map(function(imageurl, i){
-        var mediaurl= 'http://www.asknature.org/images/uploads/strategy/'+masterid+'/'+imageurl;
-        console.log('Looking for image: '+mediaurl);
-        return (
-          <CarouselItem key={i}>
-              <img alt="Image" src={mediaurl} />
-              <div className="carousel-caption" />
-          </CarouselItem>
-        );
-      })
-    }
-    </Carousel>
-  );
-
-  }
-});
-/** StrategyDetail class contains a search field that filters items in
-* an unordered list in real time.
-*/
 
 var DetailComponent = React.createClass({
 
@@ -125,24 +84,52 @@ var DetailComponent = React.createClass({
 
   render: function() {
     var detail = this.state.details.results[0];
+    var routeName = 'phenomenon';
+    var routeNamePlural = 'phenomena';
+    var entityName = 'Phenomenon';
+    var secondaryTitle;
+    if(detail.groupname) {
+      secondaryTitle = detail.groupname + ' > ';
+    }
+    if(detail.parent) {
+      secondaryTitle += detail.parent + ' > ';
+    }
+    secondaryTitle += detail.name;
     return (
         /* jshint ignore:start */
         <DefaultLayout>
-            <Grid>
-              <Row className="show-grid">
-                <Col xs={12} md={12}>
-                  <ButtonToolbar>
-                    <Link url="../admin/phenomena"><Button><Glyphicon glyph="chevron-left" /> Phenomena Console</Button></Link>
-                  </ButtonToolbar>
-                </Col>
-              </Row>
-              <Row className="show-grid">
-                <Col xs={12} md={12}>
-                  <h3>{detail.name}</h3>
-                  <p className="lead">{detail.description}</p>
-                </Col>
+          <AdminBar masterid={detail.masterid} routename={routeName} pluralroute={routeNamePlural} entityname={entityName} />
+          <CreatorMast img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" entityname={entityName} />
+          <Hero items={detail} primarytitle={detail.name} secondarytitle={secondaryTitle} />
+          <SubHero description='This is a placeholder for where a short description will go.' />
+          <Grid>
+            <Row className="show-grid">
+              <Col xs={12} sm={4}>
+                <ButtonList items={{'name': detail.parent}} title="Parent Phenomenon" />
+                <ButtonList items={{'name': detail.children}} title="Child Phenomena" />
+              </Col>
+              <Col xs={12} sm={4}>
 
-              </Row>
+                  Listed as a <strong>Mechanism</strong> in <strong>XX</strong> items.
+                    <Button block><Glyphicon glyph="search" /> <Label>XX</Label></Button>
+                    <Button block>Connect your content</Button>
+
+              </Col>
+              <Col xs={12} sm={4}>
+
+                  Listed as an <strong>Outcome</strong> in <strong>YY</strong> items.
+                    <Button block><Glyphicon glyph="search" /> <Label>YY</Label></Button>
+                    <Button block>Connect your content</Button>
+
+              </Col>
+            </Row>
+          </Grid>
+          <PanelGroup defaultActiveKey='2' accordion>
+            <Panel header="More" eventKey='1'>
+
+            </Panel>
+            <Panel header="Table View" eventKey="2">
+              <Grid>
               <Row className="show-grid">
                 <Col xs={12} md={12}>
                     <h6>Legacy Data</h6>
@@ -177,7 +164,7 @@ var DetailComponent = React.createClass({
                         </tr>
                         <tr>
                           <td>out_ChildOf.out_ChildOf (grandparent)</td>
-                          <td>{detail.groupid}</td>
+                          <td>{detail.groupname}</td>
                         </tr>
                         <tr>
                           <td>in_ChildOf (children)</td>
@@ -194,6 +181,8 @@ var DetailComponent = React.createClass({
               </Row>
 
             </Grid>
+          </Panel>
+        </PanelGroup>
         </DefaultLayout>
         /* jshint ignore:end */
     );

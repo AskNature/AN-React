@@ -15,6 +15,7 @@ var List = React.createClass({
   render: function() {
     var properties = this.props;
     var items = this.props.items;
+    var routename = this.props.routename;
     var title = this.props.title;
     return (
       <div>
@@ -24,8 +25,8 @@ var List = React.createClass({
               {
                 items.name.map(function(item, i){
                   var link;
-                  if(items.id[0]) {
-                     link = '../'+ items.routename +'/'+ items.id[i];
+                  if(items.id) {
+                     link = '../'+ routename +'/'+ items.id[i];
                   }
                   return (
                     <tr href="#" key={i}>

@@ -34,10 +34,15 @@ var Defaults = {
         name: 'Loading..',
         description: '',
         short_name: '',
-        parent: '',
+        parent: [],
         children: [],
         has_function: [],
-        groupid: ''
+        groupname: '',
+        groupid: '',
+        media: [],
+        media_name: [],
+        media_entity: [],
+        media_id: []
       }
       ]
     },
