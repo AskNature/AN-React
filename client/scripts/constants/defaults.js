@@ -60,6 +60,7 @@ var Defaults = {
           outcomes: [],
           outcomes_id: [],
           mechanisms: [],
+          mechanisms_id: [],
           conditions: [],
           living_system: [],
           living_system_taxon: [],
