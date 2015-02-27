@@ -22,7 +22,7 @@ var HeroComponent = React.createClass({
         <Grid>
           <Row className="headline">
             <Col xs={12} md={12}>
-              <h3 className="animated fadeInDown">{this.props.primarytitle}<br/><small><Link url={this.props.secondarylink}><i>{this.props.secondarytitle}</i></Link></small></h3>
+              <h3 className="animated fadeInDown"> <strong>{this.props.primarytitle}</strong><br/><small><Link url={this.props.secondarylink ? this.props.secondarylink : ''}><i>{this.props.secondarytitle}</i></Link></small></h3>
             </Col>
           </Row>
         </Grid>

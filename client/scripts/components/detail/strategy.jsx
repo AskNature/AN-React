@@ -9,6 +9,7 @@ Link = require('../modules/link.jsx'),
 DefaultLayout = require('../layouts/default.jsx'),
 Hero = require('./common/hero.jsx'),
 SubHero = require('./common/subhero.jsx'),
+CreatorMast = require('./common/creatormast.jsx'),
 AdminBar = require('./common/adminbar.jsx'),
 TextArea = require('./common/textarea.jsx'),
 ImageList = require('./common/imagelist.jsx'),
@@ -81,9 +82,9 @@ var StrategyDetail = React.createClass({
 
   render: function() {
     var routeName = 'strategy';
+    var routeNamePlural = 'strategies';
     var entityName = 'Biological Strategy';
     var detail = this.state.details.results[0];
-    var legacy_url = 'http://www.asknature.org/strategy/'+detail.masterid;
     var splitLegacyTitle = detail.name.split(': ');
     var secondaryLink = '../living-system/'+ detail.living_system_id[0];
     var renderedInstance;
@@ -95,11 +96,8 @@ var StrategyDetail = React.createClass({
     return (
       /* jshint ignore:start */
       <DefaultLayout>
-        <AdminBar masterid={detail.masterid} routename={routeName} entityname={entityName} />
-        <Panel className="nomargin">
-          <img src="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" alt="Thumb" width="40px" height="40px" className="img-circle" />
-          <span> <Link url="#"><strong>AskNature Team</strong></Link> contributed this <strong>{entityName}</strong> / 2 hours ago</span>
-        </Panel>
+        <AdminBar masterid={detail.masterid} routename={routeName} pluralroute={routeNamePlural} entityname={entityName} />
+        <CreatorMast img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" entityname={entityName} />
         <Hero items={detail} primarytitle={splitLegacyTitle[0]} secondarytitle={splitLegacyTitle[1]} secondarylink={secondaryLink} />
         <SubHero description={detail.description} />
         <Grid>

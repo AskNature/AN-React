@@ -26,7 +26,7 @@ var ImageList = React.createClass({
           {
             items.name.map(function(item, i){
               var link = '../'+ routename +'/'+ items.id[i];
-              var mediaurl = 'http://biomimicry.org/wp-content/uploads/2014/07/owlanrefresh_1-e1409954986739.jpeg';
+              var mediaurl = 'http://www.757angelsgroup.com/show/main-profile/wiki-image/20140518072131!Placeholder.png';
               var heroStyle = {
                 backgroundImage: 'url(' + mediaurl + ')'
               };
@@ -41,7 +41,7 @@ var ImageList = React.createClass({
           }
           <Link url="#">
             <ListGroupItem>
-              <h6><Glyphicon glyph="plus" /> Connect your {title}</h6>
+              <h6><Glyphicon glyph="plus" /> Connect your { this.props.entityname ? (<span>{this.props.entityname}</span>) : (<span>{title}</span>)}</h6>
             </ListGroupItem>
           </Link>
         </ListGroup>

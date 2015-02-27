@@ -19,7 +19,10 @@ var SubHero = React.createClass({
       <Grid>
         <Row>
           <Col xs={12} sm={8}>
-            <h5 className="lead">{this.props.description}</h5>
+            <h5 className="lead">
+              {this.props.first ? (<strong>{this.props.first} </strong>) : ''}
+              {this.props.descriptionlink ? (<Link url={this.props.descriptionlink}>{this.props.description}</Link>) : (<span>{this.props.description}</span>)}
+              </h5>
           </Col>
           <Col xs={12} sm={4}>
             <Nav bsStyle="pills">

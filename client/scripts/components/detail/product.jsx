@@ -3,24 +3,27 @@
 */
 'use strict';
 
-var React = require('react');
+var React = require('react'),
 
-var Link = require('../modules/link.jsx');
-var Col = require('react-bootstrap/Col'),
-Well = require('react-bootstrap/Well'),
-Button = require('react-bootstrap/Button'),
-ButtonToolbar = require('react-bootstrap/ButtonToolbar'),
-OverlayTrigger = require('react-bootstrap/OverlayTrigger'),
-Tooltip = require('react-bootstrap/Tooltip'),
+Link = require('../modules/link.jsx'),
+DefaultLayout = require('../layouts/default.jsx'),
+Hero = require('./common/hero.jsx'),
+SubHero = require('./common/subhero.jsx'),
+AdminBar = require('./common/adminbar.jsx'),
+CreatorMast = require('./common/creatormast.jsx'),
+TextArea = require('./common/textarea.jsx'),
+ImageList = require('./common/imagelist.jsx'),
+ButtonList = require('./common/edgelists.jsx'),
+Gallery = require('./common/gallery.jsx'),
+
+Label = require('react-bootstrap/Label'),
+Col = require('react-bootstrap/Col'),
+Panel = require('react-bootstrap/Panel'),
+PanelGroup = require('react-bootstrap/PanelGroup'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid'),
-Glyphicon = require('react-bootstrap/Glyphicon'),
-Carousel = require('react-bootstrap/Carousel'),
-CarouselItem = require('react-bootstrap/CarouselItem'),
-Table = require('react-bootstrap/Table');
-
-var DefaultLayout = require('../layouts/default.jsx');
-
+Table = require('react-bootstrap/Table'),
+Input = require('react-bootstrap/Input');
 
 /** Gets incoming information from the store */
 
@@ -41,27 +44,6 @@ var getState = function() {
   };
 };
 
-var ButtonList = React.createClass({
-  render: function() {
-    var items = this.props.items;
-    var title = this.props.title;
-    return (
-      <Well bsSize="small">
-        <h6>{title}</h6>
-        {
-          items.map(function(item, i){
-            return (
-              <OverlayTrigger placement="top" overlay={<Tooltip>{item}</Tooltip>} key={i}>
-                <Button block>{item}</Button>
-              </OverlayTrigger>
-            );
-          })
-      }
-      </Well>
-    );
-  }
-});
-
 var List = React.createClass({
   render: function() {
     var items = this.props.items;
@@ -78,33 +60,6 @@ var List = React.createClass({
     );
   }
 });
-
-var Gallery = React.createClass({
-  render: function() {
-    var pictures = this.props.items.media;
-    var masterid = this.props.items.masterid;
-    return (
-    <Carousel {...this.props}>
-    {
-      pictures.map(function(imageurl, i){
-        var mediaurl= 'http://www.asknature.org/images/uploads/product/'+masterid+'/'+imageurl;
-        console.log('Looking for image: '+mediaurl);
-        return (
-          <CarouselItem key={i}>
-              <img alt="Image" src={mediaurl} />
-              <div className="carousel-caption" />
-          </CarouselItem>
-        );
-      })
-    }
-    </Carousel>
-  );
-
-  }
-});
-/** StrategyDetail class contains a search field that filters items in
-* an unordered list in real time.
-*/
 
 var Detail = React.createClass({
 
@@ -124,28 +79,56 @@ var Detail = React.createClass({
   },
 
   render: function() {
+    var routeName = 'product';
+    var routeNamePlural = 'products';
+    var entityName = 'Inspired Solution';
     var detail = this.state.details.results[0];
-    var legacy_url = 'http://www.asknature.org/product/'+detail.masterid;
+    var descriptionTitle = '<a href="' + detail.company_website + '" target="_blank">' + detail.company + '</a>';
     return (
-        /* jshint ignore:start */
-        <DefaultLayout>
+      /* jshint ignore:start */
+      <DefaultLayout>
+        <AdminBar masterid={detail.masterid} routename={routeName} pluralroute={routeNamePlural} entityname={entityName} />
+        <CreatorMast img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" entityname={entityName} />
+        <Hero items={detail} primarytitle={detail.description} secondarytitle={detail.name} secondarylink='' />
+        <SubHero first='Concept' description={detail.company} descriptionlink={detail.company_website} />
+        <Grid>
+          <Row className="show-grid">
+            <Col xs={12} sm={4}>
+              <ButtonList items={{'name': detail.designedsystems}} title="Designed Systems" />
+              <ButtonList conditions items={{'name': detail.conditions}} title="Context" />
+            </Col>
+            <Col xs={6} sm={4}>
+              <ButtonList mechanisms items={{'name': detail.mechanisms}} title="Mechanisms"/>
+            </Col>
+            <Col xs={6} sm={4}>
+              <ButtonList phenomena items={{'name':detail.outcomes,'id':detail.outcomes_id}} routename="phenomenon" title="Outcomes"/>
+            </Col>
+            <Col xs={12} sm={8}>
+              <ImageList items={{'name':detail.inspiredby,'id':detail.inspiredby_id}} routename="strategy" title="Inspired By" entityname="Biological Strategy" />
+            </Col>
+          </Row>
+        </Grid>
+        <PanelGroup defaultActiveKey='1' accordion>
+          <Panel header="More" eventKey='1'>
             <Grid>
-              <Row className="show-grid">
-                <Col xs={12} md={12}>
-                  <ButtonToolbar>
-                    <Link url="../admin/products"><Button><Glyphicon glyph="chevron-left" /> Inspired Solutions Console</Button></Link>
-
-                    <Button href={legacy_url} target="_blank" bsStyle="primary">View on legacy site</Button>
-                  </ButtonToolbar>
+              <Row>
+                <Col xs={12}>
+                  <Gallery items={detail} />
                 </Col>
               </Row>
-              <Row className="show-grid">
+              <Row>
                 <Col xs={12} md={12}>
-                  <h3>{detail.name}</h3>
-                  <p className="lead">{detail.description}</p>
-                </Col>
 
+                  <TextArea title='Summary' item={detail.special_text} />
+                  <TextArea title='Inspiration' item={detail.biomimicry_story} />
+                  <TextArea title='Market Advantage' item={detail.how_is_it_different} />
+                  <TextArea title='Challenges Solved' item={detail.challenges_solved} />
+                </Col>
               </Row>
+            </Grid>
+          </Panel>
+          <Panel header="Table View" eventKey="2">
+            <Grid>
               <Row className="show-grid">
                 <Col xs={12} md={12}>
                     <h6>Legacy Data</h6>
@@ -269,6 +252,8 @@ var Detail = React.createClass({
                 </Col>
               </Row>
             </Grid>
+          </Panel>
+        </PanelGroup>
         </DefaultLayout>
         /* jshint ignore:end */
     );

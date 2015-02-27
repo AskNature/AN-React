@@ -76,15 +76,23 @@ var Defaults = {
     product: {
       results : [
       {
-        outcomes: [],
         name: 'Loading ...',
         description: '',
         inspiredby: [],
+        inspiredby_id: [],
         keywords: 'Tag1, Tag2',
         collectors: [],
         media: [],
+        media_name: [],
+        media_entity: [],
+        media_id: [],
+        outcomes: [],
+        outcomes_id: [],
+        mechanisms: [],
+        conditions: [],
         researchers: [],
-        sources: []
+        sources: [],
+        designedsystems: []
         }
       ]
     },
