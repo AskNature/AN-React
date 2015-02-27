@@ -14,7 +14,6 @@ if(process.env.NODE_ENV == 'production') {
 } else {
     livingSystemCache = Cached('livingSystem');
 }
-livingSystemCache.setDefaults({"freshFor": 120});
 
 
 var loadindex = function(req, res, next) {
