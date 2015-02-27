@@ -277,6 +277,10 @@ var StrategyDetail = React.createClass({
                         <td><List items={detail.conditions} /></td>
                       </tr>
                       <tr>
+                        <td>keywords</td>
+                        <td><List items={detail.keywords.split(',')} /></td>
+                      </tr>
+                      <tr>
                         <td>in_InspiredBy</td>
                         <td><List items={detail.products} /></td>
                       </tr>
