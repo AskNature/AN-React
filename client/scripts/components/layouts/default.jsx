@@ -2,8 +2,8 @@
 
 var React = require('react');
 var pageStore = require('../../stores/page');
-var userStore = require('../../stores/user');
-var userActions = require('../../actions/user');
+var userStore = require('../../stores/accounts');
+var userActions = require('../../actions/users');
 var Navbar = require('../modules/navbar.jsx');
 var Sidebar = require('../modules/sidebar.jsx');
 

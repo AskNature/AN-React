@@ -8,6 +8,7 @@ var keyMirror = require('keymirror');
 var itemConstants = keyMirror({
 
   // Strategy action types
+  GET_STRATEGY: null,
   GET_ALL_STRATEGIES: null
 
 });
