@@ -3,16 +3,18 @@
 */
 'use strict';
 
-var React = require('react');
+var React = require('react'),
 
-var Link = require('../modules/link.jsx'),
+Link = require('../modules/link.jsx'),
 Hero = require('./common/hero.jsx'),
+SubHero = require('./common/subhero.jsx'),
 AdminBar = require('./common/adminbar.jsx'),
 TextArea = require('./common/textarea.jsx'),
 ImageList = require('./common/imagelist.jsx'),
-ButtonList = require('./common/edgelists.jsx');
+ButtonList = require('./common/edgelists.jsx'),
+Gallery = require('./common/gallery.jsx'),
 
-var Col = require('react-bootstrap/Col'),
+Col = require('react-bootstrap/Col'),
 Well = require('react-bootstrap/Well'),
 Panel = require('react-bootstrap/Panel'),
 PanelGroup = require('react-bootstrap/PanelGroup'),
@@ -74,44 +76,6 @@ var List = React.createClass({
   }
 });
 
-
-
-var Gallery = React.createClass({
-  render: function() {
-    var detail = this.props.items;
-    var masterid = detail.masterid;
-    var pictures = detail.media;
-    var picturenames = detail.media_name;
-    return (
-      <Carousel {...this.props}>
-        {
-          pictures.map(function(imageurl, i){
-            var mediaurl;
-            if(masterid) {
-              mediaurl = 'http://www.asknature.org/images/uploads/strategy/'+masterid+'/'+imageurl;
-            } else {
-              mediaurl = 'http://biomimicry.org/wp-content/uploads/2014/07/owlanrefresh_1-e1409954986739.jpeg';
-            }
-            var imgStyle = {
-              backgroundImage: 'url(' + mediaurl + ')'
-            };
-            return (
-              <CarouselItem key={i}>
-                <OverlayTrigger placement="bottom" overlay={<Tooltip><strong>{picturenames[i]}</strong></Tooltip>}>
-                  <div className="image-bg" style={imgStyle} />
-                </OverlayTrigger>
-              </CarouselItem>
-            );
-          })
-        }
-      </Carousel>
-    );
-  }
-});
-/** StrategyDetail class contains a search field that filters items in
-* an unordered list in real time.
-*/
-
 var StrategyDetail = React.createClass({
 
   mixins: [focusStore.mixin],
@@ -153,25 +117,8 @@ var StrategyDetail = React.createClass({
           <span> <Link url="#"><strong>AskNature Team</strong></Link> contributed this <strong>{entityName}</strong> / 2 hours ago</span>
         </Panel>
         <Hero items={detail} primarytitle={splitLegacyTitle[0]} secondarytitle={splitLegacyTitle[1]} secondarylink={secondaryLink} />
+        <SubHero description={detail.description} />
         <Grid>
-          <Row>
-            <Col xs={12} sm={8}>
-              <h5 className="lead">{detail.description}</h5>
-            </Col>
-            <Col xs={12} sm={4}>
-              <Nav bsStyle="pills">
-                <NavItem>
-                  <Glyphicon glyph="pencil" />
-                </NavItem>
-                <NavItem>
-                  <Glyphicon glyph="share-alt" />
-                </NavItem>
-                <NavItem>
-                  <Glyphicon glyph="print" />
-                </NavItem>
-              </Nav>
-            </Col>
-          </Row>
           <Row className="show-grid">
             <Col xs={12} sm={4}>
               <ButtonList livingsystems items={{'taxon':detail.living_system_taxon, 'name':detail.living_system, 'id':detail.living_system_id}} routename="living-system" title="Living Systems"/>
