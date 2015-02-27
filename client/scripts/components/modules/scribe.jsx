@@ -15,7 +15,7 @@ ScribeTextField = React.createClass({
     componentDidMount: function() {
         var that = this;
         var scribeElement = this.refs.scribe.getDOMNode();
-	var scribe = new Scribe(scribeElement, { allowBlockElements: false });
+	var scribe = new Scribe(scribeElement, { allowBlockElements: (this.props.enableBlockMode ? true : false) });
         this.setState({scribe: scribe}, function() {
             scribe.on('content-changed', updateData);
             function updateData() {

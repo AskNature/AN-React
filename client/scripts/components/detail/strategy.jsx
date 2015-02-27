@@ -138,8 +138,8 @@ var StrategyDetail = React.createClass({
               </Row>
               <Row>
                 <Col xs={12} md={12}>
-                  <TextArea title='Story' item={detail.brief} />
-                  <TextArea title='Citations' item={detail.special_text} />
+                  <TextArea title='Story' item={detail.brief} store={focusStore} actions={focusActions} fieldName={"brief"} editable={this.state.editable} />
+                  <TextArea title='Citations' item={detail.special_text} store={focusStore} actions={focusActions} fieldName={"special_text"} editable={this.state.editable} />
 
                 </Col>
               </Row>
