@@ -50,7 +50,7 @@ var NavbarComponent = React.createClass({
                   <Link className="navbar-brand" url="/">AskNature</Link>
                   </Nav>
               {/* End temp button for left offcanvas menu */}
-
+	      {navLinks}
             </Navbar>
             /* jshint ignore:end */
         );
