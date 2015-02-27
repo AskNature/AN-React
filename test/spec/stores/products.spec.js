@@ -1,14 +1,14 @@
 /**
-*   Outcome Store Spec Test
+*   Product Store Spec Test
 */
 
 /*jshint expr: true*/
 
 'use strict';
 
-var outcomeStore = require('../../../client/scripts/stores/outcome');
+var productStore = require('../../../client/scripts/stores/admin/products');
 
-describe('Outcome Store', function() {
+describe('Product Store', function() {
 
     var ReactTestUtils;
     var reactRender;
@@ -17,9 +17,9 @@ describe('Outcome Store', function() {
         ReactTestUtils = require('react/addons').addons.TestUtils;
     });
 
-    it('provides the "Outcome Store"', function() {
+    it('provides the "Product Store"', function() {
         // Expect it to exist
-        expect(outcomeStore).to.be.ok;
+        expect(productStore).to.be.ok;
     });
 
 });

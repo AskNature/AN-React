@@ -1,14 +1,14 @@
 /**
-*   Product Store Spec Test
+*   Product Actions Spec Test
 */
 
 /*jshint expr: true*/
 
 'use strict';
 
-var productStore = require('../../../client/scripts/stores/product');
+var productActions = require('../../../client/scripts/actions/products');
 
-describe('Product Store', function() {
+describe('Product Actions', function() {
 
     var ReactTestUtils;
     var reactRender;
@@ -17,9 +17,9 @@ describe('Product Store', function() {
         ReactTestUtils = require('react/addons').addons.TestUtils;
     });
 
-    it('provides the "Product Store"', function() {
+    it('provides the "Product Actions"', function() {
         // Expect it to exist
-        expect(productStore).to.be.ok;
+        expect(productActions).to.be.ok;
     });
 
 });
