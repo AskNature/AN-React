@@ -6,6 +6,7 @@
 var React = require('react'),
 
 Link = require('../modules/link.jsx'),
+DefaultLayout = require('../layouts/default.jsx'),
 Hero = require('./common/hero.jsx'),
 SubHero = require('./common/subhero.jsx'),
 AdminBar = require('./common/adminbar.jsx'),
@@ -14,29 +15,14 @@ ImageList = require('./common/imagelist.jsx'),
 ButtonList = require('./common/edgelists.jsx'),
 Gallery = require('./common/gallery.jsx'),
 
+Label = require('react-bootstrap/Label'),
 Col = require('react-bootstrap/Col'),
-Well = require('react-bootstrap/Well'),
 Panel = require('react-bootstrap/Panel'),
 PanelGroup = require('react-bootstrap/PanelGroup'),
-Button = require('react-bootstrap/Button'),
-ButtonToolbar = require('react-bootstrap/ButtonToolbar'),
-ButtonGroup = require('react-bootstrap/ButtonGroup'),
-Nav = require('react-bootstrap/Nav'),
-NavItem = require('react-bootstrap/NavItem'),
-Label = require('react-bootstrap/Label'),
-OverlayTrigger = require('react-bootstrap/OverlayTrigger'),
-Tooltip = require('react-bootstrap/Tooltip'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid'),
-Glyphicon = require('react-bootstrap/Glyphicon'),
-Carousel = require('react-bootstrap/Carousel'),
-CarouselItem = require('react-bootstrap/CarouselItem'),
-ListGroupItem = require('react-bootstrap/ListGroupItem'),
-ListGroup = require('react-bootstrap/ListGroup'),
 Table = require('react-bootstrap/Table'),
 Input = require('react-bootstrap/Input');
-
-var DefaultLayout = require('../layouts/default.jsx');
 
 
 /** Gets incoming information from the store */
@@ -109,9 +95,7 @@ var StrategyDetail = React.createClass({
     return (
       /* jshint ignore:start */
       <DefaultLayout>
-        <Panel className="nomargin bgTexture">
-          <AdminBar masterid={detail.masterid} routename={routeName} entityname={entityName} />
-        </Panel>
+        <AdminBar masterid={detail.masterid} routename={routeName} entityname={entityName} />
         <Panel className="nomargin">
           <img src="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" alt="Thumb" width="40px" height="40px" className="img-circle" />
           <span> <Link url="#"><strong>AskNature Team</strong></Link> contributed this <strong>{entityName}</strong> / 2 hours ago</span>
