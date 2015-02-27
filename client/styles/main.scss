@@ -177,9 +177,12 @@ Hero
   height: 400px;
   overflow:hidden;
   background: #444;
-  .carousel-inner > .item > img {
+  .carousel-inner .image-bg {
+    background: #999 no-repeat center center;
+    background-size: cover;
+    height: 400px;
+    width: 100%;
     position: relative;
-    min-width: 100%;
   }
 }
 

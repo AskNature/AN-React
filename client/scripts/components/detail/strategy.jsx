@@ -210,6 +210,11 @@ var LinkList = React.createClass({
             );
           })
         }
+        <Link url="#">
+          <ListGroupItem>
+            <h6><Glyphicon glyph="plus" /> Connect your {title}</h6>
+          </ListGroupItem>
+        </Link>
     </ListGroup>
     </div>
     );
@@ -239,6 +244,7 @@ var Gallery = React.createClass({
     var detail = this.props.items;
     var masterid = detail.masterid;
     var pictures = detail.media;
+    var picturenames = detail.media_name;
     return (
       <Carousel {...this.props}>
         {
@@ -249,11 +255,14 @@ var Gallery = React.createClass({
             } else {
               mediaurl = 'http://biomimicry.org/wp-content/uploads/2014/07/owlanrefresh_1-e1409954986739.jpeg';
             }
-            console.log('Looking for image: '+mediaurl);
+            var imgStyle = {
+              backgroundImage: 'url(' + mediaurl + ')'
+            };
             return (
               <CarouselItem key={i}>
-                <img alt="Image" src={mediaurl} />
-                <div className="carousel-caption" />
+                <OverlayTrigger placement="bottom" overlay={<Tooltip><strong>{picturenames[i]}</strong></Tooltip>}>
+                <div className="image-bg" style={imgStyle} />
+                </OverlayTrigger>
               </CarouselItem>
             );
           })
@@ -360,6 +369,7 @@ var StrategyDetail = React.createClass({
                     <h6><strong>Your Inspired Ideas</strong></h6>
 
                       <ul className="media-list">
+                        {detail.application_1 ? (
                       <li className="media">
                         <div className="media-left">
                           <a href="#">
@@ -367,29 +377,34 @@ var StrategyDetail = React.createClass({
                           </a>
                         </div>
                         <div className="media-body">
-                          <p><a href="#"><strong>AskNature Staff </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_1}} /> <Label>Sector 1</Label></p>
+                          <p><a href="#"><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_1}} /> <Label>Sector 1</Label></p>
                         </div>
-                      </li>
-                      <li className="media">
+                      </li>) : ''
+                    }
+                      {detail.application_2 ? (
+                        <li className="media">
                         <div className="media-left">
                           <a href="#">
                             <img src="https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
                           </a>
                         </div>
                         <div className="media-body">
-                          <p><a href="#"><strong>AskNature Staff </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_2}} /> <Label>Sector 2</Label> <Label>Sector 3</Label></p>
+                          <p><a href="#"><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_2}} /> <Label>Sector 2</Label> <Label>Sector 3</Label></p>
                         </div>
-                      </li>
+                      </li>) : ''
+                    }
+                    {detail.application_3 ? (
                       <li className="media">
-                        <div className="media-left">
-                          <a href="#">
-                            <img src="https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
-                          </a>
-                        </div>
-                        <div className="media-body">
-                          <p><a href="#"><strong>AskNature Staff </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_3}} /> <Label>Sector 4</Label></p>
-                        </div>
-                      </li>
+                      <div className="media-left">
+                        <a href="#">
+                          <img src="https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
+                        </a>
+                      </div>
+                      <div className="media-body">
+                        <p><a href="#"><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_3}} /> <Label>Sector 4</Label> <Label>Sector 3</Label></p>
+                      </div>
+                    </li>) : ''
+                  }
                       <li className="media">
                         <div className="media-left">
                           <a href="#">
@@ -410,13 +425,16 @@ var StrategyDetail = React.createClass({
                 </Col>
               </Row>
               <Row className="show-grid">
-
+                {detail.sources[0] ? (
                 <Col xs={12} sm={6}>
                   <ButtonList items={detail.sources} title="Sources" />
-                </Col>
+                </Col>) : ''
+              }
+              {detail.experts[0] ? (
                 <Col xs={12} sm={6}>
                   <ButtonList items={detail.experts} title="Studied By" />
-                </Col>
+                </Col>) : ''
+              }
               </Row>
             </Grid>
           </Panel>

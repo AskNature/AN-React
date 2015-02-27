@@ -49,6 +49,7 @@ var Defaults = {
           description: '...and She\'s Pissed',
           masterid: '',
           media: [],
+          media_name: [],
           outcomes: [],
           mechanisms: [],
           conditions: [],
