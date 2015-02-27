@@ -6,7 +6,7 @@
 
 'use strict';
 
-var productStore = require('../../../client/scripts/stores/product');
+var productStore = require('../../../client/scripts/stores/admin/products');
 
 describe('Product Store', function() {
 
