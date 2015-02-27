@@ -10,6 +10,7 @@ var RowLinkComponent = React.createClass({
 });
 
 var GriddleComponent = React.createClass({
+    mixins: [React.addons.LinkedStateMixin],
     getInitialState: function() {
         return {
             "results": [{"name" : "Loading..."}],
@@ -17,7 +18,8 @@ var GriddleComponent = React.createClass({
             "maxPages": 0,
             "externalResultsPerPage": 5,
             "externalSortColumn": null,
-            "externalSortAscending": true
+            "externalSortAscending": true,
+	    "filter": false
         };
     },
     columnMeta: function() {
@@ -43,7 +45,7 @@ var GriddleComponent = React.createClass({
     },
     setPage: function(index) {
         Pace.restart();
-        this.props.actions.getListPaginated(index, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending);
+        this.props.actions.getListPaginated(index, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending, this.state.filter);
 	this.setState({"currentPage": index});
     },
     setPageSize: function(size) {
@@ -56,16 +58,20 @@ var GriddleComponent = React.createClass({
 	    this.setPage(0);
 	});
     },
-    setFilter: function(filter) {
-        // TODO: set filter state
+    setFilter: function(event) {
+        console.log("set filter");
+        this.setState({"filter": event.target.value});
+	this.setPage(0);
     },
     resetFilterSort: function() {
-        this.changeSort(null, true);
-	// TODO: reset filter state
+        this.setState({"filter": false}, function() {
+	    this.changeSort(null, true);
+	});
     },
     render: function() {
         return <div>
 	       <a onClick={this.resetFilterSort}>Reset</a>
+	       <input type="text" value={this.state.filter} onChange={this.setFilter} />
 	       <Griddle useExternal={true}
                externalSetPage={this.setPage}
                enableSort={true}

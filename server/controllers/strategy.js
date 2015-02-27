@@ -44,6 +44,11 @@ var returnList = function(req, res, next) {
       chain.order(order.substring(1) + (order.substring(0,1)=="-" ? " desc" : " asc"));
   }
 
+  var filter = req.query["filter"];
+  if(filter) {
+      chain.containsText({"name" : filter});
+  }
+
   strategyCache.getOrElse('count', Cached.deferred(function(done) {
       console.log("cache miss");
       db.select('count(*)').from('Strategy')
