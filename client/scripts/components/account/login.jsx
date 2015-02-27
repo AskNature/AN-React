@@ -3,6 +3,8 @@ NoChromeLayout = require('../layouts/nochrome.jsx'),
 Link = require('../modules/link.jsx'),
 
 Button = require('react-bootstrap').Button,
+ButtonGroup = require('react-bootstrap').ButtonGroup,
+Glyphicon = require('react-bootstrap').Glyphicon,
 Grid = require('react-bootstrap').Grid,
 Row = require('react-bootstrap').Row,
 Col = require('react-bootstrap').Col,
@@ -11,7 +13,7 @@ Input = require('react-bootstrap').Input;
 
 var FormData = require('react-form-data');
 
-var userActions = require('../../actions/user');
+var userActions = require('../../actions/users');
 var routeActions = require('../../actions/routes');
 
 var Login = React.createClass({
@@ -49,29 +51,26 @@ var Login = React.createClass({
                     <Col xs={12} md={6} mdOffset={3}>
                       <Panel header={title} id="login-panel">
                         <form onChange={this.updateFormData} onSubmit={this.handleSubmit}>
-                        <Row className="show-grid">
-                          <Col xs={12}>
-                          <Input name="username" type="email" placeholder="Email Address" bsStyle={this.state.style} />
-                          <Input name="password" type="password" placeholder="Password" bsStyle={this.state.style} />
-                          <Input type="checkbox" label="Remember Me" checked />
-                          <Link className="pull-left" url="/signup">Create AskNature Account</Link>
-			  <Link className="pull-left" url="/forgot">Forgot password?</Link>
-                          <Input className="pull-right" type="submit" bsStyle="primary" value="Login" />
-                          </Col>
+                          <Row className="show-grid">
+                            <Col xs={12}>
+                              <Input name="username" type="email" placeholder="Email Address" bsStyle={this.state.style} />
+                              <Input name="password" type="password" placeholder="Password" bsStyle={this.state.style} />
+                              <Link url="/forgot">Forgot password?</Link>
+                              <Input className="pull-left" type="checkbox" label="Remember Me" checked />
+                              <Input className="pull-right" type="submit" bsStyle="primary" value="Login" />
+                            </Col>
                           </Row>
                           <Row className="show-grid">
-                          <Col xs={12}>
-                          <hr />
-			  <Col xs={4}>
-                          <Button href='/auth/google'>Sign in with Google</Button>
-			  </Col>
-			  <Col xs={4}>
-			  <Button href='/auth/facebook'>Sign in with Facebook</Button>
-			  </Col>
-			  <Col xs={4}>
-			  <Button href='/auth/linkedin'>Sign in with LinkedIn</Button>
-			  </Col>
-                          </Col>
+                            <Col xs={12}>
+                              <h6>Or login with:</h6>
+                              <ButtonGroup justified>
+                                <Button href='/auth/google'><Glyphicon glyph="social-google-plus" />Google</Button>
+                                <Button href='/auth/facebook'>Facebook</Button>
+                                <Button href='/auth/linkedin'>LinkedIn</Button>
+                              </ButtonGroup>
+                              <hr />
+                              <Link url="/signup">Create AskNature Account</Link>
+                            </Col>
                           </Row>
                         </form>
                       </Panel>

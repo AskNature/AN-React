@@ -10,7 +10,7 @@ MenuItem = require('react-bootstrap').MenuItem,
 DropdownButton = require('react-bootstrap').DropdownButton;
 
 var routeActions = require('../../actions/routes');
-var userActions = require('../../actions/user');
+var userActions = require('../../actions/users');
 
 var transitionRoute = function(eventKey, href) {
     routeActions.setRoute(href);

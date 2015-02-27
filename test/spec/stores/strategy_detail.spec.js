@@ -6,7 +6,7 @@
 
 'use strict';
 
-var strategyStore = require('../../../client/scripts/stores/strategy_detail');
+var strategyStore = require('../../../client/scripts/stores/detail/strategies');
 
 describe('Strategy Detail Store', function() {
 

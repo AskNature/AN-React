@@ -1,8 +1,8 @@
 var React = require('react');
 var DefaultLayout = require('../layouts/default.jsx'),
 
-userActions = require('../../actions/user'),
-userStore = require('../../stores/user'),
+userActions = require('../../actions/users'),
+userStore = require('../../stores/accounts'),
 
 Link = require('../modules/link.jsx'),
 

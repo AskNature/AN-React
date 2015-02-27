@@ -1,16 +1,13 @@
-/**
-* Outcome Routes
-* Define controllers to call when various routes are received via
-* client actions.
-*/
-
 'use strict';
 
-var focusController = require('../controllers/product');
+var Controller = require('../controllers/product');
 
 var routes = function (app) {
-  app.get('/admin/products', focusController.loadindex, focusController.returnList);
-  app.get('/api/products', focusController.returnList);
+  app.get('/admin/products', Controller.loadindex);
+  app.get('/api/products', Controller.returnList);
+
+  app.get('/product/:id', Controller.loadindex);
+  app.get('/api/product/:id', Controller.returnItem);
 };
 
 module.exports = routes;

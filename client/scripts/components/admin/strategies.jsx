@@ -1,20 +1,24 @@
 /**
-* Strategy Console
+* ProductConsole Component
 */
 'use strict';
 
 var React = require('react');
 var DefaultLayout = require('../layouts/default.jsx');
-var FocusTable = require('../modules/strategytable.jsx');
+var strategySt = require('../../stores/admin/strategies');
+var strategyAc = require('../../actions/strategies');
+var GriddleComponent = require('./griddle_component.jsx');
 
-var FocusConsole = React.createClass({
+var StrategyConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
             <DefaultLayout>
                 <div className="main-container">
-                        <h1>Strategy Console</h1>
-                        <FocusTable />
+                        <h1>Life's Solutions Griddle Console</h1>
+                        <GriddleComponent store={strategySt} actions={strategyAc}
+			linkColumnName={"name"}
+                        columns={["name", "description", "outcomes", "living_system", "masterid"]} />
                 </div>
             </DefaultLayout>
             /* jshint ignore:end */
@@ -22,4 +26,4 @@ var FocusConsole = React.createClass({
     }
 });
 
-module.exports = FocusConsole;
+module.exports = StrategyConsole;
