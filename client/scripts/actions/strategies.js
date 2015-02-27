@@ -86,6 +86,7 @@ module.exports = {
   },
 
   setItem: function(focus, next) {
+    console.log(focus);
     Dispatcher.handleViewAction({
       actionType: Constants.GET_STRATEGY,
       focus: assign({}, Defaults, focus)
@@ -127,6 +128,27 @@ module.exports = {
     });
   },
 
+  updateField: function(fieldName, newValue, oldValues) {
+      //console.log(oldValues);
+      var newValues = oldValues;
+      newValues.results[0][fieldName] = newValue.substring(0,newValue.length-4);
+      //console.log(newValues);
+      this.setItem(newValues);
+  },
+
+  saveStrategy: function(data) {
+    var self = this;
+    request
+    .post('/api/strategy')
+    .send(data)
+    .end(function(res) {
+        if(res.ok) {
+            if(res) {
+                console.log('save strategy success!');
+            }
+        }
+    });
+  }
 
 
 

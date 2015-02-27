@@ -6,7 +6,6 @@
 var React = require('react');
 var DefaultLayout = require('./layouts/default.jsx');
 
-
 var IndexComponent = React.createClass({
     render: function() {
         return (
