@@ -19,7 +19,7 @@ var GriddleComponent = React.createClass({
             "externalResultsPerPage": 5,
             "externalSortColumn": null,
             "externalSortAscending": true,
-	    "filter": false
+	    "filter": ""
         };
     },
     columnMeta: function() {
@@ -64,7 +64,7 @@ var GriddleComponent = React.createClass({
 	this.setPage(0);
     },
     resetFilterSort: function() {
-        this.setState({"filter": false}, function() {
+        this.setState({"filter": ""}, function() {
 	    this.changeSort(null, true);
 	});
     },
