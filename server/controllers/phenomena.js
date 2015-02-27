@@ -35,7 +35,7 @@ var loadindex = function(req, res, next) {
 
 var returnList = function(req, res) {
   var chain = db
-  .select('name, short_name, in("ChildOf").name as children, out("ChildOf").name as parent, out("ChildOf").masterid as parentid, masterid, "phenomena" as entityType')
+  .select('name, short_name, in("ChildOf").name as children, out("ChildOf").name as parent, out("ChildOf").masterid as parentid, masterid, "phenomenon" as entityType')
   .from('Function');
 
   var limit = parseInt(req.query["limit"]);
