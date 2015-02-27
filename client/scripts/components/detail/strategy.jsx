@@ -5,7 +5,9 @@
 
 var React = require('react');
 
-var Link = require('../modules/link.jsx');
+var Link = require('../modules/link.jsx'),
+Hero = require('./common/hero.jsx');
+
 var Col = require('react-bootstrap/Col'),
 Well = require('react-bootstrap/Well'),
 Panel = require('react-bootstrap/Panel'),
@@ -60,40 +62,6 @@ var AdminButtons = React.createClass({
         <Link url="../admin/strategies"><Button bsSize="small"><Glyphicon glyph="chevron-left" /> Biological Strategies Console</Button></Link>
         <Button bsSize="small" href={legacy_url} target="_blank" bsStyle="primary">View on legacy site</Button>
       </ButtonToolbar>
-      /* jshint ignore:end */
-    );
-  }
-});
-
-var Hero = React.createClass({
-  render: function() {
-    var detail = this.props.items;
-    var masterid = detail.masterid;
-    var legacy_url = 'http://www.asknature.org/strategy/'+masterid;
-    var featuredimageurl = detail.media[0];
-    var mediaurl = 'http://biomimicry.org/wp-content/uploads/2014/07/owlanrefresh_1-e1409954986739.jpeg';
-    var heroStyle = {
-      backgroundImage: 'url(' + mediaurl + ')'
-    };
-    var splitname = detail.name.split(': ');
-    var livinglink = '../living-system/'+ detail.living_system_id;
-    return (
-      /* jshint ignore:start */
-      <section className="hero" style={heroStyle}>
-        <div className="texture-overlay"></div>
-        <Grid>
-          <Row>
-            <Col xs={12} md={12}>
-              <Label bsStyle="primary" className="animated fadeInDown">Biological Strategy</Label>
-            </Col>
-          </Row>
-          <Row className="headline">
-            <Col xs={12} md={12}>
-              <h3 className="animated fadeInDown">{splitname[0]}<br/><small><Link url={livinglink}><i>{splitname[1]}</i></Link></small></h3>
-            </Col>
-          </Row>
-        </Grid>
-      </section>
       /* jshint ignore:end */
     );
   }
@@ -331,8 +299,8 @@ var StrategyDetail = React.createClass({
   render: function() {
     var detail = this.state.details.results[0];
     var legacy_url = 'http://www.asknature.org/strategy/'+detail.masterid;
-    var livingSystemMap = {'taxon':detail.living_system_taxon, 'name':detail.living_system, 'id':detail.living_system_id};
-    var sourceMap = {'year':detail.sources_year, 'name':detail.sources, 'authors':detail.sources_authors, 'id':detail.sources_id};
+    var splitLegacyTitle = detail.name.split(': ');
+    var secondaryLink = '../living-system/'+ detail.living_system_id[0];
     var renderedInstance;
     function handleSelect (selectedKey) {
       renderedInstance.setProps({
@@ -349,7 +317,7 @@ var StrategyDetail = React.createClass({
           <img src="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" alt="Thumb" width="40px" height="40px" className="img-circle" />
           <span> <strong>Username</strong> contributed this <strong>Biological Strategy</strong> / 2 hours ago</span>
         </Panel>
-        <Hero items={detail} />
+        <Hero items={detail} entitytype="strategy" primarytitle={splitLegacyTitle[0]} secondarytitle={splitLegacyTitle[1]} secondarylink={secondaryLink} />
         <Grid>
           <Row>
             <Col xs={12} sm={8}>
@@ -371,7 +339,7 @@ var StrategyDetail = React.createClass({
           </Row>
           <Row className="show-grid">
             <Col xs={12} sm={4}>
-              <ButtonList livingsystemmap={livingSystemMap} items={detail.living_system} title="Living Systems"/>
+              <ButtonList livingsystemmap={{'taxon':detail.living_system_taxon, 'name':detail.living_system, 'id':detail.living_system_id}} items={detail.living_system} title="Living Systems"/>
               <ButtonList items={detail.conditions} title="Context"/>
             </Col>
             <Col xs={6} sm={4}>
@@ -461,7 +429,7 @@ var StrategyDetail = React.createClass({
               <Row className="show-grid">
                 {detail.sources[0] ? (
                 <Col xs={12} sm={6}>
-                  <ButtonList sourcemap={sourceMap} items={detail.sources} title="Sources" />
+                  <ButtonList sourcemap={{'year':detail.sources_year, 'name':detail.sources, 'authors':detail.sources_authors, 'id':detail.sources_id}} items={detail.sources} title="Sources" />
                 </Col>) : ''
               }
               {detail.experts[0] ? (
