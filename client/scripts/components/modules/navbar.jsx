@@ -21,10 +21,10 @@ var NavbarComponent = React.createClass({
     render: function() {
       var brand = <Link url="/">AskNature</Link>;
       var user = this.props.user;
-      var settingsurl = "/settings";
+      var settingsurl = '/settings';
       var greeting = 'Howdy '+ (user.firstName ? user.firstName : user.email);
       var navLinks = user.loggedIn ? (
-        <Nav right navbar role="navigation">
+        <Nav right navbar-header className="pull-right navbar-header">
           <DropdownButton title={greeting}>
             <MenuItem eventKey="1"><Link url={settingsurl}>My Account</Link></MenuItem>
             <MenuItem divider />
