@@ -5,7 +5,6 @@
 
 var React = require('react'),
 
-Label = require('react-bootstrap').Label,
 Grid = require('react-bootstrap').Grid,
 Row = require('react-bootstrap').Row,
 Col = require('react-bootstrap').Col;

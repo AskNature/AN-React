@@ -6,7 +6,8 @@
 var React = require('react');
 
 var Link = require('../modules/link.jsx'),
-Hero = require('./common/hero.jsx');
+Hero = require('./common/hero.jsx'),
+AdminBar = require('./common/adminbar.jsx');
 
 var Col = require('react-bootstrap/Col'),
 Well = require('react-bootstrap/Well'),
@@ -51,21 +52,6 @@ var getState = function() {
     details: focusStore.get()
   };
 };
-
-var AdminButtons = React.createClass({
-  render: function() {
-    var masterid = this.props.masterid;
-    var legacy_url = 'http://www.asknature.org/strategy/'+masterid;
-    return (
-      /* jshint ignore:start */
-      <ButtonToolbar>
-        <Link url="../admin/strategies"><Button bsSize="small"><Glyphicon glyph="chevron-left" /> Biological Strategies Console</Button></Link>
-        <Button bsSize="small" href={legacy_url} target="_blank" bsStyle="primary">View on legacy site</Button>
-      </ButtonToolbar>
-      /* jshint ignore:end */
-    );
-  }
-});
 
 var LivingSystemList = React.createClass({
   render: function() {
@@ -297,6 +283,8 @@ var StrategyDetail = React.createClass({
   },
 
   render: function() {
+    var routeName = 'strategy';
+    var entityName = 'Biological Strategy';
     var detail = this.state.details.results[0];
     var legacy_url = 'http://www.asknature.org/strategy/'+detail.masterid;
     var splitLegacyTitle = detail.name.split(': ');
@@ -311,13 +299,13 @@ var StrategyDetail = React.createClass({
       /* jshint ignore:start */
       <DefaultLayout>
         <Panel className="nomargin bgTexture">
-          <AdminButtons masterid={detail.masterid} className="pull-right" />
+          <AdminBar masterid={detail.masterid} routename={routeName} entityname={entityName} />
         </Panel>
         <Panel className="nomargin">
           <img src="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" alt="Thumb" width="40px" height="40px" className="img-circle" />
-          <span> <strong>Username</strong> contributed this <strong>Biological Strategy</strong> / 2 hours ago</span>
+          <span> <Link url="#"><strong>AskNature Team</strong></Link> contributed this <strong>{entityName}</strong> / 2 hours ago</span>
         </Panel>
-        <Hero items={detail} entitytype="strategy" primarytitle={splitLegacyTitle[0]} secondarytitle={splitLegacyTitle[1]} secondarylink={secondaryLink} />
+        <Hero items={detail} primarytitle={splitLegacyTitle[0]} secondarytitle={splitLegacyTitle[1]} secondarylink={secondaryLink} />
         <Grid>
           <Row>
             <Col xs={12} sm={8}>
