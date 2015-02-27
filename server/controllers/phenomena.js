@@ -39,7 +39,7 @@ var returnList = function(req, res) {
 var returnItem = function(req, res, next) {
   console.log(req.params.id);
   db
-  .select('name, short_name, description, in("ChildOf").name as children, out("ChildOf").name as parent, out("ChildOf").out("ChildOf").name as groupname, out("ChildOf").out("ChildOf").masterid as groupid, out("ChildOf").masterid as parentid, in("HasFunction").name as has_function, masterid, out("HasMedia").filename as media, out("HasMedia").name as media_name, out("HasMedia").entity as media_entity, out("HasMedia").masterid as media_id')
+  .select('name, short_name, description, in("ChildOf").name as children, in("ChildOf").masterid as children_id, out("ChildOf").name as parent, out("ChildOf").out("ChildOf").name as groupname, out("ChildOf").out("ChildOf").masterid as groupid, out("ChildOf").masterid as parentid, in("HasFunction").name as has_function, masterid, out("HasMedia").filename as media, out("HasMedia").name as media_name, out("HasMedia").entity as media_entity, out("HasMedia").masterid as media_id')
   .from('Function')
   .where('masterid == "' + req.params.id + '"')
   .all()

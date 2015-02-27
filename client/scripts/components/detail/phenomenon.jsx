@@ -105,8 +105,8 @@ var DetailComponent = React.createClass({
           <Grid>
             <Row className="show-grid">
               <Col xs={12} sm={4}>
-                <ButtonList items={{'name': detail.parent}} title="Parent Phenomenon" />
-                <ButtonList items={{'name': detail.children}} title="Child Phenomena" />
+                <ButtonList phenomena items={{'name': detail.parent, 'id': detail.parentid}} routename="phenomenon" title="Parent Phenomenon" />
+                <ButtonList phenomena items={{'name': detail.children, 'id': detail.children_id}} routename="phenomenon" title="Child Phenomena" />
               </Col>
               <Col xs={12} sm={4}>
 
