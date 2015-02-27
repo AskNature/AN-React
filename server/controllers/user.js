@@ -11,6 +11,20 @@ settings = require('../config/env/default'),
 crypto = require('crypto'),
 path = require('path');
 
+var Cached = require('cached');
+var Memcached = require('memcached');
+
+var userCache;
+if(process.env.NODE_ENV == 'production') {
+    userCache = Cached('user', { backend: {
+	type: 'memcached',
+	client: new Memcached('127.0.0.1:11211')
+    }});
+} else {
+    userCache = Cached('user');
+}
+userCache.setDefaults({"freshFor": 120});
+
 var logout = function(req, res, next) {
     req.logout();
     res.redirect('/');
@@ -151,19 +165,43 @@ var loadindex = function(req, res, next) {
 };
 
 var returnList = function(req, res) {
-  db
-  .select('name, masterid')
+  var chain = db
+  .select('name, masterid, "user" as entityType')
   .from('Users')
-  .where('out_Flagged IS NULL AND email_confirmed == 1')
-  .limit('200')
-  .all()
-  .then(function (results) {
-      res.status(200).json({
-        results: results
-      });
-      console.log('The collection controller has sent ' + results.length + ' records.');
-  })
-  .done();
+  .where('out_Flagged IS NULL AND email_confirmed == 1');
+
+  var limit = parseInt(req.query["limit"]);
+  if(limit) {
+      chain.limit(limit);
+  }
+
+  var offset = parseInt(req.query["offset"]);
+  if(offset) {
+      chain.offset(offset);
+  }
+
+  var order = req.query["order"];
+  if(order) {
+      chain.order(order.substring(1) + (order.substring(0,1)=="-" ? " desc" : " asc"));
+  }
+
+  userCache.getOrElse('count', Cached.deferred(function(done) {
+      console.log("cache miss");
+      db.select('count(*)').from('Users')
+      .where('out_Flagged IS NULL AND email_confirmed == 1')
+      .scalar().then(function(count) {
+	  done(null, count); // return Cached.deferred
+      }).done();
+  })).then(function(count) {
+      chain.all().then(function(results) {
+	  res.status(200).json({
+	      results: results,
+	      count: count,
+	      maxPages: Math.ceil(count/limit)
+	  });
+	  console.log('The user collection controller has send '+ results.length + ' records.');
+      }).done();
+  });
 };
 
 var returnItem = function(req, res, next) {

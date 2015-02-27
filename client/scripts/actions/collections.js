@@ -1,5 +1,5 @@
 /**
-* Outcome actions
+* Collection actions
 */
 'use strict';
 
@@ -32,6 +32,35 @@ module.exports = {
     var self = this;
     request
     .get('/api/collections')
+    .type('json')
+    .end(function(res) {
+      if (res.ok) {
+        if (res) {
+          var listData = res.body;
+          self.setList(listData);
+          console.log(res.body);
+        }
+        if (callback && callback.success) {
+          callback.success(res);
+        }
+      }
+      else {
+        if (callback && callback.error) {
+          callback.error(res);
+        }
+      }
+
+      if (callback && callback.complete) {
+        callback.complete(res);
+      }
+    });
+  },
+
+  getListPaginated: function(index, size, sortCol, asc, callback) {
+    var self = this;
+    var getString = '/api/collections?offset='+index*size+'&limit='+size;
+    if (sortCol) { getString += '&order='+(asc ? '+' : '-')+sortCol; }
+    request.get(getString)
     .type('json')
     .end(function(res) {
       if (res.ok) {
