@@ -80,6 +80,8 @@ var Hero = React.createClass({
     var heroStyle = {
       backgroundImage: 'url(' + mediaurl + ')'
     };
+    var splitname = detail.name.split(': ');
+    var livinglink = '../living-system/'+ detail.living_system_id;
     return (
       /* jshint ignore:start */
       <section className="hero" style={heroStyle}>
@@ -92,7 +94,7 @@ var Hero = React.createClass({
           </Row>
           <Row className="headline">
             <Col xs={12} md={12}>
-              <h3 className="animated fadeInDown">{detail.name}</h3>
+              <h3 className="animated fadeInDown">{splitname[0]}<br/><small><Link url={livinglink}><i>{splitname[1]}</i></Link></small></h3>
             </Col>
           </Row>
         </Grid>
