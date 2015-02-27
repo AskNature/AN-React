@@ -177,13 +177,16 @@ Hero
   height: 400px;
   overflow:hidden;
   background: #444;
-  .carousel-inner .image-bg {
-    background: #999 no-repeat center center;
-    background-size: cover;
-    height: 400px;
-    width: 100%;
-    position: relative;
+  .carousel-inner {
+    .image-bg {
+      background: #999 no-repeat center center;
+      background-size: cover;
+      height: 400px;
+      width: 100%;
+      position: relative;
+    }
   }
+
 }
 
 @media (min-width: 1px) {

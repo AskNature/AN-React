@@ -71,12 +71,7 @@ var Hero = React.createClass({
     var masterid = detail.masterid;
     var legacy_url = 'http://www.asknature.org/strategy/'+masterid;
     var featuredimageurl = detail.media[0];
-    var mediaurl;
-    if(masterid) {
-      mediaurl = 'http://www.asknature.org/images/uploads/strategy/'+masterid+'/'+featuredimageurl;
-    } else {
-      mediaurl = 'http://biomimicry.org/wp-content/uploads/2014/07/owlanrefresh_1-e1409954986739.jpeg';
-    }
+    var mediaurl = 'http://biomimicry.org/wp-content/uploads/2014/07/owlanrefresh_1-e1409954986739.jpeg';
     var heroStyle = {
       backgroundImage: 'url(' + mediaurl + ')'
     };
@@ -106,18 +101,55 @@ var Hero = React.createClass({
 
 var LivingSystemList = React.createClass({
   render: function() {
-    var compound = this.props.map;
+    var items = this.props.livingsystemmap;
     return (
-
           <tbody>
         {
-          compound.name.map(function(item, i){
-            var link = '../living-system/'+ compound.id[i];
+          items.name.map(function(item, i){
+            var link = '../living-system/'+ items.id[i];
             return (
               <tr href="#" key={i}>
+                <td>{items.taxon[i]}: <Link url={link}><i>{item}</i></Link></td>
+                </tr>
+            );
+          })
+        }
+      </tbody>
+    );
+  }
+});
 
-                <td>{compound.taxon[i]}: <Link url={link}><i>{item}</i></Link></td>
+var SourceList = React.createClass({
+  render: function() {
+    var items = this.props.sourcemap;
+    return (
+          <tbody>
+        {
+          items.name.map(function(item, i){
+            var link = '../source/'+ items.id[i];
+            return (
+              <tr key={i}>
+                <td>{items.year[i]}<br/><Link url={link}><strong>{item}</strong></Link><br/>{items.authors[i]}</td>
+                </tr>
+            );
+          })
+        }
+      </tbody>
+    );
+  }
+});
 
+var PhenomenonList = React.createClass({
+  render: function() {
+    var items = this.props.phenomenonmap;
+    return (
+          <tbody>
+        {
+          items.name.map(function(item, i){
+            var link = '../phenomenon/'+ items.id[i];
+            return (
+              <tr key={i}>
+                <td><Link url={link}>{item}</Link></td>
                 </tr>
             );
           })
@@ -148,21 +180,24 @@ var ButtonList = React.createClass({
   render: function() {
     var items = this.props.items;
     var title = this.props.title;
-    if(this.props.map) {
-      return (
-        <div>
-        <h6><strong>{title}</strong></h6>
-        <Table striped condensed hover >
-        <LivingSystemList {...this.props} />
-        </Table>
-      </div>
-    );
-    } else {
     return (
       <div>
       <h6><strong>{title}</strong></h6>
       <Table striped condensed hover>
 
+{this.props.livingsystemmap ? (
+
+  <LivingSystemList {...this.props} />
+
+) : this.props.sourcemap ? (
+
+  <SourceList {...this.props} />
+
+) : this.props.phenomenonmap ? (
+
+  <PhenomenonList {...this.props} />
+
+) : (
           <tbody>
         {
           items.map(function(item, i){
@@ -174,10 +209,11 @@ var ButtonList = React.createClass({
           })
         }
       </tbody>
+    ) }
       </Table>
     </div>
     );
-  }
+
   }
 });
 
@@ -295,10 +331,8 @@ var StrategyDetail = React.createClass({
   render: function() {
     var detail = this.state.details.results[0];
     var legacy_url = 'http://www.asknature.org/strategy/'+detail.masterid;
-    var livingSystemTaxon = detail.living_system_taxon;
-    var livingSystemName = detail.living_system;
-    var livingSystemId = detail.living_system_id;
-    var livingSystemMap = {'taxon':livingSystemTaxon, 'name':livingSystemName, 'id':livingSystemId};
+    var livingSystemMap = {'taxon':detail.living_system_taxon, 'name':detail.living_system, 'id':detail.living_system_id};
+    var sourceMap = {'year':detail.sources_year, 'name':detail.sources, 'authors':detail.sources_authors, 'id':detail.sources_id};
     var renderedInstance;
     function handleSelect (selectedKey) {
       renderedInstance.setProps({
@@ -337,14 +371,14 @@ var StrategyDetail = React.createClass({
           </Row>
           <Row className="show-grid">
             <Col xs={12} sm={4}>
-              <ButtonList map={livingSystemMap} items={detail.living_system} title="Living Systems"/>
+              <ButtonList livingsystemmap={livingSystemMap} items={detail.living_system} title="Living Systems"/>
               <ButtonList items={detail.conditions} title="Context"/>
             </Col>
             <Col xs={6} sm={4}>
               <ButtonList items={detail.mechanisms} title="Mechanisms"/>
             </Col>
             <Col xs={6} sm={4}>
-              <ButtonList items={detail.outcomes} title="Outcomes"/>
+              <ButtonList phenomenonmap={{'name':detail.outcomes,'id':detail.outcomes_id}} items={detail.outcomes} title="Outcomes"/>
             </Col>
           </Row>
         </Grid>
@@ -427,7 +461,7 @@ var StrategyDetail = React.createClass({
               <Row className="show-grid">
                 {detail.sources[0] ? (
                 <Col xs={12} sm={6}>
-                  <ButtonList items={detail.sources} title="Sources" />
+                  <ButtonList sourcemap={sourceMap} items={detail.sources} title="Sources" />
                 </Col>) : ''
               }
               {detail.experts[0] ? (
