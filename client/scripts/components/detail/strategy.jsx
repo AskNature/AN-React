@@ -121,7 +121,7 @@ var StrategyDetail = React.createClass({
               <ButtonList conditions items={{'name': detail.conditions}} title="Context" />
             </Col>
             <Col xs={6} sm={4}>
-              <ButtonList mechanisms items={{'name': detail.mechanisms}} title="Mechanisms"/>
+              <ButtonList phenomena items={{'name': detail.mechanisms,'id':detail.mechanisms_id}} routename="phenomenon" title="Mechanisms"/>
             </Col>
             <Col xs={6} sm={4}>
               <ButtonList phenomena items={{'name':detail.outcomes,'id':detail.outcomes_id}} routename="phenomenon" title="Outcomes"/>
