@@ -144,7 +144,7 @@ module.exports = {
     .end(function(res) {
         if(res.ok) {
             if(res) {
-                console.log("save strategy success!");
+                console.log('save strategy success!');
             }
         }
     });
