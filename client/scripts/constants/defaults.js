@@ -34,10 +34,15 @@ var Defaults = {
         name: 'Loading..',
         description: '',
         short_name: '',
-        parent: '',
+        parent: [],
         children: [],
         has_function: [],
-        groupid: ''
+        groupname: '',
+        groupid: '',
+        media: [],
+        media_name: [],
+        media_entity: [],
+        media_id: []
       }
       ]
     },
@@ -50,11 +55,15 @@ var Defaults = {
           masterid: '',
           media: [],
           media_name: [],
+          media_entity: [],
+          media_id: [],
           outcomes: [],
+          outcomes_id: [],
           mechanisms: [],
           conditions: [],
           living_system: [],
           living_system_taxon: [],
+          living_system_id: [],
           products: [],
           product_masterid: [],
           sources: [],
@@ -72,15 +81,23 @@ var Defaults = {
     product: {
       results : [
       {
-        outcomes: [],
         name: 'Loading ...',
         description: '',
         inspiredby: [],
+        inspiredby_id: [],
         keywords: 'Tag1, Tag2',
         collectors: [],
         media: [],
+        media_name: [],
+        media_entity: [],
+        media_id: [],
+        outcomes: [],
+        outcomes_id: [],
+        mechanisms: [],
+        conditions: [],
         researchers: [],
-        sources: []
+        sources: [],
+        designedsystems: []
         }
       ]
     },
