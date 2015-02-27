@@ -25,6 +25,8 @@ Grid = require('react-bootstrap/Grid'),
 Table = require('react-bootstrap/Table'),
 Input = require('react-bootstrap/Input');
 
+var Scribe = require('../modules/scribe.jsx');
+var TextField = require('../modules/textfield.jsx');
 
 /** Gets incoming information from the store */
 
@@ -74,10 +76,22 @@ var StrategyDetail = React.createClass({
   componentWillMount: function() {
     var id = window.location.pathname;
     focusActions.getItem(id);
+    this.setState({editable: false});
   },
 
   componentDidMount: function(){
 
+  },
+
+  toggleEditable: function(e) {
+      e.preventDefault()
+      if(this.state.editable) {
+          // save strategy
+	  console.log("saving");
+	  console.log(focusStore.get().results[0])
+	  focusActions.saveStrategy(focusStore.get().results[0])
+      }
+      this.setState({editable: !this.state.editable});
   },
 
   render: function() {
@@ -99,7 +113,7 @@ var StrategyDetail = React.createClass({
         <AdminBar masterid={detail.masterid} routename={routeName} pluralroute={routeNamePlural} entityname={entityName} />
         <CreatorMast img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" entityname={entityName} />
         <Hero items={detail} primarytitle={splitLegacyTitle[0]} secondarytitle={splitLegacyTitle[1]} secondarylink={secondaryLink} />
-        <SubHero description={detail.description} />
+        <SubHero description={detail.description} editable={this.state.editable} store={focusStore} actions={focusActions} toggleEditable={this.toggleEditable} />
         <Grid>
           <Row className="show-grid">
             <Col xs={12} sm={4}>
@@ -220,11 +234,11 @@ var StrategyDetail = React.createClass({
                     <tbody>
                       <tr>
                         <td>name</td>
-                        <td>{detail.name}</td>
+                        <td><TextField store={focusStore} actions={focusActions} fieldName={"name"} initialValue={detail.name} disableBlockMode={true} editable={this.state.editable} /></td>
                       </tr>
                       <tr>
                         <td>description</td>
-                        <td>{detail.description}</td>
+                        <td><TextField store={focusStore} actions={focusActions} fieldName={"description"} initialValue={detail.description} editable={this.state.editable} /></td>
                       </tr>
                       <tr>
                         <td>created_by</td>
@@ -236,11 +250,11 @@ var StrategyDetail = React.createClass({
                       </tr>
                       <tr>
                         <td>brief</td>
-                        <td>{detail.brief}</td>
+                        <td><TextField store={focusStore} actions={focusActions} fieldName={"brief"} initialValue={detail.brief} editable={this.state.editable} /></td>
                       </tr>
                       <tr>
                         <td>special_text</td>
-                        <td>{detail.special_text}</td>
+                        <td><TextField store={focusStore} actions={focusActions} fieldName={"special_text"} initialValue={detail.special_text} editable={this.state.editable} /></td>
                       </tr>
                       <tr>
                         <td>out_HasLivingSystem</td>
@@ -268,19 +282,19 @@ var StrategyDetail = React.createClass({
                       </tr>
                       <tr>
                         <td>applications</td>
-                        <td>{detail.applications}</td>
+                        <td><TextField store={focusStore} actions={focusActions} fieldName={"applications"} initialValue={detail.applications} editable={this.state.editable} /></td>
                       </tr>
                       <tr>
                         <td>application_1</td>
-                        <td>{detail.application_1}</td>
+                        <td><TextField store={focusStore} actions={focusActions} fieldName={"application_1"} initialValue={detail.application_1} editable={this.state.editable} /></td>
                       </tr>
                       <tr>
                         <td>application_2</td>
-                        <td>{detail.application_2}</td>
+                        <td><TextField store={focusStore} actions={focusActions} fieldName={"application_2"} initialValue={detail.application_2} editable={this.state.editable} /></td>
                       </tr>
                       <tr>
                         <td>application_3</td>
-                        <td>{detail.application_3}</td>
+                        <td><TextField store={focusStore} actions={focusActions} fieldName={"application_3"} initialValue={detail.application_3} editable={this.state.editable} /></td>
                       </tr>
                       <tr>
                         <td>out_HasMedia</td>
@@ -316,15 +330,15 @@ var StrategyDetail = React.createClass({
                       </tr>
                       <tr>
                         <td>common_name</td>
-                        <td>{detail.common_name}</td>
+                        <td><TextField store={focusStore} actions={focusActions} fieldName={"common_name"} initialValue={detail.common_name} editable={this.state.editable} /></td>
                       </tr>
                       <tr>
                         <td>scientific_name</td>
-                        <td>{detail.scientific_name}</td>
+                        <td><TextField store={focusStore} actions={focusActions} fieldName={"scientific_name"} initialValue={detail.scientific_name} editable={this.state.editable} /></td>
                       </tr>
                       <tr>
                         <td>other_names</td>
-                        <td>{detail.other_names}</td>
+                        <td><TextField store={focusStore} actions={focusActions} fieldName={"other_names"} initialValue={detail.other_names} editable={this.state.editable} /></td>
                       </tr>
                       <tr>
                         <td>additional_taxa</td>
@@ -364,13 +378,12 @@ var StrategyDetail = React.createClass({
                       </tr>
                       <tr>
                         <td>editor_comments</td>
-                        <td>{detail.editor_comments}</td>
+                        <td><TextField store={focusStore} actions={focusActions} fieldName={"editor_comments"} initialValue={detail.editor_comments} editable={this.state.editable} /></td>
                       </tr>
                     </tbody>
                   </Table>
                 </Col>
               </Row>
-
             </Grid>
           </Panel>
         </PanelGroup>

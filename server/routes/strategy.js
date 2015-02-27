@@ -14,6 +14,8 @@ var routes = function (app) {
 
   app.get('/strategy/:id', Controller.loadindex);
   app.get('/api/strategy/:id', Controller.returnItem);
+
+  app.post('/api/strategy', Controller.updateStrategy);
 };
 
 module.exports = routes;

@@ -2,6 +2,7 @@
 var db = require('../config/database').db,
 settings = require('../config/env/default'),
 path = require('path');
+var _ = require('lodash');
 
 var Cached = require('cached');
 var strategyCache;
@@ -62,6 +63,16 @@ var returnList = function(req, res, next) {
   });
 };
 
+var updateStrategy = function(req, res, next) {
+    var newData = {summary: req.body.description, name: req.body.name};
+    console.log(JSON.stringify(newData));
+    db.update('Strategy').set(newData)
+        .where({masterid:req.body.masterid}).scalar().then(function(count) {
+            console.log("strategy updated: " + count);
+	    res.status(200).send(req.body);
+        });
+};
+
 var returnItem = function(req, res, next) {
   console.log(req.params.id);
   db
@@ -81,5 +92,6 @@ var returnItem = function(req, res, next) {
     module.exports = {
       loadindex: loadindex,
       returnList: returnList,
-      returnItem: returnItem
+      returnItem: returnItem,
+      updateStrategy: updateStrategy
     };
