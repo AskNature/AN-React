@@ -3,6 +3,7 @@
 var React = require('react'),
 Link = require('./link.jsx'),
 
+Button = require('react-bootstrap').Button,
 Navbar = require('react-bootstrap').Navbar,
 Nav = require('react-bootstrap').Nav,
 NavItem = require('react-bootstrap').NavItem,
@@ -31,21 +32,23 @@ var NavbarComponent = React.createClass({
           </DropdownButton>
         </Nav>
       ) : (
-        <Nav right navbar role="navigation">
+        <Nav right navbar-header className="pull-right navbar-header">
           <NavItem href="/login" onSelect={transitionRoute}>Login</NavItem>
-          <NavItem href="/signup" onSelect={transitionRoute}>Create Account</NavItem>
+          <NavItem href="/signup" onSelect={transitionRoute}>Sign Up</NavItem>
         </Nav>
       );
         return (
             /* jshint ignore:start */
             <Navbar fluid inverse fixedTop role="banner">
               {/* Temp button for left offcanvas menu */}
+                  <Nav left className="pull-left navbar-header">
                   <button type="button" className="navbar-toggle sidebar-toggle" data-toggle="offcanvas" data-target=".navmenu-fixed-left">
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                   </button>
                   <Link className="navbar-brand" url="/">AskNature</Link>
+                  </Nav>
               {/* End temp button for left offcanvas menu */}
                 {navLinks}
 

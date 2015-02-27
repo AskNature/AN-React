@@ -43,6 +43,7 @@ var AccountSettings = React.createClass({
         return (
             /* jshint ignore:start */
           <DefaultLayout>
+            <div className="container">
             <Grid>
                 <h2>Account Settings</h2>
                 <form className="form-horizontal" onChange={this.updateFormData} onSubmit={this.handleSubmit}>
@@ -63,6 +64,7 @@ var AccountSettings = React.createClass({
                   </Row>
                 </form>
               </Grid>
+            </div>
           </DefaultLayout>
             /* jshint ignore:end */
         );
