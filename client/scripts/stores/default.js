@@ -24,6 +24,8 @@ var Store = function(methods) {
 
     this.dispatcherToken = null;
 
+    this.setMaxListeners(20);
+
     // Provides mixin for easily adding/removing event listeners to Stores
     // Add to Components using `mixins: [storeName.mixin]`
     // This will also add the `_onChange` method which can be used as a callback
