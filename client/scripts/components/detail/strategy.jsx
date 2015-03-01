@@ -71,7 +71,7 @@ var List = React.createClass({
 
 var StrategyDetail = React.createClass({
 
-  mixins: [focusStore.mixin],
+  mixins: [focusStore.mixin, userStore.mixin],
 
   getInitialState: function() {
     return getState();
@@ -87,16 +87,22 @@ var StrategyDetail = React.createClass({
 
   },
 
-  toggleEditable: function(e) {
-      e.preventDefault()
-      if(this.state.editable) {
-          // save strategy
-	  console.log("saving");
-	  console.log(focusStore.get().results[0])
-	  focusActions.saveStrategy(focusStore.get().results[0])
-      }
-      console.log("Role: " + this.state.user.role);
-      if(this.state.user.role == 'admin') { this.setState({editable: !this.state.editable}); } else { console.log("denied"); }
+  editBegin: function(e) {
+      e.preventDefault();
+      if(this.state.user.role == 'admin') { this.setState({editable: true}); }
+  },
+
+  editCancel: function(e) {
+      e.preventDefault();
+      var id = window.location.pathname;
+      focusActions.getItem(id);
+      this.setState({editable: false});
+  },
+
+  editFinish: function(e) {
+      e.preventDefault();
+      focusActions.saveStrategy(focusStore.get().results[0]);
+      this.setState({editable: false});
   },
 
   render: function() {
@@ -118,7 +124,7 @@ var StrategyDetail = React.createClass({
         <AdminBar masterid={detail.masterid} routename={routeName} pluralroute={routeNamePlural} entityname={entityName} />
         <CreatorMast img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" entityname={entityName} />
         <Hero items={detail} primarytitle={splitLegacyTitle[0]} secondarytitle={splitLegacyTitle[1]} secondarylink={secondaryLink} />
-        <SubHero description={detail.description} editable={this.state.editable} store={focusStore} actions={focusActions} toggleEditable={this.toggleEditable} />
+        <SubHero description={detail.description} editable={this.state.editable} store={focusStore} actions={focusActions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} />
         <Grid>
           <Row className="show-grid">
             <Col xs={12} sm={4}>

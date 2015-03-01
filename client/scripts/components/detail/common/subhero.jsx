@@ -10,6 +10,8 @@ Row = require('react-bootstrap').Row,
 Col = require('react-bootstrap').Col,
 Nav = require('react-bootstrap').Nav,
 NavItem = require('react-bootstrap').NavItem,
+Button = require('react-bootstrap').Button,
+ButtonToolbar = require('react-bootstrap').ButtonToolbar,
 Glyphicon = require('react-bootstrap').Glyphicon;
 
 var SubHero = React.createClass({
@@ -25,17 +27,17 @@ var SubHero = React.createClass({
               </h5>
           </Col>
           <Col xs={12} sm={4}>
-            <Nav bsStyle="pills">
-              <NavItem active={this.props.editable} onClick={this.props.toggleEditable}>
+            <ButtonToolbar style={{"margin-top": "11.5px"}}>
+	      {this.props.editable? <ButtonGroup><Button active={true} style={{"cursor": "default"}} disabled={true} bsStyle="primary"><Glyphicon glyph="pencil" /></Button><Button bsStyle="success" onClick={this.props.editFinish}><Glyphicon glyph="ok" /></Button><Button bsStyle="danger" onClick={this.props.editCancel}><Glyphicon glyph="remove" /></Button></ButtonGroup> : <Button onClick={this.props.editBegin}>
                 <Glyphicon glyph="pencil" />
-              </NavItem>
-              <NavItem>
+              </Button>}
+              <Button>
                 <Glyphicon glyph="share-alt" />
-              </NavItem>
-              <NavItem>
+              </Button>
+              <Button>
                 <Glyphicon glyph="print" />
-              </NavItem>
-            </Nav>
+              </Button>
+            </ButtonToolbar>
           </Col>
         </Row>
       </Grid>
