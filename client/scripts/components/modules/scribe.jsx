@@ -6,7 +6,7 @@ ScribeTextField = React.createClass({
         var initialStruct = this.props.store.get();
         return {
 	    html: this.props.initialValue,
-	    gotUpdate: false
+	    gotUpdate: true
         }
     },
     componentWillMount: function() {
