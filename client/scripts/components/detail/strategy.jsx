@@ -36,6 +36,9 @@ var focusStore = require('../../stores/detail/strategies');
 
 var focusActions = require('../../actions/strategies');
 
+// Store for user permissions
+var userStore = require('../../stores/accounts');
+
 /** getState can be called to get state updates from the store.
 * initialItems = entire list that remains static
 * items = dynamic filtered list
@@ -43,7 +46,8 @@ var focusActions = require('../../actions/strategies');
 
 var getState = function() {
   return {
-    details: focusStore.get()
+    details: focusStore.get(),
+    user: userStore.get()
   };
 };
 
@@ -91,7 +95,8 @@ var StrategyDetail = React.createClass({
 	  console.log(focusStore.get().results[0])
 	  focusActions.saveStrategy(focusStore.get().results[0])
       }
-      this.setState({editable: !this.state.editable});
+      console.log("Role: " + this.state.user.role);
+      if(this.state.user.role == 'admin') { this.setState({editable: !this.state.editable}); } else { console.log("denied"); }
   },
 
   render: function() {
