@@ -20,7 +20,6 @@ module.exports = {
       actionType: Constants.GET_ALL_STRATEGIES,
       focus: assign({}, Defaults, focus)
     });
-    console.log('setList action returning '+focus.results.length + ' results.');
   },
 
   /**
@@ -38,7 +37,6 @@ module.exports = {
         if (res) {
           var listData = res.body;
           self.setList(listData);
-          console.log(res.body);
         }
         if (callback && callback.success) {
           callback.success(res);
@@ -68,7 +66,6 @@ module.exports = {
         if (res) {
           var listData = res.body;
           self.setList(listData);
-          console.log(res.body);
         }
         if (callback && callback.success) {
           callback.success(res);
@@ -87,12 +84,10 @@ module.exports = {
   },
 
   setItem: function(focus, next) {
-    console.log(focus);
     Dispatcher.handleViewAction({
       actionType: Constants.GET_STRATEGY,
       focus: assign({}, Defaults, focus)
     });
-    console.log('setItem action returning '+ focus.results + ' result.');
   },
 
   /**
@@ -111,7 +106,6 @@ module.exports = {
         if (res) {
           var itemData = res.body;
           self.setItem(itemData);
-          console.log(res.body);
         }
         if (callback && callback.success) {
           callback.success(res);
@@ -130,10 +124,8 @@ module.exports = {
   },
 
   updateField: function(fieldName, newValue, oldValues) {
-      //console.log(oldValues);
       var newValues = oldValues;
       newValues.results[0][fieldName] = newValue.substring(0,newValue.length-4);
-      //console.log(newValues);
       this.setItem(newValues);
   },
 
