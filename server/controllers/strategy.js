@@ -83,11 +83,11 @@ var createStrategy = function(req, res, next) {
                 } else {
                     // do the creation
                     db.insert().into('Strategy')
-                    .set({masterid: masterid, name: 'New strategy', status: 'raw'})
-                    .all().then(function(strategy) { // TODO: strategy template
+                    .set({masterid: masterid, name: 'New strategy', status: 'raw'}) // TODO: Proper template
+                    .all().then(function(results) {
                         // success!
-                        res.status(200).json({
-                            results: strategy
+                        return res.status(200).json({
+                            results: results
                         });
                     });
                 }
