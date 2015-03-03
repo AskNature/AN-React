@@ -61,6 +61,30 @@ var returnList = function(req, res) {
   });
 };
 
+var createProduct = function(req, res, next) {
+    // TODO: permissions check
+    var createWithToken = function() {
+	crypto.randomBytes(16, function(err, buf) {
+	    if(err) { return res.status(500).send(); }
+	    var masterid = buf.toString('hex');
+	    db.select('count(*)').from('InspiredSolutions')
+	    .where({masterid: masterid}.scalar().then(function(count) {
+		if(count > 0) {
+		    return createWithToken();
+		} else {
+		    db.insert().into('InspiredSolutions')
+		    .set({masterid: masterid, name: 'New inspired solution', status: 'raw'}) // TODO: Proper template
+		    .all().then(function(results) {
+			return res.status(200).json({
+			    results: results
+			});
+		    });
+		}
+	    });
+	});
+    };
+};
+
 var returnItem = function(req, res, next) {
   console.log(req.params.id);
   db
