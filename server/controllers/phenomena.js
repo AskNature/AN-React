@@ -8,6 +8,8 @@ var db = require('../config/database').db,
 settings = require('../config/env/default'),
 path = require('path');
 
+var crypto = require('crypto');
+
 var Cached = require('cached');
 
 var phenomenaCache;
@@ -69,6 +71,31 @@ var returnList = function(req, res) {
 	  console.log('The phenomena API has sent ' + results.length + ' records.');
       }).done();
   });
+};
+
+var createItem = function(req, res, next) {
+    // TODO: permissions check
+    var createWithToken = function() {
+	crypto.randomBytes(16, function(err, buf) {
+	    if(err) { return res.status(500).send(); }
+	    var masterif = buf.toString('hex');
+	    db.select('count(*)').from('Function')
+	    .where({masterid: masterid}).scalar()
+	    .then(function(count) {
+		if(count > 0) {
+		    return createWithToken();
+		} else {
+		    db.insert().into('Function')
+		    .set({masterid: masterid, name: 'New phenomenon'}) // TODO: Proper template
+		    .all().then(function(results) {
+			return res.status(200).json({
+			    results: results
+			});
+		    });
+		}
+	    });
+	});
+    };
 };
 
 var returnItem = function(req, res, next) {
