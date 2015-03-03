@@ -88,7 +88,8 @@
     "jit-grunt": "~0.9.0",
     "connect-livereload": "~0.5.2",
     "grunt-express-server": "~0.4.5",
-    "react-bootstrap": "^0.14.0"
+    "react-bootstrap": "^0.14.0",
+    "supertest": "^0.15.0"
   },
   "scripts": {
     "clean": "rimraf node_modules client/bower_components .tmp dist",
@@ -96,5 +97,9 @@
   },
   "engines": {
     "node": ">=0.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AskNature/AN.git"
   }
 }
