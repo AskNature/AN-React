@@ -68,6 +68,31 @@ var returnList = function(req, res, next) {
   });
 };
 
+var createStrategy = function(req, res, next) {
+    // TODO: permissions check
+    var createWithToken = function() {
+        crypto.randomBytes(16, function(err, buf) {
+            var masterid = buf.toString('hex');
+            db.select('count(*)').from('Strategy').where({masterid: masterid}).scalar()
+            .then(function(count) {
+                if(count > 0) {
+                    return createWithToken(); // overlapping masterid, try again recursively
+                } else {
+                    // do the creation
+                    db.insert().into('Strategy')
+                    .set({masterid: masterid, name: 'New strategy', status: 'raw'})
+                    .all().then(function(strategy) { // TODO: strategy template
+                        // success!
+                        res.status(200).json({
+                            results: strategy
+                        });
+                    });
+                }
+            });
+        });
+    };
+};
+
 var updateStrategy = function(req, res, next) {
     var newData = {summary: req.body.description, name: req.body.name, special_text: req.body.special_text, brief: req.body.brief, common_name: req.body.common_name, other_names: req.body.other_names, applications: req.body.applications, application_1: req.body.application_1, application_2: req.body.application_2, application_3: req.body.application_3, scientific_name: req.body.scientific_name, editor_comments: req.body.editor_comments};
     console.log(JSON.stringify(newData));
