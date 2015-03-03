@@ -7,6 +7,8 @@ var _ = require('lodash');
 var Cached = require('cached');
 var strategyCache;
 
+var crypto = require('crypto');
+
 if(process.env.NODE_ENV == 'production') {
     strategyCache = Cached('strategy', { backend: {
 	type: 'memcached',
@@ -72,6 +74,7 @@ var createStrategy = function(req, res, next) {
     // TODO: permissions check
     var createWithToken = function() {
         crypto.randomBytes(16, function(err, buf) {
+	    if(err) { return res.status(500).send(); }
             var masterid = buf.toString('hex');
             db.select('count(*)').from('Strategy').where({masterid: masterid}).scalar()
             .then(function(count) {
