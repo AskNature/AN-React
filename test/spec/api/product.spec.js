@@ -2,6 +2,7 @@
 
 var app = require('../../../server')
 var request = require('supertest');
+var should = require('chai').should();
 
 describe('Product API', function() {
     it('should successfully return JSON with a results list', function(done) {
@@ -11,7 +12,7 @@ describe('Product API', function() {
 	.expect('Content-Type', /json/)
 	.end(function(err, res) {
 	    should.not.exist(err);
-	    should.exist(res.results);
+	    should.exist(JSON.parse(res.text).results);
 	    done();
 	});
     });
