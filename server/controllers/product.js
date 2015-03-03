@@ -70,7 +70,7 @@ var createProduct = function(req, res, next) {
 	    if(err) { return res.status(500).send(); }
 	    var masterid = buf.toString('hex');
 	    db.select('count(*)').from('InspiredSolutions')
-	    .where({masterid: masterid}.scalar().then(function(count) {
+	    .where({masterid: masterid}).scalar().then(function(count) {
 		if(count > 0) {
 		    return createWithToken();
 		} else {
