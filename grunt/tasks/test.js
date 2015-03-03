@@ -22,6 +22,10 @@ var taskConfig = function(grunt) {
             grunt.task.run(['karma:unit']);
         }
 
+	grunt.task.run([
+	    'mochaTest'
+	]);
+
         // Clean up temp files
         grunt.task.run([
             'clean:tmp'

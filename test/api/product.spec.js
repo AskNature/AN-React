@@ -1,6 +1,6 @@
 'use strict'
 
-var app = require('../../../server')
+var app = require('../../server')
 var request = require('supertest');
 var should = require('chai').should();
 
