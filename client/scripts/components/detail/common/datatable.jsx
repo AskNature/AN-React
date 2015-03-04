@@ -14,6 +14,23 @@ ButtonToolbar = require('react-bootstrap').ButtonToolbar,
 Button = require('react-bootstrap').Button,
 Glyphicon = require('react-bootstrap').Glyphicon;
 
+var List = React.createClass({
+  render: function() {
+    var items = this.props.items;
+    return (
+      <ul>
+        {
+          items.map(function(item, i){
+            return (
+              <li key={i}>{item}</li>
+            );
+          })
+        }
+      </ul>
+    );
+  }
+});
+
 var DataTable = React.createClass({
   render: function() {
     var items = this.props.data;
@@ -33,7 +50,12 @@ var DataTable = React.createClass({
                 <tr key={i}>
                   <td>{key}</td>
                   <td>
-                    <TextField store={properties.store} actions={properties.actions} fieldName={key} initialValue={items[key]} editable={properties.editable}/>
+                    {items[key] instanceof Array ? (
+                        <List items={items[key]} />
+                      ) : (
+                        <TextField store={properties.store} actions={properties.actions} fieldName={key} initialValue={items[key]} editable={properties.editable}/>
+                      )
+                    }
                   </td>
                 </tr>
               );
