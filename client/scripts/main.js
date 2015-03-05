@@ -1,10 +1,5 @@
 'use strict';
 
-// Load and use polyfill for ECMA-402.
-if (!global.Intl) {
-    global.Intl = require('intl');
-}
-
 var Router = require('director').Router;
 var routes = require('./routes');
 var Dispatcher = require('./dispatchers/default');
