@@ -21,13 +21,45 @@ var HeroComponent = React.createClass({
         <div className="texture-overlay"></div>
         <Grid>
           <Row className="headline">
-            <Col xs={12} md={12}>
-              <h3 className="animated fadeInDown"> <strong>{this.props.primarytitle}</strong><br/><small>{this.props.secondarylink ? (
-                <Link url={this.props.secondarylink}>
-                  <i>{this.props.secondarytitle}</i>
-                </Link>
-              ) : (<i>{this.props.secondarytitle}</i>)}</small></h3>
-            </Col>
+            {this.props.innerimage ?
+              (
+                <div>
+                <Col xs={3}>
+                  <img src={this.props.innerimage} alt='Profile' className='img-circle img-responsive right' />
+                </Col>
+
+                <Col xs={9}>
+                  <h3 className="animated fadeInDown"> <strong>{this.props.primarytitle}</strong><br/>
+                    <small>
+                      {this.props.secondarylink ? (
+                          <Link url={this.props.secondarylink}>
+                            {this.props.secondarytitle}
+                          </Link>
+                        ) : (
+                          <span>{this.props.secondarytitle}</span>
+                        )
+                      }
+                    </small>
+                  </h3>
+                </Col>
+              </div>
+              ) : (
+                <Col xs={12}>
+                  <h3 className="animated fadeInDown"> <strong>{this.props.primarytitle}</strong><br/>
+                    <small>
+                      {this.props.secondarylink ? (
+                          <Link url={this.props.secondarylink}>
+                            <i>{this.props.secondarytitle}</i>
+                          </Link>
+                        ) : (
+                          <i>{this.props.secondarytitle}</i>
+                        )
+                      }
+                    </small>
+                  </h3>
+                </Col>
+              )
+            }
           </Row>
         </Grid>
       </section>

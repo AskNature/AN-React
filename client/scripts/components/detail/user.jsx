@@ -51,23 +51,6 @@ var getState = function() {
   };
 };
 
-var List = React.createClass({
-  render: function() {
-    var items = this.props.items;
-    return (
-      <ul>
-        {
-          items.map(function(item, i){
-            return (
-                <li key={i}>{item}</li>
-            );
-          })
-        }
-      </ul>
-    );
-  }
-});
-
 /** StrategyDetail class contains a search field that filters items in
 * an unordered list in real time.
 */
@@ -120,8 +103,7 @@ var StrategyDetail = React.createClass({
         /* jshint ignore:start */
         <DefaultLayout>
           <AdminBar masterid={detail.masterid} routename={routeName} pluralroute={routeNamePlural} entityname={entityName} />
-          <CreatorMast img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" entityname={entityName} />
-          <Hero items={detail} primarytitle={detail.masterid} secondarytitle={detail.name} />
+          <Hero items={detail} primarytitle={detail.first+' '+detail.last} secondarytitle={detail.name} innerimage={avatar} />
           <SubHero description={detail.special_text} editable={this.state.editable} store={focusStore} actions={focusActions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} />
             <Grid>
               <Row className="show-grid">

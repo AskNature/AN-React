@@ -5,7 +5,7 @@ var Defaults = {
     route: '/',
 
     page: {
-        title: 'Home',
+        title: 'AskNature',
         description: 'A React + Flux application',
         keywords: null
 
@@ -17,10 +17,7 @@ var Defaults = {
           {
             name: 'Username',
             flagged: [],
-            media: [],
-            media_name: [],
-            media_entity: [],
-            media_id: [],
+            has_media: [],
             added_media: [],
             collected: [],
             friends: [],
