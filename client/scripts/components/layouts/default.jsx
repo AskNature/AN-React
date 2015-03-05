@@ -31,7 +31,6 @@ var DefaultComponent = React.createClass({
             <div>
             <Sidebar />
             <Navbar user={this.state.user} />
-
                 <div className="default">
                     <div className="main-container">
                         <div className="content">
