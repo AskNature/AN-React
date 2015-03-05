@@ -7,7 +7,6 @@
     "modernizr": "~2.8.1",
     "normalize.css": "~3.0.1",
     "es5-shim": "~3.4.0",
-    "datatables": "~1.10.4",
     "bootstrap": "~3.3.2",
     "bootswatch-dist": "paper",
     "jasny-bootstrap": "~3.1.3",

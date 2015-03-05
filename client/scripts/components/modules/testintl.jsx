@@ -1,20 +1,22 @@
 'use strict';
 
-var React = require('react');
-
-var ReactIntl = ('react-intl');
-
-var IntlMixin = ReactIntl.IntlMixin;
-var FormattedNumber = ReactIntl.FormattedNumber;
+var IntlMixin         = ReactIntl;
+var FormattedMessage  = ReactIntl.FormattedMessage;
+var FormattedRelative = ReactIntl.FormattedRelative;
 
 var TestIntl = React.createClass({
     mixins: [IntlMixin],
 
   render: function () {
+    var yesterday = Date.now() - (1000 * 60 * 60 * 24);
       return (
         /* jshint ignore:start */
         <div>
-          <FormattedNumber value={1000} style="currency" currency="USD" />
+        <FormattedMessage
+                message={this.getIntlMessage('post.meta')}
+                num={1000}
+                ago="Yesterday" />
+              <FormattedRelative value={yesterday} />
         </div>
         /* jshint ignore:end */
       );
