@@ -4,6 +4,162 @@ FORMAT: 1A
 # AskNature
 AskNature API is an *inspiration* service that helps innovators understand how living systems have solved challenges similar to their own.
 
+## Authentication
+Currently the AskNature API is authenticated with Express sessions. Its use is only supported by browser clients at this time.
+
+## Response Status Codes
+The common [HTTP Response Status Codes](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md) are used.
+
+# Group Strategies
+The API exposes full CRUD functionality for Strategy objects.
+
+## Strategy [/api/v2/strategies/{masterid}]
+Strategies are some of the most important record types on AskNature - they represent the ways that organisms and systems have adapted in response to environmental challenges.
+
+The Strategy object has the following attributes:
+
+- masterid
+- name
+- status
+- summary
+- special_text
+- brief
+- timestamp
+- keywords
+- applications_sector
+- editor_comments
+
+The *timestamp* is assigned automatically by the system, but API consumers are free to choose the *masterid* and the values of any other field.
+
++ Parameters
+    + masterid (required, string, `example-strategy-animals`) ... Identifier of the Strategy in the form of a random hash (legacy) or a slug.
+
++ Model (application/json)
+
+    JSON representation of a Strategy.
+
+    + Body
+
+            {
+                "name": "Example strategy: animals",
+                "status": "active",
+                "summary": "A sample summary.",
+                "special_text": "A sample story.",
+                "brief": "A sample brief excerpt.",
+                "timestamp": "2014-04-14T02:15:15Z",
+                "keywords": ["fly", "eat],
+                "applications_sector": "Architecture",
+                "editor_comments": "This needs to be expanded dramatically.",
+                "masterid": "example-strategy-animals"
+            }
+
+### Retrieve a Single Strategy [GET]
++ Response 200
+    
+    [Strategy][]
+        
+
+### Update a Strategy [POST]
+To update a Strategy send a JSON with updated value for one or more of the Strategy resource attributes. All attribute values from the previous version of this Strategy are carried over by default if not included in the request.
++ Request
+
+        {
+            "name": "Example strategy: elephants"
+        }
+
++ Response 200
+
+    [Strategy][]
+    
+    
+### Delete a Strategy [DELETE]
++ Response 204
+
+## Strategy List [/api/v2/strategies{?limit,offset,filter,order}]
+Strategies can also be accessed in a paginated list, which can optionally be filtered and ordered.
+
+The Strategies list has the following attributes:
+
+- count
+- maxPages
+
++ Model (application/json)
+
+    + Body
+    
+
+### Retrieve a list of all Strategies [GET]
++ Parameters
+    + limit (optional, integer, `20`) ... Number of items to return. Default 20.
+    + offset (optional, integer, `20`) ... Number of items to offset. This is used to paginate.
+    + filter (optional, string, `name=value`) ... Name and value to filter by.
+    + order (optional, string, `+name`) ... Field to sort by and order direction. Prepend `+` to sort ascending, and `-` to sort descending (default).
+
++ Response 200 (application/json)
+
+            { 
+                results: [
+                   {
+                        "name": "Example strategy: animals",
+                        "status": "active",
+                        "summary": "A sample summary.",
+                        "special_text": "A sample story.",
+                        "brief": "A sample brief excerpt.",
+                        "timestamp": "2014-04-14T02:15:15Z",
+                        "keywords": ["fly", "eat],
+                        "applications_sector": "Architecture",
+                        "editor_comments": "This needs to be expanded dramatically.",
+                        "masterid": "example-strategy-animals"
+                    },
+                    {
+                        "name": "Example strategy: animals",
+                        "status": "active",
+                        "summary": "A sample summary.",
+                        "special_text": "A sample story.",
+                        "brief": "A sample brief excerpt.",
+                        "timestamp": "2014-04-14T02:15:15Z",
+                        "keywords": ["fly", "eat],
+                        "applications_sector": "Architecture",
+                        "editor_comments": "This needs to be expanded dramatically.",
+                        "masterid": "example-strategy-animals"
+                    }
+                ],
+                count: 2,
+                maxPages: 1
+            }
+            
+### Create a Strategy [POST]
+
++ Request
+
+            {
+                "name": "Example strategy: animals",
+                "status": "active",
+                "summary": "A sample summary.",
+                "special_text": "A sample story.",
+                "brief": "A sample brief excerpt.",
+                "timestamp": "2014-04-14T02:15:15Z",
+                "keywords": ["fly", "eat],
+                "applications_sector": "Architecture",
+                "editor_comments": "This needs to be expanded dramatically.",
+                "masterid": "example-strategy-animals"
+            }
+
++ Response 200 (application/json)
+
+            {
+                "name": "Example strategy: animals",
+                "status": "active",
+                "summary": "A sample summary.",
+                "special_text": "A sample story.",
+                "brief": "A sample brief excerpt.",
+                "timestamp": "2014-04-14T02:15:15Z",
+                "keywords": ["fly", "eat],
+                "applications_sector": "Architecture",
+                "editor_comments": "This needs to be expanded dramatically.",
+                "masterid": "example-strategy-animals"
+            }
+
 # Group Functions/Outcomes
 Function/outcome related resources of the **AskNature API**
 
