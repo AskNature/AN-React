@@ -21,6 +21,7 @@
     "flux": "~2.0.0",
     "form-serialize": "~0.4.0",
     "griddle-react": "^0.2.4",
+    "intl": "^0.1.4",
     "keymirror": "~0.1.0",
     "lodash": "~2.4.1",
     "lusca": "~1.0.0",
@@ -40,6 +41,7 @@
     "react": "~0.12.0",
     "react-form-data": "^0.2.0",
     "react-infinite-extended": "^0.3.1",
+    "react-intl": "^1.1.0",
     "scribe-editor": "^1.2.11",
     "serve-favicon": "2.0.1",
     "superagent": "~0.21.0"
