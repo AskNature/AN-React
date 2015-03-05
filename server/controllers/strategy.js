@@ -9,6 +9,8 @@ var strategyCache;
 
 var crypto = require('crypto');
 
+var Strategy = require('../models/strategy.js');
+
 if(process.env.NODE_ENV == 'production') {
     strategyCache = Cached('strategy', { backend: {
 	type: 'memcached',
@@ -70,8 +72,65 @@ var returnList = function(req, res, next) {
   });
 };
 
+var testStrategyModel = function(req, res, next) {
+    Strategy.get("45b7848da9b874f4416624563575bdb4", function(found) {
+	/*found.name = "Alkaline surfaces volatilize ammonia: loach";
+	found.save(function(err, saved) {
+	    res.status(200).send();
+	});*/
+	res.status(200).json(found);
+    });
+};
+
+var returnItem2 = function(req, res, next) {
+    Strategy.get(req.params.id, function(item) {
+	if(!item) {
+	    return res.status(404).send("No strategy with that id exists");
+	} else {
+	    return res.status(200).json(item);
+	}
+    });
+};
+
+var updateItem2 = function(req, res, next) {
+    Strategy.get(req.params.id, function(item) {
+	if(!item) {
+	    return res.status(404).send("No strategy with that id exists");
+	} else {
+	    item.set(req.body).save(function(err, savedItem) {
+		if(err) {
+		    return res.status(500).send(err);
+		} else {
+		    return res.status(200).json(savedItem);
+		}
+	    });
+	}
+    });
+};
+
+var createItem2 = function(req, res, next) {
+    var s = new Strategy(req.body.masterid, req.body);
+    s.save(function(err, saved) {
+	if(err) {
+	    return res.status(500).send(err);
+	} else {
+	    return res.status(200).json(saved);
+	}
+    });
+};
+
+var deleteItem2 = function(req, res, next) {
+    console.log(req.params.id);
+    Strategy.destroy(req.params.id, function(err) {
+	if(err) {
+	    return res.status(err.code).send(err.message);
+	} else {
+	    return res.status(204).send();
+	}
+    });
+};
+
 var createStrategy = function(req, res, next) {
-    // TODO: permissions check
     var createWithToken = function() {
         crypto.randomBytes(16, function(err, buf) {
 	    if(err) { return res.status(500).send(); }
@@ -94,6 +153,13 @@ var createStrategy = function(req, res, next) {
             });
         });
     };
+    // TODO: permissions check
+    if(req.body.masterid) {
+	// create with provided masterid
+	db.select('count(*)')
+    } else {
+	// create with generated masterid
+    }
 };
 
 var updateStrategy = function(req, res, next) {
@@ -126,5 +192,10 @@ var returnItem = function(req, res, next) {
       loadindex: loadindex,
       returnList: returnList,
       returnItem: returnItem,
-      updateStrategy: updateStrategy
+      returnItem2: returnItem2,
+      updateStrategy: updateStrategy,
+      updateItem2: updateItem2,
+      testStrategyModel: testStrategyModel,
+      createItem2: createItem2,
+      deleteItem2: deleteItem2
     };
