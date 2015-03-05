@@ -4,6 +4,43 @@ FORMAT: 1A
 # AskNature
 AskNature API is an *inspiration* service that helps innovators understand how living systems have solved challenges similar to their own.
 
+# Group Strategies
+CRUD access for strategy resources.
+
+## Single item access [/api/v2/strategy/{id}]
+Access a single item with its ID.
+### Retrieve a Strategy [GET]
++ Response 200 (application/json)
+
+        {
+            "name": "Strategy name",
+            "masterid": "strategy-name"
+        }
+        
+### Update a Strategy [POST]
++ Request
+
+        {
+            "name": "New strategy name"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "name": "New strategy name",
+            "masterid": "strategy-name"
+        }
+        
+## List access [/api/v2/strategy]
+Access a list of items, optionally filtered, sorted, and paginated.
+### Retrieve a list of all Strategies [GET]
++ Response 200 (application/json)
+
+        [{
+            "name": "Strategy name",
+            "masterid": "strategy-name"
+        }]
+
 # Group Functions/Outcomes
 Function/outcome related resources of the **AskNature API**
 
