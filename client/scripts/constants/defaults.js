@@ -17,7 +17,10 @@ var Defaults = {
           {
             name: 'Username',
             flagged: [],
-            has_media: [],
+            media: [],
+            media_name: [],
+            media_entity: [],
+            media_id: [],
             added_media: [],
             collected: [],
             friends: [],
@@ -51,7 +54,7 @@ var Defaults = {
       results : [
       {
           name: 'Nature is Coming...',
-          description: '...and She\'s Pissed',
+          description: '',
           masterid: '',
           media: [],
           media_name: [],
