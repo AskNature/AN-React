@@ -5,7 +5,7 @@ var Defaults = {
     user: {
         results : [
           {
-            name: 'Loading...',
+            name: 'Username',
             has_media: 'Add Media',
             friends: 'Add Friends',
             activities: 'What are you interested in?'
