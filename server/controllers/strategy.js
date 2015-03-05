@@ -120,7 +120,6 @@ var createItem2 = function(req, res, next) {
 };
 
 var deleteItem2 = function(req, res, next) {
-    console.log(req.params.id);
     Strategy.destroy(req.params.id, function(err) {
 	if(err) {
 	    return res.status(err.code).send(err.message);

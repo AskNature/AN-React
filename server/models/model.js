@@ -44,7 +44,7 @@ var ConstructModel = function(entityName, fields) {
 			db.insert().into(entityName)
 			    .set(_.omit(object, ["_performSaved"])).one()
 			    .then(function(saved) {
-				callback(null, _.omit(saved, ["@type", "@class", "_performSave", "@rid"]));
+				callback(null, _.omit(saved, ["@type", "@class", "_performSave", "@rid", "save", "set"]));
 			    });
 		    });
             }
