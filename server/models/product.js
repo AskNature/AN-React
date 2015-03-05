@@ -1,4 +1,4 @@
-// Strategy model
+// Product model
 
 var Model = require('./model.js');
 
