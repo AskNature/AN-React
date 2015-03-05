@@ -1,6 +1,5 @@
 'use strict';
 
-var React = require('react');
 var pageStore = require('../../stores/page');
 var userStore = require('../../stores/accounts');
 var userActions = require('../../actions/users');
@@ -31,7 +30,6 @@ var DefaultComponent = React.createClass({
             <div>
             <Sidebar />
             <Navbar user={this.state.user} />
-
                 <div className="default">
                     <div className="main-container">
                         <div className="content">
