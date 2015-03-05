@@ -1,5 +1,8 @@
 'use strict';
 
+var React = require('react');
+var ReactIntl = require('react-intl');
+
 var IntlMixin         = ReactIntl;
 var FormattedMessage  = ReactIntl.FormattedMessage;
 var FormattedDate = ReactIntl.FormattedDate;
