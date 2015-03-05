@@ -7,6 +7,8 @@ var crypto = require('crypto');
 
 var Cached = require('cached');
 
+var Product = require('../models/product.js');
+
 var productCache;
 if(process.env.NODE_ENV == 'production') {
     productCache = Cached('product', { backend: {
@@ -102,8 +104,59 @@ var returnItem = function(req, res, next) {
   .done();
 };
 
+var returnItem2 = function(req, res, next) {
+    Product.get(req.params.id, function(item) {
+	if(!item) {
+	    return res.status(404).send("No product with that id exists");
+	} else {
+	    return res.status(200).json(item);
+	}
+    });
+};
+
+var updateItem2 = function(req, res, next) {
+    Product.get(req.params.id, function(item) {
+	if(!item) {
+	    return res.status(404).send("No product with that id exists");
+	} else {
+	    item.set(req.body).save(function(err, savedItem) {
+		if(err) {
+		    return res.status(500).send(err);
+		} else {
+		    return res.status(200).json(savedItem);
+		}
+	    });
+	}
+    });
+};
+
+var createItem2 = function(req, res, next) {
+    var p = new Product(req.body.masterid, req.body);
+    p.save(function(err, saved) {
+	if(err) {
+	    return res.status(500).send(err);
+	} else {
+	    return res.status(200).json(saved);
+	}
+    });
+};
+
+var deleteItem2 = function(req, res, next) {
+    Product.destroy(req.params.id, function(err) {
+	if(err) {
+	    return res.status(err.code).send(err.message);
+	} else {
+	    return res.status(204).send();
+	}
+    });
+};
+
     module.exports = {
       loadindex: loadindex,
       returnList: returnList,
-      returnItem: returnItem
+      returnItem: returnItem,
+      returnItem2: returnItem2,
+      updateItem2: updateItem2,
+      createItem2: createItem2,
+      deleteItem2: deleteItem2
     };
