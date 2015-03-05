@@ -2,21 +2,17 @@
 
 var IntlMixin         = ReactIntl;
 var FormattedMessage  = ReactIntl.FormattedMessage;
-var FormattedRelative = ReactIntl.FormattedRelative;
+var FormattedDate = ReactIntl.FormattedDate;
 
 var TestIntl = React.createClass({
     mixins: [IntlMixin],
 
   render: function () {
-    var yesterday = Date.now() - (1000 * 60 * 60 * 24);
+    var today = Date.now();
       return (
         /* jshint ignore:start */
         <div>
-        <FormattedMessage
-                message={this.getIntlMessage('post.meta')}
-                num={1000}
-                ago="Yesterday" />
-              <FormattedRelative value={yesterday} />
+          <p>Today is <FormattedDate value={today} /></p>
         </div>
         /* jshint ignore:end */
       );
