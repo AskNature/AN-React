@@ -26,7 +26,7 @@ var loadindex = function(req, res, next) {
    console.log('The product page has access to the ' + db.name + ' database.');
 };
 
-var returnList = function(req, res) {
+var returnList1 = function(req, res) {
   var chain = db
   .select('name, headline as description, out("InspiredBy").name as inspiredby, out("HasFunction").description as outcomes, masterid, "product" as entityType')
   .from('InspiredSolutions')
@@ -65,7 +65,7 @@ var returnList = function(req, res) {
   });
 };
 
-var createProduct = function(req, res, next) {
+var createProduct1 = function(req, res, next) {
     // TODO: permissions check
     var createWithToken = function() {
 	crypto.randomBytes(16, function(err, buf) {
@@ -89,7 +89,7 @@ var createProduct = function(req, res, next) {
     };
 };
 
-var returnItem = function(req, res, next) {
+var returnItem1 = function(req, res, next) {
   console.log(req.params.id);
   db
   .select('name, headline as description, out("InspiredBy").name as inspiredby, out("InspiredBy").masterid as inspiredby_id, out("HasDesignedSystem").name as designedsystems, out("HasFunction").description as outcomes, out("HasFunction").masterid as outcomes_id, out("HasMechanism").description as mechanisms, out("HasConditions").description as conditions, special_text, challenges_solved, how_is_it_different, biomimicry_story, product_type, patent_name, availability, company, phase, patent_number, company_website, strategy, consumer_products, keywords, in("Bookmarked").name as collectors, out("HasMedia").filename as media, out("HasMedia").name as media_name, out("HasMedia").entity as media_entity, out("HasMedia").masterid as media_id, out("FeaturedIn").name as sources, out("StudiedBy").name as researchers, status, timestamp, revision, masterid')
@@ -153,8 +153,8 @@ var deleteItem2 = function(req, res, next) {
 
     module.exports = {
       loadindex: loadindex,
-      returnList: returnList,
-      returnItem: returnItem,
+      returnList1: returnList1,
+      returnItem1: returnItem1,
       returnItem2: returnItem2,
       updateItem2: updateItem2,
       createItem2: createItem2,

@@ -6,7 +6,7 @@ var db = require('../config/database').db;
 
 var autoGenerateId = false;
 
-var ConstructModel = function(entityName, fields) {
+var ConstructModel = function(entityName, fields, relationships) {
 
     var Model = function(masterid, attributes, rid) {
 	_.forEach(fields, function(field) {

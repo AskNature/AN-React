@@ -37,7 +37,7 @@ var loadindex = function(req, res, next) {
 
 /** Return a list of functions, along with the names of each function's children and parent.*/
 
-var returnList = function(req, res) {
+var returnList1 = function(req, res) {
   var chain = db
   .select('name, short_name, in("ChildOf").name as children, out("ChildOf").name as parent, out("ChildOf").masterid as parentid, masterid, "phenomenon" as entityType')
   .from('Function');
@@ -75,7 +75,7 @@ var returnList = function(req, res) {
   });
 };
 
-var createItem = function(req, res, next) {
+var createItem1 = function(req, res, next) {
     // TODO: permissions check
     var createWithToken = function() {
 	crypto.randomBytes(16, function(err, buf) {
@@ -100,7 +100,7 @@ var createItem = function(req, res, next) {
     };
 };
 
-var returnItem = function(req, res, next) {
+var returnItem1 = function(req, res, next) {
   console.log(req.params.id);
   db
   .select('name, short_name, description, in("ChildOf").name as children, in("ChildOf").masterid as children_id, out("ChildOf").name as parent, out("ChildOf").out("ChildOf").name as groupname, out("ChildOf").out("ChildOf").masterid as groupid, out("ChildOf").masterid as parentid, in("HasFunction").name as has_function, masterid, out("HasMedia").filename as media, out("HasMedia").name as media_name, out("HasMedia").entity as media_entity, out("HasMedia").masterid as media_id')
@@ -164,8 +164,8 @@ var deleteItem2 = function(req, res, next) {
 
     module.exports = {
       loadindex: loadindex,
-      returnList: returnList,
-      returnItem: returnItem,
+      returnList1: returnList1,
+      returnItem1: returnItem1,
       returnItem2: returnItem2,
       updateItem2: updateItem2,
       createItem2: createItem2,
