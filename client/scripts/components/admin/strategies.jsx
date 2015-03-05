@@ -4,7 +4,7 @@
 'use strict';
 
 var React = require('react');
-var DefaultLayout = require('../layouts/default.jsx');
+var ConsoleLayout = require('./consolelayout.jsx');
 var strategySt = require('../../stores/admin/strategies');
 var strategyAc = require('../../actions/strategies');
 var GriddleComponent = require('./griddle_component.jsx');
@@ -13,14 +13,11 @@ var StrategyConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <DefaultLayout>
-                <div className="main-container">
-                        <h1>Biological Strategy Console</h1>
+            <ConsoleLayout title="Biological Strategy Console">
                         <GriddleComponent store={strategySt} actions={strategyAc}
 			linkColumnName={"name"}
                         columns={["name", "description", "outcomes", "living_system", "masterid"]} />
-                </div>
-            </DefaultLayout>
+            </ConsoleLayout>
             /* jshint ignore:end */
         );
     }

@@ -1,6 +1,7 @@
 var React = require('react');
 var Griddle = require('griddle-react');
 var Link = require('../modules/link.jsx');
+var Input = require('react-bootstrap').Input;
 
 var RowLinkComponent = React.createClass({
     render: function() {
@@ -16,7 +17,7 @@ var GriddleComponent = React.createClass({
             "results": [{"name" : "Loading..."}],
             "currentPage": 0,
             "maxPages": 0,
-            "externalResultsPerPage": 5,
+            "externalResultsPerPage": 10,
             "externalSortColumn": null,
             "externalSortAscending": true,
 	    "filter": ""
@@ -70,8 +71,9 @@ var GriddleComponent = React.createClass({
     },
     render: function() {
         return <div>
-	       <a onClick={this.resetFilterSort}>Reset</a>
-	       <input type="text" value={this.state.filter} onChange={this.setFilter} />
+          <Input type="text" placeholder="Filter List..." value={this.state.filter} onChange={this.setFilter} />
+          <a onClick={this.resetFilterSort}>Reset</a>
+
 	       <Griddle useExternal={true}
                externalSetPage={this.setPage}
                enableSort={true}
@@ -82,11 +84,12 @@ var GriddleComponent = React.createClass({
                externalSetFilter={this.setFilter}
                externalCurrentPage={this.state.currentPage}
                results={this.state.results}
-               tableClassName="table"
-	       columnMetadata={this.columnMeta()}
-               resultsPerPage={this.state.externalResultsPerPage}
+               tableClassName="table table-striped table-hover"
+	             columnMetadata={this.columnMeta()}
                externalSortColumn={this.state.externalSortColumn}
-               externalSortAscending={this.state.externalSortAscending} />
+               externalSortAscending={this.state.externalSortAscending}
+               useGriddleStyles={false}
+ />
 	       </div>
     },
     // Event handler for 'change' events coming from store mixin
