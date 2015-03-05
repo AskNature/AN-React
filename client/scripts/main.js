@@ -5,9 +5,6 @@ if (!global.Intl) {
     global.Intl = require('intl');
 }
 
-global.React = require('react');
-global.ReactIntl = require('react-intl');
-
 var Router = require('director').Router;
 var routes = require('./routes');
 var Dispatcher = require('./dispatchers/default');

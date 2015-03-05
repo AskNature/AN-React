@@ -1,5 +1,7 @@
 'use strict';
 
+var React = require('react');
+
 var pageStore = require('../../stores/page');
 var userStore = require('../../stores/accounts');
 var userActions = require('../../actions/users');
