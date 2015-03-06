@@ -73,13 +73,19 @@ var returnList1 = function(req, res, next) {
 };
 
 var returnItem2 = function(req, res, next) {
-    Strategy.get(req.params.id, function(item) {
-	if(!item) {
-	    return res.status(404).send("No strategy with that id exists");
-	} else {
-	    return res.status(200).json(item);
-	}
-    });
+    var callback = function(item) {
+        if(!item) {
+            return res.status(404).send("No strategy with that id exists");
+        } else {
+            return res.status(200).json(item);
+	    }
+    };
+
+    if(req.query["expand"]) {
+	Strategy.getWithRelationships(req.params.id, callback);
+    } else {
+	Strategy.get(req.params.id, callback);
+    }
 };
 
 var updateItem2 = function(req, res, next) {

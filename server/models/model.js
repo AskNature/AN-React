@@ -17,7 +17,6 @@ var ConstructModel = function(entityName, fields, relationships) {
 	this.masterid = masterid;
 
 	_.forEach(relationships, function(val, key) {
-	    console.log("processed relationship " + key);
 	    // build a model for each relationship
 	    var relModel = val.model;
 	    if(attributes[key]) {
@@ -58,6 +57,8 @@ var ConstructModel = function(entityName, fields, relationships) {
 			    if(_.isObject(val)) {
 				return val.masterid;
 			    } else if(_.isString(val)) {
+				return val;
+			    } else if(_.isNumber(val)) {
 				return val;
 			    } else {
 				relationshipCallback("Something broke");
@@ -231,7 +232,7 @@ var ConstructModel = function(entityName, fields, relationships) {
 	    //return 'set(' + val.edge + ') as ' + key; // should deduplicate
 	    return val.edge + ' as ' + key;
 	});
-	var fetchMap = _.mapValues(relationships, function() { return 1 });
+	var fetchMap = _.mapValues(relationships, function() { return 0 });
 	db.select('@rid, masterid, ' + fields.join(', ') + (relFields.length ? ', ' : '') + relFields.join(', ')).from(entityName).where({masterid: masterid}).fetch(fetchMap).limit(1).one().then(function(result) {
 	    var m = new Model(result.masterid, result, result.rid);
 	    callback(m);
