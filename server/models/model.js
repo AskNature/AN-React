@@ -12,8 +12,19 @@ var ConstructModel = function(entityName, fields, relationships) {
 	_.forEach(fields, function(field) {
 	    this[field] = null;
 	}, this);
-	_.assign(this, attributes);
+	_.assign(this, _.pick(attributes, fields));
 	this.masterid = masterid;
+
+	_.forEach(relationships, function(val, key) {
+	    console.log("got one " + key);
+	    // build a model for each relationship
+	    var relModel = ConstructModel(key, ['name']);
+	    if(attributes[key]) {
+		this[key] = _.map(attributes[key], function(rel) {
+		    return new relModel(rel.masterid, rel, rel.rid);
+		});
+	    }
+	}, this);
     
 	var _rid = rid;
 	this._performSave = function(object, callback) {
@@ -92,6 +103,17 @@ var ConstructModel = function(entityName, fields, relationships) {
 	db.select('@rid, masterid, ' + fields.join(', ')).from(entityName).where({masterid: masterid}).limit(1).one().then(function(result) {
 	    if(!result) { return callback(null); }
 	    callback(new Model(result.masterid, _.pick(result, fields), result.rid));
+	}).done();
+    };
+
+    Model.getWithRelationships = function(masterid, callback) {
+	var relFields = _.map(relationships, function(val, key) {
+	    return 'set(' + val + ') as ' + key;
+	});
+	var fetchMap = _.mapValues(relationships, function() { return 1 });
+	db.select('@rid, masterid, ' + fields.join(', ') + ', ' + relFields.join(', ')).from(entityName).where({masterid: masterid}).fetch(fetchMap).limit(1).one().then(function(result) {
+	    var m = new Model(result.masterid, result, result.rid);
+	    callback(m);
 	}).done();
     };
     
