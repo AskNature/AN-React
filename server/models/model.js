@@ -74,7 +74,7 @@ var ConstructModel = function(entityName, fields, relationships) {
 			var edgeName = relationships[rel].edge.substring(edgeFlip ? 4 : 5, relationships[rel].edge.length - 2)
 
 			async.each(edgesToRemove, function(edgeToRemove, edgeCallback) {
-			    var them = '(SELECT * FROM ' + rel + ' WHERE masterid = "' + edgeToRemove + '")';
+			    var them = '(SELECT * FROM ' + relationships[rel].className + ' WHERE masterid = "' + edgeToRemove + '")';
 			    db.query('DELETE EDGE ' + edgeName + ' FROM ' + (edgeFlip ? them : _rid) + ' TO ' + (edgeFlip ? _rid : them)).then(function(res) {
 				if(res != '') {
 				    console.log("delete worked");
@@ -90,7 +90,7 @@ var ConstructModel = function(entityName, fields, relationships) {
 				async.each(edgesToAdd, function(edgeToAdd, edgeCallback) {
 				    // do the adding
 				    console.log("adding " + edgeToAdd + " as " + edgeName + " reverse " + edgeFlip);
-				    var them = '(SELECT * FROM ' + rel + ' WHERE masterid = "' + edgeToAdd + '")';
+				    var them = '(SELECT * FROM ' + relationships[rel].className + ' WHERE masterid = "' + edgeToAdd + '")';
 				    db.query('CREATE EDGE ' + edgeName + ' FROM ' + (edgeFlip ? them : _rid) + ' TO ' + (edgeFlip ? _rid : them)).then(function(res) {
 					if(res != '') {
 					    console.log("add worked");
