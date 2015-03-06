@@ -16,12 +16,12 @@ var ConstructModel = function(entityName, fields, relationships) {
 	this.masterid = masterid;
 
 	_.forEach(relationships, function(val, key) {
-	    console.log("got one " + key);
+	    console.log("processed relationship " + key);
 	    // build a model for each relationship
 	    var relModel = ConstructModel(key, ['name']);
 	    if(attributes[key]) {
 		this[key] = _.map(attributes[key], function(rel) {
-		    return new relModel(rel.masterid, rel, rel.rid);
+		    return new relModel(rel.masterid, rel, rel['@rid']);
 		});
 	    }
 	}, this);
