@@ -18,7 +18,7 @@ var ConstructModel = function(entityName, fields, relationships) {
 	_.forEach(relationships, function(val, key) {
 	    console.log("processed relationship " + key);
 	    // build a model for each relationship
-	    var relModel = ConstructModel(key, ['name']);
+	    var relModel = val;
 	    if(attributes[key]) {
 		this[key] = _.map(attributes[key], function(rel) {
 		    return new relModel(rel.masterid, rel, rel['@rid']);
@@ -108,7 +108,7 @@ var ConstructModel = function(entityName, fields, relationships) {
 
     Model.getWithRelationships = function(masterid, callback) {
 	var relFields = _.map(relationships, function(val, key) {
-	    return 'set(' + val + ') as ' + key;
+	    return 'set(' + key + ') as ' + key;
 	});
 	var fetchMap = _.mapValues(relationships, function() { return 1 });
 	db.select('@rid, masterid, ' + fields.join(', ') + ', ' + relFields.join(', ')).from(entityName).where({masterid: masterid}).fetch(fetchMap).limit(1).one().then(function(result) {
