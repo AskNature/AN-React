@@ -1,6 +1,7 @@
 'use strict';
 
-var Defaults = {
+var Placeholders = {
+
 
     user: {
         results : [
