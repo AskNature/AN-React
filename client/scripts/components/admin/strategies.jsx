@@ -14,9 +14,11 @@ var StrategyConsole = React.createClass({
         return (
             /* jshint ignore:start */
             <ConsoleLayout title="Biological Strategy Console">
-                        <GriddleComponent store={strategySt} actions={strategyAc}
-			linkColumnName={"name"}
-                        columns={["name", "description", "outcomes", "living_system", "masterid"]} />
+              <GriddleComponent store={strategySt} actions={strategyAc}
+                linkColumnName={"name"}
+                columns={["name", "description", "masterid"]}
+                listColumns={["outcomes", "living_system"]}
+                thumb={['media', 'media_id', 'media_entity']} />
             </ConsoleLayout>
             /* jshint ignore:end */
         );

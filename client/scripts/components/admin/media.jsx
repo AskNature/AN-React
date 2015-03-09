@@ -13,11 +13,12 @@ var MediaConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <ConsoleLayout title="Media Console">
+            <ConsoleLayout title='Media Console'>
                         <GriddleComponent store={mediaStore}
                         actions={mediaActions}
-                        linkColumnName={"filename"}
-                        columns={["filename", "name", "masterid"]} />
+                        linkColumnName={'name'}
+                        columns={['name', 'media', 'masterid']}
+                        thumb={['media_entity', 'media_id']} />
             </ConsoleLayout>
             /* jshint ignore:end */
         );

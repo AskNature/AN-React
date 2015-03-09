@@ -25,7 +25,7 @@ var loadindex = function(req, res, next) {
 
 var returnList = function(req, res, next) {
   var chain = db
-  .select('name, summary as description, out("HasLivingSystem").name as living_system, out("HasFunction").name as outcomes, masterid, "strategy" as entityType')
+  .select('name, summary as description, out("HasLivingSystem").name as living_system, out("HasFunction").name as outcomes, masterid, "strategy" as entityType, out("HasMedia")[0].filename as media, out("HasMedia")[0].entity as media_entity, out("HasMedia")[0].masterid as media_id')
   .from('Strategy')
   .where({status: 0});
 
