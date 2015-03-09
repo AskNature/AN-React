@@ -14,9 +14,17 @@ var ProductConsole = React.createClass({
         return (
             /* jshint ignore:start */
             <ConsoleLayout title="Inspired Solutions Console">
-                        <GriddleComponent store={productStore} actions={productActions}
-			linkColumnName={"name"}
-			columns={["name", "description", "inspiredby", "outcomes", "masterid"]} />
+                      <GriddleComponent store={productStore} actions={productActions}
+                        columns={[
+                          {columnName:'masterid', displayName:'id', type:'id'},
+                          {columnName:'description', displayName:'Name', type:'link'},
+                          {columnName:'name', displayName:'System', type:'text'},
+                          {columnName:'outcomes', displayName:'Outcomes', type:'list'},
+                          {columnName:'inspiredby', displayName:'Inspiration', type:'list'},
+                          {columnName:'timestamp', displayName:'Date Modified', type:'date'}
+                          ]}
+                        thumb={['media', 'media_id', 'media_entity']}
+                        initialSort={['timestamp', false]} />
             </ConsoleLayout>
             /* jshint ignore:end */
         );

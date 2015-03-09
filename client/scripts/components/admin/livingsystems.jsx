@@ -15,8 +15,11 @@ var LivingSystemConsole = React.createClass({
             /* jshint ignore:start */
             <ConsoleLayout title="Living System Console">
                         <GriddleComponent store={livingSystemStore} actions={livingSystemActions}
-                        linkColumnName={"name"}
-                        columns={["name", "status", "type", "featured_count", "masterid"]} />
+                          columns={[
+                            {columnName:'masterid', displayName:'id', type:'id'},
+                            {columnName:'taxon', displayName:'Taxon', type:'id'},
+                            {columnName:'name', displayName:'Latin Name', type:'link'},
+                          ]} />
             </ConsoleLayout>
             /* jshint ignore:end */
         );

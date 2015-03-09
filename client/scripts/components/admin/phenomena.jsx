@@ -14,9 +14,16 @@ var PhenomenaConsole = React.createClass({
         return (
             /* jshint ignore:start */
             <ConsoleLayout title="Phenomena Console">
-                        <GriddleComponent store={phenomenaStore}
-			actions={phenomenaActions} linkColumnName={"name"}
-			columns={["name", "short_name", "parent", "children", "masterid"]} />
+                        <GriddleComponent store={phenomenaStore} actions={phenomenaActions}
+                          columns={[
+                            {columnName:'masterid', displayName:'id', type:'id'},
+                            {columnName:'name', displayName:'Name', type:'link'},
+                            {columnName:'parent', displayName:'Parent', type:'text'},
+                            {columnName:'short_name', displayName:'Short Name', type:'text'},
+                            {columnName:'child_items', displayName:'Children', type:'list'},
+                            {columnName:'outcome_count', displayName:'Outcome Count', type:'text'},
+                          ]}
+                          thumb={['media', 'media_id', 'media_entity']} />
             </ConsoleLayout>
             /* jshint ignore:end */
         );

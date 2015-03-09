@@ -17,9 +17,9 @@ if(process.env.NODE_ENV == 'production') {
 	hosts: '127.0.0.1:11211'
     }});
 } else {
-    strategyCache = Cached('strategy');
+    strategyCache = new Cached('strategy');
 }
-strategyCache.setDefaults({"freshFor": 120});
+strategyCache.setDefaults({'freshFor': 120});
 
 var loadindex = function(req, res, next) {
   // Render index.html to allow application to handle routing
@@ -29,32 +29,32 @@ var loadindex = function(req, res, next) {
 
 var returnList1 = function(req, res, next) {
   var chain = db
-  .select('name, summary as description, out("HasLivingSystem").name as living_system, out("HasFunction").name as outcomes, masterid, "strategy" as entityType')
+  .select('name, summary as description, out("HasLivingSystem").name as living_system, out("HasFunction").name as outcomes, masterid, "strategy" as entityType, out("HasMedia")[0].filename as media, out("HasMedia")[0].entity as media_entity, out("HasMedia")[0].masterid as media_id, timestamp, is_deleted')
   .from('Strategy')
   .where({status: 0});
 
-  var limit = parseInt(req.query["limit"]);
+  var limit = parseInt(req.query.limit);
   if(limit) {
       chain.limit(limit);
   }
 
-  var offset = parseInt(req.query["offset"]);
+  var offset = parseInt(req.query.offset);
   if(offset) {
       chain.offset(offset);
   }
 
-  var order = req.query["order"];
+  var order = req.query.order;
   if(order) {
-      chain.order(order.substring(1) + (order.substring(0,1)=="-" ? " desc" : " asc"));
+      chain.order(order.substring(1) + (order.substring(0,1)==='-' ? ' desc' : ' asc'));
   }
 
-  var filter = req.query["filter"];
+  var filter = req.query.filter;
   if(filter) {
-      chain.containsText({"name" : filter});
+      chain.containsText({'name' : filter});
   }
 
   strategyCache.getOrElse('count', Cached.deferred(function(done) {
-      console.log("cache miss");
+      console.log('cache miss');
       db.select('count(*)').from('Strategy')
       .where({status: 0})
       .scalar().then(function(count) {
@@ -151,7 +151,7 @@ var createStrategy1 = function(req, res, next) {
     // TODO: permissions check
     if(req.body.masterid) {
 	// create with provided masterid
-	db.select('count(*)')
+	db.select('count(*)');
     } else {
 	// create with generated masterid
     }
