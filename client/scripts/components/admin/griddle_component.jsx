@@ -4,8 +4,9 @@ var React = require('react');
 var Griddle = require('griddle-react');
 var Link = require('../modules/link.jsx');
 var Input = require('react-bootstrap').Input;
+var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var RowLinkComponent = React.createClass({
+var LinkComponent = React.createClass({
     render: function() {
         var url = '/'+ this.props.rowData.entityType + '/' + this.props.rowData.masterid;
           var i = new Image();
@@ -47,64 +48,65 @@ var ListComponent = React.createClass({
   }
 });
 
+var RadioComponent = React.createClass({
+  render: function() {
+    var status = false;
+    if(this.props.data === 1) {status = true;}
+
+    return (
+      <div>
+        <Input type='checkbox' checked={status} readOnly />
+      </div>
+    );
+  }
+});
+
+var SelectComponent = React.createClass({
+  render: function() {
+
+    return (
+      <div>
+        <Input type="select" label='Select' defaultValue="select">
+          <option value="select">select</option>
+          <option value="other">...</option>
+        </Input>
+      </div>
+    );
+  }
+});
+
+var DateComponent = React.createClass({
+  render: function() {
+    var msec = Date.parse(this.props.data);
+    var d = new Date(msec);
+    return(
+      <span>{d.toLocaleDateString()}</span>
+    );
+  }
+});
+
 var GriddleComponent = React.createClass({
     mixins: [React.addons.LinkedStateMixin],
     getInitialState: function() {
+        var initialSort, initialSortOrder;
+        if(this.props.initialSort) {
+          initialSort = this.props.initialSort[0];
+          initialSortOrder = this.props.initialSort[1];
+        } else {
+          initialSort = null;
+          initialSortOrder = true;
+        }
         return {
             'results': [{'name' : 'Loading...'}],
             'currentPage': 0,
             'maxPages': 0,
-            'externalResultsPerPage': 10,
-            'externalSortColumn': null,
-            'externalSortAscending': true,
+            'externalResultsPerPage': 15,
+            'externalSortColumn': initialSort,
+            'externalSortAscending': initialSortOrder,
 	           'filter': ''
         };
     },
-    columnMeta: function() {
-var meta, thumb_meta, list_meta;
-           if( this.props.linkColumnName ) {
-             meta =
-              [{
-      	        'columnName': this.props.linkColumnName,
-      	        'customComponent': RowLinkComponent
-         	    },
-	            {
-      	        'columnName': 'masterid',
-      	        'visible': false
-              }];
-              if (this.props.thumb) {
-                thumb_meta =
-                [{
-        	        'columnName': this.props.thumb[0],
-        	        'visible': false
-                },
-                {
-        	        'columnName': this.props.thumb[1],
-        	        'visible': false
-                },
-                {
-        	        'columnName': this.props.thumb[2],
-        	        'visible': false
-                }];
-                meta = meta.concat(thumb_meta);
-              }
-              if (this.props.listColumns) {
 
-                this.props.listColumns.map(function(list, i){
-                    list_meta = [{
-                      'columnName': list,
-                      'customComponent': ListComponent
-                    }];
-                    meta = meta.concat(list_meta);
-                });
-
-
-              }
-              return meta;
-          }
-
-
-    },
     componentWillMount: function() {
     },
     componentDidMount: function() {
@@ -140,21 +142,52 @@ var meta, thumb_meta, list_meta;
 	});
     },
     render: function() {
-      var cols = this.props.columns;
+      var cols = [];
+      var meta = [];
+      var add_meta;
 
-       if(this.props.thumb) {
-        cols = cols.concat(this.props.thumb);
+      if( this.props.columns ) {
+        this.props.columns.map(function(list){
+          var custom = null;
+          var vis = true;
+          if(list.type === 'id') {
+            vis = false;
+          } else if(list.type === 'link') {
+            custom = LinkComponent;
+          } else if(list.type === 'list') {
+            custom = ListComponent;
+          } else if(list.type === 'date') {
+            custom = DateComponent;
+          } else if(list.type === 'boolean') {
+            custom = RadioComponent;
+          }
+          add_meta = [{
+            'columnName': list.columnName,
+            'displayName': list.displayName,
+            'customComponent': custom,
+            'visible': vis
+          }];
+          cols = cols.concat(list.columnName);
+          meta = meta.concat(add_meta);
+        });
       }
 
-      if(this.props.listColumns) {
-       cols = cols.concat(this.props.listColumns);
-     }
-        return (
+      if (this.props.thumb) {
+        this.props.thumb.map(function(list){
+          add_meta = [{
+              'columnName': list,
+              'visible': false
+            }];
+          cols = cols.concat(list);
+          meta = meta.concat(add_meta);
+        });
+      }
+      return (
         <div>
           <Input type='text' placeholder='Filter List...' value={this.state.filter} onChange={this.setFilter} />
           <a onClick={this.resetFilterSort}>Reset</a>
-
-	       <Griddle useExternal={true}
+          <div className='table-responsive'>
+	           <Griddle useExternal={true}
                externalSetPage={this.setPage}
                enableSort={true}
                columns={cols}
@@ -165,11 +198,17 @@ var meta, thumb_meta, list_meta;
                externalCurrentPage={this.state.currentPage}
                results={this.state.results}
                tableClassName='table table-striped table-hover'
-	             columnMetadata={this.columnMeta()}
+	             columnMetadata={meta}
                externalSortColumn={this.state.externalSortColumn}
                externalSortAscending={this.state.externalSortAscending}
                useGriddleStyles={false}
+               showSettings={true}
+               sortAscendingComponent={<span> <Glyphicon glyph="sort-by-alphabet" /></span>}
+               sortDescendingComponent={<span> <Glyphicon glyph="sort-by-alphabet-alt" /></span>}
+               nextIconComponent={<span> <Glyphicon glyph="chevron-right" /></span>}
+               previousIconComponent={<span><Glyphicon glyph="chevron-left" /> </span>}
  />
+          </div>
 	       </div>
        );
     },

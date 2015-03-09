@@ -15,8 +15,14 @@ var UserConsole = React.createClass({
             /* jshint ignore:start */
             <ConsoleLayout title="Users Console">
                         <GriddleComponent store={userStore} actions={userActions}
-			                       linkColumnName={"name"}
-                             columns={["name", "first", "last", "masterid"]} />
+                          columns={[
+                            {columnName:'masterid', displayName:'id', type:'id'},
+                            {columnName:'name', displayName:'Name', type:'link'},
+                            {columnName:'first', displayName:'First Name', type:'text'},
+                            {columnName:'last', displayName:'Last Name', type:'text'},
+                            {columnName:'registration_date', displayName:'Registered On', type:'date'}
+                            ]}
+                          initialSort={['registration_date', false]} />
             </ConsoleLayout>
             /* jshint ignore:end */
         );

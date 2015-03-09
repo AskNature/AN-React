@@ -14,10 +14,17 @@ var ResearcherConsole = React.createClass({
         return (
             /* jshint ignore:start */
             <ConsoleLayout title="Researchers Console">
-                        <GriddleComponent store={researcherStore}
-			actions={researcherActions}
-                        linkColumnName={"name"}
-                        columns={["name", "masterid"]} />
+                        <GriddleComponent store={researcherStore} actions={researcherActions}
+                          columns={[
+                            {columnName:'masterid', displayName:'id', type:'id'},
+                            {columnName:'name', displayName:'Name', type:'link'},
+                            {columnName:'institution', displayName:'Institution', type:'text'},
+                            {columnName:'country', displayName:'Country', type:'text'},
+                            {columnName:'studied_by', displayName:'Referenced By', type:'list'},
+                            {columnName:'timestamp', displayName:'Date Modified', type:'date'}
+                          ]}
+                          thumb={['media', 'media_id', 'media_entity']}
+                          initialSort={['timestamp', false]} />
             </ConsoleLayout>
             /* jshint ignore:end */
         );

@@ -27,7 +27,7 @@ var loadindex = function(req, res, next) {
 
 var returnList = function(req, res) {
   var chain = db
-  .select('name, masterid as media_id, filename as media, id as masterid, entity as media_entity, "media" as entityType')
+  .select('name, masterid as media_id, filename as media, id as masterid, entity as media_entity, "media" as entityType, timestamp')
   .from('Media')
   .where('deleted == 0');
 

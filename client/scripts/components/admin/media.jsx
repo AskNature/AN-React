@@ -16,9 +16,12 @@ var MediaConsole = React.createClass({
             <ConsoleLayout title='Media Console'>
                         <GriddleComponent store={mediaStore}
                         actions={mediaActions}
-                        linkColumnName={'name'}
-                        columns={['name', 'media', 'masterid']}
-                        thumb={['media_entity', 'media_id']} />
+                        linkColumnName={[{column:"name", display:"Name"}]}
+                        idColumnName={["masterid"]}
+                        columns={[{column:"media", display:"Filename"}]}
+                        timestamp={['timestamp']}
+                        thumb={['media_id', 'media_entity']}
+                        initialSort={['timestamp', false]} />
             </ConsoleLayout>
             /* jshint ignore:end */
         );
