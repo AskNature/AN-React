@@ -132,7 +132,7 @@ module.exports = {
   saveStrategy: function(data) {
     var self = this;
     request
-    .post('/api/strategy')
+    .post('/api/strategy/'+data.masterid)
     .send(data)
     .end(function(res) {
         if(res.ok) {
