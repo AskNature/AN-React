@@ -29,9 +29,8 @@ var loadindex = function(req, res, next) {
 
 var returnList1 = function(req, res, next) {
   var chain = db
-  .select('name, summary as description, out("HasLivingSystem").name as living_system, out("HasFunction").name as outcomes, masterid, "strategy" as entityType, out("HasMedia")[0].filename as media, out("HasMedia")[0].entity as media_entity, out("HasMedia")[0].masterid as media_id, timestamp, is_deleted')
-  .from('Strategy')
-  .where({status: 0});
+  .select('name, summary as description, out("HasLivingSystem").name as living_system, out("HasFunction").name as outcomes, out("HasMechanism").name as mechanisms, masterid, "strategy" as entityType, out("HasMedia")[0].filename as media, out("HasMedia")[0].entity as media_entity, out("HasMedia")[0].masterid as media_id, timestamp, both("AddedContent").name as addedby, status, flag_text, flag_tags, flag_media, is_deleted')
+  .from('Strategy');
 
   var limit = parseInt(req.query.limit);
   if(limit) {

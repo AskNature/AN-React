@@ -77,7 +77,11 @@ var Defaults = {
           collectors: [],
           experts: [],
           keywords: 'Tag1, tag2',
-          created_by: []
+          created_by: [],
+          flag_text: 0,
+          flag_tags: 0,
+          flag_media: 0,
+          is_deleted: 0
       }
       ]
     },

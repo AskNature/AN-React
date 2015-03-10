@@ -16,13 +16,18 @@ var StrategyConsole = React.createClass({
             <ConsoleLayout title='Biological Strategy Console'>
               <GriddleComponent store={strategySt} actions={strategyAc}
                 columns={[
-                  {columnName:'masterid', displayName:'id', type:'id'},
+                  {columnName:'masterid', displayName:'id', type:'hidden'},
                   {columnName:'name', displayName:'Name', type:'link'},
-                  {columnName:'description', displayName:'Description', type:'text'},
+                  {columnName:'description', displayName:'Description', type:'longtext'},
+                  {columnName:'mechanisms', displayName:'Mechanisms', type:'list'},
                   {columnName:'outcomes', displayName:'Outcomes', type:'list'},
-                  {columnName:'living_system', displayName:'Living Systems', type:'list'},
+                  {columnName:'addedby', displayName:'Added By', type:'text'},
                   {columnName:'timestamp', displayName:'Date Modified', type:'date'},
-                  {columnName:'is_deleted', displayName:'Deleted', type:'boolean'}
+                  {columnName:'status', displayName:'Status', type:'text'},
+                  {columnName:'is_deleted', displayName:'Deleted', type:'boolean'},
+                  {columnName:'flag_text', displayName:'Text', type:'boolean'},
+                  {columnName:'flag_tags', displayName:'Tags', type:'boolean'},
+                  {columnName:'flag_media', displayName:'Media', type:'boolean'},
                   ]}
                 thumb={['media', 'media_id', 'media_entity']}
                 initialSort={['timestamp', false]} />

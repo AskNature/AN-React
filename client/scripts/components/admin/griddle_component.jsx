@@ -17,6 +17,9 @@ var LinkComponent = React.createClass({
           } else {
             i.src = 'http://placehold.it/100x100';
           }
+          var textstyle = {
+            minWidth: '200px'
+          };
         return (
           <div className='media'>
             <div className='media-left media-middle'>
@@ -24,12 +27,23 @@ var LinkComponent = React.createClass({
                 <img src={i.src} alt='Thumbnail' width='100px' height='auto' />
               </Link>
             </div>
-          <div className='media-body'>
+          <div className='media-body' style={textstyle}>
             <Link url={url}><strong>{this.props.data ? this.props.data : '<No Name>'}</strong></Link>
             </div>
           </div>
           );
     }
+});
+
+var LongTextComponent = React.createClass({
+  render: function() {
+    var textstyle = {
+      minWidth: '300px'
+    };
+    return(
+      <p style={textstyle}>{this.props.data}</p>
+    );
+  }
 });
 
 var ListComponent = React.createClass({
@@ -51,6 +65,7 @@ var ListComponent = React.createClass({
 var RadioComponent = React.createClass({
   render: function() {
     var status = false;
+    console.log(this.props.data);
     if(this.props.data === 1) {status = true;}
 
     return (
@@ -63,7 +78,6 @@ var RadioComponent = React.createClass({
 
 var SelectComponent = React.createClass({
   render: function() {
-
     return (
       <div>
         <Input type="select" label='Select' defaultValue="select">
@@ -103,7 +117,7 @@ var GriddleComponent = React.createClass({
             'externalResultsPerPage': 15,
             'externalSortColumn': initialSort,
             'externalSortAscending': initialSortOrder,
-	           'filter': ''
+	          'filter': ''
         };
     },
 
@@ -150,7 +164,7 @@ var GriddleComponent = React.createClass({
         this.props.columns.map(function(list){
           var custom = null;
           var vis = true;
-          if(list.type === 'id') {
+          if(list.type === 'id' || list.type === 'hidden') {
             vis = false;
           } else if(list.type === 'link') {
             custom = LinkComponent;
@@ -160,6 +174,9 @@ var GriddleComponent = React.createClass({
             custom = DateComponent;
           } else if(list.type === 'boolean') {
             custom = RadioComponent;
+          }
+          else if(list.type === 'longtext') {
+            custom = LongTextComponent;
           }
           add_meta = [{
             'columnName': list.columnName,
@@ -207,6 +224,7 @@ var GriddleComponent = React.createClass({
                sortDescendingComponent={<span> <Glyphicon glyph="sort-by-alphabet-alt" /></span>}
                nextIconComponent={<span> <Glyphicon glyph="chevron-right" /></span>}
                previousIconComponent={<span><Glyphicon glyph="chevron-left" /> </span>}
+               noDataMessage={"No data could be found."}
  />
           </div>
 	       </div>
