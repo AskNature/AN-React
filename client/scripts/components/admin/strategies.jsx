@@ -13,7 +13,7 @@ var StrategyConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <ConsoleLayout title='Biological Strategy Console'>
+            <ConsoleLayout plural='Biological Strategies' singular='Biological Strategy'>
               <GriddleComponent store={strategySt} actions={strategyAc}
                 columns={[
                   {columnName:'masterid', displayName:'id', type:'hidden'},

@@ -13,7 +13,7 @@ var SourceConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <ConsoleLayout title="Sources Console">
+            <ConsoleLayout plural='Sources' singular='Source'>
                         <GriddleComponent store={sourceStore} actions={sourceActions}
                           columns={[
                             {columnName:'masterid', displayName:'id', type:'id'},

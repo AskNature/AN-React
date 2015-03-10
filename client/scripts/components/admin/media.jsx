@@ -13,7 +13,7 @@ var MediaConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <ConsoleLayout title='Media Console'>
+            <ConsoleLayout plural='Media' singular='Media Item'>
                         <GriddleComponent store={mediaStore} actions={mediaActions}
                           columns={[
                             {columnName:'masterid', displayName:'id', type:'id'},

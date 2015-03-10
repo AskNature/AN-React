@@ -13,7 +13,7 @@ var CollectionConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <ConsoleLayout title="Collection Console">
+            <ConsoleLayout plural='Collections' singular='Collection'>
                         <GriddleComponent store={collectionStore}
                         actions={collectionActions}
                         linkColumnName={"name"}

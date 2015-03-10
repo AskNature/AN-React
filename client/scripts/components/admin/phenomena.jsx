@@ -13,7 +13,7 @@ var PhenomenaConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <ConsoleLayout title="Phenomena Console">
+            <ConsoleLayout plural='Phenomena' singular='Phenomenon'>
                         <GriddleComponent store={phenomenaStore} actions={phenomenaActions}
                           columns={[
                             {columnName:'masterid', displayName:'id', type:'id'},

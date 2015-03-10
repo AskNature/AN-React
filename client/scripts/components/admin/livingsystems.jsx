@@ -13,7 +13,7 @@ var LivingSystemConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <ConsoleLayout title="Living System Console">
+            <ConsoleLayout plural='Living Systems' singular='Living System'>
                         <GriddleComponent store={livingSystemStore} actions={livingSystemActions}
                           columns={[
                             {columnName:'masterid', displayName:'id', type:'id'},

@@ -13,7 +13,7 @@ var UserConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <ConsoleLayout title="Users Console">
+            <ConsoleLayout plural='Users' singular='User'>
                         <GriddleComponent store={userStore} actions={userActions}
                           columns={[
                             {columnName:'masterid', displayName:'id', type:'id'},

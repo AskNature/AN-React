@@ -13,7 +13,7 @@ var ResearcherConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <ConsoleLayout title="Researchers Console">
+            <ConsoleLayout plural='Researchers' singular='Researcher'>
                         <GriddleComponent store={researcherStore} actions={researcherActions}
                           columns={[
                             {columnName:'masterid', displayName:'id', type:'id'},

@@ -13,7 +13,7 @@ var ProductConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <ConsoleLayout title="Inspired Solutions Console">
+            <ConsoleLayout plural='Inspired Solutions' singular='Inspired Solution'>
                       <GriddleComponent store={productStore} actions={productActions}
                         columns={[
                           {columnName:'masterid', displayName:'id', type:'id'},
