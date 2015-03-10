@@ -71,7 +71,7 @@ var Login = React.createClass({
                             <Col xs={12}>
                               <h6>Or login with:</h6>
                               <ButtonGroup justified>
-                                <Button href='/auth/google'><Glyphicon glyph="social-google-plus" />Google</Button>
+                                <Button href='/auth/google'>Google</Button>
                                 <Button href='/auth/facebook'>Facebook</Button>
                                 <Button href='/auth/linkedin'>LinkedIn</Button>
                               </ButtonGroup>

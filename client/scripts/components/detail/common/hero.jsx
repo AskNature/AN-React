@@ -5,6 +5,8 @@
 
 var React = require('react'),
 
+Avatar = require('react-avatar'),
+
 Grid = require('react-bootstrap').Grid,
 Row = require('react-bootstrap').Row,
 Col = require('react-bootstrap').Col;
@@ -27,7 +29,7 @@ var HeroComponent = React.createClass({
                 <Col xs={12}>
                   <div className='media'>
                     <div className='media-left media-middle'>
-                      <img src={this.props.innerimage} alt='Profile' width='100px' height='100px' className='img-circle' />
+                      <Avatar email={this.props.items.email} name={this.props.primarytitle} src={this.props.innerimage} round='true' size='100' />
                     </div>
                     <div className='media-body'>
                       <h3 className="animated fadeInDown"> <strong>{this.props.primarytitle}</strong><br/>
