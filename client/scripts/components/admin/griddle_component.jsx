@@ -48,8 +48,11 @@ var LongTextComponent = React.createClass({
 
 var ListComponent = React.createClass({
   render: function() {
+    var textstyle = {
+      minWidth: '200px'
+    };
     return(
-      <ul>
+      <ul style={textstyle}>
         {
           this.props.data.map(function(item, i){
             return (

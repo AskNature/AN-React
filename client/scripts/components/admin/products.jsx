@@ -19,9 +19,15 @@ var ProductConsole = React.createClass({
                           {columnName:'masterid', displayName:'id', type:'id'},
                           {columnName:'description', displayName:'Name', type:'link'},
                           {columnName:'name', displayName:'System', type:'text'},
-                          {columnName:'outcomes', displayName:'Outcomes', type:'list'},
                           {columnName:'inspiredby', displayName:'Inspiration', type:'list'},
-                          {columnName:'timestamp', displayName:'Date Modified', type:'date'}
+                          {columnName:'mechanisms', displayName:'Mechanisms', type:'list'},
+                          {columnName:'outcomes', displayName:'Outcomes', type:'list'},
+                          {columnName:'addedby', displayName:'Added By', type:'text'},
+                          {columnName:'timestamp', displayName:'Date Modified', type:'date'},
+                          {columnName:'status', displayName:'Status', type:'text'},
+                          {columnName:'flag_text', displayName:'Text', type:'boolean'},
+                          {columnName:'flag_tags', displayName:'Tags', type:'boolean'},
+                          {columnName:'flag_media', displayName:'Media', type:'boolean'}
                           ]}
                         thumb={['media', 'media_id', 'media_entity']}
                         initialSort={['timestamp', false]} />
