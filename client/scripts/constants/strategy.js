@@ -1,16 +1,20 @@
 /**
-* Strategy constants -- defines the action types for the "strategy" area.
+* Strategy constants
+*     -- defines the action types and default values for individual Strategies.
 */
 'use strict';
 
 var keyMirror = require('keymirror');
 
-var itemConstants = keyMirror({
-
-  // Strategy action types
-  GET_STRATEGY: null,
-  GET_ALL_STRATEGIES: null
-
+var actions = keyMirror({
+    FETCH_STRATEGY: null,
+    FETCH_STRATEGY_SUCCESS: null,
+    FETCH_STRATEGY_ERROR: null,
+    INITIALIZE_STRATEGY: null,
+    UPDATE_STRATEGY: null,
+    COMMIT_STRATEGY: null,
+    COMMIT_STRATEGY_SUCCESS: null,
+    COMMIT_STRATEGY_ERROR: null
 });
 
-module.exports = itemConstants;
+module.exports = actions;
