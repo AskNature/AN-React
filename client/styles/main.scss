@@ -13,6 +13,7 @@
 
 // Injects all bower_component files automatically
 // bower:scss
+@import "../bower_components/components-font-awesome/scss/font-awesome.scss";
 // endbower
 
 // Injects all import files automatically
@@ -41,23 +42,9 @@ label {
   margin-top: 200px;
 }
 
-.dataTables_length {
-  float: right !important;
-}
-
-.dataTables_filter {
-  float: left !important;
-  width: 50% !important;
-  text-align: left !important;
-  label {
-    display: block !important;
-
-  }
-}
-
 
 .navmenu-fixed-left {
-  top: 85px;
+  top: 64px;
   width: 200px;
 }
 
@@ -65,6 +52,7 @@ label {
   position: relative;
   float:left;
   padding-left: 15px;
+  margin-right: 0px;
 }
 
 .container {
@@ -76,9 +64,19 @@ label {
 }
 
 /* ==========================================================================
-Navbar
+Sidebar
 ========================================================================== */
 
+.navmenu-fixed-left {
+  .nav-stacked {
+    li a {
+      color: #444;
+      .fa {
+        margin-top: 3px;
+      }
+    }
+  }
+}
 
 /* ==========================================================================
 Mini hero
@@ -230,7 +228,7 @@ Hero
   background: #ffffff;
   position: fixed;
   z-index: 2000;
-  top: 83px;
+  top: 64px;
   right: 100%;
   width: 100%;
   height: 2px;
@@ -241,6 +239,16 @@ Hero
     display: block !important;
   }
 
+  .navbar-fixed-top .navbar-nav {
+    margin-top: 0;
+    margin-bottom: 0;
+    li {
+      a {
+        padding-top: 20.5px;
+        padding-bottom: 20.5px;
+      }
+    }
+  }
 
   .navbar-form {
     padding-top: 0;
@@ -262,7 +270,6 @@ Hero
   }
 
   .navmenu-fixed-left {
-    top: 64px;
     width: 200px;
   }
 
