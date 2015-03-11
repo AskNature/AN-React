@@ -37,6 +37,8 @@ var AccountReset = React.createFactory(require('./components/account/reset.jsx')
 var Infinite = React.createFactory(require('./components/demo/infinite.jsx'));
 var Relationships = React.createFactory(require('./components/demo/relationships.jsx'));
 
+//var StrategyTest = React.createFactory(require('./components/demo/strategy.jsx'));
+
 var render = function(Page) {
     React.render(new Page(), document.getElementById('app-wrapper'));
 };
@@ -153,6 +155,10 @@ var relationship_demo = function() {
     render(Relationships);
 };
 
+/*var strategy_demo = function() {
+    render(StrategyTest);
+};*/
+
 var routes = {
   '/': index,
   '/admin/strategies': console_strategies,
@@ -182,6 +188,7 @@ var routes = {
   '/reset/:token': account_reset,
   '/infinite_demo': infinite_demo,
   '/relationship_demo': relationship_demo
+  /*'/strategy_demo': strategy_demo*/
 };
 
 module.exports = routes;

@@ -11,6 +11,10 @@ var Defaults = {
 
     },
 
+    relationshipList: {
+	results: []
+    },
+
     user: {
         loggedIn: false,
         results : [
@@ -77,6 +81,12 @@ var Defaults = {
           created_by: []
       }
       ]
+    },
+
+    strategyNew: {
+	name: 'Loading...',
+	description: 'Nature is coming...',
+	products: []
     },
 
     product: {

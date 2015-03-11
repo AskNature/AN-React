@@ -10,6 +10,8 @@ var request = require('superagent');
 var assign = require('object-assign');
 var _ = require('lodash');
 
+var store = require('../stores/strategy.js');
+
 /**
 * initialize begins the load of a strategy detail instance. It takes
 * seed data and either empties the store if the data is null or
@@ -35,7 +37,7 @@ var fetch = function(masterid) {
 	actionType: Constants.FETCH_STRATEGY
     });
     request
-    .get('/api/v2/strategies/'+id)
+    .get('/api/v2/strategies/'+masterid)
     .type('json')
     .end(function(res) {
       if (res.ok) {
@@ -43,7 +45,7 @@ var fetch = function(masterid) {
           var itemData = res.body;
             Dispatcher.handleViewAction({
 		actionType: Constants.FETCH_STRATEGY_SUCCESS,
-		data: data
+		data: itemData
 	    });
         }
       }
@@ -67,6 +69,22 @@ var update = function(data) {
     });
 };
 
+var removeRelationship = function(field, data) {
+    Dispatcher.handleViewAction({
+	actionType: Constants.REMOVE_RELATIONSHIP_STRATEGY,
+	field: field,
+	data: data
+    });
+};
+
+var addRelationship = function(field, data) {
+    Dispatcher.handleViewAction({
+	actionType: Constants.ADD_RELATIONSHIP_STRATEGY,
+	field: field,
+	data: data
+    });
+};
+
 /**
 * commit submits a set of changes to the server, and marks them as saved in the store
 */
@@ -77,11 +95,11 @@ var commit = function(fields) {
 	fields: fields
     });
     var self = this;
-    var masterid = store.getId();
+    var masterid = store.getMasterid();
     var changedData = _.pick(store.getUpdatedFields(), fields);
     request
-    .post('/api/v2/strategies/'+data.masterid)
-    .send(data)
+    .post('/api/v2/strategies/'+masterid)
+    .send(changedData)
     .end(function(res) {
         if(res.ok) {
 	    Dispatcher.handleViewAction({

@@ -12,7 +12,7 @@ var _ = require('lodash');
 var strategyConstants = require('../constants/strategy');
 
 /** Gets default values to be used until db action is completed */
-var strategyDefaults = require('../constants/defaults').strategy;
+var strategyDefaults = require('../constants/defaults').strategyNew;
 
 var _data;
 var _fieldsUpdated;
@@ -25,8 +25,13 @@ var StrategyStore = new Store({
 * hasn't completed. */
   get: function() {
     return _data || strategyDefaults;
+  },
+  getMasterid: function() {
+    return _data.masterid;
+  },
+  getUpdatedFields: function() {
+    return _fieldsUpdated;
   }
-
 });
 
 /** Receives a payload from the dispatcher, matches the payload to one
@@ -38,16 +43,33 @@ StrategyStore.dispatcherToken = Dispatcher.register(function(payload) {
 
   var action = payload.action;
 
-  if (action.actionType === strategyConstants.FETCH_STRATEGY_SUCCESS || action.actionType === strategyConstants.INITIALIZE_STRATEGY) {
+  if (action.actionType === strategyConstants.FETCH_STRATEGY_SUCCESS) {
       _data = action.data;
       StrategyStore.emitChange();
+  } else if (action.actionType === strategyConstants.INITIALIZE_STRATEGY) {
+      _data = action.data || strategyDefaults;
   } else if(action.actionType === strategyConstants.UPDATE_STRATEGY) {
       _.forEach(action.data, function(value, key) {
-	  _fieldsUpdated.splice(0, 0, key);
+	  _fieldsUpdated = _.union(_fieldsUpdated, [key]);
       });
       _.assign(_data, action.data);
+      StrategyStore.emitChange();
+  } else if(action.actionType === strategyConstants.REMOVE_RELATIONSHIP_STRATEGY) {
+      if(_data[action.field]) {
+	  _data[action.field] = _.reject(_data[action.field], function(item) {
+	      return item.masterid === action.data.masterid;
+	  });
+	  _fieldsUpdated = _.union(_fieldsUpdated,[action.field]);
+	  StrategyStore.emitChange();
+      }
+  } else if(action.actionType === strategyConstants.ADD_RELATIONSHIP_STRATEGY) {
+      if(_data[action.field]) {
+	  _data[action.field].push(action.data);
+	  _fieldsUpdated = _.union(_fieldsUpdated, [action.field]);
+	  StrategyStore.emitChange();
+      }
   }
 
 });
 
-module.exports = FocusStore;
+module.exports = StrategyStore;

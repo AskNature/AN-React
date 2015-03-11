@@ -14,7 +14,9 @@ var actions = keyMirror({
     UPDATE_STRATEGY: null,
     COMMIT_STRATEGY: null,
     COMMIT_STRATEGY_SUCCESS: null,
-    COMMIT_STRATEGY_ERROR: null
+    COMMIT_STRATEGY_ERROR: null,
+    ADD_RELATIONSHIP_STRATEGY: null,
+    REMOVE_RELATIONSHIP_STRATEGY: null
 });
 
 module.exports = actions;

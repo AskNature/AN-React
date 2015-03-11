@@ -201,18 +201,33 @@ var ConstructModel = function(entityName, fields, relationships) {
     
     // ------------- static below
     
-    Model.find = function(constraints, callback) { // TODO: update for relationships
-	db.select('@rid, masterid, ' + fields.join(', ')).from(entityName).where(constraints).all().then(function(results) {
+    Model.find = function(constraints, callback, options) {
+	var relFields = _.map(relationships, function(val, key) {
+            //return 'set(' + val.edge + '.masterid) as ' + key; // should deduplicate
+            return val.edge + '.masterid as ' + key;
+        });
+	db.select('@rid, masterid, ' + fields.join(', ') + (relFields.length ? ', ' : '') + relFields.join(', ')).from(entityName).where(constraints).all().then(function(results) {
 	    callback(_.map(results, function(result) {
-		return new Model(result.masterid, _.pick(result, fields), result.rid);
+		return new Model(result.masterid, result, result.rid);
 	    }));
 	}).done();
     };
+
+    Model.findAutocomplete = function(typed, limit, callback) {
+	db.query('SELECT @rid, masterid, ' + fields.join(', ') + " FROM " + entityName + " WHERE name LIKE '" + typed + "%' LIMIT " + limit).then(function(results) {
+	    callback(results);
+	}).done();
+    };
     
-    Model.findOne = function(constraints, callback) { // TODO: update for relationships
+    Model.findOne = function(constraints, callback) {
+	var relFields = _.map(relationships, function(val, key) {
+	    //return 'set(' + val.edge + '.masterid) as ' + key; // should deduplicate
+            return val.edge + '.masterid as ' + key;
+        });
 	// find the item, create a new wrapper around it
-	db.select('@rid, masterid, ' + fields.join(', ')).from(entityName).where(constraints).limit(1).one().then(function(result) {
-	    callback(new Model(result.masterid, _.pick(result, fields), result.rid));
+	db.select('@rid, masterid, ' + fields.join(', ') + (relFields.length ? ', ' : '') + relFields.join(', ')).from(entityName).where(constraints).limit(1).one().then(function(result) {
+	    if(!result) { return callback(null); }
+	    callback(new Model(result.masterid, result, result.rid));
 	}).done();
     };
     
