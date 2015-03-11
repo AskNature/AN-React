@@ -21,7 +21,10 @@ var Defaults = {
           {
             name: 'Username',
             flagged: [],
-            has_media: [],
+            media: [],
+            media_name: [],
+            media_entity: [],
+            media_id: [],
             added_media: [],
             collected: [],
             friends: [],
