@@ -46,8 +46,18 @@ StrategyStore.dispatcherToken = Dispatcher.register(function(payload) {
 	  _fieldsUpdated.splice(0, 0, key);
       });
       _.assign(_data, action.data);
+  } else if(action.actionType === strategyConstants.REMOVE_RELATIONSHIP_STRATEGY) {
+      if(_data[action.field]) {
+	  _data[action.field] = _.filter(_data[action.field], function(item) {
+	      return item.masterid === action.data.masterid;
+	  });
+      }
+  } else if(action.actionType === strategyConstants.ADD_RELATIONSHIP_STRATEGY) {
+      if(_data[action.field]) {
+	  _data[action.field].splice(0, 0, action.data);
+      }
   }
 
 });
 
-module.exports = FocusStore;
+module.exports = StrategyStore;

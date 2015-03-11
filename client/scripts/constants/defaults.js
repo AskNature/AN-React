@@ -11,6 +11,10 @@ var Defaults = {
 
     },
 
+    relationshipList: {
+	results: []
+    },
+
     user: {
         loggedIn: false,
         results : [
