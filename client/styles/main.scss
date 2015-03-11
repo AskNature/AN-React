@@ -44,7 +44,7 @@ label {
 
 
 .navmenu-fixed-left {
-  top: 64px;
+  top: 62px;
   width: 200px;
 }
 
@@ -197,7 +197,11 @@ Hero
 
 }
 
-.navbar-header.pull-right.nav li {
+.navbar {
+  height: 62px;
+}
+
+.navbar-header.pull-right.nav>li {
   float: left;
 }
 
@@ -228,7 +232,7 @@ Hero
   background: #ffffff;
   position: fixed;
   z-index: 2000;
-  top: 64px;
+  top: 60px;
   right: 100%;
   width: 100%;
   height: 2px;
@@ -242,10 +246,12 @@ Hero
   .navbar-fixed-top .navbar-nav {
     margin-top: 0;
     margin-bottom: 0;
-    li {
-      a {
-        padding-top: 20.5px;
-        padding-bottom: 20.5px;
+    > li > a {
+      padding-top: 20.5px;
+      padding-bottom: 20.5px;
+      &.loggedin-menu {
+        padding-top: 11px;
+        padding-bottom: 4px;
       }
     }
   }
@@ -263,7 +269,7 @@ Hero
 @media (min-width: 768px) {
   body {
     padding-left: 200px;
-    padding-top: 64px;
+    padding-top: 62px;
   }
   .pace .pace-progress {
     top: 62px;
