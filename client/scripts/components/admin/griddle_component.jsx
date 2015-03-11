@@ -15,7 +15,7 @@ var LinkComponent = React.createClass({
           } else if(this.props.rowData.first) {
             i.src = 'http://www.asknature.org/images/uploads/user/'+this.props.rowData.masterid+'/avatar/lg_avatar.jpg';
           } else {
-            i.src = 'http://placehold.it/100x100';
+            i.src = '';
           }
           var textstyle = {
             minWidth: '200px'
