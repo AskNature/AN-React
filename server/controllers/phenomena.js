@@ -1,12 +1,8 @@
-/**
-* Outcome Controller - receives actions via the router
-* and interacts with the database
-*/
-
 'use strict';
 var db = require('../config/database').db,
 settings = require('../config/env/default'),
 path = require('path');
+var _ = require('lodash');
 
 var crypto = require('crypto');
 
@@ -15,15 +11,16 @@ var Cached = require('cached');
 var Phenomenon = require('../models/phenomenon.js');
 
 var phenomenaCache;
-if(process.env.NODE_ENV == 'production') {
-    phenomenaCache = Cached('phenomena', { backend: {
+
+if(process.env.NODE_ENV === 'production') {
+    phenomenaCache = new Cached('phenomena', { backend: {
 	type: 'memcached',
 	hosts: '127.0.0.1:11211'
     }});
 } else {
-    phenomenaCache = Cached('strategy');
+    phenomenaCache = new Cached('phenomena');
 }
-phenomenaCache.setDefaults({"freshFor": 120});
+phenomenaCache.setDefaults({'freshFor': 120});
 
 /**
 * I'm still not sure if this var is necessary to include in this file.
@@ -39,7 +36,7 @@ var loadindex = function(req, res, next) {
 
 var returnList1 = function(req, res) {
   var chain = db
-  .select('name, short_name, in("ChildOf").name as children, out("ChildOf").name as parent, out("ChildOf").masterid as parentid, masterid, "phenomenon" as entityType')
+  .select('name, short_name, in("ChildOf").name as child_items, out("ChildOf").name as parent, out("ChildOf").masterid as parentid, in("HasFunction").size() as outcome_count, masterid, "phenomenon" as entityType')
   .from('Function');
 
   var limit = parseInt(req.query["limit"]);
@@ -55,6 +52,11 @@ var returnList1 = function(req, res) {
   var order = req.query["order"];
   if(order) {
       chain.order(order.substring(1) + (order.substring(0,1)=="-" ? "desc" : "asc"));
+  }
+
+  var filter = req.query.filter;
+  if(filter) {
+      chain.containsText({'name' : filter});
   }
 
   phenomenaCache.getOrElse('count', Cached.deferred(function(done) {

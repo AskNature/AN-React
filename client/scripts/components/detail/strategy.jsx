@@ -119,11 +119,12 @@ var StrategyDetail = React.createClass({
         activeKey: selectedKey
       });
     }
+    console.log(detail);
     return (
       /* jshint ignore:start */
       <DefaultLayout>
         <AdminBar masterid={detail.masterid} routename={routeName} pluralroute={routeNamePlural} entityname={entityName} />
-        <CreatorMast img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" entityname={entityName} />
+        <CreatorMast userid={detail.addedby_id} displayname={detail.addedby_first+' '+detail.addedby_last} timestamp={detail.timestamp} entityname={entityName} />
         <Hero items={detail} primarytitle={splitLegacyTitle[0]} secondarytitle={splitLegacyTitle[1]} secondarylink={secondaryLink} />
         <SubHero description={detail.description} editable={this.state.editable} store={focusStore} actions={focusActions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} />
         <Grid>

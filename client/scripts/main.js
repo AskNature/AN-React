@@ -1,13 +1,5 @@
 'use strict';
 
-// Load and use polyfill for ECMA-402.
-if (!global.Intl) {
-    global.Intl = require('intl');
-}
-
-global.React = require('react');
-global.ReactIntl = require('react-intl');
-
 var Router = require('director').Router;
 var routes = require('./routes');
 var Dispatcher = require('./dispatchers/default');

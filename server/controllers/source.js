@@ -2,19 +2,20 @@
 var db = require('../config/database').db,
 settings = require('../config/env/default'),
 path = require('path');
+var _ = require('lodash');
 
 var Cached = require('cached');
-
 var sourceCache;
-if(process.env.NODE_ENV == 'production') {
-    sourceCache = Cached('source', { backedn: {
+
+if(process.env.NODE_ENV === 'production') {
+    sourceCache = new Cached('source', { backend: {
 	type: 'memcached',
 	hosts: '127.0.0.1:11211'
     }});
 } else {
-    sourceCache = Cached('source');
+    sourceCache = new Cached('source');
 }
-sourceCache.setDefaults({"freshFor": 120});
+sourceCache.setDefaults({'freshFor': 120});
 
 var loadindex = function(req, res, next) {
   // Render index.html to allow application to handle routing
@@ -24,22 +25,27 @@ var loadindex = function(req, res, next) {
 
 var returnList = function(req, res) {
   var chain = db
-  .select('name, masterid, status, type, in("FeaturedIn").size() as featured_count, "source" as entityType')
+  .select('name, secondary_title, masterid, status, type, in("FeaturedIn").size() as featured_count, in("FeaturedIn").name as featured_in, "source" as entityType, type, both("Added").name as added, timestamp')
   .from('Sources');
 
-  var limit = parseInt(req.query["limit"]);
+  var limit = parseInt(req.query.limit);
   if(limit) {
       chain.limit(limit);
   }
 
-  var offset = parseInt(req.query["offset"]);
+  var offset = parseInt(req.query.offset);
   if(offset) {
       chain.offset(offset);
   }
 
-  var order = req.query["order"];
+  var order = req.query.order;
   if(order) {
-      chain.order(order.substring(1) + (order.substring(0,1)=="-" ? "desc" : "asc"));
+      chain.order(order.substring(1) + (order.substring(0,1)==='-' ? ' desc' : ' asc'));
+  }
+
+  var filter = req.query.filter;
+  if(filter) {
+      chain.containsText({'name' : filter});
   }
 
   sourceCache.getOrElse('count', Cached.deferred(function(done) {

@@ -13,10 +13,20 @@ var SourceConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <ConsoleLayout title="Sources Console">
+            <ConsoleLayout plural='Sources' singular='Source'>
                         <GriddleComponent store={sourceStore} actions={sourceActions}
-                        linkColumnName={"name"}
-                        columns={["name", "status", "type", "featured_count", "masterid"]} />
+                          columns={[
+                            {columnName:'masterid', displayName:'id', type:'id'},
+                            {columnName:'name', displayName:'Name', type:'link'},
+                            {columnName:'status', displayName:'Status', type:'text'},
+                            {columnName:'type', displayName:'Source', type:'text'},
+                            {columnName:'featured_count', displayName:'Featured Count', type:'text'},
+                            {columnName:'featured_in', displayName:'Featured In', type:'list'},
+                            {columnName:'added', displayName:'Added By', type:'list'},
+                            {columnName:'timestamp', displayName:'Date Modified', type:'date'}
+                          ]}
+                          thumb={['media', 'media_id', 'media_entity']}
+                          initialSort={['featured_count', true]} />
             </ConsoleLayout>
             /* jshint ignore:end */
         );

@@ -51,23 +51,6 @@ var getState = function() {
   };
 };
 
-var List = React.createClass({
-  render: function() {
-    var items = this.props.items;
-    return (
-      <ul>
-        {
-          items.map(function(item, i){
-            return (
-                <li key={i}>{item}</li>
-            );
-          })
-        }
-      </ul>
-    );
-  }
-});
-
 /** StrategyDetail class contains a search field that filters items in
 * an unordered list in real time.
 */
@@ -113,35 +96,49 @@ var StrategyDetail = React.createClass({
     var routeNamePlural = 'users';
     var entityName = 'Users';
     var detail = this.state.details.results[0];
-    var items = this.state.details.results;
     var legacy_url = 'http://www.asknature.org/user/'+detail.masterid;
     var avatar = 'http://www.asknature.org/images/uploads/user/'+detail.masterid+'/avatar/lg_avatar.jpg';
     return (
         /* jshint ignore:start */
         <DefaultLayout>
           <AdminBar masterid={detail.masterid} routename={routeName} pluralroute={routeNamePlural} entityname={entityName} />
-          <CreatorMast img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" entityname={entityName} />
-          <Hero items={detail} primarytitle={detail.masterid} secondarytitle={detail.name} />
+          <Hero items={detail} primarytitle={detail.first+' '+detail.last} secondarytitle={detail.name} innerimage={avatar} />
           <SubHero description={detail.special_text} editable={this.state.editable} store={focusStore} actions={focusActions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} />
-            <Grid>
-              <Row className="show-grid">
-                <Col xs={12} sm={6}>
-                  <h3>{detail.name}</h3>
-                </Col>
 
-                <Col xs={12} sm={6}>
+            <PanelGroup defaultActiveKey='1' accordion>
+              <Panel header="More" eventKey='1'>
+                <Grid>
+                  <Row>
+                    <Col xs={12}>
+                      <Gallery items={detail} />
+                    </Col>
+                  </Row>
 
-                    <img className='img-responsive' src={avatar} />
-                </Col>
-              </Row>
-              <Row className="show-grid">
-                <Col xs={12} md={12}>
-                  <h6>Data Dump</h6>
-                  <DataTable data={detail} store={focusStore} actions={focusActions} editable={this.state.editable} />
-                </Col>
-              </Row>
-            </Grid>
-        </DefaultLayout>
+                  <Row className="show-grid">
+                    {detail.friends[0] ? (
+                      <Col xs={12} sm={6}>
+                        <ButtonList friends items={{'name':detail.friends}} routename="user" title="Friends" />
+                      </Col>) : ''
+                    }
+                    {detail.added_media[0] ? (
+                      <Col xs={12} sm={6}>
+                        <ButtonList friends items={{'name':detail.added_media}} routename="media" title={'Media by ' + detail.first} />
+                      </Col>) : ''
+                    }
+                  </Row>
+                </Grid>
+              </Panel>
+              <Panel header="Table View" eventKey="2">
+                <Grid>
+                  <Row className="show-grid">
+                    <Col xs={12} md={12}>
+                      <DataTable data={detail} editable={this.state.editable} store={focusStore} actions={focusActions} />
+                    </Col>
+                  </Row>
+                </Grid>
+              </Panel>
+            </PanelGroup>
+          </DefaultLayout>
         /* jshint ignore:end */
     );
   },

@@ -13,7 +13,7 @@ var ConditionConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <ConsoleLayout title="Conditions Console">
+            <ConsoleLayout plural='Context' singular='Condition'>
                         <GriddleComponent store={conditionStore} actions={conditionActions}
                         linkColumnName={"name"}
                         columns={["name", "masterid"]} />

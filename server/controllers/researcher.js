@@ -2,19 +2,20 @@
 var db = require('../config/database').db,
 settings = require('../config/env/default'),
 path = require('path');
+var _ = require('lodash');
 
 var Cached = require('cached');
-
 var researcherCache;
-if(process.env.NODE_ENV == 'production') {
-    researcherCache = Cached('researcher', { backend: {
-        type: 'memcached',
-        hosts: '127.0.01:11211'
+
+if(process.env.NODE_ENV === 'production') {
+    researcherCache = new Cached('researcher', { backend: {
+	type: 'memcached',
+	hosts: '127.0.0.1:11211'
     }});
 } else {
-    researcherCache = Cached('researcher');
+    researcherCache = new Cached('researcher');
 }
-researcherCache.setDefaults({"freshFor": 120});
+researcherCache.setDefaults({'freshFor': 120});
 
 var loadindex = function(req, res, next) {
   // Render index.html to allow application to handle routing
@@ -24,22 +25,27 @@ var loadindex = function(req, res, next) {
 
 var returnList = function(req, res) {
   var chain = db
-  .select('name, masterid, "researcher" as entityType')
+  .select('name, masterid, institution, country, in("StudiedBy").name as studied_by, timestamp, "researcher" as entityType')
   .from('Experts');
 
-  var limit = parseInt(req.query["limit"]);
+  var limit = parseInt(req.query.limit);
   if(limit) {
       chain.limit(limit);
   }
 
-  var offset = parseInt(req.query["offset"]);
+  var offset = parseInt(req.query.offset);
   if(offset) {
       chain.offset(offset);
   }
 
-  var order = req.query["order"];
+  var order = req.query.order;
   if(order) {
-      chain.order(order.substring(1) + (order.substring(0,1)=="-" ? "desc" : "asc"));
+      chain.order(order.substring(1) + (order.substring(0,1)==='-' ? ' desc' : ' asc'));
+  }
+
+  var filter = req.query.filter;
+  if(filter) {
+      chain.containsText({'name' : filter});
   }
 
   researcherCache.getOrElse('count', Cached.deferred(function(done) {

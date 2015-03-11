@@ -2,6 +2,7 @@
 var db = require('../config/database').db,
 settings = require('../config/env/default'),
 path = require('path');
+var _ = require('lodash');
 
 var crypto = require('crypto');
 
@@ -10,15 +11,17 @@ var Cached = require('cached');
 var Product = require('../models/product.js');
 
 var productCache;
-if(process.env.NODE_ENV == 'production') {
-    productCache = Cached('product', { backend: {
+
+if(process.env.NODE_ENV === 'production') {
+    productCache = new Cached('product', { backend: {
 	type: 'memcached',
-	hosts: '127.0.01:11211'
+	hosts: '127.0.0.1:11211'
     }});
 } else {
-    productCache = Cached('product');
+    productCache = new Cached('product');
 }
-productCache.setDefaults({"freshFor": 120});
+productCache.setDefaults({'freshFor': 120});
+
 
 var loadindex = function(req, res, next) {
   // Render index.html to allow application to handle routing
@@ -28,25 +31,29 @@ var loadindex = function(req, res, next) {
 
 var returnList1 = function(req, res) {
   var chain = db
-  .select('name, headline as description, out("InspiredBy").name as inspiredby, out("HasFunction").description as outcomes, masterid, "product" as entityType')
+  .select('name, headline as description, out("InspiredBy").name as inspiredby, out("HasFunction").description as outcomes, out("HasMechanism").name as mechanisms, masterid, "product" as entityType, out("HasMedia")[0].filename as media, out("HasMedia")[0].entity as media_entity, out("HasMedia")[0].masterid as media_id, timestamp, both("AddedContent").name as addedby, status, flag_text, flag_tags, flag_media')
   .from('InspiredSolutions')
   .where({status: 0});
 
-  var limit = parseInt(req.query["limit"]);
+  var limit = parseInt(req.query.limit);
   if(limit) {
       chain.limit(limit);
   }
 
-  var offset = parseInt(req.query["offset"]);
+  var offset = parseInt(req.query.offset);
   if(offset) {
       chain.offset(offset);
   }
 
-  var order = req.query["order"];
+  var order = req.query.order;
   if(order) {
-      chain.order(order.substring(1) + (order.substring(0,1)=="-" ? "desc" : "asc"));
+      chain.order(order.substring(1) + (order.substring(0,1)==='-' ? ' desc' : ' asc'));
   }
 
+  var filter = req.query.filter;
+  if(filter) {
+      chain.containsText({'headline' : filter});
+  }
   productCache.getOrElse('count', Cached.deferred(function(done) {
       db.select('count(*)').from('InspiredSolutions')
       .where({status: 0})

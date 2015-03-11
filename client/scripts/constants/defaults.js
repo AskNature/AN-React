@@ -5,7 +5,7 @@ var Defaults = {
     route: '/',
 
     page: {
-        title: 'Home',
+        title: 'AskNature',
         description: 'A React + Flux application',
         keywords: null
 
@@ -58,8 +58,11 @@ var Defaults = {
       results : [
       {
           name: 'Nature is Coming...',
-          description: '...and She\'s Pissed',
+          description: '',
           masterid: '',
+          addedby_id: '',
+          addedby_first: '',
+          addedby_last: '',
           media: [],
           media_name: [],
           media_entity: [],
@@ -81,7 +84,11 @@ var Defaults = {
           collectors: [],
           experts: [],
           keywords: 'Tag1, tag2',
-          created_by: []
+          created_by: [],
+          flag_text: 0,
+          flag_tags: 0,
+          flag_media: 0,
+          is_deleted: 0
       }
       ]
     },

@@ -13,7 +13,7 @@ var CollectionConsole = React.createClass({
       <DefaultLayout>
         <div className="main-container">
           <div className="container">
-            <h2>{this.props.title}</h2>
+            <h3>{this.props.plural} <Button>Create New {this.props.singular}</Button></h3>
             {this.props.children}
           </div>
         </div>
