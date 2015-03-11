@@ -40,7 +40,7 @@ var Login = React.createClass({
   render: function() {
     var title = 'Sign Up';
     function handleHide() {
-      routeActions.setRoute('/');
+      window.history.back();
     }
     return (
       /* jshint ignore:start */
