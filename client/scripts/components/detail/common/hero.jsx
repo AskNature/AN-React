@@ -13,7 +13,7 @@ Col = require('react-bootstrap').Col;
 
 var HeroComponent = React.createClass({
   render: function() {
-    var mediaurl = this.props.media ? 'http://www.asknature.org/images/uploads/'+ this.props.items.media_entity[0] + '/' + this.props.items.media_id[0] + '/' + this.props.items.media[0] : '';
+    var mediaurl ='http://www.asknature.org/images/uploads/'+ this.props.items.media_entity[0] + '/' + this.props.items.media_id[0] + '/' + this.props.items.media[0];
     var heroStyle = {
       backgroundImage: 'url(' + mediaurl + ')'
     };

@@ -43,7 +43,7 @@ var userStore = require('../../stores/accounts');
 /** Temp vars for Scott's in-progress store and action files */
 
 var scottStore = require('../../stores/strategy');
-var scottAction = require('../../actions/strategy');
+var scottActions = require('../../actions/strategy');
 
 /** getState can be called to get state updates from the store.
 * initialItems = entire list that remains static
@@ -53,39 +53,30 @@ var scottAction = require('../../actions/strategy');
 var getState = function() {
   return {
     details: focusStore.get(),
-    user: userStore.get()
+    user: userStore.get(),
+    scott_object: scottStore.get()
   };
 };
 
-
-var List = React.createClass({
-  render: function() {
-    var items = this.props.items;
-    return (
-      <ul>
-        {
-          items.map(function(item, i){
-            return (
-              <li key={i}>{item}</li>
-            );
-          })
-        }
-      </ul>
-    );
-  }
-});
-
 var StrategyDetail = React.createClass({
 
-  mixins: [focusStore.mixin, userStore.mixin],
+  mixins: [focusStore.mixin, userStore.mixin, scottStore.mixin],
 
   getInitialState: function() {
-    return getState();
+    return (
+      {
+        details: focusStore.get(),
+        user: userStore.get(),
+        scott_object: scottStore.get(),
+      editable: false
+      }
+    );
   },
 
   componentWillMount: function() {
     var id = window.location.pathname;
     focusActions.getItem(id);
+    scottActions.fetch(id);
     this.setState({editable: false});
   },
 
@@ -95,7 +86,7 @@ var StrategyDetail = React.createClass({
 
   editBegin: function(e) {
       e.preventDefault();
-      if(this.state.user.role == 'admin') { this.setState({editable: true}); }
+      if(this.state.user.role != 'admin') { this.setState({editable: true}); }
   },
 
   editCancel: function(e) {
