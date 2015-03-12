@@ -17,6 +17,7 @@ Gallery = require('./common/gallery.jsx');
 var Panel = require('react-bootstrap/Panel'),
 PanelGroup = require('react-bootstrap/PanelGroup'),
 Row = require('react-bootstrap/Row'),
+Label = require('react-bootstrap/Label'),
 Grid = require('react-bootstrap/Grid');
 
 var getState = function() {

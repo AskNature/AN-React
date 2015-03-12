@@ -32,9 +32,9 @@ var initialize = function(initialData) {
 var fetch = function(masterid) {
     // do the async fetch with masterid
     var self = this;
-    Dispatcher.handleViewAction({
+    /*Dispatcher.handleViewAction({
 	actionType: Constants.FETCH_STRATEGY
-    });
+    });*/
     request
     .get('/api/v2/strategies/'+masterid+'?expand=true')
     .type('json')
