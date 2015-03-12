@@ -28,7 +28,7 @@ var SubHero = React.createClass({
           </Col>
           <Col xs={12} sm={4}>
             <ButtonToolbar style={{"margin-top": "11.5px"}}>
-	      {this.props.editable? <ButtonGroup><Button active={true} style={{"cursor": "default"}} disabled={true} bsStyle="primary"><Glyphicon glyph="pencil" /></Button><Button bsStyle="success" onClick={this.props.editFinish}><Glyphicon glyph="ok" /></Button><Button bsStyle="danger" onClick={this.props.editCancel}><Glyphicon glyph="remove" /></Button></ButtonGroup> : <Button onClick={this.props.editBegin}>
+	      {this.props.editable? <span><ButtonGroup><Button active={true} style={{"cursor": "default"}} disabled={true} bsStyle="primary"><Glyphicon glyph="pencil" /></Button><Button bsStyle="success" onClick={this.props.editFinish}><Glyphicon glyph="ok" /></Button><Button bsStyle="danger" onClick={this.props.editCancel}><Glyphicon glyph="remove" /></Button></ButtonGroup><Button onClick={this.props.onDelete}><Glyphicon glyph="trash" /></Button></span> : <Button onClick={this.props.editBegin}>
                 <Glyphicon glyph="pencil" />
               </Button>}
               <Button>
