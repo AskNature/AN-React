@@ -10,7 +10,8 @@ var RelationshipList = require('./common/relationshiplist.jsx');
 var CreatorMast = require('./common/creatormast.jsx'),
 AdminBar = require('./common/adminbar.jsx'),
 Hero = require('./common/hero.jsx'),
-SubHero = require('./common/subhero.jsx');
+SubHero = require('./common/subhero.jsx'),
+Gallery = require('./common/gallery.jsx');
 
 var Panel = require('react-bootstrap/Panel'),
 PanelGroup = require('react-bootstrap/PanelGroup'),
@@ -83,6 +84,11 @@ var StrategyDetail = React.createClass({
 		        <Panel header="More" eventKey='1'>
                     	    <Grid>
 			        <Row>
+				    <Col xs={12}>
+				        <Gallery items={detail} />
+				    </Col>
+				</Row>
+				<Row>
 				    <Col xs={12} md={12}>
 				         <TextArea title='Story' item={detail.brief} store={store} actions={actions} fieldName={"brief"} editable={this.state.editable} />
 					 <TextArea title='Citations' item={detail.special_text} store={store} actions={actions} fieldName={"special_text"} editable={this.state.editable} />
