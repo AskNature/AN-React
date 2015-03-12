@@ -23,7 +23,7 @@ var SubHero = React.createClass({
           <Col xs={12} sm={8}>
             <h5 className="lead">
               {this.props.first ? (<strong>{this.props.first} </strong>) : ''}
-              {this.props.descriptionlink ? (<Link url={this.props.descriptionlink}>{this.props.description}</Link>) : (<span><TextField store={this.props.store} actions={this.props.actions} fieldName={"description"} initialValue={this.props.description} editable={this.props.editable} /></span>)}
+              {this.props.descriptionlink ? (<Link url={this.props.descriptionlink}>{this.props.description}</Link>) : (<span><TextField store={this.props.store} actions={this.props.actions} fieldName={"summary"} initialValue={this.props.description} editable={this.props.editable} /></span>)}
               </h5>
           </Col>
           <Col xs={12} sm={4}>
