@@ -12,6 +12,8 @@ var _ = require('lodash');
 
 var store = require('../stores/strategy.js');
 
+var routeActions = require('./routes');
+
 /**
 * initialize begins the load of a strategy detail instance. It takes
 * seed data and either empties the store if the data is null or
@@ -122,11 +124,22 @@ var commit = function(fields) {
     });
 };
 
+var del = function(masterid) {
+    request
+    .del('/api/v2/strategies/'+masterid)
+    .end(function(res) {
+	if(res.ok) {
+	    routeActions.setRoute('/admin/strategies');
+	}
+    });
+};
+
 module.exports = {
     initialize: initialize,
     fetch: fetch,
     update: update,
     removeRelationship: removeRelationship,
     addRelationship: addRelationship,
-    commit: commit
+    commit: commit,
+    del: del
 };

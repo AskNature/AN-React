@@ -70,6 +70,10 @@ var StrategyDetail = React.createClass({
         actions.commit();
         this.setState({editable: false});
     },
+    onDelete: function() {
+        var r = confirm("Do you really want to delete this record?");
+        if(r) {var id = window.location.pathname; actions.del((id.split('/')[2]));}
+    },
     render: function() {
     	var detail = this.state.object;
 	var entityName = "Biological Strategy";
@@ -81,7 +85,7 @@ var StrategyDetail = React.createClass({
 		    <AdminBar masterid={detail.masterid} routename={"strategy"} pluralroute={"strategies"} entityName={entityName} />
 		    <CreatorMast img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" entityname={entityName} />
 		    <Hero media={detail.media} primarytitle={splitLegacyTitle[0]} secondarytitle={splitLegacyTitle[1]} secondarylink={secondaryLink} />
-		    <SubHero description={detail.summary} editable={this.state.editable} store={store} actions={actions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} />
+		    <SubHero description={detail.summary} editable={this.state.editable} store={store} actions={actions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} onDelete={this.onDelete} />
 		    <Grid>
           	        <Row className="show-grid">
             		    <Col xs={12} sm={4}>
