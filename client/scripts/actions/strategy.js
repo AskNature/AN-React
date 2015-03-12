@@ -100,7 +100,7 @@ var commit = function(fields) {
     var model = store.get();
     var dataToSend = {};
     _.forEach(changedData, function(field) {
-	dataToSend[changedData] = model[changedData];
+	dataToSend[field] = model[field];
     });
     request
     .post('/api/v2/strategies/'+masterid)

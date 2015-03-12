@@ -33,8 +33,9 @@ var StrategyDetail = React.createClass({
 	    editable: false
 	});
     },
-    componentWillMount: function() {
-	actions.fetch("d1cb32be3c76489375e383e6ed53a736");
+    componentDidMount: function() {
+    	var id = window.location.pathname;
+	actions.fetch((id.split('/')[2]));
     },
     _onChange: function() {
     	this.setState(getState());
@@ -50,9 +51,6 @@ var StrategyDetail = React.createClass({
     toggleEditable: function() {
         this.setState({editable: !this.state.editable});
     },
-    saveItem: function() {
-    	actions.commit();
-    },
     editBegin: function(e) {
         e.preventDefault();
         //if(this.state.user.role == 'admin') { this.setState({editable: true}); }
@@ -61,12 +59,12 @@ var StrategyDetail = React.createClass({
     editCancel: function(e) {
         e.preventDefault();
         var id = window.location.pathname;
-        actions.fetch(id);
+        actions.fetch((id.split('/')[2]));
         this.setState({editable: false});
     },
     editFinish: function(e) {
         e.preventDefault();
-        actions.commit(); // TODO: update commit to do all fields when empty
+        actions.commit();
         this.setState({editable: false});
     },
     render: function() {
