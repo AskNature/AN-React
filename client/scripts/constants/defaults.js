@@ -12,7 +12,8 @@ var Defaults = {
     },
 
     relationshipList: {
-	results: []
+	results: [],
+    input_value: ''
     },
 
     user: {

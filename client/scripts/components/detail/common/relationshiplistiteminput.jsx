@@ -61,6 +61,11 @@ var RelationshipListItemInput = React.createClass({
       this.props.onAdd(suggestion);
       this.refs.relationshipInput.getDOMNode().value = '';
       RelationshipListActions.initialize();
+      this.setState({input_value: ''});
+  },
+
+  handleInputChange: function(e) {
+    this.setState({input_value: e.target.input_value});
   },
 
   render: function() {
@@ -70,15 +75,19 @@ var RelationshipListItemInput = React.createClass({
             <Panel style={{position:'relative'}}>
               <form className='autocomplete-input'>
                <Input type="text"
+                 value={this.state.input_value}
                  placeholder={ 'Connect your ' +
                  this.props.fieldName }
                  onFocus={this.onInputFocus}
                  onInput={this.onInputInput}
+                 onChange={this.handleInputChange}
                  ref={'relationshipInput'}
                  addonBefore={<Glyphicon
                    glyph='plus' />} />
                 <Input
                   type="text"
+                  value={this.state.input_value}
+                  onChange={this.handleInputChange}
                   placeholder={this.state.results.length > 0 ? this.state.results[0].name : '' }
                   addonBefore={<Glyphicon
                     glyph='plus' />}/>
@@ -91,11 +100,9 @@ var RelationshipListItemInput = React.createClass({
               return (
                 <li
                   tabindex={i}
-                  onBlur={this.handleBlur}
                   onClick={boundSuggestionClick}
                   className={'autocomplete-dropdown'}
                   key={result.masterid}>
-
                   <span>
                     {result.name}
                   </span>
