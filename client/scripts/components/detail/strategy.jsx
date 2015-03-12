@@ -81,6 +81,20 @@ var StrategyDetail = React.createClass({
 		    <CreatorMast img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" entityname={entityName} />
 		    <Hero media={detail.media} primarytitle={splitLegacyTitle[0]} secondarytitle={splitLegacyTitle[1]} secondarylink={secondaryLink} />
 		    <SubHero description={detail.summary} editable={this.state.editable} store={store} actions={actions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} />
+		    <Grid>
+          	        <Row className="show-grid">
+            		    <Col xs={12} sm={4}>
+               		        <ButtonList livingsystems items={detail.living_systems} routename="living-system" title="Living Systems"/>
+              			<ButtonList conditions items={detail.conditions} title="Context" />
+            		    </Col>
+            		    <Col xs={6} sm={4}>
+              		        <ButtonList phenomena items={detail.mechanisms} routename="phenomenon" title="Mechanisms"/>
+            		    </Col>
+            		    <Col xs={6} sm={4}>
+              		        <ButtonList phenomena items={detail.functions} routename="phenomenon" title="Outcomes"/>
+            		    </Col>
+          		</Row>
+         	    </Grid>
 		    <PanelGroup defaultActiveKey='1' accordion>
 		        <Panel header="More" eventKey='1'>
                     	    <Grid>
