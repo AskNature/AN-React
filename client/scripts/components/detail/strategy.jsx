@@ -11,6 +11,7 @@ var CreatorMast = require('./common/creatormast.jsx'),
 AdminBar = require('./common/adminbar.jsx'),
 Hero = require('./common/hero.jsx'),
 SubHero = require('./common/subhero.jsx'),
+ButtonList = require('./common/edgelists.jsx'),
 Gallery = require('./common/gallery.jsx');
 
 var Panel = require('react-bootstrap/Panel'),
@@ -153,6 +154,18 @@ var StrategyDetail = React.createClass({
 				        <RelationshipList items={this.state.object.products} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, "products")} onRemove={this.onRelationshipRemove.bind(null, "products")} field={"products"} routeName={"product"} title={"Inspired Solutions"} fieldName={"Inspired Solution"}/>
 				    </Col>
 				</Row>
+              			<Row className="show-grid">
+                		    {detail.sources ? (
+                  		        <Col xs={12} sm={6}>
+                    			    <ButtonList sources items={detail.sources} routename="source" title="Sources" />
+                  			</Col>) : ''
+                		    }
+                		    {detail.experts ? (
+                  		        <Col xs={12} sm={6}>
+                    			    <ButtonList experts items={detail.experts} routename="researcher" title="Studied By" />
+                  			</Col>) : ''
+                		    }
+              			</Row>
 			    </Grid>
 			</Panel>
 		    </PanelGroup>
