@@ -5,27 +5,43 @@
 
 var React = require('react'),
 Link = require('../../modules/link.jsx'),
-ListGroupItem = require('react-bootstrap').ListGroupItem;
+
+Glyphicon = require('react-bootstrap').Glyphicon,
+SplitButton = require('react-bootstrap').SplitButton,
+ButtonToolbar = require('react-bootstrap').ButtonToolbar,
+MenuItem = require('react-bootstrap').MenuItem;
+
+var MiniHero = React.createClass({
+  render: function() {
+    return (
+      <div>
+        {this.props.title}
+      </div>
+    );
+  }
+});
+
 
 var RelationshipListItem = React.createClass({
   render: function() {
     var item = this.props.item;
     var routeName = this.props.routeName;
     function clickhandler() {
-      window.setInterval(function(){scrollTo(0, 0);},200);
+      window.setInterval(function(){scrollTo(0, 0);},10000);
     }
     var link = '../' + routeName + '/' + item.masterid;
     var mediaurl = 'http://www.757angelsgroup.com/show/main-profile/wiki-image/20140518072131!Placeholder.png';
-    var heroStyle = {
-        backgroundImage: 'url(' + mediaurl + ')'
-    };
     return (
-        <div><Link url={link}>
-            <ListGroupItem className="minihero" style={heroStyle}>
-                <h6>{item.name}</h6>
-            </ListGroupItem>
-        </Link>
-	{this.props.editable ? <a href="#" style={{position: 'absolute', right: '16px', color:'#fff', zIndex: '4', marginTop: '-24px'}} onClick={this.props.onRemove.bind(null, item)}>(X)</a> : ""}</div>
+        <ButtonToolbar className='relationship-button'>
+          <SplitButton
+            title={<MiniHero title={item.name} />}
+            href={link}
+            style={{backgroundImage: 'url(' + mediaurl + ')'}}
+            pullright>
+            <MenuItem eventKey="1">Flag</MenuItem>
+            <MenuItem eventKey="2" onClick={this.props.onRemove.bind(null, item)}><Glyphicon glyph='remove' />Remove</MenuItem>
+          </SplitButton>
+        </ButtonToolbar>
     );
   }
 });

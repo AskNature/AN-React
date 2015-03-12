@@ -91,7 +91,7 @@ Sidebar
 }
 
 /* ==========================================================================
-Mini hero
+Mini hero (relationship list editor)
 ========================================================================== */
 .minihero {
     position: relative;
@@ -118,6 +118,51 @@ Mini hero
       position: absolute;
       display: block;
     }
+    .remove-button {
+      position: relative;
+      float: right;
+      margin-top: -5px;
+    }
+}
+
+.relationship-button {
+  .btn-group {
+    width: 100%;
+    margin-bottom: 4px;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+    }
+    &:hover {
+      &:before {
+        background: rgba(0,0,0,0.5);
+      }
+    }
+  }
+  .btn {
+    height: 50px;
+    &:first-child {
+      width: 90%;
+      text-transform: none;
+      text-align: left;
+      padding-top: 13px;
+      color: #fff;
+    }
+    &.dropdown-toggle {
+      width: 10%;
+      background-image: none !important;
+    }
+  }
+  .dropdown-menu {
+    left: inherit;
+    right: 0;
+    float: right;
+  }
 }
 /* ==========================================================================
 Hero
