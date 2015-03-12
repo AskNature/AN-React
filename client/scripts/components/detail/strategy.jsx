@@ -96,6 +96,58 @@ var StrategyDetail = React.createClass({
 				</Row>
 				<Row className="show-grid">
 				    <Col xs={12} sm={6}>
+                  <h6><strong>Your Inspired Ideas</strong></h6>
+
+                  <ul className="media-list">
+                    {detail.application_1 ? (
+                      <li className="media">
+                        <div className="media-left">
+                          <a href="#">
+                            <img src="https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
+                          </a>
+                        </div>
+                        <div className="media-body">
+                          <p><a href="#"><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_1}} /> <Label>Sector 1</Label></p>
+                        </div>
+                      </li>) : ''
+                    }
+                    {detail.application_2 ? (
+                      <li className="media">
+                        <div className="media-left">
+                          <a href="#">
+                            <img src="https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
+                          </a>
+                        </div>
+                        <div className="media-body">
+                          <p><a href="#"><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_2}} /> <Label>Sector 2</Label> <Label>Sector 3</Label></p>
+                        </div>
+                      </li>) : ''
+                    }
+                    {detail.application_3 ? (
+                      <li className="media">
+                        <div className="media-left">
+                          <a href="#">
+                            <img src="https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
+                          </a>
+                        </div>
+                        <div className="media-body">
+                          <p><a href="#"><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_3}} /> <Label>Sector 4</Label> <Label>Sector 3</Label></p>
+                        </div>
+                      </li>) : ''
+                    }
+                    <li className="media">
+                      <div className="media-left">
+                        <a href="#">
+                          <img src="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
+                        </a>
+                      </div>
+                      <div className="media-body">
+                        <form>
+                          <Input type="text" className="input-sm" placeholder="Share Your Idea..." />
+                        </form>
+                      </div>
+                    </li>
+                  </ul>
 				    </Col>
 				    <Col xs={12} sm={6}>
 				        <RelationshipList items={this.state.object.products} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, "products")} onRemove={this.onRelationshipRemove.bind(null, "products")} field={"products"} routeName={"product"} title={"Inspired Solutions"} fieldName={"Inspired Solution"}/>
