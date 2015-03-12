@@ -128,24 +128,10 @@ Mini hero (relationship list editor)
 .relationship-button {
   .btn-group {
     width: 100%;
-    margin-bottom: 4px;
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.3);
-    }
-    &:hover {
-      &:before {
-        background: rgba(0,0,0,0.5);
-      }
-    }
+    margin-bottom: 5px;
   }
   .btn {
-    height: 50px;
+    height: 80px;
     &:first-child {
       width: 90%;
       text-transform: none;
@@ -362,29 +348,23 @@ Hero
     padding: 0.5em 0;
 }
 
-input.relationship-input {
-    border: none;
-    outline: none;
-    width: 100%;
-    padding-left: 42px;
-    position: absolute;
-    left: 0;
-    cursor: pointer;
-    z-index: 1;
-    background-color: transparent;
-    margin-top: -1px;
-}
-
-input.relationship-input-autocomplete {
-    border: none;
-    outline: none;
-    width: 100%;
-    padding-left: 42px;
-    position: absolute;
-    left: 0;
-    cursor: pointer;
-    background-color: transparent;
-    z-index: 0;
+.autocomplete-input {
+  height: 40px;
+  .form-group {
+      display: block;
+      border: none;
+      outline: none;
+      padding-left: 15px;
+      right: 30px;
+      position: absolute;
+      left: 0;
+      cursor: pointer;
+      background-color: transparent;
+      z-index: 0;
+      &:first-child {
+        z-index: 1;
+      }
+  }
 }
 
 .autocomplete-dropdown {

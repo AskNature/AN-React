@@ -55,7 +55,7 @@ var StrategyDetail = React.createClass({
     },
     editBegin: function(e) {
         e.preventDefault();
-        //if(this.state.user.role == 'admin') { this.setState({editable: true}); }
+        // if(this.state.user.role == 'admin') { this.setState({editable: true}); }
 	this.setState({editable: true});
     },
     editCancel: function(e) {
@@ -73,6 +73,7 @@ var StrategyDetail = React.createClass({
     	var detail = this.state.object;
 	var entityName = "Biological Strategy";
 	var splitLegacyTitle = detail.name.split(': ');
+    console.log(detail);
 	//var secondaryLink = '../living-system/'+ (detail.living_systems ? detail.living_systems[0].masterid : "");
 	var secondaryLink = '';
         return (
@@ -94,7 +95,7 @@ var StrategyDetail = React.createClass({
 				    <Col xs={12} sm={6}>
 				    </Col>
 				    <Col xs={12} sm={6}>
-				        <RelationshipList items={this.state.object.products} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, "products")} onRemove={this.onRelationshipRemove.bind(null, "products")} field={"products"} routeName={"product"} title={"Inspired Solutions"} fieldName={"Inspired Solution"}/>
+				        <RelationshipList items={this.state.object.products} titleField='headline' subtitleField='name' editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, "products")} onRemove={this.onRelationshipRemove.bind(null, "products")} field={"products"} routeName={"product"} title={"Inspired Solutions"} fieldName={"Inspired Solution"}/>
 				    </Col>
 				</Row>
 			    </Grid>

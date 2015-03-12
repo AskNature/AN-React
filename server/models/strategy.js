@@ -3,7 +3,7 @@
 var Model = require('./model.js');
 
 // Models to link
-var InspiredSolution = Model('InspiredSolutions', ['name', 'headline']);
+var InspiredSolution = Model('InspiredSolutions', ['name', 'headline','both("HasMedia")[0].filename']);
 var Source = Model('Sources', ['name', 'publication_year', 'authors']);
 var Function = Model('Function', ['name']);
 var Expert = Model('Expert', ['name']);

@@ -3,7 +3,8 @@
 var React = require('react'),
 
 Link = require('../../modules/link.jsx'),
-ListGroupItem = require('react-bootstrap').ListGroupItem,
+Panel = require('react-bootstrap').Panel,
+Input = require('react-bootstrap').Input,
 Glyphicon = require('react-bootstrap').Glyphicon;
 
 var RelationshipListStore = require('../../../stores/relationshiplist.js');
@@ -46,6 +47,12 @@ var RelationshipListItemInput = React.createClass({
       if(targetNode.value !== '') {
           RelationshipListActions.fetchAutocomplete(this.props.field,targetNode.value,5);
       }
+      this.setState({dropdownVisible: true});
+  },
+
+  handleBlur: function(e) {
+      console.log('blurred');
+      this.setState({dropdownVisible: false});
   },
 
   onSuggestionClick: function(suggestion, e) {
@@ -59,34 +66,32 @@ var RelationshipListItemInput = React.createClass({
   render: function() {
     if (this.props.editable) {
     return (
-      <div>
-        <ListGroupItem style={{'height': '50px', 'paddingTop': '5px'}}>
-          <h6>
-            <Glyphicon
-              glyph='plus'
-              style={{'z-index': 4}} />
-
-            <input
-              className={'relationship-input'}
-              placeholder={ 'Connect your ' +
-                this.props.fieldName }
-                onInput={this.onInputInput}
-                onFocus={this.onInputFocus}
-                ref={'relationshipInput'} />
-
-            <input
-              className={'relationship-input-autocomplete'}
-              placeholder={
-                this.state.results.length > 0 ? this.state.results[0].name : '' } />
-
-          </h6>
-        </ListGroupItem>
-
-        <div>
+      <div style={{position:'relative' }} >
+            <Panel style={{position:'relative'}}>
+              <form className='autocomplete-input'>
+               <Input type="text"
+                 placeholder={ 'Connect your ' +
+                 this.props.fieldName }
+                 onFocus={this.onInputFocus}
+                 onInput={this.onInputInput}
+                 ref={'relationshipInput'}
+                 addonBefore={<Glyphicon
+                   glyph='plus' />} />
+                <Input
+                  type="text"
+                  placeholder={this.state.results.length > 0 ? this.state.results[0].name : '' }
+                  addonBefore={<Glyphicon
+                    glyph='plus' />}/>
+            </form>
+          </Panel>
+{this.state.dropdownVisible ? (
+        <ul>
           {this.state.results.map(function(result,
             i) { var boundSuggestionClick = this.onSuggestionClick.bind(this, result);
               return (
-                <div
+                <li
+                  tabindex={i}
+                  onBlur={this.handleBlur}
                   onClick={boundSuggestionClick}
                   className={'autocomplete-dropdown'}
                   key={result.masterid}>
@@ -95,9 +100,12 @@ var RelationshipListItemInput = React.createClass({
                     {result.name}
                   </span>
 
-                </div>
-              ); 		}, this) 	    }
-        </div>
+                </li>
+              );
+            }, this)
+          }
+        </ul>
+      ) : '' }
       </div>
     );
   } else {
