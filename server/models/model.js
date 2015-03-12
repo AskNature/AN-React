@@ -250,9 +250,14 @@ var ConstructModel = function(entityName, fields, relationships) {
 	var fetchMap = _.mapValues(relationships, function() { return 0 });
 	console.log(fetchMap);
 	db.select('@rid, masterid, ' + fields.join(', ') + (relFields.length ? ', ' : '') + relFields.join(', ')).from(entityName).where({masterid: masterid}).fetch(fetchMap).limit(1).one().then(function(result) {
-	    console.log(result);
-	    var m = new Model(result.masterid, result, result.rid);
-	    callback(m);
+	    if(result) {
+		console.log("deep-fetch success");
+		var m = new Model(result.masterid, result, result.rid);
+		callback(m);
+	    } else {
+		console.log("error deep-fetching");
+		callback(null);
+	    }
 	}).done();
     };
     
