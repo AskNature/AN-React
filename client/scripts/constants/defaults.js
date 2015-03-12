@@ -96,7 +96,9 @@ var Defaults = {
     strategyNew: {
 	name: 'Loading...',
 	description: 'Nature is coming...',
-	products: []
+	products: [],
+	media: [],
+	living_systems: []
     },
 
     product: {
