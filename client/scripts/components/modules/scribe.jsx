@@ -46,7 +46,7 @@ ScribeTextField = React.createClass({
     render: function() {
         return (
 	    <div>
-	        <div class="dotted" contentEditable="true" ref="scribe" style={{"outline" : "none", "border-bottom": "1px dashed #999"}}/>
+	        <div class="dotted" contentEditable="true" ref="scribe" style={{"outline" : "none", "borderBottom": "1px dashed #999"}}/>
 	    </div>
 	)
     }

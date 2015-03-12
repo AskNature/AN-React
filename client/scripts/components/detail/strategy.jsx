@@ -39,6 +39,11 @@ var focusActions = require('../../actions/strategies');
 // Store for user permissions
 var userStore = require('../../stores/accounts');
 
+/** Temp vars for Scott's in-progress store and action files */
+
+var scottStore = require('../../stores/strategy');
+var scottAction = require('../../actions/strategy');
+
 /** getState can be called to get state updates from the store.
 * initialItems = entire list that remains static
 * items = dynamic filtered list

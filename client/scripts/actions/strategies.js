@@ -188,7 +188,7 @@ module.exports = {
       if (callback && callback.complete) {
         callback.complete(res);
       }
-    });    
+    });
   },
 
   setItem: function(focus, next) {
