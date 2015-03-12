@@ -4,7 +4,7 @@
 'use strict';
 
 var React = require('react');
-var DefaultLayout = require('../layouts/default.jsx');
+var ConsoleLayout = require('./consolelayout.jsx');
 var mediaStore = require('../../stores/admin/media');
 var mediaActions = require('../../actions/media');
 var GriddleComponent = require('./griddle_component.jsx');
@@ -13,15 +13,17 @@ var MediaConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <DefaultLayout>
-                <div className="main-container">
-                        <h1>Media Console</h1>
-                        <GriddleComponent store={mediaStore}
-                        actions={mediaActions}
-                        linkColumnName={"filename"}
-                        columns={["filename", "name", "masterid"]} />
-                </div>
-            </DefaultLayout>
+            <ConsoleLayout plural='Media' singular='Media Item'>
+                        <GriddleComponent store={mediaStore} actions={mediaActions}
+                          columns={[
+                            {columnName:'masterid', displayName:'id', type:'id'},
+                            {columnName:'name', displayName:'Name', type:'link'},
+                            {columnName:'media', displayName:'Filename', type:'text'},
+                            {columnName:'timestamp', displayName:'Date Added', type:'date'},
+                            ]}
+                          thumb={['media_id', 'media_entity']}
+                          initialSort={['timestamp', false]} />
+            </ConsoleLayout>
             /* jshint ignore:end */
         );
     }

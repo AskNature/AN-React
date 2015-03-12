@@ -1,29 +1,22 @@
-/**
-* User Controller - receives actions via the router
-* and interacts with the session store
-*/
-
 'use strict';
-
 var db = require('../config/database').db,
-sendgrid = require('../config/sendgrid').client,
 settings = require('../config/env/default'),
-crypto = require('crypto'),
 path = require('path');
+var _ = require('lodash');
 
 var Cached = require('cached');
-var Memcached = require('memcached');
-
 var userCache;
-if(process.env.NODE_ENV == 'production') {
-    userCache = Cached('user', { backend: {
+
+if(process.env.NODE_ENV === 'production') {
+    userCache = new Cached('user', { backend: {
 	type: 'memcached',
-	client: new Memcached('127.0.0.1:11211')
+	hosts: '127.0.0.1:11211'
     }});
 } else {
-    userCache = Cached('user');
+    userCache = new Cached('user');
 }
-userCache.setDefaults({"freshFor": 120});
+userCache.setDefaults({'freshFor': 120});
+
 
 var logout = function(req, res, next) {
     req.logout();
@@ -166,23 +159,28 @@ var loadindex = function(req, res, next) {
 
 var returnList = function(req, res) {
   var chain = db
-  .select('name, masterid, "user" as entityType')
+  .select('name, first, last, masterid, registration_date, "user" as entityType')
   .from('Users')
   .where('out_Flagged IS NULL AND email_confirmed == 1');
 
-  var limit = parseInt(req.query["limit"]);
+  var limit = parseInt(req.query.limit);
   if(limit) {
       chain.limit(limit);
   }
 
-  var offset = parseInt(req.query["offset"]);
+  var offset = parseInt(req.query.offset);
   if(offset) {
       chain.offset(offset);
   }
 
-  var order = req.query["order"];
+  var order = req.query.order;
   if(order) {
-      chain.order(order.substring(1) + (order.substring(0,1)=="-" ? " desc" : " asc"));
+      chain.order(order.substring(1) + (order.substring(0,1)==='-' ? ' desc' : ' asc'));
+  }
+
+  var filter = req.query.filter;
+  if(filter) {
+      chain.containsText({'name' : filter});
   }
 
   userCache.getOrElse('count', Cached.deferred(function(done) {
@@ -207,9 +205,9 @@ var returnList = function(req, res) {
 var returnItem = function(req, res, next) {
   console.log(req.params.id);
   db
-  .select('masterid, name, first, last, email, roles, registration_date, timestamp, out("Flagged").name as flagged, email_confirmed, special_text, activities, address_1, address_2, city, state, postal_code, country, time_zone, phone, extension, tollfree, fax, im, langs_spoken, revision, hide_email, send_email, alert_frequency, last_alerted, status, contact_me, hide_address, hide_phone, gender, custom_avatar, ip_address, out("HasMedia").filename as has_media, out("AddedMedia").filename as added_media, out("Bookmarked").name as collected, out("Friends").name as friends, password, salt, persist, newpassword, email_salt')
+  .select('masterid, name, first, last, email, roles, registration_date, timestamp, out("Flagged").name as flagged, email_confirmed, special_text, activities, address_1, address_2, city, state, postal_code, country, time_zone, phone, extension, tollfree, fax, im, langs_spoken, revision, hide_email, send_email, alert_frequency, last_alerted, status, contact_me, hide_address, hide_phone, gender, custom_avatar, ip_address, out("HasMedia").filename as media, out("HasMedia").name as media_name, out("HasMedia").entity as media_entity, out("HasMedia").masterid as media_id, out("AddedMedia").filename as added_media, out("Bookmarked").name as collected, out("Friends").name as friends, password, salt, persist, newpassword, email_salt')
   .from('Users')
-  .where('masterid LIKE "' + req.params.id + '"')
+  .where('masterid == "' + req.params.id + '"')
   .all()
   .then(function (results) {
       res.status(200).json({

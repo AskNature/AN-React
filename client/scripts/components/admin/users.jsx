@@ -4,7 +4,7 @@
 'use strict';
 
 var React = require('react');
-var DefaultLayout = require('../layouts/default.jsx');
+var ConsoleLayout = require('./consolelayout.jsx');
 var userStore = require('../../stores/admin/users');
 var userActions = require('../../actions/users');
 var GriddleComponent = require('./griddle_component.jsx');
@@ -13,14 +13,17 @@ var UserConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <DefaultLayout>
-                <div className="main-container">
-                        <h1>Users Griddle Console</h1>
+            <ConsoleLayout plural='Users' singular='User'>
                         <GriddleComponent store={userStore} actions={userActions}
-			linkColumnName={"name"}
-                        columns={["name", "masterid"]} />
-                </div>
-            </DefaultLayout>
+                          columns={[
+                            {columnName:'masterid', displayName:'id', type:'id'},
+                            {columnName:'name', displayName:'Name', type:'link'},
+                            {columnName:'first', displayName:'First Name', type:'text'},
+                            {columnName:'last', displayName:'Last Name', type:'text'},
+                            {columnName:'registration_date', displayName:'Registered On', type:'date'}
+                            ]}
+                          initialSort={['registration_date', false]} />
+            </ConsoleLayout>
             /* jshint ignore:end */
         );
     }

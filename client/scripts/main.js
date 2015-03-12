@@ -51,5 +51,4 @@ Dispatcher.register(function(payload) {
     return true; // No errors.  Needed by promise in Dispatcher.
 });
 
-console.log('Welcome to Yeogurt');
-console.log('This should definitely appear');
+console.log('Welcome to AskNature');

@@ -2,19 +2,20 @@
 var db = require('../config/database').db,
 settings = require('../config/env/default'),
 path = require('path');
+var _ = require('lodash');
 
 var Cached = require('cached');
-
 var livingSystemCache;
-if(process.env.NODE_ENV == 'production') {
-    livingSystemCache = Cached('livingSystem', { backend: {
-        type: 'memcached',
-        hosts: '127.0.01:11211'
+
+if(process.env.NODE_ENV === 'production') {
+    livingSystemCache = new Cached('livingSystem', { backend: {
+	type: 'memcached',
+	hosts: '127.0.0.1:11211'
     }});
 } else {
-    livingSystemCache = Cached('livingSystem');
+    livingSystemCache = new Cached('livingSystem');
 }
-
+livingSystemCache.setDefaults({'freshFor': 120});
 
 var loadindex = function(req, res, next) {
   // Render index.html to allow application to handle routing
@@ -23,23 +24,28 @@ var loadindex = function(req, res, next) {
 
 var returnList = function(req, res) {
   var chain = db
-  .select('name, masterid, "living-system" as entityType')
+  .select('name, masterid, taxon, in("HasLivingSystem").name as has_living_system, common_name, "living-system" as entityType')
   .from('LivingSystem')
   .where('in_HasLivingSystem IS NOT NULL');
 
-  var limit = parseInt(req.query["limit"]);
+  var limit = parseInt(req.query.limit);
   if(limit) {
       chain.limit(limit);
   }
 
-  var offset = parseInt(req.query["offset"]);
+  var offset = parseInt(req.query.offset);
   if(offset) {
       chain.offset(offset);
   }
 
-  var order = req.query["order"];
+  var order = req.query.order;
   if(order) {
-      chain.order(order.substring(1) + (order.substring(0,1)=="-" ? "desc" : "asc"));
+      chain.order(order.substring(1) + (order.substring(0,1)==='-' ? ' desc' : ' asc'));
+  }
+
+  var filter = req.query.filter;
+  if(filter) {
+      chain.containsText({'name' : filter});
   }
 
   livingSystemCache.getOrElse('count', Cached.deferred(function(done) {

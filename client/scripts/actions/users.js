@@ -175,10 +175,11 @@ module.exports = {
     });
   },
 
-  getListPaginated: function(index, size, sortCol, asc, callback) {
+  getListPaginated: function(index, size, sortCol, asc, filter, callback) {
     var self = this;
     var getString = '/api/users?offset='+index*size+'&limit='+size;
     if (sortCol) { getString += '&order='+(asc ? '+' : '-')+sortCol; }
+    if (filter) { getString += '&filter='+filter; }
     request.get(getString)
     .type('json')
     .end(function(res) {

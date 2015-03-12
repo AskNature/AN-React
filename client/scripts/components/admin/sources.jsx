@@ -4,7 +4,7 @@
 'use strict';
 
 var React = require('react');
-var DefaultLayout = require('../layouts/default.jsx');
+var ConsoleLayout = require('./consolelayout.jsx');
 var sourceStore = require('../../stores/admin/sources');
 var sourceActions = require('../../actions/sources');
 var GriddleComponent = require('./griddle_component.jsx');
@@ -13,14 +13,21 @@ var SourceConsole = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-            <DefaultLayout>
-                <div className="main-container">
-                        <h1>Sources Console</h1>
+            <ConsoleLayout plural='Sources' singular='Source'>
                         <GriddleComponent store={sourceStore} actions={sourceActions}
-                        linkColumnName={"name"}
-                        columns={["name", "status", "type", "featured_count", "masterid"]} />
-                </div>
-            </DefaultLayout>
+                          columns={[
+                            {columnName:'masterid', displayName:'id', type:'id'},
+                            {columnName:'name', displayName:'Name', type:'link'},
+                            {columnName:'status', displayName:'Status', type:'text'},
+                            {columnName:'type', displayName:'Source', type:'text'},
+                            {columnName:'featured_count', displayName:'Featured Count', type:'text'},
+                            {columnName:'featured_in', displayName:'Featured In', type:'list'},
+                            {columnName:'added', displayName:'Added By', type:'list'},
+                            {columnName:'timestamp', displayName:'Date Modified', type:'date'}
+                          ]}
+                          thumb={['media', 'media_id', 'media_entity']}
+                          initialSort={['featured_count', true]} />
+            </ConsoleLayout>
             /* jshint ignore:end */
         );
     }
