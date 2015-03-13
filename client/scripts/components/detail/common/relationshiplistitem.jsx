@@ -47,11 +47,16 @@ var RelationshipListItem = React.createClass({
       window.setInterval(function(){scrollTo(0, 0);},10000);
     }
     var link = '../' + routeName + '/' + item.masterid;
-
+    var title = this.props.titleField;
+    var subTitle= this.props.subtitleField;
+    if (this.props.routeName === 'living-system')  {
+      title = 'Common Name';
+      subTitle = this.props.item.taxon + ': ' + this.props.item.name;
+    }
     return (
         <ButtonToolbar className='relationship-button'>
           <SplitButton
-            title={<MiniHero title={this.props.titleField} subtitle={this.props.subtitleField} />}
+            title={<MiniHero title={title} subtitle={subTitle} />}
             onClick={this.clickHandler.bind(null,link)}
             pullright>
             <MenuItem eventKey="1" onClick={this.setFlag}><Glyphicon glyph='flag' /> Flag</MenuItem>
