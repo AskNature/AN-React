@@ -13,7 +13,7 @@ var Defaults = {
 
     relationshipList: {
 	results: [],
-    input_value: ''
+    boxvalue: ''
     },
 
     user: {

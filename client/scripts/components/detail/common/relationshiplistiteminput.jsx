@@ -1,11 +1,13 @@
 'use strict';
 
 var React = require('react'),
-
 Link = require('../../modules/link.jsx'),
-Panel = require('react-bootstrap').Panel,
-Input = require('react-bootstrap').Input,
+
+Button = require('react-bootstrap').Button,
+ButtonToolbar = require('react-bootstrap').ButtonToolbar,
 Glyphicon = require('react-bootstrap').Glyphicon;
+
+var Combobox = require('react-widgets').Combobox;
 
 var RelationshipListStore = require('../../../stores/relationshiplist.js');
 var RelationshipListActions = require('../../../actions/relationshiplist.js');
@@ -47,12 +49,6 @@ var RelationshipListItemInput = React.createClass({
       if(targetNode.value !== '') {
           RelationshipListActions.fetchAutocomplete(this.props.field,targetNode.value,5);
       }
-      this.setState({dropdownVisible: true});
-  },
-
-  handleBlur: function(e) {
-      console.log('blurred');
-      this.setState({dropdownVisible: false});
   },
 
   onSuggestionClick: function(suggestion, e) {
@@ -61,63 +57,43 @@ var RelationshipListItemInput = React.createClass({
       this.props.onAdd(suggestion);
       this.refs.relationshipInput.getDOMNode().value = '';
       RelationshipListActions.initialize();
-      this.setState({input_value: ''});
   },
 
-  handleInputChange: function(e) {
-    this.setState({input_value: e.target.input_value});
+  onAdd: function() {
+    console.log(this.refs.combobox);
+    this.props.onAdd(this.refs.combobox.state.value);
+
+    React.findDOMNode(this.refs.combobox).value = '';
+
+    RelationshipListActions.initialize();
   },
 
   render: function() {
-    if (this.props.editable) {
-    return (
-      <div style={{position:'relative' }} >
-            <Panel style={{position:'relative'}}>
-              <form className='autocomplete-input'>
-               <Input type="text"
-                 value={this.state.input_value}
-                 placeholder={ 'Connect your ' +
-                 this.props.fieldName }
-                 onFocus={this.onInputFocus}
-                 onInput={this.onInputInput}
-                 onChange={this.handleInputChange}
-                 ref={'relationshipInput'}
-                 addonBefore={<Glyphicon
-                   glyph='plus' />} />
-                <Input
-                  type="text"
-                  value={this.state.input_value}
-                  onChange={this.handleInputChange}
-                  placeholder={this.state.results.length > 0 ? this.state.results[0].name : '' }
-                  addonBefore={<Glyphicon
-                    glyph='plus' />}/>
-            </form>
-          </Panel>
-{this.state.dropdownVisible ? (
-        <ul>
-          {this.state.results.map(function(result,
-            i) { var boundSuggestionClick = this.onSuggestionClick.bind(this, result);
-              return (
-                <li
-                  tabindex={i}
-                  onClick={boundSuggestionClick}
-                  className={'autocomplete-dropdown'}
-                  key={result.masterid}>
-                  <span>
-                    {result.name}
-                  </span>
-
-                </li>
-              );
-            }, this)
-          }
-        </ul>
-      ) : '' }
-      </div>
-    );
-  } else {
-    return '';
-  }
+    if(this.props.editable) {
+        return (
+          <div className='relationship-selector'>
+            <Combobox
+              textField='name'
+              onInput={this.onInputInput}
+              data={this.state.results}
+              filter='contains'
+              ref='combobox'
+              placeholder={ 'Connect your ' + this.props.fieldName }
+              />
+            <Button
+              onClick={this.onAdd}
+              ref='addbutton'>
+              <Glyphicon glyph='plus' />
+            </Button>
+          </div>
+        );
+    } else {
+      return (
+        <span>
+          Sign in to connect more {this.props.fieldName}s.
+        </span>
+      );
+    }
   }
 });
 

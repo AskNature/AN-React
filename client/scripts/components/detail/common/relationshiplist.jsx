@@ -36,14 +36,12 @@ var RelationshipList = React.createClass({
               subtitleField={item[this.props.subtitleField]} />;
             }, this)
           }
-          {this.props.editable ?
             <RelationshipListItemInput
               editable={this.props.editable}
               fieldName={this.props.fieldName}
               field={this.props.field}
               onAdd={this.onAdd} />
-            : ''
-          }
+
       </div>
     );
   }
