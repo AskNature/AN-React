@@ -3,6 +3,8 @@ var db = require('../config/database').db,
 settings = require('../config/env/default'),
 path = require('path');
 var _ = require('lodash');
+var crypto = require('crypto');
+var sendgrid = require('../config/sendgrid').client;
 
 var Cached = require('cached');
 var userCache;
