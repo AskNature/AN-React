@@ -89,6 +89,7 @@ var StrategyDetail = React.createClass({
 	var splitLegacyTitle = detail.name.split(': ');
 	//var secondaryLink = '../living-system/'+ (detail.living_systems ? detail.living_systems[0].masterid : '');
 	var secondaryLink = '';
+    console.log(this.state.user);
         return (
 		    !this.state.loaded ? (<div>{this.state.error ? 'Error' : 'Loading'}</div>) : (<div><AdminBar masterid={detail.masterid} routename={'strategy'} pluralroute={'strategies'} entityName={entityName} />
 		    <CreatorMast img='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg' entityname={entityName} />
@@ -181,24 +182,26 @@ var StrategyDetail = React.createClass({
 				    </Col>
 				</Row>
               			<Row className='show-grid'>
-                		    {detail.sources ? (
+                		    {detail.sources[0] ? (
                   		        <Col xs={12} sm={6}>
-                    			    <ButtonList sources items={detail.sources} routename='source' title='Sources' />
+                                      <RelationshipList items={this.state.object.sources} editable={this.state.editable} titleField='name' subtitleField='authors' onAdd={this.onRelationshipAdd.bind(null, 'sources')} onRemove={this.onRelationshipRemove.bind(null, 'sources')} field={'sources'} routeName={'source'} title={'Sources'} fieldName={'Sources'}/>
                   			</Col>) : ''
                 		    }
-                		    {detail.experts ? (
+                		    {detail.experts[0] ? (
                   		        <Col xs={12} sm={6}>
-                    			    <ButtonList experts items={detail.experts} routename='researcher' title='Studied By' />
+                                      <RelationshipList items={this.state.object.experts} editable={this.state.editable} titleField='name' subtitleField='institution' onAdd={this.onRelationshipAdd.bind(null, 'experts')} onRemove={this.onRelationshipRemove.bind(null, 'experts')} field={'experts'} routeName={'researcher'} title={'Researched By'} fieldName={'Researched By'}/>
                   			</Col>) : ''
                 		    }
               			</Row>
 			    </Grid>
+            {this.state.user ? (
                 <PanelGroup defaultActiveKey='0' accordion>
                     <Panel header='Value Table' eventKey='1'>
-                    <DataTable data={detail} />
-            </Panel>
-		    </PanelGroup>
-            </div>
+                        <DataTable data={detail} />
+                    </Panel>
+                </PanelGroup>
+            ) : '' }
+        </div>
             )
         );
     }

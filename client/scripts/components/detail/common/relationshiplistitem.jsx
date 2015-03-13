@@ -16,9 +16,7 @@ var MiniHero = React.createClass({
     return (
       <div className='minihero'>
         <h5 style={{marginTop: '9px', overflow:'hidden', whiteSpace:'normal'}}>
-          <strong>
             {this.props.title}
-          </strong>
           <br/>
           <small>{this.props.subtitle}</small>
         </h5>
