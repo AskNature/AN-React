@@ -2,9 +2,8 @@
 
 var React = require('react'),
 store = require('../../stores/strategy.js'),
+userStore = require('../../stores/accounts'),
 actions = require('../../actions/strategy.js');
-
-var userStore = require('../../stores/accounts');
 
 var TextArea = require('./common/textarea.jsx');
 var DataTable = require('./common/datatable.jsx');
@@ -30,7 +29,7 @@ var getState = function() {
 	object: store.get(),
 	loaded: store.getLoaded(),
 	error: store.getError(),
-	user: userStore.get()
+    user: userStore.get()
     }
     );
 };
@@ -68,7 +67,8 @@ var StrategyDetail = React.createClass({
     },
     editBegin: function(e) {
         e.preventDefault();
-        if(this.state.user.role == 'admin') { this.setState({editable: true}); }
+        //if(this.state.user.role == 'admin') { this.setState({editable: true}); }
+	this.setState({editable: true});
     },
     editCancel: function(e) {
         e.preventDefault();
@@ -91,7 +91,6 @@ var StrategyDetail = React.createClass({
 	var splitLegacyTitle = detail.name.split(': ');
 	//var secondaryLink = '../living-system/'+ (detail.living_systems ? detail.living_systems[0].masterid : '');
 	var secondaryLink = '';
-    console.log(this.state.user);
         return (
 		    !this.state.loaded ? (<div>{this.state.error ? 'Error' : 'Loading'}</div>) : (<div><AdminBar masterid={detail.masterid} routename={'strategy'} pluralroute={'strategies'} entityName={entityName} />
 		    <CreatorMast img='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg' entityname={entityName} />
@@ -196,9 +195,9 @@ var StrategyDetail = React.createClass({
                 		    }
               			</Row>
 			    </Grid>
-            {this.state.user ? (
+            {this.state.user.role == 'admin' || 'editor' ? (
                 <PanelGroup defaultActiveKey='0' accordion>
-                    <Panel header='Value Table' eventKey='1'>
+                    <Panel header='Table View' eventKey='1'>
                         <DataTable data={detail} />
                     </Panel>
                 </PanelGroup>

@@ -4,7 +4,10 @@
 'use strict';
 
 var React = require('react'),
+routeActions = require('../../../actions/routes'),
 Link = require('../../modules/link.jsx'),
+
+
 
 Glyphicon = require('react-bootstrap').Glyphicon,
 SplitButton = require('react-bootstrap').SplitButton,
@@ -33,6 +36,10 @@ var RelationshipListItem = React.createClass({
     console.log('Flagged');
   },
 
+  clickHandler: function(link) {
+    routeActions.setRoute(link);
+  },
+
   render: function() {
     var item = this.props.item;
     var routeName = this.props.routeName;
@@ -45,7 +52,7 @@ var RelationshipListItem = React.createClass({
         <ButtonToolbar className='relationship-button'>
           <SplitButton
             title={<MiniHero title={this.props.titleField} subtitle={this.props.subtitleField} />}
-            href={link}
+            onClick={this.clickHandler.bind(null,link)}
             pullright>
             <MenuItem eventKey="1" onClick={this.setFlag}><Glyphicon glyph='flag' /> Flag</MenuItem>
             {this.props.editable ? (
