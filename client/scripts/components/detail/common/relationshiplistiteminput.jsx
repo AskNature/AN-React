@@ -35,7 +35,7 @@ var RelationshipListItemInput = React.createClass({
   onInputInput: function(e) {
       console.log('text entered');
       if(e.target.value !== '') {
-          RelationshipListActions.fetchAutocomplete(this.props.field,e.target.value,5);
+          RelationshipListActions.fetchAutocomplete(this.props.field,e.target.value,10);
       } else {
           RelationshipListActions.initialize();
       }
@@ -56,7 +56,7 @@ var RelationshipListItemInput = React.createClass({
             <Combobox
               textField='name'
               onInput={this.onInputInput}
-              data={this.state.results}
+              data={this.state.results.concat(['Create New'])}
               filter='contains'
               ref='combobox'
               placeholder={ 'Add ' + this.props.fieldName }

@@ -85,7 +85,6 @@ var StrategyDetail = React.createClass({
         if(r) {actions.del(this.props.masterid);}
     },
     render: function() {
-    	console.log(this.state.object);
         var detail = this.state.object;
 	var entityName = 'Biological Strategy';
 	var splitLegacyTitle = detail.name.split(': ');
