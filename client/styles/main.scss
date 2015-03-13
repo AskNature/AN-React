@@ -64,6 +64,15 @@ label {
   margin: 0;
 }
 
+.tool-buttons .btn {
+  border: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  &:hover {
+    background: #ccc;
+  }
+}
 /* ==========================================================================
 Relationship Selector
 ========================================================================== */
@@ -86,6 +95,7 @@ Relationship Selector
     border: 0;
     box-shadow: none;
     -webkit-box-shadow: none;
+    -moz-box-shadow: none;
     background: none;
   }
 }
