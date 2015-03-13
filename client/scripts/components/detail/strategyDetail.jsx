@@ -99,7 +99,7 @@ var StrategyDetail = React.createClass({
 		    <Grid>
           	        <Row className='show-grid'>
             		    <Col xs={12} sm={4}>
-                            <RelationshipList items={this.state.object.living_systems} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'living_systems')} onRemove={this.onRelationshipRemove.bind(null, 'living_systems')} field={'living_systems'} routeName={'living_system'} title={'Living Systems'} fieldName={'Living Systems'}/>
+                            <RelationshipList items={this.state.object.living_systems} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'living_systems')} onRemove={this.onRelationshipRemove.bind(null, 'living_systems')} field={'living_systems'} routeName={'living-system'} title={'Living Systems'} fieldName={'Living Systems'}/>
                            <RelationshipList items={this.state.object.conditions} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'conditions')} onRemove={this.onRelationshipRemove.bind(null, 'conditions')} field={'conditions'} routeName={'condition'} title={'Context'} fieldName={'Context'}/>
             		    </Col>
             		    <Col xs={6} sm={4}>

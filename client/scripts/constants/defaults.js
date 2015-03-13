@@ -55,6 +55,18 @@ var Defaults = {
       ]
     },
 
+    phenomenonNew : {
+        name: 'Loading...',
+	description: '',
+	short_name: '',
+	parent: [],
+	children: [],
+	has_function: [],
+	groupname: '',
+	groupid: '',
+	media: [],
+    },
+
     strategy: {
       results : [
       {
