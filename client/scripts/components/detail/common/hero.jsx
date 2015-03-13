@@ -5,6 +5,7 @@
 
 var React = require('react'),
 
+TextArea = require('./textarea.jsx'),
 Grid = require('react-bootstrap').Grid,
 Row = require('react-bootstrap').Row,
 Col = require('react-bootstrap').Col;
@@ -22,7 +23,7 @@ var HeroComponent = React.createClass({
         <Grid>
           <Row className="headline">
             <Col xs={12} md={12}>
-              <h3 className="animated fadeInDown"> {this.props.editable ? (<span><strong>Editable</strong><br/><small>Slug: {this.props.masterid}</small></span>) : (<span><strong>{this.props.primarytitle}</strong><br/><small>{this.props.secondarylink ? (
+              <h3 className="animated fadeInDown"> {this.props.editable ? (<span><strong><TextArea item={this.props.primarytitle} editable={this.props.editable} store={this.props.store} actions={this.props.actions} fieldName={this.props.primarytitlefield} /></strong><small>Slug: {this.props.masterid}</small></span>) : (<span><strong>{this.props.primarytitle}</strong><br/><small>{this.props.secondarylink ? (
                 <Link url={this.props.secondarylink}>
                   <i>{this.props.secondarytitle}</i>
                 </Link>
