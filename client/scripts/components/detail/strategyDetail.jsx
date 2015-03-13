@@ -105,7 +105,6 @@ var StrategyDetail = React.createClass({
               		        <ButtonList phenomena items={detail.mechanisms} routename='phenomenon' title='Mechanisms'/>
             		    </Col>
             		    <Col xs={6} sm={4}>
-              		        <ButtonList phenomena items={detail.functions} routename='phenomenon' title='Outcomes'/>
                           <RelationshipList items={this.state.object.functions} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'functions')} onRemove={this.onRelationshipRemove.bind(null, 'functions')} field={'functions'} routeName={'phenomenon'} title={'Outcomes'} fieldName={'Outcomes'}/>
             		    </Col>
           		</Row>

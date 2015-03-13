@@ -69,9 +69,11 @@ Relationship Selector
 
 .relationship-selector {
   width: 100%;
+  margin-bottom: 15px;
   .rw-combobox {
-    width: 82%;
+    width: 75%;
     float: left;
+    position: relative;
     input {
       padding-left: 15px;
     }
@@ -79,6 +81,10 @@ Relationship Selector
   .btn {
     float: right;
     margin-right: -5px;
+    border: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    background: none;
   }
 }
 /* ==========================================================================
@@ -118,23 +124,27 @@ Mini hero (relationship list editor)
     margin-bottom: 5px;
   }
   .btn {
-    height: 80px;
+    height: auto;
     &:first-child {
       width: 90%;
       text-transform: none;
       text-align: left;
       padding-top: 13px;
+      padding-bottom: 20px;
       color: #fff;
     }
     &.dropdown-toggle {
       width: 10%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
       background-image: none !important;
     }
     .minihero {
       // background: rgba(255,255,255,0.7);
       margin: -13px -16px;
       padding: 0px 15px;
-      height: 80px;
+      height: auto;
       overflow: hidden;
     }
   }

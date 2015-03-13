@@ -144,7 +144,7 @@ var ProductDetail = React.createClass({
               <ButtonList phenomena items={detail.outcomes} routename="phenomenon" title="Outcomes"/>
             </Col>
             <Col xs={12} sm={8}>
-              <RelationshipList items={detail.strategies} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, "strategies")} onRemove={this.onRelationshipRemove.bind(null, "strategies")} field={"strategies"} routeName="strategy" title="Inspired By" fieldName="Biological Strategy" titleField="name" subtitleField="summary" />
+              <RelationshipList items={detail.strategies} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, "strategies")} onRemove={this.onRelationshipRemove.bind(null, "strategies")} field={"strategies"} routeName="strategy" title="Inspired By" fieldName="Biological Strategy" titleField={"name"} />
             </Col>
           </Row>
         </Grid>

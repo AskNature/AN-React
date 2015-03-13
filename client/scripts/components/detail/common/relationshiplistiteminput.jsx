@@ -41,30 +41,11 @@ var RelationshipListItemInput = React.createClass({
       }
   },
 
-  onInputFocus: function(e) {
-      console.log('focused');
-      RelationshipListActions.initialize();
-      var domNode = this.getDOMNode();
-      var targetNode = e.target;
-      if(targetNode.value !== '') {
-          RelationshipListActions.fetchAutocomplete(this.props.field,targetNode.value,5);
-      }
-  },
-
-  onSuggestionClick: function(suggestion, e) {
-      console.log('clicked ' + suggestion.masterid);
-      e.preventDefault();
-      this.props.onAdd(suggestion);
-      this.refs.relationshipInput.getDOMNode().value = '';
-      RelationshipListActions.initialize();
-  },
-
   onAdd: function() {
-    console.log(this.refs.combobox);
-    this.props.onAdd(this.refs.combobox.state.value);
-
-    React.findDOMNode(this.refs.combobox).value = '';
-
+    console.log(this.refs.combobox.state.value.masterid);
+    if (this.refs.combobox.state.value.masterid) {
+      this.props.onAdd(this.refs.combobox.state.value);
+    }
     RelationshipListActions.initialize();
   },
 
@@ -89,8 +70,8 @@ var RelationshipListItemInput = React.createClass({
         );
     } else {
       return (
-        <span>
-          Sign in to connect more {this.props.fieldName}s.
+        <span style={{float:'right'}}>
+          <Link url='/login'>Sign in</Link> to connect more.
         </span>
       );
     }
