@@ -30,6 +30,7 @@ var RelationshipList = require('./common/relationshiplist.jsx');
 /** Gets incoming information from the store */
 
 var store = require('../../stores/product');
+var userStore = require('../../stores/accounts');
 
 /** Sends outgoing requests to an action */
 
@@ -44,7 +45,8 @@ var getState = function() {
   return {
     object: store.get(),
     loaded: store.getLoaded(),
-    error: store.getError()
+    error: store.getError(),
+    user: userStore.get()
   };
 };
 
@@ -101,8 +103,7 @@ var ProductDetail = React.createClass({
   },
   editBegin: function(e) {
       e.preventDefault();
-      //if(this.state.user.role == 'admin') { this.setState({editable: true}); }
-      this.setState({editable: true});
+      if(this.state.user.role == 'admin') { this.setState({editable: true}); }
   },
   editCancel: function(e) {
       e.preventDefault();
