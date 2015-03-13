@@ -28,19 +28,36 @@ var SubHero = React.createClass({
           </Col>
           <Col xs={12} sm={4}>
             <ButtonToolbar className='tool-buttons' style={{"margin-top": "11.5px"}}>
-	      {this.props.editable? <span><ButtonGroup><Button active={true} style={{"cursor": "default"}} disabled={true} bsStyle="primary"><Glyphicon glyph="pencil" /></Button><Button bsStyle="success" onClick={this.props.editFinish}><Glyphicon glyph="ok" /></Button><Button bsStyle="danger" onClick={this.props.editCancel}><Glyphicon glyph="remove" /></Button></ButtonGroup><Button onClick={this.props.onDelete}><Glyphicon glyph="trash" /></Button></span> : <Button onClick={this.props.editBegin}>
-                <Glyphicon glyph="pencil" />
-              </Button>}
-              <Button>
-                <Glyphicon glyph="share-alt" />
-              </Button>
-              <Button>
-                <Glyphicon glyph="print" />
-              </Button>
-            </ButtonToolbar>
-          </Col>
-        </Row>
-      </Grid>
+	             {this.props.editable ?
+                 <span>
+                   <ButtonGroup>
+                     <Button block active={true} style={{"cursor": "default"}} disabled={true}>
+                       <Glyphicon glyph="pencil" /> Edit Mode Active
+                     </Button>
+                     <Button block bsStyle="success" onClick={this.props.editFinish}>
+                       <Glyphicon glyph="ok" /> <strong>Update</strong>
+                     </Button>
+                     <Button block bsStyle="warning" onClick={this.props.editCancel}>
+                       <Glyphicon glyph="remove" /> Cancel
+                     </Button>
+                     <Button block bsStyle="danger" onClick={this.props.onDelete}>
+                       <Glyphicon glyph="trash" /> Delete
+                     </Button>
+                   </ButtonGroup>
+                 </span>
+               :  <Button onClick={this.props.editBegin}>
+                    <Glyphicon glyph="pencil" />
+                  </Button>}
+                  <Button>
+                    <Glyphicon glyph="share-alt" />
+                  </Button>
+                  <Button>
+                    <Glyphicon glyph="print" />
+                  </Button>
+                </ButtonToolbar>
+              </Col>
+            </Row>
+          </Grid>
       /* jshint ignore:end */
     );
   }
