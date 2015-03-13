@@ -71,7 +71,6 @@ var RelationshipListItemInput = React.createClass({
     } else {
       return (
         <span style={{float:'right'}}>
-          <Link url='/login'>Sign in</Link> to connect more.
         </span>
       );
     }

@@ -5,7 +5,7 @@ store = require('../../stores/strategy.js'),
 actions = require('../../actions/strategy.js');
 
 var TextArea = require('./common/textarea.jsx');
-
+var DataTable = require('./common/datatable.jsx');
 var RelationshipList = require('./common/relationshiplist.jsx');
 
 var CreatorMast = require('./common/creatormast.jsx'),
@@ -98,19 +98,17 @@ var StrategyDetail = React.createClass({
 		    <Grid>
           	        <Row className='show-grid'>
             		    <Col xs={12} sm={4}>
-               		        <ButtonList livingsystems items={detail.living_systems} routename='living-system' title='Living Systems'/>
-              			<ButtonList conditions items={detail.conditions} title='Context' />
+                            <RelationshipList items={this.state.object.living_systems} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'living_systems')} onRemove={this.onRelationshipRemove.bind(null, 'living_systems')} field={'living_systems'} routeName={'living_system'} title={'Living Systems'} fieldName={'Living Systems'}/>
+                           <RelationshipList items={this.state.object.conditions} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'conditions')} onRemove={this.onRelationshipRemove.bind(null, 'conditions')} field={'conditions'} routeName={'condition'} title={'Context'} fieldName={'Context'}/>
             		    </Col>
             		    <Col xs={6} sm={4}>
-              		        <ButtonList phenomena items={detail.mechanisms} routename='phenomenon' title='Mechanisms'/>
+                            <RelationshipList items={this.state.object.mechanisms} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'mechanisms')} onRemove={this.onRelationshipRemove.bind(null, 'mechanisms')} field={'mechanisms'} routeName={'phenomenon'} title={'Mechanisms'} fieldName={'Mechanisms'}/>
             		    </Col>
             		    <Col xs={6} sm={4}>
                           <RelationshipList items={this.state.object.functions} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'functions')} onRemove={this.onRelationshipRemove.bind(null, 'functions')} field={'functions'} routeName={'phenomenon'} title={'Outcomes'} fieldName={'Outcomes'}/>
             		    </Col>
           		</Row>
          	    </Grid>
-		    <PanelGroup defaultActiveKey='1' accordion>
-		        <Panel header='More' eventKey='1'>
                     	    <Grid>
 			        <Row>
 				    <Col xs={12}>
@@ -195,8 +193,13 @@ var StrategyDetail = React.createClass({
                 		    }
               			</Row>
 			    </Grid>
-			</Panel>
-		    </PanelGroup></div>)
+                <PanelGroup defaultActiveKey='0' accordion>
+                    <Panel header='Value Table' eventKey='1'>
+                    <DataTable data={detail} />
+            </Panel>
+		    </PanelGroup>
+            </div>
+            )
         );
     }
 });
