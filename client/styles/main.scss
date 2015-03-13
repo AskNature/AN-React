@@ -69,10 +69,10 @@ label {
   .form-control::-webkit-input-placeholder {
     color: rgba(255,255,255,0.8);
   }
-  input {
-    box-shadow-color: inset 0 -1px 0 rgba(255,255,255,0.8);
-    -webkit-box-shadow-color: inset 0 -1px 0 rgba(255,255,255,0.8);
-    -moz-box-shadow-color: inset 0 -1px 0 rgba(255,255,255,0.8);
+  .form-control[type=text] {
+    box-shadow: inset 0 -1px 0 rgba(255,255,255,0.8);
+    -webkit-box-shadow: inset 0 -1px 0 rgba(255,255,255,0.8);
+    -moz-box-shadow: inset 0 -1px 0 rgba(255,255,255,0.8);
   }
 
   .navbar-nav > li > a {
