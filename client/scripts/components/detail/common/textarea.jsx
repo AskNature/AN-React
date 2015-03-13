@@ -10,7 +10,6 @@ var TextArea = React.createClass({
   render: function() {
     var item = this.props.item;
     var title = this.props.title;
-    if(item){
       return (
         <div>
           {this.props.title ? (<h6>
@@ -33,9 +32,6 @@ var TextArea = React.createClass({
           }
         </div>
       );
-    } else {
-      return <div />;
-    }
   }
 });
 

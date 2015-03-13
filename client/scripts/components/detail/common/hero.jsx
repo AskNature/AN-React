@@ -13,9 +13,17 @@ Col = require('react-bootstrap').Col;
 var HeroComponent = React.createClass({
   render: function() {
     var mediaurl = this.props.media && this.props.media.length > 0 ? ('http://www.asknature.org/images/uploads/'+ this.props.media[0].entity + '/' + this.props.media[0].masterid + '/' + this.props.media[0].filename) : '';
-      var heroStyle = {
-      backgroundImage: 'url(' + mediaurl + ')'
-    };
+    var heroStyle;
+      if(this.props.media && this.props.media.length > 0) {
+         mediaurl = 'http://www.asknature.org/images/uploads/'+ this.props.media[0].entity + '/' + this.props.media[0].masterid + '/' + this.props.media[0].filename;
+        heroStyle = {
+          backgroundImage: 'url(' + mediaurl + ')'
+        };
+      } else {
+        heroStyle = {
+          height: '300px !important'
+        };
+      }
     return (
       /* jshint ignore:start */
       <section className="hero" style={heroStyle}>

@@ -118,8 +118,12 @@ var StrategyDetail = React.createClass({
 				</Row>
 				<Row>
 				    <Col xs={12} md={12}>
-				         <TextArea title='Story' item={detail.brief} store={store} actions={actions} fieldName={'brief'} editable={this.state.editable} />
+                        {detail.brief || this.state.editable ? (
+                    <TextArea title='Story' item={detail.brief} store={store} actions={actions} fieldName={'brief'} editable={this.state.editable} />
+                    ) : '' }
+                        {detail.special_text || this.state.editable ? (
 					 <TextArea title='Citations' item={detail.special_text} store={store} actions={actions} fieldName={'special_text'} editable={this.state.editable} />
+                     ) : '' }
 				    </Col>
 				</Row>
 				<Row className='show-grid'>

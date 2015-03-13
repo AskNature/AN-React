@@ -159,11 +159,19 @@ var ProductDetail = React.createClass({
               </Row>
               <Row>
                 <Col xs={12} md={12}>
-
+                  {detail.special_text || this.state.editable ? (
                   <TextArea title='Summary' item={detail.special_text} store={store} actions={actions} fieldName={'special_text'} editable={this.state.editable}/>
+                  ) : '' }
+                  {detail.biomimicry_story || this.state.editable ? (
                   <TextArea title='Inspiration' item={detail.biomimicry_story} store={store} actions={actions} fieldName={'biomimicry_story'} editable={this.state.editable}/>
+                  ) : '' }
+                  {detail.how_is_it_different || this.state.editable ? (
                   <TextArea title='Market Advantage' item={detail.how_is_it_different} store={store} actions={actions} fieldName={'how_is_it_different'} editable={this.state.editable}/>
+                  ) : '' }
+                  {detail.challenges_solved || this.state.editable ? (
                   <TextArea title='Challenges Solved' item={detail.challenges_solved} store={store} actions={actions} fieldName={'challenges_solved'} editable={this.state.editable}/>
+                    ) : '' }
+
                 </Col>
               </Row>
             </Grid>

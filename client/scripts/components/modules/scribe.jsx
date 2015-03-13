@@ -5,8 +5,14 @@ var Scribe = require('scribe-editor');
 var ScribeTextField = React.createClass({
   getInitialState: function() {
     var initialStruct = this.props.store.get();
+    var initialValue;
+    if(this.props.initialValue) {
+      initialValue = this.props.initialValue;
+    } else {
+      initialValue = 'Enter a '+this.props.fieldName;
+    }
     return {
-      html: this.props.initialValue,
+      html: initialValue,
       gotUpdate: true
     };
   },
