@@ -91,6 +91,7 @@ var StrategyDetail = React.createClass({
 	var splitLegacyTitle = detail.name.split(': ');
 	//var secondaryLink = '../living-system/'+ (detail.living_systems ? detail.living_systems[0].masterid : '');
 	var secondaryLink = '';
+    var default_avatar = 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/10383663_869350803096314_2369845013213041061_n.png?oh=2c010ce055331caa73a9506795239fd1&oe=55BDD82A&__gda__=1433772443_f5c43498047b8193dccc0a5554ba6ed1';
         return (
 		    !this.state.loaded ? (<div>{this.state.error ? 'Error' : 'Loading'}</div>) : (<div><AdminBar masterid={detail.masterid} routename={'strategy'} pluralroute={'strategies'} entityName={entityName} />
 		    <CreatorMast img='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg' entityname={entityName} />
@@ -104,7 +105,7 @@ var StrategyDetail = React.createClass({
                            <RelationshipList items={this.state.object.conditions} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'conditions')} onRemove={this.onRelationshipRemove.bind(null, 'conditions')} field={'conditions'} routeName={'condition'} title={'Context'} fieldName={'Context'}/>
             		    </Col>
             		    <Col xs={6} sm={4}>
-                            <RelationshipList items={this.state.object.mechanisms} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'mechanisms')} onRemove={this.onRelationshipRemove.bind(null, 'mechanisms')} field={'mechanisms'} routeName={'phenomenon'} title={'Mechanisms'} fieldName={'Mechanisms'}/>
+                            <RelationshipList items={this.state.object.mechanisms} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null,'mechanisms')} onRemove={this.onRelationshipRemove.bind(null, 'mechanisms')} field={'mechanisms'} routeName={'phenomenon'} title={'Mechanisms'} fieldName={'Mechanisms'}/>
             		    </Col>
             		    <Col xs={6} sm={4}>
                           <RelationshipList items={this.state.object.functions} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'functions')} onRemove={this.onRelationshipRemove.bind(null, 'functions')} field={'functions'} routeName={'phenomenon'} title={'Outcomes'} fieldName={'Outcomes'}/>
@@ -132,7 +133,7 @@ var StrategyDetail = React.createClass({
                       <li className='media'>
                         <div className='media-left'>
                           <a href='#'>
-                            <img src='https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png' alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
+                            <img src={default_avatar} alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                           </a>
                         </div>
                         <div className='media-body'>
@@ -144,7 +145,7 @@ var StrategyDetail = React.createClass({
                       <li className='media'>
                         <div className='media-left'>
                           <a href='#'>
-                            <img src='https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png' alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
+                            <img src={default_avatar} alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                           </a>
                         </div>
                         <div className='media-body'>
@@ -156,7 +157,7 @@ var StrategyDetail = React.createClass({
                       <li className='media'>
                         <div className='media-left'>
                           <a href='#'>
-                            <img src='https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png' alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
+                            <img src={default_avatar} alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                           </a>
                         </div>
                         <div className='media-body'>
@@ -167,7 +168,7 @@ var StrategyDetail = React.createClass({
                     <li className='media'>
                       <div className='media-left'>
                         <a href='#'>
-                          <img src='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg' alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
+                          <img src={default_avatar} alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                         </a>
                       </div>
                       <div className='media-body'>
