@@ -10,6 +10,7 @@ var _ = require('lodash');
 
 /** Gets list of actions to listen for */
 var strategyConstants = require('../constants/strategy');
+var routesConstants = require('../constants/routes');
 
 /** Gets default values to be used until db action is completed */
 var strategyDefaults = require('../constants/defaults').strategyNew;
@@ -46,6 +47,8 @@ StrategyStore.dispatcherToken = Dispatcher.register(function(payload) {
   if (action.actionType === strategyConstants.FETCH_STRATEGY_SUCCESS) {
       _data = action.data;
       StrategyStore.emitChange();
+  } else if(action.actionType === routesConstants.SET_CURRENT_ROUTE) {
+      _data = strategyDefaults;
   } else if (action.actionType === strategyConstants.INITIALIZE_STRATEGY) {
       _data = action.data || strategyDefaults;
   } else if(action.actionType === strategyConstants.UPDATE_STRATEGY) {
