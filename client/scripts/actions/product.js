@@ -4,7 +4,7 @@
 'use strict';
 
 var Dispatcher = require('../dispatchers/default');
-var Constants = require('../constants/strategy');
+var Constants = require('../constants/product');
 //var Defaults = require('../constants/defaults').strategyNew;
 var request = require('superagent');
 var assign = require('object-assign');
@@ -22,7 +22,7 @@ var routeActions = require('./routes');
 
 var initialize = function(initialData) {
     Dispatcher.handleViewAction({
-	actionType: Constants.INITIALIZE_STRATEGY
+	actionType: Constants.INITIALIZE_PRODUCT
     });
 };
 
@@ -38,21 +38,21 @@ var fetch = function(masterid) {
 	actionType: Constants.FETCH_STRATEGY
     });*/
     request
-    .get('/api/v2/strategies/'+masterid+'?expand=true')
+    .get('/api/v2/products/'+masterid+'?expand=true')
     .type('json')
     .end(function(res) {
       if (res.ok) {
         if (res) {
           var itemData = res.body;
             Dispatcher.handleViewAction({
-		actionType: Constants.FETCH_STRATEGY_SUCCESS,
+		actionType: Constants.FETCH_PRODUCT_SUCCESS,
 		data: itemData
 	    });
         }
       }
       else {
 	  Dispatcher.handleViewAction({
-	      actionType: Constants.FETCH_STRATEGY_ERROR
+	      actionType: Constants.FETCH_PRODUCT_ERROR
 	  });
       }
     });
@@ -65,14 +65,14 @@ var fetch = function(masterid) {
 
 var update = function(data) {
     Dispatcher.handleViewAction({
-	actionType: Constants.UPDATE_STRATEGY,
+	actionType: Constants.UPDATE_PRODUCT,
 	data: data
     });
 };
 
 var removeRelationship = function(field, data) {
     Dispatcher.handleViewAction({
-	actionType: Constants.REMOVE_RELATIONSHIP_STRATEGY,
+	actionType: Constants.REMOVE_RELATIONSHIP_PRODUCT,
 	field: field,
 	data: data
     });
@@ -80,7 +80,7 @@ var removeRelationship = function(field, data) {
 
 var addRelationship = function(field, data) {
     Dispatcher.handleViewAction({
-	actionType: Constants.ADD_RELATIONSHIP_STRATEGY,
+	actionType: Constants.ADD_RELATIONSHIP_PRODUCT,
 	field: field,
 	data: data
     });
@@ -92,7 +92,7 @@ var addRelationship = function(field, data) {
 
 var commit = function(fields) {
     Dispatcher.handleViewAction({
-	actionType: Constants.COMMIT_STRATEGY,
+	actionType: Constants.COMMIT_PRODUCT,
 	fields: fields
     });
     var self = this;
@@ -105,18 +105,18 @@ var commit = function(fields) {
 	dataToSend[field] = model[field];
     });
     request
-    .post('/api/v2/strategies/'+masterid)
+    .post('/api/v2/products/'+masterid)
     .send(dataToSend)
     .end(function(res) {
         if(res.ok) {
 	    Dispatcher.handleViewAction({
-		actionType: Constants.COMMIT_STRATEGY_SUCCESS,
+		actionType: Constants.COMMIT_PRODUCT_SUCCESS,
 		fields: fields,
 		data: res
 	    });
         } else {
 	    Dispatcher.handleViewAction({
-		actionType: Constants.COMMIT_STRATEGY_ERROR,
+		actionType: Constants.COMMIT_PRODUCT_ERROR,
 		fields: fields,
 		error: res
 	    });
@@ -126,17 +126,17 @@ var commit = function(fields) {
 
 var del = function(masterid) {
     request
-    .del('/api/v2/strategies/'+masterid)
+    .del('/api/v2/productss/'+masterid)
     .end(function(res) {
 	if(res.ok) {
-	    routeActions.setRoute('/admin/strategies');
+	    routeActions.setRoute('/admin/products');
 	}
     });
 };
 
 var create = function() {
     Dispatcher.handleViewAction({
-	actionType: Constants.CREATE_STRATEGY
+	actionType: Constants.CREATE_PRODUCT
     });
 };
 

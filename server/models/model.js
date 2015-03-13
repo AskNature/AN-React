@@ -213,6 +213,20 @@ var ConstructModel = function(entityName, fields, relationships) {
 	}).done();
     };
 
+    Model.findWithRelationships = function(constraints, callback, options) {
+        var relFields = _.map(relationships, function(val, key) {
+            //return 'set(' + val.edge + '.masterid) as ' + key; // should deduplicate
+            return val.edge + ' as ' + key;
+        });
+        var fetchMap = _.mapValues(relationships, function() { return 0 });
+        db.select('@rid, masterid, ' + fields.join(', ') + (relFields.length ? ', ' : '') + relFields.join(', ')).from(entityName).where(constraints).fetch(fetchMap).all().then(function(results) {
+            callback(_.map(results, function(result) {
+                return new Model(result.masterid, result, result.rid);
+            }));
+        }).done();
+    };
+
+
     Model.findAutocomplete = function(typed, limit, callback) {
 	db.query('SELECT @rid, masterid, ' + fields.join(', ') + " FROM " + entityName + " WHERE name LIKE '" + typed + "%' LIMIT " + limit).then(function(results) {
 	    callback(results);
@@ -248,7 +262,6 @@ var ConstructModel = function(entityName, fields, relationships) {
 	    return val.edge + ' as ' + key;
 	});
 	var fetchMap = _.mapValues(relationships, function() { return 0 });
-	console.log(fetchMap);
 	db.select('@rid, masterid, ' + fields.join(', ') + (relFields.length ? ', ' : '') + relFields.join(', ')).from(entityName).where({masterid: masterid}).fetch(fetchMap).limit(1).one().then(function(result) {
 	    if(result) {
 		console.log("deep-fetch success");

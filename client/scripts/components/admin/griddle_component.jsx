@@ -236,7 +236,9 @@ var GriddleComponent = React.createClass({
     // Event handler for 'change' events coming from store mixin
     _onChange: function() {
         console.log('griddle store changed');
-	this.setState(this.props.store.get());
+	var state = this.props.store.get();
+	state.results.splice(0,0,{masterid: "new", name: "new component"});
+	this.setState(state);
     }
 });
 
