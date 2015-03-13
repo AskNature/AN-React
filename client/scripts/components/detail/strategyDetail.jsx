@@ -83,7 +83,8 @@ var StrategyDetail = React.createClass({
         if(r) {actions.del(this.props.masterid);}
     },
     render: function() {
-    	var detail = this.state.object;
+    	console.log(this.state.object);
+        var detail = this.state.object;
 	var entityName = 'Biological Strategy';
 	var splitLegacyTitle = detail.name.split(': ');
 	//var secondaryLink = '../living-system/'+ (detail.living_systems ? detail.living_systems[0].masterid : '');
@@ -105,6 +106,7 @@ var StrategyDetail = React.createClass({
             		    </Col>
             		    <Col xs={6} sm={4}>
               		        <ButtonList phenomena items={detail.functions} routename='phenomenon' title='Outcomes'/>
+                          <RelationshipList items={this.state.object.functions} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'functions')} onRemove={this.onRelationshipRemove.bind(null, 'functions')} field={'functions'} routeName={'phenomenon'} title={'Outcomes'} fieldName={'Outcomes'}/>
             		    </Col>
           		</Row>
          	    </Grid>
@@ -126,52 +128,52 @@ var StrategyDetail = React.createClass({
 				    <Col xs={12} sm={6}>
                   <h6><strong>Your Inspired Ideas</strong></h6>
 
-                  <ul className="media-list">
+                  <ul className='media-list'>
                     {detail.application_1 ? (
-                      <li className="media">
-                        <div className="media-left">
-                          <a href="#">
-                            <img src="https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
+                      <li className='media'>
+                        <div className='media-left'>
+                          <a href='#'>
+                            <img src='https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png' alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                           </a>
                         </div>
-                        <div className="media-body">
-                          <p><a href="#"><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_1}} /> <Label>Sector 1</Label></p>
+                        <div className='media-body'>
+                          <p><a href='#'><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_1}} /> <Label>Sector 1</Label></p>
                         </div>
                       </li>) : ''
                     }
                     {detail.application_2 ? (
-                      <li className="media">
-                        <div className="media-left">
-                          <a href="#">
-                            <img src="https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
+                      <li className='media'>
+                        <div className='media-left'>
+                          <a href='#'>
+                            <img src='https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png' alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                           </a>
                         </div>
-                        <div className="media-body">
-                          <p><a href="#"><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_2}} /> <Label>Sector 2</Label> <Label>Sector 3</Label></p>
+                        <div className='media-body'>
+                          <p><a href='#'><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_2}} /> <Label>Sector 2</Label> <Label>Sector 3</Label></p>
                         </div>
                       </li>) : ''
                     }
                     {detail.application_3 ? (
-                      <li className="media">
-                        <div className="media-left">
-                          <a href="#">
-                            <img src="https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
+                      <li className='media'>
+                        <div className='media-left'>
+                          <a href='#'>
+                            <img src='https://lh6.googleusercontent.com/-tZskG15qG3k/VC3JrjTeWwI/AAAAAAAAADM/6_6W4gnzQo8/w140-h140-p/bi-logo.png' alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                           </a>
                         </div>
-                        <div className="media-body">
-                          <p><a href="#"><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_3}} /> <Label>Sector 4</Label> <Label>Sector 3</Label></p>
+                        <div className='media-body'>
+                          <p><a href='#'><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: detail.application_3}} /> <Label>Sector 4</Label> <Label>Sector 3</Label></p>
                         </div>
                       </li>) : ''
                     }
-                    <li className="media">
-                      <div className="media-left">
-                        <a href="#">
-                          <img src="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" alt="Thumb" width="30px" height="30px" className="img-circle media-object" />
+                    <li className='media'>
+                      <div className='media-left'>
+                        <a href='#'>
+                          <img src='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg' alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                         </a>
                       </div>
-                      <div className="media-body">
+                      <div className='media-body'>
                         <form>
-                          <Input type="text" className="input-sm" placeholder="Share Your Idea..." />
+                          <Input type='text' className='input-sm' placeholder='Share Your Idea...' />
                         </form>
                       </div>
                     </li>
@@ -181,15 +183,15 @@ var StrategyDetail = React.createClass({
 				        <RelationshipList items={this.state.object.products} editable={this.state.editable} titleField='headline' subtitleField='name' onAdd={this.onRelationshipAdd.bind(null, 'products')} onRemove={this.onRelationshipRemove.bind(null, 'products')} field={'products'} routeName={'product'} title={'Inspired Solutions'} fieldName={'Inspired Solution'}/>
 				    </Col>
 				</Row>
-              			<Row className="show-grid">
+              			<Row className='show-grid'>
                 		    {detail.sources ? (
                   		        <Col xs={12} sm={6}>
-                    			    <ButtonList sources items={detail.sources} routename="source" title="Sources" />
+                    			    <ButtonList sources items={detail.sources} routename='source' title='Sources' />
                   			</Col>) : ''
                 		    }
                 		    {detail.experts ? (
                   		        <Col xs={12} sm={6}>
-                    			    <ButtonList experts items={detail.experts} routename="researcher" title="Studied By" />
+                    			    <ButtonList experts items={detail.experts} routename='researcher' title='Studied By' />
                   			</Col>) : ''
                 		    }
               			</Row>

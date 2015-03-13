@@ -1,16 +1,17 @@
 // Product model
+'use strict';
 
 var Model = require('./model.js');
 
-var FlatStrategy = Model('Strategies', ['name', 'summary']);
+var FlatStrategy = new Model('Strategies', ['name', 'summary']);
 
-var Source = Model('Sources', ['name', 'publication_year', 'authors']);
-var Function = Model('Function', ['name']);
-var Expert = Model('Expert', ['name']);
-var User = Model('Users', ['name']);
-var Media = Model('Media', ['filename', 'name', 'entity']);
-var LivingSystem = Model('LivingSystem', ['name', 'taxon']);
-var Condition = Model('Condition', []);
+var Source = new Model('Sources', ['name', 'publication_year', 'authors']);
+var Function = new Model('Function', ['name']);
+var Expert = new Model('Expert', ['name']);
+var User = new Model('Users', ['name']);
+var Media = new Model('Media', ['filename', 'name', 'entity']);
+var LivingSystem = new Model('LivingSystem', ['name', 'taxon']);
+var Condition = new Model('Condition', []);
 
 var entityName = 'InspiredSolutions';
 
@@ -60,6 +61,6 @@ var relationships = {
     }
 };
 
-var Product = Model(entityName, fields, relationships);
+var Product = new Model(entityName, fields, relationships);
 
 module.exports = Product;
