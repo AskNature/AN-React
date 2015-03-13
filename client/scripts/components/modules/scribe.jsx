@@ -1,17 +1,18 @@
+'use strict';
 var React = require('react');
 var Scribe = require('scribe-editor');
 
-ScribeTextField = React.createClass({
-    getInitialState: function() {
-        var initialStruct = this.props.store.get();
-        return {
-	    html: this.props.initialValue,
-	    gotUpdate: true
-        }
-    },
-    componentWillMount: function() {
-        this.props.store.addChangeListener(this._onChange);
-    },
+var ScribeTextField = React.createClass({
+  getInitialState: function() {
+    var initialStruct = this.props.store.get();
+    return {
+      html: this.props.initialValue,
+      gotUpdate: true
+    };
+  },
+  componentWillMount: function() {
+    this.props.store.addChangeListener(this._onChange);
+  },
     componentDidMount: function() {
         var that = this;
         var scribeElement = this.refs.scribe.getDOMNode();

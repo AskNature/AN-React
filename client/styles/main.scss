@@ -64,6 +64,24 @@ label {
 }
 
 /* ==========================================================================
+Relationship Selector
+========================================================================== */
+
+.relationship-selector {
+  width: 100%;
+  .rw-combobox {
+    width: 82%;
+    float: left;
+    input {
+      padding-left: 15px;
+    }
+  }
+  .btn {
+    float: right;
+    margin-right: -5px;
+  }
+}
+/* ==========================================================================
 Griddle Admin Lists
 ========================================================================== */
 
@@ -91,34 +109,42 @@ Sidebar
 }
 
 /* ==========================================================================
-Mini hero
+Mini hero (relationship list editor)
 ========================================================================== */
-.minihero {
-    position: relative;
-    height: 50px;
-    background: #999 no-repeat center center;
-    background-size: cover;
-    color: #fff;
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.3);
-    }
-    &:hover {
-      &:before {
-        background: rgba(0,0,0,0.5);
-      }
-    }
-    h6 {
+
+.relationship-button {
+  .btn-group {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  .btn {
+    height: 80px;
+    &:first-child {
+      width: 90%;
+      text-transform: none;
+      text-align: left;
+      padding-top: 13px;
       color: #fff;
-      position: absolute;
-      display: block;
     }
+    &.dropdown-toggle {
+      width: 10%;
+      background-image: none !important;
+    }
+    .minihero {
+      // background: rgba(255,255,255,0.7);
+      margin: -13px -16px;
+      padding: 0px 15px;
+      height: 80px;
+      overflow: hidden;
+    }
+  }
+  .dropdown-menu {
+    left: inherit;
+    right: 0;
+    float: right;
+  }
 }
+
 /* ==========================================================================
 Hero
 ========================================================================== */
@@ -317,29 +343,23 @@ Hero
     padding: 0.5em 0;
 }
 
-input.relationship-input {
-    border: none;
-    outline: none;
-    width: 100%;
-    padding-left: 42px;
-    position: absolute;
-    left: 0;
-    cursor: pointer;
-    z-index: 1;
-    background-color: transparent;
-    margin-top: -1px;
-}
-
-input.relationship-input-autocomplete {
-    border: none;
-    outline: none;
-    width: 100%;
-    padding-left: 42px;
-    position: absolute;
-    left: 0;
-    cursor: pointer;
-    background-color: transparent;
-    z-index: 0;
+.autocomplete-input {
+  height: 40px;
+  .form-group {
+      display: block;
+      border: none;
+      outline: none;
+      padding-left: 15px;
+      right: 30px;
+      position: absolute;
+      left: 0;
+      cursor: pointer;
+      background-color: transparent;
+      z-index: 0;
+      &:first-child {
+        z-index: 1;
+      }
+  }
 }
 
 .autocomplete-dropdown {

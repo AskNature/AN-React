@@ -1,5 +1,7 @@
-var React = require('react')
-store = require('../../stores/strategy.js');
+'use strict';
+
+var React = require('react'),
+store = require('../../stores/strategy.js'),
 actions = require('../../actions/strategy.js');
 
 var TextArea = require('./common/textarea.jsx');
@@ -13,11 +15,12 @@ SubHero = require('./common/subhero.jsx'),
 ButtonList = require('./common/edgelists.jsx'),
 Gallery = require('./common/gallery.jsx');
 
-var Panel = require('react-bootstrap/Panel'),
-PanelGroup = require('react-bootstrap/PanelGroup'),
-Row = require('react-bootstrap/Row'),
-Label = require('react-bootstrap/Label'),
-Grid = require('react-bootstrap/Grid');
+var Panel = require('react-bootstrap').Panel,
+PanelGroup = require('react-bootstrap').PanelGroup,
+Row = require('react-bootstrap').Row,
+Label = require('react-bootstrap').Label,
+Grid = require('react-bootstrap').Grid,
+Col = require('react-bootstrap').Col;
 
 var getState = function() {
     return (
@@ -50,11 +53,11 @@ var StrategyDetail = React.createClass({
     	this.setState(getState());
     },
     onRelationshipAdd: function(field, addedValue) {
-        console.log(field + " added " + addedValue);
+        console.log(field + ' added ' + addedValue);
 	actions.addRelationship(field, addedValue);
     },
     onRelationshipRemove: function(field, removedValue) {
-    	console.log(field + " removed " + removedValue);
+    	console.log(field + ' removed ' + removedValue);
 	actions.removeRelationship(field, removedValue);
     },
     toggleEditable: function() {
@@ -76,37 +79,37 @@ var StrategyDetail = React.createClass({
         this.setState({editable: false});
     },
     onDelete: function() {
-        var r = confirm("Do you really want to delete this record?");
+        var r = confirm('Do you really want to delete this record?');
         if(r) {actions.del(this.props.masterid);}
     },
     render: function() {
     	var detail = this.state.object;
-	var entityName = "Biological Strategy";
+	var entityName = 'Biological Strategy';
 	var splitLegacyTitle = detail.name.split(': ');
-	//var secondaryLink = '../living-system/'+ (detail.living_systems ? detail.living_systems[0].masterid : "");
+	//var secondaryLink = '../living-system/'+ (detail.living_systems ? detail.living_systems[0].masterid : '');
 	var secondaryLink = '';
         return (
-		    !this.state.loaded ? (<div>{this.state.error ? "Error" : "Loading"}</div>) : (<div><AdminBar masterid={detail.masterid} routename={"strategy"} pluralroute={"strategies"} entityName={entityName} />
-		    <CreatorMast img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" entityname={entityName} />
+		    !this.state.loaded ? (<div>{this.state.error ? 'Error' : 'Loading'}</div>) : (<div><AdminBar masterid={detail.masterid} routename={'strategy'} pluralroute={'strategies'} entityName={entityName} />
+		    <CreatorMast img='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg' entityname={entityName} />
 		    <Hero editable={this.state.editable} media={detail.media} primarytitle={this.state.loaded ? splitLegacyTitle[0] : '!!!!'} secondarytitle={splitLegacyTitle[1]} secondarylink={secondaryLink} masterid={this.state.masterid} />
 		    <div>Slug: {this.state.masterid}</div>
 		    <SubHero description={detail.summary} editable={this.state.editable} store={store} actions={actions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} onDelete={this.onDelete} />
 		    <Grid>
-          	        <Row className="show-grid">
+          	        <Row className='show-grid'>
             		    <Col xs={12} sm={4}>
-               		        <ButtonList livingsystems items={detail.living_systems} routename="living-system" title="Living Systems"/>
-              			<ButtonList conditions items={detail.conditions} title="Context" />
+               		        <ButtonList livingsystems items={detail.living_systems} routename='living-system' title='Living Systems'/>
+              			<ButtonList conditions items={detail.conditions} title='Context' />
             		    </Col>
             		    <Col xs={6} sm={4}>
-              		        <ButtonList phenomena items={detail.mechanisms} routename="phenomenon" title="Mechanisms"/>
+              		        <ButtonList phenomena items={detail.mechanisms} routename='phenomenon' title='Mechanisms'/>
             		    </Col>
             		    <Col xs={6} sm={4}>
-              		        <ButtonList phenomena items={detail.functions} routename="phenomenon" title="Outcomes"/>
+              		        <ButtonList phenomena items={detail.functions} routename='phenomenon' title='Outcomes'/>
             		    </Col>
           		</Row>
          	    </Grid>
 		    <PanelGroup defaultActiveKey='1' accordion>
-		        <Panel header="More" eventKey='1'>
+		        <Panel header='More' eventKey='1'>
                     	    <Grid>
 			        <Row>
 				    <Col xs={12}>
@@ -115,11 +118,11 @@ var StrategyDetail = React.createClass({
 				</Row>
 				<Row>
 				    <Col xs={12} md={12}>
-				         <TextArea title='Story' item={detail.brief} store={store} actions={actions} fieldName={"brief"} editable={this.state.editable} />
-					 <TextArea title='Citations' item={detail.special_text} store={store} actions={actions} fieldName={"special_text"} editable={this.state.editable} />
+				         <TextArea title='Story' item={detail.brief} store={store} actions={actions} fieldName={'brief'} editable={this.state.editable} />
+					 <TextArea title='Citations' item={detail.special_text} store={store} actions={actions} fieldName={'special_text'} editable={this.state.editable} />
 				    </Col>
 				</Row>
-				<Row className="show-grid">
+				<Row className='show-grid'>
 				    <Col xs={12} sm={6}>
                   <h6><strong>Your Inspired Ideas</strong></h6>
 
@@ -175,7 +178,7 @@ var StrategyDetail = React.createClass({
                   </ul>
 				    </Col>
 				    <Col xs={12} sm={6}>
-				        <RelationshipList items={this.state.object.products} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, "products")} onRemove={this.onRelationshipRemove.bind(null, "products")} field={"products"} routeName={"product"} title={"Inspired Solutions"} fieldName={"Inspired Solution"}/>
+				        <RelationshipList items={this.state.object.products} editable={this.state.editable} titleField='headline' subtitleField='name' onAdd={this.onRelationshipAdd.bind(null, 'products')} onRemove={this.onRelationshipRemove.bind(null, 'products')} field={'products'} routeName={'product'} title={'Inspired Solutions'} fieldName={'Inspired Solution'}/>
 				    </Col>
 				</Row>
               			<Row className="show-grid">
@@ -193,7 +196,7 @@ var StrategyDetail = React.createClass({
 			    </Grid>
 			</Panel>
 		    </PanelGroup></div>)
-        )
+        );
     }
 });
 
