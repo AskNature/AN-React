@@ -67,10 +67,6 @@ StrategyStore.dispatcherToken = Dispatcher.register(function(payload) {
   } else if (action.actionType === strategyConstants.INITIALIZE_STRATEGY) {
       _data = action.data || strategyDefaults;
       StrategyStore.emitChange();
-  } else if (action.actionType === strategyConstants.CREATE_STRATEGY) {
-      _data = strategyDefaults;
-      _loaded = true;
-      StrategyStore.emitChange();
   } else if(action.actionType === strategyConstants.UPDATE_STRATEGY) {
       _.forEach(action.data, function(value, key) {
 	  _fieldsUpdated = _.union(_fieldsUpdated, [key]);

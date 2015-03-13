@@ -96,6 +96,7 @@ var Defaults = {
 
     strategyNew: {
 	name: 'Loading...',
+	masterid: '',
 	description: 'Nature is coming...',
 	products: [],
 	media: [],
@@ -103,6 +104,23 @@ var Defaults = {
 	mechanisms: [],
 	functions: [],
 	conditions: []
+    },
+
+    productNew: {
+        name: 'Loading...',
+        masterid: '',
+	headline: 'Nature is coming...',
+	special_text: '',
+	keywords: 'one,two',
+        strategies: [],
+	media: [],
+	outcomes: [],
+	mechanisms: [],
+	conditions: [],
+	designedsystems: [],
+	researchers: [],
+	sources: [],
+	collectors: []
     },
 
     product: {

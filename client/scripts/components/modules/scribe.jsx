@@ -13,24 +13,6 @@ var ScribeTextField = React.createClass({
   componentWillMount: function() {
     this.props.store.addChangeListener(this._onChange);
   },
-  componentDidMount: function() {
-    var that = this;
-    var scribeElement = this.refs.scribe.getDOMNode();
-    var scribe = new Scribe(scribeElement, { allowBlockElements:    (this.props.enableBlockMode ? true : false) });
-    this.setState({scribe: scribe}, function() {
-      function updateData() {
-        var html = scribe.getHTML();
-        that.setState({html: html});
-        //console.log(that.props);
-        if(!that.state.gotUpdate) {
-          that.props.actions.updateField(that.props.fieldName, html, that.props.store.get());
-        } else {
-          that.setState({gotUpdate: false});
-        }
-    },
-    componentWillMount: function() {
-        this.props.store.addChangeListener(this._onChange);
-    },
     componentDidMount: function() {
         var that = this;
         var scribeElement = this.refs.scribe.getDOMNode();

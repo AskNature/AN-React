@@ -19,14 +19,6 @@ var databaseConfig = function() {
 
   module.exports.db = db;
 
-  // Import all databases
-  server.list()
-  .then(function (dbs) {
-    console.log('✔ Connected to OrientDB.'.green + ' There are ' + dbs.length + ' databases on the server.');
-  }).catch(function(err) {
-    console.log('✗ Problem connecting to OrientDB server.'.red);
-  });
-
   db.class.list()
   .then(function (classes){
     console.log('✔ Connected to the '.green + this.name.green + ' database'.green + ' as '.green + this.username.blue + '.'.green + ' There are ' + classes.length + ' classes in this database.');

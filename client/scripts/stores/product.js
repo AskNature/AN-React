@@ -1,5 +1,5 @@
 /**
-* Strategy store
+* Product store
 */
 'use strict';
 
@@ -9,25 +9,25 @@ var Dispatcher = require('../dispatchers/default');
 var _ = require('lodash');
 
 /** Gets list of actions to listen for */
-var strategyConstants = require('../constants/strategy');
+var productConstants = require('../constants/product');
 var routesConstants = require('../constants/routes');
 
 /** Gets default values to be used until db action is completed */
-var strategyDefaults = require('../constants/defaults').strategyNew;
+var productDefaults = require('../constants/defaults').productNew;
 
 var _data;
 var _fieldsUpdated;
 var _error;
 var _loaded;
 
-var StrategyStore = new Store({
+var ProductStore = new Store({
 
 /** getOutcomes is called by the getState function in
 * ../components/modules/outcomefilter and returns the response from the
 * completed action below if there is one, or default values if the action
 * hasn't completed. */
   get: function() {
-    return _data || strategyDefaults;
+    return _data || productDefaults;
   },
   getMasterid: function() {
     return _data.masterid;
@@ -48,58 +48,58 @@ var StrategyStore = new Store({
 * _focus variable, and emits a signal alerting the view (component) of
 * the update.
 */
-StrategyStore.dispatcherToken = Dispatcher.register(function(payload) {
+ProductStore.dispatcherToken = Dispatcher.register(function(payload) {
 
   var action = payload.action;
 
-  if (action.actionType === strategyConstants.FETCH_STRATEGY_SUCCESS) {
+  if (action.actionType === productConstants.FETCH_PRODUCT_SUCCESS) {
       _loaded = true;
       _error = false;
       _data = action.data;
-      StrategyStore.emitChange();
-  } else if (action.actionType === strategyConstants.FETCH_STRATEGY_ERROR) {
+      ProductStore.emitChange();
+  } else if (action.actionType === productConstants.FETCH_PRODUCT_ERROR) {
       _error = true;
-      StrategyStore.emitChange();
+      ProductStore.emitChange();
   } else if(action.actionType === routesConstants.SET_CURRENT_ROUTE) {
       _loaded = false;
-      _data = strategyDefaults;
-      StrategyStore.emitChange();
-  } else if (action.actionType === strategyConstants.INITIALIZE_STRATEGY) {
-      _data = action.data || strategyDefaults;
-      StrategyStore.emitChange();
-  } else if (action.actionType === strategyConstants.CREATE_STRATEGY) {
-      _data = strategyDefaults;
+      _data = productDefaults;
+      ProductStore.emitChange();
+  } else if (action.actionType === productConstants.INITIALIZE_PRODUCT) {
+      _data = action.data || productDefaults;
+      ProductStore.emitChange();
+  } else if (action.actionType === productConstants.CREATE_PRODUCT) {
+      _data = productDefaults;
       _loaded = true;
-      StrategyStore.emitChange();
-  } else if(action.actionType === strategyConstants.UPDATE_STRATEGY) {
+      ProductStore.emitChange();
+  } else if(action.actionType === productConstants.UPDATE_PRODUCT) {
       _.forEach(action.data, function(value, key) {
 	  _fieldsUpdated = _.union(_fieldsUpdated, [key]);
       });
       _.assign(_data, action.data);
-      StrategyStore.emitChange();
-  } else if(action.actionType === strategyConstants.REMOVE_RELATIONSHIP_STRATEGY) {
+      ProductStore.emitChange();
+  } else if(action.actionType === productConstants.REMOVE_RELATIONSHIP_PRODUCT) {
       if(_data[action.field]) {
 	  _data[action.field] = _.reject(_data[action.field], function(item) {
 	      return item.masterid === action.data.masterid;
 	  });
 	  _fieldsUpdated = _.union(_fieldsUpdated,[action.field]);
-	  StrategyStore.emitChange();
+	  ProductStore.emitChange();
       }
-  } else if(action.actionType === strategyConstants.ADD_RELATIONSHIP_STRATEGY) {
+  } else if(action.actionType === productConstants.ADD_RELATIONSHIP_PRODUCT) {
       if(_data[action.field]) {
 	  _data[action.field].push(action.data);
 	  _fieldsUpdated = _.union(_fieldsUpdated, [action.field]);
-	  StrategyStore.emitChange();
+	  ProductStore.emitChange();
       }
-  } else if(action.actionType === strategyConstants.COMMIT_STRATEGY_SUCCESS) {
+  } else if(action.actionType === productConstants.COMMIT_PRODUCT_SUCCESS) {
       if(action.fields) {
 	  _fieldsUpdated = _.difference(_fieldsUpdated, action.fields);
       } else {
 	  _fieldsUpdated = [];
       }
-      StrategyStore.emitChange();
+      ProductStore.emitChange();
   }
 
 });
 
-module.exports = StrategyStore;
+module.exports = ProductStore;

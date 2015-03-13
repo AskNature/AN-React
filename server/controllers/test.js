@@ -68,7 +68,7 @@ var testControllerFindOne = function(req, res, next) {
 };
 
 var testControllerFind = function(req, res, next) {
-    Strategy.find({name: "Test"}, function(result) {
+    Strategy.findWithRelationships({name: "test"}, function(result) {
 	res.json(result);
     });
 };
