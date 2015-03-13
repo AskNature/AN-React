@@ -118,7 +118,7 @@ var returnItem1 = function(req, res, next) {
 };
 
 var returnItem2 = function(req, res, next) {
-    Phenomenon.get(req.params.id, function(item) {
+    Phenomenon.getWithRelationships(req.params.id, function(item) {
 	if(!item) {
 	    return res.status(404).send("No phenomenon with that id exists");
 	} else {
