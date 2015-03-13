@@ -67,8 +67,7 @@ var StrategyDetail = React.createClass({
     },
     editBegin: function(e) {
         e.preventDefault();
-        //if(this.state.user.role == 'admin') { this.setState({editable: true}); }
-	this.setState({editable: true});
+        if(this.state.user.role === 'admin') { this.setState({editable: true}); }
     },
     editCancel: function(e) {
         e.preventDefault();
@@ -95,7 +94,7 @@ var StrategyDetail = React.createClass({
 		    !this.state.loaded ? (<div>{this.state.error ? 'Error' : 'Loading'}</div>) : (<div><AdminBar masterid={detail.masterid} routename={'strategy'} pluralroute={'strategies'} entityName={entityName} />
 		    <CreatorMast img='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg' entityname={entityName} />
 		    <Hero editable={false} store={store} actions={actions} media={detail.media} primarytitle={this.state.loaded ? splitLegacyTitle[0] : '!!!!'} secondarytitle={splitLegacyTitle[1]} secondarylink={secondaryLink} masterid={this.state.masterid} />
-		    <SubHero description={detail.summary} editable={this.state.editable} store={store} actions={actions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} onDelete={this.onDelete} />
+		    <SubHero description={detail.summary} credentials={this.state.user.role === 'admin' ? true : false} editable={this.state.editable} store={store} actions={actions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} onDelete={this.onDelete} />
 		    <Grid>
           	        <Row className='show-grid'>
             		    <Col xs={12} sm={4}>

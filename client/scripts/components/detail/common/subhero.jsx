@@ -31,7 +31,7 @@ var SubHero = React.createClass({
 	             {this.props.editable ?
                  <span>
                    <ButtonGroup>
-                     <Button block active={true} style={{"cursor": "default"}} disabled={true}>
+                     <Button block disabled={this.props.credentials === true ? false : true } active={true} style={{"cursor": "default"}}>
                        <Glyphicon glyph="pencil" /> Edit Mode Active
                      </Button>
                      <Button block bsStyle="success" onClick={this.props.editFinish}>
