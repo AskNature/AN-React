@@ -4,6 +4,8 @@ var React = require('react'),
 store = require('../../stores/strategy.js'),
 actions = require('../../actions/strategy.js');
 
+var userStore = require('../../stores/accounts');
+
 var TextArea = require('./common/textarea.jsx');
 
 var RelationshipList = require('./common/relationshiplist.jsx');
@@ -27,7 +29,8 @@ var getState = function() {
     {
 	object: store.get(),
 	loaded: store.getLoaded(),
-	error: store.getError()
+	error: store.getError(),
+	user: userStore.get()
     }
     );
 };
@@ -65,8 +68,7 @@ var StrategyDetail = React.createClass({
     },
     editBegin: function(e) {
         e.preventDefault();
-        //if(this.state.user.role == 'admin') { this.setState({editable: true}); }
-	this.setState({editable: true});
+        if(this.state.user.role == 'admin') { this.setState({editable: true}); }
     },
     editCancel: function(e) {
         e.preventDefault();
