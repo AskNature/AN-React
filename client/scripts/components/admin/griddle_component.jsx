@@ -6,6 +6,11 @@ var Link = require('../modules/link.jsx');
 var Input = require('react-bootstrap').Input;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
+var _ = require('lodash');
+var request = require('superagent');
+
+var TextArea = require('../detail/common/textarea.jsx');
+
 var LinkComponent = React.createClass({
     render: function() {
         var url = '/'+ this.props.rowData.entityType + '/' + this.props.rowData.masterid;
@@ -68,12 +73,13 @@ var ListComponent = React.createClass({
 var RadioComponent = React.createClass({
   render: function() {
     var status = false;
-    console.log(this.props.data);
+    //console.log(this.props.data);
     if(this.props.data === 1) {status = true;}
+    var masterid = this.props.rowData.masterid;
 
     return (
       <div>
-        <Input type='checkbox' checked={status} readOnly />
+        <Input type='checkbox' checked={status} readOnly onChange={this.props.rowData.selectCallback.bind(null, masterid, status)} />
       </div>
     );
   }
@@ -102,6 +108,12 @@ var DateComponent = React.createClass({
   }
 });
 
+var EditComponent = React.createClass({
+    render: function() {
+      return(<Button onClick={this.props.rowData.editCallback.bind(null, this.props.rowData.masterid, this.props.rowData.edit)}><Glyphicon glyph={this.props.rowData.edit ? 'check' : 'pencil'} /></Button>);
+    }
+});
+
 var GriddleComponent = React.createClass({
     mixins: [React.addons.LinkedStateMixin],
     getInitialState: function() {
@@ -115,6 +127,8 @@ var GriddleComponent = React.createClass({
         }
         return {
             'results': [{'name' : 'Loading...'}],
+	    'selectedItems': [],
+	    'editingItem': null,
             'currentPage': 0,
             'maxPages': 0,
             'externalResultsPerPage': 15,
@@ -144,9 +158,11 @@ var GriddleComponent = React.createClass({
 	});
     },
     changeSort: function(sort, asc) {
-        this.setState({'externalSortColumn' : sort, 'externalSortAscending': asc}, function() {
-	    this.setPage(0);
-	});
+        if(sort != 'selected') {
+	    this.setState({'externalSortColumn' : sort, 'externalSortAscending': asc}, function() {
+	        this.setPage(0);
+	    });
+	}
     },
     setFilter: function(event) {
         console.log('set filter');
@@ -154,13 +170,22 @@ var GriddleComponent = React.createClass({
 	this.setPage(0);
     },
     resetFilterSort: function() {
-        this.setState({'filter': ''}, function() {
+        this.setState({'filter': '', 'selectedItems': []}, function() {
 	    this.changeSort(null, true);
 	});
-    },
+   },
+   deleteSelectedItems: function() {
+        var that = this;
+   	request
+	.del('/api/v2/strategies')
+	.send({delete: this.state.selectedItems})
+	.end(function(res) {
+	    that.setPage(that.state.currentPage);
+	});
+   },
     render: function() {
-      var cols = [];
-      var meta = [];
+      var cols = ['selected', 'edit'];
+      var meta = [{columnName: 'selected', displayName: 'Select', visible:true, customComponent: RadioComponent, locked: true}, {columnName: 'edit', visible:false, customComponent: EditComponent, locked: true},{columnName: 'editCallback', visible: false},{columnName: 'selectCallback', visible:false}];
       var add_meta;
 
       if( this.props.columns ) {
@@ -205,7 +230,8 @@ var GriddleComponent = React.createClass({
       return (
         <div>
           <Input type='text' placeholder='Filter List...' value={this.state.filter} onChange={this.setFilter} />
-          <a onClick={this.resetFilterSort}>Reset</a>
+          <a onClick={this.resetFilterSort}>Reset</a><br />
+	  <span>{this.state.selectedItems.length} item{this.state.selectedItems.length === 1 ? '' : 's'} selected. <a onClick={this.deleteSelectedItems}>Delete these items.</a></span>
           <div className='table-responsive'>
 	           <Griddle useExternal={true}
                externalSetPage={this.setPage}
@@ -237,7 +263,36 @@ var GriddleComponent = React.createClass({
     _onChange: function() {
         console.log('griddle store changed');
 	var state = this.props.store.get();
-	state.results.splice(0,0,{masterid: "new", name: "new component"});
+	//state.results.splice(0,0,{masterid: "new", name: "new component", callback: function() { console.log("called! hah!")}});
+	state.results = _.map(state.results, function(s) {
+	    var c = s;
+	    console.log('test');
+	    c.selected = (_.indexOf(this.state.selectedItems, s.masterid) === -1 ? 0 : 1);
+	    c.edit = this.state.editingItem == s.masterid;
+	    var that = this;
+	    c.selectCallback = function(masterid, status) {
+	        console.log('selected ' + masterid + '!');
+		if(status) { 
+		    that.setState({selectedItems: _.difference(that.state.selectedItems, [masterid])}, function() {
+		        console.log(that.state.selectedItems);
+			that.props.store.emitChange();
+		    })
+		    console.log('was checked');
+		} else {
+		    that.setState({selectedItems: _.union(that.state.selectedItems, [masterid])}, function() {
+		        that.props.store.emitChange();
+		    });
+		    console.log('was not checked');
+		}
+	    };
+	    c.editCallback = function(masterid, edit) {
+	        console.log('called edit on ' + masterid);
+		that.setState({editingItem: (edit ? '' : masterid)}, function() {
+		    that.props.store.emitChange();
+		});
+	    };
+	    return c;
+	}, this);
 	this.setState(state);
     }
 });
