@@ -25,6 +25,18 @@ body {
   padding-top: 85px;
 }
 
+* {
+  -webkit-transition: all 0.2s ease;
+  -moz-transition:    all 0.2s ease;
+  -ms-transition:     all 0.2s ease;
+  -o-transition:      all 0.2s ease;
+}
+
+// Temp color tweaks
+a, .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+  color: #95af60;
+}
+
 label {
   font-weight: normal;
 }
@@ -46,6 +58,26 @@ label {
 .navmenu-fixed-left {
   top: 62px;
   width: 200px;
+  background: rgb(253,253,253);
+}
+
+.navbar-inverse {
+  background: #95af60;
+  .navbar-brand {
+    color: #333;
+  }
+  .form-control::-webkit-input-placeholder {
+    color: rgba(255,255,255,0.8);
+  }
+  input {
+    box-shadow-color: inset 0 -1px 0 rgba(255,255,255,0.8);
+    -webkit-box-shadow-color: inset 0 -1px 0 rgba(255,255,255,0.8);
+    -moz-box-shadow-color: inset 0 -1px 0 rgba(255,255,255,0.8);
+  }
+
+  .navbar-nav > li > a {
+    color: #fff;
+  }
 }
 
 .sidebar-toggle {
@@ -258,7 +290,6 @@ Hero
       position: relative;
     }
   }
-
 }
 
 .navbar {
@@ -335,6 +366,7 @@ Hero
     padding-left: 200px;
     padding-top: 62px;
   }
+
   .pace .pace-progress {
     top: 62px;
   }
@@ -357,6 +389,23 @@ Hero
   }
   .navmenu-fixed-left {
     width: 300px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero {
+    height: 800px;
+    h3 {
+      font-size: 50px;
+    }
+  }
+  .carousel {
+    height: 800px;
+    .carousel-inner {
+      .image-bg {
+        height: 800px;
+      }
+    }
   }
 }
 
