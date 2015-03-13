@@ -112,7 +112,7 @@ var returnItem1 = function(req, res, next) {
 };
 
 var returnItem2 = function(req, res, next) {
-    Product.get(req.params.id, function(item) {
+    Product.getWithRelationships(req.params.id, function(item) {
 	if(!item) {
 	    return res.status(404).send("No product with that id exists");
 	} else {

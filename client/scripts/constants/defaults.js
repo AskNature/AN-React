@@ -11,6 +11,11 @@ var Defaults = {
 
     },
 
+    relationshipList: {
+	results: [],
+    boxvalue: ''
+    },
+
     user: {
         loggedIn: false,
         results : [
@@ -50,6 +55,18 @@ var Defaults = {
       ]
     },
 
+    phenomenonNew : {
+        name: 'Loading...',
+	description: '',
+	short_name: '',
+	parent: [],
+	children: [],
+	has_function: [],
+	groupname: '',
+	groupid: '',
+	media: [],
+    },
+
     strategy: {
       results : [
       {
@@ -87,6 +104,35 @@ var Defaults = {
           is_deleted: 0
       }
       ]
+    },
+
+    strategyNew: {
+	name: 'Loading...',
+	masterid: '',
+	description: 'Nature is coming...',
+	products: [],
+	media: [],
+	living_systems: [],
+	mechanisms: [],
+	functions: [],
+	conditions: []
+    },
+
+    productNew: {
+        name: 'Loading...',
+        masterid: '',
+	headline: 'Nature is coming...',
+	special_text: '',
+	keywords: 'one,two',
+        strategies: [],
+	media: [],
+	outcomes: [],
+	mechanisms: [],
+	conditions: [],
+	designedsystems: [],
+	researchers: [],
+	sources: [],
+	collectors: []
     },
 
     product: {

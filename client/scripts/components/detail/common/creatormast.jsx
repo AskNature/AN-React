@@ -29,7 +29,7 @@ var CreatorMast = React.createClass({
         <div className='media'>
           <div className='media-left media-middle'>
             <Link url={'/user/' + userid}>
-              <Avatar name={name} src={avatar} round='true' size='40' />
+              <Avatar name={name} src={avatar} round size={40} />
             </Link>
           </div>
           <div className='media-body media-middle'>
