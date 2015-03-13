@@ -57,6 +57,7 @@ label {
 
 .container {
   max-width: 100%;
+  padding-bottom: 50px;
 }
 
 .nomargin {
@@ -70,6 +71,7 @@ Relationship Selector
 .relationship-selector {
   width: 100%;
   margin-bottom: 15px;
+  height: 50px;
   .rw-combobox {
     width: 75%;
     float: left;
@@ -121,7 +123,7 @@ Mini hero (relationship list editor)
 .relationship-button {
   .btn-group {
     width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
   .btn {
     height: auto;
@@ -142,10 +144,14 @@ Mini hero (relationship list editor)
     }
     .minihero {
       // background: rgba(255,255,255,0.7);
-      margin: -13px -16px;
+      margin: -13px -16px -20px;
       padding: 0px 15px;
       height: auto;
       overflow: hidden;
+      background: rgba(0,0,0,.02);
+      border-bottom-left-radius: 3px;
+      border-top-left-radius: 3px;
+
     }
   }
   .dropdown-menu {

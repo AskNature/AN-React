@@ -59,7 +59,7 @@ var RelationshipListItemInput = React.createClass({
               data={this.state.results}
               filter='contains'
               ref='combobox'
-              placeholder={ 'Connect your ' + this.props.fieldName }
+              placeholder={ 'Add ' + this.props.fieldName }
               />
             <Button
               onClick={this.onAdd}
