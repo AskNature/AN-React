@@ -30,7 +30,7 @@ var NavbarComponent = React.createClass({
       var greeting = 'Howdy '+ (user.firstName ? user.firstName : user.email);
       var navLinks = user.loggedIn ? (
         <Nav right navbar-header className="pull-right navbar-header">
-          <DropdownButton noCaret title={<Avatar name={user.firstName ? user.firstName+' '+user.lastName : null} size='40' round />} className='loggedin-menu'>
+          <DropdownButton noCaret title={<Avatar size='40' round />} className='loggedin-menu'>
             <MenuItem eventKey="1"><Link url={settingsurl}>My Account</Link></MenuItem>
             <MenuItem divider />
             <MenuItem eventKey="2"><a href="#" onClick={userActions.logoutUser}>Log Out</a></MenuItem>
