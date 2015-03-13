@@ -22,6 +22,7 @@ var AdminBar = React.createClass({
         <ButtonToolbar>
           <Link url={console_url}><Button bsSize="small"><Glyphicon glyph="chevron-left" /> {this.props.entityname} Console</Button></Link>
           <Button bsSize="small" href={legacy_url} target="_blank" bsStyle="primary">View on legacy site</Button>
+          <span style={{marginLeft:'15px',color:'#ccc'}}><strong>ID: </strong>{this.props.masterid}</span>
         </ButtonToolbar>
       </Panel>
       /* jshint ignore:end */

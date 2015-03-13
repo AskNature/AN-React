@@ -96,7 +96,6 @@ var StrategyDetail = React.createClass({
 		    !this.state.loaded ? (<div>{this.state.error ? 'Error' : 'Loading'}</div>) : (<div><AdminBar masterid={detail.masterid} routename={'strategy'} pluralroute={'strategies'} entityName={entityName} />
 		    <CreatorMast img='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg' entityname={entityName} />
 		    <Hero editable={false} store={store} actions={actions} media={detail.media} primarytitle={this.state.loaded ? splitLegacyTitle[0] : '!!!!'} secondarytitle={splitLegacyTitle[1]} secondarylink={secondaryLink} masterid={this.state.masterid} />
-		    <div>Slug: {this.state.masterid}</div>
 		    <SubHero description={detail.summary} editable={this.state.editable} store={store} actions={actions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} onDelete={this.onDelete} />
 		    <Grid>
           	        <Row className='show-grid'>
@@ -184,16 +183,13 @@ var StrategyDetail = React.createClass({
 				    </Col>
 				</Row>
               			<Row className='show-grid'>
-                		    {detail.sources[0] ? (
+
                   		        <Col xs={12} sm={6}>
-                                      <RelationshipList items={this.state.object.sources} editable={this.state.editable} titleField='name' subtitleField='authors' onAdd={this.onRelationshipAdd.bind(null, 'sources')} onRemove={this.onRelationshipRemove.bind(null, 'sources')} field={'sources'} routeName={'source'} title={'Sources'} fieldName={'Sources'}/>
-                  			</Col>) : ''
-                		    }
-                		    {detail.experts[0] ? (
+                                      <RelationshipList items={this.state.object.sources} titleField='name' subtitleField='authors' onAdd={this.onRelationshipAdd.bind(null, 'sources')} onRemove={this.onRelationshipRemove.bind(null, 'sources')} field={'sources'} routeName={'source'} title={'Sources'} fieldName={'Sources'}/>
+      			                 </Col>
                   		        <Col xs={12} sm={6}>
                                       <RelationshipList items={this.state.object.experts} editable={this.state.editable} titleField='name' subtitleField='institution' onAdd={this.onRelationshipAdd.bind(null, 'experts')} onRemove={this.onRelationshipRemove.bind(null, 'experts')} field={'experts'} routeName={'researcher'} title={'Researched By'} fieldName={'Researched By'}/>
-                  			</Col>) : ''
-                		    }
+                  			</Col>
               			</Row>
 			    </Grid>
             {this.state.user.role == 'admin' || 'editor' ? (
