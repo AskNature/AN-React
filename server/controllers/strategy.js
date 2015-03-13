@@ -124,6 +124,22 @@ var deleteItem2 = function(req, res, next) {
     });
 };
 
+var deleteMultiple2 = function(req, res, next) { // TODO: use async
+    console.log(req.body['delete']);
+    if(JSON.parse(req.body['delete']) instanceof Array) {
+	JSON.parse(req.body['delete']).forEach(function(item) {
+	    Strategy.destroy(item, function(err) {
+		if(err) {
+		    return res.status(err.code).send(err.message);
+		}
+	    });
+	});
+	res.status(200).send();
+    } else {
+	return res.status(400).send();
+    }
+};
+
 var createStrategy1 = function(req, res, next) {
     var createWithToken = function() {
         crypto.randomBytes(16, function(err, buf) {
@@ -190,5 +206,6 @@ var returnItem1 = function(req, res, next) {
       returnItem2: returnItem2,
       updateItem2: updateItem2,
       createItem2: createItem2,
-      deleteItem2: deleteItem2
+      deleteItem2: deleteItem2,
+      deleteMultiple2: deleteMultiple2
     };

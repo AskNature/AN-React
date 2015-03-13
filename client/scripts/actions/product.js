@@ -126,7 +126,7 @@ var commit = function(fields) {
 
 var del = function(masterid) {
     request
-    .del('/api/v2/productss/'+masterid)
+    .del('/api/v2/products/'+masterid)
     .end(function(res) {
 	if(res.ok) {
 	    routeActions.setRoute('/admin/products');
