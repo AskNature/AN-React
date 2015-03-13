@@ -13,14 +13,12 @@ var TextArea = React.createClass({
     if(item){
       return (
         <div>
-          <h6>
+          {this.props.title ? (<h6>
             <strong>
               {title}
             </strong>
-          </h6>
+          </h6>) : ''}
           {this.props.editable?
-            <span>
-              <p>
                 <TextField
                   store={this.props.store}
                   actions={this.props.actions}
@@ -28,8 +26,6 @@ var TextArea = React.createClass({
                   fieldName={this.props.fieldName}
                   initialValue={this.props.item}
                   editable={this.props.editable} />
-              </p>
-            </span>
             :
             <p>
               <span dangerouslySetInnerHTML={{__html: item}} />

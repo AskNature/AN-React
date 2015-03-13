@@ -10,7 +10,7 @@ var request = require('superagent');
 var assign = require('object-assign');
 var _ = require('lodash');
 
-var store = require('../stores/strategy.js');
+var store = require('../stores/product.js');
 
 var routeActions = require('./routes');
 

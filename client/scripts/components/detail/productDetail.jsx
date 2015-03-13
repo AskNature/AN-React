@@ -129,7 +129,7 @@ var ProductDetail = React.createClass({
         <div>
 	<AdminBar masterid={detail.masterid} routename={routeName} pluralroute={routeNamePlural} entityname={entityName} />
         <CreatorMast img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" entityname={entityName} />
-        <Hero editable={this.state.editable} media={detail.media} primarytitle={detail.description} secondarytitle={detail.name} secondarylink='' masterid={this.state.masterid} />
+        <Hero editable={this.state.editable} store={store} actions={actions} media={detail.media} primarytitle={detail.headline} secondarytitle={detail.name} secondarylink='' masterid={this.state.masterid} primarytitlefield={"headline"} />
         <SubHero first='Concept' description={detail.company} descriptionlink={detail.company_website} editable={this.state.editable} store={store} actions={actions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} onDelete={this.onDelete}/>
         <Grid>
           <Row className="show-grid">
@@ -144,7 +144,7 @@ var ProductDetail = React.createClass({
               <ButtonList phenomena items={detail.outcomes} routename="phenomenon" title="Outcomes"/>
             </Col>
             <Col xs={12} sm={8}>
-              <RelationshipList items={detail.strategies} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, "strategies")} onRemove={this.onRelationshipRemove.bind(null, "strategies")} field={"strategies"} routename="strategy" title="Inspired By" fieldName="Biological Strategy" />
+              <RelationshipList items={detail.strategies} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, "strategies")} onRemove={this.onRelationshipRemove.bind(null, "strategies")} field={"strategies"} routeName="strategy" title="Inspired By" fieldName="Biological Strategy" titleField="name" subtitleField="summary" />
             </Col>
           </Row>
         </Grid>
@@ -159,10 +159,10 @@ var ProductDetail = React.createClass({
               <Row>
                 <Col xs={12} md={12}>
 
-                  <TextArea title='Summary' item={detail.special_text} />
-                  <TextArea title='Inspiration' item={detail.biomimicry_story} />
-                  <TextArea title='Market Advantage' item={detail.how_is_it_different} />
-                  <TextArea title='Challenges Solved' item={detail.challenges_solved} />
+                  <TextArea title='Summary' item={detail.special_text} store={store} actions={actions} fieldName={'special_text'} editable={this.state.editable}/>
+                  <TextArea title='Inspiration' item={detail.biomimicry_story} store={store} actions={actions} fieldName={'biomimicry_story'} editable={this.state.editable}/>
+                  <TextArea title='Market Advantage' item={detail.how_is_it_different} store={store} actions={actions} fieldName={'how_is_it_different'} editable={this.state.editable}/>
+                  <TextArea title='Challenges Solved' item={detail.challenges_solved} store={store} actions={actions} fieldName={'challenges_solved'} editable={this.state.editable}/>
                 </Col>
               </Row>
             </Grid>
@@ -183,11 +183,11 @@ var ProductDetail = React.createClass({
                       <tbody>
                         <tr>
                           <td>name</td>
-                          <td>{detail.name}</td>
+                          <td><TextArea item={detail.name} store={store} actions={actions} fieldName={'name'} editable={this.state.editable}/></td>
                         </tr>
                         <tr>
                           <td>headline</td>
-                          <td>{detail.description}</td>
+                          <td>{detail.headline}</td>
                         </tr>
                         <tr>
                           <td>InspiredBy</td>
