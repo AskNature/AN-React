@@ -12,6 +12,8 @@ var _ = require('lodash');
 
 var store = require('../stores/strategy.js');
 
+var routeActions = require('./routes');
+
 /**
 * initialize begins the load of a strategy detail instance. It takes
 * seed data and either empties the store if the data is null or
@@ -32,9 +34,9 @@ var initialize = function(initialData) {
 var fetch = function(masterid) {
     // do the async fetch with masterid
     var self = this;
-    Dispatcher.handleViewAction({
+    /*Dispatcher.handleViewAction({
 	actionType: Constants.FETCH_STRATEGY
-    });
+    });*/
     request
     .get('/api/v2/strategies/'+masterid+'?expand=true')
     .type('json')
@@ -100,7 +102,7 @@ var commit = function(fields) {
     var model = store.get();
     var dataToSend = {};
     _.forEach(changedData, function(field) {
-	dataToSend[changedData] = model[changedData];
+	dataToSend[field] = model[field];
     });
     request
     .post('/api/v2/strategies/'+masterid)
@@ -122,11 +124,22 @@ var commit = function(fields) {
     });
 };
 
+var del = function(masterid) {
+    request
+    .del('/api/v2/strategies/'+masterid)
+    .end(function(res) {
+	if(res.ok) {
+	    routeActions.setRoute('/admin/strategies');
+	}
+    });
+};
+
 module.exports = {
     initialize: initialize,
     fetch: fetch,
     update: update,
     removeRelationship: removeRelationship,
     addRelationship: addRelationship,
-    commit: commit
+    commit: commit,
+    del: del
 };

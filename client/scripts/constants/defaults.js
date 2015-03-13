@@ -99,7 +99,10 @@ var Defaults = {
 	description: 'Nature is coming...',
 	products: [],
 	media: [],
-	living_systems: []
+	living_systems: [],
+	mechanisms: [],
+	functions: [],
+	conditions: []
     },
 
     product: {

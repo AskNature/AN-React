@@ -68,6 +68,12 @@ StrategyStore.dispatcherToken = Dispatcher.register(function(payload) {
 	  _fieldsUpdated = _.union(_fieldsUpdated, [action.field]);
 	  StrategyStore.emitChange();
       }
+  } else if(action.actionType === strategyConstants.COMMIT_STRATEGY_SUCCESS) {
+      if(action.fields) {
+	  _fieldsUpdated = _.difference(_fieldsUpdated, action.fields);
+      } else {
+	  _fieldsUpdated = [];
+      }
   }
 
 });

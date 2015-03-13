@@ -23,21 +23,21 @@ var List = React.createClass({
         <Table striped condensed hover>
             <tbody>
               {
-                items.name.map(function(item, i){
+                items.map(function(item, i){
                   var link;
-                  if(items.id) {
-                     link = '../'+ routename +'/'+ items.id[i];
+                  if(item.masterid) {
+                     link = '../'+ routename +'/'+ item.masterid;
                   }
                   return (
                     <tr href="#" key={i}>
                       {properties.livingsystems ? (
-                        <td>{items.taxon[i]}: <Link url={link}><i>{item}</i></Link></td>
+                        <td>{item.taxon}: <Link url={link}><i>{item.name}</i></Link></td>
                       ) : properties.sources ? (
-                        <td>{items.year[i]}<br/><Link url={link}><strong>{item}</strong></Link><br/>{items.authors[i]}</td>
+                        <td>{item.publication_year}<br/><Link url={link}><strong>{item.name}</strong></Link><br/>{item.authors}</td>
                       ) : properties.phenomena ? (
-                        <td><Link url={link}>{item}</Link></td>
+                        <td><Link url={link}>{item.name}</Link></td>
                       ) : (
-                        <td>{item}</td>
+                        <td>{item.name}</td>
                       )}
                     </tr>
                   );
