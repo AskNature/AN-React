@@ -6,7 +6,6 @@
 var React = require('react'),
 
 Link = require('../modules/link.jsx'),
-DefaultLayout = require('../layouts/default.jsx'),
 Hero = require('./common/hero.jsx'),
 SubHero = require('./common/subhero.jsx'),
 AdminBar = require('./common/adminbar.jsx'),
@@ -25,10 +24,6 @@ Grid = require('react-bootstrap/Grid'),
 Table = require('react-bootstrap/Table'),
 Input = require('react-bootstrap/Input'),
 Glyphicon = require('react-bootstrap/Glyphicon');
-
-
-var DefaultLayout = require('../layouts/default.jsx');
-
 
 /** Gets incoming information from the store */
 
@@ -99,7 +94,7 @@ var DetailComponent = React.createClass({
     secondaryTitle += detail.name;
     return (
         /* jshint ignore:start */
-        <DefaultLayout>
+        <div>
           <AdminBar masterid={detail.masterid} routename={routeName} pluralroute={routeNamePlural} entityname={entityName} />
           <CreatorMast img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg" entityname={entityName} />
           <Hero media={detail.media} primarytitle={detail.name} secondarytitle={secondaryTitle} />
@@ -185,7 +180,7 @@ var DetailComponent = React.createClass({
             </Grid>
           </Panel>
         </PanelGroup>
-        </DefaultLayout>
+      </div>
         /* jshint ignore:end */
     );
   },
