@@ -10,8 +10,8 @@ var Function = new Model('Function', ['name']);
 var Expert = new Model('Expert', ['name']);
 var User = new Model('Users', ['name']);
 var Media = new Model('Media', ['filename', 'name', 'entity']);
-var LivingSystem = new Model('LivingSystem', ['name', 'taxon']);
-var Condition = new Model('Condition', []);
+var DesignedSystem = new Model('DesignedSystem', ['name']);
+var Condition = new Model('Condition', ['name']);
 
 var entityName = 'InspiredSolutions';
 
@@ -45,8 +45,8 @@ var relationships = {
         edge: 'out("HasMechanism")'
     },
     'designedsystems' : {
-	model: Media,
-	className: 'Media',
+	model: DesignedSystem,
+	className: 'DesignedSystem',
 	edge: 'out("HasDesignedSystem")'
     },
     'outcomes': {
@@ -57,7 +57,7 @@ var relationships = {
     'conditions': {
         model: Condition,
         className: 'Condition',
-        edge: 'out("HasConditions")'
+        edge: 'out("HasCondition")'
     }
 };
 

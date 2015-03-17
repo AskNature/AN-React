@@ -135,14 +135,14 @@ var ProductDetail = React.createClass({
         <Grid>
           <Row className='show-grid'>
             <Col xs={12} sm={4}>
-              <ButtonList items={detail.designedsystems} title='Designed Systems' />
-              <ButtonList conditions items={detail.conditions} title='Context' />
+              <RelationshipList items={detail.designedsystems} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, 'designedsystems')} onRemove={this.onRelationshipRemove.bind(null, 'designedsystems')} field={'designedsystems'} routeName='design' title='Designed Systems' fieldName='Designed System' titleField={'name'} />
+              <RelationshipList items={detail.conditions} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, 'conditions')} onRemove={this.onRelationshipRemove.bind(null, 'conditions')} field={'conditions'} routeName='condition' title='Context' fieldName='Context' titleField={'name'} />
             </Col>
             <Col xs={6} sm={4}>
-              <ButtonList mechanisms items={detail.mechanisms} title='Mechanisms'/>
+              <RelationshipList items={detail.mechanisms} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, 'mechanisms')} onRemove={this.onRelationshipRemove.bind(null, 'mechanisms')} field={'mechanisms'} routeName='phenomenon' title='Mechanisms' fieldName='Mechanism' titleField={'name'} />
             </Col>
             <Col xs={6} sm={4}>
-              <ButtonList phenomena items={detail.outcomes} routename='phenomenon' title='Outcomes'/>
+              <RelationshipList items={detail.outcomes} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, 'outcomes')} onRemove={this.onRelationshipRemove.bind(null, 'outcomes')} field={'outcomes'} routeName='phenomenon' title='Outcomes' fieldName='Outcome' titleField={'name'} />
             </Col>
             <Col xs={12} sm={8}>
               <RelationshipList items={detail.strategies} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, 'strategies')} onRemove={this.onRelationshipRemove.bind(null, 'strategies')} field={'strategies'} routeName='strategy' title='Inspired By' fieldName='Biological Strategy' titleField={'name'} />
