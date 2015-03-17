@@ -3,6 +3,9 @@
 // Box sizing partial styles:
 // Apply a natural box layout model to all elements
 
+$background-color: #f9f9f9;
+$primary-color: #b5bc4f;
+
 *,
 *:before,
 *:after {
@@ -30,12 +33,12 @@ body {
 }
 
 .content, .panel, body {
-  background: #f9f9f9;
+  background: $background-color;
 }
 
 // Temp color tweaks
 a, .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
-  color: #738c3f;
+  color: #002539;
 }
 
 label {
@@ -56,7 +59,7 @@ label {
 }
 
 .navbar-inverse {
-  background: #95af60;
+  background: $primary-color;
   .navbar-brand {
     color: #333;
   }
@@ -114,7 +117,7 @@ nav.drawer {
   bottom:0;
   position: fixed;
   width: 300px;
-  background: #f9f9f9;
+  background: $background-color;
   .nav-stacked {
     li a {
       color: #444;
