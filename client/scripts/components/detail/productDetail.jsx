@@ -91,11 +91,11 @@ var ProductDetail = React.createClass({
       this.setState(getState());
   },
   onRelationshipAdd: function(field, addedValue) {
-      console.log(field + " added " + addedValue);
+      console.log(field + ' added ' + addedValue);
       actions.addRelationship(field, addedValue);
   },
   onRelationshipRemove: function(field, removedValue) {
-      console.log(field + " removed " + removedValue);
+      console.log(field + ' removed ' + removedValue);
       actions.removeRelationship(field, removedValue);
   },
   toggleEditable: function() {
@@ -103,7 +103,7 @@ var ProductDetail = React.createClass({
   },
   editBegin: function(e) {
       e.preventDefault();
-      if(this.state.user.role == 'admin') { this.setState({editable: true}); }
+      if(this.state.user.role === 'admin') { this.setState({editable: true}); }
   },
   editCancel: function(e) {
       e.preventDefault();
@@ -116,7 +116,7 @@ var ProductDetail = React.createClass({
       this.setState({editable: false});
   },
   onDelete: function() {
-      var r = confirm("Do you really want to delete this record?");
+      var r = confirm('Do you really want to delete this record?');
       if(r) {actions.del(this.props.masterid);}
   },
   render: function() {
@@ -133,24 +133,24 @@ var ProductDetail = React.createClass({
         <Hero editable={this.state.editable} store={store} actions={actions} media={detail.media} primarytitle={detail.headline} secondarytitle={detail.name} secondarylink='' masterid={this.state.masterid} primarytitlefield={"headline"} />
         <SubHero first='Concept' description={detail.company} descriptionlink={detail.company_website} editable={this.state.editable} store={store} actions={actions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} onDelete={this.onDelete}/>
         <Grid>
-          <Row className="show-grid">
+          <Row className='show-grid'>
             <Col xs={12} sm={4}>
-              <ButtonList items={detail.designedsystems} title="Designed Systems" />
-              <ButtonList conditions items={detail.conditions} title="Context" />
+              <ButtonList items={detail.designedsystems} title='Designed Systems' />
+              <ButtonList conditions items={detail.conditions} title='Context' />
             </Col>
             <Col xs={6} sm={4}>
-              <ButtonList mechanisms items={detail.mechanisms} title="Mechanisms"/>
+              <ButtonList mechanisms items={detail.mechanisms} title='Mechanisms'/>
             </Col>
             <Col xs={6} sm={4}>
-              <ButtonList phenomena items={detail.outcomes} routename="phenomenon" title="Outcomes"/>
+              <ButtonList phenomena items={detail.outcomes} routename='phenomenon' title='Outcomes'/>
             </Col>
             <Col xs={12} sm={8}>
-              <RelationshipList items={detail.strategies} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, "strategies")} onRemove={this.onRelationshipRemove.bind(null, "strategies")} field={"strategies"} routeName="strategy" title="Inspired By" fieldName="Biological Strategy" titleField={"name"} />
+              <RelationshipList items={detail.strategies} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, 'strategies')} onRemove={this.onRelationshipRemove.bind(null, 'strategies')} field={'strategies'} routeName='strategy' title='Inspired By' fieldName='Biological Strategy' titleField={'name'} />
             </Col>
           </Row>
         </Grid>
         <PanelGroup defaultActiveKey='1' accordion>
-          <Panel header="More" eventKey='1'>
+          <Panel header='More' eventKey='1'>
             <Grid>
               <Row>
                 <Col xs={12}>
@@ -176,9 +176,9 @@ var ProductDetail = React.createClass({
               </Row>
             </Grid>
           </Panel>
-          <Panel header="Table View" eventKey="2">
+          <Panel header='Table View' eventKey='2'>
             <Grid>
-              <Row className="show-grid">
+              <Row className='show-grid'>
                 <Col xs={12} md={12}>
                     <h6>Legacy Data</h6>
                     <p>This information is all due for eventual deletion, but may be helpful during short-term migration.</p>
@@ -229,7 +229,7 @@ var ProductDetail = React.createClass({
                         </tr>
                         <tr>
                           <td>company_website</td>
-                          <td><a href={detail.company_website} target="_blank">{detail.company_website}</a></td>
+                          <td><a href={detail.company_website} target='_blank'>{detail.company_website}</a></td>
                         </tr>
                         <tr>
                           <td>phase</td>
