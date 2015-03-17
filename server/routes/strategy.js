@@ -22,6 +22,7 @@ var routes = function (app) {
   app.post('/api/v2/strategies/:id', Controller.updateItem2);
   app.delete('/api/v2/strategies/:id', Controller.deleteItem2);
   app.post('/api/v2/strategies', Controller.createItem2);
+  app.delete('/api/v2/strategies', Controller.deleteMultiple2);
 };
 
 module.exports = routes;
