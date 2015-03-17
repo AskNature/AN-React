@@ -1,15 +1,11 @@
 'use strict';
 
-var React = require('react'),
+var React = require('react/addons'),
 
 Link = require('./link.jsx'),
 
 FontAwesome = require('react-fontawesome'),
-Nav = require('react-bootstrap').Nav,
-NavItem = require('react-bootstrap').NavItem,
-TabbedArea = require('react-bootstrap').TabbedArea,
-TabPane = require('react-bootstrap').TabPane,
-Table = require('react-bootstrap').Table;
+Nav = require('react-bootstrap').Nav;
 
 var ReactCSSTransition = React.addons.CSSTransitionGroup;
 
