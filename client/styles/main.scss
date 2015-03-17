@@ -29,8 +29,8 @@ body {
   transition: all 0.5s ease;
 }
 
-.content {
-  background: #f0f0f0;
+.content, .panel, body {
+  background: #f9f9f9;
 }
 
 // Temp color tweaks
@@ -82,8 +82,6 @@ label {
   }
 }
 
-
-
 .container {
   max-width: 100%;
   padding-bottom: 50px;
@@ -116,7 +114,7 @@ nav.drawer {
   bottom:0;
   position: fixed;
   width: 300px;
-  background: #f0f0f0;
+  background: #f9f9f9;
   .nav-stacked {
     li a {
       color: #444;
@@ -198,9 +196,13 @@ Mini hero (relationship list editor)
   .btn-group {
     width: 100%;
     margin-bottom: 10px;
+    box-shadow: 1px 6px 15px rgba(0,0,0,0.08);
+
   }
   .btn {
     height: auto;
+    border: none;
+    box-shadow: none;
     &:first-child {
       width: 90%;
       text-transform: none;
@@ -222,7 +224,7 @@ Mini hero (relationship list editor)
       padding: 0px 15px;
       height: auto;
       overflow: hidden;
-      background: rgba(0,0,0,.02);
+      background: #fff;
       border-bottom-left-radius: 3px;
       border-top-left-radius: 3px;
 
