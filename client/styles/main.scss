@@ -117,7 +117,7 @@ nav.drawer {
   bottom:0;
   position: fixed;
   width: 300px;
-  background: #ddd;
+  background: rgb(221,221,221); /* Old browsers */
   .nav-stacked {
     li a {
       color: #444;
@@ -144,6 +144,11 @@ nav.drawer-leave {
 }
 
 nav.drawer-leave.drawer-leave-active {
+  left: 0;
+}
+
+.default.detail {
+  position: absolute;
   left: 0;
 }
 
@@ -435,10 +440,8 @@ nav.drawer-enter {
     width: 200px;
   }
 
-
-
   .default.detail {
-    padding-left: 200px;
+    transform: translate(200px,0);
   }
 
 }
@@ -455,7 +458,7 @@ nav.drawer-enter {
 
 
   .default.detail {
-    padding-left: 300px;
+    transform: translate(300px,0);
   }
 }
 
