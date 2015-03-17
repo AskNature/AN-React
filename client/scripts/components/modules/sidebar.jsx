@@ -11,17 +11,14 @@ TabbedArea = require('react-bootstrap').TabbedArea,
 TabPane = require('react-bootstrap').TabPane,
 Table = require('react-bootstrap').Table;
 
+var ReactCSSTransition = React.addons.CSSTransitionGroup;
+
 var SidebarComponent = React.createClass({
     render: function() {
-        return (
-            /* jshint ignore:start */
-              <div className="navmenu navmenu-default navmenu-fixed-left offcanvas-xs">
-                <TabbedArea defaultActiveKey={1} justified>
-                  <TabPane eventKey={0} tab="Search">
-                    <p>Placeholder</p>
-                  </TabPane>
-                  <TabPane eventKey={1} tab='Admin'>
-                    <Nav stacked>
+        var items = [];
+        if (this.props.open) {
+          items.push(
+                    <Nav stacked className='drawer'>
                       <li eventKey={2}><Link url="../admin/phenomena"><FontAwesome name='fire' size='lg' fixedWidth className='pull-left' />&nbsp; Phenomena</Link></li>
                       <li eventKey={3}><Link url="../admin/strategies"><FontAwesome name='leaf' size='lg' fixedWidth className='pull-left' />&nbsp; Biological Strategies</Link></li>
                       <li eventKey={4}><Link url="../admin/products"><FontAwesome name='recycle' size='lg' fixedWidth className='pull-left' />&nbsp; Inspired Solutions</Link></li>
@@ -33,9 +30,15 @@ var SidebarComponent = React.createClass({
                       <li eventKey={10}><Link url="../admin/collections"><FontAwesome name='bookmark' size='lg' fixedWidth className='pull-left' />&nbsp; Collections</Link></li>
                       <li eventKey={11}><Link url="../admin/media"><FontAwesome name='photo' size='lg' fixedWidth className='pull-left' />&nbsp; Media</Link></li>
                     </Nav>
-                  </TabPane>
-                </TabbedArea>
-              </div>
+
+          );
+        }
+
+        return (
+            /* jshint ignore:start */
+            <ReactCSSTransition transitionName="drawer">
+                {items}
+            </ReactCSSTransition>
 
             /* jshint ignore:end */
         );

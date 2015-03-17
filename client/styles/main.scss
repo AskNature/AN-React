@@ -21,15 +21,16 @@
 // [endinjector]
 
 body {
-  // Compensate for the 50px tall fixed navbar with padding-top
-  padding-top: 85px;
+  // Compensate for the 62px tall fixed navbar with padding-top
+  padding-top: 62px;
 }
 
 * {
-  -webkit-transition: all 0.2s ease;
-  -moz-transition:    all 0.2s ease;
-  -ms-transition:     all 0.2s ease;
-  -o-transition:      all 0.2s ease;
+  transition: all 0.5s ease;
+}
+
+.content {
+  background: #f0f0f0;
 }
 
 // Temp color tweaks
@@ -54,13 +55,6 @@ label {
   margin-top: 200px;
 }
 
-
-.navmenu-fixed-left {
-  top: 62px;
-  width: 200px;
-  background: rgb(253,253,253);
-}
-
 .navbar-inverse {
   background: #95af60;
   .navbar-brand {
@@ -78,14 +72,17 @@ label {
   .navbar-nav > li > a {
     color: #fff;
   }
+  &.drawer-toggle, .btn-default {
+    position: relative;
+    float:left;
+    padding: 9px 15px;
+    margin: 15px;
+    background: none;
+    border: none;
+  }
 }
 
-.sidebar-toggle {
-  position: relative;
-  float:left;
-  padding-left: 15px;
-  margin-right: 0px;
-}
+
 
 .container {
   max-width: 100%;
@@ -96,15 +93,65 @@ label {
   margin: 0;
 }
 
-.tool-buttons .btn {
+.flat-button .btn, .flat-button.btn {
   border: 0;
   box-shadow: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
-  &:hover {
+}
+
+.edit-action-buttons {
+  :hover {
     background: #ccc;
   }
 }
+
+/* ==========================================================================
+Left Drawer
+========================================================================== */
+
+nav.drawer {
+  z-index: 1;
+  top: 62px;
+  bottom:0;
+  position: fixed;
+  width: 300px;
+  background: #f0f0f0;
+  .nav-stacked {
+    li a {
+      color: #444;
+      &:hover {
+        background: #fff;
+      }
+      .fa {
+        margin-top: 3px;
+      }
+    }
+  }
+}
+
+nav.drawer-enter {
+  left: -300px;
+}
+
+nav.drawer-enter.drawer-enter-active {
+  left: 0px;
+}
+
+nav.drawer-leave {
+  left: 0px;
+}
+
+nav.drawer-leave.drawer-leave-active {
+  left: -300px;
+}
+
+/* ==========================================================================
+Right Detail
+========================================================================== */
+
+
+
 /* ==========================================================================
 Relationship Selector
 ========================================================================== */
@@ -139,21 +186,6 @@ Griddle Admin Lists
   td {
     input[type="checkbox"] {
       margin-left: 10px;
-    }
-  }
-}
-
-/* ==========================================================================
-Sidebar
-========================================================================== */
-
-.navmenu-fixed-left {
-  .nav-stacked {
-    li a {
-      color: #444;
-      .fa {
-        margin-top: 3px;
-      }
     }
   }
 }
@@ -300,6 +332,28 @@ Hero
   float: left;
 }
 
+.navbar-fixed-top .navbar-nav {
+  margin-top: 0;
+  margin-bottom: 0;
+  .pull-right > li > a {
+    padding-top: 20.5px;
+    padding-bottom: 20.5px;
+    &.loggedin-menu {
+      padding-top: 11px;
+      padding-bottom: 4px;
+    }
+  }
+}
+
+.navbar-form {
+  padding-top: 0;
+  padding-bottom: 0;
+  float: left;
+  border: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
 // Styling on warning for users on IE7 or below
 .browsehappy {
     text-align: center;
@@ -334,61 +388,51 @@ Hero
 }
 
 @media (min-width: 1px) {
-  .sidebar-toggle {
-    display: block !important;
+  .navbar-header.pull-right.nav>li>a {
+    padding-top: 20.5px;
+    padding-bottom: 20.5px;
   }
 
-  .navbar-fixed-top .navbar-nav {
-    margin-top: 0;
-    margin-bottom: 0;
-    > li > a {
-      padding-top: 20.5px;
-      padding-bottom: 20.5px;
-      &.loggedin-menu {
-        padding-top: 11px;
-        padding-bottom: 4px;
-      }
-    }
-  }
-
-  .navbar-form {
-    padding-top: 0;
-    padding-bottom: 0;
-    float: left;
-    border: none;
-    box-shadow: none;
-    -webkit-box-shadow: none;
+  .navbar-brand {
+    margin-left: -15px;
   }
 }
 
 @media (min-width: 768px) {
-  body {
-    padding-left: 200px;
-    padding-top: 62px;
-  }
 
   .pace .pace-progress {
     top: 62px;
   }
 
-  .navmenu-fixed-left {
+  nav.drawer {
     width: 200px;
   }
 
-  .sidebar-toggle {
-    display: none !important;
+  nav.drawer-enter, nav.drawer-leave.drawer-leave-active {
+    left: -200px;
   }
+
+  .default.detail {
+    padding-left: 200px;
+  }
+
 }
 
 @media (min-width: 992px) {
-  body {
-    padding-left: 300px;
-  }
+
   .hero {
     height: 500px;
   }
-  .navmenu-fixed-left {
+  nav.drawer {
     width: 300px;
+  }
+
+  nav.drawer-enter, nav.drawer-leave.drawer-leave-active {
+    left: -300px;
+  }
+
+  .default.detail {
+    padding-left: 300px;
   }
 }
 

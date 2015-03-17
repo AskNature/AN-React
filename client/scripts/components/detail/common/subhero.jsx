@@ -27,7 +27,7 @@ var SubHero = React.createClass({
               </h5>
           </Col>
           <Col xs={12} sm={4}>
-            <ButtonToolbar className='tool-buttons' style={{"margin-top": "11.5px"}}>
+            <ButtonToolbar className='flat-button edit-action-buttons' style={{"margin-top": "11.5px"}}>
 	             {this.props.editable ?
                  <span>
                    <ButtonGroup>

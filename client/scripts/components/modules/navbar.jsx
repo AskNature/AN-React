@@ -46,11 +46,7 @@ var NavbarComponent = React.createClass({
             <Navbar fluid inverse fixedTop role="banner">
               {/* Temp button for left offcanvas menu */}
                   <Nav left navbar-header className="pull-left navbar-header">
-                  <button type="button" className="navbar-toggle sidebar-toggle" data-toggle="offcanvas" data-target=".navmenu-fixed-left">
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                  </button>
+                     <Button className="flat-button drawer-toggle" onClick={this.props.onDrawerToggleClick} bsSize="large"><Glyphicon glyph="menu-hamburger" /></Button>
                   <Link className="navbar-brand" url="/">AN</Link>
                   <form role="search" className='navbar-form navbar-left'>
                     <Input type="text" placeholder="Search AskNature" />

@@ -6,39 +6,57 @@ var pageStore = require('../../stores/page');
 var userStore = require('../../stores/accounts');
 var userActions = require('../../actions/users');
 var Navbar = require('../modules/navbar.jsx');
-var Sidebar = require('../modules/sidebar.jsx');
+var Drawer = require('../modules/sidebar.jsx');
+
 
 var getState = function() {
     return {
         title: pageStore.get().title,
-	user: userStore.get()
+        drawerOpen: true,
+	    user: userStore.get()
     };
 };
 
+var Detail = React.createClass({
+  render: function() {
+    return (
+        <div className={this.props.narrow ? 'default detail' : 'default'}>
+            <div className="main-container">
+                <div className="content">
+                    {this.props.children}
+                </div>
+            </div>
+        </div>
+    );
+  }
+});
+
 var DefaultComponent = React.createClass({
     mixins: [pageStore.mixin, userStore.mixin],
+    getInitialState: function() {
+        return getState();
+    },
     componentWillMount: function() {
     	userActions.fetchUser();
     },
     componentDidMount: function() {
         pageStore.emitChange();
     },
-    getInitialState: function() {
-        return getState();
-    },
+
+    handleDrawerToggleClick: function(e){
+    this.setState({
+      drawerOpen: !this.state.drawerOpen
+    });
+  },
     render: function() {
         return (
             /* jshint ignore:start */
             <div>
-            <Sidebar />
-            <Navbar user={this.state.user} />
-                <div className="default">
-                    <div className="main-container">
-                        <div className="content">
-                            {this.props.children}
-                        </div>
-                    </div>
-                </div>
+
+            <Navbar user={this.state.user} onDrawerToggleClick={this.handleDrawerToggleClick} />
+            <Drawer open={this.state.drawerOpen}/>
+            <Detail narrow={this.state.drawerOpen} {...this.props}/>
+
             </div>
             /* jshint ignore:end */
         );
