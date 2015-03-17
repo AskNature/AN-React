@@ -30,14 +30,15 @@ var taskConfig = function(grunt) {
                     '*.{ico,png,txt}',
                     '*.html',
                     'fonts/**/*.{woff,otf,ttf,eot,svg}',
-                    'styles/**/*.{css,scss,gif}'
+                    'styles/**/*.{css,scss,gif}',
+                    'bower_components/components-font-awesome/fonts/**/*.{woff,otf,ttf,eot,svg}'
                 ]
             }, {
         		expand: true,
         		cwd: '<%= yeogurt.client %>/bower_components/bootstrap/dist/',
         		dest: '<%= yeogurt.dist %>/client/',
         		src: '**/*.{woff,woff2,ttf,eot,svg}'
-        	    }, {
+    	    }, {
                 expand: true,
                 cwd: '<%= yeogurt.server %>/templates/',
                 dest: '<%= yeogurt.tmp %>',
