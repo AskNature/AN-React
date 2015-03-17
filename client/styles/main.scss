@@ -5,6 +5,7 @@
 
 $background-color: #f9f9f9;
 $primary-color: #b5bc4f;
+$fa-font-path: '../bower_components/components-font-awesome/fonts';
 
 *,
 *:before,
@@ -22,6 +23,8 @@ $primary-color: #b5bc4f;
 // Injects all import files automatically
 // [injector]
 // [endinjector]
+
+@import './react-widgets.css';
 
 body {
   // Compensate for the 62px tall fixed navbar with padding-top
