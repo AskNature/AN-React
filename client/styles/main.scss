@@ -112,12 +112,12 @@ Left Drawer
 ========================================================================== */
 
 nav.drawer {
-  z-index: 1;
+  z-index: -1;
   top: 62px;
   bottom:0;
   position: fixed;
   width: 300px;
-  background: $background-color;
+  background: #ddd;
   .nav-stacked {
     li a {
       color: #444;
@@ -132,7 +132,7 @@ nav.drawer {
 }
 
 nav.drawer-enter {
-  left: -300px;
+  left: 0;
 }
 
 nav.drawer-enter.drawer-enter-active {
@@ -144,7 +144,7 @@ nav.drawer-leave {
 }
 
 nav.drawer-leave.drawer-leave-active {
-  left: -300px;
+  left: 0;
 }
 
 /* ==========================================================================
@@ -403,6 +403,28 @@ Hero
   }
 }
 
+
+@media (max-width: 768px) {
+  nav.drawer {
+    z-index: 1;
+  }
+
+nav.drawer-enter {
+    left: -300px;
+  }
+
+  nav.drawer-enter.drawer-enter-active {
+    left: 0px;
+  }
+
+  nav.drawer-leave {
+    left: 0px;
+  }
+
+  nav.drawer-leave.drawer-leave-active {
+    left: -300px;
+  }
+}
 @media (min-width: 768px) {
 
   .pace .pace-progress {
@@ -413,9 +435,7 @@ Hero
     width: 200px;
   }
 
-  nav.drawer-enter, nav.drawer-leave.drawer-leave-active {
-    left: -200px;
-  }
+
 
   .default.detail {
     padding-left: 200px;
@@ -432,9 +452,7 @@ Hero
     width: 300px;
   }
 
-  nav.drawer-enter, nav.drawer-leave.drawer-leave-active {
-    left: -300px;
-  }
+
 
   .default.detail {
     padding-left: 300px;
