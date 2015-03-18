@@ -34,7 +34,17 @@ var Detail = React.createClass({
 var DefaultComponent = React.createClass({
     mixins: [pageStore.mixin, accountStore.mixin],
     getInitialState: function() {
-        return getState();
+        var drawerSwitch;
+        if(window.innerWidth >= 768) {
+          drawerSwitch = true;
+        } else {
+          drawerSwitch = false;
+        }
+        return {
+          title: pageStore.get().title,
+          drawerOpen: drawerSwitch,
+  	      account: accountStore.get()
+        };
     },
     componentWillMount: function() {
     	accountActions.fetchUser();

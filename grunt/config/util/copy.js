@@ -34,11 +34,6 @@ var taskConfig = function(grunt) {
                     'bower_components/components-font-awesome/fonts/**/*.{woff,woff2,otf,ttf,eot,svg}'
                 ]
             }, {
-        		expand: true,
-        		cwd: '<%= yeogurt.client %>/bower_components/bootstrap/dist/',
-        		dest: '<%= yeogurt.dist %>/client/',
-        		src: '**/*.{woff,woff2,ttf,eot,svg}'
-    	    }, {
                 expand: true,
                 cwd: '<%= yeogurt.server %>/templates/',
                 dest: '<%= yeogurt.tmp %>',
