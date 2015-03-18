@@ -12,8 +12,7 @@ var Drawer = require('../modules/sidebar.jsx');
 var getState = function() {
     return {
         title: pageStore.get().title,
-        drawerOpen: true,
-	    user: userStore.get()
+	      user: userStore.get()
     };
 };
 
@@ -34,7 +33,17 @@ var Detail = React.createClass({
 var DefaultComponent = React.createClass({
     mixins: [pageStore.mixin, userStore.mixin],
     getInitialState: function() {
-        return getState();
+        var drawerSwitch;
+        if(window.innerWidth >= 768) {
+          drawerSwitch = true;
+        } else {
+          drawerSwitch = false;
+        }
+        return {
+          title: pageStore.get().title,
+          drawerOpen: drawerSwitch,
+  	      user: userStore.get()
+        };
     },
     componentWillMount: function() {
     	userActions.fetchUser();
