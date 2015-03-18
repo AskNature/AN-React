@@ -89,18 +89,47 @@ var UserDetail = React.createClass({
 	var secondaryLink = '';
     var avatar = 'http://www.asknature.org/images/uploads/user/'+detail.masterid+'/avatar/lg_avatar.jpg';
         return (
-		    !this.state.loaded ? (<div>{this.state.error ? 'Error' : 'Loading'}</div>) : (<div><AdminBar masterid={detail.masterid} routename={'user'} pluralroute={'users'} entityName={entityName} />
-		    <Hero editable={false} store={store} actions={actions} media={detail.media} primarytitle={this.state.loaded ? detail.first+' '+detail.last : '!!!!'} secondarytitle={detail.name} masterid={this.state.masterid} innerimage={avatar} />
-		    <SubHero description={detail.special_text} credentials={this.state.account.role === 'admin' ? true : false} editable={this.state.editable} store={store} actions={actions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} onDelete={this.onDelete} />
-		    <Grid>
-          	        <Row className='show-grid'>
+		    !this.state.loaded ? (
+                <div>
+                    {this.state.error ? 'Error' : 'Loading'}
+                </div>
+            ) : (
+                <div>
+                    <AdminBar
+                        masterid={detail.masterid}
+                        routename={'user'}
+                        pluralroute={'users'}
+                        entityName={entityName} />
+
+                    <Hero
+                        editable={false}
+                        store={store}
+                        actions={actions}
+                        media={detail.media}
+                        primarytitle={this.state.loaded ? detail.first+' '+detail.last : '!!!!'}
+                        secondarytitle={detail.name}
+                        masterid={this.state.masterid}
+                        innerimage={avatar} />
+
+                    <SubHero
+                        description={detail.special_text}
+                        credentials={this.state.account.role === 'admin' ? true : false}
+                        editable={this.state.editable}
+                        store={store}
+                        actions={actions}
+                        editBegin={this.editBegin}
+                        editFinish={this.editFinish}
+                        editCancel={this.editCancel}
+                        onDelete={this.onDelete} />
+                    <Grid>
+      	             <Row className='show-grid'>
             		    <Col xs={12} sm={4}>
                             <RelationshipList items={this.state.object.friends} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'friends')} onRemove={this.onRelationshipRemove.bind(null, 'friends')} field={'friends'} routeName={'user'} title={'Friends'} fieldName={'Friends'}/>
 
             		    </Col>
 
-          		</Row>
-         	    </Grid>
+  		            </Row>
+     	            </Grid>
                     	    <Grid>
 			        <Row>
 				    <Col xs={12}>

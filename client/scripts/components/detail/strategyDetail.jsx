@@ -39,7 +39,7 @@ var StrategyDetail = React.createClass({
     getInitialState: function() {
         return ({
 	    object: store.get(),
-	    editable: !this.props.masterid ? true : false,
+	    editable: this.props.masterid ? true : false,
 	    loaded: store.getLoaded(),
 	    masterid: this.props.masterid
 	});

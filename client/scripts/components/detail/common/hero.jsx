@@ -35,12 +35,14 @@ var HeroComponent = React.createClass({
           <Row className="headline">
             <Col xs={12}>
               <div className='media'>
+                {this.props.innerimage ? (
                 <div className='media-left media-middle'>
                   <Avatar
                     name={this.props.primarytitle} src={this.props.innerimage}
                     round='true'
                     size='100' />
                 </div>
+              ) : '' }
                 <div className='media-body'>
                   <h3 className="animated fadeInDown">
                     {this.props.editable ? (

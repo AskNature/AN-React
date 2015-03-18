@@ -25,11 +25,11 @@ var RelationshipList = React.createClass({
           </strong>
         </h6>
 
-          {this.props.items.map(function(item) {
+          {this.props.items.map(function(item,i) {
             return <RelationshipListItem
               item={item}
               routeName={this.props.routeName}
-              key={item.masterid}
+              key={i}
               onRemove={this.onRemove}
               editable={this.props.editable}
               titleField={item[this.props.titleField]}
