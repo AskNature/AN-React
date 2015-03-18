@@ -8,7 +8,9 @@ var React = require('react'),
 TextArea = require('./textarea.jsx'),
 Grid = require('react-bootstrap').Grid,
 Row = require('react-bootstrap').Row,
-Col = require('react-bootstrap').Col;
+Col = require('react-bootstrap').Col,
+Avatar = require('react-avatar');
+
 
 var HeroComponent = React.createClass({
   render: function() {
@@ -27,15 +29,58 @@ var HeroComponent = React.createClass({
     return (
       /* jshint ignore:start */
       <section className="hero" style={heroStyle}>
-        <div className="texture-overlay"></div>
+        <div className="texture-overlay">
+        </div>
         <Grid>
           <Row className="headline">
-            <Col xs={12} md={12}>
-              <h3 className="animated fadeInDown"> {this.props.editable ? (<span><strong><TextArea item={this.props.primarytitle} editable={this.props.editable} store={this.props.store} actions={this.props.actions} fieldName={this.props.primarytitlefield} /></strong><small>Slug: {this.props.masterid}</small></span>) : (<span><strong>{this.props.primarytitle}</strong><br/><small>{this.props.secondarylink ? (
-                <Link url={this.props.secondarylink}>
-                  <i>{this.props.secondarytitle}</i>
-                </Link>
-              ) : (<i>{this.props.secondarytitle}</i>)}</small></span>)}</h3>
+            <Col xs={12}>
+              <div className='media'>
+                <div className='media-left media-middle'>
+                  <Avatar
+                    name={this.props.primarytitle} src={this.props.innerimage}
+                    round='true'
+                    size='100' />
+                </div>
+                <div className='media-body'>
+                  <h3 className="animated fadeInDown">
+                    {this.props.editable ? (
+                      <span>
+                        <strong>
+                          <TextArea
+                            item={this.props.primarytitle}
+                            editable={this.props.editable}
+                            store={this.props.store}
+                            actions={this.props.actions}
+                            fieldName={this.props.primarytitlefield} />
+                        </strong>
+                        <small>
+                          Slug: {this.props.masterid}
+                        </small>
+                      </span>
+                    ) : (
+                      <span>
+                        <strong>
+                          {this.props.primarytitle}
+                        </strong>
+                        <br/>
+                        <small>
+                          {this.props.secondarylink ? (
+                            <Link url={this.props.secondarylink}>
+                              <i>
+                                {this.props.secondarytitle}
+                              </i>
+                            </Link>
+                          ) : (
+                            <i>
+                              {this.props.secondarytitle}
+                            </i>
+                          )}
+                        </small>
+                      </span>
+                    )}
+                  </h3>
+                </div>
+              </div>
             </Col>
           </Row>
         </Grid>
