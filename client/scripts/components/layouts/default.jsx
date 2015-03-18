@@ -3,8 +3,8 @@
 var React = require('react');
 
 var pageStore = require('../../stores/page');
-var userStore = require('../../stores/accounts');
-var userActions = require('../../actions/users');
+var accountStore = require('../../stores/accounts');
+var accountActions = require('../../actions/accounts');
 var Navbar = require('../modules/navbar.jsx');
 var Drawer = require('../modules/sidebar.jsx');
 
@@ -13,7 +13,7 @@ var getState = function() {
     return {
         title: pageStore.get().title,
         drawerOpen: true,
-	    user: userStore.get()
+	    account: accountStore.get()
     };
 };
 
@@ -32,12 +32,12 @@ var Detail = React.createClass({
 });
 
 var DefaultComponent = React.createClass({
-    mixins: [pageStore.mixin, userStore.mixin],
+    mixins: [pageStore.mixin, accountStore.mixin],
     getInitialState: function() {
         return getState();
     },
     componentWillMount: function() {
-    	userActions.fetchUser();
+    	accountActions.fetchUser();
     },
     componentDidMount: function() {
         pageStore.emitChange();
@@ -53,7 +53,7 @@ var DefaultComponent = React.createClass({
             /* jshint ignore:start */
             <div>
 
-            <Navbar user={this.state.user} onDrawerToggleClick={this.handleDrawerToggleClick} />
+            <Navbar user={this.state.account} onDrawerToggleClick={this.handleDrawerToggleClick} />
             <Drawer open={this.state.drawerOpen}/>
             <Detail narrow={this.state.drawerOpen} {...this.props}/>
 

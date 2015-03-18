@@ -7,7 +7,7 @@ var FlatStrategy = new Model('Strategies', ['name', 'summary']);
 
 var Source = new Model('Sources', ['name', 'publication_year', 'authors']);
 var Function = new Model('Function', ['name']);
-var Expert = new Model('Expert', ['name']);
+var Expert = new Model('Expert', ['name', 'institution']);
 var User = new Model('Users', ['name']);
 var Media = new Model('Media', ['filename', 'name', 'entity']);
 var DesignedSystem = new Model('DesignedSystem', ['name']);
@@ -18,7 +18,11 @@ var entityName = 'InspiredSolutions';
 var fields = ['name', 'headline', 'special_text', 'challenges_solved', 'how_is_it_different', 'biomimicry_story', 'product_type', 'patent_name', 'availability', 'company', 'phase', 'patent_number', 'company_website', 'strategy', 'consumer_products', 'keywords', 'status', 'timestamp'];
 
 var relationships = {
-    'strategies': {model: FlatStrategy, className: 'Strategy', edge: 'out("InspiredBy")'},
+    'strategies': {
+        model: FlatStrategy,
+        className: 'Strategy',
+        edge: 'out("InspiredBy")'
+    },
     'collectors': {
         model: User,
         className: 'Users',
@@ -29,7 +33,7 @@ var relationships = {
         className: 'Media',
         edge: 'out("HasMedia")'
     },
-    'researchers': {
+    'experts': {
         model: Expert,
         className: 'Expert',
         edge: 'in("StudiedBy")'

@@ -36,6 +36,26 @@ var Defaults = {
 
     },
 
+    userNew: {
+        loggedIn: false,
+        results : [
+          {
+            name: 'Username',
+            flagged: [],
+            media: [],
+            media_name: [],
+            media_entity: [],
+            media_id: [],
+            added_media: [],
+            collected: [],
+            friends: [],
+            roles: '1,2',
+            activities: '1,2'
+          }
+        ]
+
+    },
+
     phenomenon: {
       results : [
       {
@@ -65,6 +85,8 @@ var Defaults = {
 	groupname: '',
 	groupid: '',
 	media: [],
+    mechanism: [],
+    outcome: []
     },
 
     strategy: {
@@ -96,6 +118,7 @@ var Defaults = {
           sources_id: [],
           collectors: [],
           experts: [],
+          experts_institution: [],
           keywords: 'Tag1, tag2',
           created_by: [],
           flag_text: 0,
@@ -130,7 +153,7 @@ var Defaults = {
 	mechanisms: [],
 	conditions: [],
 	designedsystems: [],
-	researchers: [],
+	experts: [],
 	sources: [],
 	collectors: []
     },
@@ -152,8 +175,10 @@ var Defaults = {
         outcomes_id: [],
         mechanisms: [],
         conditions: [],
-        researchers: [],
+        experts: [],
+        experts_institution: [],
         sources: [],
+        sources_authors: [],
         designedsystems: []
         }
       ]

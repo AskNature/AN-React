@@ -7,18 +7,20 @@
 var Controller = require('../controllers/user');
 
 var routes = function (app) {
-  app.get('/api/user', Controller.returnUser);
-  app.post('/api/user', Controller.updateUser);
-  app.get('/api/user/logout', Controller.logout);
-  app.post('/api/user/create', Controller.createUser);
-  app.post('/api/user/forgot', Controller.forgotUser);
-  app.post('/api/user/reset', Controller.resetUser);
-
   app.get('/admin/users', Controller.loadindex);
-  app.get('/api/users', Controller.returnList);
-
   app.get('/user/:id', Controller.loadindex);
-  app.get('/api/user/:id', Controller.returnItem);
+
+  // API v1
+  app.get('/api/users', Controller.returnList1);
+  app.get('/api/users/:id', Controller.returnItem1);
+  app.post('/api/users/:id', Controller.updateUser1);
+
+  // API v2
+  app.get('/api/v2/users/:id', Controller.returnItem2);
+  app.post('/api/v2/users/:id', Controller.updateItem2);
+  app.delete('/api/v2/users/:id', Controller.deleteItem2);
+  app.post('/api/v2/users', Controller.createItem2);
+  app.delete('/api/v2/users', Controller.deleteMultiple2);
 };
 
 module.exports = routes;
