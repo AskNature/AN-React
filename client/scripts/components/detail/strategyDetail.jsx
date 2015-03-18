@@ -102,7 +102,7 @@ var StrategyDetail = React.createClass({
                            <RelationshipList items={this.state.object.conditions} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'conditions')} onRemove={this.onRelationshipRemove.bind(null, 'conditions')} field={'conditions'} routeName={'condition'} title={'Context'} fieldName={'Context'}/>
             		    </Col>
             		    <Col xs={6} sm={4}>
-                            <RelationshipList items={this.state.object.mechanisms} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null,'mechanisms')} onRemove={this.onRelationshipRemove.bind(null, 'mechanisms')} field={'mechanisms'} routeName={'phenomenon'} title={'Mechanisms'} fieldName={'Mechanisms'}/>
+                            <RelationshipList items={this.state.object.mechanisms} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null,'mechanisms')} onRemove={this.onRelationshipRemove.bind(null, 'mechanisms')} field={'functions'} routeName={'phenomenon'} title={'Mechanisms'} fieldName={'Mechanisms'}/>
             		    </Col>
             		    <Col xs={6} sm={4}>
                           <RelationshipList items={this.state.object.functions} editable={this.state.editable} titleField='name' onAdd={this.onRelationshipAdd.bind(null, 'functions')} onRemove={this.onRelationshipRemove.bind(null, 'functions')} field={'functions'} routeName={'phenomenon'} title={'Outcomes'} fieldName={'Outcomes'}/>
