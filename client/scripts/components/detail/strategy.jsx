@@ -9,7 +9,7 @@ var Strategy = React.createClass({
         var masterid = window.location.pathname.split('/')[2];
         return (
 	       <DefaultLayout>
-		   <StrategyDetail masterid={masterid != 'new' ? masterid : null} />
+		   <StrategyDetail masterid={masterid !== 'new' ? masterid : null} />
 	       </DefaultLayout>
         );
     }

@@ -12,6 +12,7 @@ SubHero = require('./common/subhero.jsx'),
 AdminBar = require('./common/adminbar.jsx'),
 CreatorMast = require('./common/creatormast.jsx'),
 TextArea = require('./common/textarea.jsx'),
+DataTable = require('./common/datatable.jsx'),
 ImageList = require('./common/imagelist.jsx'),
 ButtonList = require('./common/edgelists.jsx'),
 Gallery = require('./common/gallery.jsx'),
@@ -50,23 +51,6 @@ var getState = function() {
   };
 };
 
-var List = React.createClass({
-  render: function() {
-    var items = this.props.items;
-    return (
-      <ul>
-        {
-          items.map(function(item, i){
-            return (
-                <li key={i}>{item}</li>
-            );
-          })
-        }
-      </ul>
-    );
-  }
-});
-
 var ProductDetail = React.createClass({
 
   mixins: [store.mixin],
@@ -76,7 +60,8 @@ var ProductDetail = React.createClass({
             object: store.get(),
             editable: !this.props.masterid ? true : false,
             loaded: store.getLoaded(),
-            masterid: this.props.masterid
+            masterid: this.props.masterid,
+            user: userStore.get()
         });
   },
 
@@ -91,11 +76,11 @@ var ProductDetail = React.createClass({
       this.setState(getState());
   },
   onRelationshipAdd: function(field, addedValue) {
-      console.log(field + " added " + addedValue);
+      console.log(field + ' added ' + addedValue);
       actions.addRelationship(field, addedValue);
   },
   onRelationshipRemove: function(field, removedValue) {
-      console.log(field + " removed " + removedValue);
+      console.log(field + ' removed ' + removedValue);
       actions.removeRelationship(field, removedValue);
   },
   toggleEditable: function() {
@@ -103,7 +88,7 @@ var ProductDetail = React.createClass({
   },
   editBegin: function(e) {
       e.preventDefault();
-      if(this.state.user.role == 'admin') { this.setState({editable: true}); }
+      if(this.state.user.role === 'admin') { this.setState({editable: true}); }
   },
   editCancel: function(e) {
       e.preventDefault();
@@ -116,7 +101,7 @@ var ProductDetail = React.createClass({
       this.setState({editable: false});
   },
   onDelete: function() {
-      var r = confirm("Do you really want to delete this record?");
+      var r = confirm('Do you really want to delete this record?');
       if(r) {actions.del(this.props.masterid);}
   },
   render: function() {
@@ -133,24 +118,22 @@ var ProductDetail = React.createClass({
         <Hero editable={this.state.editable} store={store} actions={actions} media={detail.media} primarytitle={detail.headline} secondarytitle={detail.name} secondarylink='' masterid={this.state.masterid} primarytitlefield={"headline"} />
         <SubHero first='Concept' description={detail.company} descriptionlink={detail.company_website} editable={this.state.editable} store={store} actions={actions} editBegin={this.editBegin} editFinish={this.editFinish} editCancel={this.editCancel} onDelete={this.onDelete}/>
         <Grid>
-          <Row className="show-grid">
+          <Row className='show-grid'>
             <Col xs={12} sm={4}>
-              <ButtonList items={detail.designedsystems} title="Designed Systems" />
-              <ButtonList conditions items={detail.conditions} title="Context" />
+              <RelationshipList items={detail.designedsystems} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, 'designedsystems')} onRemove={this.onRelationshipRemove.bind(null, 'designedsystems')} field={'designedsystems'} routeName='design' title='Designed Systems' fieldName='Designed System' titleField={'name'} />
+              <RelationshipList items={detail.conditions} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, 'conditions')} onRemove={this.onRelationshipRemove.bind(null, 'conditions')} field={'conditions'} routeName='condition' title='Context' fieldName='Context' titleField={'name'} />
             </Col>
             <Col xs={6} sm={4}>
-              <ButtonList mechanisms items={detail.mechanisms} title="Mechanisms"/>
+              <RelationshipList items={detail.mechanisms} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, 'mechanisms')} onRemove={this.onRelationshipRemove.bind(null, 'mechanisms')} field={'mechanisms'} routeName='phenomenon' title='Mechanisms' fieldName='Mechanism' titleField={'name'} />
             </Col>
             <Col xs={6} sm={4}>
-              <ButtonList phenomena items={detail.outcomes} routename="phenomenon" title="Outcomes"/>
+              <RelationshipList items={detail.outcomes} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, 'outcomes')} onRemove={this.onRelationshipRemove.bind(null, 'outcomes')} field={'outcomes'} routeName='phenomenon' title='Outcomes' fieldName='Outcome' titleField={'name'} />
             </Col>
             <Col xs={12} sm={8}>
-              <RelationshipList items={detail.strategies} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, "strategies")} onRemove={this.onRelationshipRemove.bind(null, "strategies")} field={"strategies"} routeName="strategy" title="Inspired By" fieldName="Biological Strategy" titleField={"name"} />
+              <RelationshipList items={detail.strategies} editable={this.state.editable} onAdd={this.onRelationshipAdd.bind(null, 'strategies')} onRemove={this.onRelationshipRemove.bind(null, 'strategies')} field={'strategies'} routeName='strategy' title='Inspired By' fieldName='Biological Strategy' titleField={'name'} />
             </Col>
           </Row>
         </Grid>
-        <PanelGroup defaultActiveKey='1' accordion>
-          <Panel header="More" eventKey='1'>
             <Grid>
               <Row>
                 <Col xs={12}>
@@ -174,135 +157,41 @@ var ProductDetail = React.createClass({
 
                 </Col>
               </Row>
+              <Row>
+                <Col xs={12} sm={6}>
+                  <RelationshipList
+                    items={this.state.object.sources}
+                    titleField='name'
+                    subtitleField='authors'
+                    onAdd={this.onRelationshipAdd.bind(null, 'sources')}
+                    onRemove={this.onRelationshipRemove.bind(null, 'sources')}
+                    field={'sources'}
+                    routeName={'source'}
+                    title={'Sources'}
+                    fieldName={'Sources'}/>
+                  </Col>
+                  <Col xs={12} sm={6}>
+                    <RelationshipList
+                      items={this.state.object.experts}
+                      editable={this.state.editable}
+                      titleField='name'
+                      subtitleField='institution'
+                      onAdd={this.onRelationshipAdd.bind(null, 'experts')}
+                      onRemove={this.onRelationshipRemove.bind(null, 'experts')}
+                      field={'experts'}
+                      routeName={'researcher'}
+                      title={'Researched By'}
+                      fieldName={'Researched By'}/>
+                    </Col>
+                </Row>
             </Grid>
-          </Panel>
-          <Panel header="Table View" eventKey="2">
-            <Grid>
-              <Row className="show-grid">
-                <Col xs={12} md={12}>
-                    <h6>Legacy Data</h6>
-                    <p>This information is all due for eventual deletion, but may be helpful during short-term migration.</p>
-                    <Table striped responsive condensed hover>
-                      <thead>
-                        <tr>
-                          <th>Field Name</th>
-                          <th>Field Value</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>name</td>
-                          <td><TextArea item={detail.name} store={store} actions={actions} fieldName={'name'} editable={this.state.editable}/></td>
-                        </tr>
-                        <tr>
-                          <td>headline</td>
-                          <td>{detail.headline}</td>
-                        </tr>
-                        <tr>
-                          <td>InspiredBy</td>
-                          <td><List items={detail.strategies} /></td>
-                        </tr>
-                        <tr>
-                          <td>keywords</td>
-                          <td><List items={detail.keywords.split(',')} /></td>
-                        </tr>
-                        <tr>
-                          <td>special_text</td>
-                          <td>{detail.special_text}</td>
-                        </tr>
-                        <tr>
-                          <td>challenges_solved</td>
-                          <td>{detail.challenges_solved}</td>
-                        </tr>
-                        <tr>
-                          <td>how_is_it_different</td>
-                          <td>{detail.how_is_it_different}</td>
-                        </tr>
-                        <tr>
-                          <td>biomimicry_story</td>
-                          <td>{detail.biomimicry_story}</td>
-                        </tr>
-
-                        <tr>
-                          <td>company</td>
-                          <td>{detail.company}</td>
-                        </tr>
-                        <tr>
-                          <td>company_website</td>
-                          <td><a href={detail.company_website} target="_blank">{detail.company_website}</a></td>
-                        </tr>
-                        <tr>
-                          <td>phase</td>
-                          <td>{detail.phase}</td>
-                        </tr>
-                        <tr>
-                          <td>patent_name</td>
-                          <td>{detail.patent_name}</td>
-                        </tr>
-                        <tr>
-                          <td>patent_number</td>
-                          <td>{detail.patent_number}</td>
-                        </tr>
-                        <tr>
-                          <td>consumer_products</td>
-                          <td>{detail.consumer_products}</td>
-                        </tr>
-                        <tr>
-                          <td>product_type</td>
-                          <td>{detail.product_type}</td>
-                        </tr>
-                        <tr>
-                          <td>availability</td>
-                          <td>{detail.availability}</td>
-                        </tr>
-                        <tr>
-                          <td>strategy</td>
-                          <td>{detail.strategy}</td>
-                        </tr>
-
-                        <tr>
-                          <td>masterid</td>
-                          <td>{detail.masterid}</td>
-                        </tr>
-                        <tr>
-                          <td>status</td>
-                          <td>{detail.status}</td>
-                        </tr>
-                        <tr>
-                          <td>revision</td>
-                          <td>{detail.revision}</td>
-                        </tr>
-                        <tr>
-                          <td>timestamp</td>
-                          <td>{detail.timestamp}</td>
-                        </tr>
-                        <tr>
-                          <td>media</td>
-                          <td><List items={detail.media} /></td>
-                        </tr>
-                        <tr>
-                          <td>StudiedBy</td>
-                          <td><List items={detail.researchers} /></td>
-                        </tr>
-                        <tr>
-                          <td>FeaturedIn</td>
-                          <td><List items={detail.sources} /></td>
-                        </tr>
-                        <tr>
-                          <td>Bookmarked</td>
-                          <td><List items={detail.collectors} /></td>
-                        </tr>
-                        <tr>
-                          <td>HasFunction</td>
-                          <td><List items={detail.outcomes} /></td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                </Col>
-              </Row>
-            </Grid>
-          </Panel>
-        </PanelGroup>
+            {this.state.user.role == 'admin' || 'editor' ? (
+                      <PanelGroup defaultActiveKey='0' accordion>
+                          <Panel header='Table View' eventKey='1'>
+                              <DataTable data={detail} />
+                          </Panel>
+                      </PanelGroup>
+                  ) : '' }
 	</div>
         /* jshint ignore:end */
     );

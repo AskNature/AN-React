@@ -1,5 +1,5 @@
 /**
-* ProductConsole Component
+* StrategyConsole Component
 */
 'use strict';
 
