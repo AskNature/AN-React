@@ -1,16 +1,17 @@
 'use strict';
 
-var React = require('react');
-var Griddle = require('griddle-react');
-var Link = require('../modules/link.jsx');
-var Input = require('react-bootstrap').Input;
-var Button = require('react-bootstrap').Button;
-var Glyphicon = require('react-bootstrap').Glyphicon;
+var React = require('react'),
 
-var _ = require('lodash');
-var request = require('superagent');
+Griddle = require('griddle-react'),
+_ = require('lodash'),
+request = require('superagent'),
 
-var TextArea = require('../detail/common/textarea.jsx');
+TextArea = require('../detail/common/textarea.jsx'),
+Link = require('../modules/link.jsx'),
+
+Input = require('react-bootstrap').Input,
+Button = require('react-bootstrap').Button,
+Glyphicon = require('react-bootstrap').Glyphicon;
 
 var LinkComponent = React.createClass({
     render: function() {
@@ -275,10 +276,19 @@ var GriddleComponent = React.createClass({
         });
       }
 
-      add_cols = ['status','deletebutton'];
-      add_meta = [{columnName: 'status', displayName: 'Status', visible:true, customComponent: StatusComponent, locked:true}, {columnName: 'deletebutton', displayName: 'Delete', visible: true, customComponent: DeleteComponent, locked:true}];
+      add_cols = ['status'];
+      add_meta = [{columnName: 'status', displayName: 'Status', visible:true, customComponent: StatusComponent, locked:true}];
       cols = cols.concat(add_cols);
       meta = meta.concat(add_meta);
+
+      // Only admins can delete
+      if(this.props.credentials === true) {
+        add_cols = ['deletebutton'];
+        add_meta = [{columnName: 'deletebutton', displayName: 'Delete', visible: true, customComponent: DeleteComponent, locked:true}];
+        cols = cols.concat(add_cols);
+        meta = meta.concat(add_meta);
+      }
+
       return (
         <div>
           <Input type='text' placeholder='Filter List...' value={this.state.filter} onChange={this.setFilter} />

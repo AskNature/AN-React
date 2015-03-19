@@ -3,13 +3,29 @@
 */
 'use strict';
 
-var React = require('react');
-var ConsoleLayout = require('./consolelayout.jsx');
-var strategySt = require('../../stores/admin/strategies');
-var strategyAc = require('../../actions/strategies');
-var GriddleComponent = require('./griddle_component.jsx');
+var React = require('react'),
+
+strategySt = require('../../stores/admin/strategies'),
+strategyAc = require('../../actions/strategies'),
+accountStore = require('../../stores/accounts'),
+
+ConsoleLayout = require('./consolelayout.jsx'),
+GriddleComponent = require('./griddle_component.jsx');
+
+var getState = function() {
+    return (
+    {
+    user: accountStore.get()
+    }
+    );
+};
 
 var StrategyConsole = React.createClass({
+    getInitialState: function() {
+        return (
+            getState()
+        );
+    },
     render: function() {
         return (
             /* jshint ignore:start */
@@ -30,6 +46,7 @@ var StrategyConsole = React.createClass({
                   ]}
                 thumb={['media', 'media_id', 'media_entity']}
                 initialSort={['timestamp', false]}
+                credentials={this.state.user.role === 'admin' ? true : false}
                  />
             </ConsoleLayout>
             /* jshint ignore:end */
