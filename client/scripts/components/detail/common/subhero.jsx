@@ -11,6 +11,7 @@ Col = require('react-bootstrap').Col,
 Nav = require('react-bootstrap').Nav,
 NavItem = require('react-bootstrap').NavItem,
 Button = require('react-bootstrap').Button,
+Input = require('react-bootstrap').Input,
 ButtonToolbar = require('react-bootstrap').ButtonToolbar,
 Glyphicon = require('react-bootstrap').Glyphicon;
 
@@ -27,13 +28,19 @@ var SubHero = React.createClass({
               </h5>
           </Col>
           <Col xs={12} sm={4}>
-            <ButtonToolbar className='flat-button edit-action-buttons' style={{"margin-top": "11.5px"}}>
+            <ButtonToolbar className='flat-button' style={{"margin-top": "11.5px"}}>
 	             {this.props.editable ?
                  <span>
                    <ButtonGroup>
                      <Button block disabled={this.props.credentials === true ? false : true } active={true} style={{"cursor": "default"}}>
                        <Glyphicon glyph="pencil" /> Edit Mode Active
                      </Button>
+                     <Input block type="select" label='Status' defaultValue="Active">
+                       <option value="published">Published</option>
+                       <option value="draft">Draft</option>
+                       <option value="holding">Ready for Review</option>
+                         <option value="archived">Archived</option>
+                     </Input>
                      <Button block bsStyle="success" onClick={this.props.editFinish}>
                        <Glyphicon glyph="ok" /> <strong>Update</strong>
                      </Button>
