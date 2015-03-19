@@ -23,14 +23,14 @@ var StrategyConsole = React.createClass({
                   {columnName:'outcomes', displayName:'Outcomes', type:'list'},
                   {columnName:'addedby', displayName:'Added By', type:'text'},
                   {columnName:'timestamp', displayName:'Date Modified', type:'date'},
-                  {columnName:'status', displayName:'Status', type:'text'},
-                  {columnName:'is_deleted', displayName:'Deleted', type:'boolean'},
+                  {columnName:'is_deleted', displayName:'Archived', type:'boolean'},
                   {columnName:'flag_text', displayName:'Text', type:'boolean'},
                   {columnName:'flag_tags', displayName:'Tags', type:'boolean'},
                   {columnName:'flag_media', displayName:'Media', type:'boolean'},
                   ]}
                 thumb={['media', 'media_id', 'media_entity']}
-                initialSort={['timestamp', false]} />
+                initialSort={['timestamp', false]}
+                 />
             </ConsoleLayout>
             /* jshint ignore:end */
         );

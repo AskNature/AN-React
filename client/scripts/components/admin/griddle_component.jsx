@@ -4,6 +4,7 @@ var React = require('react');
 var Griddle = require('griddle-react');
 var Link = require('../modules/link.jsx');
 var Input = require('react-bootstrap').Input;
+var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var _ = require('lodash');
@@ -61,7 +62,7 @@ var ListComponent = React.createClass({
         {
           this.props.data.map(function(item, i){
             return (
-              <li>{item}</li>
+              <li key={i}>{item}</li>
             );
           })
         }
@@ -75,11 +76,23 @@ var RadioComponent = React.createClass({
     var status = false;
     //console.log(this.props.data);
     if(this.props.data === 1) {status = true;}
-    var masterid = this.props.rowData.masterid;
-
     return (
       <div>
-        <Input type='checkbox' checked={status} readOnly onChange={this.props.rowData.selectCallback.bind(null, masterid, status)} />
+        <Input type='checkbox' checked={status} readOnly />
+      </div>
+    );
+  }
+});
+
+var BulkComponent = React.createClass({
+  render: function() {
+    var status = false;
+    //console.log(this.props.data);
+    if(this.props.data === 1) {status = true;}
+    var masterid = this.props.rowData.masterid;
+    return (
+      <div>
+        <Input type='checkbox' checked={status} onChange={this.props.rowData.selectCallback.bind(null, masterid, status)} />
       </div>
     );
   }
@@ -87,9 +100,12 @@ var RadioComponent = React.createClass({
 
 var SelectComponent = React.createClass({
   render: function() {
+    var style = {
+      minWidth: '100px'
+    };
     return (
       <div>
-        <Input type="select" label='Select' defaultValue="select">
+        <Input style={style} type="select" label='Select' defaultValue="select">
           <option value="select">select</option>
           <option value="other">...</option>
         </Input>
@@ -108,9 +124,40 @@ var DateComponent = React.createClass({
   }
 });
 
+var StatusComponent = React.createClass({
+  render: function() {
+    var style = {
+      minWidth: '100px'
+    };
+    return(
+      // This will just change the status. It may make more sense to include this in the normal status select input.
+      <Input style={style} type="select" defaultValue="select">
+        <option value="select">select</option>
+        <option value="other">...</option>
+      </Input>
+    );
+  }
+});
+
+var DeleteComponent = React.createClass({
+  render: function() {
+    return(
+      <Button bsStyle="danger"><Glyphicon glyph="trash" /></Button>
+    );
+  }
+});
+
 var EditComponent = React.createClass({
     render: function() {
       return(<Button onClick={this.props.rowData.editCallback.bind(null, this.props.rowData.masterid, this.props.rowData.edit)}><Glyphicon glyph={this.props.rowData.edit ? 'check' : 'pencil'} /></Button>);
+    }
+});
+
+var DataLoader = React.createClass({
+    render: function() {
+      return(
+      <h3>Binary Solo</h3>
+      );
     }
 });
 
@@ -126,7 +173,7 @@ var GriddleComponent = React.createClass({
           initialSortOrder = true;
         }
         return {
-            'results': [{'name' : 'Loading...'}],
+            'results': [{'name' : 'Loading...', 'deletebutton' : 0}],
 	    'selectedItems': [],
 	    'editingItem': null,
             'currentPage': 0,
@@ -175,7 +222,8 @@ var GriddleComponent = React.createClass({
 	});
    },
    deleteSelectedItems: function() {
-        var that = this;
+    // Doesn't this belong in an action file?
+    var that = this;
    	request
 	.del('/api/v2/strategies')
 	.send({delete: this.state.selectedItems})
@@ -185,9 +233,8 @@ var GriddleComponent = React.createClass({
    },
     render: function() {
       var cols = ['selected', 'edit'];
-      var meta = [{columnName: 'selected', displayName: 'Select', visible:true, customComponent: RadioComponent, locked: true}, {columnName: 'edit', visible:false, customComponent: EditComponent, locked: true},{columnName: 'editCallback', visible: false},{columnName: 'selectCallback', visible:false}];
-      var add_meta;
-
+      var meta = [{columnName: 'selected', displayName: 'Select', visible:true, customComponent: BulkComponent, locked: true}, {columnName: 'edit', visible:false, customComponent: EditComponent, locked: true},{columnName: 'editCallback', visible: false},{columnName: 'selectCallback', visible:false}];
+      var add_meta, add_cols;
       if( this.props.columns ) {
         this.props.columns.map(function(list){
           var custom = null;
@@ -227,6 +274,11 @@ var GriddleComponent = React.createClass({
           meta = meta.concat(add_meta);
         });
       }
+
+      add_cols = ['status','deletebutton'];
+      add_meta = [{columnName: 'status', displayName: 'Status', visible:true, customComponent: StatusComponent, locked:true}, {columnName: 'deletebutton', displayName: 'Delete', visible: true, customComponent: DeleteComponent, locked:true}];
+      cols = cols.concat(add_cols);
+      meta = meta.concat(add_meta);
       return (
         <div>
           <Input type='text' placeholder='Filter List...' value={this.state.filter} onChange={this.setFilter} />
@@ -254,6 +306,7 @@ var GriddleComponent = React.createClass({
                nextIconComponent={<span> <Glyphicon glyph="chevron-right" /></span>}
                previousIconComponent={<span><Glyphicon glyph="chevron-left" /> </span>}
                noDataMessage={"No data could be found."}
+               externalLoadingComponent={<DataLoader />}
  />
           </div>
 	       </div>
@@ -268,11 +321,12 @@ var GriddleComponent = React.createClass({
 	    var c = s;
 	    console.log('test');
 	    c.selected = (_.indexOf(this.state.selectedItems, s.masterid) === -1 ? 0 : 1);
+      c.deletebutton = 0;
 	    c.edit = this.state.editingItem == s.masterid;
 	    var that = this;
 	    c.selectCallback = function(masterid, status) {
 	        console.log('selected ' + masterid + '!');
-		if(status) { 
+		if(status) {
 		    that.setState({selectedItems: _.difference(that.state.selectedItems, [masterid])}, function() {
 		        console.log(that.state.selectedItems);
 			that.props.store.emitChange();

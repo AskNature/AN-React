@@ -15,31 +15,7 @@ Input = require('react-bootstrap').Input,
 ButtonToolbar = require('react-bootstrap').ButtonToolbar,
 Glyphicon = require('react-bootstrap').Glyphicon;
 
-
-
 var SubHero = React.createClass({
-  decodeEntities: (function() {
-    // this prevents any overhead from creating the object each time
-    var element = document.createElement('div');
-    function decodeHTMLEntities (str) {
-      console.log(str);
-
-      if(str && typeof str === 'string') {
-        // strip script/html tags
-        str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
-        str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, ' ');
-        str = str.replace(/\\/g, '');
-        element.innerHTML = str;
-        str = element.textContent;
-        element.textContent = '';
-      
-      }
-      return str;
-    }
-
-    return decodeHTMLEntities;
-  })(),
-
   render: function() {
     return (
       /* jshint ignore:start */
@@ -47,23 +23,9 @@ var SubHero = React.createClass({
         <Row>
           <Col xs={12} sm={8}>
             <h5 className="lead">
-              {this.props.first ? (
-                <strong>{this.props.first} </strong>
-              ) : ''}
-              {this.props.descriptionlink ? (
-                <Link
-                  url={this.props.descriptionlink}>
-                  {this.props.description}
-                </Link>
-              ) : (
-                  <TextField
-                    store={this.props.store}
-                    actions={this.props.actions}
-                    fieldName={'summary'}
-                    initialValue={this.decodeEntities(unescape(this.props.description))}
-                    editable={this.props.editable} />
-              )}
-            </h5>
+              {this.props.first ? (<strong>{this.props.first} </strong>) : ''}
+              {this.props.descriptionlink ? (<Link url={this.props.descriptionlink}>{this.props.description}</Link>) : (<span><TextField store={this.props.store} actions={this.props.actions} fieldName={"summary"} initialValue={this.props.description} editable={this.props.editable} /></span>)}
+              </h5>
           </Col>
           <Col xs={12} sm={4}>
             <ButtonToolbar className='flat-button' style={{"margin-top": "11.5px"}}>
@@ -74,10 +36,21 @@ var SubHero = React.createClass({
                        <Glyphicon glyph="pencil" /> Edit Mode Active
                      </Button>
                      <Input block type="select" label='Status' defaultValue="Active">
-                       <option value="published">Published</option>
-                       <option value="draft">Draft</option>
-                       <option value="holding">Ready for Review</option>
-                         <option value="archived">Archived</option>
+                       {this.props.user ? (
+                         <div>
+                         <option value="active">Active</option>
+                         <option value="removed">Removed</option>
+                         <option value="blacklist">Blacklisted</option>
+                         <option value="probation">On Probation</option>
+                         </div>
+                       ) : (
+                           <div>
+                           <option value="published">Published</option>
+                           <option value="draft">Draft</option>
+                           <option value="holding">Ready for Review</option>
+                             <option value="archived">Archived</option>
+                             </div>
+                         ) }
                      </Input>
                      <Button block bsStyle="success" onClick={this.props.editFinish}>
                        <Glyphicon glyph="ok" /> <strong>Update</strong>

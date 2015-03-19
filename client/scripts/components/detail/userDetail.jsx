@@ -39,7 +39,7 @@ var UserDetail = React.createClass({
     getInitialState: function() {
         return ({
 	    object: store.get(),
-	    editable: !this.props.masterid ? true : false,
+	    editable: this.props.masterid ? true : false,
 	    loaded: store.getLoaded(),
 	    masterid: this.props.masterid
 	});
@@ -120,7 +120,8 @@ var UserDetail = React.createClass({
                         editBegin={this.editBegin}
                         editFinish={this.editFinish}
                         editCancel={this.editCancel}
-                        onDelete={this.onDelete} />
+                        onDelete={this.onDelete}
+                        user />
                     <Grid>
       	             <Row className='show-grid'>
             		    <Col xs={12} sm={4}>

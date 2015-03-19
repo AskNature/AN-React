@@ -179,6 +179,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
       .fa {
         margin-top: 3px;
       }
+      &.active {
+        background: $background-color;
+      }
     }
   }
 }
