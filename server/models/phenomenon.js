@@ -6,6 +6,8 @@ var Model = require('./model.js');
 var entityName = 'Function';
 
 var FunctionFlat = new Model('Function', ['name']);
+var Outcome = new Model('Outcome', ['name']);
+var Mechanism = new Model('Mechanism', ['name']);
 
 var fields = ['name', 'short_name', 'description'];
 
@@ -20,11 +22,17 @@ var relationships = {
         className: 'Function',
         edge: 'in("ChildOf")'
     },
-    'has_function': {
+    'outcome': {
         model: FunctionFlat,
-        className: 'Function',
+        className: 'Outcome',
         edge: 'in("HasFunction")'
-    }
+    },
+    'mechanism': {
+        model: FunctionFlat,
+        className: 'Mechanism',
+        edge: 'in("HasMechanism")'
+    },
+
 };
 
 var Phenomenon = new Model(entityName, fields, relationships);

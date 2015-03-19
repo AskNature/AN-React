@@ -1,29 +1,24 @@
-/**
-* Phenomenon detail (component)
-*/
 'use strict';
 
-var React = require('react'),
+var React = require('react');
 
-Link = require('../modules/link.jsx'),
+var TextArea = require('./common/textarea.jsx');
+var DataTable = require('./common/datatable.jsx');
+var RelationshipList = require('./common/relationshiplist.jsx');
+
+var CreatorMast = require('./common/creatormast.jsx'),
+AdminBar = require('./common/adminbar.jsx'),
 Hero = require('./common/hero.jsx'),
 SubHero = require('./common/subhero.jsx'),
-AdminBar = require('./common/adminbar.jsx'),
-CreatorMast = require('./common/creatormast.jsx'),
-TextArea = require('./common/textarea.jsx'),
-ImageList = require('./common/imagelist.jsx'),
 ButtonList = require('./common/edgelists.jsx'),
-Gallery = require('./common/gallery.jsx'),
+Gallery = require('./common/gallery.jsx');
 
-Label = require('react-bootstrap/Label'),
-Col = require('react-bootstrap/Col'),
-Panel = require('react-bootstrap/Panel'),
-PanelGroup = require('react-bootstrap/PanelGroup'),
-Row = require('react-bootstrap/Row'),
-Grid = require('react-bootstrap/Grid'),
-Table = require('react-bootstrap/Table'),
-Input = require('react-bootstrap/Input'),
-Glyphicon = require('react-bootstrap/Glyphicon');
+var Panel = require('react-bootstrap').Panel,
+PanelGroup = require('react-bootstrap').PanelGroup,
+Row = require('react-bootstrap').Row,
+Label = require('react-bootstrap').Label,
+Grid = require('react-bootstrap').Grid,
+Col = require('react-bootstrap').Col;
 
 /** Gets incoming information from the store */
 
@@ -40,45 +35,67 @@ var actions = require('../../actions/phenomenon');
 */
 
 var getState = function() {
-  return {
-    object: store.get(),
+    return (
+    {
+	object: store.get(),
+	loaded: store.getLoaded(),
+	error: store.getError(),
     user: userStore.get()
-  };
+    }
+    );
 };
 
-var List = React.createClass({
-  render: function() {
-    var items = this.props.items;
-    return (
-      <ul>
-        {
-          items.map(function(item, i){
-            return (
-                <li key={i}>{item}</li>
-            );
-          })
-        }
-      </ul>
-    );
-  }
+var DetailComponent = React.createClass({
+  mixins: [store.mixin],
+  getInitialState: function() {
+      return ({
+    object: store.get(),
+    editable: !this.props.masterid ? true : false,
+    loaded: store.getLoaded(),
+    masterid: this.props.masterid,
+    user: userStore.get()
 });
 
-var DetailComponent = React.createClass({
-
-  mixins: [store.mixin, userStore.mixin],
-
-  getInitialState: function() {
-    return getState();
   },
-
-  componentWillMount: function() {
+  componentDidMount: function() {
+if(this.props.masterid) {
     actions.fetch(this.props.masterid);
+} else {
+    actions.create();
+}
   },
-
-  componentDidMount: function(){
-
+  _onChange: function() {
+    this.setState(getState());
   },
-
+  onRelationshipAdd: function(field, addedValue) {
+      console.log(field + ' added ' + addedValue);
+actions.addRelationship(field, addedValue);
+  },
+  onRelationshipRemove: function(field, removedValue) {
+    console.log(field + ' removed ' + removedValue);
+actions.removeRelationship(field, removedValue);
+  },
+  toggleEditable: function() {
+      this.setState({editable: !this.state.editable});
+  },
+  editBegin: function(e) {
+      e.preventDefault();
+      if(this.state.user.role === 'admin') { this.setState({editable: true}); }
+  },
+  editCancel: function(e) {
+      e.preventDefault();
+actions.fetch(this.props.masterid);
+      this.setState({editable: false});
+  },
+  editFinish: function(e) {
+      e.preventDefault();
+      actions.commit();
+      this.setState({editable: false});
+  },
+  onDelete: function() {
+      var r = confirm('Do you really want to delete this record?');
+      if(r) {actions.del(this.props.masterid);}
+  },
   render: function() {
     var detail = this.state.object;
     var routeName = 'phenomenon';
@@ -102,96 +119,67 @@ var DetailComponent = React.createClass({
           <Grid>
             <Row className="show-grid">
               <Col xs={12} sm={4}>
-                <ButtonList phenomena items={detail.parent} routename="phenomenon" title="Parent Phenomenon" />
-                <ButtonList phenomena items={detail.children} routename="phenomenon" title="Child Phenomena" />
+                <RelationshipList
+                  items={this.state.object.parent}
+                  editable={this.state.editable}
+                  titleField='name'
+                  onAdd={this.onRelationshipAdd.bind(null, 'parent')}
+                  onRemove={this.onRelationshipRemove.bind(null, 'parent')}
+                  field={'parent'}
+                  routeName={'phenomenon'}
+                  title={'Parent Phenomenon'}
+                  fieldName={'Parent Phenomenon'}/>
+                  <RelationshipList
+                    items={this.state.object.children}
+                    editable={this.state.editable}
+                    titleField='name'
+                    onAdd={this.onRelationshipAdd.bind(null, 'children')}
+                    onRemove={this.onRelationshipRemove.bind(null, 'children')}
+                    field={'children'}
+                    routeName={'phenomenon'}
+                    title={'Child Phenomena'}
+                    fieldName={'Child Phenomena'}/>
+              </Col>
+              <Col xs={12} sm={4}>
+                <RelationshipList
+                  items={this.state.object.mechanism}
+                  editable={this.state.editable}
+                  titleField='name'
+                  onAdd={this.onRelationshipAdd.bind(null, 'mechanism')}
+                  onRemove={this.onRelationshipRemove.bind(null, 'mechanism')}
+                  field={'mechanism'}
+                  routeName={null}
+                  title={'Listed as a Mechanism in'}
+                  fieldName={'Listed as a Mechanism in'}/>
+
               </Col>
               <Col xs={12} sm={4}>
 
-                  Listed as a <strong>Mechanism</strong> in <strong>XX</strong> items.
-                    <Button block><Glyphicon glyph="search" /> <Label>XX</Label></Button>
-                    <Button block>Connect your content</Button>
-
-              </Col>
-              <Col xs={12} sm={4}>
-
-                  Listed as an <strong>Outcome</strong> in <strong>YY</strong> items.
-                    <Button block><Glyphicon glyph="search" /> <Label>YY</Label></Button>
-                    <Button block>Connect your content</Button>
-
+                <RelationshipList
+                  items={this.state.object.outcome}
+                  editable={this.state.editable}
+                  titleField='name'
+                  onAdd={this.onRelationshipAdd.bind(null, 'outcome')}
+                  onRemove={this.onRelationshipRemove.bind(null, 'outcome')}
+                  field={'outcome'}
+                  routeName={null}
+                  title={'Listed as an Outcome in'}
+                  fieldName={'Listed as an Outcome in'}/>
               </Col>
             </Row>
           </Grid>
-          <PanelGroup defaultActiveKey='2' accordion>
-            <Panel header="More" eventKey='1'>
-
-            </Panel>
-            <Panel header="Table View" eventKey="2">
-              <Grid>
-              <Row className="show-grid">
-                <Col xs={12} md={12}>
-                    <h6>Legacy Data</h6>
-                    <p>This information is all due for eventual deletion, but may be helpful during short-term migration.</p>
-                    <Table striped responsive condensed hover>
-                      <thead>
-                        <tr>
-                          <th>Field Name</th>
-                          <th>Field Value</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>masterid</td>
-                          <td>{detail.masterid}</td>
-                        </tr>
-                        <tr>
-                          <td>name</td>
-                          <td>{detail.name}</td>
-                        </tr>
-                        <tr>
-                          <td>description</td>
-                          <td>{detail.description}</td>
-                        </tr>
-                        <tr>
-                          <td>short_name</td>
-                          <td>{detail.short_name}</td>
-                        </tr>
-                        <tr>
-                          <td>out_ChildOf (parent)</td>
-                          <td>{detail.parent}</td>
-                        </tr>
-                        <tr>
-                          <td>out_ChildOf.out_ChildOf (grandparent)</td>
-                          <td>{detail.groupname}</td>
-                        </tr>
-                        <tr>
-                          <td>in_ChildOf (children)</td>
-                          <td><List items={detail.children} /></td>
-                        </tr>
-                        <tr>
-                          <td>in_HasFunction</td>
-                          <td><List items={detail.has_function} /></td>
-                        </tr>
-
-                      </tbody>
-                    </Table>
-                </Col>
-              </Row>
-
-            </Grid>
-          </Panel>
-        </PanelGroup>
+          {this.state.user.role == 'admin' || 'editor' ? (
+                    <PanelGroup defaultActiveKey='0' accordion>
+                        <Panel header='Table View' eventKey='1'>
+                            <DataTable data={detail} />
+                        </Panel>
+                    </PanelGroup>
+                ) : '' }
       </div>
         /* jshint ignore:end */
     );
-  },
-  componentWillReceiveProps: function () {
-    this.setState(getState());
-  },
-
-  // Event handler for 'change' events coming from store mixins.
-  _onChange: function() {
-      this.setState(getState());
   }
+
 });
 
 module.exports = DetailComponent;

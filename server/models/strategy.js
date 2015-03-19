@@ -1,5 +1,5 @@
 // Strategy model
-
+'use strict';
 var Model = require('./model.js');
 
 // Models to link
@@ -11,6 +11,7 @@ var User = Model('Users', ['name']);
 var Media = Model('Media', ['filename', 'name', 'entity']);
 var LivingSystem = Model('LivingSystem', ['name', 'taxon']);
 var Condition = Model('Condition', []);
+var HasStatus = Model('HasStatus', ['value']);
 
 var entityName = 'Strategy';
 
@@ -66,7 +67,14 @@ var relationships = {
         model: Condition,
 	className: 'Condition',
 	edge: 'out("HasConditions")'
-    }
+  },
+  'has_status': {
+    model: HasStatus,
+    className: 'HasStatus',
+    edge: 'out("HasStatus")'
+
+  }
+
 };
 
 var Strategy = Model(entityName, fields, relationships);

@@ -13,7 +13,7 @@ Input = require('react-bootstrap').Input;
 
 var FormData = require('react-form-data');
 
-var userActions = require('../../actions/users');
+var accountActions = require('../../actions/accounts');
 var routeActions = require('../../actions/routes');
 
 var Login = React.createClass({
@@ -33,7 +33,7 @@ var Login = React.createClass({
   },
 
   handleSubmit: function(e) {
-    userActions.createUser(this.formData, this.createSuccess, this.createFailure);
+    accountActions.createUser(this.formData, this.createSuccess, this.createFailure);
     e.preventDefault();
   },
 

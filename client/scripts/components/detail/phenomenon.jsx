@@ -9,7 +9,7 @@ var Phenomenon = React.createClass({
         var masterid = window.location.pathname.split('/')[2];
         return (
                <DefaultLayout>
-                   <PhenomenonDetail masterid={masterid != 'new' ? masterid : null} />
+                   <PhenomenonDetail masterid={masterid !== 'new' ? masterid : null} />
                </DefaultLayout>
         );
     }

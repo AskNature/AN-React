@@ -20,7 +20,8 @@ var UserConsole = React.createClass({
                             {columnName:'name', displayName:'Name', type:'link'},
                             {columnName:'first', displayName:'First Name', type:'text'},
                             {columnName:'last', displayName:'Last Name', type:'text'},
-                            {columnName:'registration_date', displayName:'Registered On', type:'date'}
+                            {columnName:'registration_date', displayName:'Registered On', type:'date'},
+                            {columnName:'status', displayName:'Status', type:'text'}
                             ]}
                           initialSort={['registration_date', false]} />
             </ConsoleLayout>

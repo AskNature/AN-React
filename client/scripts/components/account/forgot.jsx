@@ -12,7 +12,7 @@ Input = require('react-bootstrap').Input;
 
 var FormData = require('react-form-data');
 
-var userActions = require('../../actions/users');
+var accountActions = require('../../actions/accounts');
 var routeActions = require('../../actions/routes');
 
 var Forgot = React.createClass({
@@ -32,7 +32,7 @@ var Forgot = React.createClass({
     },
 
     handleSubmit: function(e) {
-    	userActions.forgotUser(this.formData, this.forgotSuccess, this.forgotFailure);
+    	accountActions.forgotUser(this.formData, this.forgotSuccess, this.forgotFailure);
 	e.preventDefault();
     },
 

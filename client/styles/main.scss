@@ -78,11 +78,6 @@ label {
   -moz-box-shadow: none;
 }
 
-.edit-action-buttons {
-  :hover {
-    background: #ccc;
-  }
-}
 
 
 /* ==========================================================================
@@ -99,6 +94,14 @@ Top Navbar
     position: absolute;
     left: 0;
     right: 120px;
+    .btn-default.drawer-toggle {
+      position: relative;
+      float:left;
+      padding: 9px 15px;
+      margin: 15px 0 15px 15px;
+      background: none;
+      border: none;
+    }
     .navbar-brand {
     }
     .navbar-form {
@@ -142,14 +145,6 @@ Top Navbar
       color: #fff;
     }
   }
-  &.drawer-toggle, .btn-default {
-    position: relative;
-    float:left;
-    padding: 9px 15px;
-    margin: 15px 0 15px 15px;
-    background: none;
-    border: none;
-  }
 }
 
 
@@ -183,6 +178,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
       }
       .fa {
         margin-top: 3px;
+      }
+      &.active {
+        background: $background-color;
       }
     }
   }
