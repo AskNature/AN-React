@@ -17,6 +17,7 @@ var routesConstants = require('../constants/routes');
 var Defaults = require('../constants/generic-defaults').entity;
 
 var _data;
+var _type;
 var _fieldsUpdated;
 var _error;
 var _loaded;
@@ -34,7 +35,7 @@ var ThisStore = new Store({
     return _data.masterid;
   },
   getEntityType: function() {
-    return _data.entityType;
+    return _type;
   },
   getUpdatedFields: function() {
     return _fieldsUpdated;
@@ -60,6 +61,7 @@ ThisStore.dispatcherToken = Dispatcher.register(function(payload) {
       _loaded = true;
       _error = false;
       _data = action.data;
+      _type = action.entityType;
       ThisStore.emitChange();
   } else if (action.actionType === Constants.FETCH_ERROR) {
       _error = true;
@@ -74,6 +76,7 @@ ThisStore.dispatcherToken = Dispatcher.register(function(payload) {
   } else if (action.actionType === Constants.CREATE) {
       _data = Defaults;
       _loaded = true;
+      _type = action.entityType;
       ThisStore.emitChange();
   } else if(action.actionType === Constants.UPDATE) {
       _.forEach(action.data, function(value, key) {
