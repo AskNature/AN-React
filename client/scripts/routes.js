@@ -8,7 +8,7 @@ var IndexPage = React.createFactory(require('./components/index.jsx'));
 var AdminList = React.createFactory(require('./components/admin/adminlist.jsx'));
 
 var StrategyDetail = React.createFactory(require('./components/detail/strategy.jsx'));
-var ProductDetail = React.createFactory(require('./components/detail/product.jsx'));
+var ProductDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
 var LivingSystemsDetail = React.createFactory(require('./components/detail/livingsystem.jsx'));
 var PhenomenonDetail = React.createFactory(require('./components/detail/phenomenon.jsx'));
 var ConditionDetail = React.createFactory(require('./components/detail/condition.jsx'));

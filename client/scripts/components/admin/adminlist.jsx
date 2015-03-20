@@ -21,6 +21,8 @@ SourceList = require('./source'),
 StrategyList = require('./strategy'),
 UserList = require('./user');
 
+// For now, this temp solution is permanently set to StrategyList:
+
 var getState = function() {
     return (
     {
