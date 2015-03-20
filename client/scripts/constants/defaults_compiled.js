@@ -11,90 +11,90 @@ var Defaults = {
     },
 
     relationshipList: {
-	results: [],
-    boxvalue: ''
+    	results: [],
+        boxvalue: ''
     },
 
     entity: {
 
-                addedby_id: '',
-                addedby_first: '',
-                addedby_last: '',
-                description: '',
-                featured_count: '',
-                groupid: '',
-                groupname: '',
-                headline: '',
-                masterid: '',
-                name: '',
-                short_name: '',
-                special_text: '',
-                status: '',
-                type: '',
+        addedby_id: '',
+        addedby_first: '',
+        addedby_last: '',
+        description: '',
+        featured_count: '',
+        groupid: '',
+        groupname: '',
+        headline: '',
+        masterid: '',
+        name: '',
+        short_name: '',
+        special_text: '',
+        status: '',
+        type: '',
 
-                roles: ',',
-                activities: ',',
-                keywords: ',',
+        roles: ',',
+        activities: ',',
+        keywords: ',',
 
-                flag_text: 0,
-                flag_tags: 0,
-                flag_media: 0,
-                is_deleted: 0,
+        flag_text: 0,
+        flag_tags: 0,
+        flag_media: 0,
+        is_deleted: 0,
 
-                collectors: [],
-                collected: [],
+        collectors: [],
+        collected: [],
 
-                conditions: [],
+        conditions: [],
 
-                created_by: [],
+        created_by: [],
 
-                children: [],
-                parent: [],
+        children: [],
+        parent: [],
 
-                designedsystems: [],
+        designedsystems: [],
 
-                experts: [],
-                experts_institution: [],
+        experts: [],
+        experts_institution: [],
 
-                featured_in: [],
+        featured_in: [],
 
-                flagged: [],
-                friends: [],
+        flagged: [],
+        friends: [],
 
-                has_function: [],
-                has_living_system: [],
-                has_media: [],
+        has_function: [],
+        has_living_system: [],
+        has_media: [],
 
-                inspiredby: [],
-                inspiredby_id: [],
+        inspiredby: [],
+        inspiredby_id: [],
 
-                living_system: [],
-                living_system_taxon: [],
-                living_system_id: [],
+        living_system: [],
+        living_system_taxon: [],
+        living_system_id: [],
 
-                mechanisms: [],
-                mechanisms_id: [],
+        mechanisms: [],
+        mechanisms_id: [],
 
-                media: [],
-                media_name: [],
-                media_entity: [],
-                media_id: [],
-                added_media: [],
+        media: [],
+        media_name: [],
+        media_entity: [],
+        media_id: [],
+        added_media: [],
 
-                outcomes: [],
-                outcomes_id: [],
+        outcomes: [],
+        outcomes_id: [],
 
-                products: [],
-                product_masterid: [],
+        products: [],
+        product_masterid: [],
 
-                sources: [],
-                sources_authors: [],
-                sources_year: [],
-                sources_id: [],
+        sources: [],
+        sources_authors: [],
+        sources_year: [],
+        sources_id: [],
 
-                strategies: [],
+        strategies: [],
 
-                studies: []
+        studies: []
 
     }
 };
