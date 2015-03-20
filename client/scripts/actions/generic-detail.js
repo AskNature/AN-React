@@ -16,6 +16,7 @@ routeActions = require('./routes');
 
 // this doesn't work:
 
+var getEntity = function() {
 var entity = window.location.pathname.split('/');
 console.log(entity);
 var route;
@@ -23,10 +24,10 @@ if(entity[1] === 'product') {
     route = 'products';
 } else if(entity[1] === 'strategy') {
     route = 'strategies';
-} else if(entity[1] === 'admin') {
-   route = entity[2];
 }
 
+return route;
+};
 /**
 * initialize begins the load of a detail instance. It takes
 * seed data and either empties the store if the data is null or
@@ -146,7 +147,7 @@ var del = function(type,masterid) {
     .del('/api/v2/'+type+'/'+masterid)
     .end(function(res) {
 if(res.ok) {
-   routeActions.setRoute('/admin/'+entity);
+   routeActions.setRoute('/admin/'+type);
 }
     });
 };
