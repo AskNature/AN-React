@@ -3,10 +3,10 @@
 var React = require('react'),
 
 /** Sends outgoing requests to an action */
-actions = require('../../actions/model-detail'),
+actions = require('../../actions/generic-detail'),
 
 /** Gets incoming information from the store */
-store = require('../../stores/model-detail'),
+store = require('../../stores/generic-detail'),
 accountStore = require('../../stores/accounts'),
 
 DefaultLayout = require('../layouts/default.jsx'),

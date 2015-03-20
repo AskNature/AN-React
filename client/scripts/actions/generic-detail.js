@@ -24,6 +24,8 @@ if(entity[1] === 'product') {
     route = 'products';
 } else if(entity[1] === 'strategy') {
     route = 'strategies';
+} else if(entity[1] === 'phenomenon') {
+    route = 'phenomena';
 }
 
 return route;

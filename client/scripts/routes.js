@@ -16,6 +16,7 @@ var UsersConsole = React.createFactory(require('./components/admin/users.jsx'));
 var MediaConsole = React.createFactory(require('./components/admin/media.jsx'));
 
 
+var DetailComponent = React.createFactory(require('./components/detail/component-detail.jsx'));
 var StrategyDetail = React.createFactory(require('./components/detail/strategy.jsx'));
 var ProductDetail = React.createFactory(require('./components/detail/product.jsx'));
 var LivingSystemsDetail = React.createFactory(require('./components/detail/livingsystem.jsx'));
@@ -83,6 +84,10 @@ var console_users = function() {
 
 var console_media = function() {
     render(MediaConsole);
+};
+
+var detail_component = function() {
+    render(DetailComponent);
 };
 
 var detail_strategy = function() {
@@ -162,10 +167,10 @@ var routes = {
   '/admin/collections': console_collections,
   '/admin/users': console_users,
   '/admin/media': console_media,
-  '/strategy/:id': detail_strategy,
-  '/product/:id': detail_product,
+  '/strategy/:id': detail_component,
+  '/product/:id': detail_component,
   '/living-system/:id': detail_livingsystems,
-  '/phenomenon/:id': detail_phenomenon,
+  '/phenomenon/:id': detail_component,
   '/condition/:id': detail_condition,
   '/source/:id': detail_source,
   '/researcher/:id': detail_researcher,
