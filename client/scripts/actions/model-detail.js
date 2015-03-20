@@ -13,6 +13,8 @@ Constants = require('../constants/model'),
 
 routeActions = require('./routes');
 
+// this doesn't work:
+
 var entity = window.location.pathname.split('/');
 console.log(entity);
 var route;
@@ -39,14 +41,14 @@ var initialize = function(initialData) {
 * the masterid of the object
 */
 
-var fetch = function(masterid) {
+var fetch = function(masterid,entity) {
     // do the async fetch with masterid
     var self = this;
     /*Dispatcher.handleViewAction({
 	actionType: Constants.FETCH_STRATEGY
     });*/
     request
-    .get('/api/v2/'+route+'/'+masterid+'?expand=true')
+    .get('/api/v2/'+entity+'/'+masterid+'?expand=true')
     .type('json')
     .end(function(res) {
       if (res.ok) {
@@ -105,7 +107,6 @@ var commit = function(fields) {
     });
     var self = this;
     var masterid = store.getMasterid();
-    var route = store.getEntityType();
     var updatedFields = store.getUpdatedFields();
     var changedData = fields ? _.pick(updatedFields, fields) : updatedFields;
     var model = store.get();
