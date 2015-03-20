@@ -89,8 +89,8 @@ var DetailComponent = React.createClass({
       },
 
       componentDidMount: function(){
-          if(this.state.masterid) {
-              actions.fetch(this.state.masterid, this.state.routeNamePlural);
+          if(this.props.masterid) {
+              actions.fetch(this.props.type,this.props.masterid);
           } else {
               actions.create();
           }
@@ -116,7 +116,7 @@ var DetailComponent = React.createClass({
       },
       editCancel: function(e) {
           e.preventDefault();
-          actions.fetch(this.state.masterid, this.state.routeNamePlural);
+          actions.fetch(this.props.type, this.props.masterid);
           this.setState({editable: false});
       },
       editFinish: function(e) {
@@ -126,7 +126,7 @@ var DetailComponent = React.createClass({
       },
       onDelete: function() {
           var r = confirm('Do you really want to delete this record?');
-          if(r) {actions.del(this.state.masterid, this.state.routeNamePlural);}
+          if(r) {actions.del(this.props.type, this.props.masterid);}
       },
     render: function() {
       console.log(this.state);
@@ -139,8 +139,8 @@ var DetailComponent = React.createClass({
               ) : (
                 <div>
                 <Template
-                    masterid={this.state.masterid !== 'new' ? this.state.masterid : null}
-                    routenameplural={this.state.routeNamePlural}
+                    masterid={this.props.masterid !== 'new' ? this.props.masterid : null}
+                    type={this.props.type}
                     data={this.state.object}
                     loaded={this.state.loaded}
                     user={this.state.user}
