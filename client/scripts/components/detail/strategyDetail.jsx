@@ -1,9 +1,9 @@
 'use strict';
 
 var React = require('react'),
-store = require('../../stores/strategy.js'),
+store = require('../../stores/model-detail'),
 accountStore = require('../../stores/accounts'),
-actions = require('../../actions/strategy.js');
+actions = require('../../actions/model-detail');
 
 var TextArea = require('./common/textarea.jsx');
 var DataTable = require('./common/datatable.jsx');
@@ -43,10 +43,11 @@ var StrategyDetail = React.createClass({
 	    loaded: store.getLoaded(),
 	    masterid: this.props.masterid
 	});
+
     },
     componentDidMount: function() {
 	if(this.props.masterid) {
-	    actions.fetch(this.props.masterid);
+	    actions.fetch(this.props.masterid,'strategies');
 	} else {
 	    actions.create();
 	}
@@ -71,7 +72,7 @@ var StrategyDetail = React.createClass({
     },
     editCancel: function(e) {
         e.preventDefault();
-	actions.fetch(this.props.masterid);
+	actions.fetch(this.props.masterid,'strategies');
         this.setState({editable: false});
     },
     editFinish: function(e) {
@@ -86,7 +87,10 @@ var StrategyDetail = React.createClass({
     render: function() {
         var detail = this.state.object;
 	var entityName = 'Biological Strategy';
-	var splitLegacyTitle = detail.name.split(': ');
+	var splitLegacyTitle;
+    if(detail.name) {
+        splitLegacyTitle = detail.name.split(': ');
+    }
 	//var secondaryLink = '../living-system/'+ (detail.living_systems ? detail.living_systems[0].masterid : '');
 	var secondaryLink = '';
     var default_avatar = 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/10383663_869350803096314_2369845013213041061_n.png?oh=2c010ce055331caa73a9506795239fd1&oe=55BDD82A&__gda__=1433772443_f5c43498047b8193dccc0a5554ba6ed1';

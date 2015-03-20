@@ -6,16 +6,6 @@ var routeActions = require('./actions/routes');
 var IndexPage = React.createFactory(require('./components/index.jsx'));
 
 var AdminList = React.createFactory(require('./components/admin/adminlist.jsx'));
-var ProductsConsole = React.createFactory(require('./components/admin/products.jsx'));
-var LivingSystemsConsole = React.createFactory(require('./components/admin/livingsystems.jsx'));
-var PhenomenaConsole = React.createFactory(require('./components/admin/phenomena.jsx'));
-var ConditionsConsole = React.createFactory(require('./components/admin/conditions.jsx'));
-var SourcesConsole = React.createFactory(require('./components/admin/sources.jsx'));
-var ResearchersConsole = React.createFactory(require('./components/admin/researchers.jsx'));
-var CollectionsConsole = React.createFactory(require('./components/admin/collections.jsx'));
-var UsersConsole = React.createFactory(require('./components/admin/users.jsx'));
-var MediaConsole = React.createFactory(require('./components/admin/media.jsx'));
-
 
 var StrategyDetail = React.createFactory(require('./components/detail/strategy.jsx'));
 var ProductDetail = React.createFactory(require('./components/detail/product.jsx'));
@@ -50,41 +40,6 @@ var admin_list = function() {
     render(AdminList);
 };
 
-var console_products = function() {
-    render(ProductsConsole);
-};
-
-var console_livingsystems = function() {
-    render(LivingSystemsConsole);
-};
-
-var console_phenomena = function() {
-    render(PhenomenaConsole);
-};
-
-var console_conditions = function() {
-    render(ConditionsConsole);
-};
-
-var console_sources = function() {
-    render(SourcesConsole);
-};
-
-var console_researchers = function() {
-    render(ResearchersConsole);
-};
-
-var console_collections = function() {
-    render(CollectionsConsole);
-};
-
-var console_users = function() {
-    render(UsersConsole);
-};
-
-var console_media = function() {
-    render(MediaConsole);
-};
 
 var detail_strategy = function() {
     render(StrategyDetail);
@@ -157,15 +112,15 @@ var routes = {
   '/admin/strategies': admin_list,
 
 
-  '/admin/products': console_products,
-  '/admin/living-systems': console_livingsystems,
-  '/admin/phenomena': console_phenomena,
-  '/admin/conditions': console_conditions,
-  '/admin/sources': console_sources,
-  '/admin/researchers': console_researchers,
-  '/admin/collections': console_collections,
-  '/admin/users': console_users,
-  '/admin/media': console_media,
+  '/admin/products': admin_list,
+  '/admin/living-systems': admin_list,
+  '/admin/phenomena': admin_list,
+  '/admin/conditions': admin_list,
+  '/admin/sources': admin_list,
+  '/admin/researchers': admin_list,
+  '/admin/collections': admin_list,
+  '/admin/users': admin_list,
+  '/admin/media': admin_list,
   '/strategy/:id': detail_strategy,
   '/product/:id': detail_product,
   '/living-system/:id': detail_livingsystems,
