@@ -8,62 +8,44 @@ var React = require('react'),
 accountStore = require('../../stores/accounts'),
 
 ConsoleLayout = require('./consolelayout.jsx'),
-GriddleComponent = require('./griddle_component.jsx');
+GriddleComponent = require('./griddle_component.jsx'),
+
+CollectionList = require('./collection'),
+ContextList = require('./context'),
+LivingSystemList = require('./livingsystem'),
+DesignedSystemList = require('./designedsystem'),
+MediaList = require('./media'),
+PhenomenonList = require('./phenomenon'),
+ProductList = require('./product'),
+ResearcherList = require('./researcher'),
+SourceList = require('./source'),
+StrategyList = require('./strategy'),
+UserList = require('./user');
 
 var getState = function() {
     return (
     {
-    user: accountStore.get()
+    user: accountStore.get(),
+    entityList: StrategyList
     }
     );
 };
 
-var lists = [
-    {
-        'list_name' : 'strategy',
-        'plural_name' : 'Biological Strategies',
-        'singular_name' : 'Biological Strategy',
-        'store' : require('../../stores/admin/strategies'),
-        'actions' : require('../../actions/strategies'),
-        'columns' : [
-            {columnName:'masterid', displayName:'id', type:'hidden'},
-            {columnName:'name', displayName:'Name', type:'link'},
-            {columnName:'description', displayName:'Description', type:'longtext'},
-            {columnName:'mechanisms', displayName:'Mechanisms', type:'list'},
-            {columnName:'outcomes', displayName:'Outcomes', type:'list'},
-            {columnName:'addedby', displayName:'Added By', type:'text'},
-            {columnName:'timestamp', displayName:'Date Modified', type:'date'},
-            {columnName:'is_deleted', displayName:'Archived', type:'boolean'},
-            {columnName:'flag_text', displayName:'Text', type:'boolean'},
-            {columnName:'flag_tags', displayName:'Tags', type:'boolean'},
-            {columnName:'flag_media', displayName:'Media', type:'boolean'}
-        ],
-        'initialSort' : [
-            'timestamp',
-            false
-        ],
-        'thumb' : [
-            'media',
-            'media_id',
-            'media_entity'
-        ]
-    }
-];
-
-var StrategyConsole = React.createClass({
+var AdminList = React.createClass({
     getInitialState: function() {
         return (
             getState()
         );
     },
     render: function() {
+        var entityList=this.state.entityList;
         return (
             /* jshint ignore:start */
-            <ConsoleLayout plural={lists[0].plural_name} singular={lists[0].singular_name}>
-              <GriddleComponent store={lists[0].store} actions={lists[0].actions}
-                columns={lists[0].columns}
-                thumb={lists[0].thumb}
-                initialSort={lists[0].initialSort}
+            <ConsoleLayout plural={entityList.plural_name} singular={entityList.singular_name}>
+              <GriddleComponent store={entityList.store} actions={entityList.actions}
+                columns={entityList.columns}
+                thumb={entityList.thumb}
+                initialSort={entityList.initialSort}
                 credentials={this.state.user.role === 'admin' ? true : false}
                  />
             </ConsoleLayout>
@@ -72,4 +54,4 @@ var StrategyConsole = React.createClass({
     }
 });
 
-module.exports = {strategy_list:StrategyConsole};
+module.exports = AdminList;
