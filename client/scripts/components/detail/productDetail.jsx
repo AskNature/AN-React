@@ -30,12 +30,14 @@ var RelationshipList = require('./common/relationshiplist.jsx');
 
 /** Gets incoming information from the store */
 
-var store = require('../../stores/product');
+var store = require('../../stores/model-detail');
 var userStore = require('../../stores/accounts');
 
 /** Sends outgoing requests to an action */
 
-var actions = require('../../actions/product');
+var actions = require('../../actions/model-detail');
+
+var routeNamePlural = 'products';
 
 /** getState can be called to get state updates from the store.
 * initialItems = entire list that remains static
@@ -67,7 +69,7 @@ var ProductDetail = React.createClass({
 
   componentDidMount: function(){
         if(this.props.masterid) {
-            actions.fetch(this.props.masterid);
+            actions.fetch(this.props.masterid, routeNamePlural);
         } else {
             actions.create();
         }
@@ -92,21 +94,21 @@ var ProductDetail = React.createClass({
   },
   editCancel: function(e) {
       e.preventDefault();
-      actions.fetch(this.props.masterid);
+      actions.fetch(this.props.masterid, routeNamePlural);
       this.setState({editable: false});
   },
   editFinish: function(e) {
       e.preventDefault();
-      actions.commit();
+      actions.commit(routeNamePlural);
       this.setState({editable: false});
   },
   onDelete: function() {
       var r = confirm('Do you really want to delete this record?');
-      if(r) {actions.del(this.props.masterid);}
+      if(r) {actions.del(this.props.masterid, routeNamePlural);}
   },
   render: function() {
     var routeName = 'product';
-    var routeNamePlural = 'products';
+
     var entityName = 'Inspired Solution';
     var detail = this.state.object;
     var descriptionTitle = '<a href="' + detail.company_website + '" target="_blank">' + detail.company + '</a>';

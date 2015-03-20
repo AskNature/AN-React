@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react'),
+var React = require('react/addons'),
 
 Griddle = require('griddle-react'),
 _ = require('lodash'),
@@ -291,36 +291,67 @@ var GriddleComponent = React.createClass({
 
       return (
         <div>
-          <Input type='text' placeholder='Filter List...' value={this.state.filter} onChange={this.setFilter} />
-          <a onClick={this.resetFilterSort}>Reset</a><br />
-	  <span>{this.state.selectedItems.length} item{this.state.selectedItems.length === 1 ? '' : 's'} selected. <a onClick={this.deleteSelectedItems}>Delete these items.</a></span>
-          <div className='table-responsive'>
-	           <Griddle useExternal={true}
-               externalSetPage={this.setPage}
-               enableSort={true}
-               columns={cols}
-               externalSetPageSize={this.setPageSize}
-               externalMaxPage={this.state.maxPages}
-               externalChangeSort={this.changeSort}
-               externalSetFilter={this.setFilter}
-               externalCurrentPage={this.state.currentPage}
-               results={this.state.results}
-               tableClassName='table table-striped table-hover'
-	             columnMetadata={meta}
-               externalSortColumn={this.state.externalSortColumn}
-               externalSortAscending={this.state.externalSortAscending}
-               useGriddleStyles={false}
-               showSettings={true}
-               sortAscendingComponent={<span> <Glyphicon glyph="sort-by-alphabet" /></span>}
-               sortDescendingComponent={<span> <Glyphicon glyph="sort-by-alphabet-alt" /></span>}
-               nextIconComponent={<span> <Glyphicon glyph="chevron-right" /></span>}
-               previousIconComponent={<span><Glyphicon glyph="chevron-left" /> </span>}
-               noDataMessage={"No data could be found."}
-               externalLoadingComponent={<DataLoader />}
- />
+          <Input
+            type='text'
+            placeholder='Filter List...'
+            value={this.state.filter}
+            onChange={this.setFilter} />
+          <a onClick={this.resetFilterSort}>Reset</a>
+          <br />
+
+          <span>
+            {this.state.selectedItems.length} item{this.state.selectedItems.length === 1 ? '' : 's'} selected. <a onClick={this.deleteSelectedItems}>
+            Delete these items.
+          </a>
+        </span>
+        <div className='table-responsive'>
+
+          <Griddle
+            useExternal={true}
+            externalSetPage={this.setPage}
+            enableSort={true}
+            columns={cols}
+            externalSetPageSize={this.setPageSize}
+            externalMaxPage={this.state.maxPages}
+            externalChangeSort={this.changeSort}
+            externalSetFilter={this.setFilter}
+            externalCurrentPage={this.state.currentPage}
+            results={this.state.results}
+            tableClassName='table table-striped table-hover'
+            columnMetadata={meta}
+            externalSortColumn={this.state.externalSortColumn}
+            externalSortAscending={this.state.externalSortAscending}
+            useGriddleStyles={false}
+            showSettings={true}
+            sortAscendingComponent={
+              <span>
+                <Glyphicon glyph="sort-by-alphabet" />
+              </span>
+            }
+            sortDescendingComponent={
+              <span>
+                <Glyphicon glyph="sort-by-alphabet-alt" />
+              </span>
+            }
+            nextIconComponent={
+              <span>
+                <Glyphicon glyph="chevron-right" />
+              </span>
+            }
+            previousIconComponent={
+              <span>
+                <Glyphicon glyph="chevron-left" />
+              </span>
+            }
+            noDataMessage={"No data could be found."}
+            externalLoadingComponent={
+              <DataLoader />
+            }
+            />
           </div>
-	       </div>
-       );
+
+        </div>
+        );
     },
     // Event handler for 'change' events coming from store mixin
     _onChange: function() {
