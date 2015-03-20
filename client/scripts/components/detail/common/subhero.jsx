@@ -5,6 +5,9 @@
 
 var React = require('react'),
 
+TextField = require('../../modules/textfield.jsx'),
+Link = require('../../modules/link.jsx'),
+
 Grid = require('react-bootstrap').Grid,
 Row = require('react-bootstrap').Row,
 Col = require('react-bootstrap').Col,

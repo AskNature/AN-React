@@ -129,7 +129,7 @@ var routes = {
   '/source/:id': detail_source,
   '/researcher/:id': detail_researcher,
   '/collection/:id': detail_collection,
-  '/user/:id': detail_user,
+  '/user/:id': detail_component,
   '/media/:id': detail_component,
   '/login': login,
   '/signup': signup,

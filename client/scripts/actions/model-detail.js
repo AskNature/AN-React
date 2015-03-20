@@ -10,6 +10,7 @@ _ = require('lodash'),
 
 store = require('../stores/model-detail'),
 Constants = require('../constants/model'),
+Defaults = require('../constants/defaults_compiled.js'),
 
 routeActions = require('./routes');
 
@@ -150,6 +151,78 @@ var create = function() {
     });
 };
 
+/**
+* setList is called by getList and sends a request to the dispatcher.
+*/
+
+var setList = function(focus) {
+  Dispatcher.handleViewAction({
+    actionType: Constants.GET_ALL,
+    focus: assign({}, Defaults, focus)
+  });
+};
+
+/**
+* getList is called by the strategytable component. It defines the URI
+* that the router uses to pass a request to the controller.
+*/
+
+var getList = function(callback) {
+  var self = this;
+  request
+  .get('/api/'+route)
+  .type('json')
+  .end(function(res) {
+    if (res.ok) {
+      if (res) {
+        var listData = res.body;
+        self.setList(listData);
+      }
+      if (callback && callback.success) {
+        callback.success(res);
+      }
+    }
+    else {
+      if (callback && callback.error) {
+        callback.error(res);
+      }
+    }
+
+    if (callback && callback.complete) {
+      callback.complete(res);
+    }
+  });
+};
+
+var getListPaginated = function(index, size, sortCol, asc, filter, callback) {
+  var self = this;
+  var getString = '/api/'+route+'?offset='+index*size+'&limit='+size;
+  if (sortCol) { getString += '&order='+(asc ? '+' : '-')+sortCol; }
+  if (filter) { getString += '&filter='+filter; }
+  request.get(getString)
+  .type('json')
+  .end(function(res) {
+    if (res.ok) {
+      if (res) {
+        var listData = res.body;
+        self.setList(listData);
+      }
+      if (callback && callback.success) {
+        callback.success(res);
+      }
+    }
+    else {
+      if (callback && callback.error) {
+        callback.error(res);
+      }
+    }
+
+    if (callback && callback.complete) {
+      callback.complete(res);
+    }
+  });
+};
+
 module.exports = {
     initialize: initialize,
     fetch: fetch,
@@ -158,5 +231,8 @@ module.exports = {
     addRelationship: addRelationship,
     commit: commit,
     del: del,
-    create: create
+    create: create,
+    setList: setList,
+    getList: getList,
+    getListPaginated: getListPaginated
 };

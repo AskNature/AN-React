@@ -18,7 +18,8 @@ var actions = keyMirror({
     ADD_RELATIONSHIP: null,
     REMOVE_RELATIONSHIP: null,
     DELETE_SUCCESS: null,
-    CREATE: null
+    CREATE: null,
+    GET_ALL: null
 });
 
 module.exports = actions;

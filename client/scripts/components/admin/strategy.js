@@ -4,8 +4,6 @@ var List = {
 
     'plural_name' : 'Biological Strategies',
     'singular_name' : 'Biological Strategy',
-    'store' : require('../../stores/admin/strategies'),
-    'actions' : require('../../actions/strategies'),
     'columns' : [
         {columnName:'masterid', displayName:'id', type:'hidden'},
         {columnName:'name', displayName:'Name', type:'link'},

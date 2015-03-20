@@ -52,6 +52,7 @@ var Template = React.createClass({
           first='Concept'
           description={data.company}
           descriptionlink={data.company_website}
+          credentials={this.props.user.role === 'admin' ? true : false}
           editable={this.props.editable}
           store={this.props.store}
           actions={this.props.actions}
