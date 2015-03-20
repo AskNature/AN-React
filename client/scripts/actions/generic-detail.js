@@ -16,6 +16,7 @@ routeActions = require('./routes');
 
 // this doesn't work:
 
+var getEntity = function() {
 var entity = window.location.pathname.split('/');
 console.log(entity);
 var route;
@@ -23,10 +24,10 @@ if(entity[1] === 'product') {
     route = 'products';
 } else if(entity[1] === 'strategy') {
     route = 'strategies';
-} else if(entity[1] === 'admin') {
-   route = entity[2];
 }
 
+return route;
+};
 /**
 * initialize begins the load of a detail instance. It takes
 * seed data and either empties the store if the data is null or
@@ -51,7 +52,7 @@ var fetch = function(masterid) {
 actionType: Constants.FETCH_STRATEGY
     });*/
     request
-    .get('/api/v2/'+route+'/'+masterid+'?expand=true')
+    .get('/api/v2/'+getEntity()+'/'+masterid+'?expand=true')
     .type('json')
     .end(function(res) {
       if (res.ok) {
@@ -118,7 +119,7 @@ fields: fields
 dataToSend[field] = model[field];
     });
     request
-    .post('/api/v2/'+route+'/'+masterid)
+    .post('/api/v2/'+getEntity()+'/'+masterid)
     .send(dataToSend)
     .end(function(res) {
         if(res.ok) {
@@ -139,10 +140,10 @@ error: res
 
 var del = function(masterid) {
     request
-    .del('/api/v2/'+route+'/'+masterid)
+    .del('/api/v2/'+getEntity()+'/'+masterid)
     .end(function(res) {
 if(res.ok) {
-   routeActions.setRoute('/admin/'+entity);
+   routeActions.setRoute('/admin/'+getEntity());
 }
     });
 };
