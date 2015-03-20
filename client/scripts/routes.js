@@ -8,7 +8,7 @@ var IndexPage = React.createFactory(require('./components/index.jsx'));
 var AdminList = React.createFactory(require('./components/admin/adminlist.jsx'));
 
 var StrategyDetail = React.createFactory(require('./components/detail/strategy.jsx'));
-var ProductDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
+var DetailComponent = React.createFactory(require('./components/detail/component-detail.jsx'));
 var LivingSystemsDetail = React.createFactory(require('./components/detail/livingsystem.jsx'));
 var PhenomenonDetail = React.createFactory(require('./components/detail/phenomenon.jsx'));
 var ConditionDetail = React.createFactory(require('./components/detail/condition.jsx'));
@@ -45,8 +45,8 @@ var detail_strategy = function() {
     render(StrategyDetail);
 };
 
-var detail_product = function() {
-    render(ProductDetail);
+var detail_component = function() {
+    render(DetailComponent);
 };
 
 var detail_livingsystems = function() {
@@ -121,16 +121,16 @@ var routes = {
   '/admin/collections': admin_list,
   '/admin/users': admin_list,
   '/admin/media': admin_list,
-  '/strategy/:id': detail_strategy,
-  '/product/:id': detail_product,
-  '/living-system/:id': detail_livingsystems,
+  '/strategy/:id': detail_component,
+  '/product/:id': detail_component,
+  '/living-system/:id': detail_component,
   '/phenomenon/:id': detail_phenomenon,
   '/condition/:id': detail_condition,
   '/source/:id': detail_source,
   '/researcher/:id': detail_researcher,
   '/collection/:id': detail_collection,
   '/user/:id': detail_user,
-  '/media/:id': detail_media,
+  '/media/:id': detail_component,
   '/login': login,
   '/signup': signup,
   '/settings': account_settings,

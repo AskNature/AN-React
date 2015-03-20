@@ -1,6 +1,3 @@
-/**
-* Product detail (component)
-*/
 'use strict';
 
 var React = require('react'),
@@ -18,14 +15,11 @@ ButtonList = require('./common/edgelists.jsx'),
 Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
-Label = require('react-bootstrap/Label'),
-Col = require('react-bootstrap/Col'),
 Panel = require('react-bootstrap/Panel'),
 PanelGroup = require('react-bootstrap/PanelGroup'),
+Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
-Grid = require('react-bootstrap/Grid'),
-Table = require('react-bootstrap/Table'),
-Input = require('react-bootstrap/Input');
+Grid = require('react-bootstrap/Grid');
 
 var Template = React.createClass({
 

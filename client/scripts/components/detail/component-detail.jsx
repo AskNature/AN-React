@@ -9,13 +9,46 @@ actions = require('../../actions/model-detail'),
 store = require('../../stores/model-detail'),
 accountStore = require('../../stores/accounts'),
 
-DefaultLayout = require('../layouts/default.jsx'),
-Template = require('./product-detail.jsx');
+DefaultLayout = require('../layouts/default.jsx');
 
 // Temporary way to set name that gets passed to actions:
-var routeNamePlural = 'products';
 
-var masterid = window.location.pathname.split('/')[2];
+var path = window.location.pathname.split('/');
+var Template, routeNamePlural;
+
+if(path[1] === 'strategy') {
+  Template = require('./detail-strategy.jsx');
+  routeNamePlural = 'strategies';
+} else if(path[1] === 'product') {
+  Template = require('./detail-product.jsx');
+  routeNamePlural = 'products';
+} else if(path[1] === 'phenomenon') {
+  Template = require('./detail-phenomenon.jsx');
+  routeNamePlural = 'phenomena';
+} else if(path[1] === 'user') {
+  Template = require('./detail-user.jsx');
+  routeNamePlural = 'users';
+} else if(path[1] === 'collection') {
+  Template = require('./detail-collection.jsx');
+  routeNamePlural = 'collections';
+} else if(path[1] === 'condition') {
+  Template = require('./detail-condition.jsx');
+  routeNamePlural = 'conditions';
+} else if(path[1] === 'living-system') {
+  Template = require('./detail-livingsystem.jsx');
+  routeNamePlural = 'livingsystems';
+} else if(path[1] === 'media') {
+  Template = require('./detail-media.jsx');
+  routeNamePlural = 'media';
+} else if(path[1] === 'researcher') {
+  Template = require('./detail-researcher.jsx');
+  routeNamePlural = 'researcher';
+} else if(path[1] === 'source') {
+  Template = require('./detail-source.jsx');
+  routeNamePlural = 'sources';
+}
+
+var masterid = path[2];
 
 var getState = function() {
   return {
@@ -84,11 +117,18 @@ var DetailComponent = React.createClass({
 
         return (
             <DefaultLayout>
+              {!this.state.loaded ? (
+                <div>
+                  {this.state.error ? 'Error' : 'Loading'}
+                </div>
+              ) : (
+                <div>
                 <Template
                     masterid={masterid !== 'new' ? masterid : null}
                     routenameplural={routeNamePlural}
                     data={this.state.object}
-                    userrole={this.state.user.role}
+                    loaded={this.state.loaded}
+                    user={this.state.user}
                     editable={this.state.editable}
                     store={store}
                     actions={actions}
@@ -97,6 +137,8 @@ var DetailComponent = React.createClass({
                     onDelete={this.onDelete}
                     onRelationshipAdd={this.onRelationshipAdd}
                     onRelationshipRemove={this.onRelationshipRemove} />
+                </div>
+              )}
            </DefaultLayout>
         );
     },
