@@ -124,7 +124,7 @@ var routes = {
   '/strategy/:id': detail_component,
   '/product/:id': detail_component,
   '/living-system/:id': detail_component,
-  '/phenomenon/:id': detail_phenomenon,
+  '/phenomenon/:id': detail_component,
   '/condition/:id': detail_condition,
   '/source/:id': detail_source,
   '/researcher/:id': detail_researcher,
