@@ -5,8 +5,8 @@
 
 var React = require('react'),
 
-strategySt = require('../../stores/admin/strategies'),
-strategyAc = require('../../actions/strategies'),
+strategySt = require('../../stores/admin/generic-list'),
+strategyAc = require('../../actions/generic-list'),
 accountStore = require('../../stores/accounts'),
 
 ConsoleLayout = require('./consolelayout.jsx'),
