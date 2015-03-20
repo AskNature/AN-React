@@ -22,59 +22,12 @@ SourceDetail = require('./detail-source.jsx'),
 StrategyDetail = require('./detail-strategy.jsx'),
 UserDetail = require('./detail-user.jsx');
 
-
-var getTemplate = function() {
-  var path = window.location.pathname.split('/');
-  var Template, routeNamePlural;
-  if(path[1] === 'strategy') {
-    Template = StrategyDetail;
-    routeNamePlural = 'strategies';
-  } else if(path[1] === 'product') {
-    Template = ProductDetail;
-    routeNamePlural = 'products';
-  } else if(path[1] === 'phenomenon') {
-    Template = PhenomenonDetail;
-    routeNamePlural = 'phenomena';
-  } else if(path[1] === 'user') {
-    Template = UserDetail;
-    routeNamePlural = 'users';
-  } else if(path[1] === 'collection') {
-    Template = CollectionDetail;
-    routeNamePlural = 'collections';
-  } else if(path[1] === 'condition') {
-    Template = ContextDetail;
-    routeNamePlural = 'conditions';
-  } else if(path[1] === 'living-system') {
-    Template = LivingSystemDetail;
-    routeNamePlural = 'livingsystems';
-  } else if(path[1] === 'media') {
-    Template = MediaDetail;
-    routeNamePlural = 'media';
-  } else if(path[1] === 'researcher') {
-    Template = ResearcherDetail;
-    routeNamePlural = 'researcher';
-  } else if(path[1] === 'source') {
-    Template = SourceDetail;
-    routeNamePlural = 'sources';
-  }
-  return ({
-    masterid: path[2],
-    activeTemplate: Template,
-    routeNamePlural: routeNamePlural
-  });
-};
-
-var Template = getTemplate().activeTemplate;
-
 var getState = function() {
   return {
     object: store.get(),
     loaded: store.getLoaded(),
     error: store.getError(),
-    user: accountStore.get(),
-    masterid: getTemplate().masterid,
-    routeNamePlural: getTemplate().routeNamePlural,
-    editable: !getTemplate().masterid ? true : false
+    user: accountStore.get()
   };
 };
 
@@ -130,6 +83,28 @@ var DetailComponent = React.createClass({
       },
     render: function() {
       console.log(this.state);
+      var Template;
+      if(this.props.type === 'strategies') {
+        Template = StrategyDetail;
+      } else if(this.props.type === 'products') {
+        Template = ProductDetail;
+      } else if(this.props.type === 'phenomena') {
+        Template = PhenomenonDetail;
+      } else if(this.props.type === 'users') {
+        Template = UserDetail;
+      } else if(this.props.type === 'collections') {
+        Template = CollectionDetail;
+      } else if(this.props.type === 'conditions') {
+        Template = ContextDetail;
+      } else if(this.props.type === 'living-systems') {
+        Template = LivingSystemDetail;
+      } else if(this.props.type === 'media') {
+        Template = MediaDetail;
+      } else if(this.props.type === 'researchers') {
+        Template = ResearcherDetail;
+      } else if(this.props.type === 'sources') {
+        Template = SourceDetail;
+      }
         return (
             <DefaultLayout>
               {!this.state.loaded ? (

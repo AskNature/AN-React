@@ -86,11 +86,10 @@ var console_media = function() {
 
 var detail_strategy = function(id) {
     render(DetailComponent, {masterid: id, type: 'strategies'});
-
 };
 
-var detail_product = function() {
-    render(ProductDetail);
+var detail_product = function(id) {
+    render(DetailComponent, {masterid: id, type: 'products'});
 };
 
 var detail_livingsystems = function() {
