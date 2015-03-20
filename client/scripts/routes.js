@@ -16,7 +16,7 @@ var UsersConsole = React.createFactory(require('./components/admin/users.jsx'));
 var MediaConsole = React.createFactory(require('./components/admin/media.jsx'));
 
 
-var StrategyDetail = React.createFactory(require('./components/detail/strategy.jsx'));
+var StrategyDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
 var ProductDetail = React.createFactory(require('./components/detail/product.jsx'));
 var LivingSystemsDetail = React.createFactory(require('./components/detail/livingsystem.jsx'));
 var PhenomenonDetail = React.createFactory(require('./components/detail/phenomenon.jsx'));

@@ -14,20 +14,6 @@ Defaults = require('../constants/generic-defaults'),
 
 routeActions = require('./routes');
 
-// this doesn't work:
-
-var getEntity = function() {
-var entity = window.location.pathname.split('/');
-console.log(entity);
-var route;
-if(entity[1] === 'product') {
-    route = 'products';
-} else if(entity[1] === 'strategy') {
-    route = 'strategies';
-}
-
-return route;
-};
 /**
 * initialize begins the load of a detail instance. It takes
 * seed data and either empties the store if the data is null or
