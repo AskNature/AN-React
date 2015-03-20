@@ -46,7 +46,7 @@ var StrategyDetail = React.createClass({
     },
     componentDidMount: function() {
 	if(this.props.masterid) {
-	    actions.fetch(this.props.masterid);
+	    actions.fetch(this.props.type, this.props.masterid);
 	} else {
 	    actions.create();
 	}
@@ -71,7 +71,7 @@ var StrategyDetail = React.createClass({
     },
     editCancel: function(e) {
         e.preventDefault();
-	actions.fetch(this.props.masterid);
+	actions.fetch(this.props.type, this.props.masterid);
         this.setState({editable: false});
     },
     editFinish: function(e) {
@@ -81,7 +81,7 @@ var StrategyDetail = React.createClass({
     },
     onDelete: function() {
         var r = confirm('Do you really want to delete this record?');
-        if(r) {actions.del(this.props.masterid);}
+        if(r) {actions.del(this.props.type, this.props.masterid);}
     },
     render: function() {
         var detail = this.state.object;

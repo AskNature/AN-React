@@ -33,9 +33,10 @@ if(entity[1] === 'product') {
 * fills it with the seed data (from a list or from a dehydrated store).
 */
 
-var initialize = function(initialData) {
+var initialize = function(type, initialData) {
     Dispatcher.handleViewAction({
-actionType: Constants.INITIALIZE
+actionType: Constants.INITIALIZE,
+entityType: type
     });
 };
 
@@ -44,14 +45,14 @@ actionType: Constants.INITIALIZE
 * the masterid of the object
 */
 
-var fetch = function(masterid) {
+var fetch = function(type, masterid) {
     // do the async fetch with masterid
     var self = this;
     /*Dispatcher.handleViewAction({
 actionType: Constants.FETCH_STRATEGY
     });*/
     request
-    .get('/api/v2/'+route+'/'+masterid+'?expand=true')
+    .get('/api/v2/'+type+'/'+masterid+'?expand=true')
     .type('json')
     .end(function(res) {
       if (res.ok) {
@@ -59,13 +60,15 @@ actionType: Constants.FETCH_STRATEGY
           var itemData = res.body;
             Dispatcher.handleViewAction({
 actionType: Constants.FETCH_SUCCESS,
+entityType: type,
 data: itemData
    });
         }
       }
       else {
  Dispatcher.handleViewAction({
-     actionType: Constants.FETCH_ERROR
+     actionType: Constants.FETCH_ERROR,
+     entityType: type
  });
       }
     });
@@ -110,6 +113,7 @@ fields: fields
     });
     var self = this;
     var masterid = store.getMasterid();
+    var type = store.getEntityType();
     var updatedFields = store.getUpdatedFields();
     var changedData = fields ? _.pick(updatedFields, fields) : updatedFields;
     var model = store.get();
@@ -118,7 +122,7 @@ fields: fields
 dataToSend[field] = model[field];
     });
     request
-    .post('/api/v2/'+route+'/'+masterid)
+    .post('/api/v2/'+type+'/'+masterid)
     .send(dataToSend)
     .end(function(res) {
         if(res.ok) {
@@ -137,9 +141,9 @@ error: res
     });
 };
 
-var del = function(masterid) {
+var del = function(type,masterid) {
     request
-    .del('/api/v2/'+route+'/'+masterid)
+    .del('/api/v2/'+type+'/'+masterid)
     .end(function(res) {
 if(res.ok) {
    routeActions.setRoute('/admin/'+entity);
