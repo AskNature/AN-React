@@ -33,7 +33,7 @@ var Template = React.createClass({
         <AdminBar
           masterid={this.props.masterid}
           routename={routeNameSingle}
-          pluralroute={this.props.routeNamePlural}
+          pluralroute={this.props.type}
           entityname={entityName} />
         <CreatorMast
           img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg"

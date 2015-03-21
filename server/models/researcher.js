@@ -3,7 +3,7 @@
 
 var Model = require('./model.js');
 
-var entityName = 'Sources';
+var entityName = 'Experts';
 
 var fields = ['name', 'institution', 'timestamp', 'special_text', 'revision', 'status', 'timestamp', 'type', 'people', 'city', 'state', 'province', 'country', 'postal_code', 'url'];
 

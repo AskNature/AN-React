@@ -92,37 +92,33 @@ var detail_product = function(id) {
     render(DetailComponent, {masterid: id, type: 'products'});
 };
 
-var detail_livingsystems = function() {
-    render(LivingSystemsDetail);
+var detail_livingsystems = function(id) {
+    render(DetailComponent, {masterid: id, type: 'living-systems'});
 };
 
-var detail_phenomenon = function() {
-    render(PhenomenonDetail);
+var detail_phenomenon = function(id) {
+    render(DetailComponent, {masterid: id, type: 'phenomena'});
 };
 
-var detail_condition = function() {
-    render(ConditionDetail);
+var detail_condition = function(id) {
+    render(DetailComponent, {masterid: id, type: 'conditions'});
 };
 
 var detail_source = function(id) {
-    render(SourceDetail, {masterid: id, type: 'sources'});
+    render(DetailComponent, {masterid: id, type: 'sources'});
 };
 
-var detail_researcher = function() {
-    render(ResearcherDetail);
-};
+var detail_researcher = function(id) {
+    render(DetailComponent, {masterid: id, type: 'researchers'});};
 
-var detail_collection = function() {
-    render(CollectionDetail);
-};
+var detail_collection = function(id) {
+    render(DetailComponent, {masterid: id, type: 'collections'});};
 
-var detail_user = function() {
-    render(UserDetail);
-};
+var detail_user = function(id) {
+    render(DetailComponent, {masterid: id, type: 'users'});};
 
-var detail_media = function() {
-    render(MediaDetail);
-};
+var detail_media = function(id) {
+    render(DetailComponent, {masterid: id, type: 'media'});};
 
 var login = function() {
     render(Login);
