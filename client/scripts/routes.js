@@ -37,8 +37,8 @@ var AccountReset = React.createFactory(require('./components/account/reset.jsx')
 var Infinite = React.createFactory(require('./components/demo/infinite.jsx'));
 
 
-var render = function(Page) {
-    React.render(new Page(), document.getElementById('app-wrapper'));
+var render = function(Page, props) {
+    React.render(new Page(props), document.getElementById('app-wrapper'));
 };
 
 var index = function() {
@@ -85,8 +85,8 @@ var console_media = function() {
     render(MediaConsole);
 };
 
-var detail_strategy = function() {
-    render(StrategyDetail);
+var detail_strategy = function(id) {
+    render(StrategyDetail, {masterid: id, type: 'strategies'});
 };
 
 var detail_product = function() {

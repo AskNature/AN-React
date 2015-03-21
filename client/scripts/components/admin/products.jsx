@@ -5,8 +5,8 @@
 
 var React = require('react');
 var ConsoleLayout = require('./consolelayout.jsx');
-var productStore = require('../../stores/admin/products');
-var productActions = require('../../actions/products');
+var productStore = require('../../stores/admin/generic-list.js');
+var productActions = require('../../actions/generic-list');
 var GriddleComponent = require('./griddle_component.jsx');
 
 var ProductConsole = React.createClass({

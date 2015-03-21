@@ -5,8 +5,8 @@
 
 var React = require('react');
 var ConsoleLayout = require('./consolelayout.jsx');
-var phenomenaStore = require('../../stores/admin/phenomena');
-var phenomenaActions = require('../../actions/phenomena');
+var store = require('../../stores/admin/generic-list.js');
+var actions = require('../../actions/generic-list');
 var GriddleComponent = require('./griddle_component.jsx');
 
 var PhenomenaConsole = React.createClass({
@@ -14,7 +14,7 @@ var PhenomenaConsole = React.createClass({
         return (
             /* jshint ignore:start */
             <ConsoleLayout plural='Phenomena' singular='Phenomenon'>
-                        <GriddleComponent store={phenomenaStore} actions={phenomenaActions}
+                        <GriddleComponent store={store} actions={actions}
                           columns={[
                             {columnName:'masterid', displayName:'id', type:'id'},
                             {columnName:'name', displayName:'Name', type:'link'},
