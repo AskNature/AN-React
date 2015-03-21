@@ -15,6 +15,7 @@ var routes = function (app) {
   // API v1
   app.get('/api/phenomena', Controller.returnList1);
   app.get('/api/phenomenon/:id', Controller.returnItem1);
+  app.post('/api/phenomenon/:id', Controller.updatePhenomenon1);
 
   // API v2
   app.get('/api/v2/phenomena/:id', Controller.returnItem2);

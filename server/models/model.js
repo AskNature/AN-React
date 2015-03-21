@@ -10,6 +10,8 @@ var autoGenerateId = false;
 var ConstructModel = function(entityName, fields, relationships) {
 
     var Model = function(masterid, attributes, rid) {
+	console.log("created " + entityName);
+	//console.log(relationships);
 	_.forEach(fields, function(field) {
 	    this[field] = null;
 	}, this);
@@ -20,6 +22,7 @@ var ConstructModel = function(entityName, fields, relationships) {
 	    // build a model for each relationship
 	    var relModel = val.model;
 	    if(attributes[key]) {
+                if(entityName==='Users' && key === 'out_HasMedia'){console.log(_.map(attributes[key].out_HasMedia, function(u) { return u.out }));}
 		var arr;
                 if(_.isArray(attributes[key])) {
                     arr = attributes[key];
@@ -35,6 +38,7 @@ var ConstructModel = function(entityName, fields, relationships) {
                 }
 		this[key] = _.map(arr, function(rel) { // attributes[key]
 		    if(_.isObject(rel)) {
+			if(entityName==='Users' && key === 'out_HasMedia' && rel.in) { return new relModel(rel.in.masterid, rel.in, rel.in['@rid']) }
 			return new relModel(rel.masterid, rel, rel['@rid']);
 		    } else {
 			return rel;
@@ -261,7 +265,9 @@ var ConstructModel = function(entityName, fields, relationships) {
 	    //return 'set(' + val.edge + ') as ' + key; // should deduplicate
 	    return val.edge + ' as ' + key;
 	});
-	var fetchMap = _.mapValues(relationships, function() { return 0 });
+	var fetchMap = _.mapValues(relationships, function() { return 3 });
+	console.log(fetchMap);
+	console.log('@rid, masterid, ' + fields.join(', ') + (relFields.length ? ', ' : '') + relFields.join(', '));
 	db.select('@rid, masterid, ' + fields.join(', ') + (relFields.length ? ', ' : '') + relFields.join(', ')).from(entityName).where({masterid: masterid}).fetch(fetchMap).limit(1).one().then(function(result) {
 	    if(result) {
 		console.log("deep-fetch success");
