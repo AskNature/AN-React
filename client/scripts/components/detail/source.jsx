@@ -6,10 +6,9 @@ var SourceDetail = require('./sourceDetail.jsx');
 
 var Source = React.createClass({
     render: function() {
-        var masterid = window.location.pathname.split('/')[2];
         return (
 	       <DefaultLayout>
-		   <SourceDetail masterid={masterid !== 'new' ? masterid : null} />
+		   <SourceDetail masterid={this.props.masterid !== 'new' ? this.props.masterid : null} type={this.props.type} />
 	       </DefaultLayout>
         );
     }

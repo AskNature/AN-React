@@ -105,8 +105,8 @@ var detail_condition = function() {
     render(ConditionDetail);
 };
 
-var detail_source = function() {
-    render(SourceDetail);
+var detail_source = function(id) {
+    render(SourceDetail, {masterid: id, type: 'sources'});
 };
 
 var detail_researcher = function() {

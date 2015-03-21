@@ -3,7 +3,7 @@
 
 var Model = require('./model.js');
 
-var entityName = 'Function';
+var entityName = 'Sources';
 
 var fields = ['name', 'secondary_title', 'status', 'source', 'type', 'timestamp', 'authors', 'author_address', 'pages', 'volume', 'number', 'publication_year', 'publisher', 'isbn', 'accession_number', 'url', 'notes', 'access_date', 'keywords', 'abstract_excerpt', 'published_language', 'type_of_work', 'other_information'];
 
