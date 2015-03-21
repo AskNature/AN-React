@@ -9,20 +9,20 @@
 var Controller = require('../controllers/livingsystem');
 
 var routes = function (app) {
-  app.get('/admin/livingsystems', Controller.loadindex);
-  app.get('/livingsystem/:id', Controller.loadindex);
+  app.get('/admin/living-systems', Controller.loadindex);
+  app.get('/living-system/:id', Controller.loadindex);
 
   // API v1
-  app.get('/api/livingsystems', Controller.returnList1);
-  app.get('/api/livingsystem/:id', Controller.returnItem1);
-  app.post('/api/livingsystem/:id', Controller.updateLivingSystem1);
+  app.get('/api/living-systems', Controller.returnList1);
+  app.get('/api/living-system/:id', Controller.returnItem1);
+  app.post('/api/living-system/:id', Controller.updateLivingSystem1);
 
   // API v2
-  app.get('/api/v2/livingsystems/:id', Controller.returnItem2);
-  app.post('/api/v2/livingsystems/:id', Controller.updateItem2);
-  app.delete('/api/v2/livingsystems/:id', Controller.deleteItem2);
-  app.post('/api/v2/livingsystems', Controller.createItem2);
-  app.delete('/api/v2/livingsystems', Controller.deleteMultiple2);
+  app.get('/api/v2/living-systems/:id', Controller.returnItem2);
+  app.post('/api/v2/living-systems/:id', Controller.updateItem2);
+  app.delete('/api/v2/living-systems/:id', Controller.deleteItem2);
+  app.post('/api/v2/living-systems', Controller.createItem2);
+  app.delete('/api/v2/living-systems', Controller.deleteMultiple2);
 };
 
 module.exports = routes;
