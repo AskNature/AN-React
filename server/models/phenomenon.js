@@ -5,30 +5,44 @@ var Model = require('./model.js');
 
 var entityName = 'Function';
 
-var FunctionFlat = new Model('Function', ['name']);
-var Outcome = new Model('Outcome', ['name']);
-var Mechanism = new Model('Mechanism', ['name']);
-
 var fields = ['name', 'short_name', 'description'];
+
+var Function = new Model('Function',
+    [
+        'name'
+    ]
+);
+var Outcome = new Model('Outcome',
+    [
+        'name'
+    ]
+);
+var Mechanism = new Model('Mechanism',
+    [
+        'name'
+    ]
+);
+
+
 
 var relationships = {
     'parent': {
-	model: FunctionFlat,
-	className: 'Function',
+	model: Function,
+	className: 'Parent',
 	edge: 'out("ChildOf")'
     },
     'children': {
-        model: FunctionFlat,
-        className: 'Function',
+        model: Function,
+        className: 'Children',
         edge: 'in("ChildOf")'
     },
     'outcome': {
-        model: FunctionFlat,
+        model: Function,
         className: 'Outcome',
         edge: 'in("HasFunction")'
     },
     'mechanism': {
-        model: FunctionFlat,
+        model: Function,
         className: 'Mechanism',
         edge: 'in("HasMechanism")'
     },

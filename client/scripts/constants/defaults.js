@@ -124,7 +124,8 @@ var Defaults = {
           flag_text: 0,
           flag_tags: 0,
           flag_media: 0,
-          is_deleted: 0
+          is_deleted: 0,
+          in_inspiredby: []
       }
       ]
     },
