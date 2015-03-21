@@ -4,11 +4,12 @@ var Model = require('./model.js');
 
 // Models to link
 var InspiredSolution = Model('InspiredSolutions', ['name', 'headline','both("HasMedia")[0].filename']);
+var Expert = Model('Expert', ['name', 'institution']);
+var Media = Model('Media', ['filename', 'name', 'entity']);
+var InspiredSolution = Model('InspiredSolutions', ['name', 'headline'], {'out_HasMedia': {model: Media, className: 'Media', edge:'out("HasMedia")'}});
 var Source = Model('Sources', ['name', 'publication_year', 'authors']);
 var Function = Model('Function', ['name']);
-var Expert = Model('Expert', ['name', 'institution']);
-var User = Model('Users', ['name']);
-var Media = Model('Media', ['filename', 'name', 'entity']);
+var User = Model('Users', ['name'], {'out_HasMedia': {model: Media, className: 'Media', edge:'out("HasMedia")'}});
 var LivingSystem = Model('LivingSystem', ['name', 'taxon']);
 var Condition = Model('Condition', []);
 var HasStatus = Model('HasStatus', ['value']);
