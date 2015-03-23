@@ -110,6 +110,7 @@ var DetailComponent = React.createClass({
       },
     render: function() {
       console.log(this.state);
+      console.log(this.props);
       var Template = this.getTemplate();
         return (
             <DefaultLayout>

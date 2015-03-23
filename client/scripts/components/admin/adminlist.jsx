@@ -7,8 +7,8 @@ var React = require('react'),
 
 accountStore = require('../../stores/accounts'),
 
-store = require('../../stores/admin/model-list'),
-actions = require('../../actions/model-detail'),
+store = require('../../stores/admin/generic-list'),
+actions = require('../../actions/generic-detail'),
 
 ConsoleLayout = require('./consolelayout.jsx'),
 GriddleComponent = require('./griddle_component.jsx'),
