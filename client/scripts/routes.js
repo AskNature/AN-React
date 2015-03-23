@@ -108,9 +108,10 @@ var infinite_demo = function() {
 
 var routes = {
   '/': index,
-  
+
   '/list/:type': list_component,
 
+// How do we change the second '/' into another colon?? Remember that we're aiming for a path that contains a bunch of key/value pairs that look like: .../Type:masterid/...
   '/q/:type/:id': detail_component,
 
   '/strategy/:id': detail_strategy,
