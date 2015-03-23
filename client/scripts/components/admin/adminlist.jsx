@@ -24,37 +24,11 @@ SourceList = require('./source'),
 StrategyList = require('./strategy'),
 UserList = require('./user');
 
-// For now, this temp solution is permanently set to StrategyList:
 
 var getState = function() {
-    var path = window.location.pathname.split('/');
-    var List;
-    if(path[2] === 'strategies') {
-      List = StrategyList;
-    } else if(path[2] === 'products') {
-        List = ProductList;
-    } else if(path[2] === 'phenomena') {
-        List = PhenomenonList;
-    } else if(path[2] === 'users') {
-        List = UserList;
-    } else if(path[2] === 'collections') {
-        List = CollectionList;
-    } else if(path[2] === 'conditions') {
-        List = ContextList;
-    } else if(path[2] === 'living-systems') {
-        List = LivingSystemList;
-    } else if(path[2] === 'media') {
-        List = MediaList;
-    } else if(path[2] === 'researchers') {
-        List = ResearcherList;
-    } else if(path[2] === 'sources') {
-        List = SourceList;
-    }
-
     return (
     {
-    user: accountStore.get(),
-    entityList: List
+    user: accountStore.get()
     }
     );
 };

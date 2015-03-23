@@ -8,8 +8,8 @@ var ListComponent = React.createFactory(require('./components/admin/adminlist.js
 
 
 var DetailComponent = React.createFactory(require('./components/detail/component-detail.jsx'));
-var ProductDetail = React.createFactory(require('./components/detail/detail-product.jsx'));
-var StrategyDetail = React.createFactory(require('./components/detail/detail-strategy.jsx'));
+var ProductDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
+var StrategyDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
 var LivingSystemsDetail = React.createFactory(require('./components/detail/livingsystem.jsx'));
 var PhenomenonDetail = React.createFactory(require('./components/detail/phenomenon.jsx'));
 var ConditionDetail = React.createFactory(require('./components/detail/condition.jsx'));
@@ -39,6 +39,10 @@ var index = function() {
 
 var list_component = function(type) {
     render(ListComponent, {type: type});
+};
+
+var detail_component = function(type,id) {
+    render(DetailComponent, {masterid: id, type: type});
 };
 
 var detail_strategy = function(id) {
@@ -105,6 +109,7 @@ var infinite_demo = function() {
 var routes = {
   '/': index,
   '/admin/:type': list_component,
+  '/:type/:id': detail_component,
   '/strategy/:id': detail_strategy,
   '/product/:id': detail_product,
   '/living-system/:id': detail_livingsystems,
