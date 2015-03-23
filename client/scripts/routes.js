@@ -6,8 +6,8 @@ var IndexPage = React.createFactory(require('./components/index.jsx'));
 
 var ListComponent = React.createFactory(require('./components/admin/adminlist.jsx'));
 
-
 var DetailComponent = React.createFactory(require('./components/detail/component-detail.jsx'));
+
 var ProductDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
 var StrategyDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
 var LivingSystemsDetail = React.createFactory(require('./components/detail/livingsystem.jsx'));
@@ -108,8 +108,11 @@ var infinite_demo = function() {
 
 var routes = {
   '/': index,
-  '/admin/:type': list_component,
-  '/:type/:id': detail_component,
+  
+  '/list/:type': list_component,
+
+  '/q/:type/:id': detail_component,
+
   '/strategy/:id': detail_strategy,
   '/product/:id': detail_product,
   '/living-system/:id': detail_livingsystems,
@@ -120,11 +123,13 @@ var routes = {
   '/collection/:id': detail_collection,
   '/user/:id': detail_user,
   '/media/:id': detail_media,
+
   '/login': login,
   '/signup': signup,
   '/settings': account_settings,
   '/forgot': account_forgot,
   '/reset/:token': account_reset,
+
   '/infinite_demo': infinite_demo
 };
 

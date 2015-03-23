@@ -7,7 +7,6 @@
 var Controller = require('../controllers/user');
 
 var routes = function (app) {
-  app.get('/admin/users', Controller.loadindex);
   app.get('/user/:id', Controller.loadindex);
 
   // API v1

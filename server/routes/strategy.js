@@ -11,7 +11,6 @@ var Controller = require('../controllers/strategy');
 var routes = function (app) {
   app.get('/admin/strategies', Controller.loadindex);
   app.get('/strategy/:id', Controller.loadindex);
-  app.get('/:type/:id', Controller.loadindex);
 
   // API v1
   app.get('/api/strategies', Controller.returnList1);
