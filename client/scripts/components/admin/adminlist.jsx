@@ -80,6 +80,7 @@ var AdminList = React.createClass({
             /* jshint ignore:end */
         );
     },
+
     _onChange: function() {
     this.setState(getState());
 }

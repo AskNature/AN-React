@@ -358,7 +358,7 @@ var GriddleComponent = React.createClass({
 	    return c;
 	}, this);
 	this.setState(state);
-    }
+}
 });
 
 module.exports = GriddleComponent;
