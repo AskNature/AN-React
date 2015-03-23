@@ -8,7 +8,7 @@ var React = require('react'),
 accountStore = require('../../stores/accounts'),
 
 store = require('../../stores/admin/generic-list'),
-actions = require('../../actions/generic-detail'),
+actions = require('../../actions/generic-list'),
 
 ConsoleLayout = require('./consolelayout.jsx'),
 GriddleComponent = require('./griddle_component.jsx'),
@@ -66,12 +66,37 @@ var AdminList = React.createClass({
             getState()
         );
     },
+    getList: function() {
+        var List;
+        if(this.props.type === 'strategies') {
+            List = StrategyList;
+        } else if(this.props.type === 'products') {
+            List = ProductList;
+        } else if(this.props.type === 'phenomena') {
+            List = PhenomenonList;
+        } else if(this.props.type === 'users') {
+            List = UserList;
+        } else if(this.props.type === 'collections') {
+            List = CollectionList;
+        } else if(this.props.type === 'conditions') {
+            List = ContextList;
+        } else if(this.props.type === 'living-systems') {
+            List = LivingSystemList;
+        } else if(this.props.type === 'media') {
+            List = MediaList;
+        } else if(this.props.type === 'researchers') {
+            List = ResearcherList;
+        } else if(this.props.type === 'sources') {
+            List = SourceList;
+        }
+        return List;
+},
     render: function() {
-        var entityList=this.state.entityList;
+        var entityList=this.getList();
         return (
             /* jshint ignore:start */
             <ConsoleLayout plural={entityList.plural_name} singular={entityList.singular_name}>
-              <GriddleComponent store={entityList.store} actions={entityList.actions}
+              <GriddleComponent store={store} actions={actions}
                 columns={entityList.columns}
                 thumb={entityList.thumb}
                 initialSort={entityList.initialSort}

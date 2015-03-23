@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react'),
+var React = require('react/addons'),
 
 Griddle = require('griddle-react'),
 _ = require('lodash'),
@@ -133,8 +133,8 @@ var StatusComponent = React.createClass({
     return(
       // This will just change the status. It may make more sense to include this in the normal status select input.
       <Input style={style} type="select" defaultValue="select">
-        <option value="select">select</option>
-        <option value="other">...</option>
+        <option value="select" key="1">select</option>
+        <option value="other" key="2">...</option>
       </Input>
     );
   }
