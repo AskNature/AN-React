@@ -21,6 +21,8 @@ Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid');
 
+var Select = require('react-select');
+
 var Template = React.createClass({
 
   render: function() {
@@ -32,16 +34,15 @@ var Template = React.createClass({
         splitLegacyTitle = data.name.split(': ');
     }
     var default_avatar = 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/10383663_869350803096314_2369845013213041061_n.png?oh=2c010ce055331caa73a9506795239fd1&oe=55BDD82A&__gda__=1433772443_f5c43498047b8193dccc0a5554ba6ed1';
-
     return (
       /* jshint ignore:start */
         <div>
           <AdminBar masterid={data.masterid}
             routename={routeNameSingle} pluralroute={this.props.type}
             entityName={entityName} />
-	        <CreatorMast
-            img='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg'
-            entityname={entityName} />
+	        <CreatorMast 
+		img='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg'
+		entityname={entityName} />
           <Hero
             editable={false}
             store={this.props.store}
@@ -53,6 +54,7 @@ var Template = React.createClass({
             masterid={this.props.masterid} />
           <SubHero
             description={data.summary}
+	    status={data.status}
             credentials={this.props.user.role === 'admin' ? true : false}
             editable={this.props.editable}
             store={this.props.store}
@@ -60,7 +62,8 @@ var Template = React.createClass({
             editBegin={this.props.editBegin}
             editFinish={this.props.editFinish}
             editCancel={this.props.editCancel}
-            onDelete={this.props.onDelete} />
+            onDelete={this.props.onDelete}
+	    onRelationshipSet={this.props.onRelationshipSet} />
 	        <Grid>
   	        <Row className='show-grid'>
   		        <Col xs={12} sm={4}>

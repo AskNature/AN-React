@@ -1,6 +1,7 @@
 // Strategy model
 'use strict';
 var Model = require('./model.js');
+var db = require('../config/database').db;
 
 var entityName = 'Strategy';
 
@@ -69,14 +70,15 @@ var Condition = new Model('Condition',
 
   ]
 );
-var Status = new Model('Status',
+var Status = new Model('ContentStatus',
   [
-    'value'
+      'masterid',
+      'name'
   ]
 );
 
 
-// The key is what's called by the client components. Model refers to the variables define above. className is a mystery to me. Edge refers to the relationship in OrientDB.
+// The key is what's called by the client components. Model refers to the variables define above. className is the name of the class of the related item in OrientDB. Edge refers to the relationship in OrientDB.
 
 var relationships = {
     'products': {
@@ -128,13 +130,24 @@ var relationships = {
         model: Condition,
 	className: 'Condition',
 	edge: 'out("HasConditions")'
-  },
-  'status': {
-    model: Status,
-    className: 'HasStatus',
-    edge: 'out("HasStatus")'
-
-  }
+    },
+    'status': {
+	model: Status,
+	className: 'ContentStatus',
+	edge: 'out("HasStatus")',
+	select: true,
+	options: [
+	    {label: 'Published', masterid:'published'},
+	    {label: 'Duplicate', masterid:'duplicate'},
+	    {label: 'Flagged for Review', masterid:'flagged-for-review'},
+	    {label: 'Spam', masterid:'spam'},
+	    {label: 'Under Review', masterid:'under-review'},
+	    {label: 'Archived', masterid:'archived'},
+	    {label: 'Draft', masterid:'draft'},
+	    {label: 'Ready for Review', masterid:'ready-for-review'},
+	    {label: 'Incomplete Entry', masterid:'incomplete-entry'}
+	]
+    }
 
 };
 

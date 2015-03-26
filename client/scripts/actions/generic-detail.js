@@ -90,6 +90,7 @@ data: data
 };
 
 var setRelationship = function(field, data) {
+    console.log('setRelationship ' + field + ': ' + data);
     Dispatcher.handleViewAction({
 	actionType: Constants.SET_RELATIONSHIP,
 	field: field,
@@ -158,6 +159,7 @@ module.exports = {
     update: update,
     removeRelationship: removeRelationship,
     addRelationship: addRelationship,
+    setRelationship: setRelationship,
     commit: commit,
     del: del,
     create: create

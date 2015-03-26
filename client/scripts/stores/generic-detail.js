@@ -99,9 +99,13 @@ ThisStore.dispatcherToken = Dispatcher.register(function(payload) {
     ThisStore.emitChange();
       }
   } else if(action.actionType === Constants.SET_RELATIONSHIP) {
-      _data[action.field] = action.data;
-      _fieldsUpdated = _.union(_fieldsUpdated, [action.field]);
-      ThisStore.emitChange();
+      if(_data[action.field]) { 
+	  _data[action.field].masterid = action.data;
+	  console.log('data: ' + action.data);
+	  console.log(_data[action.field]);
+	  _fieldsUpdated = _.union(_fieldsUpdated, [action.field]);
+	  ThisStore.emitChange();
+      }
   } else if(action.actionType === Constants.COMMIT_SUCCESS) {
       if(action.fields) {
  _fieldsUpdated = _.difference(_fieldsUpdated, action.fields);
