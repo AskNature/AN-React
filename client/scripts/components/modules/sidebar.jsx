@@ -95,7 +95,7 @@ var SidebarComponent = React.createClass({
                                     listItems.map(function(item,i){
                                         return (
                                             <li eventKey={i}>
-                                                <Link url={'/list/'+item.slug}>
+                                                <Link url={'/admin/'+item.slug}>
                                                     <FontAwesome
                                                         name={item.faIcon}
                                                         size='lg'
