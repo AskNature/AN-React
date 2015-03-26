@@ -89,6 +89,14 @@ data: data
     });
 };
 
+var setRelationship = function(field, data) {
+    Dispatcher.handleViewAction({
+	actionType: Constants.SET_RELATIONSHIP,
+	field: field,
+	data: data
+    });
+};
+
 /**
 * commit submits a set of changes to the server, and marks them as saved in the store
 */

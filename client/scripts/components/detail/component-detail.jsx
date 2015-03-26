@@ -42,7 +42,7 @@ var DetailComponent = React.createClass({
       },
 
       componentDidMount: function(){
-          if(this.props.masterid) {
+          if(this.props.masterid !== 'new') {
               actions.fetch(this.props.type,this.props.masterid);
           } else {
               actions.create();
@@ -59,6 +59,9 @@ var DetailComponent = React.createClass({
       onRelationshipRemove: function(field, removedValue) {
           console.log(field + ' removed ' + removedValue);
           actions.removeRelationship(field, removedValue);
+      },
+      onRelationshipSet: function(field, newValue) {
+      	  actions.setRelationship(field, [newValue]);
       },
       toggleEditable: function() {
           this.setState({editable: !this.state.editable});
