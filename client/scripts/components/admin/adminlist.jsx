@@ -69,7 +69,7 @@ var AdminList = React.createClass({
         var entityList=this.getList();
         return (
             /* jshint ignore:start */
-            <ConsoleLayout plural={entityList.plural_name} singular={entityList.singular_name}>
+            <ConsoleLayout plural={entityList.plural_name} singular={entityList.singular_name} slug={this.props.type}>
               <GriddleComponent store={store} actions={actions}
                 columns={entityList.columns}
                 thumb={entityList.thumb}
