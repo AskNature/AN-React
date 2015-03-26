@@ -60,6 +60,9 @@ var DetailComponent = React.createClass({
           console.log(field + ' removed ' + removedValue);
           actions.removeRelationship(field, removedValue);
       },
+      onRelationshipSet: function(field, newValue) {
+      	  actions.setRelationship(field, [newValue]);
+      },
       toggleEditable: function() {
           this.setState({editable: !this.state.editable});
       },

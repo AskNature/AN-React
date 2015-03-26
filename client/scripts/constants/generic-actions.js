@@ -17,6 +17,7 @@ var actions = keyMirror({
     COMMIT_ERROR: null,
     ADD_RELATIONSHIP: null,
     REMOVE_RELATIONSHIP: null,
+    SET_RELATIONSHIP: null,
     DELETE_SUCCESS: null,
     CREATE: null,
     GET_ALL: null

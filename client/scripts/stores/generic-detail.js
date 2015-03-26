@@ -98,6 +98,10 @@ ThisStore.dispatcherToken = Dispatcher.register(function(payload) {
  _fieldsUpdated = _.union(_fieldsUpdated, [action.field]);
     ThisStore.emitChange();
       }
+  } else if(action.actionType === Constants.SET_RELATIONSHIP) {
+      _data[action.field] = action.data;
+      _fieldsUpdated = _.union(_fieldsUpdated, [action.field]);
+      ThisStore.emitChange();
   } else if(action.actionType === Constants.COMMIT_SUCCESS) {
       if(action.fields) {
  _fieldsUpdated = _.difference(_fieldsUpdated, action.fields);
