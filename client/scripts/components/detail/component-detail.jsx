@@ -42,7 +42,7 @@ var DetailComponent = React.createClass({
       },
 
       componentDidMount: function(){
-          if(this.props.masterid) {
+          if(this.props.masterid !== 'new') {
               actions.fetch(this.props.type,this.props.masterid);
           } else {
               actions.create();
