@@ -76,6 +76,7 @@ var DetailComponent = React.createClass({
       },
       editCancel: function(e) {
           e.preventDefault();
+          console.log('Canceled');
           actions.fetch(this.props.type, this.props.masterid);
           this.setState({editable: false});
       },
@@ -138,6 +139,7 @@ var DetailComponent = React.createClass({
                     actions={actions}
                     editBegin={this.editBegin}
                     editFinish={this.editFinish}
+                    editCancel={this.editCancel}
                     onDelete={this.onDelete}
                     onRelationshipAdd={this.onRelationshipAdd}
                     onRelationshipRemove={this.onRelationshipRemove}
