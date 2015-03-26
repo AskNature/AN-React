@@ -89,7 +89,6 @@ var DetailComponent = React.createClass({
           var r = confirm('Do you really want to delete this record?');
           if(r) {actions.del(this.props.type, this.props.masterid);}
       },
-
       //This is a temporary solution until Scott's mixin replaces it. DOES NOT LOAD CORRECTLY ON REFRESH:
       getTemplate: function() {
         var Template;
@@ -143,7 +142,7 @@ var DetailComponent = React.createClass({
                     onDelete={this.onDelete}
                     onRelationshipAdd={this.onRelationshipAdd}
                     onRelationshipRemove={this.onRelationshipRemove}
-		    onRelationshipSet={this.onRelationshipSet} />
+		                onRelationshipSet={this.onRelationshipSet} />
                 </div>
               )}
            </DefaultLayout>

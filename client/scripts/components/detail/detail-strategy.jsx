@@ -4,14 +4,11 @@ var React = require('react'),
 
 Link = require('../modules/link.jsx'),
 DefaultLayout = require('../layouts/default.jsx'),
-Hero = require('./common/hero.jsx'),
-SubHero = require('./common/subhero.jsx'),
-AdminBar = require('./common/adminbar.jsx'),
-CreatorMast = require('./common/creatormast.jsx'),
+
+TopSection = require('./common/topsection.jsx'),
+
 TextArea = require('./common/textarea.jsx'),
 DataTable = require('./common/datatable.jsx'),
-ImageList = require('./common/imagelist.jsx'),
-ButtonList = require('./common/edgelists.jsx'),
 Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
@@ -40,33 +37,16 @@ var Template = React.createClass({
     return (
       /* jshint ignore:start */
         <div>
-          <AdminBar masterid={data.masterid}
-            routename={routeNameSingle} pluralroute={this.props.type}
-            entityName={entityName} />
-	        <CreatorMast 
-		img='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg'
-		entityname={entityName} />
-          <Hero
-            editable={false}
-            store={this.props.store}
-            actions={this.props.actions}
-            media={data.media}
+          <TopSection
+            {...this.props}
+            routename={routeNameSingle}
+            entityName={entityName}
             primarytitle={primaryTitle}
             secondarytitle={secondaryTitle}
             secondarylink=''
-            masterid={this.props.masterid} />
-          <SubHero
-            description={data.summary}
-	    status={data.status}
-            credentials={this.props.user.role === 'admin' ? true : false}
-            editable={this.props.editable}
-            store={this.props.store}
-            actions={this.props.actions}
-            editBegin={this.props.editBegin}
-            editFinish={this.props.editFinish}
-            editCancel={this.props.editCancel}
-            onDelete={this.props.onDelete}
-	    onRelationshipSet={this.props.onRelationshipSet} />
+            description={this.props.data.summary}
+            />
+
 	        <Grid>
   	        <Row className='show-grid'>
   		        <Col xs={12} sm={4}>

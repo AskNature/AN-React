@@ -13,9 +13,13 @@ NavItem = require('react-bootstrap').NavItem,
 Button = require('react-bootstrap').Button,
 Input = require('react-bootstrap').Input,
 ButtonToolbar = require('react-bootstrap').ButtonToolbar,
-Glyphicon = require('react-bootstrap').Glyphicon;
+Glyphicon = require('react-bootstrap').Glyphicon,
+Tooltip = require('react-bootstrap').Tooltip,
+OverlayTrigger = require('react-bootstrap').OverlayTrigger,
 
-var Select = require('../../modules/select.jsx');
+Link = require('../../modules/link.jsx'),
+
+Select = require('../../modules/select.jsx');
 
 var SubHero = React.createClass({
   render: function() {
@@ -30,7 +34,7 @@ var SubHero = React.createClass({
               </h5>
           </Col>
           <Col xs={12} sm={4}>
-            <ButtonToolbar className='flat-button' style={{"margin-top": "11.5px"}}>
+            <ButtonToolbar justified className='flat-button' style={{"margin-top": "11.5px"}}>
 	             {this.props.editable ?
                  <span>
                    <ButtonGroup>
@@ -49,9 +53,20 @@ var SubHero = React.createClass({
                      </Button>
                    </ButtonGroup>
                  </span>
-               :  <Button onClick={this.props.editBegin}>
-                    <Glyphicon glyph="pencil" />
-                  </Button>}
+               :
+                  <OverlayTrigger placement='bottom' overlay={<Tooltip>Edit</Tooltip>}>
+                    <Button onClick={this.props.editBegin}>
+                      <Glyphicon glyph="pencil" />
+                    </Button>
+                  </OverlayTrigger>
+                }
+                  <OverlayTrigger placement='bottom' overlay={<Tooltip>Create a new record</Tooltip>}>
+                  <Link url={'new'}>
+                    <Button>
+                      <Glyphicon glyph="plus" />
+                    </Button>
+                  </Link>
+                </OverlayTrigger>
                   <Button>
                     <Glyphicon glyph="share-alt" />
                   </Button>
