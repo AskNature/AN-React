@@ -4,11 +4,19 @@ var React = require('react');
 var ReactSelect = require('react-select');
 
 var Select = React.createClass({
-    onChange: function(newValue) {
-        this.props.onRelationshipChange(this.props.fieldName, [newValue]);
+    onChange: function(e) {
+        this.props.onRelationshipSet(this.props.field, e.target.value);
+	console.log(e.target.value);
     },
     render: function() {
-        <ReactSelect value={this.props.value} options={this.props.options} onChange={this.onChange} />
+        return (
+	<Input block type="select" label={this.props.title} value={this.props.selected} onChange={this.onChange}>
+	    <option key="null" value={null}></option>
+	    {this.props.options.map(function(option) {
+	        return <option key={option.masterid} value={option.masterid}>{option.label}</option>
+	    })}
+	</Input>
+	);
     }
 });
 

@@ -15,6 +15,8 @@ Input = require('react-bootstrap').Input,
 ButtonToolbar = require('react-bootstrap').ButtonToolbar,
 Glyphicon = require('react-bootstrap').Glyphicon;
 
+var Select = require('../../modules/select.jsx');
+
 var SubHero = React.createClass({
   render: function() {
     return (
@@ -35,23 +37,7 @@ var SubHero = React.createClass({
                      <Button block disabled={this.props.credentials === true ? false : true } active={true} style={{"cursor": "default"}}>
                        <Glyphicon glyph="pencil" /> Edit Mode Active
                      </Button>
-                     <Input block type="select" label='Status' defaultValue="Active">
-                       {this.props.user ? (
-                         <div>
-                         <option value="active">Active</option>
-                         <option value="removed">Removed</option>
-                         <option value="blacklist">Blacklisted</option>
-                         <option value="probation">On Probation</option>
-                         </div>
-                       ) : (
-                           <div>
-                           <option value="published">Published</option>
-                           <option value="draft">Draft</option>
-                           <option value="holding">Ready for Review</option>
-                             <option value="archived">Archived</option>
-                             </div>
-                         ) }
-                     </Input>
+		     <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" title="Status" onRelationshipSet={this.props.onRelationshipSet} />
                      <Button block bsStyle="success" onClick={this.props.editFinish}>
                        <Glyphicon glyph="ok" /> <strong>Update</strong>
                      </Button>

@@ -65,7 +65,7 @@ var DetailComponent = React.createClass({
           actions.removeRelationship(field, removedValue);
       },
       onRelationshipSet: function(field, newValue) {
-      	  actions.setRelationship(field, [newValue]);
+      	  actions.setRelationship(field, newValue);
       },
       toggleEditable: function() {
           this.setState({editable: !this.state.editable});
@@ -140,7 +140,8 @@ var DetailComponent = React.createClass({
                     editFinish={this.editFinish}
                     onDelete={this.onDelete}
                     onRelationshipAdd={this.onRelationshipAdd}
-                    onRelationshipRemove={this.onRelationshipRemove} />
+                    onRelationshipRemove={this.onRelationshipRemove}
+		    onRelationshipSet={this.onRelationshipSet} />
                 </div>
               )}
            </DefaultLayout>
