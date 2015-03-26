@@ -27,9 +27,12 @@ var Template = React.createClass({
     var routeNameSingle = 'strategy';
     var entityName = 'Biological Strategies';
     var data = this.props.data;
-    var splitLegacyTitle;
-    if(data.name) {
-        splitLegacyTitle = data.name.split(': ');
+    var primaryTitle = data.name;
+    var secondaryTitle;
+    if(primaryTitle.includes(':')) {
+        var split = primaryTitle.split(': ');
+        primaryTitle = split[0];
+        secondaryTitle = split[1];
     }
     var default_avatar = 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/10383663_869350803096314_2369845013213041061_n.png?oh=2c010ce055331caa73a9506795239fd1&oe=55BDD82A&__gda__=1433772443_f5c43498047b8193dccc0a5554ba6ed1';
 
@@ -47,8 +50,8 @@ var Template = React.createClass({
             store={this.props.store}
             actions={this.props.actions}
             media={data.media}
-            primarytitle={this.props.loaded ? splitLegacyTitle[0] : '!!!!'}
-            secondarytitle={this.props.loaded ? splitLegacyTitle[1] : '!!!!'}
+            primarytitle={primaryTitle}
+            secondarytitle={secondaryTitle}
             secondarylink=''
             masterid={this.props.masterid} />
           <SubHero

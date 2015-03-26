@@ -11,7 +11,8 @@ TextField = React.createClass({
                         store={this.props.store}
                         actions={this.props.actions}
                         enableBlockMode={this.props.enableBlockMode}
-                        fieldName={this.props.fieldName} />
+                        fieldName={this.props.fieldName}
+                        prompt={this.props.prompt} />
                 : this.props.initialValue}
             </div>
         );

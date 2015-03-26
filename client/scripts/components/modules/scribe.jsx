@@ -5,7 +5,7 @@ var Scribe = require('scribe-editor');
 var ScribeTextField = React.createClass({
   getInitialState: function() {
     var initialStruct = this.props.store.get();
-    var initialValue;
+    var initialValue, placeholder;
     if(this.props.initialValue) {
       initialValue = this.props.initialValue;
     } else {
@@ -13,6 +13,7 @@ var ScribeTextField = React.createClass({
     }
     return {
       html: initialValue,
+      placeholder: placeholder,
       gotUpdate: true
     };
   },
@@ -22,22 +23,23 @@ var ScribeTextField = React.createClass({
     componentDidMount: function() {
         var that = this;
         var scribeElement = this.refs.scribe.getDOMNode();
-	var scribe = new Scribe(scribeElement, { allowBlockElements: (this.props.enableBlockMode ? true : false) });
+	      var scribe = new Scribe(scribeElement, { allowBlockElements: (this.props.enableBlockMode ? true : false) });
         this.setState({scribe: scribe}, function() {
             scribe.on('content-changed', updateData);
             function updateData() {
                 if(!that.state.gotUpdate) {
-		    var html = scribe.getHTML();
+		                var html = scribe.getHTML();
+                    console.log('ScribeHTML: '+html);
                     that.setState({html: html});
-		    var updatedStuff = {};
-		    updatedStuff[that.props.fieldName] = html.substring(0, html.length-4);
-		    that.props.actions.update(updatedStuff);
-		} else {
-		    that.setState({gotUpdate: false});
-		}
+		                var updatedStuff = {};
+		                updatedStuff[that.props.fieldName] = html.substring(0, html.length-4);
+		                that.props.actions.update(updatedStuff);
+                } else {
+            		    that.setState({gotUpdate: false});
+            		}
             }
             scribe.setContent(this.state.html);
-	});
+        });
     },
     componentWillUnmount: function() {
         this.props.store.removeChangeListener(this._onChange);
@@ -51,9 +53,13 @@ var ScribeTextField = React.createClass({
     render: function() {
         return (
 	    <div>
-	        <div class="dotted" contentEditable="true" ref="scribe" style={{"outline" : "none", "border-bottom": "1px dashed #999"}}/>
+	        <div
+            className="dotted textarea_editable"
+            contentEditable={true}
+            data-ph={this.state.placeholder ? this.state.placeholder : 'Huh'}
+            ref="scribe" />
 	    </div>
-	)
+	);
     }
 });
 

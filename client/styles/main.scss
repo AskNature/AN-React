@@ -79,7 +79,15 @@ label {
   -moz-box-shadow: none;
 }
 
-
+[contentEditable] {
+  outline: none;
+  border-bottom: 1px dotted #666;
+  &:before:empty{
+    content:attr(data-ph);
+    color:yellow;
+    font-style:italic;
+  }
+}
 
 /* ==========================================================================
 Top Navbar
