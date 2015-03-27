@@ -2,6 +2,7 @@
 'use strict';
 
 var Model = require('./model.js');
+var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Experts';
 
@@ -17,7 +18,12 @@ var Collection = new Model('Collection',
         'name'
     ]
 );
-
+var Status = new Model('ContentStatus',
+  [
+      'masterid',
+      'name'
+  ]
+);
 
 
 var relationships = {
@@ -30,6 +36,13 @@ var relationships = {
         model: Collection,
         className: 'Collection',
         edge: 'in("Bookmarked")'
+    },
+    'status': {
+	model: Status,
+	className: 'ContentStatus',
+	edge: 'out("HasStatus")',
+	select: true,
+	options: ListOptions.ContentStatus
     }
 
 };

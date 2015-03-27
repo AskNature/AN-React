@@ -2,6 +2,7 @@
 'use strict';
 
 var Model = require('./model.js');
+var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Users';
 
@@ -13,6 +14,12 @@ var Friend = new Model('Friends', ['name']);
 
 var Media = new Model('Media', ['name', 'id', 'filename']);
 
+var Status = new Model('ContentStatus',
+  [
+      'masterid',
+      'name'
+  ]
+);
 
 var relationships = {
     'friends': {
@@ -29,7 +36,14 @@ var relationships = {
       model: Media,
       className: 'AddedMedia',
       edge: 'out("AddedMedia")'
-    }
+    },
+'status': {
+model: Status,
+className: 'ContentStatus',
+edge: 'out("HasStatus")',
+select: true,
+options: ListOptions.ContentStatus
+}
 };
 
 var Data = new Model(entityName, fields, relationships);

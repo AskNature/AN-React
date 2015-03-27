@@ -2,6 +2,7 @@
 'use strict';
 
 var Model = require('./model.js');
+var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'InspiredSolutions';
 
@@ -53,6 +54,12 @@ var Condition = new Model('Condition',
         'name'
     ]
 );
+var Status = new Model('ContentStatus',
+  [
+      'masterid',
+      'name'
+  ]
+);
 
 var relationships = {
     'strategies': {
@@ -99,6 +106,13 @@ var relationships = {
         model: Condition,
         className: 'Condition',
         edge: 'out("HasCondition")'
+    },
+    'status': {
+        model: Status,
+        className: 'ContentStatus',
+        edge: 'out("HasStatus")',
+        select: true,
+        options: ListOptions.ContentStatus
     }
 };
 

@@ -2,6 +2,7 @@
 'use strict';
 var Model = require('./model.js');
 var db = require('../config/database').db;
+var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Strategy';
 
@@ -127,7 +128,7 @@ var relationships = {
 	edge: 'out("HasMechanism")'
     },
     'conditions': {
-        model: Condition,
+  model: Condition,
 	className: 'Condition',
 	edge: 'out("HasConditions")'
     },
@@ -136,17 +137,7 @@ var relationships = {
 	className: 'ContentStatus',
 	edge: 'out("HasStatus")',
 	select: true,
-	options: [
-	    {label: 'Published', masterid:'published'},
-	    {label: 'Duplicate', masterid:'duplicate'},
-	    {label: 'Flagged for Review', masterid:'flagged-for-review'},
-	    {label: 'Spam', masterid:'spam'},
-	    {label: 'Under Review', masterid:'under-review'},
-	    {label: 'Archived', masterid:'archived'},
-	    {label: 'Draft', masterid:'draft'},
-	    {label: 'Ready for Review', masterid:'ready-for-review'},
-	    {label: 'Incomplete Entry', masterid:'incomplete-entry'}
-	]
+	options: ListOptions.ContentStatus
     }
 
 };
