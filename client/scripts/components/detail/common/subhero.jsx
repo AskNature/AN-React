@@ -10,6 +10,9 @@ Row = require('react-bootstrap').Row,
 Col = require('react-bootstrap').Col,
 Nav = require('react-bootstrap').Nav,
 NavItem = require('react-bootstrap').NavItem,
+TabbedArea = require('react-bootstrap').TabbedArea,
+TabPane = require('react-bootstrap').TabPane,
+
 Button = require('react-bootstrap').Button,
 Input = require('react-bootstrap').Input,
 ButtonToolbar = require('react-bootstrap').ButtonToolbar,
@@ -34,46 +37,43 @@ var SubHero = React.createClass({
               </h5>
           </Col>
           <Col xs={12} sm={4}>
-            <ButtonToolbar justified className='flat-button' style={{"margin-top": "11.5px"}}>
-	             {this.props.editable ?
-                 <span>
-                   <ButtonGroup>
-                     <Button block disabled={this.props.credentials === true ? false : true } active={true} style={{"cursor": "default"}}>
-                       <Glyphicon glyph="pencil" /> Edit Mode Active
-                     </Button>
-		     <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" title="Status" onRelationshipSet={this.props.onRelationshipSet} />
-                     <Button block bsStyle="success" onClick={this.props.editFinish}>
-                       <Glyphicon glyph="ok" /> <strong>Update</strong>
-                     </Button>
-                     <Button block bsStyle="warning" onClick={this.props.editCancel}>
-                       <Glyphicon glyph="remove" /> Cancel
-                     </Button>
-                     <Button block bsStyle="danger" onClick={this.props.onDelete}>
-                       <Glyphicon glyph="trash" /> Delete
-                     </Button>
-                   </ButtonGroup>
-                 </span>
-               :
-                  <OverlayTrigger placement='bottom' overlay={<Tooltip>Edit</Tooltip>}>
-                    <Button onClick={this.props.editBegin}>
-                      <Glyphicon glyph="pencil" />
-                    </Button>
-                  </OverlayTrigger>
-                }
-                  <OverlayTrigger placement='bottom' overlay={<Tooltip>Create a new record</Tooltip>}>
-                  <Link url={'new'}>
-                    <Button>
-                      <Glyphicon glyph="plus" />
-                    </Button>
-                  </Link>
-                </OverlayTrigger>
-                  <Button>
-                    <Glyphicon glyph="share-alt" />
-                  </Button>
-                  <Button>
-                    <Glyphicon glyph="print" />
-                  </Button>
-                </ButtonToolbar>
+            <Nav justified activeKey={0} bsStyle='pills' style={{"margin-top": "11.5px"}}>
+              <NavItem
+                eventKey={1}
+                onClick={this.props.toggleEditable}
+                disabled={
+                  this.props.credentials !== true ? false : true
+                } >
+                <Glyphicon glyph="pencil" />
+              </NavItem>
+              <NavItem eventKey={3}>
+                <Glyphicon glyph="share-alt" />
+              </NavItem>
+              <NavItem eventKey={4}>
+                <Glyphicon glyph="print" />
+              </NavItem>
+              <NavItem eventKey={5}>
+                <Glyphicon glyph="bookmark" />
+              </NavItem>
+
+            </Nav>
+                {this.props.editable ?
+                    <ButtonGroup>
+                      <Button block bsStyle='primary' disabled={true} style={{"cursor": "default"}}>
+                        Edit Mode Active
+                      </Button>
+ 		     <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" title="Status" onRelationshipSet={this.props.onRelationshipSet} />
+                      <Button block bsStyle="success" onClick={this.props.editFinish}>
+                        <Glyphicon glyph="ok" /> <strong>Update</strong>
+                      </Button>
+                      <Button block bsStyle="warning" onClick={this.props.editCancel}>
+                        <Glyphicon glyph="remove" /> Cancel
+                      </Button>
+                      <Button block bsStyle="danger" onClick={this.props.onDelete}>
+                        <Glyphicon glyph="trash" /> Delete
+                      </Button>
+                    </ButtonGroup>
+                : '' }
               </Col>
             </Row>
           </Grid>

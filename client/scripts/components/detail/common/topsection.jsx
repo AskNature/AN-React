@@ -39,6 +39,7 @@ var TopSection = React.createClass({
           store={this.props.store}
           actions={this.props.actions}
           editBegin={this.props.editBegin}
+          toggleEditable={this.props.toggleEditable}
           editFinish={this.props.editFinish}
           editCancel={this.props.editCancel}
           onDelete={this.props.onDelete}

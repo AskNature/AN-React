@@ -67,8 +67,16 @@ var DetailComponent = React.createClass({
       onRelationshipSet: function(field, newValue) {
       	  actions.setRelationship(field, newValue);
       },
-      toggleEditable: function() {
-          this.setState({editable: !this.state.editable});
+      toggleEditable: function(e) {
+          e.preventDefault();
+          if(this.state.editable === true) {
+            actions.fetch(this.props.type, this.props.masterid);
+            this.setState({editable: false});
+          } else if(this.state.user.role !== 'admin') {
+            this.setState({editable: true});
+          } else {
+            alert('You don\'t have permission to edit this.');
+          }
       },
       editBegin: function(e) {
           e.preventDefault();
@@ -76,7 +84,6 @@ var DetailComponent = React.createClass({
       },
       editCancel: function(e) {
           e.preventDefault();
-          console.log('Canceled');
           actions.fetch(this.props.type, this.props.masterid);
           this.setState({editable: false});
       },
@@ -137,6 +144,7 @@ var DetailComponent = React.createClass({
                     store={store}
                     actions={actions}
                     editBegin={this.editBegin}
+                    toggleEditable={this.toggleEditable}
                     editFinish={this.editFinish}
                     editCancel={this.editCancel}
                     onDelete={this.onDelete}
