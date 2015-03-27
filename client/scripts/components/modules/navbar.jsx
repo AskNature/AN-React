@@ -27,7 +27,8 @@ var NavbarComponent = React.createClass({
       var account = this.props.account;
       var settingsurl = '/settings';
       var greeting = 'Howdy '+ (account.firstName ? account.firstName : account.email);
-      var navLinks = account.loggedIn ? (
+      console.log(account.first);
+      var navLinks = account.loggedIn === true ? (
         <Nav right navbar-header className="pull-right navbar-header">
           <DropdownButton noCaret title={<Avatar size='40' round />} className='loggedin-menu'>
             <MenuItem eventKey="1"><Link url={settingsurl}>My Account</Link></MenuItem>
