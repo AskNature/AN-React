@@ -184,6 +184,17 @@ var GriddleComponent = React.createClass({
     componentWillUnmount: function() {
         this.props.store.removeChangeListener(this._onChange); // can't use conditional mixin
     },
+    componentWillReceiveProps: function(newProps) {
+        this.props.store.removeChangeListener(this._onChange);
+	newProps.store.addChangeListener(this._onChange);
+	var that = this;
+	this.setState({'results': [{'name' : 'Loading...', 'deletebutton' : 0}]}, function() {
+	    newProps.actions.getListPaginated(0, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending, this.state.filter);
+	    console.log('Griddle component will receive new props: ');
+	    console.log(newProps.columns[1]);
+	    that.setPage(0);
+	});
+    },
     setPage: function(index) {
         Pace.restart();
         this.props.actions.getListPaginated(index, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending, this.state.filter);
