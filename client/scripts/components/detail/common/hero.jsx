@@ -53,7 +53,8 @@ var HeroComponent = React.createClass({
                             editable={this.props.editable}
                             store={this.props.store}
                             actions={this.props.actions}
-                            fieldName={this.props.primarytitlefield} />
+                            fieldName={this.props.primarytitlefield}
+                            prompt='Enter a foo' />
                         </strong>
                         <small>
                           Slug: {this.props.masterid}

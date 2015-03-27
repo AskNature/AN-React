@@ -3,23 +3,60 @@
 
 var Model = require('./model.js');
 
-var FlatStrategy = new Model('Strategies', ['name', 'summary']);
-
-var Source = new Model('Sources', ['name', 'publication_year', 'authors']);
-var Function = new Model('Function', ['name']);
-var Expert = new Model('Expert', ['name', 'institution']);
-var User = new Model('Users', ['name']);
-var Media = new Model('Media', ['filename', 'name', 'entity']);
-var DesignedSystem = new Model('DesignedSystem', ['name']);
-var Condition = new Model('Condition', ['name']);
-
 var entityName = 'InspiredSolutions';
 
 var fields = ['name', 'headline', 'special_text', 'challenges_solved', 'how_is_it_different', 'biomimicry_story', 'product_type', 'patent_name', 'availability', 'company', 'phase', 'patent_number', 'company_website', 'strategy', 'consumer_products', 'keywords', 'status', 'timestamp'];
 
+var Strategy = new Model('Strategies',
+    [
+        'name',
+        'summary'
+    ]
+);
+var Source = new Model('Sources',
+    [
+        'name',
+        'publication_year',
+        'authors'
+    ]
+);
+var Function = new Model('Function',
+    [
+        'name'
+    ]
+);
+var Expert = new Model('Expert',
+    [
+        'name',
+        'institution'
+    ]
+);
+var User = new Model('Users',
+    [
+        'name'
+    ]
+);
+var Media = new Model('Media',
+    [
+        'filename',
+        'name',
+        'entity'
+    ]
+);
+var DesignedSystem = new Model('DesignedSystem',
+    [
+        'name'
+    ]
+);
+var Condition = new Model('Condition',
+    [
+        'name'
+    ]
+);
+
 var relationships = {
     'strategies': {
-        model: FlatStrategy,
+        model: Strategy,
         className: 'Strategy',
         edge: 'out("InspiredBy")'
     },

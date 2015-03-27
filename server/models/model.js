@@ -10,6 +10,8 @@ var autoGenerateId = false;
 var ConstructModel = function(entityName, fields, relationships) {
 
     var Model = function(masterid, attributes, rid) {
+	console.log("created " + entityName);
+	//console.log(relationships);
 	_.forEach(fields, function(field) {
 	    this[field] = null;
 	}, this);
@@ -20,26 +22,37 @@ var ConstructModel = function(entityName, fields, relationships) {
 	    // build a model for each relationship
 	    var relModel = val.model;
 	    if(attributes[key]) {
+                if(entityName==='Users' && key === 'out_HasMedia'){console.log(_.map(attributes[key].out_HasMedia, function(u) { return u.out }));}
 		var arr;
                 if(_.isArray(attributes[key])) {
+		    console.log(key + ' is array');
                     arr = attributes[key];
                 } else {
                     try {
                         arr = JSON.parse(attributes[key]);
-                        if(!_.isArray(arr)) {
+			console.log('parsed: ' + arr);
+                        if(!_.isArray(arr) && !val.select) {
                             return false;
                         }
                     } catch(e) {
                         return false;
                     }
                 }
-		this[key] = _.map(arr, function(rel) { // attributes[key]
-		    if(_.isObject(rel)) {
-			return new relModel(rel.masterid, rel, rel['@rid']);
-		    } else {
-			return rel;
-		    }
-		});
+		if (val.select) {
+		    console.log("select: " + arr);
+		    this[key] = {masterid: ((arr.length > 0 && arr[0]) ? arr[0].masterid : (arr.masterid ? arr.masterid : null)), options: val.options};
+		} else {
+		    this[key] = _.map(arr, function(rel) { // attributes[key]
+			if(_.isObject(rel)) {
+			    if(entityName==='Users' && key === 'out_HasMedia' && rel.in) {
+				return new relModel(rel.in.masterid, rel.in, rel.in['@rid'])
+			    }
+			    return new relModel(rel.masterid, rel, rel['@rid']);
+			} else {
+			    return rel;
+			}
+		    });
+		}
 	    }
 	}, this);
     
@@ -53,17 +66,24 @@ var ConstructModel = function(entityName, fields, relationships) {
 		    db.select(relationships[rel].edge + ".masterid as edges")
 		    // db.select('set(' + relationships[rel].edge + ".masterid) as edges") // deduplicate
 		    .from(entityName).where({'@rid' : _rid}).limit(1).one().then(function(result) {
-			var requestEdges = _.map(object[rel], function(val) {
-			    if(_.isObject(val)) {
-				return val.masterid;
-			    } else if(_.isString(val)) {
-				return val;
-			    } else if(_.isNumber(val)) {
-				return val;
-			    } else {
-				relationshipCallback("Something broke");
-			    }
-			});
+			var requestEdges;
+			console.log(object[rel]);
+			if(_.isArray(object[rel])) {
+			    requestEdges = _.map(object[rel], function(val) {
+				if(_.isObject(val)) {
+				    return val.masterid;
+				} else if(_.isString(val)) {
+				    return val;
+				} else if(_.isNumber(val)) {
+				    return val;
+				} else {
+				    relationshipCallback("Something broke");
+				}
+			    });
+			} else {
+			    console.log(rel + " is not an array");
+			    requestEdges = [object[rel].masterid];
+			}
 			var dbEdges = result ? result.edges : [];
 			console.log("edges in db: " + dbEdges);
 			console.log("edges in request: " + requestEdges);
@@ -179,16 +199,21 @@ var ConstructModel = function(entityName, fields, relationships) {
     Model.prototype.set = function(newAttributes) {
 	_.forEach(relationships, function(val, key) {
 	    if(_.has(newAttributes, key)) {
+		console.log('setting ' + key);
 		var arr;
-		if(_.isArray(newAttributes[key])) {
+		if(_.isArray(newAttributes[key]) || _.isObject(newAttributes[key])) {
+		    console.log('setting ' + key + 'as array/object');
 		    arr = newAttributes[key];
 		} else {
 		    try {
 			arr = JSON.parse(newAttributes[key]);
+			console.log('setting ' + key + ' as non-array with val: ' + arr);
 			if(!_.isArray(arr)) {
-			    return false;
+			    //return false; temp fux
 			}
 		    } catch(e) {
+			console.log('bad json: ' + newAttributes[key]);
+			console.log(e);
 			return false;
 		    }
 		}
@@ -261,7 +286,9 @@ var ConstructModel = function(entityName, fields, relationships) {
 	    //return 'set(' + val.edge + ') as ' + key; // should deduplicate
 	    return val.edge + ' as ' + key;
 	});
-	var fetchMap = _.mapValues(relationships, function() { return 0 });
+	var fetchMap = _.mapValues(relationships, function() { return 3 });
+	console.log(fetchMap);
+	console.log('@rid, masterid, ' + fields.join(', ') + (relFields.length ? ', ' : '') + relFields.join(', '));
 	db.select('@rid, masterid, ' + fields.join(', ') + (relFields.length ? ', ' : '') + relFields.join(', ')).from(entityName).where({masterid: masterid}).fetch(fetchMap).limit(1).one().then(function(result) {
 	    if(result) {
 		console.log("deep-fetch success");

@@ -4,7 +4,9 @@
 'use strict';
 
 var React = require('react');
-var DefaultLayout = require('../layouts/default.jsx');
+var DefaultLayout = require('../layouts/default.jsx'),
+
+Link = require('../modules/link.jsx');
 
 var CollectionConsole = React.createClass({
   render: function() {
@@ -13,7 +15,7 @@ var CollectionConsole = React.createClass({
       <DefaultLayout>
         <div className="main-container">
           <div className="container">
-            <h3>{this.props.plural} <Button>Create New {this.props.singular}</Button></h3>
+            <h3>{this.props.plural} <Link url={'../'+this.props.slug+'/new'}><Button >Create New {this.props.singular}</Button></Link></h3>
             {this.props.children}
           </div>
         </div>

@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react'),
+var React = require('react/addons'),
 
 Griddle = require('griddle-react'),
 _ = require('lodash'),
@@ -133,8 +133,8 @@ var StatusComponent = React.createClass({
     return(
       // This will just change the status. It may make more sense to include this in the normal status select input.
       <Input style={style} type="select" defaultValue="select">
-        <option value="select">select</option>
-        <option value="other">...</option>
+        <option value="select" key="1">select</option>
+        <option value="other" key="2">...</option>
       </Input>
     );
   }
@@ -151,14 +151,6 @@ var DeleteComponent = React.createClass({
 var EditComponent = React.createClass({
     render: function() {
       return(<Button onClick={this.props.rowData.editCallback.bind(null, this.props.rowData.masterid, this.props.rowData.edit)}><Glyphicon glyph={this.props.rowData.edit ? 'check' : 'pencil'} /></Button>);
-    }
-});
-
-var DataLoader = React.createClass({
-    render: function() {
-      return(
-      <h3>Binary Solo</h3>
-      );
     }
 });
 
@@ -194,6 +186,17 @@ var GriddleComponent = React.createClass({
     },
     componentWillUnmount: function() {
         this.props.store.removeChangeListener(this._onChange); // can't use conditional mixin
+    },
+    componentWillReceiveProps: function(newProps) {
+        this.props.store.removeChangeListener(this._onChange);
+	newProps.store.addChangeListener(this._onChange);
+        var that = this;
+        this.setState({'results': [{'name' : 'Loading...', 'deletebutton' : 0}]}, function() {
+            newProps.actions.getListPaginated(0, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending, this.state.filter);
+	    console.log('Griddle component will receive new props: ');
+	    console.log(newProps.columns[1]);
+	    that.setPage(0);
+	});
     },
     setPage: function(index) {
         Pace.restart();
@@ -237,6 +240,7 @@ var GriddleComponent = React.createClass({
       var meta = [{columnName: 'selected', displayName: 'Select', visible:true, customComponent: BulkComponent, locked: true}, {columnName: 'edit', visible:false, customComponent: EditComponent, locked: true},{columnName: 'editCallback', visible: false},{columnName: 'selectCallback', visible:false}];
       var add_meta, add_cols;
       if( this.props.columns ) {
+        console.log(this.props.columns[1]);
         this.props.columns.map(function(list){
           var custom = null;
           var vis = true;
@@ -277,7 +281,7 @@ var GriddleComponent = React.createClass({
       }
 
       add_cols = ['status'];
-      add_meta = [{columnName: 'status', displayName: 'Status', visible:true, customComponent: StatusComponent, locked:true}];
+      add_meta = [{columnName: 'status', displayName: 'Status', visible:true, locked:true}];
       cols = cols.concat(add_cols);
       meta = meta.concat(add_meta);
 
@@ -316,7 +320,6 @@ var GriddleComponent = React.createClass({
                nextIconComponent={<span> <Glyphicon glyph="chevron-right" /></span>}
                previousIconComponent={<span><Glyphicon glyph="chevron-left" /> </span>}
                noDataMessage={"No data could be found."}
-               externalLoadingComponent={<DataLoader />}
  />
           </div>
 	       </div>
@@ -358,7 +361,7 @@ var GriddleComponent = React.createClass({
 	    return c;
 	}, this);
 	this.setState(state);
-    }
+}
 });
 
 module.exports = GriddleComponent;
