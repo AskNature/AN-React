@@ -14,6 +14,8 @@ Defaults = require('../constants/generic-defaults'),
 
 routeActions = require('./routes');
 
+var moment = require('moment');
+
 /**
 * initialize begins the load of a detail instance. It takes
 * seed data and either empties the store if the data is null or
@@ -117,6 +119,9 @@ fields: fields
     _.forEach(changedData, function(field) {
 dataToSend[field] = model[field];
     });
+    if(store.isNew()) {
+	dataToSend.timestamp = moment().format('YYYY-MM-DD HH:MM:SS');
+    }
     request
     .post('/api/v2/'+type+(store.isNew() ? '' : '/' + masterid))
     .send(dataToSend)
