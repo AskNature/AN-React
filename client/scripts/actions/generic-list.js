@@ -57,7 +57,7 @@ var getListPaginated = function(index, size, sortCol, asc, filter, callback) {
   var self = this;
   var entity = window.location.pathname.split('/')[2];
   var getString = '/api/'+entity+'?offset='+index*size+'&limit='+size;
-  if (sortCol) { getString += '&order='+(asc ? '+' : '-')+sortCol; }
+  if (sortCol && entity !== 'living-systems') { getString += '&order='+(asc ? '+' : '-')+sortCol; }
   if (filter) { getString += '&filter='+filter; }
   request.get(getString)
   .type('json')
