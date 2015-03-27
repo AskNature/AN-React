@@ -10,10 +10,14 @@ var Drawer = require('../modules/sidebar.jsx');
 
 
 var getState = function() {
+  var drawerSwitch = false;
+  if(window.innerWidth >= 768) {
+    drawerSwitch = true;
+  }
     return {
         title: pageStore.get().title,
-        drawerOpen: true,
-	    account: accountStore.get()
+	      account: accountStore.get(),
+        drawerOpen: drawerSwitch
     };
 };
 
@@ -34,17 +38,9 @@ var Detail = React.createClass({
 var DefaultComponent = React.createClass({
     mixins: [pageStore.mixin, accountStore.mixin],
     getInitialState: function() {
-        var drawerSwitch;
-        if(window.innerWidth >= 768) {
-          drawerSwitch = true;
-        } else {
-          drawerSwitch = false;
-        }
-        return {
-          title: pageStore.get().title,
-          drawerOpen: drawerSwitch,
-  	      account: accountStore.get()
-        };
+        return (
+          getState()
+        );
     },
     componentWillMount: function() {
     	accountActions.fetchUser();
@@ -52,7 +48,6 @@ var DefaultComponent = React.createClass({
     componentDidMount: function() {
         pageStore.emitChange();
     },
-
     handleDrawerToggleClick: function(e){
     this.setState({
       drawerOpen: !this.state.drawerOpen

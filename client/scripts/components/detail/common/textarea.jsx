@@ -24,7 +24,8 @@ var TextArea = React.createClass({
                   enableBlockMode={false}
                   fieldName={this.props.fieldName}
                   initialValue={this.props.item}
-                  editable={this.props.editable} />
+                  editable={this.props.editable}
+                  prompt={this.props.prompt} />
             :
             <p>
               <span dangerouslySetInnerHTML={{__html: item}} />

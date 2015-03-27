@@ -5,17 +5,26 @@
 
 var React = require('react'),
 
+TextField = require('../../modules/textfield.jsx'),
+
 Grid = require('react-bootstrap').Grid,
 Row = require('react-bootstrap').Row,
 Col = require('react-bootstrap').Col,
 Nav = require('react-bootstrap').Nav,
 NavItem = require('react-bootstrap').NavItem,
+TabbedArea = require('react-bootstrap').TabbedArea,
+TabPane = require('react-bootstrap').TabPane,
+
 Button = require('react-bootstrap').Button,
 Input = require('react-bootstrap').Input,
 ButtonToolbar = require('react-bootstrap').ButtonToolbar,
-Glyphicon = require('react-bootstrap').Glyphicon;
+Glyphicon = require('react-bootstrap').Glyphicon,
+Tooltip = require('react-bootstrap').Tooltip,
+OverlayTrigger = require('react-bootstrap').OverlayTrigger,
 
-var Select = require('../../modules/select.jsx');
+Link = require('../../modules/link.jsx'),
+
+Select = require('../../modules/select.jsx');
 
 var SubHero = React.createClass({
   render: function() {
@@ -30,35 +39,43 @@ var SubHero = React.createClass({
               </h5>
           </Col>
           <Col xs={12} sm={4}>
-            <ButtonToolbar className='flat-button' style={{"margin-top": "11.5px"}}>
-	             {this.props.editable ?
-                 <span>
-                   <ButtonGroup>
-                     <Button block disabled={this.props.credentials === true ? false : true } active={true} style={{"cursor": "default"}}>
-                       <Glyphicon glyph="pencil" /> Edit Mode Active
-                     </Button>
-		     <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" title="Status" onRelationshipSet={this.props.onRelationshipSet} />
-                     <Button block bsStyle="success" onClick={this.props.editFinish}>
-                       <Glyphicon glyph="ok" /> <strong>Update</strong>
-                     </Button>
-                     <Button block bsStyle="warning" onClick={this.props.editCancel}>
-                       <Glyphicon glyph="remove" /> Cancel
-                     </Button>
-                     <Button block bsStyle="danger" onClick={this.props.onDelete}>
-                       <Glyphicon glyph="trash" /> Delete
-                     </Button>
-                   </ButtonGroup>
-                 </span>
-               :  <Button onClick={this.props.editBegin}>
-                    <Glyphicon glyph="pencil" />
-                  </Button>}
-                  <Button>
-                    <Glyphicon glyph="share-alt" />
-                  </Button>
-                  <Button>
-                    <Glyphicon glyph="print" />
-                  </Button>
-                </ButtonToolbar>
+            <Nav justified activeKey={0} bsStyle='pills' style={{"margin-top": "11.5px"}}>
+              <NavItem
+                eventKey={1}
+                onClick={this.props.toggleEditable}
+                disabled={
+                  this.props.credentials !== true ? false : true
+                } >
+                <Glyphicon glyph="pencil" />
+              </NavItem>
+              <NavItem eventKey={3}>
+                <Glyphicon glyph="share-alt" />
+              </NavItem>
+              <NavItem eventKey={4}>
+                <Glyphicon glyph="print" />
+              </NavItem>
+              <NavItem eventKey={5}>
+                <Glyphicon glyph="bookmark" />
+              </NavItem>
+
+            </Nav>
+                {this.props.editable ?
+                    <ButtonGroup>
+                      <Button block bsStyle='primary' disabled={true} style={{"cursor": "default"}}>
+                        Edit Mode Active
+                      </Button>
+ 		     <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" title="Status" onRelationshipSet={this.props.onRelationshipSet} />
+                      <Button block bsStyle="success" onClick={this.props.editFinish}>
+                        <Glyphicon glyph="ok" /> <strong>Update</strong>
+                      </Button>
+                      <Button block bsStyle="warning" onClick={this.props.editCancel}>
+                        <Glyphicon glyph="remove" /> Cancel
+                      </Button>
+                      <Button block bsStyle="danger" onClick={this.props.onDelete}>
+                        <Glyphicon glyph="trash" /> Delete
+                      </Button>
+                    </ButtonGroup>
+                : '' }
               </Col>
             </Row>
           </Grid>

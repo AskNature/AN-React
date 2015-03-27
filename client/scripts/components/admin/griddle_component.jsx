@@ -154,14 +154,6 @@ var EditComponent = React.createClass({
     }
 });
 
-var DataLoader = React.createClass({
-    render: function() {
-      return(
-      <h3>Binary Solo</h3>
-      );
-    }
-});
-
 var GriddleComponent = React.createClass({
     mixins: [React.addons.LinkedStateMixin],
     getInitialState: function() {
@@ -289,7 +281,7 @@ var GriddleComponent = React.createClass({
       }
 
       add_cols = ['status'];
-      add_meta = [{columnName: 'status', displayName: 'Status', visible:true, customComponent: StatusComponent, locked:true}];
+      add_meta = [{columnName: 'status', displayName: 'Status', visible:true, locked:true}];
       cols = cols.concat(add_cols);
       meta = meta.concat(add_meta);
 
@@ -328,7 +320,6 @@ var GriddleComponent = React.createClass({
                nextIconComponent={<span> <Glyphicon glyph="chevron-right" /></span>}
                previousIconComponent={<span><Glyphicon glyph="chevron-left" /> </span>}
                noDataMessage={"No data could be found."}
-               externalLoadingComponent={<DataLoader />}
  />
           </div>
 	       </div>

@@ -29,7 +29,6 @@ var Defaults = {
         name: '',
         short_name: '',
         special_text: '',
-        status: '',
         type: '',
 
         roles: ',',
@@ -93,6 +92,8 @@ var Defaults = {
         sources_id: [],
 
         strategies: [],
+
+        status: [],
 
         studies: []
 

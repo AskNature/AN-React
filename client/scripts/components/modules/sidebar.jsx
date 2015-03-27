@@ -5,29 +5,113 @@ var React = require('react/addons'),
 Link = require('./link.jsx'),
 
 FontAwesome = require('react-fontawesome'),
-Nav = require('react-bootstrap').Nav;
+Nav = require('react-bootstrap').Nav,
+TabbedArea = require('react-bootstrap').TabbedArea,
+TabPane = require('react-bootstrap').TabPane;
 
 var ReactCSSTransition = React.addons.CSSTransitionGroup;
+
+var listItems = [
+    {
+        'label' : 'Biological Systems',
+        'slug' : 'living-systems',
+        'faIcon' : 'tree'
+    },
+    {
+        'label' : 'Designed Systems',
+        'slug' : '',
+        'faIcon' : ''
+    },
+    {
+        'label' : 'Biological Strategies',
+        'slug' : 'strategies',
+        'faIcon' : 'leaf'
+    },
+    {
+        'label' : 'Designed Strategies',
+        'slug' : 'products',
+        'faIcon' : 'recycle'
+    },
+    {
+        'label' : 'F&M',
+        'slug' : 'phenomena',
+        'faIcon' : 'fire'
+    },
+    {
+        'label' : 'Context',
+        'slug' : 'conditions',
+        'faIcon' : 'cloud'
+    },
+    {
+        'label' : 'Collections',
+        'slug' : 'collections',
+        'faIcon' : 'bookmark'
+    },
+    {
+        'label' : 'Stories',
+        'slug' : '',
+        'faIcon' : ''
+    },
+    {
+        'label' : 'Sources',
+        'slug' : 'sources',
+        'faIcon' : 'book'
+    },
+    {
+        'label' : 'Citations',
+        'slug' : '',
+        'faIcon' : ''
+    },
+    {
+        'label' : 'Teams',
+        'slug' : 'researchers',
+        'faIcon' : 'university'
+    },
+    {
+        'label' : 'Media',
+        'slug' : 'media',
+        'faIcon' : 'photo'
+    },
+    {
+        'label' : 'Users',
+        'slug' : 'users',
+        'faIcon' : 'users'
+    }
+];
 
 var SidebarComponent = React.createClass({
     render: function() {
         var items = [];
-        if (this.props.open) {
-          items.push(
-                    <Nav stacked className='drawer'>
-                      <li eventKey={2}><Link url="/list/phenomena"><FontAwesome name='fire' size='lg' fixedWidth className='pull-left' />&nbsp; Phenomena</Link></li>
-                      <li eventKey={3}><Link url="/list/strategies"><FontAwesome name='leaf' size='lg' fixedWidth className='pull-left' />&nbsp; Biological Strategies</Link></li>
-                      <li eventKey={4}><Link url="/list/products"><FontAwesome name='recycle' size='lg' fixedWidth className='pull-left' />&nbsp; Inspired Solutions</Link></li>
-                      <li eventKey={5}><Link url="/list/sources"><FontAwesome name='book' size='lg' fixedWidth className='pull-left' />&nbsp; Sources</Link></li>
-                      <li eventKey={6}><Link url="/list/conditions"><FontAwesome name='cloud' size='lg' fixedWidth className='pull-left' />&nbsp; Context</Link></li>
-                      <li eventKey={7}><Link url="/list/users"><FontAwesome name='users' size='lg' fixedWidth className='pull-left' />&nbsp; Users</Link></li>
-                      <li eventKey={8}><Link url="/list/living-systems"><FontAwesome name='tree' size='lg' fixedWidth className='pull-left' />&nbsp; Living Systems</Link></li>
-                      <li eventKey={9}><Link url="/list/researchers"><FontAwesome name='university' size='lg' fixedWidth className='pull-left' />&nbsp; Researchers</Link></li>
-                      <li eventKey={10}><Link url="/list/collections"><FontAwesome name='bookmark' size='lg' fixedWidth className='pull-left' />&nbsp; Collections</Link></li>
-                      <li eventKey={11}><Link url="/list/media"><FontAwesome name='photo' size='lg' fixedWidth className='pull-left' />&nbsp; Media</Link></li>
-                    </Nav>
-
-          );
+        if (this.props.open === true) {
+            items.push(
+                <Nav className='drawer' key='10'>
+                    <TabbedArea defaultActiveKey={1} key='20' justified>
+                        <TabPane key='30' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
+                            Search results go here.
+                        </TabPane>
+                        <TabPane key='40' eventKey={1} tab={<FontAwesome name='list' size='lg' fixedWidth />}>
+                            <Nav stacked>
+                                {
+                                    listItems.map(function(item,i){
+                                        return (
+                                            <li eventKey={i}>
+                                                <Link url={'/list/'+item.slug}>
+                                                    <FontAwesome
+                                                        name={item.faIcon}
+                                                        size='lg'
+                                                        fixedWidth
+                                                        className='pull-left' />
+                                                        &nbsp; {item.label}
+                                                </Link>
+                                            </li>
+                                        );
+                                    })
+                                }
+                            </Nav>
+                        </TabPane>
+                    </TabbedArea>
+                </Nav>
+            );
         }
 
         return (

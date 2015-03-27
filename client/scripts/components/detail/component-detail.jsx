@@ -44,8 +44,12 @@ var DetailComponent = React.createClass({
       componentDidMount: function(){
           if(this.props.masterid !== 'new') {
               actions.fetch(this.props.type,this.props.masterid);
-          } else {
+          } else if(this.state.user.role !== 'admin'){
               actions.create();
+              this.setState({editable: true});
+          } else {
+            alert('You don\'t get to do this.');
+            window.history.back();
           }
           console.log(this.state);
       },
@@ -63,8 +67,16 @@ var DetailComponent = React.createClass({
       onRelationshipSet: function(field, newValue) {
       	  actions.setRelationship(field, newValue);
       },
-      toggleEditable: function() {
-          this.setState({editable: !this.state.editable});
+      toggleEditable: function(e) {
+          e.preventDefault();
+          if(this.state.editable === true) {
+            actions.fetch(this.props.type, this.props.masterid);
+            this.setState({editable: false});
+          } else if(this.state.user.role !== 'admin') {
+            this.setState({editable: true});
+          } else {
+            alert('You don\'t have permission to edit this.');
+          }
       },
       editBegin: function(e) {
           e.preventDefault();
@@ -84,7 +96,6 @@ var DetailComponent = React.createClass({
           var r = confirm('Do you really want to delete this record?');
           if(r) {actions.del(this.props.type, this.props.masterid);}
       },
-
       //This is a temporary solution until Scott's mixin replaces it. DOES NOT LOAD CORRECTLY ON REFRESH:
       getTemplate: function() {
         var Template;
@@ -133,11 +144,13 @@ var DetailComponent = React.createClass({
                     store={store}
                     actions={actions}
                     editBegin={this.editBegin}
+                    toggleEditable={this.toggleEditable}
                     editFinish={this.editFinish}
+                    editCancel={this.editCancel}
                     onDelete={this.onDelete}
                     onRelationshipAdd={this.onRelationshipAdd}
                     onRelationshipRemove={this.onRelationshipRemove}
-		    onRelationshipSet={this.onRelationshipSet} />
+		                onRelationshipSet={this.onRelationshipSet} />
                 </div>
               )}
            </DefaultLayout>
