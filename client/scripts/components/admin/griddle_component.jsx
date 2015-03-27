@@ -271,7 +271,7 @@ var GriddleComponent = React.createClass({
       meta = meta.concat(add_meta);
 
       // Only admins can delete
-      if(this.props.credentials !== true) {
+      if(this.props.credentials === true) {
         add_cols = ['deletebutton'];
         add_meta = [{columnName: 'deletebutton', displayName: 'Delete', visible: true, customComponent: DeleteComponent, locked:true}];
         cols = cols.concat(add_cols);
