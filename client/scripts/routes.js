@@ -4,7 +4,17 @@ var React = require('react/addons');
 var routeActions = require('./actions/routes');
 var IndexPage = React.createFactory(require('./components/index.jsx'));
 
-var ListComponent = React.createFactory(require('./components/admin/adminlist.jsx'));
+var ListComponent = React.createFactory(require('./components/admin/adminlist.jsx')),
+CollectionList = require('./components/admin/collection'),
+ContextList = require('./components/admin/context'),
+LivingSystemList = require('./components/admin/livingsystem'),
+MediaList = require('./components/admin/media'),
+PhenomenonList = require('./components/admin/phenomenon'),
+ProductList = require('./components/admin/product'),
+ResearcherList = require('./components/admin/researcher'),
+SourceList = require('./components/admin/source'),
+StrategyList = require('./components/admin/strategy'),
+UserList = require('./components/admin/user');
 
 var DetailComponent = React.createFactory(require('./components/detail/component-detail.jsx'));
 
@@ -38,7 +48,29 @@ var index = function() {
 };
 
 var list_component = function(type) {
-    render(ListComponent, {type: type});
+    var list;
+    if(type === 'strategies') {
+        list = StrategyList;
+    } else if(type === 'products') {
+        list = ProductList;
+    } else if(type === 'phenomena') {
+        list = PhenomenonList;
+    } else if(type === 'users') {
+        list = UserList;
+    } else if(type === 'collections') {
+        list = CollectionList;
+    } else if(type === 'conditions') {
+        list = ContextList;
+    } else if(type === 'living-systems') {
+        list = LivingSystemList;
+    } else if(type === 'media') {
+        list = MediaList;
+    } else if(type === 'researchers') {
+        list = ResearcherList;
+    } else if(type === 'sources') {
+        list = SourceList;
+    }
+    render(ListComponent, {type: type, component: list});
 };
 
 var detail_component = function(type,id) {

@@ -195,6 +195,17 @@ var GriddleComponent = React.createClass({
     componentWillUnmount: function() {
         this.props.store.removeChangeListener(this._onChange); // can't use conditional mixin
     },
+    componentWillReceiveProps: function(newProps) {
+        this.props.store.removeChangeListener(this._onChange);
+	newProps.store.addChangeListener(this._onChange);
+        var that = this;
+        this.setState({'results': [{'name' : 'Loading...', 'deletebutton' : 0}]}, function() {
+            newProps.actions.getListPaginated(0, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending, this.state.filter);
+	    console.log('Griddle component will receive new props: ');
+	    console.log(newProps.columns[1]);
+	    that.setPage(0);
+	});
+    },
     setPage: function(index) {
         Pace.restart();
         this.props.actions.getListPaginated(index, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending, this.state.filter);
@@ -237,6 +248,7 @@ var GriddleComponent = React.createClass({
       var meta = [{columnName: 'selected', displayName: 'Select', visible:true, customComponent: BulkComponent, locked: true}, {columnName: 'edit', visible:false, customComponent: EditComponent, locked: true},{columnName: 'editCallback', visible: false},{columnName: 'selectCallback', visible:false}];
       var add_meta, add_cols;
       if( this.props.columns ) {
+        console.log(this.props.columns[1]);
         this.props.columns.map(function(list){
           var custom = null;
           var vis = true;
