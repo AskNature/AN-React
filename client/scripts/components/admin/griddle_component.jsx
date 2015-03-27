@@ -282,7 +282,10 @@ var GriddleComponent = React.createClass({
         <div>
           <Input type='text' placeholder='Filter List...' value={this.state.filter} onChange={this.setFilter} />
           <a onClick={this.resetFilterSort}>Reset</a><br />
-	  <span>{this.state.selectedItems.length} item{this.state.selectedItems.length === 1 ? '' : 's'} selected. <a onClick={this.deleteSelectedItems}>Delete these items.</a></span>
+	  <span>{this.state.selectedItems.length} item{this.state.selectedItems.length === 1 ? '' : 's'} selected.
+    {this.props.credentials === true ? (
+      <a onClick={this.deleteSelectedItems}>Delete these items.</a>
+      ) : ''}</span>
           <div className='table-responsive'>
 	           <Griddle useExternal={true}
                externalSetPage={this.setPage}
