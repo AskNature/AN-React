@@ -46,20 +46,20 @@ var ScribeTextField = React.createClass({
     },
     _onChange: function() {
         var newData = this.props.store.get();
-	this.setState({gotUpdate: true}, function() {
-	    this.state.scribe.setContent(newData[this.props.fieldName]);
-	});
-    },
-    render: function() {
-        return (
-	    <div>
-	        <div
-            className="dotted textarea_editable"
-            contentEditable={true}
-            data-ph={this.state.placeholder ? this.state.placeholder : 'Huh'}
-            ref="scribe" />
-	    </div>
-	);
+	      this.setState({gotUpdate: true}, function() {
+	      this.state.scribe.setContent(newData[this.props.fieldName]);
+    });
+  },
+  render: function() {
+      return (
+          <div>
+              <div
+                className="dotted textarea_editable"
+                contentEditable={true}
+                data-ph={this.state.placeholder ? this.state.placeholder : 'Huh'}
+                ref="scribe" />
+          </div>
+      );
     }
 });
 
