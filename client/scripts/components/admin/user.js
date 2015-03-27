@@ -3,8 +3,7 @@
 var List = {
     'plural_name' : 'Users',
     'singular_name' : 'User',
-    'store' : require('../../stores/admin/users'),
-    'actions' : require('../../actions/users'),
+    'slug': 'user',
     'columns' : [
       {columnName:'masterid', displayName:'id', type:'id'},
       {columnName:'name', displayName:'Name', type:'link'},

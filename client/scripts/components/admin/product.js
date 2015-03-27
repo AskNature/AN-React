@@ -1,10 +1,9 @@
 'use strict';
 
 var List = {
-    'plural_name' : 'Inspired Solutions',
-    'singular_name' : 'Inspired Solution',
-    'store' : require('../../stores/admin/products'),
-    'actions' : require('../../actions/products'),
+    'plural_name' : 'Designed Strategies',
+    'singular_name' : 'Designed Strategy',
+    'slug': 'product',
     'columns' : [
       {columnName:'masterid', displayName:'id', type:'id'},
       {columnName:'description', displayName:'Name', type:'link'},

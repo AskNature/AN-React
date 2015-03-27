@@ -42,15 +42,12 @@ var DetailComponent = React.createClass({
       },
 
       componentDidMount: function(){
-          if(this.props.masterid !== 'new' && this.props.masterid) {
+          if(this.props.masterid !== 'new') {
               actions.fetch(this.props.type,this.props.masterid);
-          } else if(this.state.user.role !== 'admin'){
+          } else if(this.props.masterid === 'new'){
               actions.create();
               this.setState({editable: true});
-          } else {
-            alert('You don\'t get to do this.');
-            window.history.back();
-          }
+          } 
           console.log(this.state);
       },
       _onChange: function() {

@@ -3,8 +3,7 @@
 var List = {
     'plural_name' : 'Phenomena',
     'singular_name' : 'Phenomenon',
-    'store' : require('../../stores/admin/phenomena'),
-    'actions' : require('../../actions/phenomena'),
+    'slug': 'phenomenon',
     'columns' : [
       {columnName:'masterid', displayName:'id', type:'id'},
       {columnName:'name', displayName:'Name', type:'link'},

@@ -3,8 +3,7 @@
 var List = {
     'plural_name' : 'Sources',
     'singular_name' : 'Source',
-    'store' : require('../../stores/admin/sources'),
-    'actions' : require('../../actions/sources'),
+    'slug': 'source',
     'columns' : [
       {columnName:'masterid', displayName:'id', type:'id'},
       {columnName:'name', displayName:'Name', type:'link'},
