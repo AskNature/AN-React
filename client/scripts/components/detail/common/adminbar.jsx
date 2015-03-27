@@ -14,7 +14,7 @@ Glyphicon = require('react-bootstrap').Glyphicon;
 
 var AdminBar = React.createClass({
   render: function() {
-    var console_url = '../admin/' + this.props.pluralroute;
+    var console_url = '../list/' + this.props.pluralroute;
     var legacy_url = 'http://www.asknature.org/'+ this.props.routename +'/'+ this.props.masterid;
     return (
       /* jshint ignore:start */
