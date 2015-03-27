@@ -5,6 +5,7 @@
 
 var React = require('react'),
 
+TextArea = require('./textarea.jsx'),
 TextField = require('../../modules/textfield.jsx'),
 
 Grid = require('react-bootstrap').Grid,
@@ -60,11 +61,11 @@ var SubHero = React.createClass({
 
             </Nav>
                 {this.props.editable ?
+                    <div>
                     <ButtonGroup>
-                      <Button block bsStyle='primary' disabled={true} style={{"cursor": "default"}}>
+                      <Button block bsStyle='link' disabled={true} style={{"cursor": "default"}}>
                         Edit Mode Active
                       </Button>
- 		                   <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" title="Status" onRelationshipSet={this.props.onRelationshipSet} />
                       <Button block bsStyle="success" onClick={this.props.editFinish}>
                         <Glyphicon glyph="ok" /> <strong>Update</strong>
                       </Button>
@@ -75,6 +76,19 @@ var SubHero = React.createClass({
                         <Glyphicon glyph="trash" /> Delete
                       </Button>
                     </ButtonGroup>
+                    <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" title="Status" onRelationshipSet={this.props.onRelationshipSet} />
+
+                    <Input type='checkbox' label='Text' checked={this.props.flagText} />
+                      <Input pullLeft type='checkbox' label='Tags' checked={this.props.flagTags} />
+                        <Input type='checkbox' label='Media' checked={this.props.flagMedia} />
+                    <TextArea
+                      title='Editor Comments'
+                      item={this.props.editorComments}
+                      store={this.props.store}
+                      actions={this.props.actions}
+                      fieldName={'editor_comments'}
+                      editable={this.props.editable} />
+                  </div>
                 : '' }
               </Col>
             </Row>
