@@ -16,7 +16,6 @@ MenuItem = require('react-bootstrap').MenuItem,
 DropdownButton = require('react-bootstrap').DropdownButton;
 
 var routeActions = require('../../actions/routes');
-var userActions = require('../../actions/users');
 
 var transitionRoute = function(eventKey, href) {
     routeActions.setRoute(href);
@@ -25,15 +24,15 @@ var transitionRoute = function(eventKey, href) {
 var NavbarComponent = React.createClass({
     render: function() {
       var brand = <Link url="/">AN</Link>;
-      var user = this.props.user;
+      var account = this.props.account;
       var settingsurl = '/settings';
-      var greeting = 'Howdy '+ (user.firstName ? user.firstName : user.email);
-      var navLinks = user.loggedIn ? (
+      var greeting = 'Howdy '+ (account.firstName ? account.firstName : account.email);
+      var navLinks = account.loggedIn ? (
         <Nav right navbar-header className="pull-right navbar-header">
           <DropdownButton noCaret title={<Avatar size='40' round />} className='loggedin-menu'>
             <MenuItem eventKey="1"><Link url={settingsurl}>My Account</Link></MenuItem>
             <MenuItem divider />
-            <MenuItem eventKey="2"><a href="#" onClick={userActions.logoutUser}>Log Out</a></MenuItem>
+            <MenuItem eventKey="2"><a href="#" onClick={this.props.accountActions.logoutUser}>Log Out</a></MenuItem>
           </DropdownButton>
         </Nav>
       ) : (

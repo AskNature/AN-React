@@ -58,7 +58,7 @@ var DefaultComponent = React.createClass({
             /* jshint ignore:start */
             <div>
 
-            <Navbar user={this.state.account} onDrawerToggleClick={this.handleDrawerToggleClick} />
+            <Navbar account={this.state.account} onDrawerToggleClick={this.handleDrawerToggleClick} accountActions={accountActions} accountStore={accountStore} />
             <Drawer open={this.state.drawerOpen}/>
             <Detail narrow={this.state.drawerOpen} {...this.props}/>
 
