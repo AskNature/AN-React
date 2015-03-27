@@ -49,12 +49,12 @@ var HeroComponent = React.createClass({
                       <span>
                         <strong>
                           <TextArea
-                            item={this.props.primarytitle}
+                            item={this.props.editable ? this.props.name : this.props.primarytitle}
                             editable={this.props.editable}
                             store={this.props.store}
                             actions={this.props.actions}
-                            fieldName={this.props.primarytitlefield}
-                            prompt='Enter a foo' />
+                            fieldName='name'
+                            placeholder='Enter a name' />
                         </strong>
                         <small>
                           Slug: {this.props.masterid}

@@ -26,7 +26,7 @@ var RelationshipList = React.createClass({
           </strong>
         </h6>
 
-          {this.props.items.map(function(item,i) {
+          {this.props.items ? this.props.items.map(function(item,i) {
             return <RelationshipListItem
               item={item}
               routeName={this.props.routeName}
@@ -35,7 +35,7 @@ var RelationshipList = React.createClass({
               editable={this.props.editable}
               titleField={item[this.props.titleField]}
               subtitleField={item[this.props.subtitleField]} />;
-            }, this)
+            }, this) : ''
           }
             <RelationshipListItemInput
               editable={this.props.editable}

@@ -39,7 +39,7 @@ var ScribeTextField = React.createClass({
 	});
     },
     componentWillReceiveProps: function(newProps) {
-	if(this.state.html != newProps.initialValue) {
+	if(this.state.html != newProps.initialValue && newProps.initialValue !== undefined) {
 	    this.setState({gotUpdate: true}, function() {
 		this.state.scribe.setContent(newProps.initialValue);
 	    });

@@ -42,7 +42,7 @@ var DetailComponent = React.createClass({
       },
 
       componentDidMount: function(){
-          if(this.props.masterid !== 'new') {
+          if(this.props.masterid !== 'new' && this.props.masterid) {
               actions.fetch(this.props.type,this.props.masterid);
           } else if(this.state.user.role !== 'admin'){
               actions.create();

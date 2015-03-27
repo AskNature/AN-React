@@ -25,6 +25,7 @@ var Select = React.createClass({
 			</Input>
 		);
 	}
+
 });
 
 module.exports = Select;

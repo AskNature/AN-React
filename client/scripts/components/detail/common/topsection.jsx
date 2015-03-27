@@ -29,6 +29,7 @@ var TopSection = React.createClass({
           primarytitle={this.props.primarytitle}
           secondarytitle={this.props.secondarytitle}
           secondarylink={this.props.secondarylink}
+	  name={this.props.data.name}
           masterid={this.props.masterid}
           innerimage={this.props.innerimage} />
         <SubHero

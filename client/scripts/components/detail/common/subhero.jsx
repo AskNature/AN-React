@@ -64,7 +64,7 @@ var SubHero = React.createClass({
                       <Button block bsStyle='primary' disabled={true} style={{"cursor": "default"}}>
                         Edit Mode Active
                       </Button>
- 		     <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" title="Status" onRelationshipSet={this.props.onRelationshipSet} />
+ 		                   <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" title="Status" onRelationshipSet={this.props.onRelationshipSet} />
                       <Button block bsStyle="success" onClick={this.props.editFinish}>
                         <Glyphicon glyph="ok" /> <strong>Update</strong>
                       </Button>
