@@ -29,7 +29,7 @@ var loadindex = function(req, res, next) {
 
 var returnList1 = function(req, res, next) {
   var chain = db
-  .select('name, short_name, in("ChildOf").name as child_items, out("ChildOf").name as parent, out("ChildOf").masterid as parentid, in("HasFunction").size() as outcome_count, masterid, "phenomenon" as entityType, out("HasStatus").name as status')
+  .select('name, short_name, in("ChildOf").name as child_items, out("ChildOf").name as parent, out("ChildOf").masterid as parentid, in("HasFunction").size() as outcome_count, masterid, "phenomenon" as entityType, out("HasStatus").name as status, flag_text, flag_tags, flag_media')
   .from('Function');
 
   var limit = parseInt(req.query.limit);
