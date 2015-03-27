@@ -19,7 +19,7 @@ if(process.env.NODE_ENV === 'production') {
 } else {
     livingsystemCache = new Cached('livingsystem');
 }
-livingsystemCache.setDefaults({'freshFor': 120});
+livingsystemCache.setDefaults({'expire': 0});
 
 var loadindex = function(req, res, next) {
   // Render index.html to allow application to handle routing
