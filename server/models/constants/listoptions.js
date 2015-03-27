@@ -12,8 +12,17 @@ var ContentStatus = [
     {label: 'Incomplete Entry', masterid:'incomplete-entry'}
 ];
 
+var UserStatus = [
+    {label: 'Approved', masterid:'approved'},
+    {label: 'Probation', masterid:'probation'},
+    {label: 'Watchlist', masterid:'watchlist'},
+    {label: 'Revoked', masterid:'revoked'},
+    {label: 'Spam', masterid:'spam'},
+];
+
 // Todo: Add UserStatus
 
 module.exports = {
-  'ContentStatus' : ContentStatus
+  'ContentStatus' : ContentStatus,
+  'UserStatus' : UserStatus,
 };
