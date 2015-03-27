@@ -277,7 +277,7 @@ var GriddleComponent = React.createClass({
       }
 
       add_cols = ['status'];
-      add_meta = [{columnName: 'status', displayName: 'Status', visible:true, customComponent: StatusComponent, locked:true}];
+      add_meta = [{columnName: 'status', displayName: 'Status', visible:true, locked:true}];
       cols = cols.concat(add_cols);
       meta = meta.concat(add_meta);
 

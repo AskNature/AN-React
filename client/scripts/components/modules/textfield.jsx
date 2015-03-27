@@ -1,7 +1,10 @@
-var React = require('react');
-var Scribe = require('./scribe.jsx');
+'use strict';
 
-TextField = React.createClass({
+var React = require('react'),
+
+Scribe = require('./scribe.jsx');
+
+var TextField = React.createClass({
     render: function() {
         return (
             <div style={this.props.editable? {}:{"borderBottom": "1px solid transparent"}}>
