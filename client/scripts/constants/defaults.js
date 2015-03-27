@@ -18,6 +18,7 @@ var Defaults = {
 
     user: {
         loggedIn: false,
+	role: 'peon',
         results : [
           {
             name: 'Username',

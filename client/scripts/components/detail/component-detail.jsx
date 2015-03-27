@@ -45,13 +45,14 @@ var DetailComponent = React.createClass({
           if(this.props.masterid !== 'new') {
               actions.fetch(this.props.type,this.props.masterid);
           } else if(this.props.masterid === 'new'){
-              actions.create();
+              actions.create(this.props.type);
               this.setState({editable: true});
           } 
           console.log(this.state);
       },
       _onChange: function() {
           this.setState(getState());
+	  this.setState({'masterid': store.getMasterid()});
       },
       onRelationshipAdd: function(field, addedValue) {
           console.log(field + ' added ' + addedValue);
@@ -132,7 +133,7 @@ var DetailComponent = React.createClass({
               ) : (
                 <div>
                 <Template
-                    masterid={this.props.masterid !== 'new' ? this.props.masterid : null}
+                    masterid={this.state.masterid !== 'new' ? this.state.masterid : null}
                     type={this.props.type}
                     data={this.state.object}
                     loaded={this.state.loaded}

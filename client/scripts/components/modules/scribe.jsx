@@ -31,6 +31,9 @@ var ScribeTextField = React.createClass({
 		    var updatedStuff = {};
 		    updatedStuff[that.props.fieldName] = htmlClean;
 		    that.props.actions.update(updatedStuff);
+		    if(that.props.fieldName === 'name') {
+		        console.log('got a new name: ' + htmlClean);
+		    }
 		} else {
 		    that.setState({gotUpdate: false});
 		}

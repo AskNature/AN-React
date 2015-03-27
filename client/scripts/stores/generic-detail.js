@@ -16,11 +16,14 @@ var routesConstants = require('../constants/routes');
 /** Gets default values to be used until db action is completed */
 var Defaults = require('../constants/generic-defaults').entity;
 
+var slug = require('slug');
+
 var _data;
 var _type;
 var _fieldsUpdated;
 var _error;
 var _loaded;
+var _new = false;
 
 var ThisStore = new Store({
 
@@ -45,6 +48,9 @@ var ThisStore = new Store({
   },
   getLoaded: function() {
     return _loaded;
+  },
+  isNew: function() {
+    return _new;
   }
 });
 
@@ -77,10 +83,16 @@ ThisStore.dispatcherToken = Dispatcher.register(function(payload) {
       _data = Defaults;
       _loaded = true;
       _type = action.entityType;
+      _new = true;
       ThisStore.emitChange();
   } else if(action.actionType === Constants.UPDATE) {
       _.forEach(action.data, function(value, key) {
  _fieldsUpdated = _.union(_fieldsUpdated, [key]);
+	  if(key === 'name' && _new) {
+	      console.log('store got updated name');
+	      _fieldsUpdated = _.union(_fieldsUpdated, ['masterid']);
+	      _data.masterid = slug(action.data[key]).toLowerCase();
+	  }
       });
       _.assign(_data, action.data);
       ThisStore.emitChange();

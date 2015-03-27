@@ -118,7 +118,7 @@ fields: fields
 dataToSend[field] = model[field];
     });
     request
-    .post('/api/v2/'+type+'/'+masterid)
+    .post('/api/v2/'+type+(store.isNew() ? '' : '/' + masterid))
     .send(dataToSend)
     .end(function(res) {
         if(res.ok) {
@@ -127,6 +127,7 @@ actionType: Constants.COMMIT_SUCCESS,
 fields: fields,
 data: res
    });
+	    if(store.isNew()) { window.location.href = '/strategy/' + masterid; }
         } else {
    Dispatcher.handleViewAction({
 actionType: Constants.COMMIT_ERROR,
@@ -147,9 +148,10 @@ if(res.ok) {
     });
 };
 
-var create = function() {
+var create = function(type) {
     Dispatcher.handleViewAction({
-actionType: Constants.CREATE
+actionType: Constants.CREATE,
+entityType: type
     });
 };
 
