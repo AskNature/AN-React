@@ -74,6 +74,7 @@ var Defaults = {
         living_system_taxon: [],
         living_system_id: [],
 
+        mechanism: [],
         mechanisms: [],
         mechanisms_id: [],
 
@@ -83,6 +84,7 @@ var Defaults = {
         media_id: [],
         added_media: [],
 
+        outcome: [],
         outcomes: [],
         outcomes_id: [],
 
