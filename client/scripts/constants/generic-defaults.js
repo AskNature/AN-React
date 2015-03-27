@@ -60,6 +60,8 @@ var Defaults = {
         flagged: [],
         friends: [],
 
+        functions: [],
+
         has_function: [],
         has_living_system: [],
         has_media: [],
@@ -67,10 +69,12 @@ var Defaults = {
         inspiredby: [],
         inspiredby_id: [],
 
+        living_systems: [],
         living_system: [],
         living_system_taxon: [],
         living_system_id: [],
 
+        mechanism: [],
         mechanisms: [],
         mechanisms_id: [],
 
@@ -80,6 +84,7 @@ var Defaults = {
         media_id: [],
         added_media: [],
 
+        outcome: [],
         outcomes: [],
         outcomes_id: [],
 
