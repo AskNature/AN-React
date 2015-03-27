@@ -21,6 +21,8 @@ var Defaults = {
         results : [
           {
             name: 'Username',
+            firstName: '',
+            lastName: '',
             flagged: [],
             media: [],
             media_name: [],
