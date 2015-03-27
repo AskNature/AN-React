@@ -9,7 +9,7 @@ var ScribeTextField = React.createClass({
     if(this.props.initialValue) {
       initialValue = this.props.initialValue;
     } else {
-      initialValue = 'Enter a '+this.props.fieldName;
+      initialValue = '';
     }
     return {
       html: initialValue,

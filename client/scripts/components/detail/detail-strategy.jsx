@@ -110,7 +110,8 @@ var Template = React.createClass({
                       store={this.props.store}
                       actions={this.props.actions}
                       fieldName={'brief'}
-                      editable={this.props.editable} />
+                      editable={this.props.editable}
+		      placeholder="Enter a Story" />
                     ) : '' }
                     {data.special_text || this.props.editable ? (
                       <TextArea
