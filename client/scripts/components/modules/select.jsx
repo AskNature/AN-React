@@ -12,9 +12,9 @@ var Select = React.createClass({
         return (
 	<Input block type="select" label={this.props.title} value={this.props.selected} onChange={this.onChange}>
 	    <option key="null" value={null}></option>
-	    {this.props.options.map(function(option) {
+	    {this.props.options ? this.props.options.map(function(option) {
 	        return <option key={option.masterid} value={option.masterid}>{option.label}</option>
-	    })}
+	    }) : ''}
 	</Input>
 	);
     }

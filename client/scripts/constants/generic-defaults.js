@@ -93,7 +93,7 @@ var Defaults = {
 
         strategies: [],
 
-        status: [],
+        status: {value: null, options:[{value: 'test1', label: 'Test 1'}]},
 
         studies: []
 
