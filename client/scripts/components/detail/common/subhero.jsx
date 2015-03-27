@@ -44,7 +44,7 @@ var SubHero = React.createClass({
                 eventKey={1}
                 onClick={this.props.toggleEditable}
                 disabled={
-                  this.props.credentials !== true ? false : true
+                  this.props.credentials === true ? false : true
                 } >
                 <Glyphicon glyph="pencil" />
               </NavItem>

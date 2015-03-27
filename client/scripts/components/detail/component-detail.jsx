@@ -72,7 +72,7 @@ var DetailComponent = React.createClass({
           if(this.state.editable === true) {
             actions.fetch(this.props.type, this.props.masterid);
             this.setState({editable: false});
-          } else if(this.state.user.role !== 'admin') {
+          } else if(this.state.user.role === 'admin') {
             this.setState({editable: true});
           } else {
             alert('You don\'t have permission to edit this.');
