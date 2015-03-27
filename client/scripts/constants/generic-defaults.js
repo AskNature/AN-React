@@ -60,6 +60,8 @@ var Defaults = {
         flagged: [],
         friends: [],
 
+        functions: [],
+
         has_function: [],
         has_living_system: [],
         has_media: [],
@@ -67,6 +69,7 @@ var Defaults = {
         inspiredby: [],
         inspiredby_id: [],
 
+        living_systems: [],
         living_system: [],
         living_system_taxon: [],
         living_system_id: [],
