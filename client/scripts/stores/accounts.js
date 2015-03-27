@@ -23,9 +23,9 @@ UserStore.dispatcherToken = Dispatcher.register(function(payload) {
 
     if (action.actionType === userConstants.SET_USER) {
         if(_user) {
-	    _.assign(_user, action.user);
+	    _.assign(_user, action.account);
 	} else {
-	    _user = action.user;
+	    _user = action.account;
 	}
 
 
