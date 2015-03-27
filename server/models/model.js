@@ -55,7 +55,7 @@ var ConstructModel = function(entityName, fields, relationships) {
 		}
 	    }
 	}, this);
-    
+
 	var _rid = rid;
 
 	var _updateRelationships = function(object, updateFinishedCallback) {
@@ -179,10 +179,10 @@ var ConstructModel = function(entityName, fields, relationships) {
 		    });
             }
 	}
-	
+
 	return this;
     };
-    
+
     Model.prototype.save = function(callback) {
 	if(!this.masterid && autoGenerateId) {
 	    var that = this;
@@ -195,7 +195,7 @@ var ConstructModel = function(entityName, fields, relationships) {
 	    this._performSave(this, callback);
 	}
     };
-    
+
     Model.prototype.set = function(newAttributes) {
 	_.forEach(relationships, function(val, key) {
 	    if(_.has(newAttributes, key)) {
@@ -223,9 +223,9 @@ var ConstructModel = function(entityName, fields, relationships) {
 	_.assign(this, _.pick(newAttributes, fields));
 	return this;
     };
-    
+
     // ------------- static below
-    
+
     Model.find = function(constraints, callback, options) {
 	var relFields = _.map(relationships, function(val, key) {
             //return 'set(' + val.edge + '.masterid) as ' + key; // should deduplicate
@@ -257,7 +257,7 @@ var ConstructModel = function(entityName, fields, relationships) {
 	    callback(results);
 	}).done();
     };
-    
+
     Model.findOne = function(constraints, callback) {
 	var relFields = _.map(relationships, function(val, key) {
 	    //return 'set(' + val.edge + '.masterid) as ' + key; // should deduplicate
@@ -269,7 +269,7 @@ var ConstructModel = function(entityName, fields, relationships) {
 	    callback(new Model(result.masterid, result, result.rid));
 	}).done();
     };
-    
+
     Model.get = function(masterid, callback) {
 	var relFields = _.map(relationships, function(val, key) {
 	    //return 'set(' + val.edge + '.masterid) as ' + key; // should deduplicate
@@ -300,7 +300,7 @@ var ConstructModel = function(entityName, fields, relationships) {
 	    }
 	}).done();
     };
-    
+
     Model.destroy = function(masterid, callback) {
 	db.delete('VERTEX').from(entityName).where({masterid: masterid}).scalar().then(function(count) {
 	    if(count == 0) {
@@ -315,4 +315,3 @@ var ConstructModel = function(entityName, fields, relationships) {
 };
 
 module.exports = ConstructModel;
-    

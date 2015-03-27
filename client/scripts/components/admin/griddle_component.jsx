@@ -99,21 +99,6 @@ var BulkComponent = React.createClass({
   }
 });
 
-var SelectComponent = React.createClass({
-  render: function() {
-    var style = {
-      minWidth: '100px'
-    };
-    return (
-      <div>
-        <Input style={style} type="select" label='Select' defaultValue="select">
-          <option value="select">select</option>
-          <option value="other">...</option>
-        </Input>
-      </div>
-    );
-  }
-});
 
 var DateComponent = React.createClass({
   render: function() {
@@ -141,9 +126,21 @@ var StatusComponent = React.createClass({
 });
 
 var DeleteComponent = React.createClass({
+  deleteItem: function() {
+   // Todo: this belongs in the generic-list action file:
+   var r = confirm('Do you really want to delete this record? This cannot be undone.');
+   if(r) {
+       var that = this;
+        request
+     .del('/api/v2/'+this.props.rowData.entityType+'/'+this.props.rowData.masterid)
+     .end(function(res) {
+         alert('Deleted!');
+     });
+   }
+  },
   render: function() {
     return(
-      <Button bsStyle="danger"><Glyphicon glyph="trash" /></Button>
+      <Button onClick={this.deleteItem} bsStyle="danger"><Glyphicon glyph="trash" /></Button>
     );
   }
 });
@@ -187,17 +184,6 @@ var GriddleComponent = React.createClass({
     componentWillUnmount: function() {
         this.props.store.removeChangeListener(this._onChange); // can't use conditional mixin
     },
-    componentWillReceiveProps: function(newProps) {
-        this.props.store.removeChangeListener(this._onChange);
-	newProps.store.addChangeListener(this._onChange);
-        var that = this;
-        this.setState({'results': [{'name' : 'Loading...', 'deletebutton' : 0}]}, function() {
-            newProps.actions.getListPaginated(0, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending, this.state.filter);
-	    console.log('Griddle component will receive new props: ');
-	    console.log(newProps.columns[1]);
-	    that.setPage(0);
-	});
-    },
     setPage: function(index) {
         Pace.restart();
         this.props.actions.getListPaginated(index, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending, this.state.filter);
@@ -226,21 +212,20 @@ var GriddleComponent = React.createClass({
 	});
    },
    deleteSelectedItems: function() {
-    // Doesn't this belong in an action file?
-    var that = this;
-   	request
-	.del('/api/v2/strategies')
-	.send({delete: this.state.selectedItems})
-	.end(function(res) {
-	    that.setPage(that.state.currentPage);
-	});
+    // Todo: this belongs in the generic-list action file:
+      var that = this;
+     	request
+    .del('/api/v2/'+this.props.slug)
+    .send({delete: this.state.selectedItems})
+    .end(function(res) {
+        that.setPage(that.state.currentPage);
+    });
    },
     render: function() {
       var cols = ['selected', 'edit'];
       var meta = [{columnName: 'selected', displayName: 'Select', visible:true, customComponent: BulkComponent, locked: true}, {columnName: 'edit', visible:false, customComponent: EditComponent, locked: true},{columnName: 'editCallback', visible: false},{columnName: 'selectCallback', visible:false}];
       var add_meta, add_cols;
       if( this.props.columns ) {
-        console.log(this.props.columns[1]);
         this.props.columns.map(function(list){
           var custom = null;
           var vis = true;
@@ -286,7 +271,7 @@ var GriddleComponent = React.createClass({
       meta = meta.concat(add_meta);
 
       // Only admins can delete
-      if(this.props.credentials === true) {
+      if(this.props.credentials !== true) {
         add_cols = ['deletebutton'];
         add_meta = [{columnName: 'deletebutton', displayName: 'Delete', visible: true, customComponent: DeleteComponent, locked:true}];
         cols = cols.concat(add_cols);

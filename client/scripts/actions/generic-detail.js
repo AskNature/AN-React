@@ -142,7 +142,7 @@ var del = function(type,masterid) {
     .del('/api/v2/'+type+'/'+masterid)
     .end(function(res) {
 if(res.ok) {
-   routeActions.setRoute('/admin/'+type);
+   routeActions.setRoute('/list/'+type);
 }
     });
 };

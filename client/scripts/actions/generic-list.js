@@ -1,13 +1,16 @@
 /**
-* Outcome actions
+* List actions
 */
 'use strict';
 
-var Dispatcher = require('../dispatchers/default');
-var Constants = require('../constants/generic-actions');
-var Defaults = require('../constants/generic-defaults');
-var request = require('superagent');
-var assign = require('object-assign');
+var Dispatcher = require('../dispatchers/default'),
+Constants = require('../constants/generic-actions'),
+Defaults = require('../constants/generic-defaults'),
+request = require('superagent'),
+assign = require('object-assign'),
+
+routeActions = require('./routes');
+
 
 /**
 * setList is called by getList and sends a request to the dispatcher.
@@ -83,20 +86,9 @@ var getListPaginated = function(index, size, sortCol, asc, filter, callback) {
   });
 };
 
-var deleteMultiple = function(entity,selected) {
-  var that = this;
-   request
-    .del('/api/v2/'+entity)
-    .send({delete: selected})
-    .end(function(res) {
-        that.setPage(that.state.currentPage);
-    });
-};
-
 
 module.exports = {
   setList: setList,
   getList: getList,
-  getListPaginated: getListPaginated,
-  deleteMultiple: deleteMultiple
-  };
+  getListPaginated: getListPaginated
+};

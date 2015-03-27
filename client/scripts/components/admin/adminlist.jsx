@@ -38,6 +38,7 @@ var AdminList = React.createClass({
                 thumb={entityList.thumb}
                 initialSort={entityList.initialSort}
                 credentials={this.state.user.role === 'admin' ? true : false}
+                slug={this.props.type}
                  />
             </ConsoleLayout>
             /* jshint ignore:end */
