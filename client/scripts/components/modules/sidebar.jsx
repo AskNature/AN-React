@@ -82,7 +82,7 @@ var listItems = [
 var SidebarComponent = React.createClass({
     render: function() {
         var items = [];
-        if (this.props.open === true) {
+        if (this.props.open) {
             items.push(
                 <Nav className='drawer' key='10'>
                     <TabbedArea defaultActiveKey={1} key='20' justified>

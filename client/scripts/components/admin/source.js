@@ -13,7 +13,10 @@ var List = {
       {columnName:'featured_count', displayName:'Featured Count', type:'text'},
       {columnName:'featured_in', displayName:'Featured In', type:'list'},
       {columnName:'added', displayName:'Added By', type:'list'},
-      {columnName:'timestamp', displayName:'Date Modified', type:'date'}
+      {columnName:'timestamp', displayName:'Date Modified', type:'date'},
+      {columnName:'flag_text', displayName:'Text', type:'boolean'},
+      {columnName:'flag_tags', displayName:'Tags', type:'boolean'},
+      {columnName:'flag_media', displayName:'Media', type:'boolean'}
     ],
     'initialSort' : [
         'featured_count',

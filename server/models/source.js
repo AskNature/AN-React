@@ -2,10 +2,11 @@
 'use strict';
 
 var Model = require('./model.js');
+var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Sources';
 
-var fields = ['name', 'secondary_title', 'status', 'source', 'type', 'timestamp', 'authors', 'author_address', 'pages', 'volume', 'number', 'publication_year', 'publisher', 'isbn', 'accession_number', 'url', 'notes', 'access_date', 'keywords', 'abstract_excerpt', 'published_language', 'type_of_work', 'other_information'];
+var fields = ['name', 'secondary_title', 'source', 'type', 'timestamp', 'authors', 'author_address', 'pages', 'volume', 'number', 'publication_year', 'publisher', 'isbn', 'accession_number', 'url', 'notes', 'access_date', 'keywords', 'abstract_excerpt', 'published_language', 'type_of_work', 'other_information'];
 
 var Content = new Model('Content',
     [
@@ -23,7 +24,12 @@ var Collection = new Model('Collection',
         'name'
     ]
 );
-
+var Status = new Model('ContentStatus',
+  [
+      'masterid',
+      'name'
+  ]
+);
 
 
 var relationships = {
@@ -41,7 +47,14 @@ var relationships = {
         model: Collection,
         className: 'Collection',
         edge: 'in("Bookmarked")'
-    }
+    },
+'status': {
+model: Status,
+className: 'ContentStatus',
+edge: 'out("HasStatus")',
+select: true,
+options: ListOptions.ContentStatus
+}
 
 };
 

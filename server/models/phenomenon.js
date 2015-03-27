@@ -2,6 +2,8 @@
 'use strict';
 
 var Model = require('./model.js');
+var ListOptions = require('./constants/listoptions.js');
+
 
 var entityName = 'Function';
 
@@ -21,6 +23,12 @@ var Mechanism = new Model('Mechanism',
     [
         'name'
     ]
+);
+var Status = new Model('ContentStatus',
+  [
+      'masterid',
+      'name'
+  ]
 );
 
 
@@ -46,6 +54,13 @@ var relationships = {
         className: 'Mechanism',
         edge: 'in("HasMechanism")'
     },
+    'status': {
+        model: Status,
+        className: 'ContentStatus',
+        edge: 'out("HasStatus")',
+        select: true,
+        options: ListOptions.ContentStatus
+    }
 
 };
 

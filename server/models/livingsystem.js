@@ -2,6 +2,7 @@
 'use strict';
 
 var Model = require('./model.js');
+var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'LivingSystem';
 
@@ -22,6 +23,12 @@ var Collection = new Model('Mechanism',
         'name'
     ]
 );
+var Status = new Model('ContentStatus',
+  [
+      'masterid',
+      'name'
+  ]
+);
 
 
 
@@ -40,6 +47,13 @@ var relationships = {
         model: LivingSystem,
         className: 'LivingSystem',
         edge: 'in("ChildSystemOf")'
+    },
+    'status': {
+    model: Status,
+    className: 'ContentStatus',
+    edge: 'out("HasStatus")',
+    select: true,
+    options: ListOptions.ContentStatus
     }
 
 };

@@ -2,6 +2,8 @@
 'use strict';
 
 var Model = require('./model.js');
+var ListOptions = require('./constants/listoptions.js');
+
 
 // The name of the associated class in the database:
 var entityName = 'Collection';

@@ -83,9 +83,20 @@ var getListPaginated = function(index, size, sortCol, asc, filter, callback) {
   });
 };
 
+var deleteMultiple = function(entity,selected) {
+  var that = this;
+   request
+    .del('/api/v2/'+entity)
+    .send({delete: selected})
+    .end(function(res) {
+        that.setPage(that.state.currentPage);
+    });
+};
+
 
 module.exports = {
   setList: setList,
   getList: getList,
-  getListPaginated: getListPaginated
+  getListPaginated: getListPaginated,
+  deleteMultiple: deleteMultiple
   };

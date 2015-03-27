@@ -44,9 +44,7 @@ var Template = React.createClass({
             primarytitle={primaryTitle}
             secondarytitle={secondaryTitle}
             secondarylink=''
-            description={this.props.data.summary}
-            />
-
+            description={this.props.data.summary} />
 	        <Grid>
   	        <Row className='show-grid'>
   		        <Col xs={12} sm={4}>

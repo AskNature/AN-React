@@ -4,14 +4,11 @@ var React = require('react'),
 
 Link = require('../modules/link.jsx'),
 DefaultLayout = require('../layouts/default.jsx'),
-Hero = require('./common/hero.jsx'),
-SubHero = require('./common/subhero.jsx'),
-AdminBar = require('./common/adminbar.jsx'),
-CreatorMast = require('./common/creatormast.jsx'),
+
+TopSection = require('./common/topsection.jsx'),
+
 TextArea = require('./common/textarea.jsx'),
 DataTable = require('./common/datatable.jsx'),
-ImageList = require('./common/imagelist.jsx'),
-ButtonList = require('./common/edgelists.jsx'),
 Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
@@ -21,45 +18,33 @@ Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid');
 
+var Select = require('react-select');
+
 var Template = React.createClass({
 
   render: function() {
     var routeNameSingle = 'user';
     var entityName = 'Users';
     var data = this.props.data;
+    var fullname;
+    if(this.props.loaded) {
+      fullname = data.first+' '+data.last;
+    }
     var avatar = 'http://www.asknature.org/images/uploads/user/'+this.props.masterid+'/avatar/lg_avatar.jpg';
     return (
       /* jshint ignore:start */
       <div>
-        <AdminBar
-          masterid={this.props.masterid}
+        <TopSection
+          {...this.props}
           routename={routeNameSingle}
-          pluralroute={this.props.routeNamePlural}
-          entityname={entityName} />
-        <CreatorMast
-          img="https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg"
-          entityname={entityName} />
-        <Hero
-          editable={false}
-          store={this.props.store}
-          actions={this.props.actions}
-          media={data.media}
-          primarytitle={this.props.loaded ? data.first+' '+data.last : '!!!!'}
-          secondarytitle={data.name}
-          secondarylink=''
-          masterid={this.props.masterid}
-          innerimage={avatar} />
-        <SubHero
-          description={data.special_text}
-          credentials={this.props.user.role === 'admin' ? true : false}
-          editable={this.props.editable}
-          store={this.props.store}
-          actions={this.props.actions}
-          editBegin={this.props.editBegin}
-          editFinish={this.props.editFinish}
-          editCancel={this.props.editCancel}
-          onDelete={this.props.onDelete}
-          user />
+          entityName={entityName}
+          primarytitle={fullname}
+          secondarytitle={this.props.data.name}
+          description={this.props.data.special_text}
+          innerimage={avatar}
+          user={true}
+          />
+
         <Grid>
           <Row className='show-grid'>
             <Col xs={12} sm={4}>

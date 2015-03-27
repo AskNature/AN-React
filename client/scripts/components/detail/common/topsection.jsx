@@ -29,7 +29,8 @@ var TopSection = React.createClass({
           primarytitle={this.props.primarytitle}
           secondarytitle={this.props.secondarytitle}
           secondarylink={this.props.secondarylink}
-          masterid={this.props.masterid} />
+          masterid={this.props.masterid}
+          innerimage={this.props.innerimage} />
         <SubHero
           description={this.props.description}
           descriptionlink={this.props.descriptionlink}
@@ -43,7 +44,8 @@ var TopSection = React.createClass({
           editFinish={this.props.editFinish}
           editCancel={this.props.editCancel}
           onDelete={this.props.onDelete}
-          onRelationshipSet={this.props.onRelationshipSet} />
+          onRelationshipSet={this.props.onRelationshipSet}
+          user={this.props.user} />
       </div>
       /* jshint ignore:end */
     );
