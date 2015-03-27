@@ -11,7 +11,10 @@ var List = {
       {columnName:'parent', displayName:'Parent', type:'text'},
       {columnName:'short_name', displayName:'Short Name', type:'text'},
       {columnName:'child_items', displayName:'Children', type:'list'},
-      {columnName:'outcome_count', displayName:'Outcome Count', type:'text'}
+      {columnName:'outcome_count', displayName:'Outcome Count', type:'text'},
+      {columnName:'flag_text', displayName:'Text', type:'boolean'},
+      {columnName:'flag_tags', displayName:'Tags', type:'boolean'},
+      {columnName:'flag_media', displayName:'Media', type:'boolean'}
     ],
     'thumb' : [
         'media',
