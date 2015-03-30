@@ -35,9 +35,50 @@ var Template = React.createClass({
           entityName={entityName}
           primarytitle={this.props.data.name}
           secondarytitle={this.props.data.authors}
+          secondarylink={this.props.data.url}
           description={this.props.data.abstract_excerpt}
           />
-
+          <Grid>
+  	        <Row className='show-grid'>
+  		        <Col xs={12} sm={4}>
+                
+                <RelationshipList
+                  items={data.conditions}
+                  editable={this.props.editable}
+                  titleField='name'
+                  onAdd={this.props.onRelationshipAdd.bind(null, 'conditions')}
+                  onRemove={this.props.onRelationshipRemove.bind(null, 'conditions')}
+                  field={'conditions'}
+                  routeName={'condition'}
+                  title={'Context'}
+                  fieldName={'Context'}/>
+      		    </Col>
+      		    <Col xs={6} sm={4}>
+                <RelationshipList
+                  items={data.mechanisms}
+                  editable={this.props.editable}
+                  titleField='name'
+                  onAdd={this.props.onRelationshipAdd.bind(null,'mechanisms')}
+                  onRemove={this.props.onRelationshipRemove.bind(null, 'mechanisms')}
+                  field={'functions'}
+                  routeName={'phenomenon'}
+                  title={'Mechanisms'}
+                  fieldName={'Mechanisms'}/>
+        		    </Col>
+        		    <Col xs={6} sm={4}>
+                  <RelationshipList
+                    items={data.functions}
+                    editable={this.props.editable}
+                    titleField='name'
+                    onAdd={this.props.onRelationshipAdd.bind(null, 'functions')}
+                    onRemove={this.props.onRelationshipRemove.bind(null, 'functions')}
+                    field={'functions'}
+                    routeName={'phenomenon'}
+                    title={'Outcomes'}
+                    fieldName={'Outcomes'}/>
+        		    </Col>
+          		</Row>
+       	    </Grid>
           {this.props.userrole == 'admin' || 'editor' ? (
             <PanelGroup defaultActiveKey='0' accordion>
               <Panel header='Table View' eventKey='1'>

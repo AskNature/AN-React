@@ -30,6 +30,22 @@ var Status = new Model('ContentStatus',
       'name'
   ]
 );
+var FM = new Model('FM',
+  [
+    'name'
+  ]
+);
+var LivingSystem = new Model('LivingSystem',
+  [
+    'name',
+    'taxon'
+  ]
+);
+var Condition = new Model('Condition',
+  [
+'name'
+  ]
+);
 
 
 var relationships = {
@@ -47,6 +63,26 @@ var relationships = {
         model: Collection,
         className: 'Collection',
         edge: 'in("Bookmarked")'
+    },
+    'functions': {
+  model: FM,
+  className: 'FM',
+  edge: 'out("HasFunction")'
+    },
+    'living_systems': {
+	model: LivingSystem,
+	className: 'LivingSystem',
+	edge: 'out("HasLivingSystem")'
+    },
+    'mechanisms': {
+	model: FM,
+	className: 'FM',
+	edge: 'out("HasMechanism")'
+    },
+    'conditions': {
+  model: Condition,
+	className: 'Condition',
+	edge: 'out("HasConditions")'
     },
 'status': {
 model: Status,

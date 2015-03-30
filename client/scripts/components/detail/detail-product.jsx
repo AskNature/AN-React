@@ -36,7 +36,7 @@ var Template = React.createClass({
           primarytitle={this.props.data.headline}
           secondarytitle={this.props.data.name}
           secondarylink=''
-          description={this.props.data.comapny}
+          description={this.props.data.company}
           descriptionlink={this.props.data.company_website}
           />
         <Grid>
