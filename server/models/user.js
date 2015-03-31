@@ -12,7 +12,7 @@ var User = new Model('User', ['name']);
 
 var Friend = new Model('Friends', ['name']);
 
-var Media = new Model('Media', ['name', 'id', 'filename']);
+var Media = new Model('Media', ['name', 'id', 'entity', 'filename']);
 
 var Status = new Model('UserStatus',
   [
