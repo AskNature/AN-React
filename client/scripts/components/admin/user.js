@@ -6,20 +6,11 @@ var List = {
     'slug': 'user',
     'columns' : [
       {columnName:'masterid', displayName:'id', type:'id'},
-      {columnName:'name', displayName:'Name', type:'link'},
-      {columnName:'first', displayName:'First Name', type:'text'},
-      {columnName:'last', displayName:'Last Name', type:'text'},
-      {columnName:'registration_date', displayName:'Registered On', type:'date'},
-      {columnName:'status', displayName:'Status', type:'text'}
-    ],
-    'initialSort' : [
-        'registration_date',
-        false
-    ],
-    'thumb' : [
-        'media',
-        'media_id',
-        'media_entity'
+      {columnName:'username', displayName:'Username', type:'link'},
+      {columnName:'firstName', displayName:'First Name', type:'text'},
+      {columnName:'lastName', displayName:'Last Name', type:'text'},
+      {columnName:'role', displayName:'Role', type:'text'},
+      {columnName:'provider', displayName:'Provider', type:'text'}
     ]
 };
 

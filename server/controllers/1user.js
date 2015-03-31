@@ -9,28 +9,28 @@ var userCache;
 
 var crypto = require('crypto');
 
-var User = require('../models/user.js');
+var User = require('../models/1user.js');
 
 if(process.env.NODE_ENV === 'production') {
-    userCache = new Cached('user', { backend: {
+    userCache = new Cached('1user', { backend: {
 	type: 'memcached',
 	hosts: '127.0.0.1:11211'
     }});
 } else {
-    userCache = new Cached('user');
+    userCache = new Cached('1user');
 }
 userCache.setDefaults({'freshFor': 120});
 
 var loadindex = function(req, res, next) {
   // Render index.html to allow application to handle routing
    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
-   console.log('The user page has access to the ' + db.name + ' database.');
+   console.log('The original user page has access to the ' + db.name + ' database.');
 };
 
 var returnList1 = function(req, res, next) {
   var chain = db
-  .select('firstName, lastName, masterid, username, role, provider, "user" as entityType')
-  .from('PassportUser');
+  .select('name, masterid, first, last, registration_date, "user" as entityType, out("HasStatus").name as status')
+  .from('Users');
 
   var limit = parseInt(req.query.limit);
   if(limit) {
@@ -54,7 +54,7 @@ var returnList1 = function(req, res, next) {
 
   userCache.getOrElse('count', Cached.deferred(function(done) {
       console.log('cache miss');
-      db.select('count(*)').from('PassportUser')
+      db.select('count(*)').from('Users')
       .where({status: 0})
       .scalar().then(function(count) {
 	  done(null, count); // return Cached.deferred
@@ -74,7 +74,7 @@ var returnList1 = function(req, res, next) {
 var returnItem2 = function(req, res, next) {
     var callback = function(item) {
         if(!item) {
-            return res.status(404).send("No user with that id exists");
+            return res.status(404).send("No original user with that id exists");
         } else {
             return res.status(200).json(item);
 	    }
@@ -90,7 +90,7 @@ var returnItem2 = function(req, res, next) {
 var updateItem2 = function(req, res, next) {
     User.get(req.params.id, function(item) {
 	if(!item) {
-	    return res.status(404).send("No user with that id exists");
+	    return res.status(404).send("No original user with that id exists");
 	} else {
 	    item.set(req.body).save(function(err, savedItem) {
 		if(err) {
@@ -145,13 +145,13 @@ var createUser1 = function(req, res, next) {
         crypto.randomBytes(16, function(err, buf) {
 	    if(err) { return res.status(500).send(); }
             var masterid = buf.toString('hex');
-            db.select('count(*)').from('PassportUser').where({masterid: masterid}).scalar()
+            db.select('count(*)').from('Users').where({masterid: masterid}).scalar()
             .then(function(count) {
                 if(count > 0) {
                     return createWithToken(); // overlapping masterid, try again recursively
                 } else {
                     // do the creation
-                    db.insert().into('PassportUser')
+                    db.insert().into('Users')
                     .set({masterid: masterid, name: 'New user', status: 'raw'}) // TODO: Proper template
                     .all().then(function(results) {
                         // success!
@@ -185,8 +185,8 @@ var updateUser1 = function(req, res, next) {
 var returnItem1 = function(req, res, next) {
   console.log(req.params.id);
   db
-  .select('username')
-  .from('PassportUser')
+  .select('name')
+  .from('Users')
   .where('masterid == "' + req.params.id + '"')
   .all()
   .then(function (results) {

@@ -73,6 +73,11 @@ var listItems = [
         'faIcon' : 'photo'
     },
     {
+        'label' : 'Original Users',
+        'slug' : '1users',
+        'faIcon' : 'users'
+    },
+    {
         'label' : 'Users',
         'slug' : 'users',
         'faIcon' : 'users'

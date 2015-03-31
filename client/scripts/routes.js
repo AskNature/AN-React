@@ -14,6 +14,7 @@ ProductList = require('./components/admin/product'),
 ResearcherList = require('./components/admin/researcher'),
 SourceList = require('./components/admin/source'),
 StrategyList = require('./components/admin/strategy'),
+OneUserList = require('./components/admin/1user'),
 UserList = require('./components/admin/user');
 
 var DetailComponent = React.createFactory(require('./components/detail/component-detail.jsx'));
@@ -69,6 +70,8 @@ var list_component = function(type) {
         list = ResearcherList;
     } else if(type === 'sources') {
         list = SourceList;
+    } else if(type === '1users') {
+        list = OneUserList;
     }
     render(ListComponent, {type: type, component: list});
 };
