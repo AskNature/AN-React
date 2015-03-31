@@ -5,21 +5,21 @@ path = require('path');
 var _ = require('lodash');
 
 var Cached = require('cached');
-var userCache;
+var oneUserCache;
 
 var crypto = require('crypto');
 
-var User = require('../models/1user.js');
+var oneUser = require('../models/1user.js');
 
 if(process.env.NODE_ENV === 'production') {
-    userCache = new Cached('1user', { backend: {
+    oneUserCache = new Cached('1user', { backend: {
 	type: 'memcached',
 	hosts: '127.0.0.1:11211'
     }});
 } else {
-    userCache = new Cached('1user');
+    oneUserCache = new Cached('1user');
 }
-userCache.setDefaults({'freshFor': 120});
+oneUserCache.setDefaults({'freshFor': 120});
 
 var loadindex = function(req, res, next) {
   // Render index.html to allow application to handle routing
@@ -29,7 +29,7 @@ var loadindex = function(req, res, next) {
 
 var returnList1 = function(req, res, next) {
   var chain = db
-  .select('name, masterid, first, last, registration_date, "user" as entityType, out("HasStatus").name as status')
+  .select('name, masterid, first, last, registration_date, "1user" as entityType, out("HasStatus").name as status')
   .from('Users');
 
   var limit = parseInt(req.query.limit);
@@ -52,7 +52,7 @@ var returnList1 = function(req, res, next) {
       chain.containsText({'name' : filter});
   }
 
-  userCache.getOrElse('count', Cached.deferred(function(done) {
+  oneUserCache.getOrElse('count', Cached.deferred(function(done) {
       console.log('cache miss');
       db.select('count(*)').from('Users')
       .where({status: 0})
@@ -81,14 +81,14 @@ var returnItem2 = function(req, res, next) {
     };
 
     if(req.query["expand"]) {
-	User.getWithRelationships(req.params.id, callback);
+	oneUser.getWithRelationships(req.params.id, callback);
     } else {
-	User.get(req.params.id, callback);
+	oneUser.get(req.params.id, callback);
     }
 };
 
 var updateItem2 = function(req, res, next) {
-    User.get(req.params.id, function(item) {
+    oneUser.get(req.params.id, function(item) {
 	if(!item) {
 	    return res.status(404).send("No original user with that id exists");
 	} else {
@@ -115,7 +115,7 @@ var createItem2 = function(req, res, next) {
 };
 
 var deleteItem2 = function(req, res, next) {
-    User.destroy(req.params.id, function(err) {
+    oneUser.destroy(req.params.id, function(err) {
 	if(err) {
 	    return res.status(err.code).send(err.message);
 	} else {
@@ -128,7 +128,7 @@ var deleteMultiple2 = function(req, res, next) { // TODO: use async
     console.log(req.body['delete']);
     if(JSON.parse(req.body['delete']) instanceof Array) {
 	JSON.parse(req.body['delete']).forEach(function(item) {
-	    User.destroy(item, function(err) {
+	    oneUser.destroy(item, function(err) {
 		if(err) {
 		    return res.status(err.code).send(err.message);
 		}
@@ -177,7 +177,7 @@ var updateUser1 = function(req, res, next) {
     console.log(JSON.stringify(newData));
     db.update('Users').set(newData)
         .where({masterid:req.params.id}).scalar().then(function(count) {
-            console.log("user updated: " + count);
+            console.log("1user updated: " + count);
 	    res.status(200).send(req.body);
         });
 };

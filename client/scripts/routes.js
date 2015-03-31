@@ -113,6 +113,9 @@ var detail_collection = function(id) {
 var detail_user = function(id) {
     render(DetailComponent, {masterid: id, type: 'users'});};
 
+var detail_1user = function(id) {
+    render(DetailComponent, {masterid: id, type: '1users'});};
+
 var detail_media = function(id) {
     render(DetailComponent, {masterid: id, type: 'media'});};
 
@@ -158,6 +161,7 @@ var routes = {
   '/researcher/:id': detail_researcher,
   '/collection/:id': detail_collection,
   '/user/:id': detail_user,
+  '/1user/:id': detail_1user,
   '/media/:id': detail_media,
 
   '/login': login,

@@ -20,7 +20,8 @@ ProductDetail = require('./detail-product.jsx'),
 ResearcherDetail = require('./detail-researcher.jsx'),
 SourceDetail = require('./detail-source.jsx'),
 StrategyDetail = require('./detail-strategy.jsx'),
-UserDetail = require('./detail-user.jsx');
+UserDetail = require('./detail-user.jsx'),
+OneUserDetail = require('./detail-1user.jsx');
 
 var getState = function() {
   return {
@@ -47,7 +48,7 @@ var DetailComponent = React.createClass({
           } else if(this.props.masterid === 'new'){
               actions.create(this.props.type);
               this.setState({editable: true});
-          } 
+          }
           console.log(this.state);
       },
       _onChange: function() {
@@ -105,6 +106,8 @@ var DetailComponent = React.createClass({
           Template = PhenomenonDetail;
         } else if(this.props.type === 'users') {
           Template = UserDetail;
+        }  else if(this.props.type === '1users') {
+            Template = OneUserDetail;
         } else if(this.props.type === 'collections') {
           Template = CollectionDetail;
         } else if(this.props.type === 'conditions') {

@@ -4,7 +4,7 @@
 var Model = require('./model.js');
 var ListOptions = require('./constants/listoptions.js');
 
-var entityName = 'Users';
+var entityName = 'PassportUser';
 
 var fields = ['name', 'firstName', 'lastName', 'email', 'role', 'provider', 'password', 'passwordToken', 'passwordReset', 'verified', 'verifyToken', 'id'];
 
