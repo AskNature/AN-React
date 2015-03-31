@@ -18,9 +18,11 @@ var TopSection = React.createClass({
         <AdminBar masterid={this.props.data.masterid}
           routename={this.props.routename} pluralroute={this.props.type}
           entityName={this.props.entityName} />
+        {this.props.user === false ? (
         <CreatorMast
           img='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg'
           entityname={this.props.entityName} />
+      ) : ''}
         <Hero
           editable={this.props.editable}
           store={this.props.store}
