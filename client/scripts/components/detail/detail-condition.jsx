@@ -33,7 +33,7 @@ var Template = React.createClass({
           primarytitle={this.props.data.name}
           secondarylink=''
           description={this.props.data.descripition} />
-          
+
         <Grid>
           <Row className='show-grid'>
             <Col xs={12} sm={4}>
@@ -95,7 +95,7 @@ var Template = React.createClass({
             </Row>
 
           </Grid>
-          {this.props.userrole == 'admin' || 'editor' ? (
+          {this.props.user.role === 'admin' ? (
             <PanelGroup defaultActiveKey='0' accordion>
               <Panel header='Table View' eventKey='1'>
                 <DataTable data={data} />

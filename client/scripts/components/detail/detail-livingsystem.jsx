@@ -35,7 +35,7 @@ var Template = React.createClass({
           secondarylink=''
           description={this.props.data.other_names} />
 
-        {this.props.userrole == 'admin' || 'editor' ? (
+        {this.props.user.role === 'admin' ? (
             <PanelGroup defaultActiveKey='0' accordion>
               <Panel header='Table View' eventKey='1'>
                 <DataTable data={data} />

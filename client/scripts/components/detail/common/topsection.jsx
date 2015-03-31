@@ -15,9 +15,11 @@ var TopSection = React.createClass({
     return (
       /* jshint ignore:start */
       <div>
-        <AdminBar masterid={this.props.data.masterid}
-          routename={this.props.routename} pluralroute={this.props.type}
-          entityName={this.props.entityName} />
+        {this.props.user.role === 'admin' ? (
+          <AdminBar masterid={this.props.data.masterid}
+            routename={this.props.routename} pluralroute={this.props.type}
+            entityName={this.props.entityName} />
+        ): ''}
         <CreatorMast
           img='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg'
           entityname={this.props.entityName} />
