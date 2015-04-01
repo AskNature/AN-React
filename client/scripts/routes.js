@@ -8,6 +8,7 @@ var ListComponent = React.createFactory(require('./components/admin/adminlist.js
 CollectionList = require('./components/admin/collection'),
 ContextList = require('./components/admin/context'),
 BSystemList = require('./components/admin/bsystem'),
+DSystemList = require('./components/admin/dsystem'),
 MediaList = require('./components/admin/media'),
 PhenomenonList = require('./components/admin/phenomenon'),
 DStrategyList = require('./components/admin/dstrategy'),
@@ -64,6 +65,8 @@ var list_component = function(type) {
         list = ContextList;
     } else if(type === 'b.system') {
         list = BSystemList;
+    } else if(type === 'd.system') {
+        list = DSystemList;
     } else if(type === 'media') {
         list = MediaList;
     } else if(type === 'researchers') {
@@ -90,6 +93,10 @@ var detail_dstrategy = function(id) {
 
 var detail_bsystem = function(id) {
     render(DetailComponent, {masterid: id, type: 'b.system'});
+};
+
+var detail_dsystem = function(id) {
+    render(DetailComponent, {masterid: id, type: 'd.system'});
 };
 
 var detail_phenomenon = function(id) {
@@ -155,6 +162,7 @@ var routes = {
   '/b.strategy/:id': detail_bstrategy,
   '/d.strategy/:id': detail_dstrategy,
   '/b.system/:id': detail_bsystem,
+  '/d.system/:id': detail_dsystem,
   '/phenomenon/:id': detail_phenomenon,
   '/context/:id': detail_context,
   '/source/:id': detail_source,

@@ -19,7 +19,7 @@ var listItems = [
     },
     {
         'label' : 'Designed Systems',
-        'slug' : '#',
+        'slug' : 'd.system',
         'faIcon' : ''
     },
     {

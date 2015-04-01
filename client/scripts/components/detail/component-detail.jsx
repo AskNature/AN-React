@@ -14,6 +14,7 @@ DefaultLayout = require('../layouts/default.jsx'),
 CollectionDetail = require('./detail-collection.jsx'),
 ContextDetail = require('./detail-context.jsx'),
 BSystemDetail = require('./detail-bsystem.jsx'),
+DSystemDetail = require('./detail-dsystem.jsx'),
 MediaDetail = require('./detail-media.jsx'),
 PhenomenonDetail = require('./detail-phenomenon.jsx'),
 DStrategyDetail = require('./detail-dstrategy.jsx'),
@@ -114,6 +115,8 @@ var DetailComponent = React.createClass({
           Template = ContextDetail;
         } else if(this.props.type === 'b.system') {
           Template = BSystemDetail;
+        } else if(this.props.type === 'd.system') {
+          Template = DSystemDetail;
         } else if(this.props.type === 'media') {
           Template = MediaDetail;
         } else if(this.props.type === 'researchers') {
