@@ -28,9 +28,9 @@ var Template = React.createClass({
     var data = this.props.data;
     var fullname;
     if(this.props.loaded) {
-      fullname = data.first+' '+data.last;
+      fullname = data.firstName+' '+data.lastName;
     }
-    var avatar = 'http://www.asknature.org/images/uploads/user/'+this.props.masterid+'/avatar/lg_avatar.jpg';
+
     return (
       /* jshint ignore:start */
       <div>
@@ -39,36 +39,11 @@ var Template = React.createClass({
           routename={routeNameSingle}
           entityName={entityName}
           primarytitle={fullname}
-          secondarytitle={this.props.data.name}
-          description={this.props.data.special_text}
-          innerimage={avatar}
-          user={true}
+          secondarytitle={this.props.data.username}
+          description={this.props.data.email}
+          userdetail={true}
           />
 
-        <Grid>
-          <Row className='show-grid'>
-            <Col xs={12} sm={4}>
-              <RelationshipList
-                items={data.friends}
-                titleField='name'
-                editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'friends')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'friends')}
-                field={'friends'}
-                routeName='user'
-                title='Friends'
-                fieldName='Friends' />
-            </Col>
-
-          </Row>
-        </Grid>
-        <Grid>
-          <Row>
-            <Col xs={12}>
-              <Gallery items={data} />
-            </Col>
-          </Row>
-        </Grid>
         {this.props.user.role === 'admin' ? (
           <PanelGroup defaultActiveKey='0' accordion>
             <Panel header='Table View' eventKey='1'>

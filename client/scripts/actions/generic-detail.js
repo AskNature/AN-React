@@ -132,7 +132,7 @@ actionType: Constants.COMMIT_SUCCESS,
 fields: fields,
 data: res
    });
-	    if(store.isNew()) { window.location.href = '/strategy/' + masterid; }
+	    if(store.isNew()) { window.location.href = '/'+ type +'/' + masterid; }
         } else {
    Dispatcher.handleViewAction({
 actionType: Constants.COMMIT_ERROR,

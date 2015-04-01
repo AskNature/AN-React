@@ -29,8 +29,8 @@ var loadindex = function(req, res, next) {
 
 var returnList1 = function(req, res, next) {
   var chain = db
-  .select('name, masterid, first, last, registration_date, "user" as entityType, out("HasStatus").name as status')
-  .from('Users');
+  .select('firstName, lastName, masterid, username, role, provider, "user" as entityType')
+  .from('PassportUser');
 
   var limit = parseInt(req.query.limit);
   if(limit) {
@@ -54,7 +54,7 @@ var returnList1 = function(req, res, next) {
 
   userCache.getOrElse('count', Cached.deferred(function(done) {
       console.log('cache miss');
-      db.select('count(*)').from('Users')
+      db.select('count(*)').from('PassportUser')
       .where({status: 0})
       .scalar().then(function(count) {
 	  done(null, count); // return Cached.deferred
@@ -145,13 +145,13 @@ var createUser1 = function(req, res, next) {
         crypto.randomBytes(16, function(err, buf) {
 	    if(err) { return res.status(500).send(); }
             var masterid = buf.toString('hex');
-            db.select('count(*)').from('Users').where({masterid: masterid}).scalar()
+            db.select('count(*)').from('PassportUser').where({masterid: masterid}).scalar()
             .then(function(count) {
                 if(count > 0) {
                     return createWithToken(); // overlapping masterid, try again recursively
                 } else {
                     // do the creation
-                    db.insert().into('Users')
+                    db.insert().into('PassportUser')
                     .set({masterid: masterid, name: 'New user', status: 'raw'}) // TODO: Proper template
                     .all().then(function(results) {
                         // success!
@@ -185,8 +185,8 @@ var updateUser1 = function(req, res, next) {
 var returnItem1 = function(req, res, next) {
   console.log(req.params.id);
   db
-  .select('name')
-  .from('Users')
+  .select('username')
+  .from('PassportUser')
   .where('masterid == "' + req.params.id + '"')
   .all()
   .then(function (results) {
