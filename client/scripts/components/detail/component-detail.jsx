@@ -12,7 +12,7 @@ accountStore = require('../../stores/accounts'),
 DefaultLayout = require('../layouts/default.jsx'),
 
 CollectionDetail = require('./detail-collection.jsx'),
-ContextDetail = require('./detail-condition.jsx'),
+ContextDetail = require('./detail-context.jsx'),
 LivingSystemDetail = require('./detail-livingsystem.jsx'),
 MediaDetail = require('./detail-media.jsx'),
 PhenomenonDetail = require('./detail-phenomenon.jsx'),
@@ -110,7 +110,7 @@ var DetailComponent = React.createClass({
             Template = OneUserDetail;
         } else if(this.props.type === 'collections') {
           Template = CollectionDetail;
-        } else if(this.props.type === 'conditions') {
+        } else if(this.props.type === 'context') {
           Template = ContextDetail;
         } else if(this.props.type === 'living-systems') {
           Template = LivingSystemDetail;

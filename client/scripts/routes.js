@@ -60,7 +60,7 @@ var list_component = function(type) {
         list = UserList;
     } else if(type === 'collections') {
         list = CollectionList;
-    } else if(type === 'conditions') {
+    } else if(type === 'context') {
         list = ContextList;
     } else if(type === 'living-systems') {
         list = LivingSystemList;
@@ -96,8 +96,8 @@ var detail_phenomenon = function(id) {
     render(DetailComponent, {masterid: id, type: 'phenomena'});
 };
 
-var detail_condition = function(id) {
-    render(DetailComponent, {masterid: id, type: 'conditions'});
+var detail_context = function(id) {
+    render(DetailComponent, {masterid: id, type: 'context'});
 };
 
 var detail_source = function(id) {
@@ -156,7 +156,7 @@ var routes = {
   '/d.strategy/:id': detail_dstrategy,
   '/living-system/:id': detail_livingsystems,
   '/phenomenon/:id': detail_phenomenon,
-  '/condition/:id': detail_condition,
+  '/context/:id': detail_context,
   '/source/:id': detail_source,
   '/researcher/:id': detail_researcher,
   '/collection/:id': detail_collection,

@@ -39,7 +39,7 @@ var listItems = [
     },
     {
         'label' : 'Context',
-        'slug' : 'conditions',
+        'slug' : 'context',
         'faIcon' : 'cloud'
     },
     {
