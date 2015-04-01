@@ -14,6 +14,8 @@ DataTable = require('./common/datatable.jsx'),
 Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
+Button = require('react-bootstrap').Button,
+Glyphicon = require('react-bootstrap/Glyphicon'),
 Panel = require('react-bootstrap/Panel'),
 PanelGroup = require('react-bootstrap/PanelGroup'),
 Col = require('react-bootstrap/Col'),
@@ -49,8 +51,25 @@ var Template = React.createClass({
                   onRemove={this.props.onRelationshipRemove.bind(null, 'living_systems')}
                   field={'living_systems'}
                   routeName={'living-system'}
-                  title={'Higher Order'}
-                  fieldName={'Higher Order'}/>
+                  title={'Higher Level System'}
+                  fieldName={'Higher Level System'}/>
+                  <Button bsStyle='link' block
+                        disabled={true} >
+                      <Glyphicon glyph='arrow-down' />
+                  </Button>
+                  <h5 style={{fontWeight: 'bold',marginLeft:'12px'}}>
+                    {this.props.data.common_name ? this.props.data.common_name : 'Common Name'}
+                    <br/>
+                    <small>
+                      {this.props.data.taxon}: <i>{this.props.data.name}</i>
+                  </small>
+                  </h5>
+                  {data.children ? (
+                  <Button bsStyle='link' block
+                        disabled={true} >
+                      <Glyphicon glyph='arrow-down' />
+                  </Button>
+                  ) : ''}
                 <RelationshipList
                   items={data.children}
                   editable={false}
@@ -59,8 +78,8 @@ var Template = React.createClass({
                   onRemove={this.props.onRelationshipRemove.bind(null, 'living_systems')}
                   field={'living_systems'}
                   routeName={'living-system'}
-                  title={'Lower Orders'}
-                  fieldName={'Lower Orders'}/>
+                  title={'Lower Level System'}
+                  fieldName={'Lower Level System'}/>
               </Col>
               <Col xs={6} sm={4}>
                 <RelationshipList

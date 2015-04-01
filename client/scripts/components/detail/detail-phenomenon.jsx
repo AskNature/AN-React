@@ -11,6 +11,8 @@ DataTable = require('./common/datatable.jsx'),
 Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
+Button = require('react-bootstrap').Button,
+Glyphicon = require('react-bootstrap/Glyphicon'),
 Panel = require('react-bootstrap/Panel'),
 PanelGroup = require('react-bootstrap/PanelGroup'),
 Col = require('react-bootstrap/Col'),
@@ -21,7 +23,7 @@ var Template = React.createClass({
 
   render: function() {
     var routeNameSingle = 'phenomenon';
-    var entityName = 'Phenomena';
+    var entityName = 'Function & Mechanism';
     var data = this.props.data;
     return (
       /* jshint ignore:start */
@@ -30,10 +32,11 @@ var Template = React.createClass({
           {...this.props}
           routename={routeNameSingle}
           entityName={entityName}
+          datatype={entityName}
           primarytitle={this.props.data.name}
           secondarytitle=''
           secondarylink=''
-          description={this.props.data.description} />
+          description={this.props.data.description ? this.props.data.description : 'Description goes here.'} />
 
         <Grid>
           <Row className='show-grid'>
@@ -45,9 +48,20 @@ var Template = React.createClass({
                 onRemove={this.props.onRelationshipRemove.bind(null, 'parent')}
                 field={'function'}
                 routeName='phenomenon'
-                title='Parent Phenomenon'
-                fieldName='Parent Phenomenon'
+                title='Higher Level Functions & Mechanisms'
+                fieldName='Higher Level Functions & Mechanisms'
                 titleField={'name'} />
+              <Button bsStyle='link' block
+                    disabled={true} >
+                  <Glyphicon glyph='arrow-down' />
+              </Button>
+              <h5 style={{marginLeft:'12px', fontWeight: 'bold'}}>
+                {this.props.data.name}
+              </h5>
+              <Button bsStyle='link' block
+                    disabled={true} >
+                  <Glyphicon glyph='arrow-down' />
+              </Button>
               <RelationshipList
                 items={data.children}
                 editable={this.props.editable}
@@ -55,8 +69,8 @@ var Template = React.createClass({
                 onRemove={this.props.onRelationshipRemove.bind(null, 'children')}
                 field={'functions'}
                 routeName='phenomenon'
-                title='Child Phenomena'
-                fieldName='Child Phenomena'
+                title='Lower Level Functions & Mechanisms'
+                fieldName='Lower Level Functions & Mechanisms'
                 titleField={'name'} />
             </Col>
             <Col xs={12} sm={4}>
