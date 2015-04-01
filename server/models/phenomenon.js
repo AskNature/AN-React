@@ -11,17 +11,8 @@ var fields = ['name', 'short_name', 'description', 'flag_text', 'flag_media', 'f
 
 var Function = new Model('Function',
     [
-        'name'
-    ]
-);
-var Outcome = new Model('Outcome',
-    [
-        'name'
-    ]
-);
-var Mechanism = new Model('Mechanism',
-    [
-        'name'
+        'name',
+        '@class'
     ]
 );
 var Status = new Model('ContentStatus',
