@@ -42,7 +42,7 @@ var Template = React.createClass({
           secondarytitle={this.props.data.name}
           description={this.props.data.special_text}
           innerimage={avatar}
-          user={true}
+          userdetail={true}
           />
 
         <Grid>
@@ -69,7 +69,7 @@ var Template = React.createClass({
             </Col>
           </Row>
         </Grid>
-        {this.props.userrole == 'admin' || 'editor' ? (
+        {this.props.user.role == 'admin' ? (
           <PanelGroup defaultActiveKey='0' accordion>
             <Panel header='Table View' eventKey='1'>
               <DataTable data={data} />
