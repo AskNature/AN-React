@@ -23,6 +23,7 @@ var HeroComponent = React.createClass({
         };
       } else {
         heroStyle = {
+          backgroundImage: 'url(/images/lichen.JPG)',
           height: '300px !important'
         };
       }
@@ -44,44 +45,27 @@ var HeroComponent = React.createClass({
                 </div>
               ) : '' }
                 <div className='media-body'>
-                  <h3 className="animated fadeInDown">
-                    {this.props.editable ? (
-                      <span>
-                        <strong>
-                          <TextArea
-                            item={this.props.editable ? this.props.name : this.props.primarytitle}
-                            editable={this.props.editable}
-                            store={this.props.store}
-                            actions={this.props.actions}
-                            fieldName='name'
-                            placeholder='Enter a name' />
-                        </strong>
-                        <small>
-                          Slug: {this.props.masterid}
-                        </small>
-                      </span>
-                    ) : (
-                      <span>
-                        <strong>
-                          {this.props.primarytitle}
-                        </strong>
-                        <br/>
-                        <small>
-                          {this.props.secondarylink ? (
-                            <Link url={this.props.secondarylink}>
-                              <i>
-                                {this.props.secondarytitle}
-                              </i>
-                            </Link>
-                          ) : (
-                            <i>
-                              {this.props.secondarytitle}
-                            </i>
-                          )}
-                        </small>
-                      </span>
-                    )}
+                  <h6 className="animated fadeInDown" style={{textTransform:'uppercase',fontWeight:'800',color:'#ffffff', marginBottom: 0}}>
+                    {this.props.datatype}
+                  </h6>
+                  <h3 className="animated fadeInDown" style={{marginTop: '8px', marginBottom: 0, fontWeight: '800'}}>
+                      <TextArea
+                        item={!this.props.editable && this.props.primarydisplay ? this.props.primarydisplay : this.props.primarytitle}
+                        editable={this.props.editable}
+                        store={this.props.store}
+                        actions={this.props.actions}
+                        fieldName='name'
+                        placeholder='Enter a name' />
                   </h3>
+                  <h5 style={{fontWeight: '600', color: '#ffffff', fontStyle: 'italic', marginTop: 0}}>
+                    {this.props.secondarylink ? (
+                      <Link url={this.props.secondarylink}>
+                          {this.props.secondarytitle}
+                      </Link>
+                    ) : (
+                        <span>{this.props.secondarytitle}</span>
+                    ) }
+                  </h5>
                 </div>
               </div>
             </Col>

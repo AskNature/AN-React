@@ -6,7 +6,7 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'LivingSystem';
 
-var fields = ['name', 'taxon', 'common_name', 'gbif_id', 'other_names', 'taxon', 'parent_id', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'taxon', 'common_name', 'gbif_id', 'other_names', 'taxon', 'parent_id', 'flag_text', 'flag_media', 'flag_tags', 'description'];
 
 var Entity = new Model('Entity',
     [
@@ -15,7 +15,7 @@ var Entity = new Model('Entity',
 );
 var LivingSystem = new Model('Outcome',
     [
-        'name'
+        'name', 'taxon'
     ]
 );
 var Collection = new Model('Mechanism',
@@ -26,6 +26,17 @@ var Collection = new Model('Mechanism',
 var Status = new Model('ContentStatus',
   [
       'masterid',
+      'name'
+  ]
+);
+var Source = new Model('Source',
+  [
+      'name',
+      'authors'
+  ]
+);
+var Team = new Model('Team',
+  [
       'name'
   ]
 );
@@ -47,6 +58,16 @@ var relationships = {
         model: LivingSystem,
         className: 'LivingSystem',
         edge: 'in("ChildSystemOf")'
+    },
+    'out_featuredin': {
+        model: Source,
+        className: 'Source',
+        edge: 'out("FeaturedIn")'
+    },
+    'out_studiedby': {
+        model: Team,
+        className: 'Team',
+        edge: 'out("StudiedBy")'
     },
     'status': {
     model: Status,

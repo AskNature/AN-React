@@ -15,7 +15,7 @@ var TopSection = React.createClass({
     return (
       /* jshint ignore:start */
       <div>
-        {this.props.user.role === 'admin' ? (
+        {this.props.user.role === 'superstar' ? (
           <AdminBar masterid={this.props.data.masterid}
             routename={this.props.routename} pluralroute={this.props.type}
             entityName={this.props.entityName} />
@@ -28,10 +28,12 @@ var TopSection = React.createClass({
           store={this.props.store}
           actions={this.props.actions}
           media={this.props.data.media}
+          datatype={this.props.datatype}
           primarytitle={this.props.primarytitle}
+          primarydisplay={this.props.primarydisplay}
           secondarytitle={this.props.secondarytitle}
           secondarylink={this.props.secondarylink}
-	  name={this.props.data.name}
+	        name={this.props.data.name}
           masterid={this.props.masterid}
           innerimage={this.props.innerimage} />
         <SubHero

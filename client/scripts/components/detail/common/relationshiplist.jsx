@@ -4,7 +4,9 @@ var React = require('react'),
 
 ListGroup = require('react-bootstrap').ListGroup,
 RelationshipListItem = require('./relationshiplistitem.jsx'),
-RelationshipListItemInput = require('./relationshiplistiteminput.jsx');
+RelationshipListItemInput = require('./relationshiplistiteminput.jsx'),
+
+Label = require('react-bootstrap').Label;
 
 var RelationshipList = React.createClass({
   onAdd: function(added) {
@@ -18,12 +20,17 @@ var RelationshipList = React.createClass({
   },
   render: function() {
     console.log('Rendering list for '+this.props.title);
+
     return (
       <div>
         <h6>
           <strong>
             {this.props.title}
           </strong>
+          &nbsp;
+          <Label>
+            {this.props.items ? this.props.items.length : ''}
+          </Label>
         </h6>
 
           {this.props.items ? this.props.items.map(function(item,i) {
