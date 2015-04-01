@@ -1,5 +1,5 @@
 /**
-* StrategyConsole Component
+* Adminlist Component
 */
 'use strict';
 

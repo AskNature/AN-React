@@ -31,7 +31,7 @@ var Template = React.createClass({
           primarytitle={this.props.name}
           description={this.props.data.description} />
 
-          {this.props.userrole == 'admin' || 'editor' ? (
+          {this.props.user.role === 'admin' ? (
             <PanelGroup defaultActiveKey='0' accordion>
               <Panel header='Table View' eventKey='1'>
                 <DataTable data={data} />

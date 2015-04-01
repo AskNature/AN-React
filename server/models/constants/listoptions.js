@@ -13,11 +13,14 @@ var ContentStatus = [
 ];
 
 var UserStatus = [
-    {label: 'Approved', masterid:'approved'},
-    {label: 'Probation', masterid:'probation'},
+    {label: 'Participant (Probationary)', masterid:'participant-probationary'},
+    {label: 'Participant', masterid:'participant'},
+    {label: 'Editor', masterid:'editor'},
+    {label: 'Admin', masterid:'admin'},
+    {label: 'Owner', masterid:'owner'},
     {label: 'Watchlist', masterid:'watchlist'},
     {label: 'Revoked', masterid:'revoked'},
-    {label: 'Spam', masterid:'spam'},
+    {label: 'Spam', masterid:'spam'}
 ];
 
 // Todo: Add UserStatus

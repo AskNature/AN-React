@@ -33,7 +33,7 @@ var listItems = [
         'faIcon' : 'recycle'
     },
     {
-        'label' : 'F&M',
+        'label' : 'Functions & Mechanisms',
         'slug' : 'phenomena',
         'faIcon' : 'fire'
     },

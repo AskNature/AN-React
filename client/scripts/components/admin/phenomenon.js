@@ -1,8 +1,8 @@
 'use strict';
 
 var List = {
-    'plural_name' : 'Phenomena',
-    'singular_name' : 'Phenomenon',
+    'plural_name' : 'Functions & Mechanisms',
+    'singular_name' : 'Function & Mechanism',
     'slug': 'phenomenon',
     'columns' : [
       {columnName:'masterid', displayName:'id', type:'id'},
