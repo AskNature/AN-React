@@ -23,6 +23,9 @@ var listItems = [
         'faIcon' : ''
     },
     {
+        'class' : 'divider'
+    },
+    {
         'label' : 'Biological Strategies',
         'slug' : 'strategies',
         'faIcon' : 'leaf'
@@ -31,6 +34,9 @@ var listItems = [
         'label' : 'Designed Strategies',
         'slug' : 'products',
         'faIcon' : 'recycle'
+    },
+    {
+        'class' : 'divider'
     },
     {
         'label' : 'Functions & Mechanisms',
@@ -46,6 +52,9 @@ var listItems = [
         'label' : 'Collections',
         'slug' : 'collections',
         'faIcon' : 'bookmark'
+    },
+    {
+        'class' : 'divider'
     },
     {
         'label' : 'Stories',
@@ -68,9 +77,15 @@ var listItems = [
         'faIcon' : 'university'
     },
     {
+        'class' : 'divider'
+    },
+    {
         'label' : 'Media',
         'slug' : 'media',
         'faIcon' : 'photo'
+    },
+    {
+        'class' : 'divider'
     },
     {
         'label' : 'Original Users',
@@ -81,7 +96,23 @@ var listItems = [
         'label' : 'Users',
         'slug' : 'users',
         'faIcon' : 'users'
-    }
+    },
+    {
+        'class' : 'divider'
+    },
+    {
+        'label' : 'Static Pages',
+        'slug' : 'info',
+        'faIcon' : 'info'
+    },
+    {
+        'class' : 'divider'
+    },
+    {
+        'label' : 'Advertisements',
+        'slug' : 'ads',
+        'faIcon' : ''
+    },
 ];
 
 var SidebarComponent = React.createClass({
@@ -99,6 +130,9 @@ var SidebarComponent = React.createClass({
                                 {
                                     listItems.map(function(item,i){
                                         return (
+                                            item.class ? (
+                                                <li className={item.class}></li>
+                                            ) : (
                                             <li eventKey={i}>
                                                 <Link url={'/list/'+item.slug}>
                                                     <FontAwesome
@@ -109,6 +143,7 @@ var SidebarComponent = React.createClass({
                                                         &nbsp; {item.label}
                                                 </Link>
                                             </li>
+                                        )
                                         );
                                     })
                                 }
