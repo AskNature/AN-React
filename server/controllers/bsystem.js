@@ -5,31 +5,31 @@ path = require('path');
 var _ = require('lodash');
 
 var Cached = require('cached');
-var livingsystemCache;
+var bsystemCache;
 
 var crypto = require('crypto');
 
-var Source = require('../models/livingsystem.js');
+var Source = require('../models/bsystem.js');
 
 if(process.env.NODE_ENV === 'production') {
-    livingsystemCache = new Cached('livingsystem', { backend: {
+    bsystemCache = new Cached('bsystem', { backend: {
 	type: 'memcached',
 	hosts: '127.0.0.1:11211'
     }});
 } else {
-    livingsystemCache = new Cached('livingsystem');
+    bsystemCache = new Cached('bsystem');
 }
-livingsystemCache.setDefaults({'expire': 0});
+bsystemCache.setDefaults({'expire': 0});
 
 var loadindex = function(req, res, next) {
   // Render index.html to allow application to handle routing
    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
-   console.log('The livingsystem page has access to the ' + db.name + ' database.');
+   console.log('The bsystem page has access to the ' + db.name + ' database.');
 };
 
 var returnList1 = function(req, res, next) {
   var chain = db
-  .select('name, masterid, taxon, in("HasLivingSystem").name as has_living_system, common_name, "living-system" as entityType, out("HasStatus").name as status, flag_text, flag_tags, flag_media')
+  .select('name, masterid, taxon, in("HasLivingSystem").name as has_living_system, common_name, "b.system" as entityType, out("HasStatus").name as status, flag_text, flag_tags, flag_media')
   .from('LivingSystem');
 
   var limit = parseInt(req.query.limit);
@@ -52,7 +52,7 @@ var returnList1 = function(req, res, next) {
       chain.containsText({'name' : filter});
   }
 
-  livingsystemCache.getOrElse('count', Cached.deferred(function(done) {
+  bsystemCache.getOrElse('count', Cached.deferred(function(done) {
       console.log('cache miss');
       db.select('count(*)').from('LivingSystem')
       .scalar().then(function(count) {
@@ -65,7 +65,7 @@ var returnList1 = function(req, res, next) {
 	      count: count,
 	      maxPages: Math.ceil(count/limit)
 	  });
-	  console.log('The livingsystem controller has sent ' + results.length + ' records.');
+	  console.log('The bsystem controller has sent ' + results.length + ' records.');
       }).done();
   });
 };
@@ -73,7 +73,7 @@ var returnList1 = function(req, res, next) {
 var returnItem2 = function(req, res, next) {
     var callback = function(item) {
         if(!item) {
-            return res.status(404).send("No livingsystem with that id exists");
+            return res.status(404).send("No bsystem with that id exists");
         } else {
             return res.status(200).json(item);
 	    }
@@ -89,7 +89,7 @@ var returnItem2 = function(req, res, next) {
 var updateItem2 = function(req, res, next) {
     Source.get(req.params.id, function(item) {
 	if(!item) {
-	    return res.status(404).send("No livingsystem with that id exists");
+	    return res.status(404).send("No bsystem with that id exists");
 	} else {
 	    item.set(req.body).save(function(err, savedItem) {
 		if(err) {
@@ -151,7 +151,7 @@ var createSource1 = function(req, res, next) {
                 } else {
                     // do the creation
                     db.insert().into('LivingSystem')
-                    .set({masterid: masterid, name: 'New livingsystem', status: 'raw'}) // TODO: Proper template
+                    .set({masterid: masterid, name: 'New bsystem', status: 'raw'}) // TODO: Proper template
                     .all().then(function(results) {
                         // success!
                         return res.status(200).json({
@@ -171,12 +171,12 @@ var createSource1 = function(req, res, next) {
     }
 };
 
-var updateLivingSystem1 = function(req, res, next) {
+var updateBSystem1 = function(req, res, next) {
     var newData = {name: req.body.name};
     console.log(JSON.stringify(newData));
     db.update('LivingSystem').set(newData)
         .where({masterid:req.params.id}).scalar().then(function(count) {
-            console.log("livingsystem updated: " + count);
+            console.log("bsystem updated: " + count);
 	    res.status(200).send(req.body);
         });
 };
@@ -184,7 +184,7 @@ var updateLivingSystem1 = function(req, res, next) {
 var returnItem1 = function(req, res, next) {
   console.log(req.params.id);
   db
-  .select('name, secondary_title, masterid, status, type, in("FeaturedIn").size() as featured_count, in("FeaturedIn").name as featured_in, "livingsystem" as entityType, type, both("Added").name as added, timestamp')
+  .select('name, secondary_title, masterid, status, type, in("FeaturedIn").size() as featured_count, in("FeaturedIn").name as featured_in, "bsystem" as entityType, type, both("Added").name as added, timestamp')
   .from('LivingSystem')
   .where('masterid == "' + req.params.id + '"')
   .all()
@@ -201,7 +201,7 @@ var returnItem1 = function(req, res, next) {
       loadindex: loadindex,
       returnList1: returnList1,
       returnItem1: returnItem1,
-      updateLivingSystem1: updateLivingSystem1,
+      updateBSystem1: updateBSystem1,
       returnItem2: returnItem2,
       updateItem2: updateItem2,
       createItem2: createItem2,

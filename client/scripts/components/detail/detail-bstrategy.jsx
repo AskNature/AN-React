@@ -51,11 +51,11 @@ var Template = React.createClass({
                 <RelationshipList
                   items={data.living_systems}
                   editable={this.props.editable}
-                  titleField='name'
+                  titleField={'name'}
                   onAdd={this.props.onRelationshipAdd.bind(null, 'living_systems')}
                   onRemove={this.props.onRelationshipRemove.bind(null, 'living_systems')}
                   field={'living_systems'}
-                  routeName={'living-system'}
+                  routeName={'b.system'}
                   title={'Living Systems'}
                   fieldName={'Living Systems'}/>
                 <RelationshipList

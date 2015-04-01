@@ -2,9 +2,9 @@
 
 var List = {
 
-    'plural_name' : 'Living Systems',
-    'singular_name' : 'Living System',
-    'slug': 'living_system',
+    'plural_name' : 'Biological Systems',
+    'singular_name' : 'Biological System',
+    'slug': 'b.system',
     'columns' : [
       {columnName:'masterid', displayName:'id', type:'id'},
       {columnName:'taxon', displayName:'Taxon', type:'id'},

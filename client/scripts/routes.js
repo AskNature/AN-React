@@ -7,7 +7,7 @@ var IndexPage = React.createFactory(require('./components/index.jsx'));
 var ListComponent = React.createFactory(require('./components/admin/adminlist.jsx')),
 CollectionList = require('./components/admin/collection'),
 ContextList = require('./components/admin/context'),
-LivingSystemList = require('./components/admin/livingsystem'),
+BSystemList = require('./components/admin/bsystem'),
 MediaList = require('./components/admin/media'),
 PhenomenonList = require('./components/admin/phenomenon'),
 DStrategyList = require('./components/admin/dstrategy'),
@@ -21,7 +21,7 @@ var DetailComponent = React.createFactory(require('./components/detail/component
 
 var ProductDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
 var StrategyDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
-var LivingSystemsDetail = React.createFactory(require('./components/detail/livingsystem.jsx'));
+var BSystemDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
 var PhenomenonDetail = React.createFactory(require('./components/detail/phenomenon.jsx'));
 var ConditionDetail = React.createFactory(require('./components/detail/condition.jsx'));
 var SourceDetail = React.createFactory(require('./components/detail/source.jsx'));
@@ -62,8 +62,8 @@ var list_component = function(type) {
         list = CollectionList;
     } else if(type === 'context') {
         list = ContextList;
-    } else if(type === 'living-systems') {
-        list = LivingSystemList;
+    } else if(type === 'b.system') {
+        list = BSystemList;
     } else if(type === 'media') {
         list = MediaList;
     } else if(type === 'researchers') {
@@ -88,8 +88,8 @@ var detail_dstrategy = function(id) {
     render(DetailComponent, {masterid: id, type: 'd.strategy'});
 };
 
-var detail_livingsystems = function(id) {
-    render(DetailComponent, {masterid: id, type: 'living-systems'});
+var detail_bsystem = function(id) {
+    render(DetailComponent, {masterid: id, type: 'b.system'});
 };
 
 var detail_phenomenon = function(id) {
@@ -154,7 +154,7 @@ var routes = {
 
   '/b.strategy/:id': detail_bstrategy,
   '/d.strategy/:id': detail_dstrategy,
-  '/living-system/:id': detail_livingsystems,
+  '/b.system/:id': detail_bsystem,
   '/phenomenon/:id': detail_phenomenon,
   '/context/:id': detail_context,
   '/source/:id': detail_source,

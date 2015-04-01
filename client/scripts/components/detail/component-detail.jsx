@@ -13,7 +13,7 @@ DefaultLayout = require('../layouts/default.jsx'),
 
 CollectionDetail = require('./detail-collection.jsx'),
 ContextDetail = require('./detail-context.jsx'),
-LivingSystemDetail = require('./detail-livingsystem.jsx'),
+BSystemDetail = require('./detail-bsystem.jsx'),
 MediaDetail = require('./detail-media.jsx'),
 PhenomenonDetail = require('./detail-phenomenon.jsx'),
 DStrategyDetail = require('./detail-dstrategy.jsx'),
@@ -112,8 +112,8 @@ var DetailComponent = React.createClass({
           Template = CollectionDetail;
         } else if(this.props.type === 'context') {
           Template = ContextDetail;
-        } else if(this.props.type === 'living-systems') {
-          Template = LivingSystemDetail;
+        } else if(this.props.type === 'b.system') {
+          Template = BSystemDetail;
         } else if(this.props.type === 'media') {
           Template = MediaDetail;
         } else if(this.props.type === 'researchers') {

@@ -14,7 +14,7 @@ var ReactCSSTransition = React.addons.CSSTransitionGroup;
 var listItems = [
     {
         'label' : 'Biological Systems',
-        'slug' : '#',
+        'slug' : 'b.system',
         'faIcon' : 'tree',
     },
     {
