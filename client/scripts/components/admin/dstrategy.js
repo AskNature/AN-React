@@ -3,7 +3,7 @@
 var List = {
     'plural_name' : 'Designed Strategies',
     'singular_name' : 'Designed Strategy',
-    'slug': 'product',
+    'slug': 'd.strategy',
     'columns' : [
       {columnName:'masterid', displayName:'id', type:'id'},
       {columnName:'description', displayName:'Name', type:'link'},

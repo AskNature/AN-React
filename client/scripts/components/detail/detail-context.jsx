@@ -20,7 +20,7 @@ Grid = require('react-bootstrap/Grid');
 var Template = React.createClass({
 
   render: function() {
-    var routeNameSingle = 'condition';
+    var routeNameSingle = 'context';
     var entityName = 'Context';
     var data = this.props.data;
     return (

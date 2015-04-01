@@ -23,7 +23,7 @@ var Select = require('react-select');
 var Template = React.createClass({
 
   render: function() {
-    var routeNameSingle = 'strategy';
+    var routeNameSingle = 'b.strategy';
     var entityName = 'Biological Strategies';
     var data = this.props.data;
     var primaryTitle = data.name;
@@ -51,11 +51,11 @@ var Template = React.createClass({
                 <RelationshipList
                   items={data.living_systems}
                   editable={this.props.editable}
-                  titleField='name'
+                  titleField={'name'}
                   onAdd={this.props.onRelationshipAdd.bind(null, 'living_systems')}
                   onRemove={this.props.onRelationshipRemove.bind(null, 'living_systems')}
                   field={'living_systems'}
-                  routeName={'living-system'}
+                  routeName={'b.system'}
                   title={'Living Systems'}
                   fieldName={'Living Systems'}/>
                 <RelationshipList
@@ -187,9 +187,9 @@ var Template = React.createClass({
                     onAdd={this.props.onRelationshipAdd.bind(null, 'products')}
                     onRemove={this.props.onRelationshipRemove.bind(null, 'products')}
                     field={'products'}
-                    routeName={'product'}
-                    title={'Inspired Solutions'}
-                    fieldName={'Inspired Solution'}/>
+                    routeName={'d.strategy'}
+                    title={'Inspired Designed Strategies'}
+                    fieldName={'Inspired Designed Strategies'}/>
     				    </Col>
 	            </Row>
         			<Row className='show-grid'>

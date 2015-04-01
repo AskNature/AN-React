@@ -81,7 +81,7 @@ var RelationshipListItem = React.createClass({
     var link = '../' + routeName + '/' + item.masterid;
     var title = this.props.titleField;
     var subTitle= this.props.subtitleField;
-    if (routeName === 'living-system')  {
+    if (routeName === 'b.system')  {
       title = 'Common Name';
       subTitle = this.props.item.taxon + ': ' + this.props.item.name;
     }

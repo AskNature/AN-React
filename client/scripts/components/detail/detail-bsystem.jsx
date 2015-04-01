@@ -24,7 +24,7 @@ Grid = require('react-bootstrap/Grid');
 
 var Template = React.createClass({
   render: function() {
-    var routeNameSingle = 'living-system';
+    var routeNameSingle = 'b.system';
     var entityName = 'Biological System';
     var data = this.props.data;
     return (
@@ -50,7 +50,7 @@ var Template = React.createClass({
                   onAdd={this.props.onRelationshipAdd.bind(null, 'living_systems')}
                   onRemove={this.props.onRelationshipRemove.bind(null, 'living_systems')}
                   field={'living_systems'}
-                  routeName={'living-system'}
+                  routeName={'b.system'}
                   title={'Higher Level System'}
                   fieldName={'Higher Level System'}/>
                   <Button bsStyle='link' block
@@ -77,7 +77,7 @@ var Template = React.createClass({
                   onAdd={this.props.onRelationshipAdd.bind(null, 'living_systems')}
                   onRemove={this.props.onRelationshipRemove.bind(null, 'living_systems')}
                   field={'living_systems'}
-                  routeName={'living-system'}
+                  routeName={'b.system'}
                   title={'Lower Level System'}
                   fieldName={'Lower Level System'}/>
               </Col>
@@ -89,7 +89,7 @@ var Template = React.createClass({
                   onAdd={this.props.onRelationshipAdd.bind(null,'strategies')}
                   onRemove={this.props.onRelationshipRemove.bind(null, 'strategies')}
                   field={'strategies'}
-                  routeName={'strategy'}
+                  routeName={'b.strategy'}
                   title={'Biological Strategies'}
                   fieldName={'Biological Strategies'}/>
                 </Col>

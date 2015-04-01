@@ -14,12 +14,12 @@ var ReactCSSTransition = React.addons.CSSTransitionGroup;
 var listItems = [
     {
         'label' : 'Biological Systems',
-        'slug' : '#',
+        'slug' : 'b.system',
         'faIcon' : 'tree',
     },
     {
         'label' : 'Designed Systems',
-        'slug' : '#',
+        'slug' : 'd.system',
         'faIcon' : ''
     },
     {
@@ -27,12 +27,12 @@ var listItems = [
     },
     {
         'label' : 'Biological Strategies',
-        'slug' : 'strategies',
+        'slug' : 'b.strategy',
         'faIcon' : 'leaf'
     },
     {
         'label' : 'Designed Strategies',
-        'slug' : 'products',
+        'slug' : 'd.strategy',
         'faIcon' : 'recycle'
     },
     {
@@ -45,7 +45,7 @@ var listItems = [
     },
     {
         'label' : 'Context',
-        'slug' : 'conditions',
+        'slug' : 'context',
         'faIcon' : 'cloud'
     },
     {
