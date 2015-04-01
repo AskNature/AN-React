@@ -14,7 +14,7 @@ Glyphicon = require('react-bootstrap').Glyphicon;
 
 var AdminBar = React.createClass({
   render: function() {
-    var console_url = '../admin/' + this.props.pluralroute;
+    var console_url = '../list/' + this.props.pluralroute;
     var legacy_url = 'http://www.asknature.org/'+ this.props.routename +'/'+ this.props.masterid;
     return (
       /* jshint ignore:start */
@@ -22,6 +22,7 @@ var AdminBar = React.createClass({
         <ButtonToolbar>
           <Link url={console_url}><Button bsSize="small"><Glyphicon glyph="chevron-left" /> {this.props.entityname} Console</Button></Link>
           <Button bsSize="small" href={legacy_url} target="_blank" bsStyle="primary">View on legacy site</Button>
+          <span style={{marginLeft:'15px',color:'#ccc'}}><strong>ID: </strong>{this.props.masterid}</span>
         </ButtonToolbar>
       </Panel>
       /* jshint ignore:end */

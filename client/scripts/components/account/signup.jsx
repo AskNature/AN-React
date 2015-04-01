@@ -4,15 +4,16 @@ NoChromeLayout = require('../layouts/nochrome.jsx'),
 Link = require('../modules/link.jsx'),
 
 Button = require('react-bootstrap').Button,
+ButtonGroup = require('react-bootstrap').ButtonGroup,
 Grid = require('react-bootstrap').Grid,
 Row = require('react-bootstrap').Row,
 Col = require('react-bootstrap').Col,
-Panel = require('react-bootstrap').Panel,
+Modal = require('react-bootstrap').Modal,
 Input = require('react-bootstrap').Input;
 
 var FormData = require('react-form-data');
 
-var userActions = require('../../actions/users');
+var accountActions = require('../../actions/accounts');
 var routeActions = require('../../actions/routes');
 
 var Login = React.createClass({
@@ -32,14 +33,15 @@ var Login = React.createClass({
   },
 
   handleSubmit: function(e) {
-    userActions.createUser(this.formData, this.createSuccess, this.createFailure);
+    accountActions.createUser(this.formData, this.createSuccess, this.createFailure);
     e.preventDefault();
   },
 
   render: function() {
-    var title = (
-      <h2>Sign up</h2>
-    )
+    var title = 'Sign Up';
+    function handleHide() {
+      window.history.back();
+    }
     return (
       /* jshint ignore:start */
       <NoChromeLayout>
@@ -47,18 +49,22 @@ var Login = React.createClass({
           <Grid>
             <Row className="show-grid">
               <Col xs={12} md={6} mdOffset={3}>
-                <Panel header={title} id="login-panel">
+                <Modal title={title} id="login-panel" bsStyle="primary" backdrop={false} onRequestHide={handleHide}>
+                  <div className='modal-body'>
                   <form onChange={this.updateFormData} onSubmit={this.handleSubmit}>
                     <Row className="show-grid">
                       <Col xs={12}>
                         <Input name="email" type="email" placeholder="Email Address" bsStyle={this.state.style} />
                         <Input name="password" type="password" placeholder="Password" />
-                        <Input className="pull-right" type="submit" bsStyle="primary" value="Sign Up" />
-                      </Col>
+                          <ButtonGroup className="pull-right">
+                            <Button onClick={handleHide}>Close</Button>
+                            <Button type="submit" bsStyle="primary">Login</Button>
+                        </ButtonGroup>
+                                              </Col>
                       <Col xs={12}>
                         <h6>Or sign up with your existing account:</h6>
                         <ButtonGroup justified>
-                          <Button href='/auth/google'><Glyphicon glyph="social-google-plus" />Google</Button>
+                          <Button href='/auth/google'>Google</Button>
                           <Button href='/auth/facebook'>Facebook</Button>
                           <Button href='/auth/linkedin'>LinkedIn</Button>
                         </ButtonGroup>
@@ -68,7 +74,8 @@ var Login = React.createClass({
                     </Row>
 
                   </form>
-                </Panel>
+                </div>
+                </Modal>
               </Col>
             </Row>
           </Grid>

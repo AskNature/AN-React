@@ -56,10 +56,11 @@ module.exports = {
     });
   },
 
-  getListPaginated: function(index, size, sortCol, asc, callback) {
+  getListPaginated: function(index, size, sortCol, asc, filter, callback) {
     var self = this;
     var getString = '/api/products?offset='+index*size+'&limit='+size;
     if (sortCol) { getString += '&order='+(asc ? '+' : '-')+sortCol; }
+    if (filter) { getString += '&filter='+filter; }
     request.get(getString)
     .type('json')
     .end(function(res) {
@@ -67,7 +68,6 @@ module.exports = {
         if (res) {
           var listData = res.body;
           self.setList(listData);
-          console.log(res.body);
         }
         if (callback && callback.success) {
           callback.success(res);
@@ -82,8 +82,9 @@ module.exports = {
       if (callback && callback.complete) {
         callback.complete(res);
       }
-    });
+    });    
   },
+
 
   setItem: function(focus, next) {
     Dispatcher.handleViewAction({

@@ -13,6 +13,16 @@ var infinite = function(req, res) {
     res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
 };
 
+var relationships = function(req, res) {
+    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
+};
+
+var strategy = function(req, res) {
+    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
+};
+
 module.exports = {
-    infinite: infinite
+    infinite: infinite,
+    relationships: relationships,
+    strategy: strategy
 };

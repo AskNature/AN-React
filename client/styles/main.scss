@@ -3,6 +3,11 @@
 // Box sizing partial styles:
 // Apply a natural box layout model to all elements
 
+$background-color: #f9f9f9;
+$primary-color: #b5bc4f;
+$fa-font-path: '../bower_components/components-font-awesome/fonts';
+@import url("//fonts.googleapis.com/css?family=Roboto:300,400,500,700");
+
 *,
 *:before,
 *:after {
@@ -13,15 +18,32 @@
 
 // Injects all bower_component files automatically
 // bower:scss
+@import "../bower_components/components-font-awesome/scss/font-awesome.scss";
 // endbower
 
 // Injects all import files automatically
 // [injector]
 // [endinjector]
 
+@import './react-widgets.css';
+@import './react-select.css';
+
 body {
-  // Compensate for the 50px tall fixed navbar with padding-top
-  padding-top: 85px;
+  // Compensate for the 62px tall fixed navbar with padding-top
+  padding-top: 62px;
+}
+
+* {
+  transition: all 0.5s ease;
+}
+
+.content, .panel, body {
+  background: $background-color;
+}
+
+// Temp color tweaks
+a, .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+  color: #002539;
 }
 
 label {
@@ -41,68 +63,256 @@ label {
   margin-top: 200px;
 }
 
-.dataTables_length {
-  float: right !important;
-}
-
-.dataTables_filter {
-  float: left !important;
-  width: 50% !important;
-  text-align: left !important;
-  label {
-    display: block !important;
-
-  }
-}
-
-
-.navmenu-fixed-left {
-  top: 85px;
-  width: 200px;
-}
-
-.sidebar-toggle {
-  position: relative;
-  float:left;
-  padding-left: 15px;
-}
-
 .container {
   max-width: 100%;
+  padding-bottom: 50px;
 }
 
 .nomargin {
   margin: 0;
 }
+
+.flat-button .btn, .flat-button.btn {
+  border: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+[contentEditable] {
+  outline: none;
+  border-bottom: 1px dotted #666;
+  &:before:empty{
+    content:attr(data-ph);
+    color:yellow;
+    font-style:italic;
+  }
+}
+
 /* ==========================================================================
-Mini hero
+Top Navbar
 ========================================================================== */
-.minihero {
-    position: relative;
-    height: 50px;
-    background: #999 no-repeat center center;
-    background-size: cover;
-    color: #fff;
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.3);
+
+.navbar-inverse {
+  background: $primary-color;
+  height: 62px;
+  .navbar-brand {
+    color: #333;
+  }
+  .navbar-header.pull-left {
+    position: absolute;
+    left: 0;
+    right: 120px;
+    .btn-default.drawer-toggle {
+      position: relative;
+      float:left;
+      padding: 9px 15px;
+      margin: 15px 0 15px 15px;
+      background: none;
+      border: none;
     }
-    &:hover {
-      &:before {
-        background: rgba(0,0,0,0.5);
+    .navbar-brand {
+    }
+    .navbar-form {
+      padding-top: 0;
+      padding-bottom: 0;
+      float: left;
+      border: none;
+      box-shadow: none;
+      -webkit-box-shadow: none;
+      .form-group {
+        position: absolute;
+        left: 130px;
+        right: 0;
+        .form-control::-webkit-input-placeholder {
+          color: rgba(255,255,255,0.8);
+        }
+        .form-control[type=text] {
+          box-shadow: inset 0 -1px 0 rgba(255,255,255,0.8);
+          -webkit-box-shadow: inset 0 -1px 0 rgba(255,255,255,0.8);
+          -moz-box-shadow: inset 0 -1px 0 rgba(255,255,255,0.8);
+        }
       }
     }
-    h6 {
-      color: #fff;
-      position: absolute;
-      display: block;
+  }
+  .navbar-header.pull-right.nav
+  >li{
+      float: left;
+    >a {
+      padding-top: 20.5px;
+      padding-bottom: 20.5px;
+      &.loggedin-menu {
+        padding-top: 11px;
+        padding-bottom: 4px;
+      }
     }
+  }
+  .navbar-nav {
+    margin-top: 0;
+    margin-bottom: 0;
+    > li > a {
+      color: #fff;
+    }
+  }
 }
+
+
+/* ==========================================================================
+Left Drawer
+========================================================================== */
+
+nav.drawer {
+  z-index: -1;
+  top: 62px;
+  bottom:0;
+  position: fixed;
+  width: 300px;
+  background: rgb(238,238,238); /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijg2JSIgc3RvcC1jb2xvcj0iI2RkZGRkZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkZGRkZGQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(left,  rgba(238,238,238,1) 0%, rgba(221,221,221,1) 86%, rgba(221,221,221,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(238,238,238,1)), color-stop(86%,rgba(221,221,221,1)), color-stop(100%,rgba(221,221,221,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left,  rgba(238,238,238,1) 0%,rgba(221,221,221,1) 86%,rgba(221,221,221,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left,  rgba(238,238,238,1) 0%,rgba(221,221,221,1) 86%,rgba(221,221,221,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left,  rgba(238,238,238,1) 0%,rgba(221,221,221,1) 86%,rgba(221,221,221,1) 100%); /* IE10+ */
+  background: linear-gradient(to right,  rgba(238,238,238,1) 0%,rgba(221,221,221,1) 86%,rgba(221,221,221,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#dddddd',GradientType=1 ); /* IE6-8 */
+
+  overflow-y: scroll;
+
+  .nav-stacked {
+    li a {
+      color: #444;
+      &:hover {
+        background: $background-color;
+      }
+      .fa {
+        margin-top: 3px;
+      }
+      &.active {
+        background: $background-color;
+      }
+    }
+  }
+}
+
+nav.drawer-enter {
+  left: 0;
+}
+
+nav.drawer-enter.drawer-enter-active {
+  left: 0px;
+}
+
+nav.drawer-leave {
+  left: 0px;
+}
+
+nav.drawer-leave.drawer-leave-active {
+  left: 0;
+}
+
+.default.detail {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+/* ==========================================================================
+Subhero Buttons
+========================================================================== */
+
+.btn-toolbar > a {
+  margin-left: 5px;
+}
+
+/* ==========================================================================
+Relationship Selector
+========================================================================== */
+
+.relationship-selector {
+  width: 100%;
+  margin-bottom: 15px;
+  height: 50px;
+  .rw-combobox {
+    width: 75%;
+    float: left;
+    position: relative;
+    input {
+      padding-left: 15px;
+    }
+  }
+  .btn {
+    float: right;
+    margin-right: -5px;
+    border: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    background: none;
+  }
+}
+/* ==========================================================================
+Griddle Admin Lists
+========================================================================== */
+
+.griddle {
+  td {
+    input[type="checkbox"] {
+      margin-left: 10px;
+    }
+  }
+}
+
+/* ==========================================================================
+Mini hero (relationship list editor)
+========================================================================== */
+
+.relationship-button {
+  .btn-group {
+    width: 100%;
+    margin-bottom: 10px;
+    box-shadow: 1px 6px 15px rgba(0,0,0,0.08);
+
+  }
+  .btn {
+    height: auto;
+    border: none;
+    box-shadow: none;
+    &:first-child {
+      width: 90%;
+      text-transform: none;
+      text-align: left;
+      padding-top: 13px;
+      padding-bottom: 20px;
+      color: #fff;
+    }
+    &.dropdown-toggle {
+      width: 10%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      background-image: none !important;
+    }
+    .minihero {
+      // background: rgba(255,255,255,0.7);
+      margin: -13px -16px -20px;
+      padding: 0px 15px;
+      height: auto;
+      overflow: hidden;
+      background: #fff;
+      border-bottom-left-radius: 3px;
+      border-top-left-radius: 3px;
+
+    }
+  }
+  .dropdown-menu {
+    left: inherit;
+    right: 0;
+    float: right;
+  }
+}
+
 /* ==========================================================================
 Hero
 ========================================================================== */
@@ -136,6 +346,9 @@ Hero
       right: 15px;
       a {
         color: #fff;
+      }
+      .media {
+        margin-bottom: 10px;
       }
     }
     h3 {
@@ -187,12 +400,8 @@ Hero
       position: relative;
     }
   }
-
 }
 
-.navbar-header.pull-right.nav li {
-  float: left;
-}
 
 // Styling on warning for users on IE7 or below
 .browsehappy {
@@ -221,46 +430,93 @@ Hero
   background: #ffffff;
   position: fixed;
   z-index: 2000;
-  top: 83px;
+  top: 60px;
   right: 100%;
   width: 100%;
   height: 2px;
 }
 
 @media (min-width: 1px) {
-  .sidebar-toggle {
-    display: block !important;
-  }
+
 }
 
-@media (min-width: 768px) {
-  body {
-    padding-left: 200px;
-    padding-top: 64px;
+
+@media (max-width: 768px) {
+  nav.drawer {
+    z-index: 1;
   }
+
+nav.drawer-enter {
+    left: -300px;
+  }
+
+  nav.drawer-enter.drawer-enter-active {
+    left: 0px;
+  }
+
+  nav.drawer-leave {
+    left: 0px;
+  }
+
+  nav.drawer-leave.drawer-leave-active {
+    left: -300px;
+  }
+}
+@media (min-width: 768px) {
+
   .pace .pace-progress {
     top: 62px;
   }
 
-  .navmenu-fixed-left {
-    top: 64px;
+  nav.drawer {
     width: 200px;
   }
 
-  .sidebar-toggle {
-    display: none !important;
+  .default.detail {
+    transform: translate(200px,0);
+    right: 200px;
   }
+
+  .navbar-fixed-top .form-control {
+    width: 100%;
+  }
+
+ .container-fluid .navbar-brand {
+   margin-left: 0;
+ }
 }
 
 @media (min-width: 992px) {
-  body {
-    padding-left: 300px;
-  }
+
   .hero {
     height: 500px;
   }
-  .navmenu-fixed-left {
+  nav.drawer {
     width: 300px;
+  }
+
+
+
+  .default.detail {
+    transform: translate(300px,0);
+    right: 300px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero {
+    height: 800px;
+    h3 {
+      font-size: 50px;
+    }
+  }
+  .carousel {
+    height: 800px;
+    .carousel-inner {
+      .image-bg {
+        height: 800px;
+      }
+    }
   }
 }
 
@@ -271,4 +527,48 @@ Hero
     background: #fff8e2;
     color: #000;
     padding: 0.5em 0;
+}
+
+.autocomplete-input {
+  height: 40px;
+  .form-group {
+      display: block;
+      border: none;
+      outline: none;
+      padding-left: 15px;
+      right: 30px;
+      position: absolute;
+      left: 0;
+      cursor: pointer;
+      background-color: transparent;
+      z-index: 0;
+      &:first-child {
+        z-index: 1;
+      }
+  }
+}
+
+.autocomplete-dropdown {
+    padding-left: 42px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: #666 !important;
+    border: 1px solid #eee;
+    background-color: #fcfcfc;
+    border-top: none;
+    border-radius: 3px;
+    margin-top: -2px;
+    cursor: pointer;
+}
+
+.autocomplete-dropdown a {
+    color: #666 !important;
+}
+
+.autocomplete-dropdown:hover a {
+    text-decoration: none;
+}
+
+.autocomplete-dropdown:hover {
+    background-color: rgb(238, 238, 238);
 }

@@ -1,39 +1,124 @@
 'use strict';
 
-var React = require('react');
+var React = require('react/addons'),
 
-var Link = require('./link.jsx');
-var Nav = require('react-bootstrap').Nav,
-NavItem = require('react-bootstrap').NavItem,
+Link = require('./link.jsx'),
+
+FontAwesome = require('react-fontawesome'),
+Nav = require('react-bootstrap').Nav,
 TabbedArea = require('react-bootstrap').TabbedArea,
-TabPane = require('react-bootstrap').TabPane,
-Table = require('react-bootstrap').Table;
+TabPane = require('react-bootstrap').TabPane;
+
+var ReactCSSTransition = React.addons.CSSTransitionGroup;
+
+var listItems = [
+    {
+        'label' : 'Biological Systems',
+        'slug' : '#',
+        'faIcon' : 'tree',
+    },
+    {
+        'label' : 'Designed Systems',
+        'slug' : '#',
+        'faIcon' : ''
+    },
+    {
+        'label' : 'Biological Strategies',
+        'slug' : 'strategies',
+        'faIcon' : 'leaf'
+    },
+    {
+        'label' : 'Designed Strategies',
+        'slug' : 'products',
+        'faIcon' : 'recycle'
+    },
+    {
+        'label' : 'F&M',
+        'slug' : 'phenomena',
+        'faIcon' : 'fire'
+    },
+    {
+        'label' : 'Context',
+        'slug' : 'conditions',
+        'faIcon' : 'cloud'
+    },
+    {
+        'label' : 'Collections',
+        'slug' : 'collections',
+        'faIcon' : 'bookmark'
+    },
+    {
+        'label' : 'Stories',
+        'slug' : '#',
+        'faIcon' : ''
+    },
+    {
+        'label' : 'Sources',
+        'slug' : 'sources',
+        'faIcon' : 'book'
+    },
+    {
+        'label' : 'Citations',
+        'slug' : '#',
+        'faIcon' : ''
+    },
+    {
+        'label' : 'Teams',
+        'slug' : 'researchers',
+        'faIcon' : 'university'
+    },
+    {
+        'label' : 'Media',
+        'slug' : 'media',
+        'faIcon' : 'photo'
+    },
+    {
+        'label' : 'Users',
+        'slug' : 'users',
+        'faIcon' : 'users'
+    }
+];
 
 var SidebarComponent = React.createClass({
     render: function() {
+        var items = [];
+        if (this.props.open) {
+            items.push(
+                <Nav className='drawer' key='10'>
+                    <TabbedArea defaultActiveKey={1} key='20' justified>
+                        <TabPane key='30' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
+                            Search results go here.
+                        </TabPane>
+                        <TabPane key='40' eventKey={1} tab={<FontAwesome name='list' size='lg' fixedWidth />}>
+                            <Nav stacked>
+                                {
+                                    listItems.map(function(item,i){
+                                        return (
+                                            <li eventKey={i}>
+                                                <Link url={'/list/'+item.slug}>
+                                                    <FontAwesome
+                                                        name={item.faIcon}
+                                                        size='lg'
+                                                        fixedWidth
+                                                        className='pull-left' />
+                                                        &nbsp; {item.label}
+                                                </Link>
+                                            </li>
+                                        );
+                                    })
+                                }
+                            </Nav>
+                        </TabPane>
+                    </TabbedArea>
+                </Nav>
+            );
+        }
+
         return (
             /* jshint ignore:start */
-              <div className="navmenu navmenu-default navmenu-fixed-left offcanvas-xs">
-                <TabbedArea defaultActiveKey={2} justified>
-                  <TabPane eventKey={1} tab="Search">
-                    <p>Placeholder</p>
-                  </TabPane>
-                  <TabPane eventKey={2} tab='Admin'>
-                    <Nav stacked>
-                      <li eventKey={2}><Link url="../admin/phenomena">Phenomena</Link></li>
-                      <li eventKey={3}><Link url="../admin/strategies">Biological Strategies</Link></li>
-                      <li eventKey={4}><Link url="../admin/products">Inspired Solutions</Link></li>
-                      <li eventKey={5}><Link url="../admin/sources">Sources</Link></li>
-                      <li eventKey={6}><Link url="../admin/conditions">Challenges</Link></li>
-                      <li eventKey={7}><Link url="../admin/users">Users</Link></li>
-                      <li eventKey={8}><Link url="../admin/living-systems">Living Systems</Link></li>
-                      <li eventKey={9}><Link url="../admin/researchers">Researchers</Link></li>
-                      <li eventKey={10}><Link url="../admin/collections">Collections</Link></li>
-                      <li eventKey={11}><Link url="../admin/media">Media</Link></li>
-                    </Nav>
-                  </TabPane>
-                </TabbedArea>
-              </div>
+            <ReactCSSTransition transitionName="drawer">
+                {items}
+            </ReactCSSTransition>
 
             /* jshint ignore:end */
         );

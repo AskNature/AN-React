@@ -12,7 +12,7 @@ Input = require('react-bootstrap').Input;
 
 var FormData = require('react-form-data');
 
-var userActions = require('../../actions/users');
+var accountActions = require('../../actions/accounts');
 var routeActions = require('../../actions/routes');
 
 var Reset = React.createClass({
@@ -34,7 +34,7 @@ var Reset = React.createClass({
 
     handleSubmit: function(e) {
     	this.formData.token = window.location.pathname.split('/')[2]; // TODO: grab token from URL. there's a better way...
-    	userActions.resetUser(this.formData, this.resetSuccess, this.resetFailure);
+    	accountActions.resetUser(this.formData, this.resetSuccess, this.resetFailure);
 	console.log(this.formData);
 	e.preventDefault();
     },

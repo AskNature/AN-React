@@ -5,19 +5,50 @@ var Defaults = {
     route: '/',
 
     page: {
-        title: 'Home',
+        title: 'AskNature',
         description: 'A React + Flux application',
         keywords: null
 
     },
 
+    relationshipList: {
+	results: [],
+    boxvalue: ''
+    },
+
     user: {
+        loggedIn: false,
+	role: 'peon',
+        results : [
+          {
+            name: 'Username',
+            firstName: '',
+            lastName: '',
+            flagged: [],
+            media: [],
+            media_name: [],
+            media_entity: [],
+            media_id: [],
+            added_media: [],
+            collected: [],
+            friends: [],
+            roles: '1,2',
+            activities: '1,2'
+          }
+        ]
+
+    },
+
+    userNew: {
         loggedIn: false,
         results : [
           {
             name: 'Username',
             flagged: [],
-            has_media: [],
+            media: [],
+            media_name: [],
+            media_entity: [],
+            media_id: [],
             added_media: [],
             collected: [],
             friends: [],
@@ -47,12 +78,29 @@ var Defaults = {
       ]
     },
 
+    phenomenonNew : {
+        name: 'Loading...',
+	description: '',
+	short_name: '',
+	parent: [],
+	children: [],
+	has_function: [],
+	groupname: '',
+	groupid: '',
+	media: [],
+    mechanism: [],
+    outcome: []
+    },
+
     strategy: {
       results : [
       {
           name: 'Nature is Coming...',
-          description: '...and She\'s Pissed',
+          description: '',
           masterid: '',
+          addedby_id: '',
+          addedby_first: '',
+          addedby_last: '',
           media: [],
           media_name: [],
           media_entity: [],
@@ -73,10 +121,45 @@ var Defaults = {
           sources_id: [],
           collectors: [],
           experts: [],
+          experts_institution: [],
           keywords: 'Tag1, tag2',
-          created_by: []
+          created_by: [],
+          flag_text: 0,
+          flag_tags: 0,
+          flag_media: 0,
+          is_deleted: 0,
+          in_inspiredby: []
       }
       ]
+    },
+
+    strategyNew: {
+	name: 'Loading...',
+	masterid: '',
+	description: 'Nature is coming...',
+	products: [],
+	media: [],
+	living_systems: [],
+	mechanisms: [],
+	functions: [],
+	conditions: []
+    },
+
+    productNew: {
+        name: 'Loading...',
+        masterid: '',
+	headline: 'Nature is coming...',
+	special_text: '',
+	keywords: 'one,two',
+        strategies: [],
+	media: [],
+	outcomes: [],
+	mechanisms: [],
+	conditions: [],
+	designedsystems: [],
+	experts: [],
+	sources: [],
+	collectors: []
     },
 
     product: {
@@ -96,8 +179,10 @@ var Defaults = {
         outcomes_id: [],
         mechanisms: [],
         conditions: [],
-        researchers: [],
+        experts: [],
+        experts_institution: [],
         sources: [],
+        sources_authors: [],
         designedsystems: []
         }
       ]
