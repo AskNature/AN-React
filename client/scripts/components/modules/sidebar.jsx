@@ -24,12 +24,12 @@ var listItems = [
     },
     {
         'label' : 'Biological Strategies',
-        'slug' : 'strategies',
+        'slug' : 'b.strategy',
         'faIcon' : 'leaf'
     },
     {
         'label' : 'Designed Strategies',
-        'slug' : 'products',
+        'slug' : 'd.strategy',
         'faIcon' : 'recycle'
     },
     {

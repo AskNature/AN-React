@@ -16,10 +16,10 @@ ContextDetail = require('./detail-condition.jsx'),
 LivingSystemDetail = require('./detail-livingsystem.jsx'),
 MediaDetail = require('./detail-media.jsx'),
 PhenomenonDetail = require('./detail-phenomenon.jsx'),
-ProductDetail = require('./detail-product.jsx'),
+DStrategyDetail = require('./detail-dstrategy.jsx'),
 ResearcherDetail = require('./detail-researcher.jsx'),
 SourceDetail = require('./detail-source.jsx'),
-StrategyDetail = require('./detail-strategy.jsx'),
+BStrategyDetail = require('./detail-bstrategy.jsx'),
 UserDetail = require('./detail-user.jsx'),
 OneUserDetail = require('./detail-1user.jsx');
 
@@ -98,10 +98,10 @@ var DetailComponent = React.createClass({
       //This is a temporary solution until Scott's mixin replaces it. DOES NOT LOAD CORRECTLY ON REFRESH:
       getTemplate: function() {
         var Template;
-        if(this.props.type === 'strategies') {
-          Template = StrategyDetail;
-        } else if(this.props.type === 'products') {
-          Template = ProductDetail;
+        if(this.props.type === 'b.strategy') {
+          Template = BStrategyDetail;
+        } else if(this.props.type === 'd.strategy') {
+          Template = DStrategyDetail;
         } else if(this.props.type === 'phenomena') {
           Template = PhenomenonDetail;
         } else if(this.props.type === 'users') {

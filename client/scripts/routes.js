@@ -10,10 +10,10 @@ ContextList = require('./components/admin/context'),
 LivingSystemList = require('./components/admin/livingsystem'),
 MediaList = require('./components/admin/media'),
 PhenomenonList = require('./components/admin/phenomenon'),
-ProductList = require('./components/admin/product'),
+DStrategyList = require('./components/admin/dstrategy'),
 ResearcherList = require('./components/admin/researcher'),
 SourceList = require('./components/admin/source'),
-StrategyList = require('./components/admin/strategy'),
+BStrategyList = require('./components/admin/bstrategy'),
 OneUserList = require('./components/admin/1user'),
 UserList = require('./components/admin/user');
 
@@ -50,10 +50,10 @@ var index = function() {
 
 var list_component = function(type) {
     var list;
-    if(type === 'strategies') {
-        list = StrategyList;
-    } else if(type === 'products') {
-        list = ProductList;
+    if(type === 'b.strategy') {
+        list = BStrategyList;
+    } else if(type === 'd.strategy') {
+        list = DStrategyList;
     } else if(type === 'phenomena') {
         list = PhenomenonList;
     } else if(type === 'users') {
@@ -80,12 +80,12 @@ var detail_component = function(type,id) {
     render(DetailComponent, {masterid: id, type: type});
 };
 
-var detail_strategy = function(id) {
-    render(DetailComponent, {masterid: id, type: 'strategies'});
+var detail_bstrategy = function(id) {
+    render(DetailComponent, {masterid: id, type: 'b.strategy'});
 };
 
-var detail_product = function(id) {
-    render(DetailComponent, {masterid: id, type: 'products'});
+var detail_dstrategy = function(id) {
+    render(DetailComponent, {masterid: id, type: 'd.strategy'});
 };
 
 var detail_livingsystems = function(id) {
@@ -152,8 +152,8 @@ var routes = {
 // How do we change the second '/' into another colon?? Remember that we're aiming for a path that contains a bunch of key/value pairs that look like: .../Type:masterid/...
   '/q/:type/:id': detail_component,
 
-  '/strategy/:id': detail_strategy,
-  '/product/:id': detail_product,
+  '/b.strategy/:id': detail_bstrategy,
+  '/d.strategy/:id': detail_dstrategy,
   '/living-system/:id': detail_livingsystems,
   '/phenomenon/:id': detail_phenomenon,
   '/condition/:id': detail_condition,

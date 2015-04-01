@@ -23,8 +23,8 @@ var Select = require('react-select');
 var Template = React.createClass({
 
   render: function() {
-    var routeNameSingle = 'product';
-    var entityName = 'Inspired Solutions';
+    var routeNameSingle = 'd.strategy';
+    var entityName = 'Designed Strategies';
     var data = this.props.data;
     return (
       /* jshint ignore:start */
@@ -72,8 +72,8 @@ var Template = React.createClass({
                 onAdd={this.props.onRelationshipAdd.bind(null, 'strategies')}
                 onRemove={this.props.onRelationshipRemove.bind(null, 'strategies')}
                 field={'strategies'}
-                routeName='strategy'
-                title='Inspired By'
+                routeName='b.strategy'
+                title='Inspiring Biological Strategies'
                 fieldName='Biological Strategy'
                 titleField={'name'} />
             </Col>
