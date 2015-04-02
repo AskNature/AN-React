@@ -48,12 +48,12 @@ var RelationshipListItem = React.createClass({
       'Strategy' :
         {
           'displayName' : 'Biological Strategy',
-          'route' : 'strategy'
+          'route' : 'b.strategy'
         },
       'InspiredSolutions' :
         {
           'displayName' : 'Designed Strategy',
-          'route' : 'product'
+          'route' : 'd.strategy'
         }
     };
     var lations;

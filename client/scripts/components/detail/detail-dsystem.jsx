@@ -34,7 +34,7 @@ var Template = React.createClass({
           {...this.props}
           routename={routeNameSingle}
           entityName={entityName}
-          datatype={entityName+': Organism'}
+          datatype={entityName}
           primarytitle={this.props.data.name}
           secondarytitle={this.props.data.name}
           secondarylink=''
@@ -78,15 +78,15 @@ var Template = React.createClass({
               </Col>
               <Col xs={6} sm={4}>
                 <RelationshipList
-                  items={data.has_livingsystem}
+                  items={data.has_dsystem}
                   editable={this.props.editable}
                   titleField='name'
-                  onAdd={this.props.onRelationshipAdd.bind(null,'strategies')}
-                  onRemove={this.props.onRelationshipRemove.bind(null, 'strategies')}
-                  field={'strategies'}
-                  routeName={'b.strategy'}
-                  title={'Biological Strategies'}
-                  fieldName={'Biological Strategies'}/>
+                  onAdd={this.props.onRelationshipAdd.bind(null,'d.strategy')}
+                  onRemove={this.props.onRelationshipRemove.bind(null, 'd.strategy')}
+                  field={'d.strategy'}
+                  routeName={'d.strategy'}
+                  title={'Designed Strategies'}
+                  fieldName={'Designed Strategies'}/>
                 </Col>
                 <Col xs={6} sm={4}>
                   <RelationshipList
