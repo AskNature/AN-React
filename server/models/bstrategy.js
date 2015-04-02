@@ -90,7 +90,7 @@ var relationships = {
     'sources': {
 	model: Source,
 	className: 'Sources',
-	edge: 'out("FeaturedIn")'
+	edge: 'out("HasSource")'
     },
     'functions': {
 	model: Function,

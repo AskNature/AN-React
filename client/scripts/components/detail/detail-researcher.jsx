@@ -35,8 +35,8 @@ var Template = React.createClass({
           entityName={entityName}
           dataType={entityName}
           primarytitle={this.props.data.name}
+          primarylink={this.props.data.url}
           secondarytitle={this.props.data.institution}
-          secondarylink=''
           description={this.props.data.special_text}
           />
           <Grid>

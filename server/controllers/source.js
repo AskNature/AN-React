@@ -29,7 +29,7 @@ var loadindex = function(req, res, next) {
 
 var returnList1 = function(req, res, next) {
   var chain = db
-  .select('name, secondary_title, masterid, out("HasStatus").name as status, type, in("FeaturedIn").size() as featured_count, in("FeaturedIn").name as featured_in, "source" as entityType, type, both("Added").name as added, timestamp, flag_text, flag_tags, flag_media')
+  .select('name, secondary_title, masterid, out("HasStatus").name as status, type, in("HasSource").size() as featured_count, in("HasSource").name as featured_in, "source" as entityType, type, both("Added").name as added, timestamp, flag_text, flag_tags, flag_media')
   .from('Sources');
 
   var limit = parseInt(req.query.limit);

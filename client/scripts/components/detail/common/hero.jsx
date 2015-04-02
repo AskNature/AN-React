@@ -49,6 +49,8 @@ var HeroComponent = React.createClass({
                     {this.props.datatype}
                   </h6>
                   <h3 className="animated fadeInDown" style={{marginTop: '8px', marginBottom: 0, fontWeight: '800'}}>
+                    {!this.props.editable && this.props.primarylink ? (
+                      <Link url={this.props.primarylink}>
                       <TextArea
                         item={!this.props.editable && this.props.primarydisplay ? this.props.primarydisplay : this.props.primarytitle}
                         editable={this.props.editable}
@@ -56,14 +58,36 @@ var HeroComponent = React.createClass({
                         actions={this.props.actions}
                         fieldName='name'
                         placeholder='Enter a name' />
+                    </Link>
+                    ) : (
+                      <TextArea
+                        item={!this.props.editable && this.props.primarydisplay ? this.props.primarydisplay : this.props.primarytitle}
+                        editable={this.props.editable}
+                        store={this.props.store}
+                        actions={this.props.actions}
+                        fieldName='name'
+                        placeholder='Enter a name' />
+                    )}
                   </h3>
                   <h5 style={{fontWeight: '600', color: '#ffffff', fontStyle: 'italic', marginTop: 0}}>
-                    {this.props.secondarylink ? (
+                    {!this.props.editable && this.props.secondarylink ? (
                       <Link url={this.props.secondarylink}>
-                          {this.props.secondarytitle}
+                        <TextArea
+                          item={this.props.secondarytitle}
+                          editable={this.props.editable}
+                          store={this.props.store}
+                          actions={this.props.actions}
+                          fieldName='institution'
+                          placeholder='Enter a subtitle' />
                       </Link>
                     ) : (
-                        <span>{this.props.secondarytitle}</span>
+                      <TextArea
+                        item={this.props.secondarytitle}
+                        editable={this.props.editable}
+                        store={this.props.store}
+                        actions={this.props.actions}
+                        fieldName=''
+                        placeholder='Enter a subtitle' />
                     ) }
                   </h5>
                 </div>

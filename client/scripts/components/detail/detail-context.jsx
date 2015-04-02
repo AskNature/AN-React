@@ -5,12 +5,15 @@ var React = require('react'),
 Link = require('../modules/link.jsx'),
 DefaultLayout = require('../layouts/default.jsx'),
 
+TopSection = require('./common/topsection.jsx'),
 TextArea = require('./common/textarea.jsx'),
 DataTable = require('./common/datatable.jsx'),
 
 Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
+Button = require('react-bootstrap').Button,
+Glyphicon = require('react-bootstrap/Glyphicon'),
 Panel = require('react-bootstrap/Panel'),
 PanelGroup = require('react-bootstrap/PanelGroup'),
 Col = require('react-bootstrap/Col'),
@@ -32,54 +35,80 @@ var Template = React.createClass({
           entityName={entityName}
           primarytitle={this.props.data.name}
           secondarylink=''
-          description={this.props.data.descripition} />
+          description={this.props.data.description} />
 
         <Grid>
           <Row className='show-grid'>
             <Col xs={12} sm={4}>
-              <RelationshipList
-                items={data.designedsystems}
-                editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'designedsystems')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'designedsystems')}
-                field={'designedsystems'}
-                routeName='design'
-                title='Designed Systems'
-                fieldName='Designed System'
-                titleField={'name'} />
+            <RelationshipList
+              items={data.parent}
+              editable={this.props.editable}
+              onAdd={this.props.onRelationshipAdd.bind(null, 'parent')}
+              onRemove={this.props.onRelationshipRemove.bind(null, 'parent')}
+              field={'context'}
+              routeName='context'
+              title='More General Context'
+              fieldName='More General Context'
+              titleField={'name'} />
+            <Button bsStyle='link' block
+                  disabled={true} >
+                <Glyphicon glyph='arrow-down' />
+            </Button>
+            <h5 style={{marginLeft:'12px', fontWeight: 'bold'}}>
+              {this.props.data.name}
+            </h5>
+            <Button bsStyle='link' block
+                  disabled={true} >
+                <Glyphicon glyph='arrow-down' />
+            </Button>
+            <RelationshipList
+              items={data.children}
+              editable={this.props.editable}
+              onAdd={this.props.onRelationshipAdd.bind(null, 'children')}
+              onRemove={this.props.onRelationshipRemove.bind(null, 'children')}
+              field={'context'}
+              routeName='context'
+              title='More Specific Context'
+              fieldName='More Specific Context'
+              titleField={'name'} />
             </Col>
-            <Col xs={6} sm={4}>
-              <RelationshipList
-                items={data.outcomes}
-                editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'functions')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'functions')}
-                field={'functions'}
-                routeName='phenomenon'
-                title='Outcomes'
-                fieldName='Outcome'
-                titleField={'name'} />
+            <Col xs={12} sm={4}>
+            <RelationshipList
+              items={data.has_context}
+              editable={this.props.editable}
+              onAdd={this.props.onRelationshipAdd.bind(null, 'has_context')}
+              onRemove={this.props.onRelationshipRemove.bind(null, 'has_context')}
+              field={'has_context'}
+              routeName={null}
+              title={'Listed as Context in'}
+              fieldName={'Listed as Context in'}
+              titleField={'name'} />
             </Col>
-            <Col xs={12} sm={8}>
+            <Col xs={12} sm={4}>
+            <RelationshipList
+              items={data.featured_in}
+              editable={this.props.editable}
+              onAdd={this.props.onRelationshipAdd.bind(null, 'featured_in')}
+              onRemove={this.props.onRelationshipRemove.bind(null, 'featured_in')}
+              field={'featured_in'}
+              routeName={null}
+              title={'Featured In'}
+              fieldName={'Featured In'}
+              titleField={'name'} />
               <RelationshipList
-                items={data.strategies}
+                items={data.studied_by}
                 editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'strategies')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'strategies')}
-                field={'strategies'}
-                routeName='strategy'
-                title='Inspired By'
-                fieldName='Biological Strategy'
+                onAdd={this.props.onRelationshipAdd.bind(null, 'studied_by')}
+                onRemove={this.props.onRelationshipRemove.bind(null, 'studied_by')}
+                field={'studied_by'}
+                routeName={null}
+                title={'Studied By'}
+                fieldName={'Studied By'}
                 titleField={'name'} />
             </Col>
           </Row>
         </Grid>
         <Grid>
-          <Row>
-            <Col xs={12}>
-              <Gallery items={data} />
-            </Col>
-          </Row>
           <Row>
             <Col xs={12} md={12}>
               {data.special_text || this.props.editable ? (

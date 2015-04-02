@@ -35,12 +35,7 @@ var FM = new Model('FM',
     'name'
   ]
 );
-var LivingSystem = new Model('LivingSystem',
-  [
-    'name',
-    'taxon'
-  ]
-);
+
 var Condition = new Model('Condition',
   [
 'name'
@@ -52,7 +47,7 @@ var relationships = {
     'featured_in': {
 	model: Content,
 	className: 'FeaturedIn',
-	edge: 'in("FeaturedIn")'
+	edge: 'in("HasSource")'
     },
     'owner': {
         model: User,
@@ -69,11 +64,12 @@ var relationships = {
   className: 'FM',
   edge: 'out("HasFunction")'
     },
-    'living_systems': {
-	model: LivingSystem,
-	className: 'LivingSystem',
-	edge: 'out("HasLivingSystem")'
-    },
+
+//    'living_systems': {
+//	model: LivingSystem,
+//	className: 'LivingSystem',
+//	edge: 'out("HasLivingSystem")'
+//    },
     'mechanisms': {
 	model: FM,
 	className: 'FM',

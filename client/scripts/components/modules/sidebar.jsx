@@ -106,7 +106,7 @@ var listItems = [
         'faIcon' : 'users'
     },
     {
-        'label' : 'Users',
+        'label' : 'Updated Users',
         'slug' : 'users',
         'faIcon' : 'users'
     },

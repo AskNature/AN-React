@@ -11,6 +11,11 @@ var fields = ['name', 'short_name', 'description', 'flag_text', 'flag_media', 'f
 
 var Function = new Model('Function',
     [
+        'name'
+    ]
+);
+var Entity = new Model('Entity',
+    [
         'name',
         '@class'
     ]
@@ -36,12 +41,12 @@ var relationships = {
         edge: 'in("ChildOf")'
     },
     'outcome': {
-        model: Function,
+        model: Entity,
         className: 'Outcome',
         edge: 'in("HasFunction")'
     },
     'mechanism': {
-        model: Function,
+        model: Entity,
         className: 'Mechanism',
         edge: 'in("HasMechanism")'
     },
