@@ -2,23 +2,71 @@
 'use strict';
 
 var Model = require('./model.js');
-
-var FlatStrategy = new Model('Strategies', ['name', 'summary']);
-
-var Source = new Model('Sources', ['name', 'publication_year', 'authors']);
-var Function = new Model('Function', ['name']);
-var Expert = new Model('Expert', ['name']);
-var User = new Model('Users', ['name']);
-var Media = new Model('Media', ['filename', 'name', 'entity']);
-var LivingSystem = new Model('LivingSystem', ['name', 'taxon']);
-var Condition = new Model('Condition', []);
+var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'InspiredSolutions';
 
-var fields = ['name', 'headline', 'special_text', 'challenges_solved', 'how_is_it_different', 'biomimicry_story', 'product_type', 'patent_name', 'availability', 'company', 'phase', 'patent_number', 'company_website', 'strategy', 'consumer_products', 'keywords', 'status', 'timestamp'];
+var fields = ['name', 'headline', 'special_text', 'challenges_solved', 'how_is_it_different', 'biomimicry_story', 'product_type', 'patent_name', 'availability', 'company', 'phase', 'patent_number', 'company_website', 'strategy', 'consumer_products', 'keywords', 'timestamp', 'flag_text', 'flag_media', 'flag_tags'];
+
+var Strategy = new Model('Strategies',
+    [
+        'name',
+        'summary'
+    ]
+);
+var Source = new Model('Sources',
+    [
+        'name',
+        'publication_year',
+        'authors'
+    ]
+);
+var Function = new Model('Function',
+    [
+        'name'
+    ]
+);
+var Expert = new Model('Expert',
+    [
+        'name',
+        'institution'
+    ]
+);
+var User = new Model('Users',
+    [
+        'name'
+    ]
+);
+var Media = new Model('Media',
+    [
+        'filename',
+        'name',
+        'entity'
+    ]
+);
+var DesignedSystem = new Model('DesignedSystem',
+    [
+        'name'
+    ]
+);
+var Condition = new Model('Condition',
+    [
+        'name'
+    ]
+);
+var Status = new Model('ContentStatus',
+  [
+      'masterid',
+      'name'
+  ]
+);
 
 var relationships = {
-    'strategies': {model: FlatStrategy, className: 'Strategy', edge: 'out("InspiredBy")'},
+    'strategies': {
+        model: Strategy,
+        className: 'Strategy',
+        edge: 'out("InspiredBy")'
+    },
     'collectors': {
         model: User,
         className: 'Users',
@@ -29,7 +77,7 @@ var relationships = {
         className: 'Media',
         edge: 'out("HasMedia")'
     },
-    'researchers': {
+    'experts': {
         model: Expert,
         className: 'Expert',
         edge: 'in("StudiedBy")'
@@ -45,8 +93,8 @@ var relationships = {
         edge: 'out("HasMechanism")'
     },
     'designedsystems' : {
-	model: Media,
-	className: 'Media',
+	model: DesignedSystem,
+	className: 'DesignedSystem',
 	edge: 'out("HasDesignedSystem")'
     },
     'outcomes': {
@@ -57,7 +105,14 @@ var relationships = {
     'conditions': {
         model: Condition,
         className: 'Condition',
-        edge: 'out("HasConditions")'
+        edge: 'out("HasCondition")'
+    },
+    'status': {
+        model: Status,
+        className: 'ContentStatus',
+        edge: 'out("HasStatus")',
+        select: true,
+        options: ListOptions.ContentStatus
     }
 };
 

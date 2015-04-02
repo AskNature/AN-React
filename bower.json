@@ -7,7 +7,6 @@
     "modernizr": "~2.8.1",
     "normalize.css": "~3.0.1",
     "es5-shim": "~3.4.0",
-    "bootstrap": "~3.3.2",
     "bootswatch-dist": "paper",
     "pace": "~1.0.2",
     "animate.css": "~3.2.1",

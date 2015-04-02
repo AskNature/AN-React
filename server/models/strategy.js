@@ -1,20 +1,85 @@
 // Strategy model
-
+'use strict';
 var Model = require('./model.js');
-
-// Models to link
-var InspiredSolution = Model('InspiredSolutions', ['name', 'headline','both("HasMedia")[0].filename']);
-var Source = Model('Sources', ['name', 'publication_year', 'authors']);
-var Function = Model('Function', ['name']);
-var Expert = Model('Expert', ['name', 'institution']);
-var User = Model('Users', ['name']);
-var Media = Model('Media', ['filename', 'name', 'entity']);
-var LivingSystem = Model('LivingSystem', ['name', 'taxon']);
-var Condition = Model('Condition', []);
+var db = require('../config/database').db;
+var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Strategy';
 
-var fields = ['name', 'status', 'summary', 'special_text', 'brief', 'timestamp', 'created_by', 'entered_by', 'date_entered', 'additional_functions', 'keywords', 'common_name', 'scientific_name', 'other_names', 'additional_taxa', 'additional_reference', 'applications_sector', 'applications', 'source', 'source_citation', 'pages_of_excerpt', 'image_file_name', 'video_url', 'pdf_file_name', 'application_1', 'application_2', 'application_3', 'editor_comments', 'other_names', 'additional_taxa', 'general_strategy'];
+var fields = ['name', 'summary', 'special_text', 'brief', 'timestamp', 'created_by', 'entered_by', 'date_entered', 'additional_functions', 'keywords', 'common_name', 'scientific_name', 'other_names', 'additional_taxa', 'additional_reference', 'applications_sector', 'applications', 'source', 'source_citation', 'pages_of_excerpt', 'image_file_name', 'video_url', 'pdf_file_name', 'application_1', 'application_2', 'application_3', 'editor_comments', 'other_names', 'additional_taxa', 'general_strategy', 'flag_text', 'flag_media', 'flag_tags'];
+
+// Models to link
+
+var Expert = new Model('Expert',
+  [
+    'name',
+    'institution'
+  ]
+);
+var Media = new Model('Media',
+  [
+    'filename',
+    'name',
+    'entity'
+  ]
+);
+var InspiredSolution = new Model('InspiredSolutions',
+  [
+    'name',
+    'headline'
+  ],
+  {'out_HasMedia':
+    {
+      model: Media,
+      className: 'Media',
+      edge:'out("HasMedia")'
+    }
+  }
+);
+var Source = new Model('Sources',
+  [
+    'name',
+    'publication_year',
+    'authors'
+  ]
+);
+var Function = new Model('Function',
+  [
+    'name'
+  ]
+);
+var User = new Model('Users',
+  [
+    'name'
+  ],
+  {'out_HasMedia':
+    {
+      model: Media,
+      className: 'Media',
+      edge:'out("HasMedia")'
+    }
+  }
+);
+var LivingSystem = new Model('LivingSystem',
+  [
+    'name',
+    'taxon'
+  ]
+);
+var Condition = new Model('Condition',
+  [
+
+  ]
+);
+var Status = new Model('ContentStatus',
+  [
+      'masterid',
+      'name'
+  ]
+);
+
+
+// The key is what's called by the client components. Model refers to the variables define above. className is the name of the class of the related item in OrientDB. Edge refers to the relationship in OrientDB.
 
 var relationships = {
     'products': {
@@ -63,10 +128,18 @@ var relationships = {
 	edge: 'out("HasMechanism")'
     },
     'conditions': {
-        model: Condition,
+  model: Condition,
 	className: 'Condition',
 	edge: 'out("HasConditions")'
+    },
+    'status': {
+	model: Status,
+	className: 'ContentStatus',
+	edge: 'out("HasStatus")',
+	select: true,
+	options: ListOptions.ContentStatus
     }
+
 };
 
 var Strategy = Model(entityName, fields, relationships);

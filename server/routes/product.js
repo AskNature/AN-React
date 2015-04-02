@@ -9,6 +9,7 @@ var routes = function (app) {
   // API v1
   app.get('/api/products', Controller.returnList1);
   app.get('/api/product/:id', Controller.returnItem1);
+  app.post('/api/product/:id', Controller.updateProduct1);
 
   // API v2
   app.get('/api/v2/products/:id', Controller.returnItem2);

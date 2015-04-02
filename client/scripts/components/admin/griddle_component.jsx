@@ -1,15 +1,17 @@
 'use strict';
 
-var React = require('react');
-var Griddle = require('griddle-react');
-var Link = require('../modules/link.jsx');
-var Input = require('react-bootstrap').Input;
-var Glyphicon = require('react-bootstrap').Glyphicon;
+var React = require('react/addons'),
 
-var _ = require('lodash');
-var request = require('superagent');
+Griddle = require('griddle-react'),
+_ = require('lodash'),
+request = require('superagent'),
 
-var TextArea = require('../detail/common/textarea.jsx');
+TextArea = require('../detail/common/textarea.jsx'),
+Link = require('../modules/link.jsx'),
+
+Input = require('react-bootstrap').Input,
+Button = require('react-bootstrap').Button,
+Glyphicon = require('react-bootstrap').Glyphicon;
 
 var LinkComponent = React.createClass({
     render: function() {
@@ -61,7 +63,7 @@ var ListComponent = React.createClass({
         {
           this.props.data.map(function(item, i){
             return (
-              <li>{item}</li>
+              <li key={i}>{item}</li>
             );
           })
         }
@@ -75,28 +77,28 @@ var RadioComponent = React.createClass({
     var status = false;
     //console.log(this.props.data);
     if(this.props.data === 1) {status = true;}
-    var masterid = this.props.rowData.masterid;
-
     return (
       <div>
-        <Input type='checkbox' checked={status} readOnly onChange={this.props.rowData.selectCallback.bind(null, masterid, status)} />
+        <Input type='checkbox' checked={status} readOnly />
       </div>
     );
   }
 });
 
-var SelectComponent = React.createClass({
+var BulkComponent = React.createClass({
   render: function() {
+    var status = false;
+    //console.log(this.props.data);
+    if(this.props.data === 1) {status = true;}
+    var masterid = this.props.rowData.masterid;
     return (
       <div>
-        <Input type="select" label='Select' defaultValue="select">
-          <option value="select">select</option>
-          <option value="other">...</option>
-        </Input>
+        <Input type='checkbox' checked={status} onChange={this.props.rowData.selectCallback.bind(null, masterid, status)} />
       </div>
     );
   }
 });
+
 
 var DateComponent = React.createClass({
   render: function() {
@@ -104,6 +106,41 @@ var DateComponent = React.createClass({
     var d = new Date(msec);
     return(
       <span>{d.toLocaleDateString()}</span>
+    );
+  }
+});
+
+var StatusComponent = React.createClass({
+  render: function() {
+    var style = {
+      minWidth: '100px'
+    };
+    return(
+      // This will just change the status. It may make more sense to include this in the normal status select input.
+      <Input style={style} type="select" defaultValue="select">
+        <option value="select" key="1">select</option>
+        <option value="other" key="2">...</option>
+      </Input>
+    );
+  }
+});
+
+var DeleteComponent = React.createClass({
+  deleteItem: function() {
+   // Todo: this belongs in the generic-list action file:
+   var r = confirm('Do you really want to delete this record? This cannot be undone.');
+   if(r) {
+       var that = this;
+        request
+     .del('/api/v2/'+this.props.rowData.entityType+'/'+this.props.rowData.masterid)
+     .end(function(res) {
+         alert('Deleted!');
+     });
+   }
+  },
+  render: function() {
+    return(
+      <Button onClick={this.deleteItem} bsStyle="danger"><Glyphicon glyph="trash" /></Button>
     );
   }
 });
@@ -126,7 +163,7 @@ var GriddleComponent = React.createClass({
           initialSortOrder = true;
         }
         return {
-            'results': [{'name' : 'Loading...'}],
+            'results': [{'name' : 'Loading...', 'deletebutton' : 0}],
 	    'selectedItems': [],
 	    'editingItem': null,
             'currentPage': 0,
@@ -146,6 +183,17 @@ var GriddleComponent = React.createClass({
     },
     componentWillUnmount: function() {
         this.props.store.removeChangeListener(this._onChange); // can't use conditional mixin
+    },
+    componentWillReceiveProps: function(newProps) {
+        this.props.store.removeChangeListener(this._onChange);
+	newProps.store.addChangeListener(this._onChange);
+	var that = this;
+	this.setState({'results': [{'name' : 'Loading...', 'deletebutton' : 0}]}, function() {
+	    newProps.actions.getListPaginated(0, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending, this.state.filter);
+	    console.log('Griddle component will receive new props: ');
+	    console.log(newProps.columns[1]);
+	    that.setPage(0);
+	});
     },
     setPage: function(index) {
         Pace.restart();
@@ -175,19 +223,19 @@ var GriddleComponent = React.createClass({
 	});
    },
    deleteSelectedItems: function() {
-        var that = this;
-   	request
-	.del('/api/v2/strategies')
-	.send({delete: this.state.selectedItems})
-	.end(function(res) {
-	    that.setPage(that.state.currentPage);
-	});
+    // Todo: this belongs in the generic-list action file:
+      var that = this;
+     	request
+    .del('/api/v2/'+this.props.slug)
+    .send({delete: this.state.selectedItems})
+    .end(function(res) {
+        that.setPage(that.state.currentPage);
+    });
    },
     render: function() {
       var cols = ['selected', 'edit'];
-      var meta = [{columnName: 'selected', displayName: 'Select', visible:true, customComponent: RadioComponent, locked: true}, {columnName: 'edit', visible:false, customComponent: EditComponent, locked: true},{columnName: 'editCallback', visible: false},{columnName: 'selectCallback', visible:false}];
-      var add_meta;
-
+      var meta = [{columnName: 'selected', displayName: 'Select', visible:true, customComponent: BulkComponent, locked: true}, {columnName: 'edit', visible:false, customComponent: EditComponent, locked: true},{columnName: 'editCallback', visible: false},{columnName: 'selectCallback', visible:false}];
+      var add_meta, add_cols;
       if( this.props.columns ) {
         this.props.columns.map(function(list){
           var custom = null;
@@ -227,11 +275,28 @@ var GriddleComponent = React.createClass({
           meta = meta.concat(add_meta);
         });
       }
+
+      add_cols = ['status'];
+      add_meta = [{columnName: 'status', displayName: 'Status', visible:true, locked:true}];
+      cols = cols.concat(add_cols);
+      meta = meta.concat(add_meta);
+
+      // Only admins can delete
+      if(this.props.credentials === true) {
+        add_cols = ['deletebutton'];
+        add_meta = [{columnName: 'deletebutton', displayName: 'Delete', visible: true, customComponent: DeleteComponent, locked:true}];
+        cols = cols.concat(add_cols);
+        meta = meta.concat(add_meta);
+      }
+
       return (
         <div>
           <Input type='text' placeholder='Filter List...' value={this.state.filter} onChange={this.setFilter} />
           <a onClick={this.resetFilterSort}>Reset</a><br />
-	  <span>{this.state.selectedItems.length} item{this.state.selectedItems.length === 1 ? '' : 's'} selected. <a onClick={this.deleteSelectedItems}>Delete these items.</a></span>
+	  <span>{this.state.selectedItems.length} item{this.state.selectedItems.length === 1 ? '' : 's'} selected.
+    {this.props.credentials === true ? (
+      <a onClick={this.deleteSelectedItems}>Delete these items.</a>
+      ) : ''}</span>
           <div className='table-responsive'>
 	           <Griddle useExternal={true}
                externalSetPage={this.setPage}
@@ -268,11 +333,12 @@ var GriddleComponent = React.createClass({
 	    var c = s;
 	    console.log('test');
 	    c.selected = (_.indexOf(this.state.selectedItems, s.masterid) === -1 ? 0 : 1);
+      c.deletebutton = 0;
 	    c.edit = this.state.editingItem == s.masterid;
 	    var that = this;
 	    c.selectCallback = function(masterid, status) {
 	        console.log('selected ' + masterid + '!');
-		if(status) { 
+		if(status) {
 		    that.setState({selectedItems: _.difference(that.state.selectedItems, [masterid])}, function() {
 		        console.log(that.state.selectedItems);
 			that.props.store.emitChange();
@@ -294,7 +360,7 @@ var GriddleComponent = React.createClass({
 	    return c;
 	}, this);
 	this.setState(state);
-    }
+}
 });
 
 module.exports = GriddleComponent;

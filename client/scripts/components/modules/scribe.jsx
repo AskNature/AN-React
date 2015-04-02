@@ -9,15 +9,12 @@ var ScribeTextField = React.createClass({
     if(this.props.initialValue) {
       initialValue = this.props.initialValue;
     } else {
-      initialValue = 'Enter a '+this.props.fieldName;
+      initialValue = '';
     }
     return {
       html: initialValue,
       gotUpdate: true
     };
-  },
-  componentWillMount: function() {
-    this.props.store.addChangeListener(this._onChange);
   },
     componentDidMount: function() {
         var that = this;
@@ -28,10 +25,15 @@ var ScribeTextField = React.createClass({
             function updateData() {
                 if(!that.state.gotUpdate) {
 		    var html = scribe.getHTML();
-                    that.setState({html: html});
+                    var index = html.lastIndexOf("<br");
+		    var htmlClean = html.substring(0, (((html.length - index) <= 5 && index != -1) ? index : html.length));
+                    that.setState({html: htmlClean});
 		    var updatedStuff = {};
-		    updatedStuff[that.props.fieldName] = html.substring(0, html.length-4);
+		    updatedStuff[that.props.fieldName] = htmlClean;
 		    that.props.actions.update(updatedStuff);
+		    if(that.props.fieldName === 'name') {
+		        console.log('got a new name: ' + htmlClean);
+		    }
 		} else {
 		    that.setState({gotUpdate: false});
 		}
@@ -39,19 +41,18 @@ var ScribeTextField = React.createClass({
             scribe.setContent(this.state.html);
 	});
     },
-    componentWillUnmount: function() {
-        this.props.store.removeChangeListener(this._onChange);
-    },
-    _onChange: function() {
-        var newData = this.props.store.get();
-	this.setState({gotUpdate: true}, function() {
-	    this.state.scribe.setContent(newData[this.props.fieldName]);
-	});
+    componentWillReceiveProps: function(newProps) {
+	if(this.state.html != newProps.initialValue && newProps.initialValue !== undefined) {
+	    this.setState({gotUpdate: true}, function() {
+		this.state.scribe.setContent(newProps.initialValue);
+	    });
+	}
     },
     render: function() {
         return (
 	    <div>
-	        <div class="dotted" contentEditable="true" ref="scribe" style={{"outline" : "none", "border-bottom": "1px dashed #999"}}/>
+	        {this.state.html == "" ? <div style={{position: 'absolute', color: '#999'}}>{this.props.placeholder}</div> : ""}
+	        <div class="dotted" contentEditable="true" ref="scribe" style={{"outline" : "none", "border-bottom": "1px solid #ddd"}}/>
 	    </div>
 	)
     }

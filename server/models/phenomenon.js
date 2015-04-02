@@ -2,29 +2,57 @@
 'use strict';
 
 var Model = require('./model.js');
+var ListOptions = require('./constants/listoptions.js');
+
 
 var entityName = 'Function';
 
-var FunctionFlat = new Model('Function', ['name']);
+var fields = ['name', 'short_name', 'description', 'flag_text', 'flag_media', 'flag_tags'];
 
-var fields = ['name', 'short_name', 'description'];
+var Function = new Model('Function',
+    [
+        'name',
+        '@class'
+    ]
+);
+var Status = new Model('ContentStatus',
+  [
+      'masterid',
+      'name'
+  ]
+);
+
+
 
 var relationships = {
     'parent': {
-	model: FunctionFlat,
-	className: 'Function',
+	model: Function,
+	className: 'Parent',
 	edge: 'out("ChildOf")'
     },
     'children': {
-        model: FunctionFlat,
-        className: 'Function',
+        model: Function,
+        className: 'Children',
         edge: 'in("ChildOf")'
     },
-    'has_function': {
-        model: FunctionFlat,
-        className: 'Function',
+    'outcome': {
+        model: Function,
+        className: 'Outcome',
         edge: 'in("HasFunction")'
+    },
+    'mechanism': {
+        model: Function,
+        className: 'Mechanism',
+        edge: 'in("HasMechanism")'
+    },
+    'status': {
+        model: Status,
+        className: 'ContentStatus',
+        edge: 'out("HasStatus")',
+        select: true,
+        options: ListOptions.ContentStatus
     }
+
 };
 
 var Phenomenon = new Model(entityName, fields, relationships);

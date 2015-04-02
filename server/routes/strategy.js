@@ -1,5 +1,5 @@
 /**
-* Outcome Routes
+* Strategy Routes
 * Define controllers to call when various routes are received via
 * client actions.
 */

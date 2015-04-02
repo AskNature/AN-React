@@ -3,16 +3,21 @@
 var React = require('react');
 
 var pageStore = require('../../stores/page');
-var userStore = require('../../stores/accounts');
-var userActions = require('../../actions/users');
+var accountStore = require('../../stores/accounts');
+var accountActions = require('../../actions/accounts');
 var Navbar = require('../modules/navbar.jsx');
 var Drawer = require('../modules/sidebar.jsx');
 
 
 var getState = function() {
+  var drawerSwitch = false;
+  if(window.innerWidth >= 768) {
+    drawerSwitch = true;
+  }
     return {
         title: pageStore.get().title,
-	      user: userStore.get()
+	      account: accountStore.get(),
+        drawerOpen: drawerSwitch
     };
 };
 
@@ -31,27 +36,18 @@ var Detail = React.createClass({
 });
 
 var DefaultComponent = React.createClass({
-    mixins: [pageStore.mixin, userStore.mixin],
+    mixins: [pageStore.mixin, accountStore.mixin],
     getInitialState: function() {
-        var drawerSwitch;
-        if(window.innerWidth >= 768) {
-          drawerSwitch = true;
-        } else {
-          drawerSwitch = false;
-        }
-        return {
-          title: pageStore.get().title,
-          drawerOpen: drawerSwitch,
-  	      user: userStore.get()
-        };
+        return (
+          getState()
+        );
     },
     componentWillMount: function() {
-    	userActions.fetchUser();
+    	accountActions.fetchUser();
     },
     componentDidMount: function() {
         pageStore.emitChange();
     },
-
     handleDrawerToggleClick: function(e){
     this.setState({
       drawerOpen: !this.state.drawerOpen
@@ -62,7 +58,7 @@ var DefaultComponent = React.createClass({
             /* jshint ignore:start */
             <div>
 
-            <Navbar user={this.state.user} onDrawerToggleClick={this.handleDrawerToggleClick} />
+            <Navbar account={this.state.account} onDrawerToggleClick={this.handleDrawerToggleClick} accountActions={accountActions}  />
             <Drawer open={this.state.drawerOpen}/>
             <Detail narrow={this.state.drawerOpen} {...this.props}/>
 

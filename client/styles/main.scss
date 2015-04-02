@@ -6,7 +6,7 @@
 $background-color: #f9f9f9;
 $primary-color: #b5bc4f;
 $fa-font-path: '../bower_components/components-font-awesome/fonts';
-@import url("//fonts.googleapis.com/css?family=Roboto:300,400,500,700");
+@import url("./gibson.css");
 
 *,
 *:before,
@@ -26,17 +26,29 @@ $fa-font-path: '../bower_components/components-font-awesome/fonts';
 // [endinjector]
 
 @import './react-widgets.css';
+@import './react-select.css';
 
 body {
   // Compensate for the 62px tall fixed navbar with padding-top
   padding-top: 62px;
+  font-family: 'Gibson', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 200;
+  background: $primary-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 100;
+  p {
+    margin: 0;
+  }
 }
 
 * {
   transition: all 0.5s ease;
 }
 
-.content, .panel, body {
+.content, .panel {
   background: $background-color;
 }
 
@@ -78,12 +90,15 @@ label {
   -moz-box-shadow: none;
 }
 
-.edit-action-buttons {
-  :hover {
-    background: #ccc;
+[contentEditable] {
+  outline: none;
+  border-bottom: 1px dotted #666;
+  &:before:empty{
+    content:attr(data-ph);
+    color:yellow;
+    font-style:italic;
   }
 }
-
 
 /* ==========================================================================
 Top Navbar
@@ -92,6 +107,7 @@ Top Navbar
 .navbar-inverse {
   background: $primary-color;
   height: 62px;
+  box-shadow: none;
   .navbar-brand {
     color: #333;
   }
@@ -99,6 +115,14 @@ Top Navbar
     position: absolute;
     left: 0;
     right: 120px;
+    .btn-default.drawer-toggle {
+      position: relative;
+      float:left;
+      padding: 9px 15px;
+      margin: 15px 0 15px 15px;
+      background: none;
+      border: none;
+    }
     .navbar-brand {
     }
     .navbar-form {
@@ -142,14 +166,6 @@ Top Navbar
       color: #fff;
     }
   }
-  &.drawer-toggle, .btn-default {
-    position: relative;
-    float:left;
-    padding: 9px 15px;
-    margin: 15px 0 15px 15px;
-    background: none;
-    border: none;
-  }
 }
 
 
@@ -163,17 +179,9 @@ nav.drawer {
   bottom:0;
   position: fixed;
   width: 300px;
-  background: rgb(238,238,238); /* Old browsers */
-/* IE9 SVG, needs conditional override of 'filter' to 'none' */
-background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijg2JSIgc3RvcC1jb2xvcj0iI2RkZGRkZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkZGRkZGQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-background: -moz-linear-gradient(left,  rgba(238,238,238,1) 0%, rgba(221,221,221,1) 86%, rgba(221,221,221,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(238,238,238,1)), color-stop(86%,rgba(221,221,221,1)), color-stop(100%,rgba(221,221,221,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(left,  rgba(238,238,238,1) 0%,rgba(221,221,221,1) 86%,rgba(221,221,221,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(left,  rgba(238,238,238,1) 0%,rgba(221,221,221,1) 86%,rgba(221,221,221,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(left,  rgba(238,238,238,1) 0%,rgba(221,221,221,1) 86%,rgba(221,221,221,1) 100%); /* IE10+ */
-background: linear-gradient(to right,  rgba(238,238,238,1) 0%,rgba(221,221,221,1) 86%,rgba(221,221,221,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#dddddd',GradientType=1 ); /* IE6-8 */
+  background: $primary-color;
 
+  overflow-y: scroll;
 
   .nav-stacked {
     li a {
@@ -183,6 +191,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
       }
       .fa {
         margin-top: 3px;
+      }
+      &.active {
+        background: $background-color;
       }
     }
   }
@@ -211,10 +222,12 @@ nav.drawer-leave.drawer-leave-active {
 }
 
 /* ==========================================================================
-Right Detail
+Subhero Buttons
 ========================================================================== */
 
-
+.btn-toolbar > a {
+  margin-left: 5px;
+}
 
 /* ==========================================================================
 Relationship Selector

@@ -4,20 +4,23 @@ var React = require('react/addons');
 var routeActions = require('./actions/routes');
 var IndexPage = React.createFactory(require('./components/index.jsx'));
 
-var StrategiesConsole = React.createFactory(require('./components/admin/strategies.jsx'));
-var ProductsConsole = React.createFactory(require('./components/admin/products.jsx'));
-var LivingSystemsConsole = React.createFactory(require('./components/admin/livingsystems.jsx'));
-var PhenomenaConsole = React.createFactory(require('./components/admin/phenomena.jsx'));
-var ConditionsConsole = React.createFactory(require('./components/admin/conditions.jsx'));
-var SourcesConsole = React.createFactory(require('./components/admin/sources.jsx'));
-var ResearchersConsole = React.createFactory(require('./components/admin/researchers.jsx'));
-var CollectionsConsole = React.createFactory(require('./components/admin/collections.jsx'));
-var UsersConsole = React.createFactory(require('./components/admin/users.jsx'));
-var MediaConsole = React.createFactory(require('./components/admin/media.jsx'));
+var ListComponent = React.createFactory(require('./components/admin/adminlist.jsx')),
+CollectionList = require('./components/admin/collection'),
+ContextList = require('./components/admin/context'),
+LivingSystemList = require('./components/admin/livingsystem'),
+MediaList = require('./components/admin/media'),
+PhenomenonList = require('./components/admin/phenomenon'),
+ProductList = require('./components/admin/product'),
+ResearcherList = require('./components/admin/researcher'),
+SourceList = require('./components/admin/source'),
+StrategyList = require('./components/admin/strategy'),
+OneUserList = require('./components/admin/1user'),
+UserList = require('./components/admin/user');
 
+var DetailComponent = React.createFactory(require('./components/detail/component-detail.jsx'));
 
-var StrategyDetail = React.createFactory(require('./components/detail/strategy.jsx'));
-var ProductDetail = React.createFactory(require('./components/detail/product.jsx'));
+var ProductDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
+var StrategyDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
 var LivingSystemsDetail = React.createFactory(require('./components/detail/livingsystem.jsx'));
 var PhenomenonDetail = React.createFactory(require('./components/detail/phenomenon.jsx'));
 var ConditionDetail = React.createFactory(require('./components/detail/condition.jsx'));
@@ -37,93 +40,84 @@ var AccountReset = React.createFactory(require('./components/account/reset.jsx')
 var Infinite = React.createFactory(require('./components/demo/infinite.jsx'));
 
 
-var render = function(Page) {
-    React.render(new Page(), document.getElementById('app-wrapper'));
+var render = function(Page, props) {
+    React.render(new Page(props), document.getElementById('app-wrapper'));
 };
 
 var index = function() {
     render(IndexPage);
 };
 
-var console_strategies = function() {
-    render(StrategiesConsole);
+var list_component = function(type) {
+    var list;
+    if(type === 'strategies') {
+        list = StrategyList;
+    } else if(type === 'products') {
+        list = ProductList;
+    } else if(type === 'phenomena') {
+        list = PhenomenonList;
+    } else if(type === 'users') {
+        list = UserList;
+    } else if(type === 'collections') {
+        list = CollectionList;
+    } else if(type === 'conditions') {
+        list = ContextList;
+    } else if(type === 'living-systems') {
+        list = LivingSystemList;
+    } else if(type === 'media') {
+        list = MediaList;
+    } else if(type === 'researchers') {
+        list = ResearcherList;
+    } else if(type === 'sources') {
+        list = SourceList;
+    } else if(type === '1users') {
+        list = OneUserList;
+    }
+    render(ListComponent, {type: type, component: list});
 };
 
-var console_products = function() {
-    render(ProductsConsole);
+var detail_component = function(type,id) {
+    render(DetailComponent, {masterid: id, type: type});
 };
 
-var console_livingsystems = function() {
-    render(LivingSystemsConsole);
+var detail_strategy = function(id) {
+    render(DetailComponent, {masterid: id, type: 'strategies'});
 };
 
-var console_phenomena = function() {
-    render(PhenomenaConsole);
+var detail_product = function(id) {
+    render(DetailComponent, {masterid: id, type: 'products'});
 };
 
-var console_conditions = function() {
-    render(ConditionsConsole);
+var detail_livingsystems = function(id) {
+    render(DetailComponent, {masterid: id, type: 'living-systems'});
 };
 
-var console_sources = function() {
-    render(SourcesConsole);
+var detail_phenomenon = function(id) {
+    render(DetailComponent, {masterid: id, type: 'phenomena'});
 };
 
-var console_researchers = function() {
-    render(ResearchersConsole);
+var detail_condition = function(id) {
+    render(DetailComponent, {masterid: id, type: 'conditions'});
 };
 
-var console_collections = function() {
-    render(CollectionsConsole);
+var detail_source = function(id) {
+    render(DetailComponent, {masterid: id, type: 'sources'});
 };
 
-var console_users = function() {
-    render(UsersConsole);
-};
+var detail_researcher = function(id) {
+    render(DetailComponent, {masterid: id, type: 'researchers'});};
 
-var console_media = function() {
-    render(MediaConsole);
-};
+var detail_collection = function(id) {
+    render(DetailComponent, {masterid: id, type: 'collections'});};
 
-var detail_strategy = function() {
-    render(StrategyDetail);
-};
+var detail_user = function(id) {
+    render(DetailComponent, {masterid: id, type: 'users'});};
 
-var detail_product = function() {
-    render(ProductDetail);
-};
+var detail_1user = function(id) {
+    render(DetailComponent, {masterid: id, type: '1users'});};
 
-var detail_livingsystems = function() {
-    render(LivingSystemsDetail);
-};
-
-var detail_phenomenon = function() {
-    render(PhenomenonDetail);
-};
-
-var detail_condition = function() {
-    render(ConditionDetail);
-};
-
-var detail_source = function() {
-    render(SourceDetail);
-};
-
-var detail_researcher = function() {
-    render(ResearcherDetail);
-};
-
-var detail_collection = function() {
-    render(CollectionDetail);
-};
-
-var detail_user = function() {
-    render(UserDetail);
-};
-
-var detail_media = function() {
-    render(MediaDetail);
-};
+var detail_media = function(id) {
+    render(DetailComponent, {masterid: id, type: 'media'});};
 
 var login = function() {
     render(Login);
@@ -152,16 +146,12 @@ var infinite_demo = function() {
 
 var routes = {
   '/': index,
-  '/admin/strategies': console_strategies,
-  '/admin/products': console_products,
-  '/admin/living-systems': console_livingsystems,
-  '/admin/phenomena': console_phenomena,
-  '/admin/conditions': console_conditions,
-  '/admin/sources': console_sources,
-  '/admin/researchers': console_researchers,
-  '/admin/collections': console_collections,
-  '/admin/users': console_users,
-  '/admin/media': console_media,
+
+  '/list/:type': list_component,
+
+// How do we change the second '/' into another colon?? Remember that we're aiming for a path that contains a bunch of key/value pairs that look like: .../Type:masterid/...
+  '/q/:type/:id': detail_component,
+
   '/strategy/:id': detail_strategy,
   '/product/:id': detail_product,
   '/living-system/:id': detail_livingsystems,
@@ -171,12 +161,15 @@ var routes = {
   '/researcher/:id': detail_researcher,
   '/collection/:id': detail_collection,
   '/user/:id': detail_user,
+  '/1user/:id': detail_1user,
   '/media/:id': detail_media,
+
   '/login': login,
   '/signup': signup,
   '/settings': account_settings,
   '/forgot': account_forgot,
   '/reset/:token': account_reset,
+
   '/infinite_demo': infinite_demo
 };
 
