@@ -20,7 +20,7 @@ var listItems = [
     {
         'label' : 'Designed Systems',
         'slug' : 'd.system',
-        'faIcon' : ''
+        'faIcon' : 'cubes'
     },
     {
         'class' : 'divider'
@@ -59,7 +59,7 @@ var listItems = [
     {
         'label' : 'Stories',
         'slug' : '#',
-        'faIcon' : ''
+        'faIcon' : 'newspaper-o'
     },
     {
         'label' : 'Sources',
@@ -69,7 +69,7 @@ var listItems = [
     {
         'label' : 'Citations',
         'slug' : '#',
-        'faIcon' : ''
+        'faIcon' : 'quote-left'
     },
     {
         'label' : 'Teams',
@@ -83,6 +83,19 @@ var listItems = [
         'label' : 'Media',
         'slug' : 'media',
         'faIcon' : 'photo'
+    },
+    {
+        'class' : 'divider'
+    },
+    {
+        'label' : 'Ideas & Insights',
+        'slug' : 'insights',
+        'faIcon' : 'lightbulb-o'
+    },
+    {
+        'label' : 'Comments',
+        'slug' : 'comments',
+        'faIcon' : 'comment'
     },
     {
         'class' : 'divider'
@@ -111,7 +124,7 @@ var listItems = [
     {
         'label' : 'Advertisements',
         'slug' : 'ads',
-        'faIcon' : ''
+        'faIcon' : 'bullhorn'
     },
 ];
 
