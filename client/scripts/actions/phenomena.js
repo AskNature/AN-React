@@ -4,8 +4,8 @@
 'use strict';
 
 var Dispatcher = require('../dispatchers/default');
-var Constants = require('../constants/phenomenon');
-var Defaults = require('../constants/defaults').phenomenon;
+var Constants = require('../constants/FM');
+var Defaults = require('../constants/defaults').FM;
 var request = require('superagent');
 var assign = require('object-assign');
 
@@ -88,7 +88,7 @@ module.exports = {
 
   setItem: function(focus, next) {
     Dispatcher.handleViewAction({
-      actionType: Constants.GET_PHENOMENON,
+      actionType: Constants.GET_FM,
       focus: assign({}, Defaults, focus)
     });
     console.log('setItem action returning '+ focus.results + ' result.');

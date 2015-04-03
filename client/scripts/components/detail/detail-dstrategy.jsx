@@ -57,12 +57,12 @@ var Template = React.createClass({
               <RelationshipList
                 items={data.outcomes}
                 editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'functions')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'functions')}
-                field={'functions'}
-                routeName='phenomenon'
-                title='Outcomes'
-                fieldName='Outcome'
+                onAdd={this.props.onRelationshipAdd.bind(null, 'outcomes')}
+                onRemove={this.props.onRelationshipRemove.bind(null, 'outcomes')}
+                field={'fm'}
+                routeName='fm'
+                title='Functions'
+                fieldName='Functions'
                 titleField={'name'} />
             </Col>
             <Col xs={12} sm={8}>

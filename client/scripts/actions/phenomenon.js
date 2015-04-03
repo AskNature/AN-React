@@ -4,13 +4,13 @@
 'use strict';
 
 var Dispatcher = require('../dispatchers/default');
-var Constants = require('../constants/phenomenon');
+var Constants = require('../constants/FM');
 //var Defaults = require('../constants/defaults').strategyNew;
 var request = require('superagent');
 var assign = require('object-assign');
 var _ = require('lodash');
 
-var store = require('../stores/phenomenon.js');
+var store = require('../stores/FM.js');
 
 var routeActions = require('./routes');
 
@@ -22,7 +22,7 @@ var routeActions = require('./routes');
 
 var initialize = function(initialData) {
     Dispatcher.handleViewAction({
-	actionType: Constants.INITIALIZE_PHENOMENON
+	actionType: Constants.INITIALIZE_FM
     });
 };
 
@@ -45,14 +45,14 @@ var fetch = function(masterid) {
         if (res) {
           var itemData = res.body;
             Dispatcher.handleViewAction({
-		actionType: Constants.FETCH_PHENOMENON_SUCCESS,
+		actionType: Constants.FETCH_FM_SUCCESS,
 		data: itemData
 	    });
         }
       }
       else {
 	  Dispatcher.handleViewAction({
-	      actionType: Constants.FETCH_PHENOMENON_ERROR
+	      actionType: Constants.FETCH_FM_ERROR
 	  });
       }
     });
@@ -65,14 +65,14 @@ var fetch = function(masterid) {
 
 var update = function(data) {
     Dispatcher.handleViewAction({
-	actionType: Constants.UPDATE_PHENOMENON,
+	actionType: Constants.UPDATE_FM,
 	data: data
     });
 };
 
 var removeRelationship = function(field, data) {
     Dispatcher.handleViewAction({
-	actionType: Constants.REMOVE_RELATIONSHIP_PHENOMENON,
+	actionType: Constants.REMOVE_RELATIONSHIP_FM,
 	field: field,
 	data: data
     });
@@ -80,7 +80,7 @@ var removeRelationship = function(field, data) {
 
 var addRelationship = function(field, data) {
     Dispatcher.handleViewAction({
-	actionType: Constants.ADD_RELATIONSHIP_PHENOMENON,
+	actionType: Constants.ADD_RELATIONSHIP_FM,
 	field: field,
 	data: data
     });
@@ -92,7 +92,7 @@ var addRelationship = function(field, data) {
 
 var commit = function(fields) {
     Dispatcher.handleViewAction({
-	actionType: Constants.COMMIT_PHENOMENON,
+	actionType: Constants.COMMIT_FM,
 	fields: fields
     });
     var self = this;
@@ -110,13 +110,13 @@ var commit = function(fields) {
     .end(function(res) {
         if(res.ok) {
 	    Dispatcher.handleViewAction({
-		actionType: Constants.COMMIT_PHENOMENON_SUCCESS,
+		actionType: Constants.COMMIT_FM_SUCCESS,
 		fields: fields,
 		data: res
 	    });
         } else {
 	    Dispatcher.handleViewAction({
-		actionType: Constants.COMMIT_PHENOMENON_ERROR,
+		actionType: Constants.COMMIT_FM_ERROR,
 		fields: fields,
 		error: res
 	    });
@@ -136,7 +136,7 @@ var del = function(masterid) {
 
 var create = function() {
     Dispatcher.handleViewAction({
-	actionType: Constants.CREATE_PHENOMENON
+	actionType: Constants.CREATE_FM
     });
 };
 

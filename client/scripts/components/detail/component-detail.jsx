@@ -16,7 +16,7 @@ ContextDetail = require('./detail-context.jsx'),
 BSystemDetail = require('./detail-bsystem.jsx'),
 DSystemDetail = require('./detail-dsystem.jsx'),
 MediaDetail = require('./detail-media.jsx'),
-PhenomenonDetail = require('./detail-phenomenon.jsx'),
+FMDetail = require('./detail-fm.jsx'),
 DStrategyDetail = require('./detail-dstrategy.jsx'),
 ResearcherDetail = require('./detail-researcher.jsx'),
 SourceDetail = require('./detail-source.jsx'),
@@ -103,8 +103,8 @@ var DetailComponent = React.createClass({
           Template = BStrategyDetail;
         } else if(this.props.type === 'd.strategy') {
           Template = DStrategyDetail;
-        } else if(this.props.type === 'phenomena') {
-          Template = PhenomenonDetail;
+        } else if(this.props.type === 'fm') {
+          Template = FMDetail;
         } else if(this.props.type === 'users') {
           Template = UserDetail;
         }  else if(this.props.type === '1users') {

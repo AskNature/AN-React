@@ -40,7 +40,7 @@ var listItems = [
     },
     {
         'label' : 'Functions & Mechanisms',
-        'slug' : 'phenomena',
+        'slug' : 'fm',
         'faIcon' : 'fire'
     },
     {

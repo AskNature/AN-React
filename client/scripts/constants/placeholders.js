@@ -15,15 +15,15 @@ var Placeholders = {
 
     },
 
-    phenomenon: {
+    fm: {
       results : [
       {
-        name: 'Add a phenomenon name',
-        description: 'Add a short paragraph describing this phenomenon in general terms.',
+        name: 'Add a FM name',
+        description: 'Add a short paragraph describing this FM in general terms.',
         short_name: '',
         parent: 'What other phenomena is this similar to?',
-        has_function: 'What content features this phenomenon as an outcome?',
-        has_mechanism: 'What content features this phenomenon as a mechanism?',
+        has_function: 'What content features this FM as an outcome?',
+        has_mechanism: 'What content features this FM as a mechanism?',
         media: 'Add Media'
       }
       ]

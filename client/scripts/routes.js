@@ -10,7 +10,7 @@ ContextList = require('./components/admin/context'),
 BSystemList = require('./components/admin/bsystem'),
 DSystemList = require('./components/admin/dsystem'),
 MediaList = require('./components/admin/media'),
-PhenomenonList = require('./components/admin/phenomenon'),
+FMList = require('./components/admin/fm'),
 DStrategyList = require('./components/admin/dstrategy'),
 ResearcherList = require('./components/admin/researcher'),
 SourceList = require('./components/admin/source'),
@@ -19,17 +19,6 @@ OneUserList = require('./components/admin/1user'),
 UserList = require('./components/admin/user');
 
 var DetailComponent = React.createFactory(require('./components/detail/component-detail.jsx'));
-
-var ProductDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
-var StrategyDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
-var BSystemDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
-var PhenomenonDetail = React.createFactory(require('./components/detail/phenomenon.jsx'));
-var ConditionDetail = React.createFactory(require('./components/detail/condition.jsx'));
-var SourceDetail = React.createFactory(require('./components/detail/source.jsx'));
-var ResearcherDetail = React.createFactory(require('./components/detail/researcher.jsx'));
-var CollectionDetail = React.createFactory(require('./components/detail/collection.jsx'));
-var UserDetail = React.createFactory(require('./components/detail/user.jsx'));
-var MediaDetail = React.createFactory(require('./components/detail/media.jsx'));
 
 
 var Login = React.createFactory(require('./components/account/login.jsx'));
@@ -55,8 +44,8 @@ var list_component = function(type) {
         list = BStrategyList;
     } else if(type === 'd.strategy') {
         list = DStrategyList;
-    } else if(type === 'phenomena') {
-        list = PhenomenonList;
+    } else if(type === 'fm') {
+        list = FMList;
     } else if(type === 'users') {
         list = UserList;
     } else if(type === 'collections') {
@@ -99,8 +88,8 @@ var detail_dsystem = function(id) {
     render(DetailComponent, {masterid: id, type: 'd.system'});
 };
 
-var detail_phenomenon = function(id) {
-    render(DetailComponent, {masterid: id, type: 'phenomena'});
+var detail_fm = function(id) {
+    render(DetailComponent, {masterid: id, type: 'fm'});
 };
 
 var detail_context = function(id) {
@@ -163,7 +152,7 @@ var routes = {
   '/d.strategy/:id': detail_dstrategy,
   '/b.system/:id': detail_bsystem,
   '/d.system/:id': detail_dsystem,
-  '/phenomenon/:id': detail_phenomenon,
+  '/fm/:id': detail_fm,
   '/context/:id': detail_context,
   '/source/:id': detail_source,
   '/researcher/:id': detail_researcher,

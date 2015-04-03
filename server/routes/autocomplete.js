@@ -10,7 +10,7 @@ var StrategyController = require('../controllers/bstrategy');
 
 var DStrategy = require('../models/dstrategy.js');
 var BStrategy = require('../models/bstrategy.js');
-var Phenomenon = require('../models/phenomenon.js');
+var FM = require('../models/fm.js');
 
 var returnAutocomplete = function(model) {
     return function(req, res, next) {
@@ -24,7 +24,7 @@ var routes = function (app) {
   // API v2
   app.get('/api/v2/autocomplete/d.strategy', returnAutocomplete(DStrategy));
   app.get('/api/v2/autocomplete/b.strategy', returnAutocomplete(BStrategy));
-  app.get('/api/v2/autocomplete/functions', returnAutocomplete(Phenomenon));
+  app.get('/api/v2/autocomplete/fm', returnAutocomplete(FM));
 
 };
 

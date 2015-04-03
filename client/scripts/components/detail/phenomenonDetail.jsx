@@ -22,12 +22,12 @@ Col = require('react-bootstrap').Col;
 
 /** Gets incoming information from the store */
 
-var store = require('../../stores/phenomenon');
+var store = require('../../stores/FM');
 var userStore = require('../../stores/accounts');
 
 /** Sends outgoing requests to an action */
 
-var actions = require('../../actions/phenomenon');
+var actions = require('../../actions/FM');
 
 /** getState can be called to get state updates from the store.
 * initialItems = entire list that remains static
@@ -98,9 +98,9 @@ actions.fetch(this.props.masterid);
   },
   render: function() {
     var detail = this.state.object;
-    var routeName = 'phenomenon';
+    var routeName = 'FM';
     var routeNamePlural = 'phenomena';
-    var entityName = 'Phenomenon';
+    var entityName = 'FM';
     var secondaryTitle;
     if(detail.groupname) {
       secondaryTitle = detail.groupname + ' > ';
@@ -126,9 +126,9 @@ actions.fetch(this.props.masterid);
                   onAdd={this.onRelationshipAdd.bind(null, 'parent')}
                   onRemove={this.onRelationshipRemove.bind(null, 'parent')}
                   field={'parent'}
-                  routeName={'phenomenon'}
-                  title={'Parent Phenomenon'}
-                  fieldName={'Parent Phenomenon'}/>
+                  routeName={'FM'}
+                  title={'Parent FM'}
+                  fieldName={'Parent FM'}/>
                   <RelationshipList
                     items={this.state.object.children}
                     editable={this.state.editable}
@@ -136,7 +136,7 @@ actions.fetch(this.props.masterid);
                     onAdd={this.onRelationshipAdd.bind(null, 'children')}
                     onRemove={this.onRelationshipRemove.bind(null, 'children')}
                     field={'children'}
-                    routeName={'phenomenon'}
+                    routeName={'FM'}
                     title={'Child Phenomena'}
                     fieldName={'Child Phenomena'}/>
               </Col>
