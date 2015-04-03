@@ -2,7 +2,7 @@ var React = require('react')
 DefaultLayout = require('../layouts/default.jsx'),
 InfiniteList = require('./infinitelist.jsx');
 var Scribe = require('../modules/scribe.jsx');
-var strategyDetailStore = require('../../stores/detail/strategies.js');
+var strategyDetailStore = require('../../stores/generic-detail.js');
 
 var ListItem = React.createClass({
     render: function() {

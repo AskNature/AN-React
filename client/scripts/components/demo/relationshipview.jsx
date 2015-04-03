@@ -1,7 +1,7 @@
 var React = require('react')
 DefaultLayout = require('../layouts/default.jsx'),
-store = require('../../stores/strategy.js');
-actions = require('../../actions/strategy.js');
+store = require('../../stores/generic-detail.js');
+actions = require('../../actions/generic-detail.js');
 
 var RelationshipList = require('./relationshiplist.jsx');
 

@@ -1,5 +1,5 @@
 /**
-*   Strategy Component Spec Test
+*   Strategy Detail Component Spec Test
 */
 
 /*jshint expr: true*/
@@ -7,7 +7,7 @@
 'use strict';
 
 var React = require('react');
-var StrategyComponent = React.createFactory(require('../../../../client/scripts/components/admin/strategies.jsx'));
+var StrategyComponent = React.createFactory(require('../../../../client/scripts/components/detail/component-detail.jsx'));
 
 describe('Strategy Component', function() {
 
