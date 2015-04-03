@@ -45,7 +45,7 @@ var relationships = {
     'has_context': {
         model: Entity,
         className: 'HasContext',
-        edge: 'in("HasCondition")'
+        edge: 'in("HasContext")'
     },
     'featured_in': {
         model: Entity,

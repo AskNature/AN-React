@@ -4,7 +4,7 @@
 var Model = require('./model.js');
 var ListOptions = require('./constants/listoptions.js');
 
-var entityName = 'Sources';
+var entityName = 'Source';
 
 var fields = ['name', 'secondary_title', 'source', 'type', 'timestamp', 'authors', 'author_address', 'pages', 'volume', 'number', 'publication_year', 'publisher', 'isbn', 'accession_number', 'url', 'notes', 'access_date', 'keywords', 'abstract_excerpt', 'published_language', 'type_of_work', 'other_information', 'flag_text', 'flag_media', 'flag_tags'];
 
