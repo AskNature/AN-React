@@ -111,6 +111,11 @@ var listItems = [
         'faIcon' : 'users'
     },
     {
+        'label' : 'Sectors',
+        'slug' : 'sector',
+        'faIcon' : 'puzzle-piece'
+    },
+    {
         'class' : 'divider'
     },
     {
