@@ -6,11 +6,11 @@
 
 'use strict';
 
-var StrategyController = require('../controllers/strategy');
+var StrategyController = require('../controllers/bstrategy');
 
-var Product = require('../models/product.js');
-var Strategy = require('../models/strategy.js');
-var Phenomenon = require('../models/phenomenon.js');
+var DStrategy = require('../models/dstrategy.js');
+var BStrategy = require('../models/bstrategy.js');
+var FM = require('../models/fm.js');
 
 var returnAutocomplete = function(model) {
     return function(req, res, next) {
@@ -22,9 +22,9 @@ var returnAutocomplete = function(model) {
 
 var routes = function (app) {
   // API v2
-  app.get('/api/v2/autocomplete/products', returnAutocomplete(Product));
-  app.get('/api/v2/autocomplete/strategies', returnAutocomplete(Strategy));
-  app.get('/api/v2/autocomplete/functions', returnAutocomplete(Phenomenon));
+  app.get('/api/v2/autocomplete/d.strategy', returnAutocomplete(DStrategy));
+  app.get('/api/v2/autocomplete/b.strategy', returnAutocomplete(BStrategy));
+  app.get('/api/v2/autocomplete/fm', returnAutocomplete(FM));
 
 };
 

@@ -179,9 +179,13 @@ nav.drawer {
   bottom:0;
   position: fixed;
   width: 300px;
-  background: $primary-color;
+  background: #eee;
 
   overflow-y: scroll;
+
+  .divider {
+    border-bottom: dotted 1px rgba(0,0,0,0.3);
+  }
 
   .nav-stacked {
     li a {

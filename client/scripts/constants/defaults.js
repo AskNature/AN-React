@@ -59,7 +59,7 @@ var Defaults = {
 
     },
 
-    phenomenon: {
+    FM: {
       results : [
       {
         name: 'Loading..',
@@ -78,7 +78,7 @@ var Defaults = {
       ]
     },
 
-    phenomenonNew : {
+    FMNew : {
         name: 'Loading...',
 	description: '',
 	short_name: '',

@@ -2,17 +2,17 @@
 
 var React = require('react');
 var DefaultLayout = require('../layouts/default.jsx');
-var PhenomenonDetail = require('./phenomenonDetail.jsx');
+var FMDetail = require('./FMDetail.jsx');
 
-var Phenomenon = React.createClass({
+var FM = React.createClass({
     render: function() {
         var masterid = window.location.pathname.split('/')[2];
         return (
                <DefaultLayout>
-                   <PhenomenonDetail masterid={masterid !== 'new' ? masterid : null} />
+                   <FMDetail masterid={masterid !== 'new' ? masterid : null} />
                </DefaultLayout>
         );
     }
 });
 
-module.exports = Phenomenon;
+module.exports = FM;

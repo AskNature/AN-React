@@ -14,32 +14,38 @@ var ReactCSSTransition = React.addons.CSSTransitionGroup;
 var listItems = [
     {
         'label' : 'Biological Systems',
-        'slug' : '#',
+        'slug' : 'b.system',
         'faIcon' : 'tree',
     },
     {
         'label' : 'Designed Systems',
-        'slug' : '#',
-        'faIcon' : ''
+        'slug' : 'd.system',
+        'faIcon' : 'cubes'
+    },
+    {
+        'class' : 'divider'
     },
     {
         'label' : 'Biological Strategies',
-        'slug' : 'strategies',
+        'slug' : 'b.strategy',
         'faIcon' : 'leaf'
     },
     {
         'label' : 'Designed Strategies',
-        'slug' : 'products',
+        'slug' : 'd.strategy',
         'faIcon' : 'recycle'
     },
     {
+        'class' : 'divider'
+    },
+    {
         'label' : 'Functions & Mechanisms',
-        'slug' : 'phenomena',
+        'slug' : 'fm',
         'faIcon' : 'fire'
     },
     {
         'label' : 'Context',
-        'slug' : 'conditions',
+        'slug' : 'context',
         'faIcon' : 'cloud'
     },
     {
@@ -48,9 +54,12 @@ var listItems = [
         'faIcon' : 'bookmark'
     },
     {
+        'class' : 'divider'
+    },
+    {
         'label' : 'Stories',
         'slug' : '#',
-        'faIcon' : ''
+        'faIcon' : 'newspaper-o'
     },
     {
         'label' : 'Sources',
@@ -60,7 +69,7 @@ var listItems = [
     {
         'label' : 'Citations',
         'slug' : '#',
-        'faIcon' : ''
+        'faIcon' : 'quote-left'
     },
     {
         'label' : 'Teams',
@@ -68,9 +77,28 @@ var listItems = [
         'faIcon' : 'university'
     },
     {
+        'class' : 'divider'
+    },
+    {
         'label' : 'Media',
         'slug' : 'media',
         'faIcon' : 'photo'
+    },
+    {
+        'class' : 'divider'
+    },
+    {
+        'label' : 'Ideas & Insights',
+        'slug' : 'insights',
+        'faIcon' : 'lightbulb-o'
+    },
+    {
+        'label' : 'Comments',
+        'slug' : 'comments',
+        'faIcon' : 'comment'
+    },
+    {
+        'class' : 'divider'
     },
     {
         'label' : 'Original Users',
@@ -78,10 +106,26 @@ var listItems = [
         'faIcon' : 'users'
     },
     {
-        'label' : 'Users',
+        'label' : 'Updated Users',
         'slug' : 'users',
         'faIcon' : 'users'
-    }
+    },
+    {
+        'class' : 'divider'
+    },
+    {
+        'label' : 'Static Pages',
+        'slug' : 'info',
+        'faIcon' : 'info'
+    },
+    {
+        'class' : 'divider'
+    },
+    {
+        'label' : 'Advertisements',
+        'slug' : 'ads',
+        'faIcon' : 'bullhorn'
+    },
 ];
 
 var SidebarComponent = React.createClass({
@@ -99,6 +143,9 @@ var SidebarComponent = React.createClass({
                                 {
                                     listItems.map(function(item,i){
                                         return (
+                                            item.class ? (
+                                                <li className={item.class}></li>
+                                            ) : (
                                             <li eventKey={i}>
                                                 <Link url={'/list/'+item.slug}>
                                                     <FontAwesome
@@ -109,6 +156,7 @@ var SidebarComponent = React.createClass({
                                                         &nbsp; {item.label}
                                                 </Link>
                                             </li>
+                                        )
                                         );
                                     })
                                 }

@@ -7,28 +7,18 @@ var IndexPage = React.createFactory(require('./components/index.jsx'));
 var ListComponent = React.createFactory(require('./components/admin/adminlist.jsx')),
 CollectionList = require('./components/admin/collection'),
 ContextList = require('./components/admin/context'),
-LivingSystemList = require('./components/admin/livingsystem'),
+BSystemList = require('./components/admin/bsystem'),
+DSystemList = require('./components/admin/dsystem'),
 MediaList = require('./components/admin/media'),
-PhenomenonList = require('./components/admin/phenomenon'),
-ProductList = require('./components/admin/product'),
+FMList = require('./components/admin/fm'),
+DStrategyList = require('./components/admin/dstrategy'),
 ResearcherList = require('./components/admin/researcher'),
 SourceList = require('./components/admin/source'),
-StrategyList = require('./components/admin/strategy'),
+BStrategyList = require('./components/admin/bstrategy'),
 OneUserList = require('./components/admin/1user'),
 UserList = require('./components/admin/user');
 
 var DetailComponent = React.createFactory(require('./components/detail/component-detail.jsx'));
-
-var ProductDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
-var StrategyDetail = React.createFactory(require('./components/detail/component-detail.jsx'));
-var LivingSystemsDetail = React.createFactory(require('./components/detail/livingsystem.jsx'));
-var PhenomenonDetail = React.createFactory(require('./components/detail/phenomenon.jsx'));
-var ConditionDetail = React.createFactory(require('./components/detail/condition.jsx'));
-var SourceDetail = React.createFactory(require('./components/detail/source.jsx'));
-var ResearcherDetail = React.createFactory(require('./components/detail/researcher.jsx'));
-var CollectionDetail = React.createFactory(require('./components/detail/collection.jsx'));
-var UserDetail = React.createFactory(require('./components/detail/user.jsx'));
-var MediaDetail = React.createFactory(require('./components/detail/media.jsx'));
 
 
 var Login = React.createFactory(require('./components/account/login.jsx'));
@@ -50,20 +40,22 @@ var index = function() {
 
 var list_component = function(type) {
     var list;
-    if(type === 'strategies') {
-        list = StrategyList;
-    } else if(type === 'products') {
-        list = ProductList;
-    } else if(type === 'phenomena') {
-        list = PhenomenonList;
+    if(type === 'b.strategy') {
+        list = BStrategyList;
+    } else if(type === 'd.strategy') {
+        list = DStrategyList;
+    } else if(type === 'fm') {
+        list = FMList;
     } else if(type === 'users') {
         list = UserList;
     } else if(type === 'collections') {
         list = CollectionList;
-    } else if(type === 'conditions') {
+    } else if(type === 'context') {
         list = ContextList;
-    } else if(type === 'living-systems') {
-        list = LivingSystemList;
+    } else if(type === 'b.system') {
+        list = BSystemList;
+    } else if(type === 'd.system') {
+        list = DSystemList;
     } else if(type === 'media') {
         list = MediaList;
     } else if(type === 'researchers') {
@@ -80,24 +72,28 @@ var detail_component = function(type,id) {
     render(DetailComponent, {masterid: id, type: type});
 };
 
-var detail_strategy = function(id) {
-    render(DetailComponent, {masterid: id, type: 'strategies'});
+var detail_bstrategy = function(id) {
+    render(DetailComponent, {masterid: id, type: 'b.strategy'});
 };
 
-var detail_product = function(id) {
-    render(DetailComponent, {masterid: id, type: 'products'});
+var detail_dstrategy = function(id) {
+    render(DetailComponent, {masterid: id, type: 'd.strategy'});
 };
 
-var detail_livingsystems = function(id) {
-    render(DetailComponent, {masterid: id, type: 'living-systems'});
+var detail_bsystem = function(id) {
+    render(DetailComponent, {masterid: id, type: 'b.system'});
 };
 
-var detail_phenomenon = function(id) {
-    render(DetailComponent, {masterid: id, type: 'phenomena'});
+var detail_dsystem = function(id) {
+    render(DetailComponent, {masterid: id, type: 'd.system'});
 };
 
-var detail_condition = function(id) {
-    render(DetailComponent, {masterid: id, type: 'conditions'});
+var detail_fm = function(id) {
+    render(DetailComponent, {masterid: id, type: 'fm'});
+};
+
+var detail_context = function(id) {
+    render(DetailComponent, {masterid: id, type: 'context'});
 };
 
 var detail_source = function(id) {
@@ -152,11 +148,12 @@ var routes = {
 // How do we change the second '/' into another colon?? Remember that we're aiming for a path that contains a bunch of key/value pairs that look like: .../Type:masterid/...
   '/q/:type/:id': detail_component,
 
-  '/strategy/:id': detail_strategy,
-  '/product/:id': detail_product,
-  '/living-system/:id': detail_livingsystems,
-  '/phenomenon/:id': detail_phenomenon,
-  '/condition/:id': detail_condition,
+  '/b.strategy/:id': detail_bstrategy,
+  '/d.strategy/:id': detail_dstrategy,
+  '/b.system/:id': detail_bsystem,
+  '/d.system/:id': detail_dsystem,
+  '/fm/:id': detail_fm,
+  '/context/:id': detail_context,
   '/source/:id': detail_source,
   '/researcher/:id': detail_researcher,
   '/collection/:id': detail_collection,

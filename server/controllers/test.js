@@ -1,7 +1,7 @@
 var db = require('../config/database').db;
 var _ = require('lodash');
 
-var Strategy = require('../models/strategy');
+var Strategy = require('../models/bstrategy');
 
 var Model = require('../models/model.js');
 

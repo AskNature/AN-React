@@ -29,8 +29,8 @@ var loadindex = function(req, res, next) {
 
 var returnList1 = function(req, res, next) {
   var chain = db
-  .select('name, secondary_title, masterid, out("HasStatus").name as status, type, in("FeaturedIn").size() as featured_count, in("FeaturedIn").name as featured_in, "source" as entityType, type, both("Added").name as added, timestamp, flag_text, flag_tags, flag_media')
-  .from('Sources');
+  .select('name, secondary_title, masterid, out("HasStatus").name as status, type, in("HasSource").size() as featured_count, in("HasSource").name as featured_in, "source" as entityType, type, both("Added").name as added, timestamp, flag_text, flag_tags, flag_media')
+  .from('Source');
 
   var limit = parseInt(req.query.limit);
   if(limit) {
@@ -54,7 +54,7 @@ var returnList1 = function(req, res, next) {
 
   sourceCache.getOrElse('count', Cached.deferred(function(done) {
       console.log('cache miss');
-      db.select('count(*)').from('Sources')
+      db.select('count(*)').from('Source')
       .scalar().then(function(count) {
 	  done(null, count); // return Cached.deferred
       }).done();
@@ -144,13 +144,13 @@ var createSource1 = function(req, res, next) {
         crypto.randomBytes(16, function(err, buf) {
 	    if(err) { return res.status(500).send(); }
             var masterid = buf.toString('hex');
-            db.select('count(*)').from('Sources').where({masterid: masterid}).scalar()
+            db.select('count(*)').from('Source').where({masterid: masterid}).scalar()
             .then(function(count) {
                 if(count > 0) {
                     return createWithToken(); // overlapping masterid, try again recursively
                 } else {
                     // do the creation
-                    db.insert().into('Sources')
+                    db.insert().into('Source')
                     .set({masterid: masterid, name: 'New source', status: 'raw'}) // TODO: Proper template
                     .all().then(function(results) {
                         // success!
@@ -174,7 +174,7 @@ var createSource1 = function(req, res, next) {
 var updateSource1 = function(req, res, next) {
     var newData = {name: req.body.name};
     console.log(JSON.stringify(newData));
-    db.update('Sources').set(newData)
+    db.update('Source').set(newData)
         .where({masterid:req.params.id}).scalar().then(function(count) {
             console.log("source updated: " + count);
 	    res.status(200).send(req.body);
@@ -185,7 +185,7 @@ var returnItem1 = function(req, res, next) {
   console.log(req.params.id);
   db
   .select('name, secondary_title, masterid, status, type, in("FeaturedIn").size() as featured_count, in("FeaturedIn").name as featured_in, "source" as entityType, type, both("Added").name as added, timestamp')
-  .from('Sources')
+  .from('Source')
   .where('masterid == "' + req.params.id + '"')
   .all()
   .then(function (results) {

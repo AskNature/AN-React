@@ -12,14 +12,15 @@ accountStore = require('../../stores/accounts'),
 DefaultLayout = require('../layouts/default.jsx'),
 
 CollectionDetail = require('./detail-collection.jsx'),
-ContextDetail = require('./detail-condition.jsx'),
-LivingSystemDetail = require('./detail-livingsystem.jsx'),
+ContextDetail = require('./detail-context.jsx'),
+BSystemDetail = require('./detail-bsystem.jsx'),
+DSystemDetail = require('./detail-dsystem.jsx'),
 MediaDetail = require('./detail-media.jsx'),
-PhenomenonDetail = require('./detail-phenomenon.jsx'),
-ProductDetail = require('./detail-product.jsx'),
+FMDetail = require('./detail-fm.jsx'),
+DStrategyDetail = require('./detail-dstrategy.jsx'),
 ResearcherDetail = require('./detail-researcher.jsx'),
 SourceDetail = require('./detail-source.jsx'),
-StrategyDetail = require('./detail-strategy.jsx'),
+BStrategyDetail = require('./detail-bstrategy.jsx'),
 UserDetail = require('./detail-user.jsx'),
 OneUserDetail = require('./detail-1user.jsx');
 
@@ -98,22 +99,24 @@ var DetailComponent = React.createClass({
       //This is a temporary solution until Scott's mixin replaces it. DOES NOT LOAD CORRECTLY ON REFRESH:
       getTemplate: function() {
         var Template;
-        if(this.props.type === 'strategies') {
-          Template = StrategyDetail;
-        } else if(this.props.type === 'products') {
-          Template = ProductDetail;
-        } else if(this.props.type === 'phenomena') {
-          Template = PhenomenonDetail;
+        if(this.props.type === 'b.strategy') {
+          Template = BStrategyDetail;
+        } else if(this.props.type === 'd.strategy') {
+          Template = DStrategyDetail;
+        } else if(this.props.type === 'fm') {
+          Template = FMDetail;
         } else if(this.props.type === 'users') {
           Template = UserDetail;
         }  else if(this.props.type === '1users') {
             Template = OneUserDetail;
         } else if(this.props.type === 'collections') {
           Template = CollectionDetail;
-        } else if(this.props.type === 'conditions') {
+        } else if(this.props.type === 'context') {
           Template = ContextDetail;
-        } else if(this.props.type === 'living-systems') {
-          Template = LivingSystemDetail;
+        } else if(this.props.type === 'b.system') {
+          Template = BSystemDetail;
+        } else if(this.props.type === 'd.system') {
+          Template = DSystemDetail;
         } else if(this.props.type === 'media') {
           Template = MediaDetail;
         } else if(this.props.type === 'researchers') {

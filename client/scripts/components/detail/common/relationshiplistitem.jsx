@@ -48,12 +48,27 @@ var RelationshipListItem = React.createClass({
       'Strategy' :
         {
           'displayName' : 'Biological Strategy',
-          'route' : 'strategy'
+          'route' : 'b.strategy'
         },
       'InspiredSolutions' :
         {
           'displayName' : 'Designed Strategy',
-          'route' : 'product'
+          'route' : 'd.strategy'
+        },
+      'Context' :
+        {
+          'displayName' : 'Context',
+          'route' : 'context'
+        },
+      'Story' :
+        {
+          'displayName' : 'Story',
+          'route' : 'story'
+        },
+      'Sources' :
+        {
+          'displayName' : 'Reference Source',
+          'route' : 'source'
         }
     };
     var lations;
@@ -61,6 +76,12 @@ var RelationshipListItem = React.createClass({
       lations = trans.Strategy;
     } else if(classname === 'InspiredSolutions') {
       lations = trans.InspiredSolutions;
+    } else if(classname === 'Context') {
+      lations = trans.Context;
+    } else if(classname === 'Story') {
+      lations = trans.Story;
+    } else if(classname === 'Sources') {
+      lations = trans.Sources;
     }
     return lations;
   },
@@ -81,7 +102,7 @@ var RelationshipListItem = React.createClass({
     var link = '../' + routeName + '/' + item.masterid;
     var title = this.props.titleField;
     var subTitle= this.props.subtitleField;
-    if (routeName === 'living-system')  {
+    if (routeName === 'b.system')  {
       title = 'Common Name';
       subTitle = this.props.item.taxon + ': ' + this.props.item.name;
     }

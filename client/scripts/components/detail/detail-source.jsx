@@ -61,7 +61,7 @@ var Template = React.createClass({
                   onAdd={this.props.onRelationshipAdd.bind(null,'mechanisms')}
                   onRemove={this.props.onRelationshipRemove.bind(null, 'mechanisms')}
                   field={'functions'}
-                  routeName={'phenomenon'}
+                  routeName={'FM'}
                   title={'Mechanisms'}
                   fieldName={'Mechanisms'}/>
         		    </Col>
@@ -73,7 +73,7 @@ var Template = React.createClass({
                     onAdd={this.props.onRelationshipAdd.bind(null, 'functions')}
                     onRemove={this.props.onRelationshipRemove.bind(null, 'functions')}
                     field={'functions'}
-                    routeName={'phenomenon'}
+                    routeName={'FM'}
                     title={'Outcomes'}
                     fieldName={'Outcomes'}/>
         		    </Col>

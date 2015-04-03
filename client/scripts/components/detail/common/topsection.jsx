@@ -33,6 +33,7 @@ var TopSection = React.createClass({
           datatype={this.props.datatype}
           primarytitle={this.props.primarytitle}
           primarydisplay={this.props.primarydisplay}
+          primarylink={this.props.primarylink}
           secondarytitle={this.props.secondarytitle}
           secondarylink={this.props.secondarylink}
 	        name={this.props.data.name}
