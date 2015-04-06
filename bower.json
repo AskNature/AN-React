@@ -10,7 +10,8 @@
     "bootswatch-dist": "paper",
     "pace": "~1.0.2",
     "animate.css": "~3.2.1",
-    "components-font-awesome": "~4.3.0"
+    "components-font-awesome": "~4.3.0",
+    "spinkit": "~1.0.1"
   },
   "devDependencies": {},
   "resolutions": {
