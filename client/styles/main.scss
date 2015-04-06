@@ -115,9 +115,6 @@ Loader
   z-index: 50;
   &.error {
     background: red;
-    :after {
-      content: 'Error';
-    }
   }
   .loader {
     position: absolute;
