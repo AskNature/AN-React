@@ -10,8 +10,7 @@ var fields = ['name', 'secondary_title', 'source', 'type', 'timestamp', 'authors
 
 var Content = new Model('Content',
     [
-        'name',
-        'size()'
+        'name'
     ]
 );
 var User = new Model('User',
@@ -65,11 +64,6 @@ var relationships = {
   edge: 'out("HasFunction")'
     },
 
-//    'living_systems': {
-//	model: LivingSystem,
-//	className: 'LivingSystem',
-//	edge: 'out("HasLivingSystem")'
-//    },
     'mechanisms': {
 	model: FM,
 	className: 'FM',
@@ -78,7 +72,7 @@ var relationships = {
     'conditions': {
   model: Condition,
 	className: 'Condition',
-	edge: 'out("HasConditions")'
+	edge: 'out("HasContext")'
     },
 'status': {
 model: Status,

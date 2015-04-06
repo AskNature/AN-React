@@ -11,6 +11,8 @@ accountStore = require('../../stores/accounts'),
 
 DefaultLayout = require('../layouts/default.jsx'),
 
+Isvg = require('react-inlinesvg'),
+
 CollectionDetail = require('./detail-collection.jsx'),
 ContextDetail = require('./detail-context.jsx'),
 BSystemDetail = require('./detail-bsystem.jsx'),
@@ -29,9 +31,25 @@ var getState = function() {
     object: store.get(),
     loaded: store.getLoaded(),
     error: store.getError(),
-    user: accountStore.get()
+    user: accountStore.get(),
+    windowHeight: window.innerHeight
   };
 };
+
+var Loader = React.createClass({
+  render: function() {
+    return (
+      <div className={this.props.error ? 'loader-bg error' : 'loader-bg'} style={{height: this.props.windowHeight}}>
+        <div className="loader">
+          <div className="sk-spinner sk-spinner-chasing-dots">
+            <div className="sk-dot1"></div>
+            <div className="sk-dot2"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+});
 
 var DetailComponent = React.createClass({
 
@@ -43,6 +61,10 @@ var DetailComponent = React.createClass({
           );
       },
 
+      handleResize: function(e) {
+        this.setState({windowHeight: window.innerHeight});
+      },
+
       componentDidMount: function(){
           if(this.props.masterid !== 'new') {
               actions.fetch(this.props.type,this.props.masterid);
@@ -50,8 +72,13 @@ var DetailComponent = React.createClass({
               actions.create(this.props.type);
               this.setState({editable: true});
           }
-          console.log(this.state);
+          window.addEventListener('resize', this.handleResize);
       },
+
+      componentWillUnmount: function() {
+        window.removeEventListener('resize', this.handleResize);
+      },
+
       _onChange: function() {
           this.setState(getState());
 	  this.setState({'masterid': store.getMasterid()});
@@ -130,14 +157,18 @@ var DetailComponent = React.createClass({
       console.log(this.state);
       console.log(this.props);
       var Template = this.getTemplate();
+      var style;
+      var loader = [];
+      if (!this.state.loaded) {
+        style = {position: 'relative', WebkitFilter: 'blur(0px) saturate(2)', height: this.state.windowHeight - 62, overflow: 'hidden'};
+        loader.push(
+          <Loader windowHeight={this.state.windowHeight - 62} error={this.state.error ? true : false} />
+        );
+      }
         return (
             <DefaultLayout>
-              {!this.state.loaded ? (
-                <div>
-                  {this.state.error ? 'Error' : 'Loading'}
-                </div>
-              ) : (
-                <div>
+                {loader}
+                <div style={style}>
                 <Template
                     masterid={this.state.masterid !== 'new' ? this.state.masterid : null}
                     type={this.props.type}
@@ -156,7 +187,7 @@ var DetailComponent = React.createClass({
                     onRelationshipRemove={this.onRelationshipRemove}
 		                onRelationshipSet={this.onRelationshipSet} />
                 </div>
-              )}
+
            </DefaultLayout>
         );
     },

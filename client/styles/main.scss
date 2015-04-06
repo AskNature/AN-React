@@ -19,6 +19,7 @@ $fa-font-path: '../bower_components/components-font-awesome/fonts';
 // Injects all bower_component files automatically
 // bower:scss
 @import "../bower_components/components-font-awesome/scss/font-awesome.scss";
+@import "../bower_components/spinkit/scss/spinners/6-chasing-dots.scss";
 // endbower
 
 // Injects all import files automatically
@@ -99,6 +100,42 @@ label {
     font-style:italic;
   }
 }
+
+/* ==========================================================================
+Loader
+========================================================================== */
+
+.loader-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: $primary-color;
+  opacity: 0.8;
+  z-index: 50;
+  &.error {
+    background: red;
+    :after {
+      content: 'Error';
+    }
+  }
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -60px;
+    margin-top: -60px;
+    z-index: 50;
+    .sk-spinner-chasing-dots.sk-spinner {
+      width: 120px;
+      height: 120px;
+      .sk-dot1, .sk-dot2 {
+        background-color: #ffffff;
+      }
+    }
+  }
+}
+
 
 /* ==========================================================================
 Top Navbar
