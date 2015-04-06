@@ -115,6 +115,14 @@ Loader
   z-index: 50;
   &.error {
     background: red;
+    > :before {
+      content: 'Error';
+      font-size: 36px;
+      color: white;
+      padding-top: 20px;
+      font-weight: 800;
+      text-align: center;
+    }
   }
   .loader {
     position: absolute;
