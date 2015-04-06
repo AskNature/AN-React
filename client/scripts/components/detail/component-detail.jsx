@@ -33,7 +33,7 @@ var getState = function() {
     windowHeight: window.innerHeight
   };
 };
-
+/** The loading state and component could proably be moved to ../layouts/default.jsx */
 var Loader = React.createClass({
   render: function() {
     return (
