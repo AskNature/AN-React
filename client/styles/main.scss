@@ -18,8 +18,7 @@ $fa-font-path: '../bower_components/components-font-awesome/fonts';
 
 // Injects all bower_component files automatically
 // bower:scss
-@import "../bower_components/components-font-awesome/scss/font-awesome.scss";
-@import "../bower_components/spinkit/scss/spinners/6-chasing-dots.scss";
+@import '../bower_components/components-font-awesome/scss/font-awesome.scss';
 // endbower
 
 // Injects all import files automatically
@@ -28,6 +27,7 @@ $fa-font-path: '../bower_components/components-font-awesome/fonts';
 
 @import './react-widgets.css';
 @import './react-select.css';
+@import '../bower_components/spinkit/scss/spinners/6-chasing-dots.scss';
 
 body {
   // Compensate for the 62px tall fixed navbar with padding-top

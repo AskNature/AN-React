@@ -11,8 +11,6 @@ accountStore = require('../../stores/accounts'),
 
 DefaultLayout = require('../layouts/default.jsx'),
 
-Isvg = require('react-inlinesvg'),
-
 CollectionDetail = require('./detail-collection.jsx'),
 ContextDetail = require('./detail-context.jsx'),
 BSystemDetail = require('./detail-bsystem.jsx'),
