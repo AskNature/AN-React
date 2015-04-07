@@ -168,7 +168,7 @@ var DetailComponent = React.createClass({
                 {loader}
                 <div style={style}>
                 <Template
-                    masterid={this.state.masterid !== 'new' ? this.state.masterid : null}
+                    masterid={this.props.masterid !== 'new' ? this.props.masterid : null}
                     type={this.props.type}
                     data={this.state.object}
                     loaded={this.state.loaded}

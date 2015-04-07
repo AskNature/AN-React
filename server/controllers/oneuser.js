@@ -9,15 +9,15 @@ var oneUserCache;
 
 var crypto = require('crypto');
 
-var oneUser = require('../models/1user.js');
+var oneUser = require('../models/oneuser.js');
 
 if(process.env.NODE_ENV === 'production') {
-    oneUserCache = new Cached('1user', { backend: {
+    oneUserCache = new Cached('oneuser', { backend: {
 	type: 'memcached',
 	hosts: '127.0.0.1:11211'
     }});
 } else {
-    oneUserCache = new Cached('1user');
+    oneUserCache = new Cached('oneuser');
 }
 oneUserCache.setDefaults({'freshFor': 120});
 

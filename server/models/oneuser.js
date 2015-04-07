@@ -8,16 +8,17 @@ var entityName = 'Users';
 
 var fields = ['name', 'first', 'last', 'email', 'roles', 'registration_date', 'timestamp', 'email_confirmed', 'special_text', 'address_1', 'address_2', 'city', 'state', 'postal_code', 'country', 'time_zone', 'phone', 'extension', 'tollfree', 'fax', 'im', 'langs_spoken', 'revision', 'hide_email', 'send_email', 'alert_frequency', 'last_alerted', 'contact_me', 'hide_address', 'hide_phone', 'gender', 'custom_avatar', 'ip_address', 'password', 'salt', 'persist', 'newpassword', 'email_salt'];
 
-var User = new Model('User', ['name']);
+var User = new Model('Friends',
+  [
+    'name'
+  ]
+);
 
-var Friend = new Model('Friends', ['name']);
-
-var Media = new Model('Media', ['name', 'id', 'filename']);
+var Media = new Model('Media', ['name', 'id', 'filename', 'entityType']);
 
 var Status = new Model('UserStatus',
   [
-      'masterid',
-      'name'
+      'masterid'
   ]
 );
 
@@ -25,7 +26,7 @@ var relationships = {
     'friends': {
     	model: User,
     	className: 'Friends',
-    	edge: 'both("Friends")'
+    	edge: 'out("Friends")'
     },
     'media': {
     	model: Media,
@@ -37,13 +38,13 @@ var relationships = {
       className: 'AddedMedia',
       edge: 'out("AddedMedia")'
     },
-'status': {
-model: Status,
-className: 'UserStatus',
-edge: 'out("HasStatus")',
-select: true,
-options: ListOptions.UserStatus
-}
+    'status': {
+      model: Status,
+      className: 'UserStatus',
+      edge: 'out("HasStatus")',
+      select: true,
+      options: ListOptions.ContentStatus
+    }
 };
 
 var Data = new Model(entityName, fields, relationships);

@@ -23,8 +23,6 @@ var UserStatus = [
     {label: 'Spam', masterid:'spam'}
 ];
 
-// Todo: Add UserStatus
-
 module.exports = {
   'ContentStatus' : ContentStatus,
   'UserStatus' : UserStatus,

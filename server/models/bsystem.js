@@ -1,4 +1,3 @@
-// FM model
 'use strict';
 
 var Model = require('./model.js');

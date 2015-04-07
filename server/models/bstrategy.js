@@ -1,7 +1,6 @@
 // Strategy model
 'use strict';
 var Model = require('./model.js');
-var db = require('../config/database').db;
 var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Strategy';
@@ -142,6 +141,6 @@ var relationships = {
 
 };
 
-var Strategy = Model(entityName, fields, relationships);
+var Data = new Model(entityName, fields, relationships);
 
-module.exports = Strategy;
+module.exports = Data;

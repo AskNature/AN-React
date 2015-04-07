@@ -45,30 +45,6 @@ var Template = React.createClass({
           userdetail={true}
           />
 
-        <Grid>
-          <Row className='show-grid'>
-            <Col xs={12} sm={4}>
-              <RelationshipList
-                items={data.friends}
-                titleField='name'
-                editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'friends')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'friends')}
-                field={'friends'}
-                routeName='1user'
-                title='Friends'
-                fieldName='Friends' />
-            </Col>
-
-          </Row>
-        </Grid>
-        <Grid>
-          <Row>
-            <Col xs={12}>
-              <Gallery items={data} />
-            </Col>
-          </Row>
-        </Grid>
         {this.props.user.role == 'admin' ? (
           <PanelGroup defaultActiveKey='0' accordion>
             <Panel header='Table View' eventKey='1'>

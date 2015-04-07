@@ -4,7 +4,7 @@
 
 'use strict';
 
-var Controller = require('../controllers/1user');
+var Controller = require('../controllers/oneuser');
 
 var routes = function (app) {
   app.get('/1user/:id', Controller.loadindex);
