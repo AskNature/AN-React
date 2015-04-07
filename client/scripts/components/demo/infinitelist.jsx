@@ -4,7 +4,7 @@ var Infinite = require('react-infinite-extended');
 var InfiniteList = React.createClass({
     getInitialState: function() {
         return {
-            elements: this.buildElements(0, 20),
+            elements: this.props.elements,
             isInfiniteLoading: false,
             extendedHeight: 0,
             extendedBlock: undefined,
@@ -23,6 +23,10 @@ var InfiniteList = React.createClass({
 
     componentDidUnmount: function() {
         window.removeEventListener('resize', this.handleResize);
+    },
+
+    componentWillReceiveProps: function(newProps) {
+        this.setState({elements: newProps.elements});
     },
 
     extendListener: function(num) {
@@ -48,7 +52,7 @@ var InfiniteList = React.createClass({
     buildElements: function(start, end) {
         var elements = [];
         for (var i = start; i < end; i++) {
-            elements.push(<this.props.itemComponent num={i} key={i} extendListener={this.extendListener} />)
+            elements.push(<this.props.itemComponent num={i} key={i} extendListener={this.extendListener} data={{name: i, media:[]}} />)
         }
         return elements;
     },
@@ -97,8 +101,9 @@ var InfiniteList = React.createClass({
                          extendedIndex={this.state.extendedIndex}
                          loadingSpinnerDelegate={this.elementInfiniteLoad()}
                          isInfiniteLoading={this.state.isInfiniteLoading}
-                         preloadBatchSize={125}
+                         preloadBatchSize={1000}
 			 className="infinite-list"
+			 scrollNumberCallback={function(num) {console.log(num)}}
                          >
             {this.state.elements}
         </Infinite></div>;

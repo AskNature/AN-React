@@ -3,13 +3,14 @@ DefaultLayout = require('../layouts/default.jsx'),
 InfiniteList = require('./infinitelist.jsx');
 var Scribe = require('../modules/scribe.jsx');
 var strategyDetailStore = require('../../stores/generic-detail.js');
+var strategyDetailActions = require('../../actions/generic-detail.js');
+
+var TopSection = require('../detail/common/topsection.jsx');
 
 var ListItem = React.createClass({
     render: function() {
-        return <div className="infinite-list-item" style={{height: "500px", "borderBottom": "1px solid #ddd", cursor: "pointer"}}
-        onClick={this.props.extendListener(this.props.num)}>
-            <a onClick={this.props.extendListener(this.props.num)}>List Item {this.props.num}</a><br />
-            <img src={"http://thecatapi.com/api/images/get?format=src&type=gif&x=" + this.props.num} />
+        return <div className="infinite-list-item" style={{height: "500px", "borderBottom": "1px solid #ddd", cursor: "pointer"}}>
+            <TopSection primarytitle={this.props.data.name} user={{}} data={this.props.data} />
         </div>;
     }
 });
@@ -33,10 +34,22 @@ var BigListItem = React.createClass({
 });
 
 var Infinite = React.createClass({
+    mixins: [strategyDetailStore.mixin],
+    getInitialState: function() {
+        return { elements: [<ListItem num={0} key={0} data={{name: "first element", media:[]}}  extendListener={this.extendListener} />, <ListItem num={1} key={1} data={{name: "second element", media:[]}} extendListener={this.extendListener} />] }
+    },
+    componentWillMount: function() {
+        strategyDetailActions.fetch('b.strategy', this.props.masterid);//'740c420618b1b9abb92630cdaff6e0dd');
+    },
+    _onChange: function() {
+        var newElements = this.state.elements;
+	newElements[0] = <ListItem num={0} key={0} data={strategyDetailStore.get()} />;
+        this.setState({elements: newElements})
+    },
     render: function() {
         return (
             <DefaultLayout>
-                    <InfiniteList itemComponent={ListItem} extendedItemComponent={BigListItem} />
+                    <InfiniteList itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} />
             </DefaultLayout>
         )
     }
