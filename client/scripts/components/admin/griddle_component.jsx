@@ -176,7 +176,11 @@ var GriddleComponent = React.createClass({
     },
 
     componentWillMount: function() {
+      this.inputCallback = _.debounce(function (e) {
+        this.setPage(0);
+        }, 500);
     },
+
     componentDidMount: function() {
         this.props.store.addChangeListener(this._onChange); // can't use conditional mixin
         this.setPage(0);
@@ -206,17 +210,19 @@ var GriddleComponent = React.createClass({
 	});
     },
     changeSort: function(sort, asc) {
-        if(sort != 'selected') {
+        if(sort !== 'selected') {
 	    this.setState({'externalSortColumn' : sort, 'externalSortAscending': asc}, function() {
 	        this.setPage(0);
 	    });
 	}
     },
-    setFilter: function(event) {
-        console.log('set filter');
+
+    setFilter: function (e) {
+        e.persist();
         this.setState({'filter': event.target.value});
-	this.setPage(0);
+        this.inputCallback(e);
     },
+
     resetFilterSort: function() {
         this.setState({'filter': '', 'selectedItems': []}, function() {
 	    this.changeSort(null, true);
@@ -291,7 +297,7 @@ var GriddleComponent = React.createClass({
 
       return (
         <div>
-          <Input type='text' placeholder='Filter List...' value={this.state.filter} onChange={this.setFilter} />
+          <Input id='filter-input' type='text' placeholder='Filter List...' value={this.state.filter} onChange={this.setFilter} />
           <a onClick={this.resetFilterSort}>Reset</a><br />
 	  <span>{this.state.selectedItems.length} item{this.state.selectedItems.length === 1 ? '' : 's'} selected.
     {this.props.credentials === true ? (
@@ -331,7 +337,6 @@ var GriddleComponent = React.createClass({
 	//state.results.splice(0,0,{masterid: "new", name: "new component", callback: function() { console.log("called! hah!")}});
 	state.results = _.map(state.results, function(s) {
 	    var c = s;
-	    console.log('test');
 	    c.selected = (_.indexOf(this.state.selectedItems, s.masterid) === -1 ? 0 : 1);
       c.deletebutton = 0;
 	    c.edit = this.state.editingItem == s.masterid;
