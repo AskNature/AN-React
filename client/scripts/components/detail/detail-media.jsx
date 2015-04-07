@@ -26,6 +26,7 @@ var Template = React.createClass({
     var routeNameSingle = 'media';
     var entityName = 'Media';
     var data = this.props.data;
+    var imgid = data.has_media.length > 0 ? this.props.data.has_media[0].masterid : '';
     return (
       /* jshint ignore:start */
       <div>
@@ -37,7 +38,13 @@ var Template = React.createClass({
           secondarytitle={this.props.data.filename}
           secondarylink=''
           description={this.props.data.description} />
-
+        <Grid>
+          <Row>
+            <Col xs={12}>
+              <img src={'http://www.asknature.org/images/uploads/'+ data.entity + '/' + imgid + '/' + data.filename} style={{maxWidth: '100%', height: 'auto'}} />
+              </Col>
+            </Row>
+          </Grid>
           {this.props.user.role === 'admin' ? (
             <PanelGroup defaultActiveKey='0' accordion>
               <Panel header='Table View' eventKey='1'>
