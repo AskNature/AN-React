@@ -24,7 +24,6 @@ var List = {
     ],
     'thumb' : [
         'media',
-        'media_id',
         'media_entity'
     ]
 };

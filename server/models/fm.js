@@ -14,20 +14,18 @@ var Function = new Model('Function',
         'name'
     ]
 );
-var Entity = new Model('Entity',
-    [
-        'name',
-        '@class'
-    ]
-);
 var Status = new Model('ContentStatus',
   [
       'masterid',
       'name'
   ]
 );
-
-
+var Entity = new Model('Entity',
+    [
+        'name',
+        '@class'
+  ]
+);
 
 var relationships = {
     'parent': {

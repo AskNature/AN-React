@@ -18,7 +18,6 @@ var List = {
         false
     ],
     'thumb' : [
-        'media',
         'media_id',
         'media_entity'
     ]

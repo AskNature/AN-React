@@ -15,10 +15,17 @@ Glyphicon = require('react-bootstrap').Glyphicon;
 
 var LinkComponent = React.createClass({
     render: function() {
+      console.log(this.props.rowData);
         var url = '/'+ this.props.rowData.entityType + '/' + this.props.rowData.masterid;
           var i = new Image();
+          var id;
+          if(this.props.rowData.media_id) {
+            id = this.props.rowData.media_id;
+          } else {
+            id = this.props.rowData.masterid;
+          }
           if(this.props.rowData.media) {
-            i.src = 'http://www.asknature.org/images/uploads/' + this.props.rowData.media_entity + '/' + this.props.rowData.media_id + '/' + this.props.rowData.media;
+            i.src = 'http://www.asknature.org/images/uploads/' + this.props.rowData.media_entity + '/' + id + '/' + this.props.rowData.media;
           } else if(this.props.rowData.first) {
             i.src = 'http://www.asknature.org/images/uploads/user/'+this.props.rowData.masterid+'/avatar/lg_avatar.jpg';
           } else {

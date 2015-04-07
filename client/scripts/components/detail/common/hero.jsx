@@ -17,7 +17,7 @@ var HeroComponent = React.createClass({
     var mediaurl = this.props.media && this.props.media.length > 0 ? ('http://www.asknature.org/images/uploads/'+ this.props.media[0].entity + '/' + this.props.media[0].masterid + '/' + this.props.media[0].filename) : '';
     var heroStyle;
       if(this.props.media && this.props.media.length > 0) {
-         mediaurl = 'http://www.asknature.org/images/uploads/'+ this.props.media[0].entity + '/' + this.props.media[0].masterid + '/' + this.props.media[0].filename;
+         mediaurl = 'http://www.asknature.org/images/uploads/'+ this.props.media[0].entity + '/' + this.props.masterid + '/' + this.props.media[0].filename;
         heroStyle = {
           backgroundImage: 'url(' + mediaurl + ')'
         };

@@ -14,11 +14,12 @@ var Gallery = React.createClass({
   render: function() {
     var detail = this.props.items;
     var pictures = detail.media;
+    var masterid = detail.masterid;
     return (
       <Carousel {...this.props}>
         {
           pictures.map(function(image, i){
-            var mediaurl = 'http://www.asknature.org/images/uploads/'+ image.entity + '/' + image.masterid + '/' + image.filename;
+            var mediaurl = 'http://www.asknature.org/images/uploads/'+ image.entity + '/' + masterid + '/' + image.filename;
             var imgStyle = {
               backgroundImage: 'url(' + mediaurl + ')'
             };
