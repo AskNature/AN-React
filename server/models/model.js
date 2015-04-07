@@ -23,22 +23,24 @@ var ConstructModel = function(entityName, fields, relationships) {
 	    // build a model for each relationship
 	    var RelModel = val.model;
 	    if(attributes[key]) {
-                if(entityName==='Users' && key === 'out_HasMedia'){console.log(_.map(attributes[key].out_HasMedia, function(u) { return u.out; }));}
-		var arr;
-                if(_.isArray(attributes[key])) {
-		    console.log(key + ' is array');
-                    arr = attributes[key];
-                } else {
-                    try {
-                        arr = JSON.parse(attributes[key]);
-			console.log('parsed: ' + arr);
-                        if(!_.isArray(arr) && !val.select) {
-                            return false;
-                        }
-                    } catch(e) {
-                        return false;
-                    }
-                }
+        if(entityName==='Users' && key === 'out_HasMedia'){
+          console.log(_.map(attributes[key].out_HasMedia, function(u) { return u.out; }));
+        }
+	      var arr;
+        if(_.isArray(attributes[key])) {
+		      console.log(key + ' is array');
+          arr = attributes[key];
+        } else {
+          try {
+            arr = JSON.parse(attributes[key]);
+            console.log('parsed: ' + arr);
+            if(!_.isArray(arr) && !val.select) {
+              return false;
+            }
+          } catch(e) {
+            return false;
+          }
+      }
 		if (val.select) {
 		    console.log('select: ' + arr);
 		    this[key] = {masterid: ((arr.length > 0 && arr[0]) ? arr[0].masterid : (arr.masterid ? arr.masterid : null)), options: val.options};

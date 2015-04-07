@@ -31,7 +31,8 @@ var Login = React.createClass({
 
     loginSuccess: function() {
     	this.setState({style: ''});
-	routeActions.setRoute("/");
+        window.history.back();
+      
     },
 
     handleSubmit: function(e) {

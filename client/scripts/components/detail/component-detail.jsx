@@ -121,7 +121,7 @@ var DetailComponent = React.createClass({
           var r = confirm('Do you really want to delete this record?');
           if(r) {actions.del(this.props.type, this.props.masterid);}
       },
-      //This is a temporary solution until Scott's mixin replaces it. DOES NOT LOAD CORRECTLY ON REFRESH:
+      //T his is a temporary solution until something cleaner replaces it.
       getTemplate: function() {
         var Template;
         if(this.props.type === 'b.strategy') {
@@ -148,6 +148,9 @@ var DetailComponent = React.createClass({
           Template = ResearcherDetail;
         } else if(this.props.type === 'sources') {
           Template = SourceDetail;
+        }
+        if(this.state.loaded === false) {
+          actions.fetch(this.props.type,this.props.masterid);
         }
         return Template;
       },

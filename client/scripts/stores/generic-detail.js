@@ -111,7 +111,7 @@ ThisStore.dispatcherToken = Dispatcher.register(function(payload) {
     ThisStore.emitChange();
       }
   } else if(action.actionType === Constants.SET_RELATIONSHIP) {
-      if(_data[action.field]) { 
+      if(_data[action.field]) {
 	  _data[action.field].masterid = action.data;
 	  console.log('data: ' + action.data);
 	  console.log(_data[action.field]);
