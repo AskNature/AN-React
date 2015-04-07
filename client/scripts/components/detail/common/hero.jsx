@@ -14,9 +14,13 @@ Avatar = require('react-avatar');
 
 var HeroComponent = React.createClass({
   render: function() {
-    var mediaurl = this.props.media && this.props.media.length > 0 ? ('http://www.asknature.org/images/uploads/'+ this.props.media[0].entity + '/' + this.props.media[0].masterid + '/' + this.props.media[0].filename) : '';
-    var heroStyle;
-      if(this.props.media && this.props.media.length > 0) {
+    var mediaurl, heroStyle;
+    if(this.props.imgurl){
+      mediaurl = this.props.imgurl;
+      heroStyle = {
+        backgroundImage: 'url(' + mediaurl + ')'
+      };
+    } else if(this.props.media && this.props.media.length > 0) {
          mediaurl = 'http://www.asknature.org/images/uploads/'+ this.props.media[0].entity + '/' + this.props.masterid + '/' + this.props.media[0].filename;
         heroStyle = {
           backgroundImage: 'url(' + mediaurl + ')'
@@ -46,7 +50,7 @@ var HeroComponent = React.createClass({
               ) : '' }
                 <div className='media-body'>
                   <h6 className="animated fadeInDown" style={{textTransform:'uppercase',fontWeight:'800',color:'#ffffff', marginBottom: 0}}>
-                    {this.props.datatype}
+                    {this.props.label}
                   </h6>
                   <h3 className="animated fadeInDown" style={{marginTop: '8px', marginBottom: 0, fontWeight: '800'}}>
                     {!this.props.editable && this.props.primarylink ? (

@@ -26,7 +26,14 @@ var Template = React.createClass({
     var routeNameSingle = 'media';
     var entityName = 'Media';
     var data = this.props.data;
-    var imgid = data.has_media.length > 0 ? this.props.data.has_media[0].masterid : '';
+    var img = new Image();
+    img.id = data.has_media.length > 0 ? this.props.data.has_media[0].masterid : '';
+    img.src='http://www.asknature.org/images/uploads/'+ data.entity + '/' + img.id + '/' + data.filename;
+    img.onload = function () {
+      img.width = this.width;
+      img.height = this.height;
+    };
+    console.log(img.width);
     return (
       /* jshint ignore:start */
       <div>
@@ -37,11 +44,12 @@ var Template = React.createClass({
           primarytitle={this.props.data.name}
           secondarytitle={this.props.data.filename}
           secondarylink=''
-          description={this.props.data.description} />
+          description={this.props.data.description}
+          imgurl={img.src} />
         <Grid>
           <Row>
             <Col xs={12}>
-              <img src={'http://www.asknature.org/images/uploads/'+ data.entity + '/' + imgid + '/' + data.filename} style={{maxWidth: '100%', height: 'auto'}} />
+              <img src={img.src} style={{maxWidth: '100%', height: 'auto'}} />
               </Col>
             </Row>
           </Grid>

@@ -32,7 +32,7 @@ var Template = React.createClass({
           {...this.props}
           routename={routeNameSingle}
           entityName={entityName}
-          datatype={entityName}
+          label={entityName}
           primarytitle={this.props.data.name}
           secondarytitle=''
           secondarylink=''

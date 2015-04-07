@@ -34,7 +34,7 @@ var Template = React.createClass({
           {...this.props}
           routename={routeNameSingle}
           entityName={entityName}
-          datatype={entityName+': Organism'}
+          label={entityName+': Organism'}
           primarytitle={this.props.data.common_name}
           primarydisplay={this.props.data.common_name ? this.props.data.common_name : 'Common Name'}
           secondarytitle={this.props.data.name}
