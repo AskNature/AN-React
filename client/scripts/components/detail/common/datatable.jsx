@@ -22,7 +22,7 @@ var List = React.createClass({
         {
           items.map(function(item, i){
             return (
-              <li key={i}>{item}</li>
+              <li key={i}>{item.name}</li>
             );
           })
         }
@@ -53,7 +53,11 @@ var DataTable = React.createClass({
                     {items[key] instanceof Array ? (
                         <List items={items[key]} />
                       ) : (
-                        <TextField store={properties.store} actions={properties.actions} fieldName={key} initialValue={items[key]} editable={properties.editable}/>
+                        key !== 'status' ? (
+                          <TextField store={properties.store} actions={properties.actions} fieldName={key} initialValue={items[key]} editable={properties.editable}/>
+                        ) : (
+                          <span>{items[key].masterid}</span>
+                        )
                       )
                     }
                   </td>

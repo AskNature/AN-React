@@ -223,7 +223,7 @@ var Template = React.createClass({
           {this.props.user.role === 'admin' ? (
             <PanelGroup defaultActiveKey='0' accordion>
               <Panel header='Table View' eventKey='1'>
-                <DataTable data={data} />
+                <DataTable data={data} editable={this.props.editable} actions={this.props.actions} store={this.props.store}/>
               </Panel>
             </PanelGroup>
           ) : '' }
