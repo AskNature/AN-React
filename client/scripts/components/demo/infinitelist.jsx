@@ -98,6 +98,7 @@ var InfiniteList = React.createClass({
                          loadingSpinnerDelegate={this.elementInfiniteLoad()}
                          isInfiniteLoading={this.state.isInfiniteLoading}
                          preloadBatchSize={125}
+			 className="infinite-list"
                          >
             {this.state.elements}
         </Infinite></div>;
