@@ -72,15 +72,27 @@ var SubHero = React.createClass({
                       <Button block bsStyle="warning" onClick={this.props.editCancel}>
                         <Glyphicon glyph="remove" /> Cancel
                       </Button>
+                      {this.props.user.role === 'admin' ?
                       <Button block bsStyle="danger" onClick={this.props.onDelete}>
                         <Glyphicon glyph="trash" /> Delete
                       </Button>
+                      : ''}
                     </ButtonGroup>
-                    <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" title="Status" onRelationshipSet={this.props.onRelationshipSet} />
-
-                    <Input type='checkbox' label='Text' checked={this.props.flagText} />
-                      <Input pullLeft type='checkbox' label='Tags' checked={this.props.flagTags} />
-                        <Input type='checkbox' label='Media' checked={this.props.flagMedia} />
+                    <hr/>
+                    <fieldset>
+                      <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" onRelationshipSet={this.props.onRelationshipSet} />
+                      <div className='form-group'>
+                        <label className="checkbox-inline">
+                          <input type='checkbox' checked={this.props.flagText} id='flag_text' /><Glyphicon glyph="font" />
+                        </label>
+                        <label className="checkbox-inline">
+                          <input type='checkbox' checked={this.props.flagTags} id='flag_tags' /><Glyphicon glyph="tags" />
+                        </label>
+                        <label className="checkbox-inline">
+                          <input type='checkbox' checked={this.props.flagMedia} id='flag_media' /><Glyphicon glyph="picture" />
+                        </label>
+                      </div>
+                      </fieldset>
                     <TextArea
                       title='Editor Comments'
                       item={this.props.editorComments}
@@ -89,7 +101,24 @@ var SubHero = React.createClass({
                       fieldName={'editor_comments'}
                       editable={this.props.editable} />
                   </div>
-                : '' }
+                : this.props.user.role === 'admin' ?
+
+                  <fieldset disabled>
+                    <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" onRelationshipSet={this.props.onRelationshipSet} />
+                    <div className='form-group'>
+                      <label className="checkbox-inline">
+                        <input type='checkbox' checked={this.props.flagText} id='flag_text' /><Glyphicon glyph="font" />
+                      </label>
+                      <label className="checkbox-inline">
+                        <input type='checkbox' checked={this.props.flagTags} id='flag_tags' /><Glyphicon glyph="tags" />
+                      </label>
+                      <label className="checkbox-inline">
+                        <input type='checkbox' checked={this.props.flagMedia} id='flag_media' /><Glyphicon glyph="picture" />
+                      </label>
+                    </div>
+                  </fieldset>
+                  : ''
+                 }
               </Col>
             </Row>
           </Grid>
