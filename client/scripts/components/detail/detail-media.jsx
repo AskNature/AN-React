@@ -3,6 +3,7 @@
 var React = require('react'),
 
 Link = require('../modules/link.jsx'),
+FadeImage = require('../modules/imagefade.jsx'),
 DefaultLayout = require('../layouts/default.jsx'),
 
 TopSection = require('./common/topsection.jsx'),
@@ -21,7 +22,6 @@ Grid = require('react-bootstrap/Grid');
 var Select = require('react-select');
 
 var Template = React.createClass({
-
   render: function() {
     var routeNameSingle = 'media';
     var entityName = 'Media';
@@ -29,11 +29,7 @@ var Template = React.createClass({
     var img = new Image();
     img.id = data.has_media.length > 0 ? this.props.data.has_media[0].masterid : '';
     img.src='http://www.asknature.org/images/uploads/'+ data.entity + '/' + img.id + '/' + data.filename;
-    img.onload = function () {
-      img.width = this.width;
-      img.height = this.height;
-    };
-    console.log(img.width);
+    console.log(img.src);
     return (
       /* jshint ignore:start */
       <div>
@@ -49,7 +45,7 @@ var Template = React.createClass({
         <Grid>
           <Row>
             <Col xs={12}>
-              <img src={img.src} style={{maxWidth: '100%', height: 'auto'}} />
+              <FadeImage src={img.src} />
               </Col>
             </Row>
           </Grid>
