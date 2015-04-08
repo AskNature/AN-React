@@ -19,8 +19,6 @@ var RelationshipList = React.createClass({
     this.props.onRemove(removed);
   },
   render: function() {
-    console.log('Rendering list for '+this.props.title);
-
     return (
       <div>
         <h6>
