@@ -25,7 +25,7 @@ var Template = React.createClass({
     var data = this.props.data;
     var primaryKey = 'name';
     var secondaryTitle;
-    var primaryTitle = Object.keys(primaryKey)[0];
+    var primaryTitle = data[primaryKey];
     if(primaryTitle.includes(':')) {
         var split = primaryTitle.split(': ');
         primaryTitle = split[0];
@@ -43,6 +43,7 @@ var Template = React.createClass({
             primarytitle={primaryTitle}
             primarykey={primaryKey}
             secondarytitle={secondaryTitle}
+            secondarykey=''
             description={data[descriptionKey]}
             descriptionKey={descriptionKey} />
 	        <Grid>

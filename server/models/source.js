@@ -48,11 +48,7 @@ var relationships = {
 	className: 'FeaturedIn',
 	edge: 'in("HasSource")'
     },
-    'collection': {
-        model: Content,
-        className: 'Collection',
-        edge: 'in("Bookmarked")'
-    },
+
     'functions': {
   model: Content,
   className: 'FM',

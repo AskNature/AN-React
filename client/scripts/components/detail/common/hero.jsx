@@ -64,6 +64,7 @@ var HeroComponent = React.createClass({
                         placeholder='Enter a name' />
                     </Link>
                     ) : (
+                      this.props.primarykey ?
                       <TextArea
                         item={!this.props.editable && this.props.primarydisplay ? this.props.primarydisplay : this.props.primarytitle}
                         editable={this.props.editable}
@@ -71,6 +72,11 @@ var HeroComponent = React.createClass({
                         actions={this.props.actions}
                         fieldName={this.props.primarykey}
                         placeholder='Enter a name' />
+                      :
+                        <TextArea
+                          item={this.props.primarydisplay ? this.props.primarydisplay : this.props.primarytitle}
+                          editable={false}
+                           />
                     )}
                   </h3>
                   <h5 style={{fontWeight: '600', color: '#ffffff', fontStyle: 'italic', marginTop: 0}}>

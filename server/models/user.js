@@ -1,6 +1,6 @@
 'use strict';
 var Model = require('./model.js');
-var ListOptions = require('./constants/listoptions.js');
+var ListOptions = require('./constants/listoptions');
 
 var entityName = 'PassportUser';
 
@@ -14,7 +14,7 @@ var Status = new Model('UserStatus',
 );
 
 var relationships = {
-  'status': {
+  'status' : {
   model: Status,
   className: 'UserStatus',
   edge: 'out("HasStatus")',

@@ -58,11 +58,6 @@ var relationships = {
         className: 'LivingSystem',
         edge: 'in("ChildSystemOf")'
     },
-    'out_featuredin': {
-        model: Source,
-        className: 'Source',
-        edge: 'out("FeaturedIn")'
-    },
     'out_studiedby': {
         model: Team,
         className: 'Team',

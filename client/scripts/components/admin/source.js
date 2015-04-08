@@ -8,18 +8,16 @@ var List = {
       {columnName:'masterid', displayName:'id', type:'id'},
       {columnName:'name', displayName:'Name', type:'link'},
       {columnName:'status', displayName:'Status', type:'text'},
-      {columnName:'type', displayName:'Source', type:'text'},
-      {columnName:'featured_count', displayName:'Featured Count', type:'text'},
-      {columnName:'featured_in', displayName:'Featured In', type:'list'},
-      {columnName:'added', displayName:'Added By', type:'list'},
+      {columnName:'type', displayName:'Type', type:'text'},
+      {columnName:'has_source', displayName:'Featured In', type:'list'},
       {columnName:'timestamp', displayName:'Date Modified', type:'date'},
       {columnName:'flag_text', displayName:'Text', type:'boolean'},
       {columnName:'flag_tags', displayName:'Tags', type:'boolean'},
       {columnName:'flag_media', displayName:'Media', type:'boolean'}
     ],
     'initialSort' : [
-        'featured_count',
-        true
+        'masterid',
+        false
     ],
     'thumb' : [
         'media',

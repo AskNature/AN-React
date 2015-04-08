@@ -29,7 +29,7 @@ var loadindex = function(req, res, next) {
 
 var returnList1 = function(req, res, next) {
   var chain = db
-  .select('firstName, lastName, masterid, username, role, provider, "user" as entityType')
+  .select('firstName, lastName, masterid, username, role, provider, "user" as entityType, both("HasStatus").name as status')
   .from('PassportUser');
 
   var limit = parseInt(req.query.limit);

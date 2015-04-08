@@ -25,5 +25,5 @@ var UserStatus = [
 
 module.exports = {
   'ContentStatus' : ContentStatus,
-  'UserStatus' : UserStatus,
+  'UserStatus' : UserStatus
 };

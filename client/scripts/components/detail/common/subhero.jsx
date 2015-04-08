@@ -99,7 +99,10 @@ var SubHero = React.createClass({
                     </ButtonGroup>
                     <hr/>
                     <fieldset>
+                      {this.props.status ?
                       <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" onRelationshipSet={this.props.onRelationshipSet} />
+                      : ''}
+
                       <div className='form-group'>
                         <label className="checkbox-inline">
                           <input type='checkbox' checked={this.props.flagText} id='flag_text' /><Glyphicon glyph="font" />
@@ -123,7 +126,9 @@ var SubHero = React.createClass({
                 : this.props.user.role === 'admin' ?
 
                   <fieldset disabled>
-                    <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" onRelationshipSet={this.props.onRelationshipSet} />
+                    {this.props.status ?
+                      <Select selected={this.props.status.masterid} options={this.props.status.options} field="status" onRelationshipSet={this.props.onRelationshipSet} />
+                    : ''}
                     <div className='form-group'>
                       <label className="checkbox-inline">
                         <input type='checkbox' checked={this.props.flagText} id='flag_text' /><Glyphicon glyph="font" />

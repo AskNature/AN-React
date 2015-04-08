@@ -27,6 +27,8 @@ var Template = React.createClass({
     if(this.props.loaded) {
       fullname = data.first+' '+data.last;
     }
+    var secondaryKey = 'name';
+    var descriptionKey = 'special_text';
     var avatar = 'http://www.asknature.org/images/uploads/user/'+this.props.masterid+'/avatar/lg_avatar.jpg';
     return (
       /* jshint ignore:start */
@@ -36,8 +38,11 @@ var Template = React.createClass({
           routename={routeNameSingle}
           entityName={entityName}
           primarytitle={fullname}
-          secondarytitle={this.props.data.name}
-          description={this.props.data.special_text}
+          primarykey=''
+          secondarytitle={data[secondaryKey]}
+          secondarykey={secondaryKey}
+          description={data[descriptionKey]}
+          descriptionKey={descriptionKey}
           innerimage={avatar}
           userdetail={true}
           />

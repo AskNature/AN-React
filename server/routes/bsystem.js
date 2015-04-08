@@ -14,9 +14,7 @@ var routes = function (app) {
 
   // API v1
   app.get('/api/b.system', Controller.returnList1);
-  app.get('/api/b.system/:id', Controller.returnItem1);
-  app.post('/api/b.system/:id', Controller.updateBSystem1);
-
+  
   // API v2
   app.get('/api/v2/b.system/:id', Controller.returnItem2);
   app.post('/api/v2/b.system/:id', Controller.updateItem2);
