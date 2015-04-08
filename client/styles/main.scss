@@ -642,3 +642,11 @@ nav.drawer-enter {
 .autocomplete-dropdown:hover {
     background-color: rgb(238, 238, 238);
 }
+
+/* ==========================================================================
+ Search list (infinite scroll)
+========================================================================== */
+
+.infinite-list div {
+    transition: none;
+}
