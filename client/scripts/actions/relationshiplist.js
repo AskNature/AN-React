@@ -5,7 +5,7 @@
 
 var Dispatcher = require('../dispatchers/default');
 var Constants = require('../constants/relationshiplist');
-var Defaults = require('../constants/defaults').relationshipList;
+var Defaults = require('../constants/generic-defaults').relationshipList;
 var request = require('superagent');
 var assign = require('object-assign');
 var _ = require('lodash');

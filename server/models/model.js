@@ -256,7 +256,7 @@ var ConstructModel = function(entityName, fields, relationships) {
 
 
     Model.findAutocomplete = function(typed, limit, callback) {
-	db.query('SELECT @rid, masterid, ' + fields.join(', ') + ' FROM ' + entityName + ' WHERE name LIKE "' + typed + '%" LIMIT ' + limit).then(function(results) {
+	db.query('SELECT @rid, masterid, ' + fields.join(', ') + ' FROM ' + entityName + ' WHERE name LIKE "%' + typed + '%" LIMIT ' + limit).then(function(results) {
 	    callback(results);
 	}).done();
     };

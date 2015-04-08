@@ -76,7 +76,8 @@ data: data
 };
 
 var removeRelationship = function(field, data) {
-    Dispatcher.handleViewAction({
+   console.log('actions/generic-detail: removeRelationship ' + field + ' to ' + data);
+Dispatcher.handleViewAction({
 actionType: Constants.REMOVE_RELATIONSHIP,
 field: field,
 data: data
@@ -84,6 +85,7 @@ data: data
 };
 
 var addRelationship = function(field, data) {
+   console.log('actions/generic-detail: addRelationship ' + field + ' to ' + data.name);
     Dispatcher.handleViewAction({
 actionType: Constants.ADD_RELATIONSHIP,
 field: field,

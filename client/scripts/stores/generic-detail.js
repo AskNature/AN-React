@@ -107,6 +107,8 @@ ThisStore.dispatcherToken = Dispatcher.register(function(payload) {
   } else if(action.actionType === Constants.ADD_RELATIONSHIP) {
       if(_data[action.field]) {
  _data[action.field].push(action.data);
+ console.log('stores/generic-detail: ADD_RELATIONSHIP to ' + action.data.name + ':');
+ console.log(_data[action.field]);
  _fieldsUpdated = _.union(_fieldsUpdated, [action.field]);
     ThisStore.emitChange();
       }
