@@ -92,7 +92,7 @@ var relationships = {
         className: 'Function',
         edge: 'out("HasMechanism")'
     },
-    'designedsystems' : {
+    'dsystems' : {
 	model: DesignedSystem,
 	className: 'DesignedSystem',
 	edge: 'out("HasDesignedSystem")'

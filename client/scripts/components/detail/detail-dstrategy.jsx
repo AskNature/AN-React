@@ -23,6 +23,15 @@ var Template = React.createClass({
     var routeNameSingle = 'd.strategy';
     var entityName = 'Designed Strategies';
     var data = this.props.data;
+    var primaryKey = 'headline';
+    var secondaryTitle = data.dsystems[0] ? data.dsystems[0].name : '';
+    if(data.dsystems[1]){
+      secondaryTitle += ' & others';
+    }
+    if(data.name) {
+      secondaryTitle = data.name;
+    }
+    var descriptionKey = 'special_text';
     return (
       /* jshint ignore:start */
       <div>
@@ -30,22 +39,24 @@ var Template = React.createClass({
           {...this.props}
           routename={routeNameSingle}
           entityName={entityName}
-          primarytitle={this.props.data.headline}
-          secondarytitle={this.props.data.name}
+          primarytitle={data[primaryKey]}
+          primarykey={primaryKey}
+          secondarytitle={secondaryTitle}
+          secondarykey={'name'}
           secondarylink=''
-          description={this.props.data.company}
-          descriptionlink={this.props.data.company_website}
+          description={data[descriptionKey]}
+          descriptionKey={descriptionKey}
           />
         <Grid>
           <Row className='show-grid'>
             <Col xs={12} sm={4}>
               <RelationshipList
-                items={data.designedsystems}
+                items={data.dsystems}
                 editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'designedsystems')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'designedsystems')}
-                field={'designedsystems'}
-                routeName='design'
+                onAdd={this.props.onRelationshipAdd.bind(null, 'dsystems')}
+                onRemove={this.props.onRelationshipRemove.bind(null, 'dsystems')}
+                field={'d.system'}
+                routeName='d.system'
                 title='Designed Systems'
                 fieldName='Designed System'
                 titleField={'name'} />
