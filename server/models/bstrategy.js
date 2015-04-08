@@ -42,7 +42,7 @@ var Source = new Model('Sources',
     'authors'
   ]
 );
-var Function = new Model('Function',
+var Entity = new Model('Entity',
   [
     'name'
   ]
@@ -92,7 +92,7 @@ var relationships = {
 	edge: 'out("HasSource")'
     },
     'functions': {
-	model: Function,
+	model: Entity,
 	className: 'Function',
 	edge: 'out("HasFunction")'
     },
@@ -122,14 +122,14 @@ var relationships = {
 	edge: 'out("HasLivingSystem")'
     },
     'mechanisms': {
-	model: Function,
+	model: Entity,
 	className: 'Function',
 	edge: 'out("HasMechanism")'
     },
-    'conditions': {
-  model: Condition,
-	className: 'Condition',
-	edge: 'out("HasConditions")'
+    'context': {
+  model: Entity,
+	className: 'Context',
+	edge: 'out("HasContext")'
     },
     'status': {
 	model: Status,
