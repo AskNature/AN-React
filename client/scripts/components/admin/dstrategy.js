@@ -19,7 +19,7 @@ var List = {
       {columnName:'flag_media', displayName:'Media', type:'boolean'}
     ],
     'initialSort' : [
-        'timestamp',
+        'masterid',
         false
     ],
     'thumb' : [
