@@ -113,7 +113,7 @@ ThisStore.dispatcherToken = Dispatcher.register(function(payload) {
   } else if(action.actionType === Constants.SET_RELATIONSHIP) {
       if(_data[action.field]) {
 	  _data[action.field].masterid = action.data;
-	  console.log('data: ' + action.data);
+	  console.log('stores/generic-detail: SET_RELATIONSHIP to ' + action.data + ':');
 	  console.log(_data[action.field]);
 	  _fieldsUpdated = _.union(_fieldsUpdated, [action.field]);
 	  ThisStore.emitChange();

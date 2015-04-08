@@ -94,7 +94,8 @@ var DetailComponent = React.createClass({
           actions.removeRelationship(field, removedValue);
       },
       onRelationshipSet: function(field, newValue) {
-      	  actions.setRelationship(field, newValue);
+          console.log('component-detail: ' + field + ' set to ' + newValue);
+          actions.setRelationship(field, newValue);
       },
       toggleEditable: function(e) {
           e.preventDefault();

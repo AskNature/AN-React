@@ -92,7 +92,7 @@ data: data
 };
 
 var setRelationship = function(field, data) {
-    console.log('setRelationship ' + field + ': ' + data);
+    console.log('actions/generic-detail: setRelationship ' + field + ' to ' + data);
     Dispatcher.handleViewAction({
 	actionType: Constants.SET_RELATIONSHIP,
 	field: field,
