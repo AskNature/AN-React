@@ -25,6 +25,9 @@ var Template = React.createClass({
     var data = this.props.data;
     var primaryKey = 'name';
     var secondaryTitle = data.living_systems[0] ? data.living_systems[0].name : '';
+    if(data.living_systems[1]){
+      secondaryTitle += ' & others';
+    }
     var primaryTitle = data[primaryKey];
     if(primaryTitle.includes(':')) {
         var split = primaryTitle.split(': ');
