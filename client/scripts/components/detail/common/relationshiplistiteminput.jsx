@@ -1,6 +1,9 @@
 'use strict';
 
 var React = require('react'),
+
+_ = require('lodash'),
+
 Link = require('../../modules/link.jsx'),
 
 Button = require('react-bootstrap').Button,
@@ -29,13 +32,16 @@ var RelationshipListItemInput = React.createClass({
   },
 
   componentWillMount: function() {
-      //RelationshipListActions.initialize();
+    this.inputCallback = _.debounce(function (e, field, target) {
+      RelationshipListActions.fetchAutocomplete(field,target,10);
+      console.log('Search '+field+' for '+target);
+      }, 500);
   },
 
   onInputInput: function(e) {
       console.log('text entered');
       if(e.target.value !== '') {
-          RelationshipListActions.fetchAutocomplete(this.props.field,e.target.value,10);
+        this.inputCallback(e, this.props.field, e.target.value);
       } else {
           RelationshipListActions.initialize();
       }
