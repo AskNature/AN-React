@@ -24,13 +24,14 @@ var Template = React.createClass({
     var entityName = 'Biological Strategies';
     var data = this.props.data;
     var primaryKey = 'name';
-    var secondaryTitle;
+    var secondaryTitle = data.living_systems[0] ? data.living_systems[0].name : '';
     var primaryTitle = data[primaryKey];
     if(primaryTitle.includes(':')) {
         var split = primaryTitle.split(': ');
         primaryTitle = split[0];
         secondaryTitle = split[1];
     }
+
     var descriptionKey = 'summary';
     var default_avatar = 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/10383663_869350803096314_2369845013213041061_n.png?oh=2c010ce055331caa73a9506795239fd1&oe=55BDD82A&__gda__=1433772443_f5c43498047b8193dccc0a5554ba6ed1';
     return (
@@ -40,12 +41,14 @@ var Template = React.createClass({
             {...this.props}
             routename={routeNameSingle}
             entityName={entityName}
-            primarytitle={primaryTitle}
+            primarytitle={data[primaryKey]}
+            primarydisplay={primaryTitle}
             primarykey={primaryKey}
             secondarytitle={secondaryTitle}
             secondarykey=''
             description={data[descriptionKey]}
-            descriptionKey={descriptionKey} />
+            descriptionKey={descriptionKey}
+            />
 	        <Grid>
   	        <Row className='show-grid'>
   		        <Col xs={12} sm={4}>
