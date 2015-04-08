@@ -22,7 +22,7 @@ var ImageComponent = React.createClass({
 
   render: function() {
     var className = this.props.className ? this.props.className + ' image' : 'image';
-    console.log(this.state);
+
     if (this.state.imageLoaded) {
       className += ' image-loaded';
     }

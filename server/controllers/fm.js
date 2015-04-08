@@ -55,6 +55,7 @@ var returnList1 = function(req, res, next) {
   fmCache.getOrElse('count', Cached.deferred(function(done) {
       console.log('cache miss');
       db.select('count(*)').from('Function')
+      .where({status: 0})
       .scalar().then(function(count) {
 	  done(null, count); // return Cached.deferred
       }).done();
@@ -139,69 +140,11 @@ var deleteMultiple2 = function(req, res, next) { // TODO: use async
     }
 };
 
-var createFM1 = function(req, res, next) {
-    var createWithToken = function() {
-        crypto.randomBytes(16, function(err, buf) {
-	    if(err) { return res.status(500).send(); }
-            var masterid = buf.toString('hex');
-            db.select('count(*)').from('Function').where({masterid: masterid}).scalar()
-            .then(function(count) {
-                if(count > 0) {
-                    return createWithToken(); // overlapping masterid, try again recursively
-                } else {
-                    // do the creation
-                    db.insert().into('Function')
-                    .set({masterid: masterid, name: 'New fm', status: 'raw'}) // TODO: Proper template
-                    .all().then(function(results) {
-                        // success!
-                        return res.status(200).json({
-                            results: results
-                        });
-                    });
-                }
-            });
-        });
-    };
-    // TODO: permissions check
-    if(req.body.masterid) {
-	// create with provided masterid
-	db.select('count(*)');
-    } else {
-	// create with generated masterid
-    }
-};
-
-var updateFM1 = function(req, res, next) {
-    var newData = {name: req.body.name};
-    console.log(JSON.stringify(newData));
-    db.update('Function').set(newData)
-        .where({masterid:req.params.id}).scalar().then(function(count) {
-            console.log("fm updated: " + count);
-	    res.status(200).send(req.body);
-        });
-};
-
-var returnItem1 = function(req, res, next) {
-  console.log(req.params.id);
-  db
-  .select('name, secondary_title, masterid, status, type, in("FeaturedIn").size() as featured_count, in("FeaturedIn").name as featured_in, "fm" as entityType, type, both("Added").name as added, timestamp')
-  .from('Function')
-  .where('masterid == "' + req.params.id + '"')
-  .all()
-  .then(function (results) {
-      res.status(200).json({
-        results: results
-      });
-  })
-  .done();
-};
 
 
     module.exports = {
       loadindex: loadindex,
       returnList1: returnList1,
-      returnItem1: returnItem1,
-      updateFM1: updateFM1,
       returnItem2: returnItem2,
       updateItem2: updateItem2,
       createItem2: createItem2,

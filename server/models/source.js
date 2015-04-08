@@ -48,29 +48,24 @@ var relationships = {
 	className: 'FeaturedIn',
 	edge: 'in("HasSource")'
     },
-    'owner': {
-        model: User,
-        className: 'Added',
-        edge: 'in("Added")'
-    },
     'collection': {
-        model: Collection,
+        model: Content,
         className: 'Collection',
         edge: 'in("Bookmarked")'
     },
     'functions': {
-  model: FM,
+  model: Content,
   className: 'FM',
   edge: 'out("HasFunction")'
     },
 
     'mechanisms': {
-	model: FM,
+	model: Content,
 	className: 'FM',
 	edge: 'out("HasMechanism")'
     },
     'conditions': {
-  model: Condition,
+  model: Content,
 	className: 'Condition',
 	edge: 'out("HasContext")'
     },

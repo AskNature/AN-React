@@ -12,6 +12,8 @@ CreatorMast = require('./creatormast.jsx');
 
 var TopSection = React.createClass({
   render: function() {
+    console.log('TopSection Props:');
+    console.log(this.props);
     return (
       /* jshint ignore:start */
       <div>
@@ -33,9 +35,11 @@ var TopSection = React.createClass({
           datatype={this.props.data.type}
           label={this.props.label ? this.props.label : this.props.entityName}
           primarytitle={this.props.primarytitle}
+          primarykey={this.props.primarykey}
           primarydisplay={this.props.primarydisplay}
           primarylink={this.props.primarylink}
           secondarytitle={this.props.secondarytitle}
+          secondarykey={this.props.secondarykey}
           secondarylink={this.props.secondarylink}
 	        name={this.props.data.name}
           masterid={this.props.masterid}
@@ -44,6 +48,7 @@ var TopSection = React.createClass({
         <SubHero
           description={this.props.description}
           descriptionlink={this.props.descriptionlink}
+          descriptionKey={this.props.descriptionKey}
           status={this.props.data.status}
           credentials={this.props.user.role === 'admin' ? true : false}
           editable={this.props.editable}

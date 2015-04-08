@@ -35,9 +35,28 @@ var SubHero = React.createClass({
         <Row>
           <Col xs={12} sm={8}>
             <h5 className="lead">
-              {this.props.first ? (<strong>{this.props.first} </strong>) : ''}
-              {this.props.descriptionlink ? (<Link url={this.props.descriptionlink}>{this.props.description}</Link>) : (<span><TextField store={this.props.store} actions={this.props.actions} fieldName={"summary"} initialValue={this.props.description} editable={this.props.editable} placeholder="Add a summary here" /></span>)}
-              </h5>
+              {this.props.first ? (
+                <strong>
+                  {this.props.first}
+                </strong>)
+              : ''}
+              {this.props.descriptionlink ? (
+                <Link url={this.props.descriptionlink}>
+                  {this.props.description}
+                </Link>
+              ) : (
+                <span>
+                  <TextArea
+                    store={this.props.store}
+                    actions={this.props.actions}
+                    item={this.props.description}
+                    fieldName={this.props.descriptionKey}
+                    editable={this.props.editable}
+                    placeholder='Add a description'
+                    />
+                </span>
+              )}
+            </h5>
           </Col>
           <Col xs={12} sm={4}>
             <Nav justified activeKey={0} bsStyle='pills' style={{"margin-top": "11.5px"}}>

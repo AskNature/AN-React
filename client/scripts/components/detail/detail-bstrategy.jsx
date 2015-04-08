@@ -8,12 +8,9 @@ DefaultLayout = require('../layouts/default.jsx'),
 TopSection = require('./common/topsection.jsx'),
 
 TextArea = require('./common/textarea.jsx'),
-DataTable = require('./common/datatable.jsx'),
 Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
-Panel = require('react-bootstrap/Panel'),
-PanelGroup = require('react-bootstrap/PanelGroup'),
 Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid');
@@ -26,13 +23,15 @@ var Template = React.createClass({
     var routeNameSingle = 'b.strategy';
     var entityName = 'Biological Strategies';
     var data = this.props.data;
-    var primaryTitle = data.name;
+    var primaryKey = 'name';
     var secondaryTitle;
+    var primaryTitle = Object.keys(primaryKey)[0];
     if(primaryTitle.includes(':')) {
         var split = primaryTitle.split(': ');
         primaryTitle = split[0];
         secondaryTitle = split[1];
     }
+    var descriptionKey = 'summary';
     var default_avatar = 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/10383663_869350803096314_2369845013213041061_n.png?oh=2c010ce055331caa73a9506795239fd1&oe=55BDD82A&__gda__=1433772443_f5c43498047b8193dccc0a5554ba6ed1';
     return (
       /* jshint ignore:start */
@@ -42,9 +41,10 @@ var Template = React.createClass({
             routename={routeNameSingle}
             entityName={entityName}
             primarytitle={primaryTitle}
+            primarykey={primaryKey}
             secondarytitle={secondaryTitle}
-            secondarylink=''
-            description={this.props.data.summary} />
+            description={data[descriptionKey]}
+            descriptionKey={descriptionKey} />
 	        <Grid>
   	        <Row className='show-grid'>
   		        <Col xs={12} sm={4}>
@@ -111,7 +111,7 @@ var Template = React.createClass({
                       actions={this.props.actions}
                       fieldName={'brief'}
                       editable={this.props.editable}
-		      placeholder="Enter a Story" />
+		                  placeholder="Enter a Story" />
                     ) : '' }
                     {data.special_text || this.props.editable ? (
                       <TextArea
@@ -220,13 +220,7 @@ var Template = React.createClass({
           			</Col>
         			</Row>
 			    </Grid>
-          {this.props.user.role === 'admin' ? (
-            <PanelGroup defaultActiveKey='0' accordion>
-              <Panel header='Table View' eventKey='1'>
-                <DataTable data={data} editable={this.props.editable} actions={this.props.actions} store={this.props.store}/>
-              </Panel>
-            </PanelGroup>
-          ) : '' }
+
         </div>
       /* jshint ignore:end */
     );

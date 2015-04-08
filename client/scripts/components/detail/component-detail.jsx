@@ -10,6 +10,10 @@ store = require('../../stores/generic-detail'),
 accountStore = require('../../stores/accounts'),
 
 DefaultLayout = require('../layouts/default.jsx'),
+DataTable = require('./common/datatable.jsx'),
+
+Panel = require('react-bootstrap/Panel'),
+PanelGroup = require('react-bootstrap/PanelGroup'),
 
 CollectionDetail = require('./detail-collection.jsx'),
 ContextDetail = require('./detail-context.jsx'),
@@ -187,6 +191,13 @@ var DetailComponent = React.createClass({
                     onRelationshipAdd={this.onRelationshipAdd}
                     onRelationshipRemove={this.onRelationshipRemove}
 		                onRelationshipSet={this.onRelationshipSet} />
+                  {this.state.user.role === 'admin' ? (
+                    <PanelGroup defaultActiveKey='0' accordion>
+                      <Panel header='Table View' eventKey='1'>
+                        <DataTable data={this.state.object} editable={this.state.editable} actions={actions} store={store}/>
+                      </Panel>
+                    </PanelGroup>
+                  ) : '' }
                 </div>
 
            </DefaultLayout>

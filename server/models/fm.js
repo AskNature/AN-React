@@ -9,7 +9,7 @@ var entityName = 'Function';
 
 var fields = ['name', 'short_name', 'description', 'flag_text', 'flag_media', 'flag_tags'];
 
-var Function = new Model('Function',
+var FM = new Model('FM',
     [
         'name'
     ]
@@ -29,12 +29,12 @@ var Entity = new Model('Entity',
 
 var relationships = {
     'parent': {
-	model: Function,
+	model: FM,
 	className: 'Parent',
 	edge: 'out("ChildOf")'
     },
     'children': {
-        model: Function,
+        model: FM,
         className: 'Children',
         edge: 'in("ChildOf")'
     },

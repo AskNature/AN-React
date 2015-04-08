@@ -6,15 +6,12 @@ DefaultLayout = require('../layouts/default.jsx'),
 
 TopSection = require('./common/topsection.jsx'),
 TextArea = require('./common/textarea.jsx'),
-DataTable = require('./common/datatable.jsx'),
 
 Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
 Button = require('react-bootstrap').Button,
 Glyphicon = require('react-bootstrap/Glyphicon'),
-Panel = require('react-bootstrap/Panel'),
-PanelGroup = require('react-bootstrap/PanelGroup'),
 Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid');
@@ -25,6 +22,8 @@ var Template = React.createClass({
     var routeNameSingle = 'fm';
     var entityName = 'Function & Mechanism';
     var data = this.props.data;
+    var primaryKey = 'name';
+    var descriptionKey = 'description';
     return (
       /* jshint ignore:start */
       <div>
@@ -33,11 +32,10 @@ var Template = React.createClass({
           routename={routeNameSingle}
           entityName={entityName}
           label={entityName}
-          primarytitle={this.props.data.name}
-          secondarytitle=''
-          secondarylink=''
-          description={this.props.data.description ? this.props.data.description : 'Description goes here.'} />
-
+          primarytitle={data[primaryKey]}
+          primarykey={primaryKey}
+          description={data[descriptionKey]}
+          descriptionKey={descriptionKey} />
         <Grid>
           <Row className='show-grid'>
             <Col xs={12} sm={4}>
@@ -80,7 +78,6 @@ var Template = React.createClass({
                 onAdd={this.props.onRelationshipAdd.bind(null, 'mechanism')}
                 onRemove={this.props.onRelationshipRemove.bind(null, 'mechanism')}
                 field={'mechanism'}
-                routeName={null}
                 title={'Listed as a Mechanism in'}
                 fieldName={'Listed as a Mechanism in'}
                 titleField={'name'} />
@@ -92,7 +89,6 @@ var Template = React.createClass({
                 onAdd={this.props.onRelationshipAdd.bind(null, 'outcome')}
                 onRemove={this.props.onRelationshipRemove.bind(null, 'outcome')}
                 field={'outcome'}
-                routeName={null}
                 title={'Listed as an Outcome in'}
                 fieldName={'Listed as an Outcome in'}
                 titleField={'name'} />
@@ -100,13 +96,6 @@ var Template = React.createClass({
           </Row>
         </Grid>
 
-        {this.props.user.role === 'admin' ? (
-          <PanelGroup defaultActiveKey='0' accordion>
-            <Panel header='Table View' eventKey='1'>
-              <DataTable data={data} />
-            </Panel>
-          </PanelGroup>
-        ) : '' }
 
     </div>
       /* jshint ignore:end */

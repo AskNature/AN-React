@@ -60,7 +60,7 @@ var HeroComponent = React.createClass({
                         editable={this.props.editable}
                         store={this.props.store}
                         actions={this.props.actions}
-                        fieldName='name'
+                        fieldName={this.props.primarykey}
                         placeholder='Enter a name' />
                     </Link>
                     ) : (
@@ -69,7 +69,7 @@ var HeroComponent = React.createClass({
                         editable={this.props.editable}
                         store={this.props.store}
                         actions={this.props.actions}
-                        fieldName='name'
+                        fieldName={this.props.primarykey}
                         placeholder='Enter a name' />
                     )}
                   </h3>
@@ -81,7 +81,7 @@ var HeroComponent = React.createClass({
                           editable={this.props.editable}
                           store={this.props.store}
                           actions={this.props.actions}
-                          fieldName='institution'
+                          fieldName={this.props.secondarykey}
                           placeholder='Enter a subtitle' />
                       </Link>
                     ) : (
@@ -90,7 +90,7 @@ var HeroComponent = React.createClass({
                         editable={this.props.editable}
                         store={this.props.store}
                         actions={this.props.actions}
-                        fieldName=''
+                        fieldName={this.props.secondarykey}
                         placeholder='Enter a subtitle' />
                     ) }
                   </h5>
