@@ -17,6 +17,7 @@ var BSystem = require('../models/bsystem.js');
 var FM = require('../models/fm.js');
 var Context = require('../models/context.js');
 
+var Source = require('../models/source.js');
 var Researcher = require('../models/researcher.js');
 
 var returnAutocomplete = function(model) {
@@ -38,6 +39,7 @@ var routes = function (app) {
   app.get('/api/v2/autocomplete/fm', returnAutocomplete(FM));
   app.get('/api/v2/autocomplete/context', returnAutocomplete(Context));
 
+  app.get('/api/v2/autocomplete/source', returnAutocomplete(Source));
   app.get('/api/v2/autocomplete/researcher', returnAutocomplete(Researcher));
 
 };

@@ -201,16 +201,18 @@ var Template = React.createClass({
 	            </Row>
         			<Row className='show-grid'>
                 <Col xs={12} sm={6}>
-                  <RelationshipList
-                    items={data.sources}
-                    titleField='name'
-                    subtitleField='authors'
-                    onAdd={this.props.onRelationshipAdd.bind(null, 'sources')}
-                    onRemove={this.props.onRelationshipRemove.bind(null, 'sources')}
-                    field={'sources'}
-                    routeName={'source'}
-                    title={'Sources'}
-                    fieldName={'Sources'}/>
+
+                    <RelationshipList
+                      items={data.sources}
+                      editable={this.props.editable}
+                      titleField='name'
+                      subtitleField='authors'
+                      onAdd={this.props.onRelationshipAdd.bind(null, 'sources')}
+                      onRemove={this.props.onRelationshipRemove.bind(null, 'sources')}
+                      field={'source'}
+                      routeName={'source'}
+                      title={'Sources'}
+                      fieldName={'Sources'}/>
                 </Col>
 		            <Col xs={12} sm={6}>
                   <RelationshipList
