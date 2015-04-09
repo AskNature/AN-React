@@ -96,6 +96,7 @@ ThisStore.dispatcherToken = Dispatcher.register(function(payload) {
       });
       _.assign(_data, action.data);
       ThisStore.emitChange();
+
   } else if(action.actionType === Constants.REMOVE_RELATIONSHIP) {
       if(_data[action.field]) {
  _data[action.field] = _.reject(_data[action.field], function(item) {

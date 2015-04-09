@@ -60,6 +60,7 @@ var TopSection = React.createClass({
           editCancel={this.props.editCancel}
           onDelete={this.props.onDelete}
           onRelationshipSet={this.props.onRelationshipSet}
+          onBooleanSet={this.props.onBooleanSet}
           user={this.props.user}
           editorComments={this.props.data.editor_comments}
           flags={{'flagText':this.props.data.flag_text, 'flagMedia':this.props.data.flag_media,'flagTags':this.props.data.flag_tags}} />

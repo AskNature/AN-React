@@ -97,6 +97,13 @@ var DetailComponent = React.createClass({
           console.log('component-detail: ' + field + ' set to ' + newValue);
           actions.setRelationship(field, newValue);
       },
+      onBooleanSet: function(e) {
+        e.persist();
+        console.log('component-detail: ' + e.target.id + ' set to ' + e.target.checked);
+        var updatedStuff = {};
+        updatedStuff[e.target.id] = e.target.checked;
+        actions.update(updatedStuff);
+      },
       toggleEditable: function(e) {
           e.preventDefault();
           if(this.state.editable === true) {
@@ -191,7 +198,8 @@ var DetailComponent = React.createClass({
                     onDelete={this.onDelete}
                     onRelationshipAdd={this.onRelationshipAdd}
                     onRelationshipRemove={this.onRelationshipRemove}
-		                onRelationshipSet={this.onRelationshipSet} />
+		                onRelationshipSet={this.onRelationshipSet}
+                    onBooleanSet={this.onBooleanSet} />
                   {this.state.user.role === 'admin' ? (
                     <PanelGroup defaultActiveKey='0' accordion>
                       <Panel header='Table View' eventKey='1'>

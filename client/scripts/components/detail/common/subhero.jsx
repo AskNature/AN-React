@@ -105,13 +105,14 @@ var SubHero = React.createClass({
 
                       <div className='form-group'>
                         <label className="checkbox-inline">
-                          <input type='checkbox' checked={this.props.flagText} id='flag_text' /><Glyphicon glyph="font" />
+                          <input type='checkbox' checked={this.props.flags.flagText}
+                            onClick={this.props.onBooleanSet} id='flag_text' /><Glyphicon glyph="font" />
                         </label>
                         <label className="checkbox-inline">
-                          <input type='checkbox' checked={this.props.flagTags} id='flag_tags' /><Glyphicon glyph="tags" />
+                          <input type='checkbox' checked={this.props.flags.flagTags} id='flag_tags' onClick={this.props.onBooleanSet}/><Glyphicon glyph="tags" />
                         </label>
                         <label className="checkbox-inline">
-                          <input type='checkbox' checked={this.props.flagMedia} id='flag_media' /><Glyphicon glyph="picture" />
+                          <input type='checkbox' checked={this.props.flags.flagMedia} id='flag_media' onClick={this.props.onBooleanSet}/><Glyphicon glyph="picture" />
                         </label>
                       </div>
                       </fieldset>
@@ -131,13 +132,13 @@ var SubHero = React.createClass({
                     : ''}
                     <div className='form-group'>
                       <label className="checkbox-inline">
-                        <input type='checkbox' checked={this.props.flagText} id='flag_text' /><Glyphicon glyph="font" />
+                        <input type='checkbox' checked={this.props.flags.flagText} id='flag_text' /><Glyphicon glyph="font" />
                       </label>
                       <label className="checkbox-inline">
-                        <input type='checkbox' checked={this.props.flagTags} id='flag_tags' /><Glyphicon glyph="tags" />
+                        <input type='checkbox' checked={this.props.flags.flagTags} id='flag_tags' /><Glyphicon glyph="tags" />
                       </label>
                       <label className="checkbox-inline">
-                        <input type='checkbox' checked={this.props.flagMedia} id='flag_media' /><Glyphicon glyph="picture" />
+                        <input type='checkbox' checked={this.props.flags.flagMedia} id='flag_media' /><Glyphicon glyph="picture" />
                       </label>
                     </div>
                   </fieldset>
