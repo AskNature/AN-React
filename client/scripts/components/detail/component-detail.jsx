@@ -126,7 +126,7 @@ var DetailComponent = React.createClass({
           var r = confirm('Do you really want to delete this record?');
           if(r) {actions.del(this.props.type, this.props.masterid);}
       },
-      //T his is a temporary solution until something cleaner replaces it.
+      //This is a temporary solution until something cleaner replaces it.
       getTemplate: function() {
         var Template;
         if(this.props.type === 'b.strategy') {
