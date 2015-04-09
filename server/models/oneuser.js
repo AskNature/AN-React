@@ -13,12 +13,6 @@ var Entity = new Model('Content',
         '@class'
     ]
 );
-var User = new Model('User',
-    [
-        'name'
-    ]
-);
-
 var Status = new Model('UserStatus',
   [
       'masterid',
@@ -27,23 +21,17 @@ var Status = new Model('UserStatus',
 );
 var Media = new Model('Media',
   [
-    'name',
     'masterid',
     'filename',
-    'entityType'
+    'entity'
   ]
 );
 
-var Condition = new Model('Condition',
-  [
-'name'
-  ]
-);
 
 var relationships = {
   'friends': {
       model: Entity,
-      className: 'User',
+      className: 'Users',
       edge: 'out("Friends")'
       },
       'media': {

@@ -21,7 +21,7 @@ var Template = React.createClass({
 
   render: function() {
     var routeNameSingle = '1user';
-    var entityName = '1Users';
+    var entityName = 'Original User';
     var data = this.props.data;
     var fullname;
     if(this.props.loaded) {

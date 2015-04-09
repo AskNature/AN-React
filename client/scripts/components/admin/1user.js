@@ -13,8 +13,8 @@ var List = {
       {columnName:'status', displayName:'Status', type:'text'}
     ],
     'initialSort' : [
-        'registration_date',
-        false
+        'masterid',
+        true
     ],
     'thumb' : [
         'media',
