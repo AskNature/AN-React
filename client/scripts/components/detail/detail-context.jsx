@@ -86,25 +86,26 @@ var Template = React.createClass({
             </Col>
             <Col xs={12} sm={4}>
             <RelationshipList
-              items={data.featured_in}
+              items={data.has_source}
               editable={this.props.editable}
-              onAdd={this.props.onRelationshipAdd.bind(null, 'featured_in')}
-              onRemove={this.props.onRelationshipRemove.bind(null, 'featured_in')}
-              field={'featured_in'}
-              routeName={null}
-              title={'Has Source'}
-              fieldName={'Has Source'}
+              onAdd={this.props.onRelationshipAdd.bind(null, 'has_source')}
+              onRemove={this.props.onRelationshipRemove.bind(null, 'has_source')}
+              field={'source'}
+              routeName='source'
+              title={'Has Sources'}
+              fieldName={'Has Sources'}
               titleField={'name'} />
               <RelationshipList
                 items={data.studied_by}
                 editable={this.props.editable}
+                titleField='name'
+                subtitleField='institution'
                 onAdd={this.props.onRelationshipAdd.bind(null, 'studied_by')}
                 onRemove={this.props.onRelationshipRemove.bind(null, 'studied_by')}
-                field={'studied_by'}
-                routeName={null}
-                title={'Studied By'}
-                fieldName={'Studied By'}
-                titleField={'name'} />
+                field={'researcher'}
+                routeName={'researcher'}
+                title={'Researched By'}
+                fieldName={'Researched By'}/>
             </Col>
           </Row>
         </Grid>

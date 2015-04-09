@@ -40,17 +40,17 @@ var relationships = {
     },
     'has_context': {
         model: Entity,
-        className: 'Strategy',
+        className: 'SuperStrategy',
         edge: 'in("HasContext")'
     },
-    'featured_in': {
+    'has_source': {
         model: Entity,
         className: 'Source',
         edge: 'out("HasSource")'
     },
     'studied_by': {
         model: Entity,
-        className: 'Expert',
+        className: 'Experts',
         edge: 'in("StudiedBy")'
     },
     'status': {
