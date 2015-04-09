@@ -23,6 +23,8 @@ var Template = React.createClass({
     var routeNameSingle = 'context';
     var entityName = 'Context';
     var data = this.props.data;
+    var primaryKey = 'name';
+    var descriptionKey = 'description';
     return (
       /* jshint ignore:start */
       <div>
@@ -30,10 +32,11 @@ var Template = React.createClass({
           {...this.props}
           routename={routeNameSingle}
           entityName={entityName}
-          primarytitle={this.props.data.name}
-          secondarylink=''
-          description={this.props.data.description} />
-
+          primarytitle={data[primaryKey]}
+          primarykey={primaryKey}
+          description={data[descriptionKey]}
+          descriptionKey={descriptionKey}
+          />
         <Grid>
           <Row className='show-grid'>
             <Col xs={12} sm={4}>

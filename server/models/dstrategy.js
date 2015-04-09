@@ -21,7 +21,7 @@ var Source = new Model('Sources',
         'authors'
     ]
 );
-var Function = new Model('Function',
+var Concept = new Model('Concept',
     [
         'name'
     ]
@@ -45,11 +45,6 @@ var Media = new Model('Media',
     ]
 );
 var DesignedSystem = new Model('DesignedSystem',
-    [
-        'name'
-    ]
-);
-var Condition = new Model('Condition',
     [
         'name'
     ]
@@ -85,27 +80,27 @@ var relationships = {
     'sources': {
         model: Source,
         className: 'Sources',
-        edge: 'out("FeaturedIn")'
+        edge: 'out("HasSource")'
     },
     'mechanisms': {
-        model: Function,
+        model: Concept,
         className: 'Function',
         edge: 'out("HasMechanism")'
     },
-    'dsystems' : {
+    'designedsystems' : {
 	model: DesignedSystem,
 	className: 'DesignedSystem',
-	edge: 'out("HasDesignedSystem")'
+	edge: 'out("HasDSystem")'
     },
-    'outcomes': {
-        model: Function,
+    'functions': {
+        model: Concept,
         className: 'Function',
         edge: 'out("HasFunction")'
     },
-    'conditions': {
-        model: Condition,
-        className: 'Condition',
-        edge: 'out("HasCondition")'
+    'context': {
+        model: Concept,
+        className: 'Context',
+        edge: 'out("HasContext")'
     },
     'status': {
         model: Status,

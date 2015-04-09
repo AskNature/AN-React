@@ -1,4 +1,3 @@
-// FM model
 'use strict';
 
 var Model = require('./model.js');
@@ -9,7 +8,6 @@ var ListOptions = require('./constants/listoptions.js');
 var entityName = 'Context';
 
 var fields = ['name', 'description', 'flag_text', 'flag_media', 'flag_tags'];
-
 
 var Context = new Model('Context',
     [
@@ -28,8 +26,6 @@ var Status = new Model('ContentStatus',
       'name'
   ]
 );
-
-
 
 var relationships = {
     'parent': {
@@ -50,7 +46,7 @@ var relationships = {
     'featured_in': {
         model: Entity,
         className: 'FeaturedIn',
-        edge: 'out("FeaturedIn")'
+        edge: 'out("HasSource")'
     },
     'studied_by': {
         model: Entity,
