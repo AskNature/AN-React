@@ -46,42 +46,18 @@ var Template = React.createClass({
           />
           <Grid>
             <Row className='show-grid'>
-              <Col xs={12} sm={4}>
+              <Col xs={12}>
                 <RelationshipList
-                  items={data.designedsystems}
+                  items={data.studied_by}
                   editable={this.props.editable}
-                  onAdd={this.props.onRelationshipAdd.bind(null, 'designedsystems')}
-                  onRemove={this.props.onRelationshipRemove.bind(null, 'designedsystems')}
-                  field={'designedsystems'}
-                  routeName='{null}'
-                  title='Area/s of Research'
-                  fieldName='Area/s of Research'
+                  onAdd={this.props.onRelationshipAdd.bind(null, 'studied_by')}
+                  onRemove={this.props.onRelationshipRemove.bind(null, 'studied_by')}
+                  field={'b.strategy'}
+                  title='Area/s of Expertise'
+                  fieldName='Area/s of Expertise'
                   titleField={'name'} />
               </Col>
-              <Col xs={6} sm={4}>
-                <RelationshipList
-                  items={data.outcomes}
-                  editable={this.props.editable}
-                  onAdd={this.props.onRelationshipAdd.bind(null, 'functions')}
-                  onRemove={this.props.onRelationshipRemove.bind(null, 'functions')}
-                  field={'functions'}
-                  routeName='FM'
-                  title='Outcomes'
-                  fieldName='Outcome'
-                  titleField={'name'} />
-              </Col>
-              <Col xs={12} sm={8}>
-                <RelationshipList
-                  items={data.strategies}
-                  editable={this.props.editable}
-                  onAdd={this.props.onRelationshipAdd.bind(null, 'strategies')}
-                  onRemove={this.props.onRelationshipRemove.bind(null, 'strategies')}
-                  field={'strategies'}
-                  routeName='b.strategy'
-                  title='Inspiring Biological Strategies'
-                  fieldName='Biological Strategy'
-                  titleField={'name'} />
-              </Col>
+              
             </Row>
           </Grid>
 

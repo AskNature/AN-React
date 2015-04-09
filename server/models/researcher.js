@@ -6,16 +6,12 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Experts';
 
-var fields = ['name', 'institution', 'timestamp', 'special_text', 'revision', 'timestamp', 'type', 'people', 'city', 'state', 'province', 'country', 'postal_code', 'url', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'institution', 'timestamp', 'special_text', 'revision', 'timestamp', 'type', 'people', 'city', 'state', 'province', 'country', 'postal_code', 'url', 'flag_text', 'flag_media', 'flag_tags', 'editor_notes'];
 
 var Content = new Model('Content',
     [
         'name',
-    ]
-);
-var Collection = new Model('Collection',
-    [
-        'name'
+        '@class'
     ]
 );
 var Status = new Model('ContentStatus',
@@ -29,13 +25,8 @@ var Status = new Model('ContentStatus',
 var relationships = {
     'studied_by': {
     	model: Content,
-    	className: 'StudiedBy',
+    	className: 'SuperStrategy',
     	edge: 'in("StudiedBy")'
-    },
-    'collected': {
-        model: Collection,
-        className: 'Collection',
-        edge: 'in("Bookmarked")'
     },
     'status': {
 	model: Status,
