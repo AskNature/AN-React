@@ -6,11 +6,12 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Media';
 
-var fields = ['name', 'filename', 'id', 'entity', 'timestamp', 'user_id', 'mime_type', 'file_type_id', 'author', 'author_url', 'source', 'source_url', 'license_id', 'description', 'deleted', 'keywords', 'featured', 'popup', 'sort_order', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'filename', 'id', 'entity', 'timestamp', 'user_id', 'mime_type', 'file_type_id', 'author', 'author_url', 'source', 'source_url', 'license_id', 'description', 'deleted', 'keywords', 'featured', 'popup', 'sort_order', 'flag_text', 'flag_media', 'flag_tags', 'custom_url'];
 
 var Entity = new Model('Entity',
     [
-        'name'
+        'name',
+        '@class'
     ]
 );
 var User = new Model('Outcome',

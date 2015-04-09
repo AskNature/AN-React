@@ -101,17 +101,23 @@ label {
   }
 }
 
+.overflow-scroll {
+  width: 100%;
+  display: block;
+  overflow: scroll;
+}
+
 /* ==========================================================================
 Image Fade
 ========================================================================== */
 
-.image {
+.fadeimage.image {
    opacity: 0;
+   width: 100%;
    transition: opacity 1.0s;
-}
-
-.image-loaded {
-  opacity: 1;
+   &.image-loaded {
+     opacity: 1;
+   }
 }
 
 /* ==========================================================================
