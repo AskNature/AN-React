@@ -1,4 +1,5 @@
-var React = require('react')
+'use strict';
+var React = require('react'),
 DefaultLayout = require('../layouts/default.jsx'),
 InfiniteList = require('./infinitelist.jsx');
 var Scribe = require('../modules/scribe.jsx');
@@ -15,7 +16,7 @@ var _ = require('lodash');
 var ListItem = React.createClass({
     render: function() {
         return <div className="infinite-list-item" style={{height: "2500px", "borderBottom": "1px solid #ddd", cursor: "pointer"}}>
-            <StrategyDetail type="b.strategy" masterid={this.props.data.masterid} loaded={true} editable={false} user={{}} data={this.props.data} 
+            <StrategyDetail type="b.strategy" masterid={this.props.data.masterid} loaded={true} editable={false} user={{}} data={this.props.data}
 	            editBegin={function() {}}
                     toggleEditable={function() {}}
                     editFinish={function() {}}
@@ -24,6 +25,7 @@ var ListItem = React.createClass({
                     onRelationshipAdd={function() {}}
                     onRelationshipRemove={function() {}}
                     onRelationshipSet={function() {}} />
+                <h1>Test</h1>
         </div>;
     }
 });
@@ -49,11 +51,12 @@ var BigListItem = React.createClass({
 var Infinite = React.createClass({
     mixins: [store.mixin],
     getInitialState: function() {
-        return { elements: [] }
+        return { elements: [] };
     },
     componentWillMount: function() {
-        //actions.fetch('b.strategy', this.props.masterid);//'740c420618b1b9abb92630cdaff6e0dd');
-	actions.getListPaginated('b.strategy', 0, 20, null, null, null);
+        // actions.getList('b.strategy',this.props.masterid);
+        //'740c420618b1b9abb92630cdaff6e0dd');
+	 actions.getListPaginated('b.strategy', 0, 20, null, null, null);
     },
     _onChange: function() {
         //var newElements = this.state.elements;
@@ -61,14 +64,14 @@ var Infinite = React.createClass({
 	    return <ListItem key={r.masterid} data={r} />;
 	});
 	//newElements[0] = <ListItem num={0} key={0} data={store.get()} />;
-        this.setState({elements: newElements})
+        this.setState({elements: newElements});
     },
     render: function() {
         return (
             <DefaultLayout>
                     <InfiniteList itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} />
             </DefaultLayout>
-        )
+        );
     }
 });
 

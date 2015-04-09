@@ -9,6 +9,14 @@ var TextField = require('../../modules/textfield.jsx');
 var TextArea = React.createClass({
   render: function() {
     var item = this.props.item;
+    // Remove html:
+    if (this.props.item) {
+    // item = item.replace(/<(?:.|\n)*?>/gm, '');
+    // Remove backslashes:
+    item = item.replace(/\\/g, '');
+    item = item.replace(/\u00a0/g, '');
+  }
+
     var title = this.props.title;
       return (
         <div>
@@ -23,13 +31,13 @@ var TextArea = React.createClass({
                   actions={this.props.actions}
                   enableBlockMode={false}
                   fieldName={this.props.fieldName}
-                  initialValue={this.props.item}
+                  initialValue={item}
                   editable={this.props.editable}
                   prompt={this.props.prompt}
 		  placeholder={this.props.placeholder} />
             :
             <p>
-              <span dangerouslySetInnerHTML={{__html: item}} />
+              {<span dangerouslySetInnerHTML={{__html: item}} />}
             </p>
           }
         </div>
