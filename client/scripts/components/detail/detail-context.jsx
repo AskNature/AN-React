@@ -75,11 +75,11 @@ var Template = React.createClass({
             <Col xs={12} sm={4}>
             <RelationshipList
               items={data.has_context}
-              editable={this.props.editable}
+              editable={false}
               onAdd={this.props.onRelationshipAdd.bind(null, 'has_context')}
               onRemove={this.props.onRelationshipRemove.bind(null, 'has_context')}
               field={'has_context'}
-              routeName={null}
+              routeName=''
               title={'Listed as Context in'}
               fieldName={'Listed as Context in'}
               titleField={'name'} />
@@ -92,8 +92,8 @@ var Template = React.createClass({
               onRemove={this.props.onRelationshipRemove.bind(null, 'featured_in')}
               field={'featured_in'}
               routeName={null}
-              title={'Featured In'}
-              fieldName={'Featured In'}
+              title={'Has Source'}
+              fieldName={'Has Source'}
               titleField={'name'} />
               <RelationshipList
                 items={data.studied_by}

@@ -32,7 +32,7 @@ var Login = React.createClass({
     loginSuccess: function() {
     	this.setState({style: ''});
         window.history.back();
-      
+
     },
 
     handleSubmit: function(e) {
@@ -61,7 +61,7 @@ var Login = React.createClass({
                               <Input name="username" type="email" placeholder="Email Address" bsStyle={this.state.style} />
                               <Input name="password" type="password" placeholder="Password" bsStyle={this.state.style} />
                               <Link url="/forgot">Forgot password?</Link>
-                              <Input className="pull-left" type="checkbox" label="Remember Me" checked />
+                              <Input className="pull-left" type="checkbox" label="Remember Me" />
                                 <ButtonGroup className="pull-right">
                                   <Button onClick={handleHide}>Close</Button>
                                   <Button type="submit" bsStyle="primary">Login</Button>

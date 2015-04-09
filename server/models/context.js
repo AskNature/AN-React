@@ -7,7 +7,7 @@ var ListOptions = require('./constants/listoptions.js');
 // The name of the associated class in the database:
 var entityName = 'Context';
 
-var fields = ['name', 'description', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'description', 'flag_text', 'flag_media', 'flag_tags', 'editor_comments'];
 
 var Context = new Model('Context',
     [
@@ -30,27 +30,27 @@ var Status = new Model('ContentStatus',
 var relationships = {
     'parent': {
 	model: Context,
-	className: 'Parent',
+	className: 'Context',
 	edge: 'out("ChildOf")'
     },
     'children': {
         model: Context,
-        className: 'Children',
+        className: 'Context',
         edge: 'in("ChildOf")'
     },
     'has_context': {
         model: Entity,
-        className: 'HasContext',
+        className: 'Strategy',
         edge: 'in("HasContext")'
     },
     'featured_in': {
         model: Entity,
-        className: 'FeaturedIn',
+        className: 'Source',
         edge: 'out("HasSource")'
     },
     'studied_by': {
         model: Entity,
-        className: 'StudiedBy',
+        className: 'Expert',
         edge: 'in("StudiedBy")'
     },
     'status': {
