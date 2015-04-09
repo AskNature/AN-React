@@ -83,7 +83,7 @@ var DetailComponent = React.createClass({
 
       _onChange: function() {
           this.setState(getState());
-	         //this.setState({'masterid': store.getMasterid()});
+	        this.setState({'masterid': store.getMasterid()});
       },
       onRelationshipAdd: function(field, addedValue) {
           console.log(field + ' added ' + addedValue);
