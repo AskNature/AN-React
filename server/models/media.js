@@ -34,7 +34,7 @@ var Status = new Model('ContentStatus',
 var relationships = {
     'has_media': {
 	model: Entity,
-	className: 'Entity',
+	className: 'Content',
 	edge: 'in("HasMedia")'
     },
     'added_media': {

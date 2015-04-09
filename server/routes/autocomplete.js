@@ -6,7 +6,7 @@
 
 'use strict';
 
-var StrategyController = require('../controllers/bstrategy');
+var Content = require('../models/content.js');
 
 var DStrategy = require('../models/dstrategy.js');
 var BStrategy = require('../models/bstrategy.js');
@@ -30,6 +30,8 @@ var returnAutocomplete = function(model) {
 
 var routes = function (app) {
   // API v2
+  app.get('/api/v2/autocomplete/content', returnAutocomplete(Content));
+
   app.get('/api/v2/autocomplete/d.strategy', returnAutocomplete(DStrategy));
   app.get('/api/v2/autocomplete/b.strategy', returnAutocomplete(BStrategy));
 
