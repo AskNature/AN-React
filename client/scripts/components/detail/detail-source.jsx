@@ -46,13 +46,13 @@ var Template = React.createClass({
   		        <Col xs={12} sm={4}>
 
                 <RelationshipList
-                  items={data.conditions}
+                  items={data.context}
                   editable={this.props.editable}
                   titleField='name'
-                  onAdd={this.props.onRelationshipAdd.bind(null, 'conditions')}
-                  onRemove={this.props.onRelationshipRemove.bind(null, 'conditions')}
-                  field={'conditions'}
-                  routeName={'condition'}
+                  onAdd={this.props.onRelationshipAdd.bind(null, 'context')}
+                  onRemove={this.props.onRelationshipRemove.bind(null, 'context')}
+                  field={'context'}
+                  routeName={'context'}
                   title={'Context'}
                   fieldName={'Context'}/>
       		    </Col>
@@ -63,8 +63,8 @@ var Template = React.createClass({
                   titleField='name'
                   onAdd={this.props.onRelationshipAdd.bind(null,'mechanisms')}
                   onRemove={this.props.onRelationshipRemove.bind(null, 'mechanisms')}
-                  field={'functions'}
-                  routeName={'FM'}
+                  field={'fm'}
+                  routeName={'fm'}
                   title={'Mechanisms'}
                   fieldName={'Mechanisms'}/>
         		    </Col>
@@ -75,12 +75,21 @@ var Template = React.createClass({
                     titleField='name'
                     onAdd={this.props.onRelationshipAdd.bind(null, 'functions')}
                     onRemove={this.props.onRelationshipRemove.bind(null, 'functions')}
-                    field={'functions'}
-                    routeName={'FM'}
-                    title={'Outcomes'}
-                    fieldName={'Outcomes'}/>
+                    field={'fm'}
+                    routeName={'fm'}
+                    title={'Functions'}
+                    fieldName={'Functions'}/>
         		    </Col>
           		</Row>
+              <Row>
+                <Col xs={12}>
+                  <RelationshipList
+                    items={data.has_source}
+                    editable={false}
+                    title={'Listed as a Source in'}
+                    titleField={'name'} />
+                </Col>
+              </Row>
        	    </Grid>
 
 

@@ -6,63 +6,44 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Source';
 
-var fields = ['name', 'secondary_title', 'source', 'type', 'timestamp', 'authors', 'author_address', 'pages', 'volume', 'number', 'publication_year', 'publisher', 'isbn', 'accession_number', 'url', 'notes', 'access_date', 'keywords', 'abstract_excerpt', 'published_language', 'type_of_work', 'other_information', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'secondary_title', 'source', 'type', 'timestamp', 'authors', 'author_address', 'pages', 'volume', 'number', 'publication_year', 'publisher', 'isbn', 'accession_number', 'url', 'notes', 'access_date', 'keywords', 'abstract_excerpt', 'published_language', 'type_of_work', 'other_information', 'flag_text', 'flag_media', 'flag_tags', 'editor_notes'];
 
 var Content = new Model('Content',
     [
-        'name'
+        'name',
+        '@class'
     ]
 );
-var User = new Model('User',
-    [
-        'name'
-    ]
-);
-var Collection = new Model('Collection',
-    [
-        'name'
-    ]
-);
+
 var Status = new Model('ContentStatus',
   [
       'masterid',
       'name'
   ]
 );
-var FM = new Model('FM',
-  [
-    'name'
-  ]
-);
-
-var Condition = new Model('Condition',
-  [
-'name'
-  ]
-);
 
 
 var relationships = {
-    'featured_in': {
+    'has_source': {
 	model: Content,
-	className: 'FeaturedIn',
+	className: 'SuperStrategy',
 	edge: 'in("HasSource")'
     },
 
     'functions': {
   model: Content,
-  className: 'FM',
+  className: 'Function',
   edge: 'out("HasFunction")'
     },
 
     'mechanisms': {
 	model: Content,
-	className: 'FM',
+	className: 'Function',
 	edge: 'out("HasMechanism")'
     },
-    'conditions': {
+    'context': {
   model: Content,
-	className: 'Condition',
+	className: 'Context',
 	edge: 'out("HasContext")'
     },
 'status': {
