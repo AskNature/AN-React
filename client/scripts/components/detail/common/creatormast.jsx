@@ -16,7 +16,7 @@ var CreatorMast = React.createClass({
     // Default User should ultimately be defined somewhere else:
     var name, userid, avatar;
 
-    if(this.props.addedby) {
+    if(this.props.addedby[0]) {
       name = this.props.addedby[0].first ? this.props.addedby[0].first + ' ' + this.props.addedby[0].last : this.props.addedby[0].name;
       userid = this.props.addedby[0].masterid;
       avatar = 'http://www.asknature.org/images/uploads/user/'+userid+'/avatar/lg_avatar.jpg';
