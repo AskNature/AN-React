@@ -7,8 +7,9 @@
 
 var settings = require('../config/env/default'),
 db = require('../config/database').db,
-path = require('path');
-
+path = require('path'),
+crypto = require('crypto'),
+sendgrid = require('sendgrid');
 
 var login = function(req, res) {
     if(req.isAuthenticated()) { res.redirect('/') }
