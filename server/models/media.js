@@ -44,6 +44,13 @@ var relationships = {
         className: 'Users',
         edge: 'in("AddedMedia")'
     },
+    'license': {
+        model: Status,
+        className: 'License',
+        edge: 'out("HasLicense")',
+        select: true,
+        options: ListOptions.License
+    },
     'status': {
         model: Status,
         className: 'ContentStatus',

@@ -4,6 +4,7 @@ var React = require('react'),
 
 Link = require('../modules/link.jsx'),
 FadeImage = require('../modules/imagefade.jsx'),
+Select = require('../modules/select.jsx'),
 DefaultLayout = require('../layouts/default.jsx'),
 
 TopSection = require('./common/topsection.jsx'),
@@ -15,8 +16,6 @@ RelationshipList = require('./common/relationshiplist.jsx'),
 Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid');
-
-var Select = require('react-select');
 
 var Template = React.createClass({
   render: function() {
@@ -91,7 +90,7 @@ var Template = React.createClass({
             </Col>
             <Col xs={11} >
               <h6><strong>Linked Image (Custom URL)</strong></h6>
-              <h5 className='overflow-scroll'>
+              <h6 className='overflow-scroll'>
                 <TextArea
                 item={data.custom_url}
                 store={this.props.store}
@@ -99,7 +98,40 @@ var Template = React.createClass({
                 fieldName={'custom_url'}
                 editable={this.props.editable}
                 placeholder="Enter a URL" />
-            </h5>
+            </h6>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col xs={12} md={4} >
+              <h6><strong>Original Image URL</strong></h6>
+              <p className='overflow-scroll'>
+                <TextArea
+                item={data.source_url}
+                store={this.props.store}
+                actions={this.props.actions}
+                fieldName={'source_url'}
+                editable={this.props.editable}
+                placeholder="Enter the URL of the original image" />
+            </p>
+            </Col>
+            <Col xs={12} md={4} >
+              <h6><strong>Attribution</strong></h6>
+              <p>
+                <TextArea
+                item={data.author}
+                store={this.props.store}
+                actions={this.props.actions}
+                fieldName={'author'}
+                editable={this.props.editable}
+                placeholder="Attribute this image (photographer/illustrator/owner/etc)" />
+            </p>
+            </Col>
+            <Col xs={12} md={4} >
+              <h6><strong>License</strong></h6>
+                {data.license ?
+                <Select selected={data.license.masterid} options={data.license.options} field='status' onRelationshipSet={this.props.onRelationshipSet} />
+                : ''}
             </Col>
           </Row>
         </Grid>

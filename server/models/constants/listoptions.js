@@ -23,7 +23,20 @@ var UserStatus = [
     {label: 'Spam', masterid:'spam'}
 ];
 
+var License = [
+    {label: 'PD - Public Domain', masterid:'pd'},
+    {label: 'CC-by-nc-nd - Attribution Non-commercial No Derivatives', masterid:'CC-by-nc-nd'},
+    {label: 'CC-by-nc-sa - Attribution Non-commercial Share Alike', masterid:'CC-by-nc-sa'},
+    {label: 'CC-by-nc - Attribution Non-commercial', masterid:'CC-by-nc'},
+    {label: 'CC-by-nd - Attribution No Derivatives', masterid:'CC-by-nd'},
+    {label: 'CC-by-sa - Attribution Share Alike', masterid:'CC-by-sa'},
+    {label: 'CC-by - Attribution', masterid:'CC-by'},
+    {label: 'Copyright - All Rights Reserved', masterid:'Copyright'},
+    {label: 'GFDL - Gnu Free Document License', masterid:'GFDL'}
+];
+
 module.exports = {
-  'ContentStatus' : ContentStatus,
-  'UserStatus' : UserStatus
+  ContentStatus : ContentStatus,
+  UserStatus : UserStatus,
+  License : License
 };
