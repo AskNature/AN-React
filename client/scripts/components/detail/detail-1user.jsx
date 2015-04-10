@@ -7,15 +7,11 @@ DefaultLayout = require('../layouts/default.jsx'),
 
 TopSection = require('./common/topsection.jsx'),
 
-TextArea = require('./common/textarea.jsx'),
-Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
 Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid');
-
-var Select = require('react-select');
 
 var Template = React.createClass({
 
@@ -38,7 +34,6 @@ var Template = React.createClass({
           routename={routeNameSingle}
           entityName={entityName}
           primarytitle={fullname}
-          primarykey=''
           secondarytitle={data[secondaryKey]}
           secondarykey={secondaryKey}
           description={data[descriptionKey]}

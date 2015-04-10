@@ -73,6 +73,13 @@ var testControllerFind = function(req, res, next) {
     });
 };
 
+var testControllerFindQuery = function(req, res, next) {
+    Strategy.findWithRelationships({name: req.params.query}, function(result) {
+        res.json(result);
+    });
+};
+
 module.exports = {
-    testController: testControllerFind
+    testController: testControllerFind,
+    testControllerQuery: testControllerFindQuery
 };
