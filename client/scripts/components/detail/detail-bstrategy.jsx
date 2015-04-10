@@ -35,6 +35,7 @@ var Template = React.createClass({
     secondaryTitle = split[1];
 
     var descriptionKey = 'summary';
+    var addedby = data.added_by;
     var default_avatar = 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/10383663_869350803096314_2369845013213041061_n.png?oh=2c010ce055331caa73a9506795239fd1&oe=55BDD82A&__gda__=1433772443_f5c43498047b8193dccc0a5554ba6ed1';
     return (
       /* jshint ignore:start */
@@ -50,6 +51,7 @@ var Template = React.createClass({
             secondarykey=''
             description={data[descriptionKey]}
             descriptionKey={descriptionKey}
+            addedby={addedby}
             />
 	        <Grid>
   	        <Row className='show-grid'>

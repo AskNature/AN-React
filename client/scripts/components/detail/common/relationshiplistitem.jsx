@@ -85,7 +85,7 @@ var RelationshipListItem = React.createClass({
       lations = trans.Context;
     } else if(classname === 'Story') {
       lations = trans.Story;
-    } else if(classname === 'Sources') {
+    } else if(classname === 'Source') {
       lations = trans.Sources;
     } else if(classname === 'Users') {
       lations = trans.User;

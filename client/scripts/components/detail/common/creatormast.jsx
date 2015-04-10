@@ -19,10 +19,10 @@ var CreatorMast = React.createClass({
     if(this.props.addedby && this.props.addedby[0]) {
       name = this.props.addedby[0].first ? this.props.addedby[0].first + ' ' + this.props.addedby[0].last : this.props.addedby[0].name;
       userid = this.props.addedby[0].masterid;
-      avatar = 'http://www.asknature.org/images/uploads/user/'+userid+'/avatar/lg_avatar.jpg';
+      avatar = this.props.addedby[0].custom_avatar ? this.props.addedby[0].custom_avatar : 'http://www.asknature.org/images/uploads/user/'+userid+'/avatar/lg_avatar.jpg';
     } else {
-      name = 'AskNature Team';
-      userid = 'asknatureteam';
+      name = 'AskNature';
+      userid = 'asknature';
       avatar = 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/10383663_869350803096314_2369845013213041061_n.png?oh=2c010ce055331caa73a9506795239fd1&oe=55BDD82A&__gda__=1433772443_f5c43498047b8193dccc0a5554ba6ed1';
     }
 
