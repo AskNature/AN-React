@@ -8,7 +8,6 @@ var accountActions = require('../../actions/accounts');
 var Navbar = require('../modules/navbar.jsx');
 var Drawer = require('../modules/sidebar.jsx');
 
-
 var getState = function() {
   var drawerSwitch = false;
   if(window.innerWidth >= 768) {
@@ -59,7 +58,7 @@ var DefaultComponent = React.createClass({
             <div>
 
             <Navbar account={this.state.account} onDrawerToggleClick={this.handleDrawerToggleClick} accountActions={accountActions}  />
-            <Drawer open={this.state.drawerOpen}/>
+            <Drawer open={this.state.drawerOpen} searchResultElements={this.props.searchResultElements} searchResultComponent={this.props.searchResultComponent}/>
             <Detail narrow={this.state.drawerOpen} {...this.props}/>
 
             </div>

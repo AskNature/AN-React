@@ -46,6 +46,12 @@ var BigListItem = React.createClass({
     }
 });
 
+var SimpleComponent = React.createClass({
+    render: function() {
+        return <span>"Hello!"</span>
+    }
+});
+
 var Infinite = React.createClass({
     mixins: [store.mixin],
     getInitialState: function() {
@@ -65,7 +71,7 @@ var Infinite = React.createClass({
     },
     render: function() {
         return (
-            <DefaultLayout>
+            <DefaultLayout searchResultComponent={InfiniteList} searchResultElements={this.state.elements}>
                     <InfiniteList itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} />
             </DefaultLayout>
         )
