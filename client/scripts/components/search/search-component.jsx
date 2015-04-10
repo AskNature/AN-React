@@ -8,7 +8,7 @@ var React = require('react'),
 accountStore = require('../../stores/accounts'),
 
 store = require('../../stores/admin/generic-list'),
-actions = require('../../actions/generic-list'),
+actions = require('../../actions/generic-search'),
 
 EntityList = require('./bstrategy.js'),
 

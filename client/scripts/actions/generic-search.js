@@ -28,8 +28,7 @@ var setList = function(focus) {
 * that the router uses to pass a request to the controller.
 */
 
-var getList = function(callback) {
-  var entity = window.location.pathname.split('/')[2];
+var getList = function(entity, callback) {
   var self = this;
   request
   .get('/api/'+entity)
@@ -56,9 +55,8 @@ var getList = function(callback) {
   });
 };
 
-var getListPaginated = function(index, size, sortCol, asc, filter, callback) {
+var getListPaginated = function(index, size, sortCol, asc, filter, entity, callback) {
   var self = this;
-  var entity = window.location.pathname.split('/')[2];
   var getString = '/api/'+entity+'?offset='+index*size+'&limit='+size;
   if (sortCol && entity !== 'living-systems') { getString += '&order='+(asc ? '+' : '-')+sortCol; }
   if (filter) { getString += '&filter='+filter; }

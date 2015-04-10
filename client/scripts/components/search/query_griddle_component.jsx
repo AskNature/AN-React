@@ -91,15 +91,14 @@ var DrawerSearchComponent = React.createClass({
 	newProps.store.addChangeListener(this._onChange);
 	var that = this;
 	this.setState({'results': [{'name' : 'Loading...', 'deletebutton' : 0}]}, function() {
-	    newProps.actions.getListPaginated(0, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending, this.state.filter);
+	    newProps.actions.getListPaginated(0, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending, this.state.filter, 'b.strategy');
 	    console.log('Griddle component will receive new props: ');
 	    console.log(newProps.columns[1]);
 	    that.setPage(0);
 	});
     },
     setPage: function(index) {
-        Pace.restart();
-        this.props.actions.getListPaginated(index, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending, this.state.filter);
+        this.props.actions.getListPaginated(index, this.state.externalResultsPerPage, this.state.externalSortColumn, this.state.externalSortAscending, this.state.filter, 'b.strategy');
 	this.setState({'currentPage': index});
     },
     setPageSize: function(size) {
@@ -126,30 +125,11 @@ var DrawerSearchComponent = React.createClass({
 	    this.changeSort(null, true);
 	});
    },
-   deleteSelectedItems: function() {
-    // Todo: this belongs in the generic-list action file:
-      var that = this;
-     	request
-    .del('/api/v2/'+this.props.slug)
-    .send({delete: this.state.selectedItems})
-    .end(function(res) {
-        that.setPage(that.state.currentPage);
-    });
-   },
+
     render: function() {
-      var cols = ['selected', 'edit'];
-      var add_meta, add_cols;
-      if( this.props.columns ) {
-        this.props.columns.map(function(list){
-          var custom = null;
-          var vis = true;
-          if(list.type === 'id' || list.type === 'hidden') {
-            vis = false;
-          } else if(list.type === 'link') {
-            custom = LinkComponent;
-          }
-        });
-      }
+      var cols = this.props.columns;
+console.log(this.state);
+
 
       return (
         <div>
@@ -159,7 +139,7 @@ var DrawerSearchComponent = React.createClass({
 	           <Griddle useExternal={true}
                externalSetPage={this.setPage}
                enableSort={true}
-               columns={cols}
+               columns={['name']}
                externalSetPageSize={this.setPageSize}
                externalMaxPage={this.state.maxPages}
                externalChangeSort={this.changeSort}
