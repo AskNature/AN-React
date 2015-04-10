@@ -3,7 +3,6 @@
 var React = require('react/addons'),
 
 Link = require('./link.jsx'),
-Search = require('../search/search-component.jsx'),
 
 FontAwesome = require('react-fontawesome'),
 Nav = require('react-bootstrap').Nav,
@@ -148,11 +147,7 @@ var SidebarComponent = React.createClass({
                 <Nav className='drawer' key='10'>
                     <TabbedArea defaultActiveKey={1} key='20' justified>
                         <TabPane key='30' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
-<<<<<<< HEAD
                             {this.props.searchResultComponent ?  <this.props.searchResultComponent elements={this.props.searchResultElements} itemComponent={SimpleItem}/> : 'Search results go here.'}
-=======
-                            <Search />
->>>>>>> search
                         </TabPane>
                         <TabPane key='40' eventKey={1} tab={<FontAwesome name='list' size='lg' fixedWidth />}>
                             <Nav stacked>

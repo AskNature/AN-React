@@ -3,8 +3,10 @@
 // Box sizing partial styles:
 // Apply a natural box layout model to all elements
 
-$background-color: #f9f9f9;
+$background-color: #dddddd;
+$paper-color: #f9f9f9;
 $primary-color: #b5bc4f;
+$light-text: #cccccc;
 $fa-font-path: '../bower_components/components-font-awesome/fonts';
 @import url("./gibson.css");
 
@@ -51,6 +53,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .content, .panel {
   background: $background-color;
+}
+
+.panel {
+  background: $paper-color;
+  box-shadow: none;
 }
 
 // Temp color tweaks
@@ -108,6 +115,22 @@ label {
 }
 
 /* ==========================================================================
+Infinite List
+========================================================================== */
+
+.infinite-list {
+  background: $background-color;
+  .infinite-list-item {
+    background: $paper-color;
+    margin: 20px 10px;
+  }
+  div {
+    transition: none;
+  }
+}
+
+
+/* ==========================================================================
 Image Fade
 ========================================================================== */
 
@@ -137,7 +160,7 @@ Loader
   top: 0;
   left: 0;
   width: 100%;
-  background: $primary-color;
+  background: $background-color;
   opacity: 0.8;
   z-index: 50;
   &.error {
@@ -248,7 +271,7 @@ nav.drawer {
   bottom:0;
   position: fixed;
   width: 300px;
-  background: #eee;
+  background: $background-color;
 
   overflow-y: scroll;
 
@@ -260,13 +283,13 @@ nav.drawer {
     li a {
       color: #444;
       &:hover {
-        background: $background-color;
+        background: $paper-color;
       }
       .fa {
         margin-top: 3px;
       }
       &.active {
-        background: $background-color;
+        background: $paper-color;
       }
     }
   }
@@ -288,10 +311,21 @@ nav.drawer-leave.drawer-leave-active {
   left: 0;
 }
 
+
+
+/* ==========================================================================
+Detail Component
+========================================================================== */
+
 .default.detail {
   position: absolute;
   left: 0;
   right: 0;
+  background: $background-color;
+  .detail-single {
+    margin: 20px 10px;
+    background: $paper-color;
+  }
 }
 
 /* ==========================================================================
@@ -332,10 +366,17 @@ Relationship Selector
 Griddle Admin Lists
 ========================================================================== */
 
+.griddle-card {
+  padding: 10px;
+  background: $paper-color;
+}
 .griddle {
   td {
     input[type="checkbox"] {
       margin-left: 10px;
+    }
+    h5 {
+      font-weight: 800;
     }
   }
 }
@@ -343,6 +384,30 @@ Griddle Admin Lists
 /* ==========================================================================
 Mini hero (relationship list editor)
 ========================================================================== */
+
+.well.card {
+  background: transparent;
+  cursor: pointer;
+  border-bottom: dotted 1px rgba(0, 0, 0, 0.3);
+  margin-bottom: 0;
+  padding-left: 20px;
+  &:hover {
+    background: $paper-color;
+  }
+}
+
+h6.card-label {
+  color: $light-text;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-bottom: 0;
+}
+
+h5.card-name {
+  margin-top: 9px;
+  overflow: hidden;
+  white-space: normal;
+}
 
 .relationship-button {
   .btn-group {
@@ -647,12 +712,4 @@ nav.drawer-enter {
 
 .autocomplete-dropdown:hover {
     background-color: rgb(238, 238, 238);
-}
-
-/* ==========================================================================
- Search list (infinite scroll)
-========================================================================== */
-
-.infinite-list div {
-    transition: none;
 }

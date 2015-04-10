@@ -19,9 +19,9 @@ var MiniHero = React.createClass({
     return (
       <div className='minihero'>
         {this.props.label ? (
-          <h6 style={{color: '#ccc', textTransform:'uppercase', fontWeight: '800', marginBottom: 0}}>{this.props.label}</h6>
+          <h6 className='card-label'>{this.props.label}</h6>
         ) : ''}
-        <h5 style={{marginTop: '9px', overflow:'hidden', whiteSpace:'normal'}}>
+        <h5 className='card-name'>
             {this.props.title}
           <br/>
           <small>{this.props.subtitle}</small>

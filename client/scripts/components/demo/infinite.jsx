@@ -41,7 +41,6 @@ var ListItem = React.createClass({
                     onRelationshipAdd={function() {}}
                     onRelationshipRemove={function() {}}
                     onRelationshipSet={function() {}} />
-                <h1>Test</h1>
         </div>;
     }
 });
