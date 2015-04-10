@@ -16,7 +16,9 @@ var Entity = new Model('Entity',
 );
 var User = new Model('Outcome',
     [
-        'name'
+        'name',
+        'first',
+        'last'
     ]
 );
 var Collection = new Model('Mechanism',
@@ -39,7 +41,7 @@ var relationships = {
     },
     'added_media': {
         model: User,
-        className: 'User',
+        className: 'Users',
         edge: 'in("AddedMedia")'
     },
     'status': {

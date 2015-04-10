@@ -26,6 +26,7 @@ var Template = React.createClass({
     var primaryKey = 'name';
     var secondaryTitle = 'Placeholder: Media Type';
     var descriptionKey = 'description';
+    var addedby = data.added_media;
     var img = new Image();
     img.id = data.has_media.length > 0 ? this.props.data.has_media[0].masterid : '';
     img.src='http://www.asknature.org/images/uploads/'+ data.entity + '/' + img.id + '/' + data.filename;
@@ -42,6 +43,7 @@ var Template = React.createClass({
           primarykey={primaryKey}
           description={data[descriptionKey]}
           descriptionKey={descriptionKey}
+          addedby={addedby}
           imgurl={img.src} />
           <Grid>
             <Row>
