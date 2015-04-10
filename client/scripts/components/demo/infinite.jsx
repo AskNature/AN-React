@@ -41,6 +41,7 @@ var ListItem = React.createClass({
                     onRelationshipAdd={function() {}}
                     onRelationshipRemove={function() {}}
                     onRelationshipSet={function() {}} />
+                <h1>Test</h1>
         </div>;
     }
 });
@@ -74,10 +75,12 @@ var Infinite = React.createClass({
     getInitialState: function() {
         return { elements: [],
             cards: [] };
+
     },
     componentWillMount: function() {
-        //actions.fetch('b.strategy', this.props.masterid);//'740c420618b1b9abb92630cdaff6e0dd');
-	actions.getListPaginated('b.strategy', 0, 20, null, null, null);
+        // actions.getList('b.strategy',this.props.masterid);
+        //'740c420618b1b9abb92630cdaff6e0dd');
+	 actions.getListPaginated('b.strategy', 0, 20, null, null, null);
     },
     _onChange: function() {
         //var newElements = this.state.elements;
@@ -95,6 +98,7 @@ var Infinite = React.createClass({
             elements: newElements,
             cards: newCards
         });
+
     },
     render: function() {
         return (

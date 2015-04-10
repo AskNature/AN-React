@@ -58,7 +58,7 @@ var Login = React.createClass({
                         <Input name="password" type="password" placeholder="Password" />
                           <ButtonGroup className="pull-right">
                             <Button onClick={handleHide}>Close</Button>
-                            <Button type="submit" bsStyle="primary">Login</Button>
+                            <Button type="submit" bsStyle="primary">Sign up</Button>
                         </ButtonGroup>
                                               </Col>
                       <Col xs={12}>

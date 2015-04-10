@@ -7,15 +7,11 @@ DefaultLayout = require('../layouts/default.jsx'),
 
 TopSection = require('./common/topsection.jsx'),
 
-TextArea = require('./common/textarea.jsx'),
-Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
 Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid');
-
-var Select = require('react-select');
 
 var Template = React.createClass({
 
@@ -29,7 +25,7 @@ var Template = React.createClass({
     }
     var secondaryKey = 'name';
     var descriptionKey = 'special_text';
-    var avatar = 'http://www.asknature.org/images/uploads/user/'+this.props.masterid+'/avatar/lg_avatar.jpg';
+    var avatar = data.custom_avatar ? data.custom_avatar : 'http://www.asknature.org/images/uploads/user/'+data.masterid+'/avatar/lg_avatar.jpg';
     return (
       /* jshint ignore:start */
       <div>
@@ -38,7 +34,6 @@ var Template = React.createClass({
           routename={routeNameSingle}
           entityName={entityName}
           primarytitle={fullname}
-          primarykey=''
           secondarytitle={data[secondaryKey]}
           secondarykey={secondaryKey}
           description={data[descriptionKey]}

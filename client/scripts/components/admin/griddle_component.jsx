@@ -83,10 +83,9 @@ var RadioComponent = React.createClass({
   render: function() {
     var status = false;
     //console.log(this.props.data);
-    if(this.props.data === 1) {status = true;}
     return (
       <div>
-        <Input type='checkbox' checked={status} readOnly />
+        <Input type='checkbox' checked={this.props.data} readOnly />
       </div>
     );
   }

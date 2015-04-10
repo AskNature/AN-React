@@ -49,7 +49,10 @@ var Entity = new Model('Entity',
 );
 var User = new Model('Users',
   [
-    'name'
+    'name',
+    'first',
+    'last',
+    'custom_avatar'
   ],
   {'out_HasMedia':
     {
@@ -111,10 +114,10 @@ var relationships = {
 	className: 'Media',
 	edge: 'out("HasMedia")'
     },
-    'contributors': {
+    'added_by': {
 	model: User,
 	className: 'Users',
-	edge: 'in("Created")'
+	edge: 'in("AddedStrategy")'
     },
     'living_systems': {
 	model: LivingSystem,

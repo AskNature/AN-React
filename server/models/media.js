@@ -6,16 +6,19 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Media';
 
-var fields = ['name', 'filename', 'id', 'entity', 'timestamp', 'user_id', 'mime_type', 'file_type_id', 'author', 'author_url', 'source', 'source_url', 'license_id', 'description', 'deleted', 'keywords', 'featured', 'popup', 'sort_order', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'filename', 'id', 'entity', 'timestamp', 'user_id', 'mime_type', 'file_type_id', 'author', 'author_url', 'source', 'source_url', 'license_id', 'description', 'deleted', 'keywords', 'featured', 'popup', 'sort_order', 'flag_text', 'flag_media', 'flag_tags', 'custom_url'];
 
 var Entity = new Model('Entity',
     [
-        'name'
+        'name',
+        '@class'
     ]
 );
 var User = new Model('Outcome',
     [
-        'name'
+        'name',
+        'first',
+        'last'
     ]
 );
 var Collection = new Model('Mechanism',
@@ -33,13 +36,20 @@ var Status = new Model('ContentStatus',
 var relationships = {
     'has_media': {
 	model: Entity,
-	className: 'Entity',
+	className: 'Content',
 	edge: 'in("HasMedia")'
     },
     'added_media': {
         model: User,
-        className: 'User',
+        className: 'Users',
         edge: 'in("AddedMedia")'
+    },
+    'license': {
+        model: Status,
+        className: 'License',
+        edge: 'out("HasLicense")',
+        select: true,
+        options: ListOptions.License
     },
     'status': {
         model: Status,
