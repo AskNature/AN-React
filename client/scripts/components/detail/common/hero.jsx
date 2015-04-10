@@ -91,6 +91,7 @@ var HeroComponent = React.createClass({
                           placeholder='Enter a subtitle' />
                       </Link>
                     ) : (
+                      this.props.secondarykey ?
                       <TextArea
                         item={this.props.secondarytitle}
                         editable={this.props.editable}
@@ -98,6 +99,11 @@ var HeroComponent = React.createClass({
                         actions={this.props.actions}
                         fieldName={this.props.secondarykey}
                         placeholder='Enter a subtitle' />
+                      :
+                      <TextArea
+                        item={this.props.secondarytitle}
+                        editable={false}
+                       />
                     ) }
                   </h5>
                 </div>

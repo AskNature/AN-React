@@ -46,6 +46,7 @@ var SubHero = React.createClass({
                 </Link>
               ) : (
                 <span>
+                  {this.props.descriptionKey ? (
                   <TextArea
                     store={this.props.store}
                     actions={this.props.actions}
@@ -54,6 +55,12 @@ var SubHero = React.createClass({
                     editable={this.props.editable}
                     placeholder='Add a description'
                     />
+                ) : (
+                  <TextArea
+                    item={this.props.description}
+                    editable={false}
+                    />
+                )}
                 </span>
               )}
             </h5>
