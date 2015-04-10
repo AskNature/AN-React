@@ -135,7 +135,7 @@ var listItems = [
 
 var SimpleItem = React.createClass({
     render: function() {
-        return (this.props.data.name);
+        return (<b>{this.props.data.name}</b>);
     }
 });
 
@@ -147,7 +147,7 @@ var SidebarComponent = React.createClass({
                 <Nav className='drawer' key='10'>
                     <TabbedArea defaultActiveKey={1} key='20' justified>
                         <TabPane key='30' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
-                            {this.props.searchResultComponent ?  <this.props.searchResultComponent elements={this.props.searchResultElements} itemComponent={SimpleItem}/> : 'Search results go here.'}
+                            {this.props.searchResultComponent ?  <this.props.searchResultComponent elements={this.props.searchResultElements} itemComponent={SimpleItem} itemHeight={this.props.searchResultHeight} /> : 'Search results go here.'}
                         </TabPane>
                         <TabPane key='40' eventKey={1} tab={<FontAwesome name='list' size='lg' fixedWidth />}>
                             <Nav stacked>
