@@ -7,6 +7,8 @@ var React = require('react'),
 Link = require('../../modules/link.jsx'),
 Avatar = require('react-avatar'),
 
+moment = require('moment'),
+
 Panel = require('react-bootstrap').Panel;
 
 var CreatorMast = React.createClass({
@@ -21,8 +23,7 @@ var CreatorMast = React.createClass({
       userid = this.props.userid;
       avatar = 'http://www.asknature.org/images/uploads/user/'+this.props.userid+'/avatar/lg_avatar.jpg';
     }
-    var msec = Date.parse(this.props.timestamp);
-    var d = new Date(msec);
+    var relTime = this.props.timestamp ? moment(this.props.timestamp, 'YYYY-MM-DD HH:MM:SS').fromNow() : '';
     return (
       /* jshint ignore:start */
       <Panel className="nomargin">
@@ -33,7 +34,7 @@ var CreatorMast = React.createClass({
             </Link>
           </div>
           <div className='media-body media-middle'>
-            <Link url={'/user/' + userid}> <strong> {name}</strong></Link> contributed this <strong>{this.props.entityname}</strong> on {d.toLocaleDateString()}
+            <Link url={'/user/' + userid}> <strong> {name}</strong></Link> contributed this <strong>{this.props.entityname}</strong>  {relTime}
           </div>
         </div>
       </Panel>
