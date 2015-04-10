@@ -3,7 +3,8 @@
 // Box sizing partial styles:
 // Apply a natural box layout model to all elements
 
-$background-color: #f9f9f9;
+$background-color: #dddddd;
+$paper-color: #f9f9f9;
 $primary-color: #b5bc4f;
 $fa-font-path: '../bower_components/components-font-awesome/fonts';
 @import url("./gibson.css");
@@ -50,7 +51,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .content, .panel {
-  background: $background-color;
+  background: $paper-color;
+  box-shadow: none;
 }
 
 // Temp color tweaks
@@ -105,6 +107,18 @@ label {
   width: 100%;
   display: block;
   overflow: scroll;
+}
+
+/* ==========================================================================
+Infinite List
+========================================================================== */
+
+.infinite-list {
+  background: $background-color;
+  .infinite-list-item {
+    background: $paper-color;
+    margin: 20px 10px;
+  }
 }
 
 /* ==========================================================================
@@ -248,7 +262,7 @@ nav.drawer {
   bottom:0;
   position: fixed;
   width: 300px;
-  background: #eee;
+  background: $background-color;
 
   overflow-y: scroll;
 
@@ -260,13 +274,13 @@ nav.drawer {
     li a {
       color: #444;
       &:hover {
-        background: $background-color;
+        background: $paper-color;
       }
       .fa {
         margin-top: 3px;
       }
       &.active {
-        background: $background-color;
+        background: $paper-color;
       }
     }
   }

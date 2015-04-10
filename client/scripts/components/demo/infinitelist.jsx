@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 var Infinite = require('react-infinite-extended');
 var routeActions = require('../../actions/routes');
@@ -10,12 +12,12 @@ var InfiniteList = React.createClass({
             extendedHeight: 0,
             extendedBlock: undefined,
             extendedIndex: undefined,
-            containerHeight: window.innerHeight - 74
+            containerHeight: window.innerHeight - 60
         }
     },
 
     handleResize: function(e) {
-        this.setState({containerHeight: window.innerHeight - 74});
+        this.setState({containerHeight: window.innerHeight - 60});
     },
 
     componentDidMount: function() {
@@ -49,7 +51,7 @@ var InfiniteList = React.createClass({
     heightUpdateListener: function(height) {
         this.setState({extendedHeight: height-2500});
     },
- 
+
     buildElements: function(start, end) {
         var elements = [];
         for (var i = start; i < end; i++) {
@@ -57,7 +59,7 @@ var InfiniteList = React.createClass({
         }
         return elements;
     },
- 
+
     handleInfiniteLoad: function() {
 /*        var that = this;
         this.setState({
@@ -72,7 +74,7 @@ var InfiniteList = React.createClass({
             });
         }, 2500);*/
     },
- 
+
     elementInfiniteLoad: function() {
         return <div className="infinite-list-item">
             Loading...
@@ -97,7 +99,7 @@ var InfiniteList = React.createClass({
 	console.log(this.state.elements[num].props.data.masterid);
 	routeActions.setRoute('/infinite_demo/'+this.state.elements[num].props.data.masterid);
     },
- 
+
     render: function() {
         return <div><Infinite elementHeight={2500}
                          containerHeight={this.state.containerHeight}
