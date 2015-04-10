@@ -69,6 +69,11 @@ var RelationshipListItem = React.createClass({
         {
           'displayName' : 'Reference Source',
           'route' : 'source'
+        },
+      'User' :
+        {
+          'displayName' : 'Original User',
+          'route' : '1user'
         }
     };
     var lations;
@@ -82,6 +87,8 @@ var RelationshipListItem = React.createClass({
       lations = trans.Story;
     } else if(classname === 'Sources') {
       lations = trans.Sources;
+    } else if(classname === 'Users') {
+      lations = trans.User;
     }
     return lations;
   },

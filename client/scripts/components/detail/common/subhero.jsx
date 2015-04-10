@@ -46,6 +46,7 @@ var SubHero = React.createClass({
                 </Link>
               ) : (
                 <span>
+                  {this.props.descriptionKey ? (
                   <TextArea
                     store={this.props.store}
                     actions={this.props.actions}
@@ -54,6 +55,12 @@ var SubHero = React.createClass({
                     editable={this.props.editable}
                     placeholder='Add a description'
                     />
+                ) : (
+                  <TextArea
+                    item={this.props.description}
+                    editable={false}
+                    />
+                )}
                 </span>
               )}
             </h5>
@@ -100,7 +107,7 @@ var SubHero = React.createClass({
                     <hr/>
                     <fieldset>
                       {this.props.status ?
-                      <Select selected={this.props.status.masterid} options={this.props.status.options} field='status' onRelationshipSet={this.props.onRelationshipSet} />
+                      <Select editable={this.props.editable} selected={this.props.status.masterid} options={this.props.status.options} field='status' onRelationshipSet={this.props.onRelationshipSet} />
                       : ''}
 
                       <div className='form-group'>
@@ -128,7 +135,7 @@ var SubHero = React.createClass({
 
                   <fieldset disabled>
                     {this.props.status ?
-                      <Select selected={this.props.status.masterid} options={this.props.status.options} field='status' onRelationshipSet={this.props.onRelationshipSet} />
+                      <Select editable={this.props.editable} selected={this.props.status.masterid} options={this.props.status.options} field='status' onRelationshipSet={this.props.onRelationshipSet} />
                     : ''}
                     <div className='form-group'>
                       <label className="checkbox-inline">

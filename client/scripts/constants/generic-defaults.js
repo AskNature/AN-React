@@ -40,6 +40,8 @@ var Defaults = {
         flag_media: 0,
         is_deleted: 0,
 
+        addedby: [],
+        
         collectors: [],
         collected: [],
 

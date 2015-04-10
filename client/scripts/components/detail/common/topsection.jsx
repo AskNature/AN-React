@@ -13,7 +13,7 @@ CreatorMast = require('./creatormast.jsx');
 var TopSection = React.createClass({
   render: function() {
     console.log('TopSection Props:');
-    console.log(this.props);
+    console.log(this.props.addedby);
     return (
       /* jshint ignore:start */
       <div>
@@ -25,7 +25,9 @@ var TopSection = React.createClass({
         {this.props.userdetail ? '' : (
           <CreatorMast
             img='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg'
-            entityname={this.props.entityName} />
+            entityname={this.props.entityName}
+            timestamp={this.props.data.timestamp}
+            addedby={this.props.addedby} />
         ) }
         <Hero
           editable={this.props.editable}
