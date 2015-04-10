@@ -6,6 +6,7 @@ Link = require('./link.jsx'),
 
 FontAwesome = require('react-fontawesome'),
 Nav = require('react-bootstrap').Nav,
+Well = require('react-bootstrap').Well,
 TabbedArea = require('react-bootstrap').TabbedArea,
 TabPane = require('react-bootstrap').TabPane;
 
@@ -134,16 +135,38 @@ var listItems = [
 ];
 
 var SidebarComponent = React.createClass({
+
+
     render: function() {
         var items = [];
+        var cards = [];
+        for (var i=0; i < 10; i++) {
+            cards.push(
+                <Well bsSize='small' className='card' key={i}>
+                    <h6 className='card-label'>
+                        Content Type
+                    </h6>
+                    <h5 className='card-name'>
+                        Name of Content Record
+                        <br/>
+                    <small>
+                        Secondary Text
+                    </small>
+                    </h5>
+                </Well>
+            );
+        }
         if (this.props.open) {
             items.push(
                 <Nav className='drawer' key='10'>
-                    <TabbedArea defaultActiveKey={1} key='20' justified>
-                        <TabPane key='30' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
-                            Search results go here.
+                    <TabbedArea defaultActiveKey={2} key='20' justified>
+                        <TabPane key='20' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
+                            {cards}
                         </TabPane>
-                        <TabPane key='40' eventKey={1} tab={<FontAwesome name='list' size='lg' fixedWidth />}>
+                        <TabPane key='30' eventKey={1} tab={<FontAwesome name='info' size='lg' fixedWidth />}>
+                            Menu of static pages goes here.
+                        </TabPane>
+                        <TabPane key='40' eventKey={2} tab={<FontAwesome name='list' size='lg' fixedWidth />}>
                             <Nav stacked>
                                 {
                                     listItems.map(function(item,i){
