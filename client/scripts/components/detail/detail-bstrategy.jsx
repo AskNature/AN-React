@@ -29,7 +29,7 @@ var Template = React.createClass({
       secondaryTitle += ' & others';
     }
     var primaryTitle = data[primaryKey];
-    if(primaryTitle.includes(':')) {
+    if(primaryTitle.indexOf(':') !== -1) {
         var split = primaryTitle.split(': ');
         primaryTitle = split[0];
         secondaryTitle = split[1];
