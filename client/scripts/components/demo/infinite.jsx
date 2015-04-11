@@ -115,7 +115,7 @@ var Infinite = React.createClass({
 	});
         return (
             <DefaultLayout searchResultComponent={InfiniteList} searchResultElements={sidebarComponentList} searchResultHeight={100}>
-                    <InfiniteList query={this.props.query} itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} />
+                    <InfiniteList query={this.props.query} itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} routeOnScroll={true} />
             </DefaultLayout>
         );
     }
