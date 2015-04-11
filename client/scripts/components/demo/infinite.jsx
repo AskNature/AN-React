@@ -79,7 +79,7 @@ var Infinite = React.createClass({
     },
     componentWillMount: function() {
         //actions.fetch('b.strategy', this.props.masterid);//'740c420618b1b9abb92630cdaff6e0dd');
-	actions.getListPaginated('b.strategy', 0, 20, null, null, null);
+	actions.getListPaginated('b.strategy', 0, 20, null, null, this.props.query);
     },
     componentWillReceiveProps: function(newProps) {
         console.log("new masterid: " + newProps.masterid);
@@ -99,8 +99,9 @@ var Infinite = React.createClass({
 	   return item.props.data.masterid === this.props.masterid;
         }, this);
         this.setState({elements: newElements, data: store.get(), index: index == -1 ? 0 : index});
+	var that = this;
 	if(index == -1) {
-	    setTimeout(function() { routeActions.setRoute("/infinite_demo/"+newElements[0].props.data.masterid)}, 300);
+	    setTimeout(function() { routeActions.setRoute("/infinite_demo/"+that.props.query+'/'+newElements[0].props.data.masterid)}, 300);
 	}
     },
     setIndex: function(num) {
@@ -114,7 +115,7 @@ var Infinite = React.createClass({
 	});
         return (
             <DefaultLayout searchResultComponent={InfiniteList} searchResultElements={sidebarComponentList} searchResultHeight={100}>
-                    <InfiniteList itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} />
+                    <InfiniteList query={this.props.query} itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} />
             </DefaultLayout>
         );
     }

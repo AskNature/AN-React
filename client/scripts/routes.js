@@ -135,8 +135,8 @@ var account_reset = function(token) {
     render(AccountReset);
 };
 
-var infinite_demo = function(id) {
-    render(Infinite, {masterid: id});
+var infinite_demo = function(query, id) {
+    render(Infinite, {masterid: id, query: query});
 };
 
 
@@ -167,7 +167,8 @@ var routes = {
   '/forgot': account_forgot,
   '/reset/:token': account_reset,
 
-  '/infinite_demo/:id': infinite_demo
+  '/infinite_demo/:query/:id': infinite_demo,
+  '/infinite_demo/:query': infinite_demo
 };
 
 module.exports = routes;
