@@ -49,7 +49,7 @@ var InfiniteList = React.createClass({
     },
 
     heightUpdateListener: function(height) {
-        this.setState({extendedHeight: height-2500});
+        this.setState({extendedHeight: height-this.props.itemHeight});
     },
 
     buildElements: function(start, end) {
@@ -84,7 +84,7 @@ var InfiniteList = React.createClass({
     extend: function(num) {
         this.contract(this.state.extendedIndex);
         this.state.elements[num] = <this.props.extendedItemComponent num={num} key={num} contractListener={this.contractListener} heightUpdateListener={this.heightUpdateListener} />;
-        this.setState({extendedBlock: Math.floor((num*2500)/125), extendedIndex: num});
+        this.setState({extendedBlock: Math.floor((num*this.props.itemHeight)/125), extendedIndex: num});
     },
 
     contract: function(num) {
@@ -98,10 +98,11 @@ var InfiniteList = React.createClass({
         console.log(num);
 	console.log(this.state.elements[num].props.data.masterid);
 	routeActions.setRoute('/infinite_demo/'+this.state.elements[num].props.data.masterid);
+	if (this.props.scrollCallback) { this.props.scrollCallback(num) }
     },
 
     render: function() {
-        return <div><Infinite elementHeight={2500}
+        return <div><Infinite elementHeight={this.props.itemHeight}
                          containerHeight={this.state.containerHeight}
                          infiniteLoadBeginBottomOffset={400}
                          onInfiniteLoad={this.handleInfiniteLoad}
@@ -113,6 +114,7 @@ var InfiniteList = React.createClass({
                          preloadBatchSize={20}
 			 className="infinite-list"
 			 scrollNumberCallback={this.scrollCallback}
+			 selectedItem={this.props.selectedItem}
                          >
             {this.state.elements}
         </Infinite></div>;

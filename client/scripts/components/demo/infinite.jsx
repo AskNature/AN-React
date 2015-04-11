@@ -74,16 +74,15 @@ var BigListItem = React.createClass({
 
 var SimpleComponent = React.createClass({
     render: function() {
-        return <span>"Hello!"</span>;
+        return <a onClick={this.props.onClickHandler.bind(null, this.props.num)}><div>{this.props.current === this.props.num ? 'C' : ''}{this.props.data.name}{this.props.num}</div></a>
     }
 });
 
 var Infinite = React.createClass({
     mixins: [store.mixin],
     getInitialState: function() {
-        return { elements: [],
-            cards: [] };
 
+        return { elements: [], data: [], index: 0 }
     },
     componentWillMount: function() {
         // actions.getList('b.strategy',this.props.masterid);
@@ -102,16 +101,22 @@ var Infinite = React.createClass({
 
 
 	//newElements[0] = <ListItem num={0} key={0} data={store.get()} />;
-        this.setState({
-            elements: newElements,
-            cards: newCards
-        });
 
+        this.setState({elements: newElements, data: store.get()})
+    },
+    setIndex: function(num) {
+        this.setState({index: num});
     },
     render: function() {
+        var i = 0;
+	var that = this;
+        var simpleComponentList = _.map(this.state.data, function(d) {
+	    return <SimpleComponent current={that.state.index} data={d} num={i++} onClickHandler={function(num) { that.setState({index: num}); }} />
+	});
         return (
-            <DefaultLayout searchResultComponent={InfiniteCard} searchResultElements={this.state.cards}>
-                    <InfiniteList itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} />
+
+            <DefaultLayout searchResultComponent={InfiniteList} searchResultElements={simpleComponentList} searchResultHeight={200}>
+                    <InfiniteList itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} />
             </DefaultLayout>
         );
     }
