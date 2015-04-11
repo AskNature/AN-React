@@ -21,8 +21,17 @@ var ListCard = React.createClass({
     render: function() {
         return (
         <div>
-            <Well className='card infinite-list-item' style={{height: "200px"}}>
-            <h5>{this.props.data.name}</h5>
+            <Well bsSize='small' className='card'>
+                <h6 className='card-label'>
+                    Biological Strategy
+                </h6>
+                <h5 className='card-name'>
+                    {this.props.data.name}
+                    <br/>
+                <small>
+
+                </small>
+                </h5>
             </Well>
         </div>
     );

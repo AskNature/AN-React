@@ -6,6 +6,7 @@ Link = require('./link.jsx'),
 
 FontAwesome = require('react-fontawesome'),
 Nav = require('react-bootstrap').Nav,
+Well = require('react-bootstrap').Well,
 TabbedArea = require('react-bootstrap').TabbedArea,
 TabPane = require('react-bootstrap').TabPane;
 
@@ -145,11 +146,16 @@ var SidebarComponent = React.createClass({
         if (this.props.open) {
             items.push(
                 <Nav className='drawer' key='10'>
-                    <TabbedArea defaultActiveKey={1} key='20' justified>
-                        <TabPane key='30' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
+                    <TabbedArea defaultActiveKey={0} key='20' justified>
+                        <TabPane key='20' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
                             {this.props.searchResultComponent ?  <this.props.searchResultComponent elements={this.props.searchResultElements} itemComponent={SimpleItem}/> : 'Search results go here.'}
                         </TabPane>
-                        <TabPane key='40' eventKey={1} tab={<FontAwesome name='list' size='lg' fixedWidth />}>
+                        <TabPane key='30' eventKey={1} tab={<FontAwesome name='info' size='lg' fixedWidth />}>
+                            <Well>
+                                Informational Pages go in here
+                            </Well>
+                        </TabPane>
+                        <TabPane key='40' eventKey={2} tab={<FontAwesome name='list' size='lg' fixedWidth />}>
                             <Nav stacked>
                                 {
                                     listItems.map(function(item,i){

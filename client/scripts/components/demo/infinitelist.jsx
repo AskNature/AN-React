@@ -110,7 +110,7 @@ var InfiniteList = React.createClass({
                          extendedIndex={this.state.extendedIndex}
                          loadingSpinnerDelegate={this.elementInfiniteLoad()}
                          isInfiniteLoading={this.state.isInfiniteLoading}
-                         preloadBatchSize={1000}
+                         preloadBatchSize={20}
 			 className="infinite-list"
 			 scrollNumberCallback={this.scrollCallback}
                          >
