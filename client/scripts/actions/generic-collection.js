@@ -59,8 +59,7 @@ var getList = function(callback) {
 var getListPaginated = function(entity, index, size, sortCol, asc, filter, callback) {
   var self = this;
   //var getString = '/api/'+entity+'?offset='+index*size+'&limit='+size;
-  entity = window.location.pathname.split('/')[2];
-  var getString = '/test/' + entity;
+  var getString = '/test';
   if (sortCol && entity !== 'living-systems') { getString += '&order='+(asc ? '+' : '-')+sortCol; }
   if (filter) { getString += '&filter='+filter; }
   request.get(getString)

@@ -2,11 +2,9 @@
 
 var React = require('react'),
 DefaultLayout = require('../layouts/default.jsx'),
-InfiniteList = require('./infinitelist.jsx'),
-InfiniteCard = require('./temp-infinitecard.jsx');
+Well = require('react-bootstrap').Well,
+InfiniteList = require('./infinitelist.jsx');
 var Scribe = require('../modules/scribe.jsx');
-
-var Well = require('react-bootstrap').Well;
 //var strategyDetailStore = require('../../stores/generic-detail.js');
 //var strategyDetailActions = require('../../actions/generic-detail.js');
 var store = require('../../stores/admin/generic-list.js');
@@ -16,27 +14,6 @@ var TopSection = require('../detail/common/topsection.jsx');
 var StrategyDetail = require('../detail/detail-bstrategy.jsx');
 
 var _ = require('lodash');
-
-var ListCard = React.createClass({
-    render: function() {
-        return (
-        <div>
-            <Well bsSize='small' className='card'>
-                <h6 className='card-label'>
-                    Biological Strategy
-                </h6>
-                <h5 className='card-name'>
-                    {this.props.data.name}
-                    <br/>
-                <small>
-
-                </small>
-                </h5>
-            </Well>
-        </div>
-    );
-    }
-});
 
 var ListItem = React.createClass({
     render: function() {
@@ -72,37 +49,44 @@ var BigListItem = React.createClass({
     }
 });
 
+
 var SimpleComponent = React.createClass({
     render: function() {
-        return <a onClick={this.props.onClickHandler.bind(null, this.props.num)}><div>{this.props.current === this.props.num ? 'C' : ''}{this.props.data.name}{this.props.num}</div></a>
+        return (
+        <div>
+            <Well onClick={this.props.onClickHandler.bind(null, this.props.num)} bsSize='small' className={this.props.current === this.props.num ? 'card active' : 'card'} key={this.props.num}>
+                <h6 className='card-label'>
+                    Biological Strategy
+                </h6>
+                <h5 className='card-name'>
+                    {this.props.data.name}
+                    <br/>
+                <small>
+
+                </small>
+                </h5>
+            </Well>
+        </div>
+    );
     }
 });
 
 var Infinite = React.createClass({
     mixins: [store.mixin],
     getInitialState: function() {
-
-        return { elements: [], data: [], index: 0 }
+        return { elements: [], data: [], index: 0 };
     },
     componentWillMount: function() {
-        // actions.getList('b.strategy',this.props.masterid);
-        //'740c420618b1b9abb92630cdaff6e0dd');
-	 actions.getListPaginated('b.strategy', 0, 20, null, null, null);
+        //actions.fetch('b.strategy', this.props.masterid);//'740c420618b1b9abb92630cdaff6e0dd');
+	actions.getListPaginated('b.strategy', 0, 20, null, null, null);
     },
     _onChange: function() {
         //var newElements = this.state.elements;
-    var newElements = _.map(store.get(), function(r) {
+	var newElements = _.map(store.get(), function(r) {
 	    return <ListItem key={r.masterid} data={r} />;
 	});
-    // This needs to be done in concert with the previous map loop
-    var newCards = _.map(store.get(), function(r) {
-	    return <ListCard key={r.masterid} data={r} />;
-	});
-
-
 	//newElements[0] = <ListItem num={0} key={0} data={store.get()} />;
-
-        this.setState({elements: newElements, data: store.get()})
+        this.setState({elements: newElements, data: store.get()});
     },
     setIndex: function(num) {
         this.setState({index: num});
@@ -114,7 +98,6 @@ var Infinite = React.createClass({
 	    return <SimpleComponent current={that.state.index} data={d} num={i++} onClickHandler={function(num) { that.setState({index: num}); }} />
 	});
         return (
-
             <DefaultLayout searchResultComponent={InfiniteList} searchResultElements={simpleComponentList} searchResultHeight={200}>
                     <InfiniteList itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} />
             </DefaultLayout>

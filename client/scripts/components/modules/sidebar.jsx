@@ -148,7 +148,7 @@ var SidebarComponent = React.createClass({
                 <Nav className='drawer' key='10'>
 
                     <TabbedArea defaultActiveKey={1} key='20' justified>
-                        <TabPane key='30' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
+                        <TabPane key='20' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
                             {this.props.searchResultComponent ?  <this.props.searchResultComponent elements={this.props.searchResultElements} itemComponent={SimpleItem} itemHeight={this.props.searchResultHeight} /> : 'Search results go here.'}
                         </TabPane>
                         <TabPane key='30' eventKey={1} tab={<FontAwesome name='info' size='lg' fixedWidth />}>
