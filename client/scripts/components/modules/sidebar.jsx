@@ -143,19 +143,23 @@ var SimpleItem = React.createClass({
 var SidebarComponent = React.createClass({
     render: function() {
         var items = [];
-        if (this.props.open) {
+        // if (this.props.open) {
             items.push(
                 <Nav className='drawer' key='10'>
 
-                    <TabbedArea defaultActiveKey={1} key='20' justified>
+                    <TabbedArea defaultActiveKey={0} key='20' justified>
                         <TabPane key='20' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
-                            {this.props.searchResultComponent ?  <this.props.searchResultComponent elements={this.props.searchResultElements} itemComponent={SimpleItem} itemHeight={this.props.searchResultHeight} /> : 'Search results go here.'}
+                            {this.props.searchResultComponent ?  <this.props.searchResultComponent elements={this.props.searchResultElements} itemComponent={SimpleItem} itemHeight={this.props.searchResultHeight} /> : <Well>
+                                Query results & content clusters go in here
+                            </Well>
+                            }
                         </TabPane>
                         <TabPane key='30' eventKey={1} tab={<FontAwesome name='info' size='lg' fixedWidth />}>
                             <Well>
                                 Informational Pages go in here
                             </Well>
                         </TabPane>
+                        {this.props.credentials === 'admin' ? (
                         <TabPane key='40' eventKey={2} tab={<FontAwesome name='list' size='lg' fixedWidth />}>
                             <Nav stacked>
                                 {
@@ -180,10 +184,11 @@ var SidebarComponent = React.createClass({
                                 }
                             </Nav>
                         </TabPane>
+                    ) : '' }
                     </TabbedArea>
                 </Nav>
             );
-        }
+    //    }
 
         return (
             /* jshint ignore:start */
