@@ -50,7 +50,7 @@ var NavbarComponent = React.createClass({
                      <Button className="flat-button drawer-toggle" onClick={this.props.onDrawerToggleClick} bsSize="large"><Glyphicon glyph="menu-hamburger" /></Button>
                   <Link className="navbar-brand" url="/">AN</Link>
                   <form role="search" className='navbar-form navbar-left'>
-                    <Input type="text" placeholder="Search AskNature" />
+                    <Input type="text" placeholder="Search AskNature" value={this.props.searchQuery} onChange={this.props.searchQueryChange}/>
                   </form>
                 </Nav>
               {/* End temp button for left offcanvas menu */}

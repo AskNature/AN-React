@@ -82,12 +82,17 @@ var Infinite = React.createClass({
 	actions.getListPaginated('b.strategy', 0, 20, null, null, this.props.query);
     },
     componentWillReceiveProps: function(newProps) {
-        console.log("new masterid: " + newProps.masterid);
-       var index = _.findIndex(this.state.elements, function(item) {
-           return item.props.data.masterid === newProps.masterid;
-       }, this);
-       console.log("index: " + index);
-       this.setState({index: index});
+       if(this.props.query !== newProps.query) {
+           console.log('new query: ' + newProps.query);
+	   actions.getListPaginated('b.strategy', 0, 20, null, null, newProps.query);
+       } else if(this.props.masterid !== newProps.masterid) {
+           console.log("new masterid: " + newProps.masterid);
+	   var index = _.findIndex(this.state.elements, function(item) {
+               return item.props.data.masterid === newProps.masterid;
+           }, this);
+           console.log("index: " + index);
+           this.setState({index: index});
+       }
     },
     _onChange: function() {
         //var newElements = this.state.elements;
@@ -114,7 +119,7 @@ var Infinite = React.createClass({
 	    return <SidebarComponent current={that.state.index} data={d} num={i++} onClickHandler={function(num) { that.setState({index: num}); }} />
 	});
         return (
-            <DefaultLayout searchResultComponent={InfiniteList} searchResultElements={sidebarComponentList} searchResultHeight={100}>
+            <DefaultLayout searchResultComponent={InfiniteList} searchResultElements={sidebarComponentList} searchResultHeight={100} searchQuery={this.props.query} searchQueryChange={function(t) {if(t.target.value) { routeActions.setRoute('/infinite_demo/'+t.target.value)}}}>
                     <InfiniteList query={this.props.query} itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} routeOnScroll={true} />
             </DefaultLayout>
         );
