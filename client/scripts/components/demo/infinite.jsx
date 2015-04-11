@@ -14,6 +14,7 @@ var TopSection = require('../detail/common/topsection.jsx');
 var StrategyDetail = require('../detail/detail-bstrategy.jsx');
 
 var _ = require('lodash');
+var routeActions = require('../../actions/routes');
 
 var ListItem = React.createClass({
     render: function() {
@@ -50,7 +51,7 @@ var BigListItem = React.createClass({
 });
 
 
-var SimpleComponent = React.createClass({
+var SidebarComponent = React.createClass({
     render: function() {
         return (
         <div>
@@ -97,7 +98,10 @@ var Infinite = React.createClass({
 	var index = _.findIndex(newElements, function(item) {
 	   return item.props.data.masterid === this.props.masterid;
         }, this);
-        this.setState({elements: newElements, data: store.get(), index: index});
+        this.setState({elements: newElements, data: store.get(), index: index == -1 ? 0 : index});
+	if(index == -1) {
+	    setTimeout(function() { routeActions.setRoute("/infinite_demo/"+newElements[0].props.data.masterid)}, 300);
+	}
     },
     setIndex: function(num) {
         this.setState({index: num});
@@ -105,11 +109,11 @@ var Infinite = React.createClass({
     render: function() {
         var i = 0;
 	var that = this;
-        var simpleComponentList = _.map(this.state.data, function(d) {
-	    return <SimpleComponent current={that.state.index} data={d} num={i++} onClickHandler={function(num) { that.setState({index: num}); }} />
+        var sidebarComponentList = _.map(this.state.data, function(d) {
+	    return <SidebarComponent current={that.state.index} data={d} num={i++} onClickHandler={function(num) { that.setState({index: num}); }} />
 	});
         return (
-            <DefaultLayout searchResultComponent={InfiniteList} searchResultElements={simpleComponentList} searchResultHeight={100}>
+            <DefaultLayout searchResultComponent={InfiniteList} searchResultElements={sidebarComponentList} searchResultHeight={100}>
                     <InfiniteList itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} />
             </DefaultLayout>
         );
