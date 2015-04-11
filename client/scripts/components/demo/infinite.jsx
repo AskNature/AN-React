@@ -80,6 +80,14 @@ var Infinite = React.createClass({
         //actions.fetch('b.strategy', this.props.masterid);//'740c420618b1b9abb92630cdaff6e0dd');
 	actions.getListPaginated('b.strategy', 0, 20, null, null, null);
     },
+    componentWillReceiveProps: function(newProps) {
+        console.log("new masterid: " + newProps.masterid);
+       var index = _.findIndex(this.state.elements, function(item) {
+           return item.props.data.masterid === newProps.masterid;
+       }, this);
+       console.log("index: " + index);
+       this.setState({index: index});
+    },
     _onChange: function() {
         //var newElements = this.state.elements;
 	var newElements = _.map(store.get(), function(r) {
