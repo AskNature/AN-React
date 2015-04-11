@@ -94,7 +94,10 @@ var Infinite = React.createClass({
 	    return <ListItem key={r.masterid} data={r} />;
 	});
 	//newElements[0] = <ListItem num={0} key={0} data={store.get()} />;
-        this.setState({elements: newElements, data: store.get()});
+	var index = _.findIndex(newElements, function(item) {
+	   return item.props.data.masterid === this.props.masterid;
+        }, this);
+        this.setState({elements: newElements, data: store.get(), index: index});
     },
     setIndex: function(num) {
         this.setState({index: num});
@@ -106,7 +109,7 @@ var Infinite = React.createClass({
 	    return <SimpleComponent current={that.state.index} data={d} num={i++} onClickHandler={function(num) { that.setState({index: num}); }} />
 	});
         return (
-            <DefaultLayout searchResultComponent={InfiniteList} searchResultElements={simpleComponentList} searchResultHeight={200}>
+            <DefaultLayout searchResultComponent={InfiniteList} searchResultElements={simpleComponentList} searchResultHeight={100}>
                     <InfiniteList itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} />
             </DefaultLayout>
         );
