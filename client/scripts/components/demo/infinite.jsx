@@ -14,6 +14,7 @@ var TopSection = require('../detail/common/topsection.jsx');
 var StrategyDetail = require('../detail/detail-bstrategy.jsx');
 
 var _ = require('lodash');
+var routeActions = require('../../actions/routes');
 
 var ListItem = React.createClass({
     render: function() {
@@ -50,7 +51,7 @@ var BigListItem = React.createClass({
 });
 
 
-var SimpleComponent = React.createClass({
+var SidebarComponent = React.createClass({
     render: function() {
         return (
         <div>
@@ -78,7 +79,20 @@ var Infinite = React.createClass({
     },
     componentWillMount: function() {
         //actions.fetch('b.strategy', this.props.masterid);//'740c420618b1b9abb92630cdaff6e0dd');
-	actions.getListPaginated('b.strategy', 0, 20, null, null, null);
+	actions.getListPaginated('b.strategy', 0, 20, null, null, this.props.query);
+    },
+    componentWillReceiveProps: function(newProps) {
+       if(this.props.query !== newProps.query) {
+           console.log('new query: ' + newProps.query);
+	   actions.getListPaginated('b.strategy', 0, 20, null, null, newProps.query);
+       } else if(this.props.masterid !== newProps.masterid) {
+           console.log("new masterid: " + newProps.masterid);
+	   var index = _.findIndex(this.state.elements, function(item) {
+               return item.props.data.masterid === newProps.masterid;
+           }, this);
+           console.log("index: " + index);
+           this.setState({index: index});
+       }
     },
     _onChange: function() {
         //var newElements = this.state.elements;
@@ -86,7 +100,14 @@ var Infinite = React.createClass({
 	    return <ListItem key={r.masterid} data={r} />;
 	});
 	//newElements[0] = <ListItem num={0} key={0} data={store.get()} />;
-        this.setState({elements: newElements, data: store.get()});
+	var index = _.findIndex(newElements, function(item) {
+	   return item.props.data.masterid === this.props.masterid;
+        }, this);
+        this.setState({elements: newElements, data: store.get(), index: index == -1 ? 0 : index});
+	var that = this;
+	if(index == -1) {
+	    setTimeout(function() { routeActions.setRoute("/infinite_demo/"+that.props.query+'/'+newElements[0].props.data.masterid)}, 300);
+	}
     },
     setIndex: function(num) {
         this.setState({index: num});
@@ -94,12 +115,12 @@ var Infinite = React.createClass({
     render: function() {
         var i = 0;
 	var that = this;
-        var simpleComponentList = _.map(this.state.data, function(d) {
-	    return <SimpleComponent current={that.state.index} data={d} num={i++} onClickHandler={function(num) { that.setState({index: num}); }} />
+        var sidebarComponentList = _.map(this.state.data, function(d) {
+	    return <SidebarComponent current={that.state.index} data={d} num={i++} onClickHandler={function(num) { that.setState({index: num}); }} />
 	});
         return (
-            <DefaultLayout searchResultComponent={InfiniteList} searchResultElements={simpleComponentList} searchResultHeight={200}>
-                    <InfiniteList itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} />
+            <DefaultLayout searchResultComponent={InfiniteList} searchResultElements={sidebarComponentList} searchResultHeight={100} searchQuery={this.props.query} searchQueryChange={function(t) {if(t.target.value) { routeActions.setRoute('/infinite_demo/'+t.target.value)}}}>
+                    <InfiniteList query={this.props.query} itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} routeOnScroll={true} />
             </DefaultLayout>
         );
     }
