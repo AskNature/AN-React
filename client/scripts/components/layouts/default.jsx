@@ -43,7 +43,6 @@ var DefaultComponent = React.createClass({
     },
     componentWillMount: function() {
     	accountActions.fetchUser();
-      console.log(this.state.account);
     },
     componentDidMount: function() {
         pageStore.emitChange();
@@ -54,13 +53,16 @@ var DefaultComponent = React.createClass({
     });
   },
     render: function() {
+      console.log('Account:');
+      console.log(this.state.account);
         return (
             /* jshint ignore:start */
             <div>
 
             <Navbar account={this.state.account} onDrawerToggleClick={this.handleDrawerToggleClick} accountActions={accountActions}  />
-            <Drawer open={this.state.drawerOpen} searchResultElements={this.props.searchResultElements} searchResultComponent={this.props.searchResultComponent} searchResultHeight={this.props.searchResultHeight} />
-            <Detail narrow={this.state.drawerOpen} credentials={this.state.account.role} {...this.props}/>
+            <Drawer open={this.state.drawerOpen} searchResultElements={this.props.searchResultElements} searchResultComponent={this.props.searchResultComponent} searchResultHeight={this.props.searchResultHeight}
+            loggedIn={this.state.account.loggedIn} />
+            <Detail narrow={this.state.drawerOpen} {...this.props}/>
 
             </div>
             /* jshint ignore:end */

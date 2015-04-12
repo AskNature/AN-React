@@ -143,7 +143,7 @@ var SimpleItem = React.createClass({
 var SidebarComponent = React.createClass({
     render: function() {
         var items = [];
-        // if (this.props.open) {
+         if (this.props.open === true) {
             items.push(
                 <Nav className='drawer' key='10'>
 
@@ -159,7 +159,7 @@ var SidebarComponent = React.createClass({
                                 Informational Pages go in here
                             </Well>
                         </TabPane>
-                        {this.props.credentials === 'admin' ? (
+                        {this.props.loggedIn ? (
                         <TabPane key='40' eventKey={2} tab={<FontAwesome name='list' size='lg' fixedWidth />}>
                             <Nav stacked>
                                 {
@@ -188,7 +188,7 @@ var SidebarComponent = React.createClass({
                     </TabbedArea>
                 </Nav>
             );
-    //    }
+        }
 
         return (
             /* jshint ignore:start */

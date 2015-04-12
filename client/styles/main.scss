@@ -37,7 +37,8 @@ body {
   font-family: 'Gibson', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 200;
-  background: $primary-color;
+  background: $background-color;
+  overflow: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -297,18 +298,22 @@ nav.drawer {
 
 nav.drawer-enter {
   left: 0;
+  opacity: 0%;
 }
 
 nav.drawer-enter.drawer-enter-active {
   left: 0px;
+  opacity: 100%;
 }
 
 nav.drawer-leave {
   left: 0px;
+  opacity: 100%;
 }
 
 nav.drawer-leave.drawer-leave-active {
   left: 0;
+  opacity: 0%;
 }
 
 
@@ -318,9 +323,7 @@ Detail Component
 ========================================================================== */
 
 .default.detail {
-  position: absolute;
-  left: 0;
-  right: 0;
+
   background: $background-color;
   .detail-single {
     margin: 20px 10px;
