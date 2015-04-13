@@ -19,7 +19,8 @@ var Media = new Model('Media',
   [
     'filename',
     'name',
-    'entity'
+    'entity',
+    'description'
   ]
 );
 var InspiredSolution = new Model('InspiredSolutions',
@@ -111,7 +112,7 @@ var relationships = {
     },
     'media': {
 	model: Media,
-	className: 'Media',
+	className: 'Image',
 	edge: 'out("HasMedia")'
     },
     'added_by': {

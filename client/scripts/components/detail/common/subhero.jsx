@@ -69,7 +69,7 @@ var SubHero = React.createClass({
           </Col>
           <Col xs={12} sm={4}>
             <Nav justified activeKey={0} bsStyle='pills' style={{"margin-top": "11.5px"}}>
-              <Restrict user={{status: {'EditPage': false}}} capability="EditPage">
+              {/* <Restrict user={{status: {'EditPage': false}}} capability="EditPage"> */}
 	      <NavItem
                 eventKey={1}
                 onClick={this.props.toggleEditable}
@@ -78,7 +78,7 @@ var SubHero = React.createClass({
                 } >
                 <Glyphicon glyph="pencil" />
               </NavItem>
-	      </Restrict>
+	      {/* </Restrict> */}
               <NavItem eventKey={3}>
                 <Glyphicon glyph="share-alt" />
               </NavItem>

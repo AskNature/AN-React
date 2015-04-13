@@ -2,6 +2,8 @@
 
 var React = require('react'),
 
+moment = require('moment'),
+
 Link = require('../modules/link.jsx'),
 FadeImage = require('../modules/imagefade.jsx'),
 Select = require('../modules/select.jsx'),
@@ -13,11 +15,24 @@ TextArea = require('./common/textarea.jsx'),
 Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
+Panel = require('react-bootstrap/Panel'),
+Well = require('react-bootstrap/Well'),
+
 Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid');
 
 var Template = React.createClass({
+  getInitialState : function () {
+    return {width: 0, height: 0};
+  },
+  _getImageWidth : function(e) {
+    var w = e.target.naturalWidth;
+    var h = e.target.naturalHeight;
+    console.log(w+' x '+h);
+    this.setState({width: w, height: h});
+  },
+
   render: function() {
     var routeNameSingle = 'media';
     var entityName = 'Media';
@@ -26,10 +41,9 @@ var Template = React.createClass({
     var secondaryTitle = 'Placeholder: Media Type';
     var descriptionKey = 'description';
     var addedby = data.added_media;
-    var img = new Image();
-    img.id = data.has_media.length > 0 ? this.props.data.has_media[0].masterid : '';
-    img.src='http://www.asknature.org/images/uploads/'+ data.entity + '/' + img.id + '/' + data.filename;
-    console.log(img.src);
+    var imgID = data.has_media.length > 0 ? data.has_media[0].masterid : '';
+    var imgSRC='http://www.asknature.org/images/uploads/'+ data.entity + '/' + imgID + '/' + data.filename;
+    var upload_date = moment(data.timestamp, 'YYYY-MM-DD HH:mm:ss').format('MMM Do, YYYY');
     return (
       /* jshint ignore:start */
       <div>
@@ -43,7 +57,7 @@ var Template = React.createClass({
           description={data[descriptionKey]}
           descriptionKey={descriptionKey}
           addedby={addedby}
-          imgurl={img.src} />
+          imgurl={imgSRC} />
           <Grid>
             <Row>
               <Col xs={12}>
@@ -58,65 +72,66 @@ var Template = React.createClass({
                   titleField={'name'} />
               </Col>
             </Row>
+            <hr />
+            <Row>
+              <Col xs={12} >
+                <Panel>
+                  <form>
+                  <Input type='file' help='Upload a JPG, PNG, or GIF to AskNature. Max file size is 8mb.' />
+                  <Input
+                    type='text'
+                    placeholder='Enter Custom URL'
+                    value={data.media_url ? data.media_url : data.entity ? 'http://www.asknature.org/uploads/'+data.entity+'/'+imgID+'/'+data.filename : ''}
+                    buttonAfter={<Button>Link to Image</Button>} />
+                  </form>
+                </Panel>
+              </Col>
+            </Row>
+          <Row>
 
-          <Row>
-            <Col xs={12}>
-              <FadeImage className='fadeimage' src={img.src} />
+            <Col xs={12} sm={8}>
+              <FadeImage className='fadeimage' src={imgSRC} getWidth={this._getImageWidth}/>
             </Col>
-          </Row>
-          <Row>
-            <Col xs={1} >
-              Checkbox
-            </Col>
-            <Col xs={11} >
-              <h6><strong>Legacy Image Path</strong></h6>
-              <h6 className='overflow-scroll'>
-                <small>HOST</small>/uploads/<strong>{data.entity}</strong>/<strong>{img.id}</strong>/<strong>{data.filename}</strong></h6>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={1} >
-              Checkbox
-            </Col>
-            <Col xs={11} >
-              <h6><strong>Uploaded Image</strong></h6>
-                <h6 className='overflow-scroll'>
-                  <small>HOST</small>/media/<strong>year</strong>/<strong>month</strong>/<strong>date</strong>/<strong>filename</strong></h6>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={1} >
-              Checkbox
-            </Col>
-            <Col xs={11} >
-              <h6><strong>Linked Image (Custom URL)</strong></h6>
-              <h6 className='overflow-scroll'>
+            <Col xs={12} sm={4}>
+
+              <h6><strong>Name</strong></h6>
+              <p>
                 <TextArea
-                item={data.custom_url}
+                item={data.name}
                 store={this.props.store}
                 actions={this.props.actions}
-                fieldName={'custom_url'}
+                fieldName={'name'}
                 editable={this.props.editable}
-                placeholder="Enter a URL" />
-            </h6>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col xs={12} md={4} >
-              <h6><strong>Original Image URL</strong></h6>
-              <p className='overflow-scroll'>
+                placeholder="Enter a brief phrase to identify this image" />
+              </p>
+              <h6><strong>Caption</strong></h6>
+              <p>
                 <TextArea
-                item={data.source_url}
+                item={data.description}
                 store={this.props.store}
                 actions={this.props.actions}
-                fieldName={'source_url'}
+                fieldName={'description'}
                 editable={this.props.editable}
-                placeholder="Enter the URL of the original image" />
-            </p>
+                placeholder="Enter a caption that will be displayed with this image" />
+              </p>
+              <h6><strong>Pixel Dimensions: </strong>{this.state.width + ' x ' + this.state.height}</h6>
+              <h6><strong>Upload Date: </strong>{upload_date}</h6>
             </Col>
-            <Col xs={12} md={4} >
-              <h6><strong>Attribution</strong></h6>
+          </Row>
+          <Row>
+            <Well>
+            <Col xs={12} sm={4}>
+
+              <h6><strong>License</strong></h6>
+                {data.license ? (
+                  <form>
+                    <Select selected={data.license.masterid} options={data.license.options} field='status' onRelationshipSet={this.props.onRelationshipSet} />
+                  </form>
+                ) : ''}
+              </Col>
+              <Col xs={12} sm={4}>
+
+              <h6><strong>Original Image Attribution</strong></h6>
               <p>
                 <TextArea
                 item={data.author}
@@ -125,16 +140,24 @@ var Template = React.createClass({
                 fieldName={'author'}
                 editable={this.props.editable}
                 placeholder="Attribute this image (photographer/illustrator/owner/etc)" />
-            </p>
+              </p>
             </Col>
-            <Col xs={12} md={4} >
-              <h6><strong>License</strong></h6>
-                {data.license ?
-                <Select selected={data.license.masterid} options={data.license.options} field='status' onRelationshipSet={this.props.onRelationshipSet} />
-                : ''}
+            <Col xs={12} sm={4}>
+
+              <h6><strong>Original Image URL</strong></h6>
+              <h6 className='overflow-scroll'>
+                <TextArea
+                item={data.source_url}
+                store={this.props.store}
+                actions={this.props.actions}
+                fieldName={'source_url'}
+                editable={this.props.editable}
+                placeholder="Enter the URL of the original image" />
+              </h6>
             </Col>
+            </Well>
           </Row>
-        </Grid>
+          </Grid>
 
 
       </div>

@@ -19,6 +19,17 @@ var getState = function() {
     return RelationshipListStore.get();
 };
 
+var InputListComponent = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <img src='http://placehold.it/50x50' width='50px' height='auto' />
+        {this.props.item.name}
+      </div>
+    );
+  }
+});
+
 var RelationshipListItemInput = React.createClass({
   mixins: [RelationshipListStore.mixin],
 
@@ -63,9 +74,11 @@ var RelationshipListItemInput = React.createClass({
               textField='name'
               onInput={this.onInputInput}
               data={this.state.results.concat(['Create New'])}
+              itemComponent={this.props.media ? InputListComponent : ''}
               filter='contains'
               ref='combobox'
               placeholder={ 'Add ' + this.props.fieldName }
+              media={this.props.media}
               />
             <Button
               onClick={this.onAdd}
