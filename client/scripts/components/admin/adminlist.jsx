@@ -16,7 +16,7 @@ GriddleComponent = require('./griddle_component.jsx');
 var getState = function() {
     return (
         {
-            user: accountStore.get()
+            account: accountStore.get()
         }
     );
 };
@@ -37,7 +37,7 @@ var AdminList = React.createClass({
                 columns={entityList.columns}
                 thumb={entityList.thumb}
                 initialSort={entityList.initialSort}
-                credentials={this.state.user.role === 'admin' ? true : false}
+                credentials={this.state.account.role === 'admin' ? true : false}
                 slug={this.props.type}
                  />
             </ConsoleLayout>
