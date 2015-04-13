@@ -1,3 +1,4 @@
+
 'use strict';
 
 var React = require('react');
@@ -15,7 +16,7 @@ var getState = function() {
   }
     return {
         title: pageStore.get().title,
-	      account: accountStore.get(),
+	     account: accountStore.get(),
         drawerOpen: drawerSwitch
     };
 };
@@ -42,16 +43,30 @@ var DefaultComponent = React.createClass({
         );
     },
     componentWillMount: function() {
-    	accountActions.fetchUser();
+    accountActions.fetchUser();
     },
     componentDidMount: function() {
         pageStore.emitChange();
+        window.addEventListener('resize', this.handleResize);
+    },
+    componentWillUnmount: function () {
+      window.removeEventListener('resize', this.handleResize);
     },
     handleDrawerToggleClick: function(e){
-    this.setState({
-      drawerOpen: !this.state.drawerOpen
-    });
-  },
+      this.setState({
+        drawerOpen: !this.state.drawerOpen
+      });
+    },
+    handleResize: function(e) {
+      var drawerSwitch;
+      if(window.innerWidth < 768) {
+        drawerSwitch = false;
+      } else {
+        drawerSwitch = true;
+      }
+      this.setState({drawerOpen: drawerSwitch});
+    },
+
     render: function() {
       console.log('Account:');
       console.log(this.state.account);

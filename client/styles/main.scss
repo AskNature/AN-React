@@ -38,8 +38,9 @@ body {
   font-size: 14px;
   font-weight: 200;
   background: $background-color;
-  overflow: hidden;
+
 }
+
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 100;
@@ -298,22 +299,18 @@ nav.drawer {
 
 nav.drawer-enter {
   left: 0;
-  opacity: 0%;
 }
 
 nav.drawer-enter.drawer-enter-active {
   left: 0px;
-  opacity: 100%;
 }
 
 nav.drawer-leave {
   left: 0px;
-  opacity: 100%;
 }
 
 nav.drawer-leave.drawer-leave-active {
   left: 0;
-  opacity: 0%;
 }
 
 
@@ -322,8 +319,10 @@ nav.drawer-leave.drawer-leave-active {
 Detail Component
 ========================================================================== */
 
-.default.detail {
-
+.default {
+  position: absolute;
+  left: 0;
+  right: 0;
   background: $background-color;
   .detail-single {
     margin: 20px 10px;
@@ -586,24 +585,24 @@ Hero
 
 
 @media (max-width: 768px) {
-  nav.drawer {
-    z-index: 1;
+  .default.detail {
+    transform: translate(300px,0);
+    left: 0;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: $background-color;
+      opacity: 0.8;
+      transition: opacity 0.5s ease;
+    }
   }
-
-nav.drawer-enter {
-    left: -300px;
-  }
-
-  nav.drawer-enter.drawer-enter-active {
-    left: 0px;
-  }
-
-  nav.drawer-leave {
-    left: 0px;
-  }
-
-  nav.drawer-leave.drawer-leave-active {
-    left: -300px;
+  .nav-justified > li {
+    display: table-cell;
+    width: 1%;
   }
 }
 @media (min-width: 768px) {
