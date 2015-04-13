@@ -40,8 +40,7 @@ var RelationshipList = React.createClass({
               editable={this.props.editable}
               titleField={item[this.props.titleField]}
               subtitleField={item[this.props.subtitleField]}
-              media={this.props.media}
-              thumbs={item} />;
+              media={this.props.media} />;
             }, this) : ''
           }
             <RelationshipListItemInput

@@ -25,7 +25,7 @@ var Gallery = React.createClass({
             };
             return (
               <CarouselItem key={i}>
-                <OverlayTrigger placement="bottom" overlay={<Tooltip><strong>{image.name}</strong></Tooltip>}>
+                <OverlayTrigger placement="bottom" overlay={<Tooltip><strong>{image.description ? image.description : image.name}</strong></Tooltip>}>
                   <div className="image-bg" style={imgStyle} />
                 </OverlayTrigger>
               </CarouselItem>

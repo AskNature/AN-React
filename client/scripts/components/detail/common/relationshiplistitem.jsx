@@ -130,7 +130,7 @@ var RelationshipListItem = React.createClass({
     return (
         <ButtonToolbar className='relationship-button'>
           <SplitButton
-            title={<MiniHero title={title} subtitle={subTitle} label={itemLabel} media={this.props.media} thumbs={this.props.thumbs} masterid={item.masterid}/>}
+            title={<MiniHero title={title} subtitle={subTitle} label={itemLabel} media={this.props.media} thumbs={this.props.item} masterid={item.masterid}/>}
             onClick={this.clickHandler.bind(null,link)}
             pullright>
             <MenuItem eventKey="1" onClick={this.setFlag}><Glyphicon glyph='flag' /> Flag</MenuItem>
