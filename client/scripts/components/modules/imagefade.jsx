@@ -9,7 +9,7 @@ var ImageComponent = React.createClass({
     };
   },
 
-  onImageLoad: function() {
+  onImageLoad: function(img) {
     if (this.isMounted()) {
       this.setState({imageLoaded: true});
     }
@@ -17,7 +17,7 @@ var ImageComponent = React.createClass({
 
   componentDidMount: function() {
     var imgTag = this.refs.img.getDOMNode();
-    imgTag.onload = this.onImageLoad;
+    imgTag.onload = this.onImageLoad(imgTag);
   },
 
   render: function() {
@@ -29,7 +29,7 @@ var ImageComponent = React.createClass({
     return (
       /* jshint ignore:start */
       <div>
-      <img src={this.props.src} className={className} ref='img'/>
+      <img src={this.props.src} className={className} ref='img' onLoad={this.props.getWidth}/>
       </div>
       /* jshint ignore:end */
     );

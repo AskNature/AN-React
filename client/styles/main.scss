@@ -3,6 +3,7 @@
 // Box sizing partial styles:
 // Apply a natural box layout model to all elements
 
+$white-color: #ffffff;
 $background-color: #dddddd;
 $paper-color: #f9f9f9;
 $primary-color: #b5bc4f;
@@ -53,13 +54,13 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.5s ease;
 }
 
-.content, .panel {
+.content {
   background: $background-color;
 }
 
 .panel {
-  background: $paper-color;
-  box-shadow: none;
+  box-shadow: 1px 6px 15px rgba(0,0,0,0.08);
+  border-radius: 3px;
 }
 
 // Temp color tweaks
@@ -114,6 +115,15 @@ label {
   width: 100%;
   display: block;
   overflow: scroll;
+}
+
+/* ==========================================================================
+Creator Mast
+========================================================================== */
+
+.panel.creator-mast {
+  background: $paper-color;
+  box-shadow: none;
 }
 
 /* ==========================================================================

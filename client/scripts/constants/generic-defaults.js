@@ -29,7 +29,11 @@ var Defaults = {
         name: '',
         short_name: '',
         special_text: '',
+        timestamp: '0000-00-00 00:00:00',
         type: '',
+
+        width: 200,
+        height: 100,
 
         roles: ',',
         activities: ',',
@@ -41,7 +45,7 @@ var Defaults = {
         is_deleted: 0,
 
         addedby: [],
-        
+
         collectors: [],
         collected: [],
 
