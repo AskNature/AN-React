@@ -249,7 +249,7 @@ var Template = React.createClass({
                     field={'researcher'}
                     routeName={'researcher'}
                     title={'Researched By'}
-                    fieldName={'Researched By'}/>
+                    fieldName={'Researched By'} />
           			</Col>
         			</Row>
 			    </Grid>

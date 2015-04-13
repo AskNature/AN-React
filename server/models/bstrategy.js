@@ -102,8 +102,8 @@ var relationships = {
     },
     'experts': {
 	model: Expert,
-	className: 'Expert',
-	edge: 'in("StudiedBy")'
+	className: 'Experts',
+	edge: 'out("StudiedBy")'
     },
     'collectors': {
 	model: User,
