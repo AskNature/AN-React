@@ -27,6 +27,8 @@ Link = require('../../modules/link.jsx'),
 
 Select = require('../../modules/select.jsx');
 
+var Restrict = require('../../modules/restrict.jsx');
+
 var SubHero = React.createClass({
   render: function() {
     return (
@@ -67,7 +69,8 @@ var SubHero = React.createClass({
           </Col>
           <Col xs={12} sm={4}>
             <Nav justified activeKey={0} bsStyle='pills' style={{"margin-top": "11.5px"}}>
-              <NavItem
+              <Restrict user={{status: {'EditPage': false}}} capability="EditPage">
+	      <NavItem
                 eventKey={1}
                 onClick={this.props.toggleEditable}
                 disabled={
@@ -75,6 +78,7 @@ var SubHero = React.createClass({
                 } >
                 <Glyphicon glyph="pencil" />
               </NavItem>
+	      </Restrict>
               <NavItem eventKey={3}>
                 <Glyphicon glyph="share-alt" />
               </NavItem>

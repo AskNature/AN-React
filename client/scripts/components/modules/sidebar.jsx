@@ -6,6 +6,7 @@ Link = require('./link.jsx'),
 
 FontAwesome = require('react-fontawesome'),
 Nav = require('react-bootstrap').Nav,
+Well = require('react-bootstrap').Well,
 TabbedArea = require('react-bootstrap').TabbedArea,
 TabPane = require('react-bootstrap').TabPane;
 
@@ -133,17 +134,33 @@ var listItems = [
     },
 ];
 
+var SimpleItem = React.createClass({
+    render: function() {
+        return (<b>{this.props.data.name}</b>);
+    }
+});
+
 var SidebarComponent = React.createClass({
     render: function() {
         var items = [];
-        if (this.props.open) {
+         if (this.props.open === true) {
             items.push(
                 <Nav className='drawer' key='10'>
-                    <TabbedArea defaultActiveKey={1} key='20' justified>
-                        <TabPane key='30' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
-                            Search results go here.
+
+                    <TabbedArea defaultActiveKey={0} key='20' justified>
+                        <TabPane key='20' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
+                            {this.props.searchResultComponent ?  <this.props.searchResultComponent elements={this.props.searchResultElements} itemComponent={SimpleItem} itemHeight={this.props.searchResultHeight} /> : <Well>
+                                Query results & content clusters go in here
+                            </Well>
+                            }
                         </TabPane>
-                        <TabPane key='40' eventKey={1} tab={<FontAwesome name='list' size='lg' fixedWidth />}>
+                        <TabPane key='30' eventKey={1} tab={<FontAwesome name='info' size='lg' fixedWidth />}>
+                            <Well>
+                                Informational Pages go in here
+                            </Well>
+                        </TabPane>
+                        {this.props.loggedIn ? (
+                        <TabPane key='40' eventKey={2} tab={<FontAwesome name='list' size='lg' fixedWidth />}>
                             <Nav stacked>
                                 {
                                     listItems.map(function(item,i){
@@ -167,6 +184,7 @@ var SidebarComponent = React.createClass({
                                 }
                             </Nav>
                         </TabPane>
+                    ) : '' }
                     </TabbedArea>
                 </Nav>
             );
@@ -184,4 +202,4 @@ var SidebarComponent = React.createClass({
 
 });
 
-module.exports =SidebarComponent;
+module.exports = SidebarComponent;

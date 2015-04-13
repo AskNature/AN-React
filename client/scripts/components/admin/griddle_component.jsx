@@ -42,7 +42,7 @@ var LinkComponent = React.createClass({
               </Link>
             </div>
           <div className='media-body' style={textstyle}>
-            <Link url={url}><strong>{this.props.data ? this.props.data : '<No Name>'}</strong></Link>
+            <Link url={url}><h5>{this.props.data ? this.props.data : '<No Name>'}</h5></Link>
             </div>
           </div>
           );
@@ -302,7 +302,7 @@ var GriddleComponent = React.createClass({
       }
 
       return (
-        <div>
+        <div className='griddle-card'>
           <Input id='filter-input' type='text' placeholder='Filter List...' value={this.state.filter} onChange={this.setFilter} />
           <a onClick={this.resetFilterSort}>Reset</a><br />
 	  <span>{this.state.selectedItems.length} item{this.state.selectedItems.length === 1 ? '' : 's'} selected.

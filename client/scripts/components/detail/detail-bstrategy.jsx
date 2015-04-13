@@ -18,14 +18,20 @@ Grid = require('react-bootstrap/Grid');
 var Select = require('react-select');
 
 var Template = React.createClass({
-
+  shouldComponentUpdate: function(nextProps, nextState) {
+    if(nextProps.masterid !== this.props.masterid || nextProps.editable !== this.props.editable || nextProps.loaded !== this.props.loaded) {
+      return true;
+    } else {
+      return false;
+    }
+  },
   render: function() {
     var routeNameSingle = 'b.strategy';
     var entityName = 'Biological Strategies';
     var data = this.props.data;
     var primaryKey = 'name';
     var secondaryTitle = data.living_systems[0] ? data.living_systems[0].name : '';
-    if(data.living_systems[1]){
+    if(data.living_systems.length > 1){
       secondaryTitle += ' & others';
     }
     var primaryTitle = data[primaryKey];

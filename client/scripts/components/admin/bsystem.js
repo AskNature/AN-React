@@ -10,10 +10,6 @@ var List = {
       {columnName:'taxon', displayName:'Taxon', type:'text'},
       {columnName:'name', displayName:'Latin Name', type:'link'}
   ],
-  'initialSort' : [
-      'name',
-      false
-  ],
   'thumb' : [
       'media',
       'media_entity'

@@ -1,3 +1,4 @@
+
 'use strict';
 
 var React = require('react');
@@ -8,7 +9,6 @@ var accountActions = require('../../actions/accounts');
 var Navbar = require('../modules/navbar.jsx');
 var Drawer = require('../modules/sidebar.jsx');
 
-
 var getState = function() {
   var drawerSwitch = false;
   if(window.innerWidth >= 768) {
@@ -16,7 +16,7 @@ var getState = function() {
   }
     return {
         title: pageStore.get().title,
-	      account: accountStore.get(),
+	     account: accountStore.get(),
         drawerOpen: drawerSwitch
     };
 };
@@ -43,23 +43,40 @@ var DefaultComponent = React.createClass({
         );
     },
     componentWillMount: function() {
-    	accountActions.fetchUser();
+    accountActions.fetchUser();
     },
     componentDidMount: function() {
         pageStore.emitChange();
+        window.addEventListener('resize', this.handleResize);
+    },
+    componentWillUnmount: function () {
+      window.removeEventListener('resize', this.handleResize);
     },
     handleDrawerToggleClick: function(e){
-    this.setState({
-      drawerOpen: !this.state.drawerOpen
-    });
-  },
+      this.setState({
+        drawerOpen: !this.state.drawerOpen
+      });
+    },
+    handleResize: function(e) {
+      var drawerSwitch;
+      if(window.innerWidth < 768) {
+        drawerSwitch = false;
+      } else {
+        drawerSwitch = true;
+      }
+      this.setState({drawerOpen: drawerSwitch});
+    },
+
     render: function() {
+      console.log('Account:');
+      console.log(this.state.account);
         return (
             /* jshint ignore:start */
             <div>
 
-            <Navbar account={this.state.account} onDrawerToggleClick={this.handleDrawerToggleClick} accountActions={accountActions}  />
-            <Drawer open={this.state.drawerOpen}/>
+
+            <Navbar searchQuery={this.props.searchQuery} searchQueryChange={this.props.searchQueryChange} account={this.state.account} onDrawerToggleClick={this.handleDrawerToggleClick} accountActions={accountActions}  />
+            <Drawer open={this.state.drawerOpen} searchResultElements={this.props.searchResultElements} searchResultComponent={this.props.searchResultComponent} searchResultHeight={this.props.searchResultHeight} loggedIn={this.state.account.loggedIn} />
             <Detail narrow={this.state.drawerOpen} {...this.props}/>
 
             </div>

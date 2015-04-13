@@ -10,10 +10,12 @@ var React = require('react');
 
 var Restrict = React.createClass({
     render: function() {
-        if(this.props.user.status[this.props.capability]) {
-	    {this.props.children}
+        if(this.props.user && this.props.user.status && this.props.capability && this.props.user.status[this.props.capability]) {
+	    return (this.props.children);
 	} else {
-	    {this.props.deniedComponent : this.props.deniedComponent : "You don't have permission to access this feature."}
+	    return (this.props.deniedComponent ? <this.props.deniedComponent /> : (<span></span>));
 	}
     }
 });
+
+module.exports = Restrict;

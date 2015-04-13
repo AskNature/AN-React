@@ -19,7 +19,7 @@ routeActions = require('./routes');
 var setList = function(focus) {
   Dispatcher.handleViewAction({
     actionType: Constants.GET_ALL,
-    focus: assign({}, {}, focus)
+    focus: assign({}, Defaults, focus)
   });
 };
 
@@ -28,8 +28,7 @@ var setList = function(focus) {
 * that the router uses to pass a request to the controller.
 */
 
-var getList = function(callback) {
-  var entity = window.location.pathname.split('/')[2];
+var getList = function(entity, callback) {
   var self = this;
   request
   .get('/api/'+entity)
@@ -56,12 +55,11 @@ var getList = function(callback) {
   });
 };
 
-var getListPaginated = function(entity, index, size, sortCol, asc, filter, callback) {
+var getListPaginated = function(index, size, sortCol, asc, filter, entity, callback) {
   var self = this;
-  //var getString = '/api/'+entity+'?offset='+index*size+'&limit='+size;
-  var getString = '/test/'+filter;
+  var getString = '/api/'+entity+'?offset='+index*size+'&limit='+size;
   if (sortCol && entity !== 'living-systems') { getString += '&order='+(asc ? '+' : '-')+sortCol; }
-  //if (filter) { getString += '&filter='+filter; }
+  if (filter) { getString += '&filter='+filter; }
   request.get(getString)
   .type('json')
   .end(function(res) {

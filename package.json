@@ -43,7 +43,7 @@
     "react-avatar": "^0.4.0",
     "react-fontawesome": "0.0.3",
     "react-form-data": "^0.2.0",
-    "react-infinite-extended": "^0.3.3",
+    "react-infinite-extended": "^0.3.4",
     "react-intl": "^1.1.0",
     "react-select": "~0.4.3",
     "react-tap-event-plugin": "^0.1.4",
