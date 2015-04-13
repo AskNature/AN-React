@@ -149,7 +149,7 @@ var SidebarComponent = React.createClass({
 
                     <TabbedArea defaultActiveKey={0} key='20' justified>
                         <TabPane key='20' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
-                            {this.props.searchResultComponent ?  <this.props.searchResultComponent elements={this.props.searchResultElements} itemComponent={SimpleItem} itemHeight={this.props.searchResultHeight} /> : <Well>
+                            {this.props.searchResultComponent ?  <this.props.searchResultComponent  elements={this.props.searchResultElements} itemComponent={SimpleItem} itemHeight={this.props.searchResultHeight} /> : <Well>
                                 Query results & content clusters go in here
                             </Well>
                             }
@@ -161,7 +161,7 @@ var SidebarComponent = React.createClass({
                         </TabPane>
                         {this.props.loggedIn ? (
                         <TabPane key='40' eventKey={2} tab={<FontAwesome name='list' size='lg' fixedWidth />}>
-                            <Nav stacked>
+                            <Nav stacked onClick={this.props.onResultClick}>
                                 {
                                     listItems.map(function(item,i){
                                         return (

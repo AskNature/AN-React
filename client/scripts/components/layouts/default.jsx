@@ -57,6 +57,20 @@ var DefaultComponent = React.createClass({
         drawerOpen: !this.state.drawerOpen
       });
     },
+    handleSearchFocus: function(e){
+      this.setState({
+        drawerOpen: true
+      });
+    },
+    handleResultClick: function(e) {
+      var drawerSwitch;
+      if(window.innerWidth < 768) {
+        drawerSwitch = false;
+      } else {
+        drawerSwitch = true;
+      }
+      this.setState({drawerOpen: drawerSwitch});
+    },
     handleResize: function(e) {
       var drawerSwitch;
       if(window.innerWidth < 768) {
@@ -75,8 +89,9 @@ var DefaultComponent = React.createClass({
             <div>
 
 
-            <Navbar searchQuery={this.props.searchQuery} searchQueryChange={this.props.searchQueryChange} account={this.state.account} onDrawerToggleClick={this.handleDrawerToggleClick} accountActions={accountActions}  />
-            <Drawer open={this.state.drawerOpen} searchResultElements={this.props.searchResultElements} searchResultComponent={this.props.searchResultComponent} searchResultHeight={this.props.searchResultHeight} loggedIn={this.state.account.loggedIn} />
+            <Navbar searchQuery={this.props.searchQuery} searchQueryChange={this.props.searchQueryChange} account={this.state.account} onDrawerToggleClick={this.handleDrawerToggleClick}
+              onSearchFocus={this.handleSearchFocus} accountActions={accountActions}  />
+            <Drawer open={this.state.drawerOpen} searchResultElements={this.props.searchResultElements} searchResultComponent={this.props.searchResultComponent} searchResultHeight={this.props.searchResultHeight} loggedIn={this.state.account.loggedIn} onResultClick={this.handleResultClick} />
             <Detail narrow={this.state.drawerOpen} {...this.props}/>
 
             </div>
