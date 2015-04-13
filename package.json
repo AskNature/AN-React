@@ -49,6 +49,7 @@
     "react-tap-event-plugin": "^0.1.4",
     "react-widgets": "^2.3.1",
     "scribe-editor": "^1.2.11",
+    "sendgrid": "^1.6.1",
     "serve-favicon": "2.0.1",
     "slug": "^0.8.0",
     "superagent": "~0.21.0"
