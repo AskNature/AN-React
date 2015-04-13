@@ -125,14 +125,14 @@ var Template = React.createClass({
               <h6><strong>License</strong></h6>
                 {data.license ? (
                   <form>
-                    <Select selected={data.license.masterid} options={data.license.options} field='status' onRelationshipSet={this.props.onRelationshipSet} />
+                    <Select editable={this.props.editable} selected={data.license.masterid} options={data.license.options} field='status' onRelationshipSet={this.props.onRelationshipSet} />
                   </form>
                 ) : ''}
               </Col>
               <Col xs={12} sm={4}>
 
               <h6><strong>Original Image Attribution</strong></h6>
-              <p>
+                <h6 className='overflow-scroll'>
                 <TextArea
                 item={data.author}
                 store={this.props.store}
@@ -140,12 +140,13 @@ var Template = React.createClass({
                 fieldName={'author'}
                 editable={this.props.editable}
                 placeholder="Attribute this image (photographer/illustrator/owner/etc)" />
-              </p>
+            </h6>
             </Col>
             <Col xs={12} sm={4}>
 
               <h6><strong>Original Image URL</strong></h6>
               <h6 className='overflow-scroll'>
+                {this.props.editable ? (
                 <TextArea
                 item={data.source_url}
                 store={this.props.store}
@@ -153,6 +154,9 @@ var Template = React.createClass({
                 fieldName={'source_url'}
                 editable={this.props.editable}
                 placeholder="Enter the URL of the original image" />
+            ) : (
+              <a href={data.source_url} target='_blank'>{data.source_url}</a>
+            ) }
               </h6>
             </Col>
             </Well>
