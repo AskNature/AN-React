@@ -39,14 +39,17 @@ var RelationshipList = React.createClass({
               onRemove={this.onRemove}
               editable={this.props.editable}
               titleField={item[this.props.titleField]}
-              subtitleField={item[this.props.subtitleField]} />;
+              subtitleField={item[this.props.subtitleField]}
+              media={this.props.media}
+              thumbs={item} />;
             }, this) : ''
           }
             <RelationshipListItemInput
               editable={this.props.editable}
               fieldName={this.props.fieldName}
               field={this.props.field}
-              onAdd={this.onAdd} />
+              onAdd={this.onAdd}
+              media={this.props.media} />
 
       </div>
     );

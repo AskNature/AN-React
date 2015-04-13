@@ -112,7 +112,20 @@ var Template = React.createClass({
   	        <Grid>
 			        <Row>
 		            <Col xs={12}>
-		              <Gallery items={data} />
+                    <RelationshipList
+                      items={data.media}
+                      editable={this.props.editable}
+                      titleField='name'
+                      onAdd={this.props.onRelationshipAdd.bind(null, 'media')}
+                      onRemove={this.props.onRelationshipRemove.bind(null, 'media')}
+                      field={'media'}
+                      routeName={'media'}
+                      title={'Media'}
+                      fieldName={'Media'}
+                      media />
+
+                    <Gallery items={data} />
+
 	              </Col>
               </Row>
               <Row>

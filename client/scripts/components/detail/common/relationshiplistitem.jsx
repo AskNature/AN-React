@@ -16,8 +16,19 @@ MenuItem = require('react-bootstrap').MenuItem;
 
 var MiniHero = React.createClass({
   render: function() {
+    var thumburl;
+    if(this.props.media) {
+      if(this.props.thumburl) {
+        thumburl = this.props.thumburl;
+      } else {
+        thumburl = 'http://placehold.it/100x100';
+      }
+    }
     return (
       <div className='minihero'>
+        {this.props.media ? (
+          <img src={thumburl} width='100px' height='auto' />
+        ) : ''}
         {this.props.label ? (
           <h6 className='card-label'>{this.props.label}</h6>
         ) : ''}
@@ -113,10 +124,13 @@ var RelationshipListItem = React.createClass({
       title = 'Common Name';
       subTitle = this.props.item.taxon + ': ' + this.props.item.name;
     }
+    if (routeName === 'media') {
+      subTitle = this.props.item.description;
+    }
     return (
         <ButtonToolbar className='relationship-button'>
           <SplitButton
-            title={<MiniHero title={title} subtitle={subTitle} label={itemLabel}/>}
+            title={<MiniHero title={title} subtitle={subTitle} label={itemLabel} media={this.props.media} thumbs={this.props.thumbs} masterid={item.masterid}/>}
             onClick={this.clickHandler.bind(null,link)}
             pullright>
             <MenuItem eventKey="1" onClick={this.setFlag}><Glyphicon glyph='flag' /> Flag</MenuItem>

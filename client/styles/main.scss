@@ -363,6 +363,14 @@ Relationship Selector
     input {
       padding-left: 15px;
     }
+    .rw-popup ul li {
+      clear: both;
+      height: 100%;
+      img {
+        float: left;
+        margin: 1px 10px 1px -10px;
+      }
+    }
   }
   .btn {
     float: right;
@@ -456,7 +464,11 @@ h5.card-name {
       background: #fff;
       border-bottom-left-radius: 3px;
       border-top-left-radius: 3px;
-
+      img {
+        float: left;
+        margin-left: -15px;
+        margin-right: 10px;
+      }
     }
   }
   .dropdown-menu {

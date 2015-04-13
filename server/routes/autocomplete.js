@@ -20,6 +20,8 @@ var Context = require('../models/context.js');
 var Source = require('../models/source.js');
 var Researcher = require('../models/researcher.js');
 
+var Media = require('../models/media.js');
+
 var returnAutocomplete = function(model) {
     return function(req, res, next) {
 	var suggestions = model.findAutocomplete(req.query.query, req.query.count, function(result) {
@@ -43,6 +45,9 @@ var routes = function (app) {
 
   app.get('/api/v2/autocomplete/source', returnAutocomplete(Source));
   app.get('/api/v2/autocomplete/researcher', returnAutocomplete(Researcher));
+
+  app.get('/api/v2/autocomplete/media', returnAutocomplete(Media));
+
 
 };
 
