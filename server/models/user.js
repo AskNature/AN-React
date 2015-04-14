@@ -9,7 +9,8 @@ var fields = ['username', 'firstName', 'lastName', 'email', 'role', 'provider', 
 var Status = new Model('UserStatus',
   [
       'masterid',
-      'name'
+      'name',
+      'UpdateStrategy'
   ]
 );
 
@@ -18,7 +19,7 @@ var relationships = {
   model: Status,
   className: 'UserStatus',
   edge: 'out("HasStatus")',
-  select: true,
+  //select: true,
   options: ListOptions.UserStatus
   }
   };

@@ -16,7 +16,7 @@ var RestrictOptions = React.createClass({
         if(this.props.user.status[this.props.capability]) {
 	    return (this.props.component(this.props.options[this.props.capability]));
 	} else {
-	    return ({this.props.deniedComponent : this.props.deniedComponent : "You don't have permission to access this feature."});
+	    return ({this.props.deniedComponent : <this.props.deniedComponent /> : "You don't have permission to access this feature."});
 	}
     }
 });

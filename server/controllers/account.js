@@ -9,7 +9,8 @@ var settings = require('../config/env/default'),
 db = require('../config/database').db,
 path = require('path'),
 crypto = require('crypto'),
-sendgrid = require('sendgrid');
+sendgrid = require('sendgrid'),
+User=require('../models/user.js');
 
 var login = function(req, res) {
     if(req.isAuthenticated()) { res.redirect('/') }
@@ -120,14 +121,18 @@ var resetAccount = function(req, res, next) {
 
 var returnAccount = function(req, res, next) {
     if(req.user) {
-	res.status(200).json({
-	    username: req.user.username,
-	    email: req.user.email,
-	    firstName: req.user.firstName,
-	    lastName: req.user.lastName,
-	    password: req.user.password,
-	    role: req.user.role,
-	    loggedIn: true
+
+	User.getWithRelationships(req.user.id, function(u) {
+	    res.status(200).json({
+                username: req.user.username,
+                email: req.user.email,
+                firstName: req.user.firstName,
+                lastName: req.user.lastName,
+		password: req.user.password,
+		role: req.user.role,
+                loggedIn: true,
+		status: u.status
+            });
 	});
     } else {
 	res.status(200).json({loggedIn: false});
