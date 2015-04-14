@@ -20,9 +20,8 @@ var taskConfig = function(grunt) {
         },
         dist: {
             options: {
-                browsers: ['last 2 versions', 'ie 8', 'ie 9', 'safari'],
-                map: true,
-                diff: true,
+                browsers: ['last 2 versions', 'ie 8', 'ie 9'],
+                map: true
             },
             files: [{
                 expand: true,
