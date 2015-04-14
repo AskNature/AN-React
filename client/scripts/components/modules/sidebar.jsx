@@ -134,11 +134,6 @@ var listItems = [
     },
 ];
 
-var SimpleItem = React.createClass({
-    render: function() {
-        return (<b>{this.props.data.name}</b>);
-    }
-});
 
 var SidebarComponent = React.createClass({
     render: function() {
@@ -148,8 +143,8 @@ var SidebarComponent = React.createClass({
                 <Nav className='drawer' key='10'>
 
                     <TabbedArea defaultActiveKey={0} key='20' justified>
-                        <TabPane key='20' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth />}>
-                            {this.props.searchResultComponent ?  <this.props.searchResultComponent  elements={this.props.searchResultElements} itemComponent={SimpleItem} itemHeight={this.props.searchResultHeight} /> : <Well>
+                        <TabPane key='20' eventKey={0} tab={<FontAwesome name='search' size='lg' fixedWidth onClick={this.props.onResultClick}/>}>
+                            {this.props.searchResultComponent ?  <this.props.searchResultComponent  elements={this.props.searchResultElements} itemHeight={this.props.searchResultHeight} /> : <Well>
                                 Query results & content clusters go in here
                             </Well>
                             }

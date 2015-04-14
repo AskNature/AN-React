@@ -105,7 +105,7 @@ var Infinite = React.createClass({
         }, this);
         this.setState({elements: newElements, data: store.get(), index: index == -1 ? 0 : index});
 	var that = this;
-	if(index == -1) {
+	if(index === -1) {
 	    setTimeout(function() { routeActions.setRoute("/infinite_demo/"+that.props.query+'/'+newElements[0].props.data.masterid)}, 300);
 	}
     },
@@ -116,7 +116,7 @@ var Infinite = React.createClass({
         var i = 0;
 	var that = this;
         var sidebarComponentList = _.map(this.state.data, function(d) {
-	    return <SidebarComponent current={that.state.index} data={d} num={i++} onClickHandler={function(num) { that.setState({index: num}); }} />
+	    return <SidebarComponent current={that.state.index} data={d} num={i++} onClickHandler={function(num) { that.setState({index: num});}} />;
 	});
         return (
             <DefaultLayout searchResultComponent={InfiniteList} searchResultElements={sidebarComponentList} searchResultHeight={100} searchQuery={this.props.query} searchQueryChange={function(t) {if(t.target.value) { routeActions.setRoute('/infinite_demo/'+t.target.value)}}}>

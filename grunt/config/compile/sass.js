@@ -19,10 +19,15 @@ var taskConfig = function(grunt) {
                 '<%= yeogurt.tmp %>/styles/main.css': '<%= yeogurt.client %>/styles/main.{scss,sass}'
             }
         },
+
+        /**
+         * outputStyle was originally set to 'compressed', but that setting prevented grunt-autoprefixer from working later in the build. The change to 'nested' lets grunt-autoprefixer do its magic, but a cleaner and more performant solution should be identified.
+         */
+
         dist: {
             options: {
                 precision: 10,
-                outputStyle: 'compressed',
+                outputStyle: 'nested',
                 sourceMap: true,
                 includePaths: [
                     '<%= yeogurt.client %>/styles/'

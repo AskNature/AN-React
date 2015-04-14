@@ -25,7 +25,7 @@ var Template = React.createClass({
     }
     var secondaryKey = 'name';
     var descriptionKey = 'special_text';
-    var avatar = data.custom_avatar ? data.custom_avatar : 'http://www.asknature.org/images/uploads/user/'+data.masterid+'/avatar/lg_avatar.jpg';
+    var avatar = data.custom_avatar && data.custom_avatar !== 'null' ? data.custom_avatar : 'http://www.asknature.org/images/uploads/user/'+data.masterid+'/avatar/lg_avatar.jpg';
     return (
       /* jshint ignore:start */
       <div>

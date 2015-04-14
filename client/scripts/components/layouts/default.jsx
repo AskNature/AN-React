@@ -62,7 +62,9 @@ var DefaultComponent = React.createClass({
         drawerOpen: true
       });
     },
+    // This needs to find a new home where it can get events from sidebar drawer clicks:
     handleResultClick: function(e) {
+      e.persist();
       var drawerSwitch;
       if(window.innerWidth < 768) {
         drawerSwitch = false;
@@ -84,6 +86,7 @@ var DefaultComponent = React.createClass({
     render: function() {
       console.log('Account:');
       console.log(this.state.account);
+
         return (
             /* jshint ignore:start */
             <div>

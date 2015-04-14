@@ -98,8 +98,6 @@ label {
 .flat-button .btn, .flat-button.btn {
   border: 0;
   box-shadow: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
 }
 
 [contentEditable] {
@@ -403,8 +401,6 @@ Relationship Selector
     margin-right: -5px;
     border: 0;
     box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     background: none;
   }
 }
