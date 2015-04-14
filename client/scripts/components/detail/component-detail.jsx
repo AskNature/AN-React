@@ -175,13 +175,13 @@ var DetailComponent = React.createClass({
       if (!this.state.loaded) {
         style = {position: 'relative', WebkitFilter: 'blur(0px) saturate(2)', height: this.state.windowHeight - 62, overflow: 'hidden'};
         loader.push(
-          <Loader windowHeight={this.state.windowHeight - 62} error={this.state.error ? true : false} />
+          <Loader windowHeight={this.state.windowHeight - 22} error={this.state.error ? true : false} />
         );
       }
         return (
             <DefaultLayout>
                 {loader}
-                <div style={style}>
+                <div style={style} className='detail-single'>
                 <Template
                     masterid={this.props.masterid !== 'new' ? this.props.masterid : null}
                     type={this.props.type}

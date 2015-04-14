@@ -38,6 +38,13 @@ var relationships = {
       model: Media,
       className: 'Media',
      edge: 'out("HasMedia")'
+      },
+      'status': {
+        model: Status,
+        className: 'UserStatus',
+        edge: 'out("HasStatus")',
+        select: true,
+        options: ListOptions.UserStatus
       }
 
 };

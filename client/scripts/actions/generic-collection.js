@@ -59,9 +59,9 @@ var getList = function(callback) {
 var getListPaginated = function(entity, index, size, sortCol, asc, filter, callback) {
   var self = this;
   //var getString = '/api/'+entity+'?offset='+index*size+'&limit='+size;
-  var getString = '/test';
+  var getString = '/test/'+filter;
   if (sortCol && entity !== 'living-systems') { getString += '&order='+(asc ? '+' : '-')+sortCol; }
-  if (filter) { getString += '&filter='+filter; }
+  //if (filter) { getString += '&filter='+filter; }
   request.get(getString)
   .type('json')
   .end(function(res) {

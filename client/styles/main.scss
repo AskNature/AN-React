@@ -3,8 +3,12 @@
 // Box sizing partial styles:
 // Apply a natural box layout model to all elements
 
-$background-color: #f9f9f9;
-$primary-color: #b5bc4f;
+$white-color: #ffffff;
+$background-color: #dddddd;
+$paper-color: #f9f9f9;
+$primary-color: #9EAB0F;
+$light-text: #cccccc;
+$mid-text: #aaaaaa;
 $fa-font-path: '../bower_components/components-font-awesome/fonts';
 @import url("./gibson.css");
 
@@ -35,8 +39,10 @@ body {
   font-family: 'Gibson', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 200;
-  background: $primary-color;
+  background: $background-color;
+  overflow-x: hidden;
 }
+
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 100;
@@ -49,8 +55,13 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.5s ease;
 }
 
-.content, .panel {
+.content {
   background: $background-color;
+}
+
+.panel {
+  box-shadow: 1px 6px 15px rgba(0,0,0,0.08);
+  border-radius: 3px;
 }
 
 // Temp color tweaks
@@ -87,8 +98,6 @@ label {
 .flat-button .btn, .flat-button.btn {
   border: 0;
   box-shadow: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
 }
 
 [contentEditable] {
@@ -106,6 +115,31 @@ label {
   display: block;
   overflow: scroll;
 }
+
+/* ==========================================================================
+Creator Mast
+========================================================================== */
+
+.panel.creator-mast {
+  background: $paper-color;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+Infinite List
+========================================================================== */
+
+.infinite-list {
+  background: $background-color;
+  .infinite-list-item {
+    background: $paper-color;
+    margin: 20px 10px;
+  }
+  div {
+    transition: none;
+  }
+}
+
 
 /* ==========================================================================
 Image Fade
@@ -137,7 +171,7 @@ Loader
   top: 0;
   left: 0;
   width: 100%;
-  background: $primary-color;
+  background: $background-color;
   opacity: 0.8;
   z-index: 50;
   &.error {
@@ -205,13 +239,25 @@ Top Navbar
         position: absolute;
         left: 130px;
         right: 0;
+        .input-group {
+          width: 100%;
+          .input-group-addon {
+            width: 20px;
+          }
+        }
         .form-control::-webkit-input-placeholder {
           color: rgba(255,255,255,0.8);
         }
         .form-control[type=text] {
           box-shadow: inset 0 -1px 0 rgba(255,255,255,0.8);
-          -webkit-box-shadow: inset 0 -1px 0 rgba(255,255,255,0.8);
-          -moz-box-shadow: inset 0 -1px 0 rgba(255,255,255,0.8);
+          font-weight: bold;
+          padding-left: 10px;
+          &:focus {
+            background: rgba(0,0,0,0.3);
+            box-shadow: none;
+            border-radius: 3px;
+          }
+
         }
       }
     }
@@ -248,7 +294,7 @@ nav.drawer {
   bottom:0;
   position: fixed;
   width: 300px;
-  background: #eee;
+  background: $background-color;
 
   overflow-y: scroll;
 
@@ -260,13 +306,13 @@ nav.drawer {
     li a {
       color: #444;
       &:hover {
-        background: $background-color;
+        background: $paper-color;
       }
       .fa {
         margin-top: 3px;
       }
       &.active {
-        background: $background-color;
+        background: $paper-color;
       }
     }
   }
@@ -288,10 +334,34 @@ nav.drawer-leave.drawer-leave-active {
   left: 0;
 }
 
-.default.detail {
+.well.card {
+  background: transparent;
+  cursor: pointer;
+  border-bottom: dotted 1px rgba(0, 0, 0, 0.3);
+  margin-bottom: 0;
+  padding-left: 20px;
+  &:hover, &.active {
+    background: $paper-color;
+  }
+  h6.card-label {
+    color: $mid-text;
+  }
+}
+
+
+/* ==========================================================================
+Detail Component
+========================================================================== */
+
+.default {
   position: absolute;
   left: 0;
   right: 0;
+  background: $background-color;
+  .detail-single {
+    margin: 20px 10px;
+    background: $paper-color;
+  }
 }
 
 /* ==========================================================================
@@ -317,14 +387,20 @@ Relationship Selector
     input {
       padding-left: 15px;
     }
+    .rw-popup ul li {
+      clear: both;
+      height: 100%;
+      img {
+        float: left;
+        margin: 1px 10px 1px -10px;
+      }
+    }
   }
   .btn {
     float: right;
     margin-right: -5px;
     border: 0;
     box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     background: none;
   }
 }
@@ -332,10 +408,17 @@ Relationship Selector
 Griddle Admin Lists
 ========================================================================== */
 
+.griddle-card {
+  padding: 10px;
+  background: $paper-color;
+}
 .griddle {
   td {
     input[type="checkbox"] {
       margin-left: 10px;
+    }
+    h5 {
+      font-weight: 800;
     }
   }
 }
@@ -343,6 +426,20 @@ Griddle Admin Lists
 /* ==========================================================================
 Mini hero (relationship list editor)
 ========================================================================== */
+
+
+h6.card-label {
+  color: $light-text;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-bottom: 0;
+}
+
+h5.card-name {
+  margin-top: 9px;
+  overflow: hidden;
+  white-space: normal;
+}
 
 .relationship-button {
   .btn-group {
@@ -379,7 +476,11 @@ Mini hero (relationship list editor)
       background: #fff;
       border-bottom-left-radius: 3px;
       border-top-left-radius: 3px;
-
+      img {
+        float: left;
+        margin-left: -15px;
+        margin-right: 10px;
+      }
     }
   }
   .dropdown-menu {
@@ -518,24 +619,24 @@ Hero
 
 
 @media (max-width: 768px) {
-  nav.drawer {
-    z-index: 1;
+  .default.detail {
+    transform: translate(300px,0);
+    left: 0;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: $background-color;
+      opacity: 0.8;
+      transition: opacity 0.5s ease;
+    }
   }
-
-nav.drawer-enter {
-    left: -300px;
-  }
-
-  nav.drawer-enter.drawer-enter-active {
-    left: 0px;
-  }
-
-  nav.drawer-leave {
-    left: 0px;
-  }
-
-  nav.drawer-leave.drawer-leave-active {
-    left: -300px;
+  .nav-justified > li {
+    display: table-cell;
+    width: 1%;
   }
 }
 @media (min-width: 768px) {
@@ -647,12 +748,4 @@ nav.drawer-enter {
 
 .autocomplete-dropdown:hover {
     background-color: rgb(238, 238, 238);
-}
-
-/* ==========================================================================
- Search list (infinite scroll)
-========================================================================== */
-
-.infinite-list div {
-    transition: none;
 }

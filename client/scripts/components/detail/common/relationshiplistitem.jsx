@@ -16,12 +16,23 @@ MenuItem = require('react-bootstrap').MenuItem;
 
 var MiniHero = React.createClass({
   render: function() {
+    var thumburl;
+    if(this.props.media) {
+      if(this.props.thumburl) {
+        thumburl = this.props.thumburl;
+      } else {
+        thumburl = 'http://placehold.it/100x100';
+      }
+    }
     return (
       <div className='minihero'>
-        {this.props.label ? (
-          <h6 style={{color: '#ccc', textTransform:'uppercase', fontWeight: '800', marginBottom: 0}}>{this.props.label}</h6>
+        {this.props.media ? (
+          <img src={thumburl} width='100px' height='auto' />
         ) : ''}
-        <h5 style={{marginTop: '9px', overflow:'hidden', whiteSpace:'normal'}}>
+        {this.props.label ? (
+          <h6 className='card-label'>{this.props.label}</h6>
+        ) : ''}
+        <h5 className='card-name'>
             {this.props.title}
           <br/>
           <small>{this.props.subtitle}</small>
@@ -113,10 +124,13 @@ var RelationshipListItem = React.createClass({
       title = 'Common Name';
       subTitle = this.props.item.taxon + ': ' + this.props.item.name;
     }
+    if (routeName === 'media') {
+      subTitle = this.props.item.description;
+    }
     return (
         <ButtonToolbar className='relationship-button'>
           <SplitButton
-            title={<MiniHero title={title} subtitle={subTitle} label={itemLabel}/>}
+            title={<MiniHero title={title} subtitle={subTitle} label={itemLabel} media={this.props.media} thumbs={this.props.item} masterid={item.masterid}/>}
             onClick={this.clickHandler.bind(null,link)}
             pullright>
             <MenuItem eventKey="1" onClick={this.setFlag}><Glyphicon glyph='flag' /> Flag</MenuItem>

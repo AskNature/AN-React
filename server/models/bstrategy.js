@@ -19,7 +19,8 @@ var Media = new Model('Media',
   [
     'filename',
     'name',
-    'entity'
+    'entity',
+    'description'
   ]
 );
 var InspiredSolution = new Model('InspiredSolutions',
@@ -101,8 +102,8 @@ var relationships = {
     },
     'experts': {
 	model: Expert,
-	className: 'Expert',
-	edge: 'in("StudiedBy")'
+	className: 'Experts',
+	edge: 'out("StudiedBy")'
     },
     'collectors': {
 	model: User,
@@ -111,7 +112,7 @@ var relationships = {
     },
     'media': {
 	model: Media,
-	className: 'Media',
+	className: 'Image',
 	edge: 'out("HasMedia")'
     },
     'added_by': {

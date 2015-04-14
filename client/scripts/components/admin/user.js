@@ -11,7 +11,11 @@ var List = {
       {columnName:'lastName', displayName:'Last Name', type:'text'},
       {columnName:'role', displayName:'Role', type:'text'},
       {columnName:'provider', displayName:'Provider', type:'text'}
-    ]
+    ],
+    'initialSort' : [
+      'masterid',
+      true
+    ],
 };
 
 module.exports = List;

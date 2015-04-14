@@ -19,13 +19,21 @@ var Select = require('react-select');
 
 var Template = React.createClass({
 
+  // This is causing relationshiplist changes to be hidden until update button is clicked:
+  /* shouldComponentUpdate: function(nextProps, nextState) {
+    if(nextProps.masterid !== this.props.masterid || nextProps.editable !== this.props.editable || nextProps.loaded !== this.props.loaded) {
+      return true;
+    } else {
+      return false;
+    }
+  },*/
   render: function() {
     var routeNameSingle = 'b.strategy';
     var entityName = 'Biological Strategies';
     var data = this.props.data;
     var primaryKey = 'name';
     var secondaryTitle = data.living_systems[0] ? data.living_systems[0].name : '';
-    if(data.living_systems[1]){
+    if(data.living_systems.length > 1){
       secondaryTitle += ' & others';
     }
     var primaryTitle = data[primaryKey];
@@ -106,7 +114,22 @@ var Template = React.createClass({
   	        <Grid>
 			        <Row>
 		            <Col xs={12}>
-		              <Gallery items={data} />
+
+                    <Gallery items={data} />
+                      {this.props.editable ? (
+                        <RelationshipList
+                          items={data.media}
+                          editable={this.props.editable}
+                          titleField='name'
+                          onAdd={this.props.onRelationshipAdd.bind(null, 'media')}
+                          onRemove={this.props.onRelationshipRemove.bind(null, 'media')}
+                          field={'media'}
+                          routeName={'media'}
+                          title={'Media'}
+                          fieldName={'Media'}
+                          media />
+                      ) : '' }
+
 	              </Col>
               </Row>
               <Row>
@@ -226,7 +249,7 @@ var Template = React.createClass({
                     field={'researcher'}
                     routeName={'researcher'}
                     title={'Researched By'}
-                    fieldName={'Researched By'}/>
+                    fieldName={'Researched By'} />
           			</Col>
         			</Row>
 			    </Grid>

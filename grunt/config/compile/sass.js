@@ -19,6 +19,7 @@ var taskConfig = function(grunt) {
                 '<%= yeogurt.tmp %>/styles/main.css': '<%= yeogurt.client %>/styles/main.{scss,sass}'
             }
         },
+
         dist: {
             options: {
                 precision: 10,
