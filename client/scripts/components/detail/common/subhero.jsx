@@ -7,6 +7,7 @@ var React = require('react'),
 
 TextArea = require('./textarea.jsx'),
 TextField = require('../../modules/textfield.jsx'),
+RestrictOptions = require('../../modules/restrictoptions.jsx'),
 
 Grid = require('react-bootstrap').Grid,
 Row = require('react-bootstrap').Row,
@@ -69,7 +70,7 @@ var SubHero = React.createClass({
           </Col>
           <Col xs={12} sm={4}>
             <Nav justified activeKey={0} bsStyle='pills' style={{"margin-top": "11.5px"}}>
-              {<RestrictOptions user={this.props.user.status} options={"EditStrategy": {'disabled': true, 'eventKey':1, onClick: this.props.toggleEditable}}>}
+              {/*<RestrictOptions user={this.props.user.status} options={{"EditStrategy": {'disabled': true, 'eventKey':1, onClick: this.props.toggleEditable}}}>*/}
 	      <NavItem
                 eventKey={1}
                 onClick={this.props.toggleEditable}
@@ -78,7 +79,7 @@ var SubHero = React.createClass({
                 } >
                 <Glyphicon glyph="pencil" />
               </NavItem>
-	      {</Restrict>}
+	      {/*</RestrictOptions>*/}
               <NavItem eventKey={3}>
                 <Glyphicon glyph="share-alt" />
               </NavItem>
