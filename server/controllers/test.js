@@ -5,6 +5,8 @@ var Strategy = require('../models/bstrategy');
 
 var Model = require('../models/model.js');
 
+var User = require('../models/account.js');
+
 var Product = Model('InspiredSolutions', ['name', 'headline']);
 
 var relationships = {'InspiredSolutions':'in("InspiredBy")'};
@@ -79,7 +81,14 @@ var testControllerFindQuery = function(req, res, next) {
     });
 };
 
+var testUser = function(req, res, next) {
+    User.findWithRelationships({id: req.params.id}, function(result) {
+	res.json(result);
+    });
+};
+
 module.exports = {
     testController: testControllerFind,
-    testControllerQuery: testControllerFindQuery
+    testControllerQuery: testControllerFindQuery,
+    testUser: testUser
 };

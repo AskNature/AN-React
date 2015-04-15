@@ -9,7 +9,7 @@ var settings = require('../config/env/default'),
 db = require('../config/database').db,
 path = require('path'),
 crypto = require('crypto'),
-sendgrid = require('sendgrid'),
+sendgrid = require('../config/sendgrid').client,
 User=require('../models/user.js');
 
 var login = function(req, res) {
@@ -121,7 +121,6 @@ var resetAccount = function(req, res, next) {
 
 var returnAccount = function(req, res, next) {
     if(req.user) {
-
 	User.getWithRelationships(req.user.id, function(u) {
 	    res.status(200).json({
                 username: req.user.username,
