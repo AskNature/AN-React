@@ -49,8 +49,12 @@ var NavbarComponent = React.createClass({
                   <Nav left navbar-header className="pull-left navbar-header">
                      <Button className="flat-button drawer-toggle" onClick={this.props.onDrawerToggleClick} bsSize="large"><FontAwesome name='bars' size='lg' fixedWidth /></Button>
                   <Link className="navbar-brand" url="/">AN</Link>
-                  <form role="search" className='navbar-form navbar-left'>
-                    <Input addonBefore={<FontAwesome name='search' size='lg' fixedWidth />} type="text" placeholder="Search AskNature" value={this.props.searchQuery} onFocus={this.props.onSearchFocus} onChange={this.props.searchQueryChange}/>
+                  <form role="search" className='navbar-form navbar-left search'>
+
+                    <Input className='search-input' type="text" placeholder='Search AskNature' value={this.props.searchQuery} onFocus={this.props.onSearchFocus} onChange={this.props.searchQueryChange}/>
+                      <label className='search-label'>
+                        <FontAwesome name='search' size='lg' fixedWidth />
+                      </label>
                   </form>
                 </Nav>
               {/* End temp button for left offcanvas menu */}

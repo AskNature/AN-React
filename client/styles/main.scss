@@ -222,19 +222,23 @@ Top Navbar
       position: relative;
       float:left;
       padding: 9px 15px;
-      margin: 15px 0 15px 15px;
+      margin: 10px 0 15px 0;
       background: none;
       border: none;
     }
     .navbar-brand {
     }
-    .navbar-form {
+    .navbar-form.search {
       padding-top: 0;
       padding-bottom: 0;
       float: left;
       border: none;
       box-shadow: none;
-      -webkit-box-shadow: none;
+      label.search-label {
+        color: $white-color;
+        margin: 5px 0 0 15px;
+        z-index: 10;
+      }
       .form-group {
         position: absolute;
         left: 130px;
@@ -249,13 +253,15 @@ Top Navbar
           color: rgba(255,255,255,0.8);
         }
         .form-control[type=text] {
-          box-shadow: inset 0 -1px 0 rgba(255,255,255,0.8);
+          box-shadow: none;
           font-weight: bold;
-          padding-left: 10px;
+          padding-left: 40px;
+          background: rgba(255,255,255,0.15);
+          box-shadow: none;
+          border-radius: 3px;
+          transition: opacity 0.5s;
           &:focus {
-            background: rgba(0,0,0,0.3);
-            box-shadow: none;
-            border-radius: 3px;
+            background: rgba(0,0,0,0.15);
           }
 
         }
