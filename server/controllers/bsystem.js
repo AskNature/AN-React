@@ -54,7 +54,7 @@ var returnList1 = function(req, res, next) {
 
   bsystemCache.getOrElse('count', Cached.deferred(function(done) {
       console.log('cache miss');
-      db.select('count(*)').from('LivingSystem')
+      db.select('count(*)').from('index:LivingSystem.masterid')
       .scalar().then(function(count) {
 	  done(null, count); // return Cached.deferred
       }).done();
