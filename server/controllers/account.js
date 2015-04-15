@@ -1,60 +1,84 @@
 /**
-* Account Controller - receives actions via the router
-* and interacts with the session store
-*/
+ * Account Controller - receives actions via the router
+ * and interacts with the session store
+ */
 
 'use strict';
 
 var settings = require('../config/env/default'),
-db = require('../config/database').db,
-path = require('path'),
-crypto = require('crypto'),
-sendgrid = require('sendgrid'),
-User=require('../models/user.js');
+    db = require('../config/database').db,
+    path = require('path'),
+    crypto = require('crypto'),
+    sendgrid = require('sendgrid'),
+    User = require('../models/account.js');
 
 var login = function(req, res) {
-    if(req.isAuthenticated()) { res.redirect('/') }
+    if (req.isAuthenticated()) {
+        res.redirect('/')
+    }
     // Render index.html to allow application to handle routing
-    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
+    res.sendFile(path.join(settings.staticAssets, '/index.html'), {
+        root: settings.root
+    });
 };
 
 var signup = function(req, res) {
     // Render index.html to allow application to handle routing
-    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
+    res.sendFile(path.join(settings.staticAssets, '/index.html'), {
+        root: settings.root
+    });
 };
 
 var editSettings = function(req, res) {
-  // Render index.html to allow application to handle routing
-    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
+    // Render index.html to allow application to handle routing
+    res.sendFile(path.join(settings.staticAssets, '/index.html'), {
+        root: settings.root
+    });
 };
 
 var forgot = function(req, res) {
-    if(req.isAuthenticated()) { res.redirect('/') }
+    if (req.isAuthenticated()) {
+        res.redirect('/')
+    }
     // Render index.html to allow application to handle routing
-    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
+    res.sendFile(path.join(settings.staticAssets, '/index.html'), {
+        root: settings.root
+    });
 };
 
 var reset = function(req, res) {
-    if(req.isAuthenticated()) { res.redirect('/') }
+    if (req.isAuthenticated()) {
+        res.redirect('/')
+    }
     // Render index.htmlto allow application to handle routing
-    res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
+    res.sendFile(path.join(settings.staticAssets, '/index.html'), {
+        root: settings.root
+    });
 };
 
 var verify = function(req, res) {
-    db.select().from('PassportUser').where({verified: false, verifyToken: req.params.token}).limit(1).one().then(function(user) {
-        if(user) {
-            db.update('PassportUser').set({verified: true, verifyToken: ''}).where({id: user.id}).scalar().then(function(total) {
-		if(!req.isAuthenticated()) {
-		    req.login(user, function(err) {
-			if(!err) {
-			    res.redirect('/settings');
-			} else {
-			    res.redirect('/');
-			}
-		    });
-		} else {
-		    res.redirect('/settings');
-		}
+    db.select().from('PassportUser').where({
+        verified: false,
+        verifyToken: req.params.token
+    }).limit(1).one().then(function(user) {
+        if (user) {
+            db.update('PassportUser').set({
+                verified: true,
+                verifyToken: ''
+            }).where({
+                id: user.id
+            }).scalar().then(function(total) {
+                if (!req.isAuthenticated()) {
+                    req.login(user, function(err) {
+                        if (!err) {
+                            res.redirect('/settings');
+                        } else {
+                            res.redirect('/');
+                        }
+                    });
+                } else {
+                    res.redirect('/settings');
+                }
             });
         } else {
             res.redirect('/');
@@ -69,85 +93,109 @@ var logout = function(req, res, next) {
 };
 
 var forgotAccount = function(req, res, next) {
-    if (req.isAuthenticated()) { res.status(403).send('You\'re already logged in to an account'); } // user already logged in
-    db.select().from('PassportUser').where({email: req.body.email}).limit(1).one().then(function(user) {
-	if(user) {
-	    crypto.randomBytes(20, function(err, buf) {
-		var token = buf.toString('hex');
-		console.log(JSON.stringify(user));
-		db.update('PassportUser').set({passwordReset: true, passwordToken: token})
-		    .where({id: user.id}).scalar().then(function(total) {
-			console.log("generated reset token for " + total + " user.");
-			console.log("User: " + user.email + ", Token: " + token);
-			var email = {
-			    from: "support@asknatu.re",
-			    to: user.email,
-			    subject: "AskNatu.re Password Reset",
-			    text: "http://asknatu.re/reset/" + token,
-			    html: "<a href=\"http://asknatu.re/reset/" + token + "\">Reset password</a>"
-			};
-			sendgrid.sendMail(email, function(err, info) {
-			    if(err) {
-				console.log("sendgrid error: " + err);
-				res.status(500).send("Sendgrid error");
-			    } else {
-				console.log("Reset message sent");
-				res.status(200).send();
-			    }
-			});
-		});
-	    });
-	} else {
-	    // user doesn't exist in the database
-	    res.status(403).send("User with that address doesn't exist");
-	}
+    if (req.isAuthenticated()) {
+        res.status(403).send('You\'re already logged in to an account');
+    } // user already logged in
+    db.select().from('PassportUser').where({
+        email: req.body.email
+    }).limit(1).one().then(function(user) {
+        if (user) {
+            crypto.randomBytes(20, function(err, buf) {
+                var token = buf.toString('hex');
+                console.log(JSON.stringify(user));
+                db.update('PassportUser').set({
+                        passwordReset: true,
+                        passwordToken: token
+                    })
+                    .where({
+                        id: user.id
+                    }).scalar().then(function(total) {
+                        console.log("generated reset token for " + total + " user.");
+                        console.log("User: " + user.email + ", Token: " + token);
+                        var email = {
+                            from: "support@asknatu.re",
+                            to: user.email,
+                            subject: "AskNatu.re Password Reset",
+                            text: "http://asknatu.re/reset/" + token,
+                            html: "<a href=\"http://asknatu.re/reset/" + token + "\">Reset password</a>"
+                        };
+                        sendgrid.sendMail(email, function(err, info) {
+                            if (err) {
+                                console.log("sendgrid error: " + err);
+                                res.status(500).send("Sendgrid error");
+                            } else {
+                                console.log("Reset message sent");
+                                res.status(200).send();
+                            }
+                        });
+                    });
+            });
+        } else {
+            // user doesn't exist in the database
+            res.status(403).send("User with that address doesn't exist");
+        }
     });
 };
 
 var resetAccount = function(req, res, next) {
-    if(req.isAuthenticated()) { res.status(403).send("You're already logged in to an account"); }
+    if (req.isAuthenticated()) {
+        res.status(403).send("You're already logged in to an account");
+    }
     console.log(req.body.token);
-    db.select().from('PassportUser').where({passwordReset: true, passwordToken: req.body.token}).limit(1).one().then(function(user) {
-	if(user) {
-	    db.update('PassportUser').set({passwordReset: false, passwordToken: '', password: req.body.password}).where({id: user.id}).scalar().then(function(total) {
-		console.log("reset password");
-		res.status(200).send();
-	    });
-	} else {
-	    res.status(403).send("User with that reset token doesn't exist");
-	}
+    db.select().from('PassportUser').where({
+        passwordReset: true,
+        passwordToken: req.body.token
+    }).limit(1).one().then(function(user) {
+        if (user) {
+            db.update('PassportUser').set({
+                passwordReset: false,
+                passwordToken: '',
+                password: req.body.password
+            }).where({
+                id: user.id
+            }).scalar().then(function(total) {
+                console.log("reset password");
+                res.status(200).send();
+            });
+        } else {
+            res.status(403).send("User with that reset token doesn't exist");
+        }
     });
 };
 
 var returnAccount = function(req, res, next) {
-    if(req.user) {
+    if (req.user) {
 
-	User.getWithRelationships(req.user.id, function(u) {
-	    res.status(200).json({
+        User.getWithRelationships(req.user.id, function(u) {
+            res.status(200).json({
                 username: req.user.username,
                 email: req.user.email,
                 firstName: req.user.firstName,
                 lastName: req.user.lastName,
-		password: req.user.password,
-		role: req.user.role,
+                password: req.user.password,
+                role: req.user.role,
                 loggedIn: true,
-		status: u.status
+                status: u.status
             });
-	});
+        });
     } else {
-	res.status(200).json({loggedIn: false});
+        res.status(200).json({
+            loggedIn: false
+        });
     }
 };
 
 var updateAccount = function(req, res, next) {
-    if(req.user) {
-	db.update('PassportUser').set(req.body)
-	    .where({id:req.user.id}).scalar().then(function() {
-		console.log("user updated");
+    if (req.user) {
+        db.update('PassportUser').set(req.body)
+            .where({
+                id: req.user.id
+            }).scalar().then(function() {
+                console.log("user updated");
             });
-	res.status(200).send(req.body);
+        res.status(200).send(req.body);
     } else {
-	res.status(403).send("You're not logged in!");
+        res.status(403).send("You're not logged in!");
     }
 };
 
@@ -156,29 +204,31 @@ var createAccount = function(req, res, next) {
 
     var conflict = false;
 
-    db.select('count(*)').from('PassportUser').where({email: req.body.email}).scalar().then(function(count) {
-	console.log(JSON.stringify(count));
-	if(count > 0) {
-	    return res.status(400).send("email taken");
-	} else {
-	    var token = '';
-	    crypto.randomBytes(20, function(err, buf) {
+    db.select('count(*)').from('PassportUser').where({
+        email: req.body.email
+    }).scalar().then(function(count) {
+        console.log(JSON.stringify(count));
+        if (count > 0) {
+            return res.status(400).send("email taken");
+        } else {
+            var token = '';
+            crypto.randomBytes(20, function(err, buf) {
                 var token = buf.toString('hex');
-		db.insert().into('PassportUser')
-		    .set({
-			id: req.body.email,
-			username: name,
-			firstName: '',
-			lastName: '',
-			email: req.body.email,
-			provider: "Local",
-			role: "user",
-			password: req.body.password,
-			verified: false,
-			verifyToken: token
-		    }).one().then(function(user) {
-			console.log("user created");
-			var email = {
+                db.insert().into('PassportUser')
+                    .set({
+                        id: req.body.email,
+                        username: name,
+                        firstName: '',
+                        lastName: '',
+                        email: req.body.email,
+                        provider: "Local",
+                        role: "user",
+                        password: req.body.password,
+                        verified: false,
+                        verifyToken: token
+                    }).one().then(function(user) {
+                        console.log("user created");
+                        var email = {
                             from: "support@asknatu.re",
                             to: user.email,
                             subject: "AskNatu.re Email Verification",
@@ -186,17 +236,21 @@ var createAccount = function(req, res, next) {
                             html: "<a href=\"http://asknatu.re/verify/" + token + "\">Verify account</a>"
                         };
 
-			sendgrid.sendMail(email, function(sgerr, info) {
-			    if(sgerr) { return res.status(500).send("Sendgrid error"); }
+                        sendgrid.sendMail(email, function(sgerr, info) {
+                            if (sgerr) {
+                                return res.status(500).send("Sendgrid error");
+                            }
                             req.login(user, function(err) {
-				if(err) { return res.status(500).send("failure"); }
-				return res.status(201).send("success");
+                                if (err) {
+                                    return res.status(500).send("failure");
+                                }
+                                return res.status(201).send("success");
                             });
-			});
+                        });
 
-		    });
-	    });
-	}
+                    });
+            });
+        }
     });
 };
 
