@@ -9,9 +9,10 @@ request = require('superagent'),
 TextArea = require('../detail/common/textarea.jsx'),
 Link = require('../modules/link.jsx'),
 
+FontAwesome = require('react-fontawesome'),
+
 Input = require('react-bootstrap').Input,
-Button = require('react-bootstrap').Button,
-Glyphicon = require('react-bootstrap').Glyphicon;
+Button = require('react-bootstrap').Button;
 
 var LinkComponent = React.createClass({
     render: function() {
@@ -146,14 +147,14 @@ var DeleteComponent = React.createClass({
   },
   render: function() {
     return(
-      <Button onClick={this.deleteItem} bsStyle="danger"><Glyphicon glyph="trash" /></Button>
+      <Button onClick={this.deleteItem} bsStyle="danger"><FontAwesome name='trash' size='lg' fixedWidth /></Button>
     );
   }
 });
 
 var EditComponent = React.createClass({
     render: function() {
-      return(<Button onClick={this.props.rowData.editCallback.bind(null, this.props.rowData.masterid, this.props.rowData.edit)}><Glyphicon glyph={this.props.rowData.edit ? 'check' : 'pencil'} /></Button>);
+      return(<Button onClick={this.props.rowData.editCallback.bind(null, this.props.rowData.masterid, this.props.rowData.edit)}><FontAwesome name={this.props.rowData.edit ? 'check' : 'pencil'} size='lg' fixedWidth /></Button>);
     }
 });
 
@@ -326,10 +327,10 @@ var GriddleComponent = React.createClass({
                externalSortAscending={this.state.externalSortAscending}
                useGriddleStyles={false}
                showSettings={true}
-               sortAscendingComponent={<span> <Glyphicon glyph="sort-by-alphabet" /></span>}
-               sortDescendingComponent={<span> <Glyphicon glyph="sort-by-alphabet-alt" /></span>}
-               nextIconComponent={<span> <Glyphicon glyph="chevron-right" /></span>}
-               previousIconComponent={<span><Glyphicon glyph="chevron-left" /> </span>}
+               sortAscendingComponent={<span> <FontAwesome name='sort-desc' size='lg' fixedWidth /></span>}
+               sortDescendingComponent={<span> <FontAwesome name='sort-asc' size='lg' fixedWidth /></span>}
+               nextIconComponent={<span> <FontAwesome name='chevron-right' size='lg' fixedWidth /></span>}
+               previousIconComponent={<span><FontAwesome name='chevron-left' size='lg' fixedWidth /> </span>}
                noDataMessage={"No data could be found."}
  />
           </div>

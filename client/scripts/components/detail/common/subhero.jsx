@@ -9,6 +9,8 @@ TextArea = require('./textarea.jsx'),
 TextField = require('../../modules/textfield.jsx'),
 RestrictOptions = require('../../modules/restrictoptions.jsx'),
 
+FontAwesome = require('react-fontawesome'),
+
 Grid = require('react-bootstrap').Grid,
 Row = require('react-bootstrap').Row,
 Col = require('react-bootstrap').Col,
@@ -16,11 +18,9 @@ Nav = require('react-bootstrap').Nav,
 NavItem = require('react-bootstrap').NavItem,
 TabbedArea = require('react-bootstrap').TabbedArea,
 TabPane = require('react-bootstrap').TabPane,
-
 Button = require('react-bootstrap').Button,
 Input = require('react-bootstrap').Input,
 ButtonToolbar = require('react-bootstrap').ButtonToolbar,
-Glyphicon = require('react-bootstrap').Glyphicon,
 Tooltip = require('react-bootstrap').Tooltip,
 OverlayTrigger = require('react-bootstrap').OverlayTrigger,
 
@@ -77,17 +77,17 @@ var SubHero = React.createClass({
                 disabled={
                   this.props.credentials === false ? true : false
                 } >
-                <Glyphicon glyph="pencil" />
+                <FontAwesome name='pencil' size='lg' fixedWidth />
               </NavItem>
 	      {/*</RestrictOptions>*/}
               <NavItem eventKey={3}>
-                <Glyphicon glyph="share-alt" />
+                <FontAwesome name='share-alt' size='lg' fixedWidth />
               </NavItem>
               <NavItem eventKey={4}>
-                <Glyphicon glyph="print" />
+                <FontAwesome name='print' size='lg' fixedWidth />
               </NavItem>
               <NavItem eventKey={5}>
-                <Glyphicon glyph="bookmark" />
+                <FontAwesome name='bookmark-o' size='lg' fixedWidth />
               </NavItem>
 
             </Nav>
@@ -98,14 +98,14 @@ var SubHero = React.createClass({
                         Edit Mode Active
                       </Button>
                       <Button block bsStyle="success" onClick={this.props.editFinish}>
-                        <Glyphicon glyph="ok" /> <strong>Update</strong>
+                        <FontAwesome name='check' size='lg' fixedWidth /> <strong>Update</strong>
                       </Button>
                       <Button block bsStyle="warning" onClick={this.props.editCancel}>
-                        <Glyphicon glyph="remove" /> Cancel
+                        <FontAwesome name='undo' size='lg' fixedWidth /> Cancel
                       </Button>
                       {this.props.user.role === 'admin' ?
                       <Button block bsStyle="danger" onClick={this.props.onDelete}>
-                        <Glyphicon glyph="trash" /> Delete
+                        <FontAwesome name='trash' size='lg' fixedWidth /> Delete
                       </Button>
                       : ''}
                     </ButtonGroup>
@@ -118,13 +118,13 @@ var SubHero = React.createClass({
                       <div className='form-group'>
                         <label className="checkbox-inline">
                           <input type='checkbox' checked={this.props.flags.flagText}
-                            onClick={this.props.onBooleanSet} id='flag_text' /><Glyphicon glyph="font" />
+                            onClick={this.props.onBooleanSet} id='flag_text' /><FontAwesome name='font' size='lg' fixedWidth />
                         </label>
                         <label className="checkbox-inline">
-                          <input type='checkbox' checked={this.props.flags.flagTags} id='flag_tags' onClick={this.props.onBooleanSet}/><Glyphicon glyph="tags" />
+                          <input type='checkbox' checked={this.props.flags.flagTags} id='flag_tags' onClick={this.props.onBooleanSet}/><FontAwesome name='tags' size='lg' fixedWidth />
                         </label>
                         <label className="checkbox-inline">
-                          <input type='checkbox' checked={this.props.flags.flagMedia} id='flag_media' onClick={this.props.onBooleanSet}/><Glyphicon glyph="picture" />
+                          <input type='checkbox' checked={this.props.flags.flagMedia} id='flag_media' onClick={this.props.onBooleanSet}/><FontAwesome name='picture-o' size='lg' fixedWidth />
                         </label>
                       </div>
                       </fieldset>
@@ -144,13 +144,13 @@ var SubHero = React.createClass({
                     : ''}
                     <div className='form-group'>
                       <label className="checkbox-inline">
-                        <input type='checkbox' checked={this.props.flags.flagText} id='flag_text' /><Glyphicon glyph="font" />
+                        <input type='checkbox' checked={this.props.flags.flagText} id='flag_text' /><FontAwesome name='font' size='lg' fixedWidth />
                       </label>
                       <label className="checkbox-inline">
-                        <input type='checkbox' checked={this.props.flags.flagTags} id='flag_tags' /><Glyphicon glyph="tags" />
+                        <input type='checkbox' checked={this.props.flags.flagTags} id='flag_tags' /><FontAwesome name='tags' size='lg' fixedWidth />
                       </label>
                       <label className="checkbox-inline">
-                        <input type='checkbox' checked={this.props.flags.flagMedia} id='flag_media' /><Glyphicon glyph="picture" />
+                        <input type='checkbox' checked={this.props.flags.flagMedia} id='flag_media' /><FontAwesome name='picture-o' size='lg' fixedWidth />
                       </label>
                     </div>
                   </fieldset>

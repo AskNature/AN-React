@@ -4,9 +4,9 @@ var React = require('react'),
 
 Link = require('./link.jsx'),
 Avatar = require('react-avatar'),
+FontAwesome = require('react-fontawesome'),
 
 Well = require('react-bootstrap').Well,
-Glyphicon = require('react-bootstrap').Glyphicon,
 Button = require('react-bootstrap').Button,
 Input = require('react-bootstrap').Input,
 Navbar = require('react-bootstrap').Navbar,
@@ -47,10 +47,10 @@ var NavbarComponent = React.createClass({
             <Navbar fluid inverse fixedTop role="banner">
               {/* Temp button for left offcanvas menu */}
                   <Nav left navbar-header className="pull-left navbar-header">
-                     <Button className="flat-button drawer-toggle" onClick={this.props.onDrawerToggleClick} bsSize="large"><Glyphicon glyph="menu-hamburger" /></Button>
+                     <Button className="flat-button drawer-toggle" onClick={this.props.onDrawerToggleClick} bsSize="large"><FontAwesome name='bars' size='lg' fixedWidth /></Button>
                   <Link className="navbar-brand" url="/">AN</Link>
                   <form role="search" className='navbar-form navbar-left'>
-                    <Input addonBefore={<Glyphicon glyph='search' />} type="text" placeholder="Search AskNature" value={this.props.searchQuery} onFocus={this.props.onSearchFocus} onChange={this.props.searchQueryChange}/>
+                    <Input addonBefore={<FontAwesome name='search' size='lg' fixedWidth />} type="text" placeholder="Search AskNature" value={this.props.searchQuery} onFocus={this.props.onSearchFocus} onChange={this.props.searchQueryChange}/>
                   </form>
                 </Nav>
               {/* End temp button for left offcanvas menu */}
