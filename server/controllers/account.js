@@ -166,7 +166,7 @@ var resetAccount = function(req, res, next) {
 var returnAccount = function(req, res, next) {
     if (req.user) {
 	console.log(req.user);
-        Account.getWithRelationships(req.user.id, function(u) {
+        Account.getWithRelationships(req.user.masterid, function(u) {
             res.status(200).json({
                 username: req.user.username,
                 email: req.user.email,
