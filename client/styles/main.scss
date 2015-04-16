@@ -40,6 +40,7 @@ $light-text: $gray-light;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+  }
 
 body {
   // Compensate for the 62px tall fixed navbar with padding-top
@@ -755,16 +756,13 @@ Hero
     border-radius: 3px;
     margin-top: -2px;
     cursor: pointer;
-}
-
-.autocomplete-dropdown a {
-    color: #666 !important;
-}
-
-.autocomplete-dropdown:hover a {
-    text-decoration: none;
-}
-
-.autocomplete-dropdown:hover {
-    background-color: rgb(238, 238, 238);
+    a {
+      color: #666 !important;
+    }
+    &:hover {
+      background-color: rgb(238, 238, 238);
+      a {
+        text-decoration: none;
+      }
+    }
 }
