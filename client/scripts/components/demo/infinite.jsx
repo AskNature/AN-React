@@ -54,8 +54,8 @@ var BigListItem = React.createClass({
 var SidebarComponent = React.createClass({
     render: function() {
         return (
-        <div>
-            <Well onClick={this.props.onClickHandler.bind(null, this.props.num)} bsSize='small' className={this.props.current === this.props.num ? 'card active' : 'card'} key={this.props.num}>
+        <div className='card-set'>
+            <Well onClick={this.props.onClickHandler.bind(null, this.props.num)} bsSize='small' className={this.props.current === this.props.num ? 'card card-parent active' : 'card card-parent'} key={this.props.num}>
                 <h6 className='card-label'>
                     Biological Strategy
                 </h6>
@@ -66,6 +66,19 @@ var SidebarComponent = React.createClass({
 
                 </small>
               </h4>
+
+              <Well bsSize='small' className='card card-child' key={this.props.num+100}>
+                <h6 className='card-label'>
+                  Entity Type
+                </h6>
+                <h4 className='card-name'>
+                      Hornet feet make cold jelly stay at bay
+                      <br/>
+                  <small>
+                      Why? Because I said so.
+                  </small>
+                </h4>
+              </Well>
             </Well>
         </div>
     );

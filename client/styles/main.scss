@@ -353,9 +353,7 @@ nav.drawer-leave.drawer-leave-active {
   &:hover, &.active {
     background: $paper-color;
   }
-  h6.card-label {
-    color: $mid-text;
-  }
+
 }
 
 
@@ -765,12 +763,6 @@ Hero
 
 .autocomplete-dropdown:hover a {
     text-decoration: none;
-}
-
-.autocomplete-dropdown:hover {
-    background-color: rgb(238, 238, 238);
-}
-coration: none;
 }
 
 .autocomplete-dropdown:hover {
