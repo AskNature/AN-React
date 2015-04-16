@@ -67,7 +67,7 @@ var SidebarComponent = React.createClass({
                 </small>
               </h4>
             </Well>
-            <Well className='card card-list'>
+            <Well className='card-list'>
               <Well bsSize='small' className='card card-child' key={this.props.num+100}>
                 <h6 className='card-label'>
                   Entity Type
