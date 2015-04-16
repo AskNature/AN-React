@@ -37,7 +37,9 @@ var CreatorMast = React.createClass({
             </Link>
           </div>
           <div className='media-body media-middle'>
+            <h6>
             <Link url={'/1user/' + userid}> <strong> {name}</strong></Link> contributed this <strong>{this.props.entityname}</strong>  {relTime}
+              </h6>
           </div>
         </div>
       </Panel>

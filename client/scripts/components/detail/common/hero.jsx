@@ -52,7 +52,7 @@ var HeroComponent = React.createClass({
                   <h6 className="animated fadeInDown" style={{textTransform:'uppercase',fontWeight:'800',color:'#ffffff', marginBottom: 0}}>
                     {this.props.label}
                   </h6>
-                  <h3 className="animated fadeInDown" style={{marginTop: '8px', marginBottom: 0, fontWeight: '800'}}>
+                  <h2 className="animated fadeInDown" style={{marginTop: '8px', marginBottom: 0, fontWeight: '800'}}>
                     {!this.props.editable && this.props.primarylink ? (
                       <Link url={this.props.primarylink}>
                       <TextArea
@@ -78,7 +78,7 @@ var HeroComponent = React.createClass({
                           editable={false}
                            />
                     )}
-                  </h3>
+                  </h2>
                   <h5 style={{fontWeight: '600', color: '#ffffff', fontStyle: 'italic', marginTop: 0}}>
                     {!this.props.editable && this.props.secondarylink ? (
                       <Link url={this.props.secondarylink}>

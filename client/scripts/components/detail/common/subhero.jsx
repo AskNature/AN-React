@@ -37,7 +37,7 @@ var SubHero = React.createClass({
       <Grid>
         <Row>
           <Col xs={12} sm={8}>
-            <h5 className="lead">
+            <h4>
               {this.props.first ? (
                 <strong>
                   {this.props.first}
@@ -66,7 +66,7 @@ var SubHero = React.createClass({
                 )}
                 </span>
               )}
-            </h5>
+            </h4>
           </Col>
           <Col xs={12} sm={4}>
             <Nav justified activeKey={0} bsStyle='pills' style={{"margin-top": "11.5px"}}>
@@ -77,17 +77,17 @@ var SubHero = React.createClass({
                 disabled={
                   this.props.credentials === false ? true : false
                 } >
-                <FontAwesome name='pencil' size='lg' fixedWidth />
+                <FontAwesome name='pencil'  fixedWidth />
               </NavItem>
 	      {/*</RestrictOptions>*/}
               <NavItem eventKey={3}>
-                <FontAwesome name='share-alt' size='lg' fixedWidth />
+                <FontAwesome name='share'  fixedWidth />
               </NavItem>
               <NavItem eventKey={4}>
-                <FontAwesome name='print' size='lg' fixedWidth />
+                <FontAwesome name='print'  fixedWidth />
               </NavItem>
               <NavItem eventKey={5}>
-                <FontAwesome name='bookmark-o' size='lg' fixedWidth />
+                <FontAwesome name='bookmark-o'  fixedWidth />
               </NavItem>
 
             </Nav>
@@ -98,14 +98,14 @@ var SubHero = React.createClass({
                         Edit Mode Active
                       </Button>
                       <Button block bsStyle="success" onClick={this.props.editFinish}>
-                        <FontAwesome name='check' size='lg' fixedWidth /> <strong>Update</strong>
+                        <FontAwesome name='check'  fixedWidth /> <strong>Update</strong>
                       </Button>
                       <Button block bsStyle="warning" onClick={this.props.editCancel}>
-                        <FontAwesome name='undo' size='lg' fixedWidth /> Cancel
+                        <FontAwesome name='undo'  fixedWidth /> Cancel
                       </Button>
                       {this.props.user.role === 'admin' ?
                       <Button block bsStyle="danger" onClick={this.props.onDelete}>
-                        <FontAwesome name='trash' size='lg' fixedWidth /> Delete
+                        <FontAwesome name='trash'  fixedWidth /> Delete
                       </Button>
                       : ''}
                     </ButtonGroup>
@@ -118,13 +118,13 @@ var SubHero = React.createClass({
                       <div className='form-group'>
                         <label className="checkbox-inline">
                           <input type='checkbox' checked={this.props.flags.flagText}
-                            onClick={this.props.onBooleanSet} id='flag_text' /><FontAwesome name='font' size='lg' fixedWidth />
+                            onClick={this.props.onBooleanSet} id='flag_text' /><FontAwesome name='font'  fixedWidth />
                         </label>
                         <label className="checkbox-inline">
-                          <input type='checkbox' checked={this.props.flags.flagTags} id='flag_tags' onClick={this.props.onBooleanSet}/><FontAwesome name='tags' size='lg' fixedWidth />
+                          <input type='checkbox' checked={this.props.flags.flagTags} id='flag_tags' onClick={this.props.onBooleanSet}/><FontAwesome name='tags'  fixedWidth />
                         </label>
                         <label className="checkbox-inline">
-                          <input type='checkbox' checked={this.props.flags.flagMedia} id='flag_media' onClick={this.props.onBooleanSet}/><FontAwesome name='picture-o' size='lg' fixedWidth />
+                          <input type='checkbox' checked={this.props.flags.flagMedia} id='flag_media' onClick={this.props.onBooleanSet}/><FontAwesome name='picture-o'  fixedWidth />
                         </label>
                       </div>
                       </fieldset>
@@ -144,13 +144,13 @@ var SubHero = React.createClass({
                     : ''}
                     <div className='form-group'>
                       <label className="checkbox-inline">
-                        <input type='checkbox' checked={this.props.flags.flagText} id='flag_text' /><FontAwesome name='font' size='lg' fixedWidth />
+                        <input type='checkbox' checked={this.props.flags.flagText} id='flag_text' /><FontAwesome name='font'  fixedWidth />
                       </label>
                       <label className="checkbox-inline">
-                        <input type='checkbox' checked={this.props.flags.flagTags} id='flag_tags' /><FontAwesome name='tags' size='lg' fixedWidth />
+                        <input type='checkbox' checked={this.props.flags.flagTags} id='flag_tags' /><FontAwesome name='tags'  fixedWidth />
                       </label>
                       <label className="checkbox-inline">
-                        <input type='checkbox' checked={this.props.flags.flagMedia} id='flag_media' /><FontAwesome name='picture-o' size='lg' fixedWidth />
+                        <input type='checkbox' checked={this.props.flags.flagMedia} id='flag_media' /><FontAwesome name='picture-o'  fixedWidth />
                       </label>
                     </div>
                   </fieldset>

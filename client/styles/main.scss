@@ -2,15 +2,37 @@
 
 // Box sizing partial styles:
 // Apply a natural box layout model to all elements
-
 $white-color: #ffffff;
 $background-color: #dddddd;
 $paper-color: #f9f9f9;
 $primary-color: #9EAB0F;
-$light-text: #cccccc;
+$secondary-color: #002539;
 $mid-text: #aaaaaa;
+
+// Injects all import files automatically
+// [pre_injector]
+@import 'pre/_variables';
+// [endpre_injector]
+
+// Injects all bower_component files automatically
+// bower:scss
+@import '../bower_components/components-font-awesome/scss/font-awesome.scss';
+@import '../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+// endbower
+
+// Injects all import files automatically
+// [post_injector]
+@import 'post/paper';
+// [endpost_injector]
+
+// [css_injector]
+@import 'post/gibson.css';
+@import 'post/react-select.css';
+@import 'post/react-widgets.css';
+// [endcss_injector]
+
 $fa-font-path: '../bower_components/components-font-awesome/fonts';
-@import url("./gibson.css");
+$light-text: $gray-light;
 
 *,
 *:before,
@@ -18,34 +40,16 @@ $fa-font-path: '../bower_components/components-font-awesome/fonts';
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-}
-
-// Injects all bower_component files automatically
-// bower:scss
-@import '../bower_components/components-font-awesome/scss/font-awesome.scss';
-// endbower
-
-// Injects all import files automatically
-// [injector]
-// [endinjector]
-
-@import './react-widgets.css';
-@import './react-select.css';
-@import '../bower_components/spinkit/scss/spinners/6-chasing-dots.scss';
 
 body {
   // Compensate for the 62px tall fixed navbar with padding-top
   padding-top: 62px;
-  font-family: 'Gibson', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 200;
-  background: $background-color;
   overflow-x: hidden;
 }
 
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 100;
+  font-weight: normal;
   p {
     margin: 0;
   }
@@ -64,13 +68,12 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 3px;
 }
 
-// Temp color tweaks
-a, .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
-  color: #002539;
-}
 
-label {
-  font-weight: normal;
+label, .label {
+  font-weight: 800;
+  vertical-align: top;
+  padding: 0.1em 0.5em 0.15em;
+  font-size: 85%;
 }
 
 .fullscreen {
@@ -227,21 +230,22 @@ Top Navbar
       border: none;
     }
     .navbar-brand {
+      margin-top: 7px;
     }
     .navbar-form.search {
-      padding-top: 0;
+      margin-top: 9px;
       padding-bottom: 0;
       float: left;
       border: none;
       box-shadow: none;
       label.search-label {
         color: $white-color;
-        margin: 5px 0 0 15px;
+        margin: 7px 0 0 15px;
         z-index: 10;
       }
       .form-group {
         position: absolute;
-        left: 130px;
+        left: 120px;
         right: 0;
         .input-group {
           width: 100%;
@@ -255,7 +259,7 @@ Top Navbar
         .form-control[type=text] {
           box-shadow: none;
           font-weight: bold;
-          padding-left: 40px;
+          padding-left: 45px;
           background: rgba(255,255,255,0.15);
           box-shadow: none;
           border-radius: 3px;
@@ -272,7 +276,7 @@ Top Navbar
   >li{
       float: left;
     >a {
-      padding-top: 20.5px;
+      margin-top: 6px;
       padding-bottom: 20.5px;
       &.loggedin-menu {
         padding-top: 11px;
@@ -434,17 +438,28 @@ Mini hero (relationship list editor)
 ========================================================================== */
 
 
-h6.card-label {
-  color: $light-text;
+h6.card-label, h6.heading {
   text-transform: uppercase;
   font-weight: 800;
   margin-bottom: 0;
+  color: $mid-text;
 }
 
-h5.card-name {
+h6.heading {
+  margin-bottom: 10px;
+
+  &.heading-cards {
+    margin-left: 5px;
+  }
+}
+
+h4.card-name {
   margin-top: 9px;
   overflow: hidden;
   white-space: normal;
+  small {
+    font-weight: bold;
+  }
 }
 
 .relationship-button {
@@ -534,7 +549,7 @@ Hero
         margin-bottom: 10px;
       }
     }
-    h3 {
+    h2 {
       color: #efefef;
       padding-bottom:5px;
     }
@@ -689,7 +704,7 @@ Hero
 @media (min-width: 1200px) {
   .hero {
     height: 800px;
-    h3 {
+    h2 {
       font-size: 50px;
     }
   }
@@ -750,6 +765,12 @@ Hero
 
 .autocomplete-dropdown:hover a {
     text-decoration: none;
+}
+
+.autocomplete-dropdown:hover {
+    background-color: rgb(238, 238, 238);
+}
+coration: none;
 }
 
 .autocomplete-dropdown:hover {

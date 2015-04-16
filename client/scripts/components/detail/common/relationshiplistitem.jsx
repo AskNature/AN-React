@@ -32,11 +32,11 @@ var MiniHero = React.createClass({
         {this.props.label ? (
           <h6 className='card-label'>{this.props.label}</h6>
         ) : ''}
-        <h5 className='card-name'>
+        <h4 className='card-name'>
             {this.props.title}
           <br/>
           <small>{this.props.subtitle}</small>
-        </h5>
+        </h4>
 
       </div>
     );

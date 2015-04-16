@@ -16,15 +16,49 @@ var taskConfig = function(grunt) {
             options: {
                 transform: function(filePath) {
                     filePath = filePath.replace('/client/styles/', '');
-                    
+
                     return '@import \'' + filePath.slice(0, -5) + '\';';
                 },
-                starttag: '// [injector]',
-                endtag: '// [endinjector]'
+                starttag: '// [pre_injector]',
+                endtag: '// [endpre_injector]'
             },
             files: {
                 '<%= yeogurt.client %>/styles/main.scss': [
-                    '<%= yeogurt.client %>/styles/**/*.scss',
+                    '<%= yeogurt.client %>/styles/pre/**/*.scss',
+                    '!<%= yeogurt.client %>/styles/main.scss'
+                ]
+            }
+        },
+        post_sass: {
+            options: {
+                transform: function(filePath) {
+                    filePath = filePath.replace('/client/styles/', '');
+
+                    return '@import \'' + filePath.slice(0, -5) + '\';';
+                },
+                starttag: '// [post_injector]',
+                endtag: '// [endpost_injector]'
+            },
+            files: {
+                '<%= yeogurt.client %>/styles/main.scss': [
+                    '<%= yeogurt.client %>/styles/post/**/*.scss',
+                    '!<%= yeogurt.client %>/styles/main.scss'
+                ]
+            }
+        },
+        post_css: {
+            options: {
+                transform: function(filePath) {
+                    filePath = filePath.replace('/client/styles/', '');
+
+                    return '@import \'' + filePath + '\';';
+                },
+                starttag: '// [css_injector]',
+                endtag: '// [endcss_injector]'
+            },
+            files: {
+                '<%= yeogurt.client %>/styles/main.scss': [
+                    '<%= yeogurt.client %>/styles/**/*.css',
                     '!<%= yeogurt.client %>/styles/main.scss'
                 ]
             }

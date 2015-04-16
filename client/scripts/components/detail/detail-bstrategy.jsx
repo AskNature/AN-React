@@ -29,7 +29,7 @@ var Template = React.createClass({
   },*/
   render: function() {
     var routeNameSingle = 'b.strategy';
-    var entityName = 'Biological Strategies';
+    var entityName = 'Biological Strategy';
     var data = this.props.data;
     var primaryKey = 'name';
     var secondaryTitle = data.living_systems[0] ? data.living_systems[0].name : '';

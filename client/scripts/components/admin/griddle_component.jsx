@@ -147,14 +147,14 @@ var DeleteComponent = React.createClass({
   },
   render: function() {
     return(
-      <Button onClick={this.deleteItem} bsStyle="danger"><FontAwesome name='trash' size='lg' fixedWidth /></Button>
+      <Button onClick={this.deleteItem} bsStyle="danger"><FontAwesome name='trash'  fixedWidth /></Button>
     );
   }
 });
 
 var EditComponent = React.createClass({
     render: function() {
-      return(<Button onClick={this.props.rowData.editCallback.bind(null, this.props.rowData.masterid, this.props.rowData.edit)}><FontAwesome name={this.props.rowData.edit ? 'check' : 'pencil'} size='lg' fixedWidth /></Button>);
+      return(<Button onClick={this.props.rowData.editCallback.bind(null, this.props.rowData.masterid, this.props.rowData.edit)}><FontAwesome name={this.props.rowData.edit ? 'check' : 'pencil'}  fixedWidth /></Button>);
     }
 });
 
@@ -327,10 +327,10 @@ var GriddleComponent = React.createClass({
                externalSortAscending={this.state.externalSortAscending}
                useGriddleStyles={false}
                showSettings={true}
-               sortAscendingComponent={<span> <FontAwesome name='sort-desc' size='lg' fixedWidth /></span>}
-               sortDescendingComponent={<span> <FontAwesome name='sort-asc' size='lg' fixedWidth /></span>}
-               nextIconComponent={<span> <FontAwesome name='chevron-right' size='lg' fixedWidth /></span>}
-               previousIconComponent={<span><FontAwesome name='chevron-left' size='lg' fixedWidth /> </span>}
+               sortAscendingComponent={<span> <FontAwesome name='sort-desc'  fixedWidth /></span>}
+               sortDescendingComponent={<span> <FontAwesome name='sort-asc'  fixedWidth /></span>}
+               nextIconComponent={<span> <FontAwesome name='chevron-right'  fixedWidth /></span>}
+               previousIconComponent={<span><FontAwesome name='chevron-left'  fixedWidth /> </span>}
                noDataMessage={"No data could be found."}
  />
           </div>

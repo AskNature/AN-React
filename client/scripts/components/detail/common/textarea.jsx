@@ -20,10 +20,8 @@ var TextArea = React.createClass({
     var title = this.props.title;
       return (
         <div>
-          {this.props.title ? (<h6>
-            <strong>
+          {this.props.title ? (<h6 className='heading'>
               {title}
-            </strong>
           </h6>) : ''}
           {this.props.editable?
                 <TextField

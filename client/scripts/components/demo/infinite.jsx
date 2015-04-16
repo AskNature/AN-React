@@ -59,13 +59,13 @@ var SidebarComponent = React.createClass({
                 <h6 className='card-label'>
                     Biological Strategy
                 </h6>
-                <h5 className='card-name'>
+                <h4 className='card-name'>
                     {this.props.data.name}
                     <br/>
                 <small>
 
                 </small>
-                </h5>
+              </h4>
             </Well>
         </div>
     );

@@ -21,14 +21,13 @@ var RelationshipList = React.createClass({
   render: function() {
     return (
       <div>
-        <h6>
-          <strong>
-            {this.props.title}
-          </strong>
-          &nbsp;
+        <h6 className='heading heading-cards'>
           <Label>
             {this.props.items ? this.props.items.length : ''}
           </Label>
+            {' '+this.props.title}
+
+
         </h6>
 
           {this.props.items ? this.props.items.map(function(item,i) {
