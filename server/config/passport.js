@@ -6,14 +6,14 @@ var config = require('./secrets.json');
 
 var externalLoginFunc = function(database) { return function(accessToken, refreshToken, profile, done) {
     // find or create user in orient
-    database.select().from('PassportUser').where({id: profile.id}).limit(1).one().then(function(user) {
+    database.select().from('PassportUser').where({masterid: profile.id}).limit(1).one().then(function(user) {
         if(user) {
             return done(null, user);
         } else {
             // create new profile in database
             database.insert().into('PassportUser')
                 .set({
-                    id: profile.id,
+                    masterid: profile.id,
                     username: profile.emails[0].value.split("@")[0],
                     firstName: profile.name.givenName,
                     lastName: profile.name.familyName,
@@ -31,12 +31,12 @@ var externalLoginFunc = function(database) { return function(accessToken, refres
 
 module.exports = function(passport, database) {
     passport.serializeUser(function(user, done) {
-	done(null, user.id);
+	done(null, user.masterid);
     });
 
     passport.deserializeUser(function(id, done) {
 	// fetch the user from orient
-	database.select().from('PassportUser').where({id: id}).limit(1).one().then(function(user) {
+	database.select().from('PassportUser').where({masterid: id}).limit(1).one().then(function(user) {
 	    if(user) {
 		return done(null, user);
 	    } else {
