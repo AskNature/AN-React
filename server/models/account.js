@@ -19,7 +19,7 @@ var relationships = {
   model: Status,
   className: 'UserStatus',
   edge: 'out("HasStatus")',
-  //select: true,
+  select: true,
   options: ListOptions.UserStatus
   }
   };
