@@ -80,6 +80,15 @@ var SidebarComponent = React.createClass({
                   </small>
                 </h4>
               </Well>
+              <Well bsSize='small' className='card card-child' key={this.props.num+1000}>
+                <h6 className='card-label'>
+                  Entity Type
+                </h6>
+                <h4 className='card-name'>
+                      Snail teeth gnash through flower skulls in spring
+                      <br/>
+                </h4>
+              </Well>
             </Well>
         </div>
     );
