@@ -72,6 +72,12 @@ ThisStore.dispatcherToken = Dispatcher.register(function(payload) {
   } else if (action.actionType === Constants.FETCH_ERROR) {
       _error = true;
       ThisStore.emitChange();
+  } else if (action.actionType === Constants.FETCH) {
+      _loaded = false;
+      _error = false;
+      _data = Defaults;
+      _type = action.entityType;
+      ThisStore.emitChange();
   } else if(action.actionType === routesConstants.SET_CURRENT_ROUTE) {
       _loaded = false;
       _data = Defaults;

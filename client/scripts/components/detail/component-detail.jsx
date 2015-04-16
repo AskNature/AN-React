@@ -67,7 +67,7 @@ var DetailComponent = React.createClass({
         this.setState({windowHeight: window.innerHeight});
       },
 
-      componentDidMount: function(){
+      componentWillMount: function(){
           if(this.props.masterid !== 'new') {
               actions.fetch(this.props.type,this.props.masterid);
           } else if(this.props.masterid === 'new'){
@@ -161,9 +161,9 @@ var DetailComponent = React.createClass({
         } else if(this.props.type === 'sources') {
           Template = SourceDetail;
         }
-        if(this.state.loaded === false) {
+        /*if(this.state.loaded === false) {
           actions.fetch(this.props.type,this.props.masterid);
-        }
+        }*/
         return Template;
       },
     render: function() {
@@ -212,8 +212,17 @@ var DetailComponent = React.createClass({
            </DefaultLayout>
         );
     },
-    componentWillReceiveProps: function () {
-    this.setState(getState());
+    componentWillReceiveProps: function (newProps) {
+        console.log('loading new props');
+	actions.initialize(newProps.type, {masterid: newProps.masterid});
+        if(newProps.masterid !== 'new') {
+            actions.fetch(newProps.type,newProps.masterid);
+	    this.setState({editable: false, loaded: false});
+        } else if(newProps.masterid === 'new'){
+            actions.create(newProps.type);
+            this.setState({editable: true});
+        }
+        //this.setState(getState());
   }
 });
 

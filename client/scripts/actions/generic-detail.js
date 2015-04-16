@@ -24,8 +24,8 @@ var moment = require('moment');
 
 var initialize = function(type, initialData) {
     Dispatcher.handleViewAction({
-actionType: Constants.INITIALIZE,
-entityType: type
+	actionType: Constants.INITIALIZE,
+	entityType: type
     });
 };
 
@@ -37,9 +37,11 @@ entityType: type
 var fetch = function(type, masterid) {
     // do the async fetch with masterid
     var self = this;
-    /*Dispatcher.handleViewAction({
-actionType: Constants.FETCH_STRATEGY
-    });*/
+    /*setTimeout(function() {
+	Dispatcher.handleViewAction({
+	    actionType: Constants.FETCH
+	});
+    }, 1);*/
     request
     .get('/api/v2/'+type+'/'+masterid+'?expand=true')
     .type('json')
@@ -47,18 +49,18 @@ actionType: Constants.FETCH_STRATEGY
       if (res.ok) {
         if (res) {
           var itemData = res.body;
-            Dispatcher.handleViewAction({
-actionType: Constants.FETCH_SUCCESS,
-entityType: type,
-data: itemData
-   });
+	    Dispatcher.handleViewAction({
+		actionType: Constants.FETCH_SUCCESS,
+		entityType: type,
+		data: itemData
+	    });
         }
       }
       else {
- Dispatcher.handleViewAction({
-     actionType: Constants.FETCH_ERROR,
-     entityType: type
- });
+	  Dispatcher.handleViewAction({
+	      actionType: Constants.FETCH_ERROR,
+	      entityType: type
+	  });
       }
     });
 };
