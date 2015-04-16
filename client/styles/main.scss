@@ -348,13 +348,21 @@ nav.drawer-leave.drawer-leave-active {
 .well.card {
   background: transparent;
   cursor: pointer;
-  border-bottom: dotted 1px rgba(0, 0, 0, 0.3);
   margin-bottom: 0;
   padding-left: 20px;
+  border: none;
+  border-top: solid 2px $paper-color;
   &:hover, &.active {
     background: $paper-color;
   }
-
+  &.card-child {
+    border-top: dotted 1px rgba(0, 0, 0, 0.3);
+    padding-left: 10px;
+  }
+  &.card-list {
+    padding: 0 0 0 20px;
+    border-top: none;
+  }
 }
 
 
