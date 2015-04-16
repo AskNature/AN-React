@@ -9,8 +9,8 @@ var settings = require('../config/env/default'),
     db = require('../config/database').db,
     path = require('path'),
     crypto = require('crypto'),
-    sendgrid = require('sendgrid'),
-    User = require('../models/account.js');
+    sendgrid = require('../config/sendgrid').client,
+    Account = require('../models/account.js');
 
 var login = function(req, res) {
     if (req.isAuthenticated()) {
@@ -66,7 +66,7 @@ var verify = function(req, res) {
                 verified: true,
                 verifyToken: ''
             }).where({
-                id: user.id
+                masterid: user.id
             }).scalar().then(function(total) {
                 if (!req.isAuthenticated()) {
                     req.login(user, function(err) {
@@ -108,7 +108,7 @@ var forgotAccount = function(req, res, next) {
                         passwordToken: token
                     })
                     .where({
-                        id: user.id
+                        masterid: user.id
                     }).scalar().then(function(total) {
                         console.log("generated reset token for " + total + " user.");
                         console.log("User: " + user.email + ", Token: " + token);
@@ -152,7 +152,7 @@ var resetAccount = function(req, res, next) {
                 passwordToken: '',
                 password: req.body.password
             }).where({
-                id: user.id
+                masterid: user.id
             }).scalar().then(function(total) {
                 console.log("reset password");
                 res.status(200).send();
@@ -165,8 +165,8 @@ var resetAccount = function(req, res, next) {
 
 var returnAccount = function(req, res, next) {
     if (req.user) {
-
-        User.getWithRelationships(req.user.id, function(u) {
+	console.log(req.user);
+        Account.getWithRelationships(req.user.masterid, function(u) {
             res.status(200).json({
                 username: req.user.username,
                 email: req.user.email,
@@ -189,7 +189,7 @@ var updateAccount = function(req, res, next) {
     if (req.user) {
         db.update('PassportUser').set(req.body)
             .where({
-                id: req.user.id
+                masterid: req.user.id
             }).scalar().then(function() {
                 console.log("user updated");
             });
@@ -216,7 +216,7 @@ var createAccount = function(req, res, next) {
                 var token = buf.toString('hex');
                 db.insert().into('PassportUser')
                     .set({
-                        id: req.body.email,
+                        masterid: req.body.email,
                         username: name,
                         firstName: '',
                         lastName: '',
