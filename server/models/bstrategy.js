@@ -85,7 +85,7 @@ var Status = new Model('ContentStatus',
 // The key is what's called by the client components. Model refers to the variables define above. className is the name of the class of the related item in OrientDB. Edge refers to the relationship in OrientDB.
 
 var relationships = {
-    'products': {
+    'inspired_by': {
 	model: InspiredSolution,
 	className: 'InspiredSolutions',
 	edge: 'in("InspiredBy")'
