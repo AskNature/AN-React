@@ -10,6 +10,7 @@ var Content = require('../models/content.js');
 
 var DStrategy = require('../models/dstrategy.js');
 var BStrategy = require('../models/bstrategy.js');
+var Strategy = require('../models/strategy.js');
 
 var DSystem = require('../models/dsystem.js');
 var BSystem = require('../models/bsystem.js');
@@ -36,6 +37,7 @@ var routes = function (app) {
 
   app.get('/api/v2/autocomplete/d.strategy', returnAutocomplete(DStrategy));
   app.get('/api/v2/autocomplete/b.strategy', returnAutocomplete(BStrategy));
+  app.get('/api/v2/autocomplete/strategy', returnAutocomplete(Strategy));
 
   app.get('/api/v2/autocomplete/d.system', returnAutocomplete(DSystem));
   app.get('/api/v2/autocomplete/b.system', returnAutocomplete(BSystem));
