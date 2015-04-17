@@ -348,6 +348,7 @@ nav.drawer-leave.drawer-leave-active {
 .well.card {
   background: transparent;
   cursor: pointer;
+  border: none;
   border-bottom: dotted 1px rgba(0, 0, 0, 0.3);
   margin-bottom: 0;
   padding-left: 20px;
@@ -637,10 +638,6 @@ Hero
   right: 100%;
   width: 100%;
   height: 2px;
-}
-
-@media (min-width: 1px) {
-
 }
 
 
