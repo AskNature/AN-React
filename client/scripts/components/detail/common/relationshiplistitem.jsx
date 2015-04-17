@@ -71,6 +71,11 @@ var RelationshipListItem = React.createClass({
           'displayName' : 'Context',
           'route' : 'context'
         },
+        'Function' :
+          {
+            'displayName' : 'Function & Mechanism',
+            'route' : 'fm'
+          },
       'Story' :
         {
           'displayName' : 'Story',
@@ -92,6 +97,8 @@ var RelationshipListItem = React.createClass({
       lations = trans.Strategy;
     } else if(classname === 'InspiredSolutions') {
       lations = trans.InspiredSolutions;
+    } else if(classname === 'Function') {
+        lations = trans.Function;
     } else if(classname === 'Context') {
       lations = trans.Context;
     } else if(classname === 'Story') {

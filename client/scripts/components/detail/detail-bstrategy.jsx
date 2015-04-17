@@ -211,12 +211,12 @@ var Template = React.createClass({
     				    </Col>
     				    <Col xs={12} sm={6}>
                   <RelationshipList
-                    items={data.products}
+                    items={data.inspired_by}
                     editable={this.props.editable}
                     titleField='headline'
                     subtitleField='name'
-                    onAdd={this.props.onRelationshipAdd.bind(null, 'products')}
-                    onRemove={this.props.onRelationshipRemove.bind(null, 'products')}
+                    onAdd={this.props.onRelationshipAdd.bind(null, 'inspired_by')}
+                    onRemove={this.props.onRelationshipRemove.bind(null, 'inspired_by')}
                     field={'d.strategy'}
                     routeName={'d.strategy'}
                     title={'Inspired Designed Strategies'}
