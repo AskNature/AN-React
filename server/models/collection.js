@@ -26,7 +26,7 @@ var Status = new Model('ContentStatus',
 var relationships = {
   'in_collection': {
   model: Entity,
-  className: 'Entity',
+  className: 'Content',
   edge: 'in("InCollection")'
   },
   'status': {
