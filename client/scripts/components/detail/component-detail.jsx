@@ -72,7 +72,9 @@ var DetailComponent = React.createClass({
               actions.fetch(this.props.type,this.props.masterid);
           } else if(this.props.masterid === 'new'){
               actions.create(this.props.type);
-              this.setState({editable: true});
+	      var newState = getState();
+	      newState.editable = true;
+	      this.setState(newState);
           }
           window.addEventListener('resize', this.handleResize);
       },
