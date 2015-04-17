@@ -217,6 +217,7 @@ Top Navbar
   box-shadow: none;
   .navbar-brand {
     color: #333;
+    margin-left: -15px;
   }
   .navbar-header.pull-left {
     position: absolute;
@@ -663,12 +664,12 @@ Hero
     display: table-cell;
     width: 1%;
   }
+  .navbar-inverse .navbar-header.pull-left .btn-default.drawer-toggle {
+    margin-left: 15px;
+  }
 }
 @media (min-width: 768px) {
 
-.btn-default.drawer-toggle {
-  margin: 10px -15px 15px 15px;
-}
   .pace .pace-progress {
     top: 62px;
   }
@@ -686,9 +687,7 @@ Hero
     width: 100%;
   }
 
- .container-fluid .navbar-brand {
-   margin-left: 0;
- }
+
 }
 
 @media (min-width: 992px) {
