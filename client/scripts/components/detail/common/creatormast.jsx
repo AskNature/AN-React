@@ -19,7 +19,7 @@ var CreatorMast = React.createClass({
     if(this.props.addedby && this.props.addedby[0]) {
       name = this.props.addedby[0].first ? this.props.addedby[0].first + ' ' + this.props.addedby[0].last : this.props.addedby[0].name;
       userid = this.props.addedby[0].masterid;
-      avatar = this.props.addedby[0].custom_avatar ? this.props.addedby[0].custom_avatar : 'http://www.asknature.org/images/uploads/user/'+userid+'/avatar/lg_avatar.jpg';
+      avatar = this.props.addedby[0].custom_avatar_url ? this.props.addedby[0].custom_avatar_url : 'http://www.asknature.org/images/uploads/user/'+userid+'/avatar/lg_avatar.jpg';
     } else {
       name = 'AskNature';
       userid = 'asknature';

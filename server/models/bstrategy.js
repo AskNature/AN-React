@@ -53,7 +53,7 @@ var User = new Model('Users',
     'name',
     'first',
     'last',
-    'custom_avatar'
+    'custom_avatar_url'
   ],
   {'out_HasMedia':
     {
