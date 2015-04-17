@@ -225,17 +225,17 @@ Top Navbar
     .btn-default.drawer-toggle {
       position: relative;
       float:left;
-      padding: 9px 15px;
+      padding: 10px 15px;
       margin: 10px 0 15px 0;
       background: none;
       border: none;
     }
     .navbar-brand {
-      margin-top: 7px;
     }
     .navbar-form.search {
-      margin-top: 9px;
       padding-bottom: 0;
+      padding-left: 10px;
+      padding-top: 0;
       float: left;
       border: none;
       box-shadow: none;
@@ -277,7 +277,6 @@ Top Navbar
   >li{
       float: left;
     >a {
-      margin-top: 6px;
       padding-bottom: 20.5px;
       &.loggedin-menu {
         padding-top: 11px;
@@ -667,6 +666,9 @@ Hero
 }
 @media (min-width: 768px) {
 
+.btn-default.drawer-toggle {
+  margin: 10px -15px 15px 15px;
+}
   .pace .pace-progress {
     top: 62px;
   }
