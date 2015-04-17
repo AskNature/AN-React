@@ -19,11 +19,21 @@ var getState = function() {
     return RelationshipListStore.get();
 };
 
-var InputListComponent = React.createClass({
+var MediaListComponent = React.createClass({
   render: function() {
     return (
       <div>
         <img src='http://placehold.it/50x50' width='50px' height='auto' />
+        {this.props.item.name}
+      </div>
+    );
+  }
+});
+
+var ItemListComponent = React.createClass({
+  render: function() {
+    return (
+      <div>
         {this.props.item.name}
       </div>
     );
@@ -71,10 +81,11 @@ var RelationshipListItemInput = React.createClass({
         return (
           <div className='relationship-selector'>
             <Combobox
+              valueField='masterid'
               textField='name'
               onInput={this.onInputInput}
               data={this.state.results.concat(['Create New'])}
-              itemComponent={this.props.media ? InputListComponent : ''}
+              itemComponent={this.props.media ? MediaListComponent : ItemListComponent}
               filter='contains'
               ref='combobox'
               placeholder={ 'Add ' + this.props.fieldName }

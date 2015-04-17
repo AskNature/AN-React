@@ -24,9 +24,10 @@ var Status = new Model('ContentStatus',
 );
 
 var relationships = {
+  // This ultimately needs to be tied to the @Content class.
   'in_collection': {
   model: Entity,
-  className: 'Content',
+  className: 'SuperStrategy',
   edge: 'in("InCollection")'
   },
   'status': {
