@@ -102,6 +102,32 @@ var updateItem2 = function(req, res, next) {
     });
 };
 
+var signS3Request = function(req, res, next) {
+    aws.config.update({accessKeyId: config.aws.accessKeyId, secretAccessKey: config.aws.secretAccessKey});
+    var s3 = new aws.S3();
+    var s3_params = {
+	Bucket: config.aws.bucket,
+	Key: req.query.s3_object_name,
+	Expires: 60,
+	ContentType: req.query.s3_object_type,
+	ACL: 'public-read'
+    };
+    s3.getSignedUrl('putObject', s3_params, function(err, data) {
+	if(err) {
+	    console.log(err);
+	    res.status(500).send(err);
+	}
+	else {
+	    var return_data = {
+		signed_request: data,
+		url: 'https://' + config.aws.bucket + '.s3.amazonaws.com/'+req.query.s3_object_name
+	    };
+	    res.status(200).json(return_data);
+	}
+    });
+    
+};
+
 var createItem2 = function(req, res, next) {
     var s = new Media(req.body.masterid, req.body);
     s.save(function(err, saved) {
@@ -206,5 +232,6 @@ var returnItem1 = function(req, res, next) {
       updateItem2: updateItem2,
       createItem2: createItem2,
       deleteItem2: deleteItem2,
-      deleteMultiple2: deleteMultiple2
+      deleteMultiple2: deleteMultiple2,
+      signS3Reqest: signS3Request
     };

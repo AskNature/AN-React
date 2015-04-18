@@ -23,6 +23,8 @@ var routes = function (app) {
   app.delete('/api/v2/media/:id', Controller.deleteItem2);
   app.post('/api/v2/media', Controller.createItem2);
   app.delete('/api/v2/media', Controller.deleteMultiple2);
+
+  app.get('/api/v2/sign_media_s3', Controller.signS3Request);
 };
 
 module.exports = routes;
