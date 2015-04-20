@@ -23,6 +23,8 @@ var Researcher = require('../models/researcher.js');
 
 var Media = require('../models/media.js');
 
+var OneUser = require('../models/oneuser.js');
+
 var returnAutocomplete = function(model) {
     return function(req, res, next) {
 	var suggestions = model.findAutocomplete(req.query.query, req.query.count, function(result) {
@@ -49,6 +51,8 @@ var routes = function (app) {
   app.get('/api/v2/autocomplete/researcher', returnAutocomplete(Researcher));
 
   app.get('/api/v2/autocomplete/media', returnAutocomplete(Media));
+
+  app.get('/api/v2/autocomplete/oneuser', returnAutocomplete(OneUser));
 
 
 };
