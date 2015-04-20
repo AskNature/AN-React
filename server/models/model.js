@@ -228,6 +228,20 @@ var ConstructModel = function(entityName, fields, relationships) {
 	return this;
     };
 
+    Model.prototype.fetchRelationship = function(relationship, callback) {
+	if (_.isArray(this[relationship])) {
+	    async.map(this[relationship], function(item, cb) {
+		db.select('*').from('InspiredSolutions').where({masterid: item}).all().then(function(res) {
+		        cb(!res ? true : false, res);
+		    });
+	    }, function(err, results) {
+		callback(err, results);
+	    });
+	} else {
+	    callback('not included', false);
+	}
+    };
+
     // ------------- static below
 
     Model.find = function(constraints, callback, options) {

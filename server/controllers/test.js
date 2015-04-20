@@ -29,7 +29,9 @@ var testControllerSave = function(req, res, next) {
 
 var testController = function(req, res, next) {
     Strategy.get("d1cb32be3c76489375e383e6ed53a736", function(result) {
-	res.json(result);
+	result.fetchRelationship('inspired_by', function(fetched) {
+	    res.json(fetched);
+	});
     });
 };
 
@@ -80,6 +82,6 @@ var testControllerFindQuery = function(req, res, next) {
 };
 
 module.exports = {
-    testController: testControllerFind,
+    testController: testController,
     testControllerQuery: testControllerFindQuery
 };
