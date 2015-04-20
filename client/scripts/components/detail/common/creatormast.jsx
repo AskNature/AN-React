@@ -16,10 +16,10 @@ var CreatorMast = React.createClass({
     // Default User should ultimately be defined somewhere else:
     var name, userid, avatar;
 
-    if(this.props.addedby && this.props.addedby[0]) {
-      name = this.props.addedby[0].first ? this.props.addedby[0].first + ' ' + this.props.addedby[0].last : this.props.addedby[0].name;
-      userid = this.props.addedby[0].masterid;
-      avatar = this.props.addedby[0].custom_avatar_url ? this.props.addedby[0].custom_avatar_url : 'http://www.asknature.org/images/uploads/user/'+userid+'/avatar/lg_avatar.jpg';
+    if(this.props.added_by && this.props.added_by[0]) {
+      name = this.props.added_by[0].first ? this.props.added_by[0].first + ' ' + this.props.added_by[0].last : this.props.added_by[0].name;
+      userid = this.props.added_by[0].masterid;
+      avatar = this.props.added_by[0].custom_avatar_url ? this.props.added_by[0].custom_avatar_url : 'http://www.asknature.org/images/uploads/user/'+userid+'/avatar/lg_avatar.jpg';
     } else {
       name = 'AskNature';
       userid = 'asknature';
