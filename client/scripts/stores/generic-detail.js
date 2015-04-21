@@ -35,7 +35,7 @@ var ThisStore = new Store({
     return _data || Defaults;
   },
   getMasterid: function() {
-    return _data.masterid;
+    return _data ? _data.masterid : null;
   },
   getEntityType: function() {
     return _type;
