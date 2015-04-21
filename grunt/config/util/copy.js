@@ -31,7 +31,7 @@ var taskConfig = function(grunt) {
                     '*.html',
                     'fonts/**/*.{woff,otf,ttf,eot,svg}',
                     'styles/**/*.{css,scss,gif}',
-                    'bower_components/components-font-awesome/fonts/**/*.{woff,woff2,otf,ttf,eot,svg}',
+                    'bower_components/fontawesome/fonts/**/*.{woff,woff2,otf,ttf,eot,svg}',
                     'bower_components/spinkit/scss/spinners/6-chasing-dots.scss'
                 ]
             }, {

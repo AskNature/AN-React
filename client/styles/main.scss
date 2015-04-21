@@ -16,7 +16,6 @@ $mid-text: #aaaaaa;
 
 // Injects all bower_component files automatically
 // bower:scss
-@import '../bower_components/components-font-awesome/scss/font-awesome.scss';
 @import '../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 // endbower
 
@@ -31,7 +30,6 @@ $mid-text: #aaaaaa;
 @import 'post/react-widgets.css';
 // [endcss_injector]
 
-$fa-font-path: '../bower_components/components-font-awesome/fonts';
 $light-text: $gray-light;
 
 *,
