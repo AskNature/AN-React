@@ -66,7 +66,7 @@ ThisStore.dispatcherToken = Dispatcher.register(function(payload) {
   if (action.actionType === Constants.FETCH_SUCCESS) {
       _loaded = true;
       _error = false;
-      _data = action.data;
+      _.assign(_data, action.data);
       _type = action.entityType;
       ThisStore.emitChange();
   } else if (action.actionType === Constants.FETCH_ERROR) {
@@ -87,7 +87,7 @@ ThisStore.dispatcherToken = Dispatcher.register(function(payload) {
       ThisStore.emitChange();
   } else if (action.actionType === Constants.CREATE) {
       _data = Defaults;
-      _loaded = true;
+      //_loaded = true;
       _type = action.entityType;
       _new = true;
       ThisStore.emitChange();

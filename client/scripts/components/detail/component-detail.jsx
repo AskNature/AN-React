@@ -69,9 +69,8 @@ var DetailComponent = React.createClass({
 
       componentWillMount: function(){
           var that = this;
-          if(this.props.masterid !== 'new') {
-              actions.fetch(this.props.type,this.props.masterid);
-          } else if(this.props.masterid === 'new'){
+          actions.fetch(this.props.type,this.props.masterid);
+	  if(this.props.masterid === 'new'){
               setTimeout(function() {
 	          actions.create(that.props.type);
 	      }, 1);

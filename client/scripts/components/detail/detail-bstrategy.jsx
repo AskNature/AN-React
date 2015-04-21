@@ -40,7 +40,7 @@ var Template = React.createClass({
 
     var split = primaryTitle.split(': ');
     primaryTitle = split[0];
-    secondaryTitle = split[1];
+    secondaryTitle = split.length > 1 ? split[1] : '';
 
     var descriptionKey = 'summary';
     var addedby = data.added_by;
