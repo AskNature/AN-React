@@ -1,6 +1,3 @@
-/**
-* Detail Edge Lists (component)
-*/
 'use strict';
 
 var React = require('react'),

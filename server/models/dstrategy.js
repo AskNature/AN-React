@@ -8,6 +8,29 @@ var entityName = 'InspiredSolutions';
 
 var fields = ['name', 'headline', 'special_text', 'challenges_solved', 'how_is_it_different', 'biomimicry_story', 'product_type', 'patent_name', 'availability', 'company', 'phase', 'patent_number', 'company_website', 'strategy', 'consumer_products', 'keywords', 'timestamp', 'flag_text', 'flag_media', 'flag_tags'];
 
+var Media = new Model('Media',
+  [
+    'filename',
+    'name',
+    'entity',
+    'description'
+  ]
+);
+var User = new Model('Users',
+  [
+    'name',
+    'first',
+    'last',
+    'custom_avatar_url'
+  ],
+  {'out_HasMedia':
+    {
+      model: Media,
+      className: 'Media',
+      edge:'out("HasMedia")'
+    }
+  }
+);
 var Strategy = new Model('Strategies',
     [
         'name',
@@ -32,18 +55,7 @@ var Expert = new Model('Expert',
         'institution'
     ]
 );
-var User = new Model('Users',
-    [
-        'name'
-    ]
-);
-var Media = new Model('Media',
-    [
-        'filename',
-        'name',
-        'entity'
-    ]
-);
+
 var DesignedSystem = new Model('DesignedSystem',
     [
         'name'
@@ -108,6 +120,16 @@ var relationships = {
         edge: 'out("HasStatus")',
         select: true,
         options: ListOptions.ContentStatus
+    },
+    'added_by': {
+	model: User,
+	className: 'Users',
+	edge: 'in("AddedContent")'
+    },
+    'collaborators': {
+	model: User,
+	className: 'Users',
+	edge: 'in("CollaboratedOn")'
     }
 };
 

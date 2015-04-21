@@ -59,7 +59,6 @@ var Template = React.createClass({
             secondarykey=''
             description={data[descriptionKey]}
             descriptionKey={descriptionKey}
-            addedby={addedby}
             />
 	        <Grid>
   	        <Row className='show-grid'>

@@ -15,27 +15,8 @@ var Expert = new Model('Expert',
     'institution'
   ]
 );
-var Media = new Model('Media',
-  [
-    'filename',
-    'name',
-    'entity',
-    'description'
-  ]
-);
-var InspiredSolution = new Model('InspiredSolutions',
-  [
-    'name',
-    'headline'
-  ],
-  {'out_HasMedia':
-    {
-      model: Media,
-      className: 'Media',
-      edge:'out("HasMedia")'
-    }
-  }
-);
+
+
 var Source = new Model('Sources',
   [
     'name',
@@ -48,12 +29,33 @@ var Entity = new Model('Entity',
     'name'
   ]
 );
+var Media = new Model('Media',
+  [
+    'filename',
+    'name',
+    'entity',
+    'description'
+  ]
+);
 var User = new Model('Users',
   [
     'name',
     'first',
     'last',
     'custom_avatar_url'
+  ],
+  {'out_HasMedia':
+    {
+      model: Media,
+      className: 'Media',
+      edge:'out("HasMedia")'
+    }
+  }
+);
+var InspiredSolution = new Model('InspiredSolutions',
+  [
+    'name',
+    'headline'
   ],
   {'out_HasMedia':
     {
@@ -118,7 +120,12 @@ var relationships = {
     'added_by': {
 	model: User,
 	className: 'Users',
-	edge: 'in("AddedStrategy")'
+	edge: 'in("AddedContent")'
+    },
+    'collaborators': {
+	model: User,
+	className: 'Users',
+	edge: 'in("CollaboratedOn")'
     },
     'living_systems': {
 	model: LivingSystem,
