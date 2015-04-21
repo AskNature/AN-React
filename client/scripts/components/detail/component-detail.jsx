@@ -68,10 +68,13 @@ var DetailComponent = React.createClass({
       },
 
       componentWillMount: function(){
+          var that = this;
           if(this.props.masterid !== 'new') {
               actions.fetch(this.props.type,this.props.masterid);
           } else if(this.props.masterid === 'new'){
-              actions.create(this.props.type);
+              setTimeout(function() {
+	          actions.create(that.props.type);
+	      }, 1);
 	      var newState = getState();
 	      newState.editable = true;
 	      this.setState(newState);
