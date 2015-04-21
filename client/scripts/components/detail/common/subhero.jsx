@@ -147,6 +147,16 @@ var SubHero = React.createClass({
                       title={'Contributor'}
                       fieldName={'Contributor'}
                       limit='1' />
+                    <RelationshipList
+                      items={this.props.collaborators}
+                      editable={this.props.editable}
+                      titleField='name'
+                      onAdd={this.props.onRelationshipAdd.bind(null, 'collaborators')}
+                      onRemove={this.props.onRelationshipRemove.bind(null, 'collaborators')}
+                      field={'oneuser'}
+                      routeName={'user1'}
+                      title={'Collaborators'}
+                      fieldName={'Collaborators'} />
                   </div>
 
                 : this.props.user.role === 'admin' ?

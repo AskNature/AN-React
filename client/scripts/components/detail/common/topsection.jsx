@@ -27,7 +27,9 @@ var TopSection = React.createClass({
             img='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg'
             entityname={this.props.entityName}
             timestamp={this.props.data.timestamp}
-            added_by={this.props.data.added_by} />
+            added_by={this.props.data.added_by}
+            collaborators={this.props.data.collaborators}
+            />
         ) }
         <Hero
           editable={this.props.editable}
@@ -67,6 +69,7 @@ var TopSection = React.createClass({
           onBooleanSet={this.props.onBooleanSet}
           user={this.props.user}
           added_by={this.props.data.added_by}
+          collaborators={this.props.data.collaborators}
           editorComments={this.props.data.editor_comments}
           flags={{'flagText':this.props.data.flag_text, 'flagMedia':this.props.data.flag_media,'flagTags':this.props.data.flag_tags}} />
       </div>

@@ -120,6 +120,11 @@ var relationships = {
 	className: 'Users',
 	edge: 'in("AddedStrategy")'
     },
+    'collaborators': {
+	model: User,
+	className: 'Users',
+	edge: 'in("CollaboratedOn")'
+    },
     'living_systems': {
 	model: LivingSystem,
 	className: 'LivingSystem',

@@ -69,6 +69,10 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 3px;
 }
 
+.tooltip, .popover {
+  transition: none;
+}
+
 
 label, .label {
   font-weight: 800;
@@ -214,7 +218,8 @@ Top Navbar
 .navbar-inverse {
   background: $primary-color;
   height: 62px;
-  box-shadow: none;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  z-index: 10000;
   .navbar-brand {
     color: #333;
     margin-left: -15px;
@@ -279,10 +284,10 @@ Top Navbar
       float: left;
     >a {
       padding-bottom: 20.5px;
-      &.loggedin-menu {
-        padding-top: 11px;
-        padding-bottom: 4px;
-      }
+    }
+    &.loggedin-menu>a {
+      padding-top: 11px;
+      padding-bottom: 4px;
     }
   }
   .navbar-nav {
