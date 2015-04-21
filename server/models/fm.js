@@ -9,6 +9,29 @@ var entityName = 'Function';
 
 var fields = ['name', 'short_name', 'description', 'flag_text', 'flag_media', 'flag_tags'];
 
+var Media = new Model('Media',
+  [
+    'filename',
+    'name',
+    'entity',
+    'description'
+  ]
+);
+var User = new Model('Users',
+  [
+    'name',
+    'first',
+    'last',
+    'custom_avatar_url'
+  ],
+  {'out_HasMedia':
+    {
+      model: Media,
+      className: 'Media',
+      edge:'out("HasMedia")'
+    }
+  }
+);
 var FM = new Model('FM',
     [
         'name'
@@ -54,6 +77,16 @@ var relationships = {
         edge: 'out("HasStatus")',
         select: true,
         options: ListOptions.ContentStatus
+    },
+    'added_by': {
+	model: User,
+	className: 'Users',
+	edge: 'in("AddedContent")'
+    },
+    'collaborators': {
+	model: User,
+	className: 'Users',
+	edge: 'in("CollaboratedOn")'
     }
 
 };
