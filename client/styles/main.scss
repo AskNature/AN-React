@@ -278,14 +278,14 @@ Top Navbar
     }
   }
   .navbar-header.pull-right.nav
+
   >li{
-      float: left;
-    >a {
-      padding-bottom: 20.5px;
-    }
-    &.loggedin-menu>a {
-      padding-top: 11px;
+    float: left;
+
+// Temp fix for mismatched react-bootstrap versions:
+    &a.loggedin-menu, &.loggedin-menu > a {
       padding-bottom: 4px;
+      padding-top: 11px;
     }
   }
   .navbar-nav {
