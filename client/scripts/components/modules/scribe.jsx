@@ -51,7 +51,7 @@ var ScribeTextField = React.createClass({
     render: function() {
         return (
 	    <div>
-	        {this.state.html == "" ? <div style={{position: 'absolute', color: '#999'}}>{this.props.placeholder}</div> : ""}
+	        {this.state.html == "" ? <div style={{position: 'absolute', color: '#999', zIndex: -10}}>{this.props.placeholder}</div> : ""}
 	        <div class="dotted" contentEditable="true" ref="scribe" style={{"outline" : "none", "border-bottom": "1px solid #ddd"}}/>
 	    </div>
 	)
