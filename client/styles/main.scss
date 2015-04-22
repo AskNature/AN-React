@@ -129,6 +129,27 @@ Creator Mast
 .panel.creator-mast {
   background: $paper-color;
   box-shadow: none;
+  li.dropdown {
+    display: inline;
+  }
+  > div > .media, .media-body {
+    overflow: visible;
+    .dropdown-menu {
+      padding:0;
+      li {
+        padding: 10px;
+        &:hover {
+          background: $gray-lighter;
+        }
+      }
+
+      .media, .media-body {
+        width: auto;
+        margin-top: 0;
+
+      }
+    }
+  }
 }
 
 /* ==========================================================================

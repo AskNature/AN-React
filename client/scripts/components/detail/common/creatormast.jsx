@@ -9,6 +9,8 @@ Avatar = require('react-avatar'),
 
 moment = require('moment'),
 
+DropdownButton = require('react-bootstrap').DropdownButton,
+MenuItem = require('react-bootstrap').MenuItem,
 OverlayTrigger = require('react-bootstrap').OverlayTrigger,
 Popover = require('react-bootstrap').Popover,
 Panel = require('react-bootstrap').Panel;
@@ -21,23 +23,23 @@ var Colabs = React.createClass({
       {this.props.colabs.map(function(colab, i){
         var avatar = colab.custom_avatar_url ? colab.custom_avatar_url : 'http://www.asknature.org/images/uploads/user/'+colab.masterid+'/avatar/lg_avatar.jpg';
         return (
-          <div className='media' key={i}>
-            <div className='media-left media-middle'>
-              <Link url={'/1user/' + colab.masterid}>
-                <Avatar name={name} src={avatar} round size={30} />
-              </Link>
+          <MenuItem eventKey={'1.'+i}>
+            <Link url={'/1user/' + colab.masterid}>
+            <div className='media'>
+              <div className='media-left media-middle'>
+                  <Avatar name={name} src={avatar} round size={30} />
+              </div>
+              <div className='media-body media-middle'>
+                <h6>
+                    <strong> {colab.first ? colab.first + ' ' + colab.last : colab.name}</strong>
+                </h6>
+              </div>
             </div>
-            <div className='media-body media-middle'>
-              <h6>
-                <Link url={'/1user/' + colab.masterid}>
-                  <strong> {colab.first ? colab.first + ' ' + colab.last : colab.name}</strong>
-                </Link>
-              </h6>
-            </div>
-          </div>
+            </Link>
+          </MenuItem>
         );
       })}
-      </div>
+    </div>
     );
   }
 });
@@ -74,14 +76,22 @@ var CreatorMast = React.createClass({
               <strong> {name}</strong>
             </Link>
             {this.props.collaborators && this.props.collaborators[0] ? (
-              <span> and
-                <OverlayTrigger placement='bottom' trigger='click' overlay={<Popover><Colabs colabs={this.props.collaborators} /></Popover>}>
-                  <strong>{this.props.collaborators.length > 1 ? (
-                    ' ' + this.props.collaborators.length + ' collaborators '
-                  ) : (
-                    ' one collaborator '
-                  ) }</strong>
-                </OverlayTrigger>
+              <span> and {' '}
+                <DropdownButton
+                  eventKey={1}
+                  bsStyle='link'
+                  noCaret
+                  title={
+                    this.props.collaborators.length > 1 ? (
+                      ' ' + this.props.collaborators.length + 'collaborators'
+                    ) : (
+                      'one collaborator'
+                    )
+                  }
+                  navItem={true}>
+                  <Colabs colabs={this.props.collaborators} />
+                </DropdownButton>
+                {' '}
               </span>
             ) : ' '}
               contributed this <strong>{this.props.entityname}</strong>  {relTime}
