@@ -106,16 +106,6 @@ label, .label {
   box-shadow: none;
 }
 
-[contentEditable] {
-  outline: none;
-  border-bottom: 1px dotted #666;
-  &:before:empty{
-    content:attr(data-ph);
-    color:yellow;
-    font-style:italic;
-  }
-}
-
 .overflow-scroll {
   width: 100%;
   display: block;
@@ -542,6 +532,32 @@ h4.card-name {
 }
 
 /* ==========================================================================
+Scribe
+========================================================================== */
+
+.placeholder {
+  position: absolute;
+  opacity: 0.7;
+  z-index: 0;
+}
+
+.editable {
+
+}
+
+[contentEditable] {
+  outline: none;
+  background: rgba(215,228,80,.3);
+  position: relative;
+  z-index: 1;
+  &:before:empty{
+    content:attr(data-ph);
+    color:yellow;
+    font-style:italic;
+  }
+}
+
+/* ==========================================================================
 Hero
 ========================================================================== */
 .hero {
@@ -580,7 +596,7 @@ Hero
       }
     }
     h2 {
-      color: #efefef;
+      color: $white-color;
       padding-bottom:5px;
     }
     i {
