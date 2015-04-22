@@ -4,6 +4,8 @@ var React = require('react');
 var Infinite = require('react-infinite-extended');
 var routeActions = require('../../actions/routes');
 
+var _ = require('lodash');
+
 var InfiniteList = React.createClass({
     getInitialState: function() {
         return {
@@ -12,16 +14,17 @@ var InfiniteList = React.createClass({
             extendedHeight: 0,
             extendedBlock: undefined,
             extendedIndex: undefined,
-            containerHeight: window.innerHeight - 60
+            containerHeight: window.innerHeight - 70
         }
     },
 
     handleResize: function(e) {
-        this.setState({containerHeight: window.innerHeight - 60});
+        this.setState({containerHeight: window.innerHeight - 70});
     },
 
     componentDidMount: function() {
         window.addEventListener('resize', this.handleResize);
+	this.extend(0);
     },
 
     componentDidUnmount: function() {
@@ -29,7 +32,12 @@ var InfiniteList = React.createClass({
     },
 
     componentWillReceiveProps: function(newProps) {
-        this.setState({elements: newProps.elements});
+        var that = this;
+	var i = 0;
+        var newElements = _.map(newProps.elements, function(r) {
+	    return <that.props.itemComponent key={r.masterid} data={r} heightUpdateListener={that.heightUpdateListener} num={i++} />;
+	});
+        this.setState({elements: newElements});
     },
 
     extendListener: function(num) {
@@ -48,8 +56,11 @@ var InfiniteList = React.createClass({
         };
     },
 
-    heightUpdateListener: function(height) {
-        this.setState({extendedHeight: height-this.props.itemHeight});
+    heightUpdateListener: function(height, num) {
+        console.log('heightupdatelistener' + height);
+        if(num === this.state.extendedIndex) {
+	    this.setState({extendedHeight: height-this.props.itemHeight});
+	}
     },
 
     buildElements: function(start, end) {
@@ -83,7 +94,7 @@ var InfiniteList = React.createClass({
 
     extend: function(num) {
         this.contract(this.state.extendedIndex);
-        this.state.elements[num] = <this.props.extendedItemComponent num={num} key={num} contractListener={this.contractListener} heightUpdateListener={this.heightUpdateListener} />;
+        //this.state.elements[num] = <this.props.extendedItemComponent num={num} key={num} contractListener={this.contractListener} heightUpdateListener={this.heightUpdateListener} />;
         this.setState({extendedBlock: Math.floor((num*this.props.itemHeight)/125), extendedIndex: num});
     },
 
@@ -96,8 +107,8 @@ var InfiniteList = React.createClass({
 
     scrollCallback: function(num) {
         console.log(num);
-	console.log(this.state.elements[num].props.data.masterid);
-	if(this.props.routeOnScroll) { routeActions.setRoute('/infinite_demo/'+this.props.query+'/'+this.state.elements[num].props.data.masterid);}
+	//console.log(this.state.elements[num].props.data.masterid);
+	//if(this.props.routeOnScroll) { routeActions.setRoute('/infinite_demo/'+this.props.query+'/'+this.state.elements[num].masterid);}
 	if (this.props.scrollCallback) { this.props.scrollCallback(num) }
     },
 

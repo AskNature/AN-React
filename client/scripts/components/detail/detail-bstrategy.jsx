@@ -27,6 +27,11 @@ var Template = React.createClass({
       return false;
     }
   },*/
+  componentDidMount: function() {
+      var myHeight = this.getDOMNode().offsetHeight;
+      console.log("height" + myHeight);
+      this.props.heightUpdateListener ? this.props.heightUpdateListener(this.getDOMNode().offsetHeight) : '';
+  },
   render: function() {
     var routeNameSingle = 'b.strategy';
     var entityName = 'Biological Strategy';
