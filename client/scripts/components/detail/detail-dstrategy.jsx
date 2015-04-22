@@ -54,21 +54,21 @@ var Template = React.createClass({
                 editable={this.props.editable}
                 onAdd={this.props.onRelationshipAdd.bind(null, 'designedsystems')}
                 onRemove={this.props.onRelationshipRemove.bind(null, 'designedsystems')}
-                field={'d.system'}
+                field='d.system'
                 routeName='d.system'
                 title='Designed Systems'
                 fieldName='Designed System'
-                titleField={'name'} />
+                titleField='name' />
                 <RelationshipList
                   items={data.context}
                   editable={this.props.editable}
                   titleField='name'
                   onAdd={this.props.onRelationshipAdd.bind(null, 'context')}
                   onRemove={this.props.onRelationshipRemove.bind(null, 'context')}
-                  field={'context'}
-                  routeName={'context'}
-                  title={'Context'}
-                  fieldName={'Context'}/>
+                  field='context'
+                  routeName='context'
+                  title='Contexts'
+                  fieldName='Contexts'/>
             </Col>
             <Col xs={6} sm={4}>
               <RelationshipList
@@ -76,11 +76,11 @@ var Template = React.createClass({
                 editable={this.props.editable}
                 onAdd={this.props.onRelationshipAdd.bind(null, 'mechanisms')}
                 onRemove={this.props.onRelationshipRemove.bind(null, 'mechanisms')}
-                field={'fm'}
+                field='fm'
                 routeName='fm'
                 title='Mechanisms'
                 fieldName='Mechanisms'
-                titleField={'name'} />
+                titleField='name' />
             </Col>
             <Col xs={6} sm={4}>
               <RelationshipList
@@ -88,11 +88,11 @@ var Template = React.createClass({
                 editable={this.props.editable}
                 onAdd={this.props.onRelationshipAdd.bind(null, 'functions')}
                 onRemove={this.props.onRelationshipRemove.bind(null, 'functions')}
-                field={'fm'}
+                field='fm'
                 routeName='fm'
                 title='Functions'
                 fieldName='Functions'
-                titleField={'name'} />
+                titleField='name' />
             </Col>
             <Col xs={12} sm={8}>
               <RelationshipList
@@ -100,11 +100,11 @@ var Template = React.createClass({
                 editable={this.props.editable}
                 onAdd={this.props.onRelationshipAdd.bind(null, 'strategies')}
                 onRemove={this.props.onRelationshipRemove.bind(null, 'strategies')}
-                field={'b.strategy'}
+                field='b.strategy'
                 routeName='b.strategy'
                 title='Inspiring Biological Strategies'
                 fieldName='Biological Strategy'
-                titleField={'name'} />
+                titleField='name' />
             </Col>
           </Row>
         </Grid>
@@ -146,29 +146,29 @@ var Template = React.createClass({
               <Col xs={12} sm={6}>
 
                   <RelationshipList
-                    items={data.sources}
+                    items={data.has_source}
                     editable={this.props.editable}
                     titleField='name'
                     subtitleField='authors'
-                    onAdd={this.props.onRelationshipAdd.bind(null, 'sources')}
-                    onRemove={this.props.onRelationshipRemove.bind(null, 'sources')}
-                    field={'source'}
-                    routeName={'source'}
-                    title={'Sources'}
-                    fieldName={'Sources'}/>
+                    onAdd={this.props.onRelationshipAdd.bind(null, 'has_source')}
+                    onRemove={this.props.onRelationshipRemove.bind(null, 'has_source')}
+                    field='source'
+                    routeName='source'
+                    title='Sources'
+                    fieldName='Sources'/>
               </Col>
               <Col xs={12} sm={6}>
                 <RelationshipList
-                  items={data.experts}
+                  items={data.studied_by}
                   editable={this.props.editable}
                   titleField='name'
                   subtitleField='institution'
-                  onAdd={this.props.onRelationshipAdd.bind(null, 'experts')}
-                  onRemove={this.props.onRelationshipRemove.bind(null, 'experts')}
-                  field={'researcher'}
-                  routeName={'researcher'}
-                  title={'Researched By'}
-                  fieldName={'Researched By'}/>
+                  onAdd={this.props.onRelationshipAdd.bind(null, 'studied_by')}
+                  onRemove={this.props.onRelationshipRemove.bind(null, 'studied_by')}
+                  field='researcher'
+                  routeName='researcher'
+                  title='R&D Teams'
+                  fieldName='R&D Teams' />
               </Col>
             </Row>
           </Grid>

@@ -84,12 +84,12 @@ var relationships = {
         className: 'Media',
         edge: 'out("HasMedia")'
     },
-    'experts': {
+    'studied_by': {
         model: Expert,
         className: 'Expert',
         edge: 'in("StudiedBy")'
     },
-    'sources': {
+    'has_source': {
         model: Source,
         className: 'Sources',
         edge: 'out("HasSource")'

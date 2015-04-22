@@ -167,7 +167,6 @@ var SidebarComponent = React.createClass({
                                                 <Link url={'/list/'+item.slug}>
                                                     <FontAwesome
                                                         name={item.faIcon}
-                                                        
                                                         fixedWidth
                                                         className='pull-left' />
                                                         &nbsp; {item.label}

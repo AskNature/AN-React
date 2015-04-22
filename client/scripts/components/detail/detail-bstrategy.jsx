@@ -81,8 +81,8 @@ var Template = React.createClass({
                   onRemove={this.props.onRelationshipRemove.bind(null, 'context')}
                   field={'context'}
                   routeName={'context'}
-                  title={'Context'}
-                  fieldName={'Context'}/>
+                  title={'Contexts'}
+                  fieldName={'Contexts'}/>
       		    </Col>
       		    <Col xs={6} sm={4}>
                 <RelationshipList
@@ -141,7 +141,7 @@ var Template = React.createClass({
                       actions={this.props.actions}
                       fieldName={'brief'}
                       editable={this.props.editable}
-		                  placeholder="Enter a Story" />
+		                  placeholder="Add a Story" />
                     ) : '' }
                     {data.special_text || this.props.editable ? (
                       <TextArea
@@ -150,13 +150,14 @@ var Template = React.createClass({
                         store={this.props.store}
                         actions={this.props.actions}
                         fieldName={'special_text'}
-                        editable={this.props.editable} />
+                        editable={this.props.editable}
+                        placeholder='Add citations from linked sources' />
                     ) : '' }
                   </Col>
 	              </Row>
                 <Row className='show-grid'>
 		              <Col xs={12} sm={6}>
-                    <h6><strong>Your Inspired Ideas</strong></h6>
+                    <h6 className='heading'>Your Inspired Ideas & Lessons from Nature</h6>
                     <ul className='media-list'>
                       {data.application_1 ? (
                         <li className='media'>
@@ -218,8 +219,8 @@ var Template = React.createClass({
                     onRemove={this.props.onRelationshipRemove.bind(null, 'inspired_by')}
                     field={'d.strategy'}
                     routeName={'d.strategy'}
-                    title={'Inspired Designed Strategies'}
-                    fieldName={'Inspired Designed Strategies'}/>
+                    title={'Bio-inspired Strategies'}
+                    fieldName={'Bio-inspired Strategies'}/>
     				    </Col>
 	            </Row>
         			<Row className='show-grid'>
@@ -247,8 +248,8 @@ var Template = React.createClass({
                     onRemove={this.props.onRelationshipRemove.bind(null, 'experts')}
                     field={'researcher'}
                     routeName={'researcher'}
-                    title={'Researched By'}
-                    fieldName={'Researched By'} />
+                    title={'R&D Teams'}
+                    fieldName={'R&D Teams'} />
           			</Col>
         			</Row>
 			    </Grid>
