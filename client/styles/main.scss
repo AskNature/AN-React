@@ -288,13 +288,13 @@ Top Navbar
       }
     }
   }
-  .navbar-header.pull-right.nav
 
-  >li{
+  .pull-right.nav {
     float: left;
-
-// Temp fix for mismatched react-bootstrap versions:
-    &a.loggedin-menu, &.loggedin-menu > a {
+    a {
+      padding-top: 19px;
+    }
+    li.loggedin-menu>a, a.loggedin-menu {
       padding-bottom: 4px;
       padding-top: 11px;
     }
@@ -497,6 +497,7 @@ h4.card-name {
       margin: -13px -16px -20px;
       padding: 0px 15px;
       height: auto;
+      min-height: 65px;
       overflow: hidden;
       background: #fff;
       border-radius: 3px;
@@ -505,26 +506,40 @@ h4.card-name {
         margin-left: -15px;
         margin-right: 10px;
       }
-    }
-    .minihero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: rgba(158,171,15,.7);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      a {
-        color: rgba(255,255,255,.6);
-        &:hover {
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        background: rgba(158,171,15,.7);
+        opacity: 0;
+        transition: all .5s ease;
+        border-radius: 3px;
+        h6 {
           color: $white-color;
-          background-color: transparent;
+          font-weight: 600;
+          margin: 10px 15px -5px;
+          white-space: normal;
         }
-      }
-      &.visible {
-        opacity: 1;
+        a {
+          color: rgba(255,255,255,.6);
+          transition: all .1s linear;
+          &:hover, &:focus {
+            color: $white-color;
+            background-color: transparent;
+          }
+        }
 
+      }
+      &.focused {
+        >h6, h4 {
+          opacity: .2;
+        }
+        .overlay {
+          opacity: 1;
+
+        }
       }
     }
   }

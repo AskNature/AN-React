@@ -28,7 +28,7 @@ var MiniHero = React.createClass({
       }
     }
     return (
-      <div className='minihero'>
+      <div className={this.props.showOverlay ? 'focused minihero' : 'minihero'}>
         {this.props.media ? (
           <img src={thumburl} width='100px' height='auto' />
         ) : ''}
@@ -40,18 +40,19 @@ var MiniHero = React.createClass({
           <br/>
           <small>{this.props.subtitle}</small>
         </h4>
-        <div className={this.props.showOverlay ? 'visible minihero-overlay' : 'minihero-overlay'}>
+        <div className='overlay'>
+          <h6>{this.props.title}</h6>
           <Nav justified activeKey={0} bsStyle='pills' bsSize='large'>
             <NavItem
               eventKey={1}
               onClick={this.props.link}>
-              <FontAwesome name='search' size='2x' fixedWidth />
+              <FontAwesome name='search' size='lg' fixedWidth />
             </NavItem>
             <NavItem eventKey={2}>
-              <FontAwesome name='link' size='2x' fixedWidth />
+              <FontAwesome name='link' size='lg' fixedWidth />
             </NavItem>
             <NavItem eventKey={3}>
-              <FontAwesome name='ellipsis-v' size='2x' fixedWidth />
+              <FontAwesome name='ellipsis-v' size='lg' fixedWidth />
             </NavItem>
           </Nav>
         </div>
