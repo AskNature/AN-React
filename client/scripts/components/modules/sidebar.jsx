@@ -59,7 +59,7 @@ var listItems = [
     },
     {
         'label' : 'Stories',
-        'slug' : '#',
+        'slug' : 'story',
         'faIcon' : 'newspaper-o'
     },
     {
