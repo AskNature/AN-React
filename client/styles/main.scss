@@ -483,51 +483,50 @@ h4.card-name {
 }
 
 .relationship-button {
-  .btn-group {
-    width: 100%;
+  .btn {
     margin-bottom: 10px;
     box-shadow: 1px 6px 15px rgba(0,0,0,0.08);
-
-  }
-  .btn {
     height: auto;
     border: none;
-    box-shadow: none;
-    &:first-child {
-      width: 90%;
-      text-transform: none;
-      text-align: left;
-      padding-top: 13px;
-      padding-bottom: 20px;
-      color: #fff;
-    }
-    &.dropdown-toggle {
-      width: 10%;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      background-image: none !important;
-    }
+    text-transform: none;
+    text-align: left;
+    padding-top: 13px;
+    padding-bottom: 20px;
     .minihero {
-      // background: rgba(255,255,255,0.7);
+      position: relative;
       margin: -13px -16px -20px;
       padding: 0px 15px;
       height: auto;
       overflow: hidden;
       background: #fff;
-      border-bottom-left-radius: 3px;
-      border-top-left-radius: 3px;
+      border-radius: 3px;
       img {
         float: left;
         margin-left: -15px;
         margin-right: 10px;
       }
     }
-  }
-  .dropdown-menu {
-    left: inherit;
-    right: 0;
-    float: right;
+    .minihero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(158,171,15,.7);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      a {
+        color: rgba(255,255,255,.6);
+        &:hover {
+          color: $white-color;
+          background-color: transparent;
+        }
+      }
+      &.visible {
+        opacity: 1;
+
+      }
+    }
   }
 }
 
@@ -541,9 +540,6 @@ Scribe
   z-index: 0;
 }
 
-.editable {
-
-}
 
 [contentEditable] {
   outline: none;
