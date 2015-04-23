@@ -26,7 +26,9 @@ ResearcherDetail = require('./detail-researcher.jsx'),
 SourceDetail = require('./detail-source.jsx'),
 BStrategyDetail = require('./detail-bstrategy.jsx'),
 UserDetail = require('./detail-user.jsx'),
-OneUserDetail = require('./detail-1user.jsx');
+OneUserDetail = require('./detail-1user.jsx'),
+StoryDetail = require('./detail-story.jsx');
+
 
 var getState = function() {
   return {
@@ -55,7 +57,7 @@ var Loader = React.createClass({
 
 var DetailComponent = React.createClass({
 
-      mixins: [store.mixin],
+      mixins: [store.mixin, accountStore.mixin],
 
       getInitialState: function() {
           return (
@@ -164,6 +166,8 @@ var DetailComponent = React.createClass({
           Template = ResearcherDetail;
         } else if(this.props.type === 'sources') {
           Template = SourceDetail;
+        } else if(this.props.type === 'story') {
+          Template = StoryDetail;
         }
         /*if(this.state.loaded === false) {
           actions.fetch(this.props.type,this.props.masterid);

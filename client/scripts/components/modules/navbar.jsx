@@ -17,11 +17,10 @@ DropdownButton = require('react-bootstrap').DropdownButton;
 
 var routeActions = require('../../actions/routes');
 
-var transitionRoute = function(eventKey, href) {
-    routeActions.setRoute(href);
-};
-
 var NavbarComponent = React.createClass({
+  transitionRoute: function(eventKey, href) {
+    routeActions.setRoute(href);
+  },
     render: function() {
       var brand = <Link url="/">AN</Link>;
       var account = this.props.account;
@@ -32,14 +31,14 @@ var NavbarComponent = React.createClass({
         <Nav right navbar-header className="pull-right navbar-header">
           <DropdownButton noCaret title={<Avatar size='40' round />} className='loggedin-menu'>
             <MenuItem eventKey='0' className='disabled'>{greeting}</MenuItem>
-            <MenuItem eventKey="1"><Link url={settingsurl}>My Account</Link></MenuItem>
+            <MenuItem eventKey="1" href={settingsurl} onClick={this.transitionRoute}>My Account</MenuItem>
             <MenuItem divider />
-            <MenuItem eventKey="2"><a href="#" onClick={this.props.accountActions.logoutUser}>Log Out</a></MenuItem>
+            <MenuItem eventKey="2" onClick={this.props.accountActions.logoutUser}>Log Out</MenuItem>
           </DropdownButton>
         </Nav>
       ) : (
         <Nav right navbar-header className="pull-right navbar-header">
-          <NavItem href="/login" onSelect={transitionRoute}>Sign In</NavItem>
+          <NavItem href="/login" onClick={this.transitionRoute}>Sign In</NavItem>
         </Nav>
       );
         return (
