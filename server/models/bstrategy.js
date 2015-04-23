@@ -68,7 +68,8 @@ var InspiredSolution = new Model('InspiredSolutions',
 var LivingSystem = new Model('LivingSystem',
   [
     'name',
-    'taxon'
+    'taxon',
+    'common_name'
   ]
 );
 var Condition = new Model('Condition',
