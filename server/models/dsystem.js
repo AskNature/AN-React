@@ -42,13 +42,44 @@ var Status = new Model('ContentStatus',
       'name'
   ]
 );
+var Source = new Model('Sources',
+    [
+        'name',
+        'publication_year',
+        'authors'
+    ]
+);
+var Expert = new Model('Expert',
+    [
+        'name',
+        'institution'
+    ]
+);
+var Media = new Model('Media',
+  [
+    'filename',
+    'name',
+    'entity',
+    'description'
+  ]
+);
 
 
 var relationships = {
-    'has_dsystem': {
+  'parent': {
+      model: Entity,
+      className: 'DSystem',
+      edge: 'out("ChildSystemOf")'
+  },
+  'children': {
+      model: Entity,
+      className: 'DSystem',
+      edge: 'in("ChildSystemOf")'
+  },
+  'has_dsystem': {
 	model: Entity,
-	className: 'Entity',
-	edge: 'in("HasDesignedSystem")'
+	className: 'InspiredSolutions',
+	edge: 'in("HasDSystem")'
     },
     'status': {
     model: Status,
@@ -56,6 +87,21 @@ var relationships = {
     edge: 'out("HasStatus")',
     select: true,
     options: ListOptions.ContentStatus
+  },
+  'studied_by': {
+      model: Expert,
+      className: 'Experts',
+      edge: 'in("StudiedBy")'
+  },
+  'has_source': {
+      model: Source,
+      className: 'Source',
+      edge: 'out("HasSource")'
+  },
+  'media': {
+model: Media,
+className: 'Image',
+edge: 'out("HasMedia")'
   },
   'added_by': {
 model: User,

@@ -44,7 +44,7 @@ var Template = React.createClass({
                 editable={this.props.editable}
                 onAdd={this.props.onRelationshipAdd.bind(null, 'parent')}
                 onRemove={this.props.onRelationshipRemove.bind(null, 'parent')}
-                field={'fm'}
+                field='fm'
                 routeName='fm'
                 title='More General Functions & Mechanisms'
                 fieldName='More General Functions & Mechanisms'
@@ -65,33 +65,29 @@ var Template = React.createClass({
                 editable={this.props.editable}
                 onAdd={this.props.onRelationshipAdd.bind(null, 'children')}
                 onRemove={this.props.onRelationshipRemove.bind(null, 'children')}
-                field={'fm'}
+                field='fm'
                 routeName='fm'
                 title='More Specific Functions & Mechanisms'
                 fieldName='More Specific Functions & Mechanisms'
-                titleField={'name'} />
+                titleField='name' />
             </Col>
             <Col xs={12} sm={4}>
               <RelationshipList
                 items={data.mechanism}
-                editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'mechanism')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'mechanism')}
-                field={'mechanism'}
-                title={'Listed as a Mechanism in'}
-                fieldName={'Listed as a Mechanism in'}
-                titleField={'name'} />
+                editable={false}
+                field='content'
+                title='Listed as a Mechanism in'
+                fieldName='Listed as a Mechanism in'
+                titleField='name' />
             </Col>
             <Col xs={12} sm={4}>
               <RelationshipList
-                items={data.outcome}
-                editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'outcome')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'outcome')}
-                field={'outcome'}
-                title={'Listed as an Outcome in'}
-                fieldName={'Listed as an Outcome in'}
-                titleField={'name'} />
+                items={data.function}
+                editable={false}
+                field='content'
+                title='Listed as a Function in'
+                fieldName='Listed as a Function in'
+                titleField='name' />
             </Col>
           </Row>
         </Grid>

@@ -32,7 +32,7 @@ var listItems = [
         'faIcon' : 'leaf'
     },
     {
-        'label' : 'Designed Strategies',
+        'label' : 'Bio-inspired Strategies',
         'slug' : 'd.strategy',
         'faIcon' : 'recycle'
     },
@@ -45,7 +45,7 @@ var listItems = [
         'faIcon' : 'fire'
     },
     {
-        'label' : 'Context',
+        'label' : 'Contexts',
         'slug' : 'context',
         'faIcon' : 'cloud'
     },
@@ -73,7 +73,7 @@ var listItems = [
         'faIcon' : 'quote-left'
     },
     {
-        'label' : 'Teams',
+        'label' : 'R&D Teams',
         'slug' : 'researchers',
         'faIcon' : 'university'
     },
@@ -167,7 +167,6 @@ var SidebarComponent = React.createClass({
                                                 <Link url={'/list/'+item.slug}>
                                                     <FontAwesome
                                                         name={item.faIcon}
-                                                        
                                                         fixedWidth
                                                         className='pull-left' />
                                                         &nbsp; {item.label}

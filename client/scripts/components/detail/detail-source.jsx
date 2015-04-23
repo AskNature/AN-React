@@ -21,7 +21,7 @@ var Template = React.createClass({
 
   render: function() {
     var routeNameSingle = 'source';
-    var entityName = 'Sources';
+    var entityName = 'Source';
     var data = this.props.data;
     var primaryKey = 'name';
     var secondaryKey = 'authors';
@@ -53,8 +53,8 @@ var Template = React.createClass({
                   onRemove={this.props.onRelationshipRemove.bind(null, 'context')}
                   field={'context'}
                   routeName={'context'}
-                  title={'Context'}
-                  fieldName={'Context'}/>
+                  title={'Contexts'}
+                  fieldName={'Contexts'}/>
       		    </Col>
       		    <Col xs={6} sm={4}>
                 <RelationshipList

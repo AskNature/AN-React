@@ -53,22 +53,22 @@ var Entity = new Model('Entity',
 var relationships = {
     'parent': {
 	model: FM,
-	className: 'Parent',
+	className: 'Function',
 	edge: 'out("ChildOf")'
     },
     'children': {
         model: FM,
-        className: 'Children',
+        className: 'Function',
         edge: 'in("ChildOf")'
     },
-    'outcome': {
+    'function': {
         model: Entity,
-        className: 'Outcome',
+        className: 'Content',
         edge: 'in("HasFunction")'
     },
     'mechanism': {
         model: Entity,
-        className: 'Mechanism',
+        className: 'Content',
         edge: 'in("HasMechanism")'
     },
     'status': {

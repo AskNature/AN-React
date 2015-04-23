@@ -48,8 +48,8 @@ var Template = React.createClass({
                   onRemove={this.props.onRelationshipRemove.bind(null, 'living_systems')}
                   field={'living_systems'}
                   routeName={'b.system'}
-                  title={'Higher Level System'}
-                  fieldName={'Higher Level System'}/>
+                  title={'More General Systems'}
+                  fieldName={'More General Systems'}/>
                   <Button bsStyle='link' block
                         disabled={true} >
                       <Glyphicon glyph='arrow-down' />
@@ -75,8 +75,8 @@ var Template = React.createClass({
                   onRemove={this.props.onRelationshipRemove.bind(null, 'living_systems')}
                   field={'living_systems'}
                   routeName={'b.system'}
-                  title={'Lower Level System'}
-                  fieldName={'Lower Level System'}/>
+                  title={'More Specific Systems'}
+                  fieldName={'More Specific Systems'}/>
               </Col>
               <Col xs={6} sm={4}>
                 <RelationshipList
@@ -110,8 +110,8 @@ var Template = React.createClass({
                       onRemove={this.props.onRelationshipRemove.bind(null, 'researchers')}
                       field={'researchers'}
                       routeName={'researchers'}
-                      title={'Studied by'}
-                      fieldName={'Studied by'}/>
+                      title={'R&D Teams'}
+                      fieldName={'R&D Teams'}/>
                 </Col>
               </Row>
              </Grid>
