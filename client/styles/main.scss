@@ -530,10 +530,14 @@ h4.card-name {
         left: 0;
         right: 0;
         height: 100%;
-        background: rgba(158,171,15,.7);
+        background: rgba(158,171,15,1);
         opacity: 0;
-        transition: all .5s ease;
+        transition: all .2s ease;
         border-radius: 3px;
+        >nav {
+          position: absolute;
+          bottom: 5%;
+        }
         h6 {
           color: $white-color;
           font-weight: 600;
@@ -541,8 +545,7 @@ h4.card-name {
           white-space: normal;
         }
         .nav>li>a {
-          color: rgba(255,255,255,.6);
-          transition: all .1s linear;
+          color: rgba(255,255,255,.4);
           &:hover, &:focus {
             color: $white-color;
             background-color: transparent;
@@ -552,9 +555,7 @@ h4.card-name {
 
       }
       &.focused {
-        >h6, h4 {
-          opacity: .2;
-        }
+
         .overlay {
           opacity: 1;
 
