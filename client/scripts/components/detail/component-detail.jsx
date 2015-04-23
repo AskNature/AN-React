@@ -57,7 +57,7 @@ var Loader = React.createClass({
 
 var DetailComponent = React.createClass({
 
-      mixins: [store.mixin],
+      mixins: [store.mixin, accountStore.mixin],
 
       getInitialState: function() {
           return (
