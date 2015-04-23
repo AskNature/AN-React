@@ -288,13 +288,13 @@ Top Navbar
       }
     }
   }
-  .navbar-header.pull-right.nav
 
-  >li{
+  .pull-right.nav {
     float: left;
-
-// Temp fix for mismatched react-bootstrap versions:
-    &a.loggedin-menu, &.loggedin-menu > a {
+    a {
+      padding-top: 19px;
+    }
+    li.loggedin-menu>a, a.loggedin-menu {
       padding-bottom: 4px;
       padding-top: 11px;
     }
@@ -483,51 +483,66 @@ h4.card-name {
 }
 
 .relationship-button {
-  .btn-group {
-    width: 100%;
+  .btn {
     margin-bottom: 10px;
     box-shadow: 1px 6px 15px rgba(0,0,0,0.08);
-
-  }
-  .btn {
     height: auto;
     border: none;
-    box-shadow: none;
-    &:first-child {
-      width: 90%;
-      text-transform: none;
-      text-align: left;
-      padding-top: 13px;
-      padding-bottom: 20px;
-      color: #fff;
-    }
-    &.dropdown-toggle {
-      width: 10%;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      background-image: none !important;
-    }
+    text-transform: none;
+    text-align: left;
+    padding: 0;
     .minihero {
-      // background: rgba(255,255,255,0.7);
-      margin: -13px -16px -20px;
-      padding: 0px 15px;
+      position: relative;
+      padding: 13px 15px;
       height: auto;
-      overflow: hidden;
+      min-height: 65px;
       background: #fff;
-      border-bottom-left-radius: 3px;
-      border-top-left-radius: 3px;
+      border-radius: 3px;
+      >h6 {
+        margin-top: 0;
+      }
       img {
         float: left;
         margin-left: -15px;
         margin-right: 10px;
       }
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        background: rgba(158,171,15,.7);
+        opacity: 0;
+        transition: all .5s ease;
+        border-radius: 3px;
+        h6 {
+          color: $white-color;
+          font-weight: 600;
+          margin: 10px 15px -5px;
+          white-space: normal;
+        }
+        .nav>li>a {
+          color: rgba(255,255,255,.6);
+          transition: all .1s linear;
+          &:hover, &:focus {
+            color: $white-color;
+            background-color: transparent;
+          }
+
+        }
+        
+      }
+      &.focused {
+        >h6, h4 {
+          opacity: .2;
+        }
+        .overlay {
+          opacity: 1;
+
+        }
+      }
     }
-  }
-  .dropdown-menu {
-    left: inherit;
-    right: 0;
-    float: right;
   }
 }
 
@@ -541,9 +556,6 @@ Scribe
   z-index: 0;
 }
 
-.editable {
-
-}
 
 [contentEditable] {
   outline: none;
