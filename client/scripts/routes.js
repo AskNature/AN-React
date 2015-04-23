@@ -16,7 +16,9 @@ ResearcherList = require('./components/admin/researcher'),
 SourceList = require('./components/admin/source'),
 BStrategyList = require('./components/admin/bstrategy'),
 OneUserList = require('./components/admin/1user'),
-UserList = require('./components/admin/user');
+UserList = require('./components/admin/user'),
+StoryList = require('./components/admin/story');
+
 
 var DetailComponent = React.createFactory(require('./components/detail/component-detail.jsx'));
 
@@ -64,6 +66,8 @@ var list_component = function(type) {
         list = SourceList;
     } else if(type === '1users') {
         list = OneUserList;
+    } else if(type === 'story') {
+        list = StoryList;
     }
     render(ListComponent, {type: type, component: list});
 };
@@ -115,6 +119,9 @@ var detail_1user = function(id) {
 var detail_media = function(id) {
     render(DetailComponent, {masterid: id, type: 'media'});};
 
+var detail_story = function(id) {
+    render(DetailComponent, {masterid: id, type: 'story'});};
+
 var login = function() {
     render(Login);
 };
@@ -160,6 +167,7 @@ var routes = {
   '/user/:id': detail_user,
   '/1user/:id': detail_1user,
   '/media/:id': detail_media,
+  '/story/:id': detail_story,
 
   '/login': login,
   '/signup': signup,
