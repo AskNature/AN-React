@@ -47,8 +47,8 @@ var Template = React.createClass({
               onRemove={this.props.onRelationshipRemove.bind(null, 'parent')}
               field={'context'}
               routeName='context'
-              title='More General Context'
-              fieldName='More General Context'
+              title='More General Contexts'
+              fieldName='More General Contexts'
               titleField={'name'} />
             <Button bsStyle='link' block
                   disabled={true} >
@@ -68,8 +68,8 @@ var Template = React.createClass({
               onRemove={this.props.onRelationshipRemove.bind(null, 'children')}
               field={'context'}
               routeName='context'
-              title='More Specific Context'
-              fieldName='More Specific Context'
+              title='More Specific Contexts'
+              fieldName='More Specific Contexts'
               titleField={'name'} />
             </Col>
             <Col xs={12} sm={4}>
@@ -92,8 +92,8 @@ var Template = React.createClass({
               onRemove={this.props.onRelationshipRemove.bind(null, 'has_source')}
               field={'source'}
               routeName='source'
-              title={'Has Sources'}
-              fieldName={'Has Sources'}
+              title={'Sources'}
+              fieldName={'Sources'}
               titleField={'name'} />
               <RelationshipList
                 items={data.studied_by}
@@ -104,8 +104,8 @@ var Template = React.createClass({
                 onRemove={this.props.onRelationshipRemove.bind(null, 'studied_by')}
                 field={'researcher'}
                 routeName={'researcher'}
-                title={'Researched By'}
-                fieldName={'Researched By'}/>
+                title={'R&D Teams'}
+                fieldName={'R&D Teams'}/>
             </Col>
           </Row>
         </Grid>

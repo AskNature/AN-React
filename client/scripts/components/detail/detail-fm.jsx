@@ -74,9 +74,7 @@ var Template = React.createClass({
             <Col xs={12} sm={4}>
               <RelationshipList
                 items={data.mechanism}
-                editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'mechanism')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'mechanism')}
+                editable={false}
                 field='content'
                 title='Listed as a Mechanism in'
                 fieldName='Listed as a Mechanism in'
@@ -85,9 +83,7 @@ var Template = React.createClass({
             <Col xs={12} sm={4}>
               <RelationshipList
                 items={data.function}
-                editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'function')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'function')}
+                editable={false}
                 field='content'
                 title='Listed as a Function in'
                 fieldName='Listed as a Function in'

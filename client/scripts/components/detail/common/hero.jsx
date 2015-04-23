@@ -61,7 +61,7 @@ var HeroComponent = React.createClass({
                         store={this.props.store}
                         actions={this.props.actions}
                         fieldName={this.props.primarykey}
-                        placeholder='Enter a name' />
+                        placeholder='Add a title' />
                     </Link>
                     ) : (
                       this.props.primarykey ?
@@ -71,7 +71,7 @@ var HeroComponent = React.createClass({
                         store={this.props.store}
                         actions={this.props.actions}
                         fieldName={this.props.primarykey}
-                        placeholder='Enter a name' />
+                        placeholder='Add a title' />
                       :
                         <TextArea
                           item={this.props.primarydisplay ? this.props.primarydisplay : this.props.primarytitle}

@@ -71,8 +71,8 @@ var Template = React.createClass({
                   onRemove={this.props.onRelationshipRemove.bind(null, 'living_systems')}
                   field={'b.system'}
                   routeName={'b.system'}
-                  title={'Living Systems'}
-                  fieldName={'Living Systems'}/>
+                  title={'Biological Systems'}
+                  fieldName={'Biological Systems'}/>
                 <RelationshipList
                   items={data.context}
                   editable={this.props.editable}

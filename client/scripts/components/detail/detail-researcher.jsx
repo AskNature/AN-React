@@ -21,7 +21,7 @@ var Template = React.createClass({
 
   render: function() {
     var routeNameSingle = 'researcher';
-    var entityName = 'Team';
+    var entityName = 'R&D Team';
     var data = this.props.data;
     var primaryKey = 'name';
     var primaryLinkKey = 'url';
@@ -57,7 +57,7 @@ var Template = React.createClass({
                   fieldName='Area/s of Expertise'
                   titleField={'name'} />
               </Col>
-              
+
             </Row>
           </Grid>
 

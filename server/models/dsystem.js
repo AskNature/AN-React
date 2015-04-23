@@ -55,6 +55,14 @@ var Expert = new Model('Expert',
         'institution'
     ]
 );
+var Media = new Model('Media',
+  [
+    'filename',
+    'name',
+    'entity',
+    'description'
+  ]
+);
 
 
 var relationships = {
@@ -89,6 +97,11 @@ var relationships = {
       model: Source,
       className: 'Source',
       edge: 'out("HasSource")'
+  },
+  'media': {
+model: Media,
+className: 'Image',
+edge: 'out("HasMedia")'
   },
   'added_by': {
 model: User,
