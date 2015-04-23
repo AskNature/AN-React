@@ -490,17 +490,17 @@ h4.card-name {
     border: none;
     text-transform: none;
     text-align: left;
-    padding-top: 13px;
-    padding-bottom: 20px;
+    padding: 0;
     .minihero {
       position: relative;
-      margin: -13px -16px -20px;
-      padding: 0px 15px;
+      padding: 13px 15px;
       height: auto;
       min-height: 65px;
-      overflow: hidden;
       background: #fff;
       border-radius: 3px;
+      >h6 {
+        margin-top: 0;
+      }
       img {
         float: left;
         margin-left: -15px;
@@ -522,15 +522,16 @@ h4.card-name {
           margin: 10px 15px -5px;
           white-space: normal;
         }
-        a {
+        .nav>li>a {
           color: rgba(255,255,255,.6);
           transition: all .1s linear;
           &:hover, &:focus {
             color: $white-color;
             background-color: transparent;
           }
-        }
 
+        }
+        
       }
       &.focused {
         >h6, h4 {
