@@ -38,7 +38,7 @@ var Template = React.createClass({
     var split = primaryTitle.split(': ');
     primaryTitle = split[0];
     var secondaryTitle = data.living_systems[0] && data.living_systems[0].common_name ? data.living_systems[0].common_name : split.length > 1 ? split[1] : '';
-    
+
     if(data.living_systems.length > 1){
       secondaryTitle += ' & others';
     }
@@ -156,41 +156,41 @@ var Template = React.createClass({
                   </Col>
 	              </Row>
                 <Row className='show-grid'>
-		              <Col xs={12} sm={6}>
-                    <h6 className='heading'>Your Inspired Ideas & Lessons from Nature</h6>
-                    <ul className='media-list'>
+		              <Col xs={12}>
+                    <h6 className='heading'>Design Insights & Ideas</h6>
+                    <ul className='design-insights media-list'>
                       {data.application_1 ? (
                         <li className='media'>
-                          <div className='media-left'>
+                          <div className='media-left media-middle'>
                             <a href='#'>
                               <img src={default_avatar} alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                             </a>
                           </div>
-                          <div className='media-body'>
+                          <div className='media-body media-middle'>
                             <p><a href='#'><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: data.application_1}} /></p>
                           </div>
                         </li>) : ''
                     }
                     {data.application_2 ? (
                       <li className='media'>
-                        <div className='media-left'>
+                        <div className='media-left media-middle'>
                           <a href='#'>
                             <img src={default_avatar} alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                           </a>
                         </div>
-                        <div className='media-body'>
+                        <div className='media-body media-middle'>
                           <p><a href='#'><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: data.application_2}} /></p>
                         </div>
                       </li>) : ''
                     }
                     {data.application_3 ? (
                       <li className='media'>
-                        <div className='media-left'>
+                        <div className='media-left media-middle'>
                           <a href='#'>
                             <img src={default_avatar} alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                           </a>
                         </div>
-                        <div className='media-body'>
+                        <div className='media-body media-middle'>
                           <p><a href='#'><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: data.application_3}} /></p>
                         </div>
                       </li>) : ''
@@ -209,7 +209,7 @@ var Template = React.createClass({
                     </li>
                   </ul>
     				    </Col>
-    				    <Col xs={12} sm={6}>
+    				    <Col xs={12}>
                   <RelationshipList
                     items={data.inspired_by}
                     editable={this.props.editable}

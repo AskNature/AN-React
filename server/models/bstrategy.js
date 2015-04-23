@@ -34,7 +34,8 @@ var Media = new Model('Media',
     'filename',
     'name',
     'entity',
-    'description'
+    'description',
+    'media_url'
   ]
 );
 var User = new Model('Users',

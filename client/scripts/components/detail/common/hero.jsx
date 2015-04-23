@@ -21,7 +21,7 @@ var HeroComponent = React.createClass({
         backgroundImage: 'url(' + mediaurl + ')'
       };
     } else if(this.props.media && this.props.media.length > 0) {
-         mediaurl = 'http://www.asknature.org/images/uploads/'+ this.props.media[0].entity + '/' + this.props.masterid + '/' + this.props.media[0].filename;
+         mediaurl = this.props.media[0].media_url ? this.props.media[0].media_url : 'http://www.asknature.org/images/uploads/'+ this.props.media[0].entity + '/' + this.props.masterid + '/' + this.props.media[0].filename;
         heroStyle = {
           backgroundImage: 'url(' + mediaurl + ')'
         };
