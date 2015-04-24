@@ -185,8 +185,13 @@ var CustomSidebar = React.createClass({
 });
 
 var ListItem = React.createClass({
+    componentDidMount: function() {
+        var myHeight = this.getDOMNode().offsetHeight;
+	console.log("height" + myHeight);
+	this.props.heightUpdateListener(myHeight, this.props.num);
+    },
     render: function() {
-        return <div className="infinite-list-item" style={{height: "2500px", "borderBottom": "1px solid #ddd", cursor: "pointer"}}>
+        return <div className="infinite-list-item" style={{"borderBottom": "1px solid #ddd", cursor: "pointer"}}>
             <StrategyDetail type="b.strategy" masterid={this.props.data.masterid} loaded={true} editable={false} user={{}} data={this.props.data}
 	            editBegin={function() {}}
                     toggleEditable={function() {}}
@@ -258,7 +263,7 @@ var Infinite = React.createClass({
        } else if(this.props.masterid !== newProps.masterid) {
            console.log("new masterid: " + newProps.masterid);
 	   var index = _.findIndex(this.state.elements, function(item) {
-               return item.props.data.masterid === newProps.masterid;
+               return item.masterid === newProps.masterid;
            }, this);
            console.log("index: " + index);
            this.setState({index: index});
@@ -267,12 +272,14 @@ var Infinite = React.createClass({
     },
     _onChange: function() {
         //var newElements = this.state.elements;
-	var newElements = _.map(store.get(), function(r) {
+	var newElements = store.get();
+	/*var newElements = _.map(store.get(), function(r) {
 	    return <ListItem key={r.masterid} data={r} />;
-	});
+	});*/
 	//newElements[0] = <ListItem num={0} key={0} data={store.get()} />;
 	var index = _.findIndex(newElements, function(item) {
-	   return item.props.data.masterid === this.props.masterid;
+	   //return item.props.data.masterid === this.props.masterid;
+	   return item.masterid === this.props.masterid;
         }, this);
         this.setState({elements: newElements, data: store.get(), index: index === -1 ? 0 : index});
 	var that = this;
@@ -292,9 +299,8 @@ var Infinite = React.createClass({
         	});
 
         return (
-          /* jshint ignore:start */
-            <DefaultLayout searchResultComponent={this.props.query === 'buoyancy' ? CustomSidebar : InfiniteList} searchResultElements={sidebarComponentList} searchResultHeight={100} searchQuery={this.props.query} searchQueryChange={function(t) {if(t.target.value) { routeActions.setRoute('/infinite_demo/'+t.target.value)}}}>
-                    <InfiniteList query={this.props.query} itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} routeOnScroll={true} />
+            <DefaultLayout searchResultComponent={this.props.query === 'buoyancy' ? CustomSidebar : InfiniteList} searchResultElements={[]} searchResultHeight={100} searchQuery={this.props.query} searchQueryChange={function(t) {if(t.target.value) { routeActions.setRoute('/infinite_demo/'+t.target.value)}}}>
+                    <InfiniteList query={this.props.query} itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} routeOnScroll={true} ListItem={ListItem} />
             </DefaultLayout>
             /* jshint ignore:end */
 
