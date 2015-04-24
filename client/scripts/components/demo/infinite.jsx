@@ -299,6 +299,7 @@ var Infinite = React.createClass({
         	});
 
         return (
+
             <DefaultLayout searchResultComponent={this.props.query === 'buoyancy' ? CustomSidebar : InfiniteList} searchResultElements={[]} searchResultHeight={100} searchQuery={this.props.query} searchQueryChange={function(t) {if(t.target.value) { routeActions.setRoute('/infinite_demo/'+t.target.value)}}}>
                     <InfiniteList query={this.props.query} itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} routeOnScroll={true} ListItem={ListItem} />
             </DefaultLayout>

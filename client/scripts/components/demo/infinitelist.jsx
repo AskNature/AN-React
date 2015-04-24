@@ -15,7 +15,7 @@ var InfiniteList = React.createClass({
             extendedBlock: undefined,
             extendedIndex: undefined,
             containerHeight: window.innerHeight - 70
-        }
+        };
     },
 
     handleResize: function(e) {
@@ -99,7 +99,7 @@ var InfiniteList = React.createClass({
     },
 
     contract: function(num) {
-        if(num != undefined) {
+        if(num !== undefined) {
             this.state.elements[num] = <this.props.itemComponent num={num} key={num} extendListener={this.extendListener} />;
             this.setState({extendedHeight: 0, extendedBlock: undefined, extendedIndex: undefined});
         }

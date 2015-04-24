@@ -187,7 +187,7 @@ var DetailComponent = React.createClass({
         );
       }
         return (
-            <DefaultLayout>
+            <DefaultLayout master={this.props.masterid}>
                 {loader}
                 <div style={style} className='detail-single'>
                 <Template
