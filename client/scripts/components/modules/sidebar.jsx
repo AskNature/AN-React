@@ -134,6 +134,297 @@ var listItems = [
     },
 ];
 
+var BuoyancyDemo = React.createClass({
+  render: function() {
+    return(
+    /* jshint ignore:start */
+  <div className='card-set'>
+      <Well  bsSize='small' className='card card-parent' key='100'>
+          <h6 className='card-label'>
+              Function
+          </h6>
+          <h4 className='card-name'>
+              Modify Buoyancy
+              <br/>
+          <small>
+
+          </small>
+        </h4>
+      </Well>
+      <Well className='card-list'>
+        <Well bsSize='small' className='card card-child' key='101'>
+          <h6 className='card-label'>
+            Mechanism
+          </h6>
+          <h4 className='card-name'>
+                Add/remove gas
+          </h4>
+        </Well>
+        <Well className='card-list'>
+          <Well bsSize='small' className='card card-child' key='102'>
+            <h6 className='card-label'>
+              Biological Strategy
+            </h6>
+            <h4 className='card-name'>
+                  Gas-holding structure aids buoyancy
+                  <br/>
+                  <small>
+                    Cuttlefish
+                  </small>
+            </h4>
+          </Well>
+          <Well bsSize='small' className='card card-child active' key='103'>
+            <h6 className='card-label'>
+              Biological Strategy
+            </h6>
+            <h4 className='card-name'>
+                  Swim bladder helps maintain buoyancy
+                  <br/>
+                  <small>
+                    Bone fishes
+                  </small>
+            </h4>
+          </Well>
+          <Well bsSize='small' className='card card-child' key='104'>
+            <h6 className='card-label'>
+              Biological Strategy
+            </h6>
+            <h4 className='card-name'>
+                  Siphuncle controls buoyancy
+                  <br/>
+                  <small>
+                    Nautilus
+                  </small>
+            </h4>
+          </Well>
+        </Well>
+      </Well>
+      <Well className='card-list'>
+        <Well bsSize='small' className='card card-child' key='105'>
+          <h6 className='card-label'>
+            Mechanism
+          </h6>
+          <h4 className='card-name'>
+                Add/remove wax
+          </h4>
+        </Well>
+        <Well className='card-list'>
+          <Well bsSize='small' className='card card-child' key='106'>
+            <h6 className='card-label'>
+              Biological Strategy
+            </h6>
+            <h4 className='card-name'>
+                  Wax esters allow for changes in buoyancy
+                  <br/>
+                  <small>
+                    Zooplankton
+                  </small>
+            </h4>
+          </Well>
+          <Well bsSize='small' className='card card-child' key='107'>
+            <h6 className='card-label'>
+              Linked Article
+            </h6>
+            <h4 className='card-name'>
+                  Tiny Marine Crustaceans Construct Wax "Weight Belts" to stay deep.
+                  <br/>
+                  <small>
+                    sciencemag.org
+                  </small>
+            </h4>
+          </Well>
+        </Well>
+      </Well>
+      <Well className='card-list'>
+        <Well bsSize='small' className='card card-child' key='108'>
+          <h6 className='card-label'>
+            Mechanism
+          </h6>
+          <h4 className='card-name'>
+                Change shape
+          </h4>
+        </Well>
+        <Well className='card-list'>
+          <Well bsSize='small' className='card card-child' key='109'>
+            <h6 className='card-label'>
+              Biological Strategy
+            </h6>
+            <h4 className='card-name'>
+                  Shell alters buoyancy
+                  <br/>
+                  <small>
+                    Green turtle
+                  </small>
+            </h4>
+          </Well>
+          <Well bsSize='small' className='card card-child' key='110'>
+            <h6 className='card-label'>
+              Collection
+            </h6>
+            <h4 className='card-name'>
+                  Transportation
+                  <br/>
+                  <small>
+                    Created by AskNature Team
+                  </small>
+            </h4>
+          </Well>
+          <Well bsSize='small' className='card card-child' key='111'>
+            <h6 className='card-label'>
+              Bio-inspired Strategy
+            </h6>
+            <h4 className='card-name'>
+                  Wave power anchoring system
+                  <br/>
+                  <small>
+                    BioPower Systems
+                  </small>
+            </h4>
+          </Well>
+          <Well bsSize='small' className='card card-child' key='112'>
+            <h6 className='card-label'>
+              R&D Team
+            </h6>
+            <h4 className='card-name'>
+                  BioPower Systems R&D Lab
+                  <br/>
+                  <small>
+                    New South Wales, Australia
+                  </small>
+            </h4>
+          </Well>
+        </Well>
+      </Well>
+  </div>
+  /* jshint ignore:end */
+);
+  }
+});
+
+var BallastDemo = React.createClass({
+  render: function() {
+    return(
+    /* jshint ignore:start */
+  <div className='card-set'>
+      <Well  bsSize='small' className='card card-parent active' key='100'>
+          <h6 className='card-label'>
+              Bio-inspired Strategy
+          </h6>
+          <h4 className='card-name'>
+              Series of inflatable compartments provide buoyancy
+              <br/>
+          <small>
+            Air Ballast Cargo Ship
+          </small>
+        </h4>
+      </Well>
+      <Well className='card-list'>
+        <Well bsSize='small' className='card card-child' key='101'>
+          <h6 className='card-label'>
+            Biological Strategy
+          </h6>
+          <h4 className='card-name'>
+                Swim bladder helps maintain buoyancy
+                <br />
+                <small>
+                  Bony Fishes
+                </small>
+          </h4>
+        </Well>
+        <Well bsSize='small' className='card card-child' key='102'>
+          <h6 className='card-label'>
+            Biological Strategy
+          </h6>
+          <h4 className='card-name'>
+                Swim bladders diffuse gas
+                <br />
+                <small>
+                  Bony Fishes
+                </small>
+          </h4>
+        </Well>
+        <Well bsSize='small' className='card card-child' key='103'>
+          <h6 className='card-label'>
+            Designed System
+          </h6>
+          <h4 className='card-name'>
+                Air Ballast Biomimetic Cargo Ship
+                <br />
+                <small>
+                  Team Dedale
+                </small>
+          </h4>
+        </Well>
+        <Well bsSize='small' className='card card-child' key='104'>
+          <h6 className='card-label'>
+            Context
+          </h6>
+          <h4 className='card-name'>
+                Aquatic
+          </h4>
+        </Well>
+        <Well bsSize='small' className='card card-child' key='105'>
+          <h6 className='card-label'>
+            Context
+          </h6>
+          <h4 className='card-name'>
+                Gravity
+          </h4>
+        </Well>
+        <Well bsSize='small' className='card card-child' key='106'>
+          <h6 className='card-label'>
+            Context
+          </h6>
+          <h4 className='card-name'>
+                Saltwater
+          </h4>
+        </Well>
+        <Well bsSize='small' className='card card-child' key='107'>
+          <h6 className='card-label'>
+            Context
+          </h6>
+          <h4 className='card-name'>
+                Inclement Weather
+          </h4>
+        </Well>
+        <Well bsSize='small' className='card card-child' key='108'>
+          <h6 className='card-label'>
+            Mechanism
+          </h6>
+          <h4 className='card-name'>
+                Expandable gas-filled compartments
+          </h4>
+        </Well>
+        <Well bsSize='small' className='card card-child' key='101'>
+          <h6 className='card-label'>
+            Mechanism
+          </h6>
+          <h4 className='card-name'>
+                Multiple Chambers
+          </h4>
+        </Well>
+        <Well bsSize='small' className='card card-child' key='109'>
+          <h6 className='card-label'>
+            Function
+          </h6>
+          <h4 className='card-name'>
+                Modify buoyancy
+          </h4>
+        </Well>
+        <Well bsSize='small' className='card card-child' key='110'>
+          <h6 className='card-label'>
+            Context
+          </h6>
+          <h4 className='card-name'>
+                Maintain stability
+          </h4>
+        </Well>
+      </Well>
+  </div>
+  /* jshint ignore:end */
+);
+  }
+});
 
 var SidebarComponent = React.createClass({
     render: function() {
@@ -144,7 +435,7 @@ var SidebarComponent = React.createClass({
 
                     <TabbedArea defaultActiveKey={0} key='20' justified>
                         <TabPane key='20' eventKey={0} tab={<FontAwesome name='search'  fixedWidth onClick={this.props.onResultClick}/>}>
-                            {this.props.searchResultComponent ?  <this.props.searchResultComponent  elements={this.props.searchResultElements} itemHeight={this.props.searchResultHeight} /> : <Well>
+                            {this.props.searchResultComponent ?  <this.props.searchResultComponent  elements={this.props.searchResultElements} itemHeight={this.props.searchResultHeight} /> : this.props.master == '284ace1157963de879fdab2a2a5709cc' ? <BuoyancyDemo /> : this.props.master == 'air-ballast-biomimetic-cargo-ship' ? <BallastDemo /> : <Well>
                                 Query results & content clusters go in here
                             </Well>
                             }
