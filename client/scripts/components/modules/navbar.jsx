@@ -21,6 +21,13 @@ var NavbarComponent = React.createClass({
   transitionRoute: function(eventKey, href) {
     routeActions.setRoute(href);
   },
+  onKeyPress: function(e) {
+    if(e.keyCode === 13) {
+        console.log("enter pressed");
+	routeActions.setRoute('/infinite_demo/'+e.target.value);
+	e.preventDefault();
+    }
+  },
     render: function() {
       var brand = <Link url="/">AN</Link>;
       var account = this.props.account;
@@ -50,7 +57,7 @@ var NavbarComponent = React.createClass({
                   <Link className="navbar-brand" url="/">AN</Link>
                   <form role="search" className='navbar-form navbar-left search'>
 
-                    <Input className='search-input' type="text" placeholder='Search AskNature' value={this.props.searchQuery} onFocus={this.props.onSearchFocus} onChange={this.props.searchQueryChange}/>
+                    <Input className='search-input' type="text" placeholder='Search AskNature' value={this.props.searchQuery} onFocus={this.props.onSearchFocus} onChange={this.props.searchQueryChange} onKeyPress={this.onKeyPress}/>
                       <label className='search-label'>
                         <FontAwesome name='search'  fixedWidth />
                       </label>
