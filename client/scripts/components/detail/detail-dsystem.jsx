@@ -24,6 +24,12 @@ var Template = React.createClass({
     var routeNameSingle = 'd.system';
     var entityName = 'Designed System';
     var data = this.props.data;
+    var primaryKey = 'name';
+    var secondaryTitle = data.parent[0] ? data.parent[0].name : '';
+    if(data.parent[1]){
+      secondaryTitle += ' & others';
+    }
+    var descriptionKey = 'description';
     return (
       /* jshint ignore:start */
       <div>
@@ -31,11 +37,12 @@ var Template = React.createClass({
           {...this.props}
           routename={routeNameSingle}
           entityName={entityName}
-          label={entityName}
-          primarytitle={this.props.data.name}
-          secondarytitle={this.props.data.name}
-          secondarylink=''
-          description={data.description ? data.description : 'Description goes here'} />
+          primarytitle={data[primaryKey]}
+          primarykey={primaryKey}
+          secondarytitle={secondaryTitle}
+          description={data[descriptionKey]}
+          descriptionKey={descriptionKey}
+          />
           <Grid>
             <Row className='show-grid'>
               <Col xs={12} sm={4}>
@@ -77,7 +84,8 @@ var Template = React.createClass({
                 <RelationshipList
                   items={data.has_dsystem}
                   editable={this.props.editable}
-                  titleField='name'
+                  titleField='headline'
+                  subtitleField='name'
                   onAdd={this.props.onRelationshipAdd.bind(null,'has_dsystem')}
                   onRemove={this.props.onRelationshipRemove.bind(null, 'has_dsystem')}
                   field={'d.strategy'}

@@ -102,7 +102,7 @@ var RelationshipListItem = React.createClass({
         },
       'InspiredSolutions' :
         {
-          'displayName' : 'Designed Strategy',
+          'displayName' : 'Bio-inspired Strategy',
           'route' : 'd.strategy'
         },
       'Context' :
@@ -164,7 +164,7 @@ var RelationshipListItem = React.createClass({
     var title = this.props.titleField;
     var subTitle= this.props.subtitleField;
     if (routeName === 'b.system')  {
-      title = 'Common Name';
+      title = this.props.item.common_name ? this.props.item.common_name : 'Common Name';
       subTitle = this.props.item.taxon + ': ' + this.props.item.name;
     }
     if (routeName === 'media') {

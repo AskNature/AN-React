@@ -34,7 +34,8 @@ var Media = new Model('Media',
     'filename',
     'name',
     'entity',
-    'description'
+    'description',
+    'media_url'
   ]
 );
 var User = new Model('Users',
@@ -68,7 +69,8 @@ var InspiredSolution = new Model('InspiredSolutions',
 var LivingSystem = new Model('LivingSystem',
   [
     'name',
-    'taxon'
+    'taxon',
+    'common_name'
   ]
 );
 var Condition = new Model('Condition',

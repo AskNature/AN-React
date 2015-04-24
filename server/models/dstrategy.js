@@ -13,7 +13,8 @@ var Media = new Model('Media',
     'filename',
     'name',
     'entity',
-    'description'
+    'description',
+    'media_url'
   ]
 );
 var User = new Model('Users',
@@ -87,7 +88,7 @@ var relationships = {
     'studied_by': {
         model: Expert,
         className: 'Expert',
-        edge: 'in("StudiedBy")'
+        edge: 'out("StudiedBy")'
     },
     'has_source': {
         model: Source,
@@ -101,7 +102,7 @@ var relationships = {
     },
     'designedsystems' : {
 	model: DesignedSystem,
-	className: 'DesignedSystem',
+	className: 'DSystem',
 	edge: 'out("HasDSystem")'
     },
     'functions': {

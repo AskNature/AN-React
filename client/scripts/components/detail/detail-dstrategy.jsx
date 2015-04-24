@@ -28,9 +28,6 @@ var Template = React.createClass({
     if(data.designedsystems[1]){
       secondaryTitle += ' & others';
     }
-    if(data.name) {
-      secondaryTitle = data.name;
-    }
     var descriptionKey = 'special_text';
     return (
       /* jshint ignore:start */
@@ -42,11 +39,25 @@ var Template = React.createClass({
           primarytitle={data[primaryKey]}
           primarykey={primaryKey}
           secondarytitle={secondaryTitle}
-          secondarykey={'name'}
+          secondarykey=''
           description={data[descriptionKey]}
           descriptionKey={descriptionKey}
           />
         <Grid>
+          <Row>
+            <Col xs={12}>
+              <RelationshipList
+                items={data.strategies}
+                editable={this.props.editable}
+                onAdd={this.props.onRelationshipAdd.bind(null, 'strategies')}
+                onRemove={this.props.onRelationshipRemove.bind(null, 'strategies')}
+                field='b.strategy'
+                routeName='b.strategy'
+                title='Inspiring Biological Strategies'
+                fieldName='Biological Strategy'
+                titleField='name' />
+            </Col>
+          </Row>
           <Row className='show-grid'>
             <Col xs={12} sm={4}>
               <RelationshipList
@@ -57,7 +68,7 @@ var Template = React.createClass({
                 field='d.system'
                 routeName='d.system'
                 title='Designed Systems'
-                fieldName='Designed System'
+                fieldName='Designed Systems'
                 titleField='name' />
                 <RelationshipList
                   items={data.context}
@@ -94,18 +105,7 @@ var Template = React.createClass({
                 fieldName='Functions'
                 titleField='name' />
             </Col>
-            <Col xs={12} sm={8}>
-              <RelationshipList
-                items={data.strategies}
-                editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'strategies')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'strategies')}
-                field='b.strategy'
-                routeName='b.strategy'
-                title='Inspiring Biological Strategies'
-                fieldName='Biological Strategy'
-                titleField='name' />
-            </Col>
+
           </Row>
         </Grid>
         <Grid>
@@ -118,6 +118,7 @@ var Template = React.createClass({
             <Col xs={12} md={12}>
               {data.challenges_solved || this.props.editable ? (
                 <TextArea
+                  title='Summary'
                   item={data.challenges_solved}
                   store={this.props.store}
                   actions={this.props.actions}
@@ -126,6 +127,7 @@ var Template = React.createClass({
               ) : '' }
               {data.how_is_it_different || this.props.editable ? (
                 <TextArea
+                  title={'How it\'s different'}
                   item={data.how_is_it_different}
                   store={this.props.store}
                   actions={this.props.actions}
@@ -134,6 +136,7 @@ var Template = React.createClass({
               ) : '' }
               {data.biomimicry_story || this.props.editable ? (
                 <TextArea
+                  title='Biomimicry Story'
                   item={data.biomimicry_story}
                   store={this.props.store}
                   actions={this.props.actions}
