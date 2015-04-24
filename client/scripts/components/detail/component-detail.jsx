@@ -26,7 +26,9 @@ ResearcherDetail = require('./detail-researcher.jsx'),
 SourceDetail = require('./detail-source.jsx'),
 BStrategyDetail = require('./detail-bstrategy.jsx'),
 UserDetail = require('./detail-user.jsx'),
-OneUserDetail = require('./detail-1user.jsx');
+OneUserDetail = require('./detail-1user.jsx'),
+StoryDetail = require('./detail-story.jsx');
+
 
 var getState = function() {
   return {
@@ -55,7 +57,7 @@ var Loader = React.createClass({
 
 var DetailComponent = React.createClass({
 
-      mixins: [store.mixin],
+      mixins: [store.mixin, accountStore.mixin],
 
       getInitialState: function() {
           return (
@@ -67,12 +69,16 @@ var DetailComponent = React.createClass({
         this.setState({windowHeight: window.innerHeight});
       },
 
-      componentDidMount: function(){
-          if(this.props.masterid !== 'new') {
-              actions.fetch(this.props.type,this.props.masterid);
-          } else if(this.props.masterid === 'new'){
-              actions.create(this.props.type);
-              this.setState({editable: true});
+      componentWillMount: function(){
+          var that = this;
+          actions.fetch(this.props.type,this.props.masterid);
+	  if(this.props.masterid === 'new'){
+              setTimeout(function() {
+	          actions.create(that.props.type);
+	      }, 1);
+	      var newState = getState();
+	      newState.editable = true;
+	      this.setState(newState);
           }
           window.addEventListener('resize', this.handleResize);
       },
@@ -160,10 +166,12 @@ var DetailComponent = React.createClass({
           Template = ResearcherDetail;
         } else if(this.props.type === 'sources') {
           Template = SourceDetail;
+        } else if(this.props.type === 'story') {
+          Template = StoryDetail;
         }
-        if(this.state.loaded === false) {
+        /*if(this.state.loaded === false) {
           actions.fetch(this.props.type,this.props.masterid);
-        }
+        }*/
         return Template;
       },
     render: function() {
@@ -212,8 +220,17 @@ var DetailComponent = React.createClass({
            </DefaultLayout>
         );
     },
-    componentWillReceiveProps: function () {
-    this.setState(getState());
+    componentWillReceiveProps: function (newProps) {
+        console.log('loading new props');
+	actions.initialize(newProps.type, {masterid: newProps.masterid});
+        if(newProps.masterid !== 'new') {
+            actions.fetch(newProps.type,newProps.masterid);
+	    this.setState({editable: false, loaded: false});
+        } else if(newProps.masterid === 'new'){
+            actions.create(newProps.type);
+            this.setState({editable: true});
+        }
+        //this.setState(getState());
   }
 });
 

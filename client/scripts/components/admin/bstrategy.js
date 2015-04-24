@@ -23,7 +23,8 @@ var List = {
     ],
     'thumb' : [
         'media',
-        'media_entity'
+        'media_entity',
+        'media_url'
     ]
 };
 

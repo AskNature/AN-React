@@ -1,8 +1,8 @@
 'use strict';
 
 var List = {
-    'plural_name' : 'Designed Strategies',
-    'singular_name' : 'Designed Strategy',
+    'plural_name' : 'Bio-inspired Strategies',
+    'singular_name' : 'Bio-inspired Strategy',
     'slug': 'd.strategy',
     'columns' : [
       {columnName:'masterid', displayName:'id', type:'id'},

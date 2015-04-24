@@ -7,11 +7,15 @@ var React = require('react'),
 routeActions = require('../../../actions/routes'),
 Link = require('../../modules/link.jsx'),
 
+FontAwesome = require('react-fontawesome'),
 
 
 Glyphicon = require('react-bootstrap').Glyphicon,
-SplitButton = require('react-bootstrap').SplitButton,
+Button = require('react-bootstrap').Button,
 ButtonToolbar = require('react-bootstrap').ButtonToolbar,
+Nav = require('react-bootstrap').Nav,
+NavItem = require('react-bootstrap').NavItem,
+DropdownButton = require('react-bootstrap').DropdownButton,
 MenuItem = require('react-bootstrap').MenuItem;
 
 var MiniHero = React.createClass({
@@ -25,7 +29,7 @@ var MiniHero = React.createClass({
       }
     }
     return (
-      <div className='minihero'>
+      <div className={this.props.showOverlay ? 'focused minihero' : 'minihero'}>
         {this.props.media ? (
           <img src={thumburl} width='100px' height='auto' />
         ) : ''}
@@ -37,7 +41,27 @@ var MiniHero = React.createClass({
           <br/>
           <small>{this.props.subtitle}</small>
         </h4>
+        <div className='overlay'>
+          <h6>{this.props.title}</h6>
+          <Nav justified activeKey={0} bsStyle='pills' bsSize='large'>
+            <NavItem
+              eventKey={1}
+              onClick={this.props.link}>
+              <FontAwesome name='search' size='lg' fixedWidth />
+            </NavItem>
+            <NavItem eventKey={2}>
+              <FontAwesome name='link' size='lg' fixedWidth />
+            </NavItem>
+            <DropdownButton eventKey={3} title={<FontAwesome name='ellipsis-v' size='lg' fixedWidth />} navItem={true} noCaret pullRight>
+              <MenuItem eventKey='3.1' className='disabled'>Added by Username 2 weeks ago</MenuItem>
+              <MenuItem eventKey='3.2'><FontAwesome name='flag' fixedWidth /> Report</MenuItem>
+              {this.props.editable ? (
+                <MenuItem eventKey='3.4' onClick={this.props.remove}><FontAwesome name='trash' fixedWidth /> Remove</MenuItem>
+              ) : ''}
+            </DropdownButton>
 
+          </Nav>
+        </div>
       </div>
     );
   }
@@ -45,13 +69,28 @@ var MiniHero = React.createClass({
 
 
 var RelationshipListItem = React.createClass({
-  setFlag: function() {
-    alert('Flagged!');
-    console.log('Flagged');
+
+  getInitialState: function() {
+    return {
+      showOptions: false
+    };
   },
 
   clickHandler: function(link) {
     routeActions.setRoute(link);
+  },
+
+  toggleOptions: function() {
+    if(this.state.showOptions) {
+      this.setState({showOptions: false});
+    } else {
+      this.setState({showOptions: true});
+    }
+  },
+  showOptions: function() {
+    if(!this.state.showOptions) {
+      this.setState({showOptions: true});
+    }
   },
 // This needs to be abstracted somehow:
   classTranslator: function(classname) {
@@ -63,7 +102,7 @@ var RelationshipListItem = React.createClass({
         },
       'InspiredSolutions' :
         {
-          'displayName' : 'Designed Strategy',
+          'displayName' : 'Bio-inspired Strategy',
           'route' : 'd.strategy'
         },
       'Context' :
@@ -71,6 +110,11 @@ var RelationshipListItem = React.createClass({
           'displayName' : 'Context',
           'route' : 'context'
         },
+        'Function' :
+          {
+            'displayName' : 'Function & Mechanism',
+            'route' : 'fm'
+          },
       'Story' :
         {
           'displayName' : 'Story',
@@ -92,6 +136,8 @@ var RelationshipListItem = React.createClass({
       lations = trans.Strategy;
     } else if(classname === 'InspiredSolutions') {
       lations = trans.InspiredSolutions;
+    } else if(classname === 'Function') {
+        lations = trans.Function;
     } else if(classname === 'Context') {
       lations = trans.Context;
     } else if(classname === 'Story') {
@@ -114,14 +160,11 @@ var RelationshipListItem = React.createClass({
       routeName = translations.route;
       itemLabel = translations.displayName;
     }
-    function clickhandler() {
-      window.setInterval(function(){scrollTo(0, 0);},10000);
-    }
     var link = '../' + routeName + '/' + item.masterid;
     var title = this.props.titleField;
     var subTitle= this.props.subtitleField;
     if (routeName === 'b.system')  {
-      title = 'Common Name';
+      title = this.props.item.common_name ? this.props.item.common_name : 'Common Name';
       subTitle = this.props.item.taxon + ': ' + this.props.item.name;
     }
     if (routeName === 'media') {
@@ -129,17 +172,21 @@ var RelationshipListItem = React.createClass({
     }
     return (
         <ButtonToolbar className='relationship-button'>
-          <SplitButton
-            title={<MiniHero title={title} subtitle={subTitle} label={itemLabel} media={this.props.media} thumbs={this.props.item} masterid={item.masterid}/>}
-            onClick={this.clickHandler.bind(null,link)}
-            pullright>
-            <MenuItem eventKey="1" onClick={this.setFlag}><Glyphicon glyph='flag' /> Flag</MenuItem>
-            {this.props.editable ? (
-              <MenuItem eventKey="2" onClick={this.props.onRemove.bind(null, item)}><Glyphicon glyph='remove' /> Remove</MenuItem>
-            ) : (
-              <MenuItem eventKey="2" className='disabled'><Glyphicon glyph='remove' /> Remove</MenuItem>
-            ) }
-          </SplitButton>
+          <Button
+            block
+            onClick={this.showOptions}
+            onMouseEnter={this.toggleOptions} onMouseLeave={this.toggleOptions}
+            pullright >
+            <MiniHero
+              title={title}
+              subtitle={subTitle}
+              label={itemLabel}
+              media={this.props.media}
+              thumbs={this.props.item} link={this.clickHandler.bind(null,link)} masterid={item.masterid}
+              showOverlay={this.state.showOptions}
+              remove={this.props.onRemove.bind(null,item)}
+              editable={this.props.editable} />
+          </Button>
         </ButtonToolbar>
     );
   }

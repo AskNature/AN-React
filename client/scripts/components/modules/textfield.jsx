@@ -5,6 +5,9 @@ var React = require('react'),
 Scribe = require('./scribe.jsx');
 
 var TextField = React.createClass({
+    shouldComponentUpdate: function(nextProps, nextState) {
+        return false;
+    },
     render: function() {
         return (
             <div style={this.props.editable? {}:{"borderBottom": "1px solid transparent"}}>

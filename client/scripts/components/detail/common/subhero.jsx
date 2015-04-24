@@ -8,6 +8,7 @@ var React = require('react'),
 TextArea = require('./textarea.jsx'),
 TextField = require('../../modules/textfield.jsx'),
 RestrictOptions = require('../../modules/restrictoptions.jsx'),
+RelationshipList = require('../common/relationshiplist.jsx'),
 
 FontAwesome = require('react-fontawesome'),
 
@@ -135,7 +136,29 @@ var SubHero = React.createClass({
                       actions={this.props.actions}
                       fieldName={'editor_comments'}
                       editable={this.props.editable} />
+                    <RelationshipList
+                      items={this.props.added_by}
+                      editable={this.props.editable}
+                      titleField='name'
+                      onAdd={this.props.onRelationshipAdd.bind(null, 'added_by')}
+                      onRemove={this.props.onRelationshipRemove.bind(null, 'added_by')}
+                      field={'oneuser'}
+                      routeName={'user1'}
+                      title={'Contributor'}
+                      fieldName={'Contributor'}
+                      limit='1' />
+                    <RelationshipList
+                      items={this.props.collaborators}
+                      editable={this.props.editable}
+                      titleField='name'
+                      onAdd={this.props.onRelationshipAdd.bind(null, 'collaborators')}
+                      onRemove={this.props.onRelationshipRemove.bind(null, 'collaborators')}
+                      field={'oneuser'}
+                      routeName={'user1'}
+                      title={'Collaborators'}
+                      fieldName={'Collaborators'} />
                   </div>
+
                 : this.props.user.role === 'admin' ?
 
                   <fieldset disabled>

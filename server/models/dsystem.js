@@ -8,6 +8,29 @@ var entityName = 'DSystem';
 
 var fields = ['name', 'flag_text', 'flag_media', 'flag_tags', 'description'];
 
+var Media = new Model('Media',
+  [
+    'filename',
+    'name',
+    'entity',
+    'description'
+  ]
+);
+var User = new Model('Users',
+  [
+    'name',
+    'first',
+    'last',
+    'custom_avatar_url'
+  ],
+  {'out_HasMedia':
+    {
+      model: Media,
+      className: 'Media',
+      edge:'out("HasMedia")'
+    }
+  }
+);
 var Entity = new Model('Entity',
     [
         'name'
@@ -19,13 +42,44 @@ var Status = new Model('ContentStatus',
       'name'
   ]
 );
+var Source = new Model('Sources',
+    [
+        'name',
+        'publication_year',
+        'authors'
+    ]
+);
+var Expert = new Model('Expert',
+    [
+        'name',
+        'institution'
+    ]
+);
+var Media = new Model('Media',
+  [
+    'filename',
+    'name',
+    'entity',
+    'description'
+  ]
+);
 
 
 var relationships = {
-    'has_dsystem': {
+  'parent': {
+      model: Entity,
+      className: 'DSystem',
+      edge: 'out("ChildSystemOf")'
+  },
+  'children': {
+      model: Entity,
+      className: 'DSystem',
+      edge: 'in("ChildSystemOf")'
+  },
+  'has_dsystem': {
 	model: Entity,
-	className: 'Entity',
-	edge: 'in("HasDesignedSystem")'
+	className: 'InspiredSolutions',
+	edge: 'in("HasDSystem")'
     },
     'status': {
     model: Status,
@@ -33,7 +87,32 @@ var relationships = {
     edge: 'out("HasStatus")',
     select: true,
     options: ListOptions.ContentStatus
-    }
+  },
+  'studied_by': {
+      model: Expert,
+      className: 'Experts',
+      edge: 'in("StudiedBy")'
+  },
+  'has_source': {
+      model: Source,
+      className: 'Source',
+      edge: 'out("HasSource")'
+  },
+  'media': {
+model: Media,
+className: 'Image',
+edge: 'out("HasMedia")'
+  },
+  'added_by': {
+model: User,
+className: 'Users',
+edge: 'in("AddedContent")'
+  },
+  'collaborators': {
+model: User,
+className: 'Users',
+edge: 'in("CollaboratedOn")'
+  }
 
 };
 

@@ -15,13 +15,43 @@ var Expert = new Model('Expert',
     'institution'
   ]
 );
+
+
+var Source = new Model('Sources',
+  [
+    'name',
+    'publication_year',
+    'authors'
+  ]
+);
+var Entity = new Model('Entity',
+  [
+    'name'
+  ]
+);
 var Media = new Model('Media',
   [
     'filename',
     'name',
     'entity',
-    'description'
+    'description',
+    'media_url'
   ]
+);
+var User = new Model('Users',
+  [
+    'name',
+    'first',
+    'last',
+    'custom_avatar_url'
+  ],
+  {'out_HasMedia':
+    {
+      model: Media,
+      className: 'Media',
+      edge:'out("HasMedia")'
+    }
+  }
 );
 var InspiredSolution = new Model('InspiredSolutions',
   [
@@ -36,37 +66,11 @@ var InspiredSolution = new Model('InspiredSolutions',
     }
   }
 );
-var Source = new Model('Sources',
-  [
-    'name',
-    'publication_year',
-    'authors'
-  ]
-);
-var Entity = new Model('Entity',
-  [
-    'name'
-  ]
-);
-var User = new Model('Users',
-  [
-    'name',
-    'first',
-    'last',
-    'custom_avatar'
-  ],
-  {'out_HasMedia':
-    {
-      model: Media,
-      className: 'Media',
-      edge:'out("HasMedia")'
-    }
-  }
-);
 var LivingSystem = new Model('LivingSystem',
   [
     'name',
-    'taxon'
+    'taxon',
+    'common_name'
   ]
 );
 var Condition = new Model('Condition',
@@ -85,7 +89,7 @@ var Status = new Model('ContentStatus',
 // The key is what's called by the client components. Model refers to the variables define above. className is the name of the class of the related item in OrientDB. Edge refers to the relationship in OrientDB.
 
 var relationships = {
-    'products': {
+    'inspired_by': {
 	model: InspiredSolution,
 	className: 'InspiredSolutions',
 	edge: 'in("InspiredBy")'
@@ -118,7 +122,12 @@ var relationships = {
     'added_by': {
 	model: User,
 	className: 'Users',
-	edge: 'in("AddedStrategy")'
+	edge: 'in("AddedContent")'
+    },
+    'collaborators': {
+	model: User,
+	className: 'Users',
+	edge: 'in("CollaboratedOn")'
     },
     'living_systems': {
 	model: LivingSystem,

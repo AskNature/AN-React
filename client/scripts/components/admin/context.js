@@ -2,7 +2,7 @@
 
 var List = {
 
-    'plural_name' : 'Context',
+    'plural_name' : 'Contexts',
     'singular_name' : 'Context',
     'slug': 'context',
     'columns' : [

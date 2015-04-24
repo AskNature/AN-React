@@ -32,16 +32,16 @@ var Template = React.createClass({
     var entityName = 'Biological Strategy';
     var data = this.props.data;
     var primaryKey = 'name';
-    var secondaryTitle = data.living_systems[0] ? data.living_systems[0].name : '';
-    if(data.living_systems.length > 1){
-      secondaryTitle += ' & others';
-    }
+
     var primaryTitle = data[primaryKey];
 
     var split = primaryTitle.split(': ');
     primaryTitle = split[0];
-    secondaryTitle = split[1];
+    var secondaryTitle = data.living_systems[0] && data.living_systems[0].common_name ? data.living_systems[0].common_name : split.length > 1 ? split[1] : '';
 
+    if(data.living_systems.length > 1){
+      secondaryTitle += ' & others';
+    }
     var descriptionKey = 'summary';
     var addedby = data.added_by;
     var default_avatar = 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/10383663_869350803096314_2369845013213041061_n.png?oh=2c010ce055331caa73a9506795239fd1&oe=55BDD82A&__gda__=1433772443_f5c43498047b8193dccc0a5554ba6ed1';
@@ -59,7 +59,6 @@ var Template = React.createClass({
             secondarykey=''
             description={data[descriptionKey]}
             descriptionKey={descriptionKey}
-            addedby={addedby}
             />
 	        <Grid>
   	        <Row className='show-grid'>
@@ -72,8 +71,8 @@ var Template = React.createClass({
                   onRemove={this.props.onRelationshipRemove.bind(null, 'living_systems')}
                   field={'b.system'}
                   routeName={'b.system'}
-                  title={'Living Systems'}
-                  fieldName={'Living Systems'}/>
+                  title={'Biological Systems'}
+                  fieldName={'Biological Systems'}/>
                 <RelationshipList
                   items={data.context}
                   editable={this.props.editable}
@@ -82,8 +81,8 @@ var Template = React.createClass({
                   onRemove={this.props.onRelationshipRemove.bind(null, 'context')}
                   field={'context'}
                   routeName={'context'}
-                  title={'Context'}
-                  fieldName={'Context'}/>
+                  title={'Contexts'}
+                  fieldName={'Contexts'}/>
       		    </Col>
       		    <Col xs={6} sm={4}>
                 <RelationshipList
@@ -142,7 +141,7 @@ var Template = React.createClass({
                       actions={this.props.actions}
                       fieldName={'brief'}
                       editable={this.props.editable}
-		                  placeholder="Enter a Story" />
+		                  placeholder="Add a Story" />
                     ) : '' }
                     {data.special_text || this.props.editable ? (
                       <TextArea
@@ -151,46 +150,47 @@ var Template = React.createClass({
                         store={this.props.store}
                         actions={this.props.actions}
                         fieldName={'special_text'}
-                        editable={this.props.editable} />
+                        editable={this.props.editable}
+                        placeholder='Add citations from linked sources' />
                     ) : '' }
                   </Col>
 	              </Row>
                 <Row className='show-grid'>
-		              <Col xs={12} sm={6}>
-                    <h6><strong>Your Inspired Ideas</strong></h6>
-                    <ul className='media-list'>
+		              <Col xs={12}>
+                    <h6 className='heading'>Design Insights & Ideas</h6>
+                    <ul className='design-insights media-list'>
                       {data.application_1 ? (
                         <li className='media'>
-                          <div className='media-left'>
+                          <div className='media-left media-middle'>
                             <a href='#'>
                               <img src={default_avatar} alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                             </a>
                           </div>
-                          <div className='media-body'>
+                          <div className='media-body media-middle'>
                             <p><a href='#'><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: data.application_1}} /></p>
                           </div>
                         </li>) : ''
                     }
                     {data.application_2 ? (
                       <li className='media'>
-                        <div className='media-left'>
+                        <div className='media-left media-middle'>
                           <a href='#'>
                             <img src={default_avatar} alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                           </a>
                         </div>
-                        <div className='media-body'>
+                        <div className='media-body media-middle'>
                           <p><a href='#'><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: data.application_2}} /></p>
                         </div>
                       </li>) : ''
                     }
                     {data.application_3 ? (
                       <li className='media'>
-                        <div className='media-left'>
+                        <div className='media-left media-middle'>
                           <a href='#'>
                             <img src={default_avatar} alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                           </a>
                         </div>
-                        <div className='media-body'>
+                        <div className='media-body media-middle'>
                           <p><a href='#'><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: data.application_3}} /></p>
                         </div>
                       </li>) : ''
@@ -209,18 +209,18 @@ var Template = React.createClass({
                     </li>
                   </ul>
     				    </Col>
-    				    <Col xs={12} sm={6}>
+    				    <Col xs={12}>
                   <RelationshipList
-                    items={data.products}
+                    items={data.inspired_by}
                     editable={this.props.editable}
                     titleField='headline'
                     subtitleField='name'
-                    onAdd={this.props.onRelationshipAdd.bind(null, 'products')}
-                    onRemove={this.props.onRelationshipRemove.bind(null, 'products')}
+                    onAdd={this.props.onRelationshipAdd.bind(null, 'inspired_by')}
+                    onRemove={this.props.onRelationshipRemove.bind(null, 'inspired_by')}
                     field={'d.strategy'}
                     routeName={'d.strategy'}
-                    title={'Inspired Designed Strategies'}
-                    fieldName={'Inspired Designed Strategies'}/>
+                    title={'Bio-inspired Strategies'}
+                    fieldName={'Bio-inspired Strategies'}/>
     				    </Col>
 	            </Row>
         			<Row className='show-grid'>
@@ -248,8 +248,8 @@ var Template = React.createClass({
                     onRemove={this.props.onRelationshipRemove.bind(null, 'experts')}
                     field={'researcher'}
                     routeName={'researcher'}
-                    title={'Researched By'}
-                    fieldName={'Researched By'} />
+                    title={'R&D Teams'}
+                    fieldName={'R&D Teams'} />
           			</Col>
         			</Row>
 			    </Grid>

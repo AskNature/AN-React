@@ -82,7 +82,11 @@ var ConstructModel = function(entityName, fields, relationships) {
 			    });
 			} else {
 			    console.log(rel + " is not an array");
-			    requestEdges = [object[rel].masterid];
+			    if (object[rel].masterid) { // conditional to fix removal when no relationship is included
+				requestEdges = [object[rel].masterid];
+			    } else {
+				requestEdges = result ? result.edges : [];
+			    }
 			}
 			var dbEdges = result ? result.edges : [];
 			console.log("edges in db: " + dbEdges);
@@ -253,7 +257,7 @@ var ConstructModel = function(entityName, fields, relationships) {
 
 
     Model.findAutocomplete = function(typed, limit, callback) {
-	db.query('SELECT @rid, masterid, ' + fields.join(', ') + " FROM " + entityName + " WHERE name LIKE '" + typed + "%' LIMIT " + limit).then(function(results) {
+	db.query('SELECT @rid, masterid, @class, ' + fields.join(', ') + " FROM " + entityName + " WHERE name LIKE '" + typed + "%' LIMIT " + limit).then(function(results) {
 	    callback(results);
 	}).done();
     };

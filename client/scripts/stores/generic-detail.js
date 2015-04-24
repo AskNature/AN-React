@@ -35,7 +35,7 @@ var ThisStore = new Store({
     return _data || Defaults;
   },
   getMasterid: function() {
-    return _data.masterid;
+    return _data ? _data.masterid : null;
   },
   getEntityType: function() {
     return _type;
@@ -66,11 +66,21 @@ ThisStore.dispatcherToken = Dispatcher.register(function(payload) {
   if (action.actionType === Constants.FETCH_SUCCESS) {
       _loaded = true;
       _error = false;
-      _data = action.data;
+      if(_data) {
+	  _.assign(_data, action.data);
+      } else {
+          _data = action.data;
+      }
       _type = action.entityType;
       ThisStore.emitChange();
   } else if (action.actionType === Constants.FETCH_ERROR) {
       _error = true;
+      ThisStore.emitChange();
+  } else if (action.actionType === Constants.FETCH) {
+      _loaded = false;
+      _error = false;
+      _data = Defaults;
+      _type = action.entityType;
       ThisStore.emitChange();
   } else if(action.actionType === routesConstants.SET_CURRENT_ROUTE) {
       _loaded = false;
@@ -81,7 +91,7 @@ ThisStore.dispatcherToken = Dispatcher.register(function(payload) {
       ThisStore.emitChange();
   } else if (action.actionType === Constants.CREATE) {
       _data = Defaults;
-      _loaded = true;
+      //_loaded = true;
       _type = action.entityType;
       _new = true;
       ThisStore.emitChange();
