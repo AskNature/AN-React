@@ -57,7 +57,19 @@ var Template = React.createClass({
                   fieldName='Area/s of Expertise'
                   titleField={'name'} />
               </Col>
-
+              {this.props.editable ? (
+                <RelationshipList
+                  items={data.media}
+                  editable={this.props.editable}
+                  titleField='name'
+                  onAdd={this.props.onRelationshipAdd.bind(null, 'media')}
+                  onRemove={this.props.onRelationshipRemove.bind(null, 'media')}
+                  field={'media'}
+                  routeName={'media'}
+                  title={'Media'}
+                  fieldName={'Media'}
+                  media />
+              ) : '' }
             </Row>
           </Grid>
 

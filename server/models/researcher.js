@@ -13,7 +13,8 @@ var Media = new Model('Media',
     'filename',
     'name',
     'entity',
-    'description'
+    'description',
+    'media_url'
   ]
 );
 var User = new Model('Users',
@@ -46,6 +47,11 @@ var Status = new Model('ContentStatus',
 
 
 var relationships = {
+  'media': {
+    model: Media,
+    className: 'Image',
+    edge: 'out("HasMedia")'
+  },
     'studied_by': {
     	model: Content,
     	className: 'SuperStrategy',
