@@ -23,9 +23,10 @@ var NavbarComponent = React.createClass({
   },
   onKeyPress: function(e) {
     if(e.keyCode === 13) {
-        console.log("enter pressed");
+      e.preventDefault();
+        console.log('enter pressed');
 	routeActions.setRoute('/infinite_demo/'+e.target.value);
-	e.preventDefault();
+
     }
   },
     render: function() {
