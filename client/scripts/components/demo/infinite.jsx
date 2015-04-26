@@ -283,7 +283,7 @@ var Infinite = React.createClass({
         }, this);
         this.setState({elements: newElements, data: store.get(), index: index === -1 ? 0 : index});
 	var that = this;
-	if(index === -1) {
+	if(index === -1 && newElements.length > 0) {
 	    setTimeout(function() { routeActions.setRoute("/infinite_demo/"+that.props.query+'/'+newElements[0].props.data.masterid);}, 300);
 	}
     },
@@ -300,7 +300,7 @@ var Infinite = React.createClass({
 
         return (
 
-            <DefaultLayout searchResultComponent={this.props.query === 'buoyancy' ? CustomSidebar : InfiniteList} searchResultElements={[]} searchResultHeight={100} searchQuery={this.props.query} searchQueryChange={function(t) {if(t.target.value) { routeActions.setRoute('/infinite_demo/'+t.target.value)}}}>
+            <DefaultLayout searchResultComponent={this.props.query === 'buoyancy' ? CustomSidebar : InfiniteList} searchResultElements={[]} searchResultHeight={100} searchQuery={this.props.query} searchQueryChange={function(t) {if(t.target.value) { console.log('value')}}}>
                     <InfiniteList query={this.props.query} itemComponent={ListItem} extendedItemComponent={BigListItem} elements={this.state.elements} itemHeight={2500} selectedItem={this.state.index} scrollCallback={function(num) {that.setState({index: num}); console.log("blah" + num)}} routeOnScroll={true} ListItem={ListItem} />
             </DefaultLayout>
             /* jshint ignore:end */
