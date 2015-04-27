@@ -32,6 +32,20 @@ Select = require('../../modules/select.jsx');
 var Restrict = require('../../modules/restrict.jsx');
 
 var SubHero = React.createClass({
+
+  getInitialState: function() {
+    /* Temp placeholder for bookmark action */
+      return (
+        {
+          bookmarked: false
+        }
+      );
+  },
+
+  toggleBookmark: function() {
+    /* Temp placeholder for bookmark action */
+    this.setState({bookmarked: !this.state.bookmarked});
+  },
   render: function() {
     return (
       /* jshint ignore:start */
@@ -72,7 +86,7 @@ var SubHero = React.createClass({
           <Col xs={12} sm={4}>
             <Nav justified activeKey={0} bsStyle='pills' style={{"margin-top": "11.5px"}}>
               {/*<RestrictOptions user={this.props.user.status} options={{"EditStrategy": {'disabled': true, 'eventKey':1, onClick: this.props.toggleEditable}}}>*/}
-	      <NavItem
+	             <NavItem
                 eventKey={1}
                 onClick={this.props.toggleEditable}
                 disabled={
@@ -87,8 +101,8 @@ var SubHero = React.createClass({
               <NavItem eventKey={4}>
                 <FontAwesome name='print'  fixedWidth />
               </NavItem>
-              <NavItem eventKey={5}>
-                <FontAwesome name='bookmark-o'  fixedWidth />
+              <NavItem eventKey={5} onClick={this.toggleBookmark}>
+                <FontAwesome name={this.state.bookmarked ? 'bookmark' : 'bookmark-o'}  fixedWidth />
               </NavItem>
 
             </Nav>
