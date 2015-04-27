@@ -22,6 +22,7 @@ var getState = function() {
 };
 
 var Detail = React.createClass({
+
   render: function() {
     return (
         <div className={this.props.narrow ? 'default detail' : 'default'}>
@@ -30,7 +31,9 @@ var Detail = React.createClass({
                     {this.props.children}
                 </div>
             </div>
+            <div className={this.props.narrow ? 'disabled-overlay visible' : 'disabled-overlay'} onClick={this.props.toggle} ></div>
         </div>
+
     );
   }
 });
@@ -96,7 +99,7 @@ var DefaultComponent = React.createClass({
               onSearchFocus={this.handleSearchFocus} accountActions={accountActions}  />
             <Drawer open={this.state.drawerOpen} searchResultElements={this.props.searchResultElements} searchResultComponent={this.props.searchResultComponent} searchResultHeight={this.props.searchResultHeight} loggedIn={this.state.account.loggedIn} onResultClick={this.handleResultClick}
               master={this.props.master} />
-            <Detail narrow={this.state.drawerOpen} {...this.props}/>
+            <Detail narrow={this.state.drawerOpen} toggle={this.handleDrawerToggleClick} {...this.props}/>
 
             </div>
             /* jshint ignore:end */
