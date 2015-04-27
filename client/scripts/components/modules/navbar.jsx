@@ -22,12 +22,20 @@ var NavbarComponent = React.createClass({
     routeActions.setRoute(href);
   },
   onKeyPress: function(e) {
-    if(e.keyCode === 13) {
-      e.preventDefault();
-        console.log('enter pressed');
+
+    if(e.charCode === 13) {
+        console.log("enter pressed");
 	routeActions.setRoute('/infinite_demo/'+e.target.value);
 
     }
+  },
+  componentDidMount: function() {
+    this.refs.searchbar.getDOMNode().onKeyPress = this.onKeyPress;
+  },
+  onSubmit: function(e) {
+    console.log('submit');
+    console.log(e.target.value);
+    console.log(this.refs.searchbar.getDOMNode());
   },
     render: function() {
       var brand = <Link url="/">AN</Link>;
@@ -56,9 +64,9 @@ var NavbarComponent = React.createClass({
                   <Nav left navbar-header className="pull-left navbar-header">
                      <Button className="flat-button drawer-toggle" onClick={this.props.onDrawerToggleClick} bsSize="large"><FontAwesome name='bars'  fixedWidth /></Button>
                   <Link className="navbar-brand" url="/">AN</Link>
-                  <form role="search" className='navbar-form navbar-left search'>
+                  <form role="search" className='navbar-form navbar-left search' onSubmit={this.onSubmit}>
 
-                    <Input className='search-input' type="text" placeholder='Search AskNature' value={this.props.searchQuery} onFocus={this.props.onSearchFocus} onChange={this.props.searchQueryChange} onKeyPress={this.onKeyPress}/>
+                    <Input className='search-input' type="text" placeholder='Search AskNature' defaultValue={this.props.searchQuery} onFocus={this.props.onSearchFocus} onChange={this.props.searchQueryChange} onKeyPress={this.onKeyPress} ref="searchbar" />
                       <label className='search-label'>
                         <FontAwesome name='search'  fixedWidth />
                       </label>
