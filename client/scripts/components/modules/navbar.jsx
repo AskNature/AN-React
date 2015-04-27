@@ -25,7 +25,13 @@ var NavbarComponent = React.createClass({
 
     if(e.charCode === 13) {
         console.log("enter pressed");
-	routeActions.setRoute('/infinite_demo/'+e.target.value);
+        // Temp redirect for demo:
+        if(e.target.value === 'buoyancy'){
+          routeActions.setRoute('/b.strategy/284ace1157963de879fdab2a2a5709cc');
+
+        } else {
+          routeActions.setRoute('/infinite_demo/'+e.target.value);
+        }
 
     }
   },
