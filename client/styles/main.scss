@@ -151,6 +151,8 @@ Infinite List
   .infinite-list-item {
     background: $paper-color;
     margin: 20px 10px;
+    // Short-term fix for fixed-height cards:
+    overflow: hidden;
   }
   div {
     transition: none;
