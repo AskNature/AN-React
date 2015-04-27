@@ -12,8 +12,6 @@ CreatorMast = require('./creatormast.jsx');
 
 var TopSection = React.createClass({
   render: function() {
-    console.log('TopSection Props:');
-    console.log(this.props.addedby);
     return (
       /* jshint ignore:start */
       <div>
