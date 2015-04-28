@@ -22,6 +22,8 @@ Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid');
 
+var ReactS3Uploader = require('react-s3-uploader');
+
 var Template = React.createClass({
   getInitialState : function () {
     return {width: 0, height: 0};
@@ -76,6 +78,8 @@ var Template = React.createClass({
             <Row>
               <Col xs={12} >
                 <Panel>
+		  <ReactS3Uploader 
+		      signingUrl='/s3/sign' accept='image/*' />
                   <form>
                   <Input type='file' help='Upload a JPG, PNG, or GIF to AskNature. Max file size is 8mb.' />
                   <Input
