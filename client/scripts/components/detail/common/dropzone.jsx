@@ -125,7 +125,7 @@ var DropzoneComponent = React.createClass({displayName: 'DropzoneComponent',
     },
 
     onUploadFinish: function(signResult) {
-      console.log("Upload finished: " + signResult.publicUrl);
+      console.log("Upload finished: " + window.location.host + signResult.publicUrl);
     },
 
     onUploadError: function(message) {
