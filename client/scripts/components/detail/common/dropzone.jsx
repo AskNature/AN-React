@@ -17,7 +17,7 @@ var Dropzone = React.createClass({
   getInitialState: function() {
     return {
       isDragActive: false
-    }
+    };
   },
 
   propTypes: {
@@ -95,7 +95,7 @@ var Dropzone = React.createClass({
 
     return (
       <div className={className} style={style} onClick={this.onClick} onDragLeave={this.onDragLeave} onDragOver={this.onDragOver} onDrop={this.onDrop}>
-        <input style={{display: 'none' }} type='file' multiple ref='fileInput' onChange={this.onDrop} />
+        <input style={{display: 'none' }} type='file' single ref='fileInput' onChange={this.onDrop} />
         {this.props.children}
       </div>
     );
@@ -122,14 +122,18 @@ var DropzoneComponent = React.createClass({displayName: 'DropzoneComponent',
     },
 
     cancelHandler: function () {
-      return {
+      this.setState({
         files: []
-      };
+      });
     },
 
     showFiles: function () {
       if (this.state.files.length <= 0) {
         return '';
+      } else if (this.state.files.length > 1) {
+        return (
+          <h4>Sorry, you may only upload one file per media item.</h4>
+        );
       }
 
       var files = this.state.files;
