@@ -1,8 +1,10 @@
 'use strict';
 
-var React = require('react'),
+var React = require('react/addons'),
 
 moment = require('moment'),
+
+Dropzone= require('./common/dropzone.jsx'),
 
 Link = require('../modules/link.jsx'),
 FadeImage = require('../modules/imagefade.jsx'),
@@ -21,6 +23,7 @@ Well = require('react-bootstrap/Well'),
 Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid');
+
 
 var Template = React.createClass({
   getInitialState : function () {
@@ -75,23 +78,17 @@ var Template = React.createClass({
             <hr />
             <Row>
               <Col xs={12} >
-                <Panel>
-                  <form>
-                  <Input type='file' help='Upload a JPG, PNG, or GIF to AskNature. Max file size is 8mb.' />
-                  <Input
-                    type='text'
-                    placeholder='Enter Custom URL'
-                    value={data.media_url ? data.media_url : data.entity ? 'http://www.asknature.org/uploads/'+data.entity+'/'+imgID+'/'+data.filename : ''}
-                    buttonAfter={<Button>Link to Image</Button>} />
-                  </form>
-                  <TextArea
-                  item={data.media_url}
-                  store={this.props.store}
-                  actions={this.props.actions}
-                  fieldName={'media_url'}
-                  editable={this.props.editable}
-                  placeholder="Enter a URL for this file" />
-                </Panel>
+                  <Dropzone />
+
+
+                <TextArea
+                item={data.media_url}
+                store={this.props.store}
+                actions={this.props.actions}
+                fieldName={'media_url'}
+                editable={this.props.editable}
+                initialValue={data.media_url ? data.media_url : data.entity ? 'http://www.asknature.org/uploads/'+data.entity+'/'+imgID+'/'+data.filename : ''}
+                placeholder="or add a custom URL here" />
               </Col>
             </Row>
           <Row>
