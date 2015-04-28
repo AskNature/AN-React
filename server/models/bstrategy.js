@@ -15,27 +15,8 @@ var Expert = new Model('Expert',
     'institution'
   ]
 );
-var Media = new Model('Media',
-  [
-    'filename',
-    'name',
-    'entity',
-    'description'
-  ]
-);
-var InspiredSolution = new Model('InspiredSolutions',
-  [
-    'name',
-    'headline'
-  ],
-  {'out_HasMedia':
-    {
-      model: Media,
-      className: 'Media',
-      edge:'out("HasMedia")'
-    }
-  }
-);
+
+
 var Source = new Model('Sources',
   [
     'name',
@@ -46,6 +27,15 @@ var Source = new Model('Sources',
 var Entity = new Model('Entity',
   [
     'name'
+  ]
+);
+var Media = new Model('Media',
+  [
+    'filename',
+    'name',
+    'entity',
+    'description',
+    'media_url'
   ]
 );
 var User = new Model('Users',
@@ -63,10 +53,24 @@ var User = new Model('Users',
     }
   }
 );
+var InspiredSolution = new Model('InspiredSolutions',
+  [
+    'name',
+    'headline'
+  ],
+  {'out_HasMedia':
+    {
+      model: Media,
+      className: 'Media',
+      edge:'out("HasMedia")'
+    }
+  }
+);
 var LivingSystem = new Model('LivingSystem',
   [
     'name',
-    'taxon'
+    'taxon',
+    'common_name'
   ]
 );
 var Condition = new Model('Condition',
@@ -118,7 +122,12 @@ var relationships = {
     'added_by': {
 	model: User,
 	className: 'Users',
-	edge: 'in("AddedStrategy")'
+	edge: 'in("AddedContent")'
+    },
+    'collaborators': {
+	model: User,
+	className: 'Users',
+	edge: 'in("CollaboratedOn")'
     },
     'living_systems': {
 	model: LivingSystem,

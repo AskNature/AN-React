@@ -8,6 +8,7 @@ var React = require('react'),
 TextArea = require('./textarea.jsx'),
 TextField = require('../../modules/textfield.jsx'),
 RestrictOptions = require('../../modules/restrictoptions.jsx'),
+RelationshipList = require('../common/relationshiplist.jsx'),
 
 FontAwesome = require('react-fontawesome'),
 
@@ -31,6 +32,20 @@ Select = require('../../modules/select.jsx');
 var Restrict = require('../../modules/restrict.jsx');
 
 var SubHero = React.createClass({
+
+  getInitialState: function() {
+    /* Temp placeholder for bookmark action */
+      return (
+        {
+          bookmarked: false
+        }
+      );
+  },
+
+  toggleBookmark: function() {
+    /* Temp placeholder for bookmark action */
+    this.setState({bookmarked: !this.state.bookmarked});
+  },
   render: function() {
     return (
       /* jshint ignore:start */
@@ -71,7 +86,7 @@ var SubHero = React.createClass({
           <Col xs={12} sm={4}>
             <Nav justified activeKey={0} bsStyle='pills' style={{"margin-top": "11.5px"}}>
               {/*<RestrictOptions user={this.props.user.status} options={{"EditStrategy": {'disabled': true, 'eventKey':1, onClick: this.props.toggleEditable}}}>*/}
-	      <NavItem
+	             <NavItem
                 eventKey={1}
                 onClick={this.props.toggleEditable}
                 disabled={
@@ -86,8 +101,8 @@ var SubHero = React.createClass({
               <NavItem eventKey={4}>
                 <FontAwesome name='print'  fixedWidth />
               </NavItem>
-              <NavItem eventKey={5}>
-                <FontAwesome name='bookmark-o'  fixedWidth />
+              <NavItem eventKey={5} onClick={this.toggleBookmark}>
+                <FontAwesome name={this.state.bookmarked ? 'bookmark' : 'bookmark-o'}  fixedWidth />
               </NavItem>
 
             </Nav>
@@ -135,7 +150,29 @@ var SubHero = React.createClass({
                       actions={this.props.actions}
                       fieldName={'editor_comments'}
                       editable={this.props.editable} />
+                    <RelationshipList
+                      items={this.props.added_by}
+                      editable={this.props.editable}
+                      titleField='name'
+                      onAdd={this.props.onRelationshipAdd.bind(null, 'added_by')}
+                      onRemove={this.props.onRelationshipRemove.bind(null, 'added_by')}
+                      field={'oneuser'}
+                      routeName={'user1'}
+                      title={'Contributor'}
+                      fieldName={'Contributor'}
+                      limit='1' />
+                    <RelationshipList
+                      items={this.props.collaborators}
+                      editable={this.props.editable}
+                      titleField='name'
+                      onAdd={this.props.onRelationshipAdd.bind(null, 'collaborators')}
+                      onRemove={this.props.onRelationshipRemove.bind(null, 'collaborators')}
+                      field={'oneuser'}
+                      routeName={'user1'}
+                      title={'Collaborators'}
+                      fieldName={'Collaborators'} />
                   </div>
+
                 : this.props.user.role === 'admin' ?
 
                   <fieldset disabled>

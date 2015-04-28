@@ -8,6 +8,29 @@ var entityName = 'Source';
 
 var fields = ['name', 'secondary_title', 'source', 'type', 'timestamp', 'authors', 'author_address', 'pages', 'volume', 'number', 'publication_year', 'publisher', 'isbn', 'accession_number', 'url', 'notes', 'access_date', 'keywords', 'abstract_excerpt', 'published_language', 'type_of_work', 'other_information', 'flag_text', 'flag_media', 'flag_tags', 'editor_notes'];
 
+var Media = new Model('Media',
+  [
+    'filename',
+    'name',
+    'entity',
+    'description'
+  ]
+);
+var User = new Model('Users',
+  [
+    'name',
+    'first',
+    'last',
+    'custom_avatar_url'
+  ],
+  {'out_HasMedia':
+    {
+      model: Media,
+      className: 'Media',
+      edge:'out("HasMedia")'
+    }
+  }
+);
 var Content = new Model('Content',
     [
         'name',
@@ -52,6 +75,16 @@ className: 'ContentStatus',
 edge: 'out("HasStatus")',
 select: true,
 options: ListOptions.ContentStatus
+},
+'added_by': {
+model: User,
+className: 'Users',
+edge: 'in("AddedContent")'
+},
+'collaborators': {
+model: User,
+className: 'Users',
+edge: 'in("CollaboratedOn")'
 }
 
 };

@@ -26,7 +26,9 @@ ResearcherDetail = require('./detail-researcher.jsx'),
 SourceDetail = require('./detail-source.jsx'),
 BStrategyDetail = require('./detail-bstrategy.jsx'),
 UserDetail = require('./detail-user.jsx'),
-OneUserDetail = require('./detail-1user.jsx');
+OneUserDetail = require('./detail-1user.jsx'),
+StoryDetail = require('./detail-story.jsx');
+
 
 var getState = function() {
   return {
@@ -55,7 +57,7 @@ var Loader = React.createClass({
 
 var DetailComponent = React.createClass({
 
-      mixins: [store.mixin],
+      mixins: [store.mixin, accountStore.mixin],
 
       getInitialState: function() {
           return (
@@ -68,10 +70,12 @@ var DetailComponent = React.createClass({
       },
 
       componentWillMount: function(){
-          if(this.props.masterid !== 'new') {
-              actions.fetch(this.props.type,this.props.masterid);
-          } else if(this.props.masterid === 'new'){
-              actions.create(this.props.type);
+          var that = this;
+          actions.fetch(this.props.type,this.props.masterid);
+	  if(this.props.masterid === 'new'){
+              setTimeout(function() {
+	          actions.create(that.props.type);
+	      }, 1);
 	      var newState = getState();
 	      newState.editable = true;
 	      this.setState(newState);
@@ -162,6 +166,8 @@ var DetailComponent = React.createClass({
           Template = ResearcherDetail;
         } else if(this.props.type === 'sources') {
           Template = SourceDetail;
+        } else if(this.props.type === 'story') {
+          Template = StoryDetail;
         }
         /*if(this.state.loaded === false) {
           actions.fetch(this.props.type,this.props.masterid);
@@ -181,7 +187,7 @@ var DetailComponent = React.createClass({
         );
       }
         return (
-            <DefaultLayout>
+            <DefaultLayout master={this.props.masterid}>
                 {loader}
                 <div style={style} className='detail-single'>
                 <Template

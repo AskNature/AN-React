@@ -3,6 +3,8 @@ var _ = require('lodash');
 
 var Strategy = require('../models/bstrategy');
 
+var SuperStrategy = require('../models/strategy');
+
 var Model = require('../models/model.js');
 
 var Product = Model('InspiredSolutions', ['name', 'headline']);
