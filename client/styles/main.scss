@@ -236,7 +236,16 @@ Top Navbar
   z-index: 10000;
   .navbar-brand {
     color: #333;
-    margin-left: -15px;
+    margin-left: 0;
+    margin-top: 21px;
+    width: 100px;
+    height: 20px;
+    background: url('../images/an-logo.png') no-repeat;
+    background-size: contain;
+    img {
+      height: 20px;
+      width: auto;
+    }
   }
   .navbar-header.pull-left {
     position: absolute;
@@ -250,23 +259,23 @@ Top Navbar
       background: none;
       border: none;
     }
-    .navbar-brand {
-    }
     .navbar-form.search {
       padding-bottom: 0;
       padding-left: 10px;
       padding-top: 0;
-      float: left;
+      position: absolute;
+      left: 310px;
+      right: 0;
       border: none;
       box-shadow: none;
       label.search-label {
         color: $white-color;
-        margin: 7px 0 0 15px;
+        margin: 7px 0 0 5px;
         z-index: 10;
       }
       .form-group {
         position: absolute;
-        left: 120px;
+        left: 0;
         right: 0;
         .input-group {
           width: 100%;
@@ -604,6 +613,31 @@ Scribe
   }
 }
 
+.rc-dropzone {
+  border: 2px dashed #0087F7;
+  border-radius: 5px;
+  background: white;
+  min-height: 100px;
+  padding: 24px 54px;
+  box-sizing: border-box;
+}
+.dz-message {
+  font-weight: 400;
+  text-align: center;
+  margin: 2em 0;
+  font-size: 20px;
+  vertical-align: middle;
+}
+.note {
+  font-size: 0.8em;
+  font-weight: 200;
+  display: block;
+  margin-top: 1.4rem;
+}
+
+.next {
+  margin-top: 30px;
+}
 /* ==========================================================================
 Hero
 ========================================================================== */
@@ -753,8 +787,14 @@ Hero
     display: table-cell;
     width: 1%;
   }
-  .navbar-inverse .navbar-header.pull-left .btn-default.drawer-toggle {
-    margin-left: 15px;
+
+  .navbar-inverse .navbar-header.pull-left {
+    .btn-default.drawer-toggle {
+      margin-left: 15px;
+    }
+    .navbar-form.search {
+      left: 210px;
+    }
   }
 }
 @media (min-width: 768px) {
@@ -775,7 +815,14 @@ Hero
   .navbar-fixed-top .form-control {
     width: 100%;
   }
-
+  .navbar-inverse .navbar-header.pull-left {
+    .navbar-form.search {
+      left: 210px;
+    }
+    .navbar-brand {
+      margin-left: 0;
+    }
+  }
 
 }
 
@@ -787,7 +834,11 @@ Hero
   nav.drawer {
     width: 300px;
   }
-
+  .navbar-inverse .navbar-header.pull-left {
+    .navbar-form.search {
+      left: 310px;
+    }
+  }
 
 
   .default.detail {

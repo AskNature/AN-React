@@ -21,6 +21,8 @@ var Template = React.createClass({
     var routeNameSingle = 'collection';
     var entityName = 'Collection';
     var data = this.props.data;
+    var primaryKey = 'name';
+    var descriptionKey = 'description';
     return (
       /* jshint ignore:start */
       <div>
@@ -29,8 +31,10 @@ var Template = React.createClass({
           routename={routeNameSingle}
           entityName={entityName}
           label={entityName}
-          primarytitle={this.props.data.name}
-          description={this.props.data.description} />
+          primarytitle={data[primaryKey]}
+          primarykey={primaryKey}
+          description={data[descriptionKey]}
+          descriptionKey={descriptionKey} />
         <Grid>
           <Row>
             <Col xs={12} sm={12}>
