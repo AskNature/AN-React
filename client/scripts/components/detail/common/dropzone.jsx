@@ -11,7 +11,9 @@ Panel = require('react-bootstrap/Panel'),
 Button = require('react-bootstrap').Button,
 Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
-Grid = require('react-bootstrap/Grid');
+Grid = require('react-bootstrap/Grid'),
+
+S3Upload = require('react-s3-uploader/s3upload');
 
 var Dropzone = React.createClass({
   getInitialState: function() {
@@ -61,7 +63,7 @@ var Dropzone = React.createClass({
 
     if (this.props.onDrop) {
       files = Array.prototype.slice.call(files);
-      this.props.onDrop(files);
+      this.props.onDrop(files, this.refs.fileInput.getDOMNode());
     }
   },
 
@@ -110,15 +112,34 @@ var DropzoneComponent = React.createClass({displayName: 'DropzoneComponent',
       };
     },
 
-    onDrop: function (files) {
+    onDrop: function (files, fileElement) {
       console.log('Received files: ', files);
       this.setState({
-        files: files
+        files: files,
+	fileElement: fileElement
       });
     },
 
-    uploadHandler: function () {
-      /* upload action goes here */
+    onUploadProgress: function(percent, message) {
+      console.log('Upload progress: ' + percent + '% ' + message);
+    },
+
+    onUploadFinish: function(signResult) {
+      console.log("Upload finished: " + signResult.publicUrl);
+    },
+
+    onUploadError: function(message) {
+      console.log("Upload error: " + message);
+    },
+
+    uploadHandler: function() {
+      new S3Upload({
+        fileElement: this.state.fileElement,
+        signingUrl: '/s3/sign',
+        onProgress: this.onUploadProgress,
+        onFinishS3Put: this.onUploadFinish,
+        onError: this.onUploadError
+      });
     },
 
     cancelHandler: function () {
