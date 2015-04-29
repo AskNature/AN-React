@@ -305,9 +305,6 @@ Top Navbar
 
   .pull-right.nav {
     float: left;
-    a {
-      padding-top: 19px;
-    }
     li.loggedin-menu>a, a.loggedin-menu {
       padding-bottom: 4px;
       padding-top: 11px;
@@ -318,6 +315,10 @@ Top Navbar
     margin-bottom: 0;
     > li > a {
       color: #fff;
+    }
+    .dropdown-menu {
+      box-shadow: none;
+      margin-top: 0;
     }
   }
 }
@@ -744,7 +745,7 @@ Hero
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .default.detail {
     transform: translate(300px,0);
     left: 0;
@@ -776,6 +777,26 @@ Hero
     }
     .navbar-form.search {
       left: 210px;
+    }
+  }
+  .navbar-inverse .navbar-nav.pull-right .open .dropdown-menu {
+    position: absolute;
+    right: 0;
+    left: auto;
+    background-color: $white-color;
+    > li {
+      &:hover {
+        background-color: $gray-lighter;
+      }
+      &.disabled > a {
+        color: $mid-text;
+      }
+      a {
+        color: $text-color;
+      }
+      &.divider {
+        background-color: $gray-lighter;
+      }
     }
   }
 }
