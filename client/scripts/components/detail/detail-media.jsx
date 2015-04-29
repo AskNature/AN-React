@@ -70,10 +70,15 @@ var Template = React.createClass({
           <Row>
             <Col xs={12} >
               {this.props.editable ?
-                <Dropzone />
+                <div>
+                  <Dropzone />
+                  <h4 style={{textAlign:'center'}}>
+                    ...or enter a custom URL below:
+                  </h4>
+                </div>
               : ''}
               <TextArea
-                title='Media URL'
+                title='Image URL'
                 item={data.media_url}
                 store={this.props.store}
                 actions={this.props.actions}

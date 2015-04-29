@@ -116,6 +116,25 @@ label, .label {
 }
 
 /* ==========================================================================
+Media Uploads
+========================================================================== */
+
+.dropzone {
+  color: $mid-text;
+  width: 100%;
+  height: auto;
+  padding: 40px 20px;
+  margin-bottom: 20px;
+  border-size: 4px;
+  border-style: dashed;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+/* ==========================================================================
 Creator Mast
 ========================================================================== */
 
