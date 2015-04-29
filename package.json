@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "async": "^0.7.0",
+    "aws-sdk": "^2.1.26",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.0.2",
     "cached": "^4.0.0",
@@ -45,6 +46,7 @@
     "react-form-data": "^0.2.0",
     "react-infinite-extended": "^0.3.4",
     "react-intl": "^1.1.0",
+    "react-s3-uploader": "git://github.com/shalstvedt/react-s3-uploader.git#HEAD",
     "react-select": "~0.4.3",
     "react-tap-event-plugin": "^0.1.4",
     "react-widgets": "^2.3.1",
