@@ -4,6 +4,8 @@ var React = require('react/addons'),
 
 Link = require('./link.jsx'),
 
+DropdownList = require('react-widgets').DropdownList,
+
 FontAwesome = require('react-fontawesome'),
 Nav = require('react-bootstrap').Nav,
 Well = require('react-bootstrap').Well,
@@ -130,6 +132,65 @@ var listItems = [
         'slug' : 'ads',
         'faIcon' : 'bullhorn'
     },
+];
+
+var selectItems = [
+    {
+        'label' : 'Biological Strategies',
+        'slug' : 'b.strategy',
+        'faIcon' : 'leaf'
+    },
+    {
+        'label' : 'Bio-inspired Strategies',
+        'slug' : 'd.strategy',
+        'faIcon' : 'recycle'
+    },
+    {
+        'label' : 'Biological Systems',
+        'slug' : 'b.system',
+        'faIcon' : 'tree',
+    },
+    {
+        'label' : 'Designed Systems',
+        'slug' : 'd.system',
+        'faIcon' : 'cubes'
+    },
+    {
+        'label' : 'Functions & Mechanisms',
+        'slug' : 'fm',
+        'faIcon' : 'fire'
+    },
+    {
+        'label' : 'Contexts',
+        'slug' : 'context',
+        'faIcon' : 'cloud'
+    },
+    {
+        'label' : 'Collections',
+        'slug' : 'collections',
+        'faIcon' : 'bookmark'
+    },
+    {
+        'label' : 'Stories',
+        'slug' : 'story',
+        'faIcon' : 'newspaper-o'
+    },
+    {
+        'label' : 'Sources',
+        'slug' : 'sources',
+        'faIcon' : 'book'
+    },
+    {
+        'label' : 'R&D Teams',
+        'slug' : 'researchers',
+        'faIcon' : 'university'
+    },
+    {
+        'label' : 'Original Users',
+        'slug' : '1users',
+        'faIcon' : 'users'
+    }
+
 ];
 
 var BuoyancyDemo = React.createClass({
@@ -431,11 +492,32 @@ var SidebarComponent = React.createClass({
             <Nav className='drawer' key='10'>
 
                 <TabbedArea defaultActiveKey={0} key='20' justified>
-                    <TabPane key='20' eventKey={0} tab={<FontAwesome name='search'  fixedWidth />} onClick={this.props.onResultClick} >
-                        {this.props.searchResultComponent ?  <this.props.searchResultComponent  elements={this.props.searchResultElements} itemHeight={this.props.searchResultHeight} /> : this.props.master === '284ace1157963de879fdab2a2a5709cc' ? <BuoyancyDemo /> : this.props.master === 'air-ballast-biomimetic-cargo-ship' ? <BallastDemo /> : <Well>
-                            Query results & content clusters go in here
-                        </Well>
+                    <TabPane
+
+                      key='20'
+                      eventKey={0}
+                      tab={<FontAwesome name='search'  fixedWidth />}  >
+                      <DropdownList
+                        data={selectItems}
+                        valueField='slug'
+                        textField='label'
+                        defaultValue='b.strategy'
+                        className='form-control'/>
+                      <div onClick={this.props.onResultClick}>
+                        {this.props.searchResultComponent ?
+                          <this.props.searchResultComponent
+                            elements={this.props.searchResultElements} itemHeight={this.props.searchResultHeight} />
+                        :
+                          this.props.master === '284ace1157963de879fdab2a2a5709cc' ?
+                            <BuoyancyDemo />
+                          : this.props.master === 'air-ballast-biomimetic-cargo-ship' ?
+                            <BallastDemo />
+                          :
+                            <Well>
+                              Query results & content clusters go in here
+                            </Well>
                         }
+                        </div>
                     </TabPane>
                     <TabPane key='30' eventKey={1} tab={<FontAwesome name='info'  fixedWidth />}>
                         <Well>
