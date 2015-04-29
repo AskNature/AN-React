@@ -374,22 +374,28 @@ nav.drawer {
       }
     }
   }
-}
-
-nav.drawer-enter {
-  left: 0;
-}
-
-nav.drawer-enter.drawer-enter-active {
-  left: 0px;
-}
-
-nav.drawer-leave {
-  left: 0px;
-}
-
-nav.drawer-leave.drawer-leave-active {
-  left: 0;
+  .form-control.rw-dropdownlist {
+    font-size: .7em;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 10px 0;
+    border: none;
+    box-shadow: none;
+    height: auto;
+    .rw-input {
+      padding: 0 20px;
+      color: $gray;
+    }
+    .rw-list {
+      max-height: 400px;
+    }
+    .rw-list-option {
+      padding: 10px;
+    }
+    .rw-popup {
+      box-shadow: none;
+    }
+  }
 }
 
 .well.card {
@@ -417,6 +423,7 @@ nav.drawer-leave.drawer-leave-active {
   background: transparent;
   border: none;
 }
+
 
 
 /* ==========================================================================
