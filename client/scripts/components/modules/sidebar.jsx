@@ -8,6 +8,7 @@ DropdownList = require('react-widgets').DropdownList,
 
 FontAwesome = require('react-fontawesome'),
 Nav = require('react-bootstrap').Nav,
+NavItem = require('react-bootstrap').NavItem,
 Well = require('react-bootstrap').Well,
 TabbedArea = require('react-bootstrap').TabbedArea,
 TabPane = require('react-bootstrap').TabPane;
@@ -490,12 +491,10 @@ var SidebarComponent = React.createClass({
         return (
             /* jshint ignore:start */
             <Nav className='drawer' key='10'>
-
-                <TabbedArea defaultActiveKey={0} key='20' justified>
+                <TabbedArea className={this.props.mobile ? 'sidebar-brand' : ''} defaultActiveKey={1} key='1' justified>
                     <TabPane
-
                       key='20'
-                      eventKey={0}
+                      eventKey={1}
                       tab={<FontAwesome name='search'  fixedWidth />}  >
                       <DropdownList
                         data={selectItems}
@@ -519,13 +518,13 @@ var SidebarComponent = React.createClass({
                         }
                         </div>
                     </TabPane>
-                    <TabPane key='30' eventKey={1} tab={<FontAwesome name='info'  fixedWidth />}>
+                    <TabPane key='30' eventKey={2} tab={<FontAwesome name='info'  fixedWidth />}>
                         <Well>
                             Informational Pages go in here
                         </Well>
                     </TabPane>
                     {this.props.loggedIn ? (
-                    <TabPane key='40' eventKey={2} tab={<FontAwesome name='list'  fixedWidth />} onClick={this.props.onResultClick}>
+                    <TabPane key='40' eventKey={3} tab={<FontAwesome name='list'  fixedWidth />} onClick={this.props.onResultClick}>
                         <Nav stacked onClick={this.props.onResultClick}>
                             {
                                 listItems.map(function(item,i){
