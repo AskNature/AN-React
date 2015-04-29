@@ -336,11 +336,15 @@ nav.drawer {
   width: 300px;
   background: $background-color;
   overflow-y: scroll;
-  ul.sidebar-brand {
-    background: url('../images/an-logo.png') no-repeat;
+  ul.nav-tabs {
+    background-repeat: no-repeat;
     background-size: 100px;
     background-position: 10px 15px;
-    padding-left: 120px;
+    padding-left: 0px;
+    &.sidebar-brand {
+      background-image: url('../images/an-logo.png');
+      padding-left: 120px;
+    }
   }
   .divider {
     border-bottom: dotted 1px rgba(0,0,0,0.3);
