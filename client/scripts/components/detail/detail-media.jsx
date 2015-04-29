@@ -36,6 +36,11 @@ var Template = React.createClass({
     this.setState({width: w, height: h});
   },
 
+  onNewImage : function(url) {
+    console.log("got media_url: '" + url + "'");
+    this.props.actions.update({media_url: url});
+  },
+
   render: function() {
     var routeNameSingle = 'media';
     var entityName = 'Media';
@@ -71,7 +76,7 @@ var Template = React.createClass({
             <Col xs={12} >
               {this.props.editable ?
                 <div>
-                  <Dropzone />
+                  <Dropzone onUpload={this.onNewImage} />
                   <h4 style={{textAlign:'center'}}>
                     ...or enter a custom URL below:
                   </h4>
