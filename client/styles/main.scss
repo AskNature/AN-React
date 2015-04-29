@@ -270,7 +270,7 @@ Top Navbar
       box-shadow: none;
       label.search-label {
         color: $white-color;
-        margin: 7px 0 0 5px;
+        margin: 7px 0 0;
         z-index: 10;
       }
       .form-group {
@@ -775,8 +775,11 @@ Hero
     .btn-default.drawer-toggle {
       margin-left: 15px;
     }
+    .navbar-brand {
+      display: none;
+    }
     .navbar-form.search {
-      left: 210px;
+      left: 90px;
     }
   }
   .navbar-inverse .navbar-nav.pull-right .open .dropdown-menu {
@@ -820,7 +823,7 @@ Hero
   }
   .navbar-inverse .navbar-header.pull-left {
     .navbar-form.search {
-      left: 210px;
+      left: 215px;
     }
     .navbar-brand {
       margin-left: 0;
@@ -839,7 +842,7 @@ Hero
   }
   .navbar-inverse .navbar-header.pull-left {
     .navbar-form.search {
-      left: 310px;
+      left: 315px;
     }
   }
 

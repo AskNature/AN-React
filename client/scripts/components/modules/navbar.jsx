@@ -76,7 +76,7 @@ var NavbarComponent = React.createClass({
                     <Input
                       className='search-input'
                       type="text"
-                      placeholder='Search'
+                      placeholder="How might we ..."
                       defaultValue={this.props.searchQuery} onFocus={this.props.onSearchFocus} onChange={this.props.searchQueryChange} onKeyPress={this.onKeyPress}
                       ref="searchbar" />
                       <label className='search-label'>
