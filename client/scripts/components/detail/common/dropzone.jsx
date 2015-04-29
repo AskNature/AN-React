@@ -79,16 +79,7 @@ var Dropzone = React.createClass({
     }
 
     var style = this.props.style || {
-      width: '100%',
-      height: 'auto',
-      padding: '10px 20px 20px',
-      marginBottom: '20px',
-      borderSize: '4px',
-      borderColor: '#ccc',
-      borderStyle: this.state.isDragActive ? 'solid' : 'dashed',
-      backgroundColor: this.state.isDragActive ? 'white' : 'transparent',
-      textAlign: 'center',
-      cursor: 'pointer'
+      borderColor: this.state.isDragActive ? '#9EAB0F' : '#ccc'
     };
 
     if (this.props.className) {
@@ -209,6 +200,9 @@ var DropzoneComponent = React.createClass({displayName: 'DropzoneComponent',
       return (
         <div>
           <Dropzone onDrop={this.onDrop}  >
+            <FontAwesome
+            name='file'
+            size='3x'/>
             <h3>
               <strong>Drop files here</strong> or click to choose
             </h3>
