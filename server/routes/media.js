@@ -26,7 +26,8 @@ var routes = function (app) {
   app.delete('/api/v2/media', Controller.deleteMultiple2);
 
   app.use('/s3', require('react-s3-uploader/s3router')({
-      bucket: config.s3.bucket
+      bucket: config.s3.bucket,
+      getFileKeyDir: function(req) { return 'test' }
   }));
 };
 
