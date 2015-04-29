@@ -134,7 +134,7 @@ var DropzoneComponent = React.createClass({displayName: 'DropzoneComponent',
 
     uploadHandler: function() {
       new S3Upload({
-        fileElement: this.state.fileElement,
+        rawFiles: this.state.files,
         signingUrl: '/s3/sign',
         onProgress: this.onUploadProgress,
         onFinishS3Put: this.onUploadFinish,
