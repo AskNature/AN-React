@@ -45,8 +45,12 @@ var Template = React.createClass({
     var descriptionKey = 'description';
     var addedby = data.added_media;
     var imgID = data.has_media.length > 0 ? data.has_media[0].masterid : '';
-    var imgSRC= data.media_url ? data.media_url : 'http://www.asknature.org/images/uploads/'+ data.entity + '/' + imgID + '/' + data.filename;
+    if(!data.media_url && data.entity){
+      data.media_url = 'http://www.asknature.org/uploads/' + data.entity + '/' + imgID + '/' + data.filename;
+    }
     var upload_date = moment(data.timestamp, 'YYYY-MM-DD HH:mm:ss').format('MMM Do, YYYY');
+    /* Conditional auto-fills media_url field for legacy media records: */
+
     return (
       /* jshint ignore:start */
       <div>
@@ -60,118 +64,128 @@ var Template = React.createClass({
           description={data[descriptionKey]}
           descriptionKey={descriptionKey}
           addedby={addedby}
-          imgurl={imgSRC} />
-          <Grid>
-            <Row>
-              <Col xs={12}>
-                <RelationshipList
-                  items={data.has_media}
-                  editable={this.props.editable}
-                  onAdd={this.props.onRelationshipAdd.bind(null, 'has_media')}
-                  onRemove={this.props.onRelationshipRemove.bind(null, 'has_media')}
-                  field={'Content'}
-                  title={'Displayed as Media in'}
-                  fieldName={'Displayed as Media in'}
-                  titleField={'name'} />
-              </Col>
-            </Row>
-            <hr />
-            <Row>
-              <Col xs={12} >
-                  <Dropzone />
+          imgurl={data.media_url} />
+        <Grid>
 
-
-                <TextArea
+          <Row>
+            <Col xs={12} >
+              {this.props.editable ?
+                <Dropzone />
+              : ''}
+              <TextArea
+                title='Media URL'
                 item={data.media_url}
                 store={this.props.store}
                 actions={this.props.actions}
                 fieldName={'media_url'}
                 editable={this.props.editable}
-                initialValue={data.media_url ? data.media_url : data.entity ? 'http://www.asknature.org/uploads/'+data.entity+'/'+imgID+'/'+data.filename : ''}
-                placeholder="or add a custom URL here" />
+                initialValue='test'
+                placeholder="or add a custom URL here"
+                forceWrap
+                link
+                 />
               </Col>
             </Row>
-          <Row>
-
-            <Col xs={12} sm={8}>
-              <FadeImage className='fadeimage' src={imgSRC} getWidth={this._getImageWidth}/>
-            </Col>
-            <Col xs={12} sm={4}>
-
-              <h6><strong>Name</strong></h6>
-              <p>
-                <TextArea
-                item={data.name}
-                store={this.props.store}
-                actions={this.props.actions}
-                fieldName={'name'}
-                editable={this.props.editable}
-                placeholder="Enter a brief phrase to identify this image" />
-              </p>
-              <h6><strong>Caption</strong></h6>
-              <p>
-                <TextArea
-                item={data.description}
-                store={this.props.store}
-                actions={this.props.actions}
-                fieldName={'description'}
-                editable={this.props.editable}
-                placeholder="Enter a caption that will be displayed with this image" />
-              </p>
-              <h6><strong>Pixel Dimensions: </strong>{this.state.width + ' x ' + this.state.height}</h6>
-              <h6><strong>Upload Date: </strong>{upload_date}</h6>
-            </Col>
-          </Row>
-          <Row>
-            <Well>
-            <Col xs={12} sm={4}>
-
-              <h6><strong>License</strong></h6>
-                {data.license ? (
-                  <form>
-                    <Select editable={this.props.editable} selected={data.license.masterid} options={data.license.options} field='status' onRelationshipSet={this.props.onRelationshipSet} />
-                  </form>
-                ) : ''}
+            <hr/>
+            <Row>
+              <Col xs={12} sm={8}>
+                <FadeImage className='fadeimage' src={data.media_url} getWidth={this._getImageWidth}/>
               </Col>
               <Col xs={12} sm={4}>
-
-              <h6><strong>Original Image Attribution</strong></h6>
-                <h6 className='overflow-scroll'>
                 <TextArea
-                item={data.author}
-                store={this.props.store}
-                actions={this.props.actions}
-                fieldName={'author'}
-                editable={this.props.editable}
-                placeholder="Attribute this image (photographer/illustrator/owner/etc)" />
-            </h6>
-            </Col>
-            <Col xs={12} sm={4}>
+                  title='Name'
+                  item={data.name}
+                  store={this.props.store}
+                  actions={this.props.actions}
+                  fieldName={'name'}
+                  editable={this.props.editable}
+                  placeholder="Enter a brief phrase to identify this image" />
 
-              <h6><strong>Original Image URL</strong></h6>
-              <h6 className='overflow-scroll'>
-                {this.props.editable ? (
-                <TextArea
-                item={data.source_url}
-                store={this.props.store}
-                actions={this.props.actions}
-                fieldName={'source_url'}
-                editable={this.props.editable}
-                placeholder="Enter the URL of the original image" />
-            ) : (
-              <a href={data.source_url} target='_blank'>{data.source_url}</a>
-            ) }
-              </h6>
-            </Col>
-            </Well>
-          </Row>
-          </Grid>
+                {data.description || this.state.editable ? (
+                  <TextArea
+                    title='Caption'
+                    item={data.description}
+                    store={this.props.store}
+                    actions={this.props.actions}
+                    fieldName={'description'}
+                    editable={this.props.editable}
+                    placeholder="Enter a caption that will be displayed with this image" />
+                  ) : '' }
+
+                  {this.state.width ? (
+                    <div>
+                      <h6 className='heading'>Pixel Dimensions</h6>
+                      <p>{this.state.width + ' x ' + this.state.height}</p>
+                    </div>
+                  ) : '' }
+                  {data.timestamp ? (
+                    <div>
+                      <h6 className='heading'>Upload Date</h6>
+                      <p>{upload_date}</p>
+                    </div>
+                  ) : '' }
+                </Col>
+              </Row>
+              <hr/>
+
+              <Row>
+                <Col xs={12} sm={4}>
+
+                  <h6 className='heading'>License Type</h6>
+                  {data.license ? (
+                    <form>
+                      <Select editable={this.props.editable} selected={data.license.masterid} options={data.license.options} field='status' onRelationshipSet={this.props.onRelationshipSet} />
+                    </form>
+                  ) : ''}
+                </Col>
+                <Col xs={12} sm={4}>
+
+                  <h6 className='heading'>Original Attribution</h6>
+                    <TextArea
+                      item={data.author}
+                      store={this.props.store}
+                      actions={this.props.actions}
+                      fieldName={'author'}
+                      editable={this.props.editable}
+                      placeholder="Attribute this image (photographer/illustrator/owner/etc)"
+                      forceWrap />
+                </Col>
+                <Col xs={12} sm={4}>
+
+                  <h6 className='heading'>Original Media URL</h6>
+                      <TextArea
+                        item={data.source_url}
+                        store={this.props.store}
+                        actions={this.props.actions}
+                        fieldName={'source_url'}
+                        editable={this.props.editable}
+                        placeholder="Enter the URL of the original image"
+                        forceWrap
+                        link />
+                </Col>
+              </Row>
+              <hr/>
+
+              <Row>
+                <Col xs={12}>
+                  <RelationshipList
+                    items={data.has_media}
+                    editable={this.props.editable}
+                    onAdd={this.props.onRelationshipAdd.bind(null, 'has_media')}
+                    onRemove={this.props.onRelationshipRemove.bind(null, 'has_media')}
+                    field={'Content'}
+                    title={'Displayed as Media in'}
+                    fieldName={'Displayed as Media in'}
+                    titleField={'name'} />
+                  </Col>
+                </Row>
+              </Grid>
 
 
-      </div>
-      /* jshint ignore:end */
-    );
-  }
-});
+            </div>
+            /* jshint ignore:end */
+          );
+        }
+      });
 
 module.exports = Template;
