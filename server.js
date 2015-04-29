@@ -19,6 +19,9 @@ require('./server/config/passport')(passport, dataconfig.db);
 // SendGrid configuration
 require('./server/config/sendgrid')();
 
+// S3 configuration
+require('./server/config/s3')();
+
 // Express configuration
 require('./server/config/express')(app, express, passport);
 
