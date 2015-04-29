@@ -63,6 +63,7 @@ var NavbarComponent = React.createClass({
           <NavItem href="/login" onClick={this.transitionRoute}>Sign In</NavItem>
         </Nav>
       );
+
         return (
             /* jshint ignore:start */
             <Navbar fluid inverse fixedTop role="banner">
@@ -72,7 +73,12 @@ var NavbarComponent = React.createClass({
                   <Link className="navbar-brand" url="/" />
                   <form role="search" className='navbar-form navbar-left search' onSubmit={this.onSubmit}>
 
-                    <Input className='search-input' type="text" placeholder='Search' defaultValue={this.props.searchQuery} onFocus={this.props.onSearchFocus} onChange={this.props.searchQueryChange} onKeyPress={this.onKeyPress} ref="searchbar" />
+                    <Input
+                      className='search-input'
+                      type="text"
+                      placeholder='Search'
+                      defaultValue={this.props.searchQuery} onFocus={this.props.onSearchFocus} onChange={this.props.searchQueryChange} onKeyPress={this.onKeyPress}
+                      ref="searchbar" />
                       <label className='search-label'>
                         <FontAwesome name='search'  fixedWidth />
                       </label>

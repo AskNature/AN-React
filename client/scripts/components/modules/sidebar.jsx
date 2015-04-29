@@ -426,53 +426,6 @@ var BallastDemo = React.createClass({
 
 var SidebarComponent = React.createClass({
     render: function() {
-        var items = [];
-         if (this.props.open === true) {
-            items.push(
-                <Nav className='drawer' key='10'>
-
-                    <TabbedArea defaultActiveKey={0} key='20' justified>
-                        <TabPane key='20' eventKey={0} tab={<FontAwesome name='search'  fixedWidth />} onClick={this.props.onResultClick} >
-                            {this.props.searchResultComponent ?  <this.props.searchResultComponent  elements={this.props.searchResultElements} itemHeight={this.props.searchResultHeight} /> : this.props.master === '284ace1157963de879fdab2a2a5709cc' ? <BuoyancyDemo /> : this.props.master === 'air-ballast-biomimetic-cargo-ship' ? <BallastDemo /> : <Well>
-                                Query results & content clusters go in here
-                            </Well>
-                            }
-                        </TabPane>
-                        <TabPane key='30' eventKey={1} tab={<FontAwesome name='info'  fixedWidth />}>
-                            <Well>
-                                Informational Pages go in here
-                            </Well>
-                        </TabPane>
-                        {this.props.loggedIn ? (
-                        <TabPane key='40' eventKey={2} tab={<FontAwesome name='list'  fixedWidth />} onClick={this.props.onResultClick}>
-                            <Nav stacked onClick={this.props.onResultClick}>
-                                {
-                                    listItems.map(function(item,i){
-                                        return (
-                                            item.class ? (
-                                                <li className={item.class}></li>
-                                            ) : (
-                                            <li eventKey={i}>
-                                                <Link url={'/list/'+item.slug}>
-                                                    <FontAwesome
-                                                        name={item.faIcon}
-                                                        fixedWidth
-                                                        className='pull-left' />
-                                                        &nbsp; {item.label}
-                                                </Link>
-                                            </li>
-                                        )
-                                        );
-                                    })
-                                }
-                            </Nav>
-                        </TabPane>
-                    ) : '' }
-                    </TabbedArea>
-                </Nav>
-            );
-        }
-
         return (
             /* jshint ignore:start */
             <Nav className='drawer' key='10'>
