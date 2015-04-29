@@ -98,7 +98,8 @@ var DefaultComponent = React.createClass({
             <Navbar searchQuery={this.props.searchQuery} searchQueryChange={this.props.searchQueryChange} account={this.state.account} onDrawerToggleClick={this.handleDrawerToggleClick}
               onSearchFocus={this.handleSearchFocus} accountActions={accountActions}  />
             <Drawer open={this.state.drawerOpen} searchResultElements={this.props.searchResultElements} searchResultComponent={this.props.searchResultComponent} searchResultHeight={this.props.searchResultHeight} loggedIn={this.state.account.loggedIn} onResultClick={this.handleResultClick}
-              master={this.props.master} />
+              master={this.props.master}
+              mobile={window.innerWidth < 768 ? true : false}/>
             <Detail narrow={this.state.drawerOpen} toggle={this.handleDrawerToggleClick} {...this.props}/>
 
             </div>
