@@ -570,6 +570,9 @@ h4.card-name {
     text-transform: none;
     text-align: left;
     padding: 0;
+    &:hover {
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    }
     .minihero {
       position: relative;
       padding: 13px 15px;
@@ -591,13 +594,16 @@ h4.card-name {
         left: 0;
         right: 0;
         height: 100%;
-        background: rgba(158,171,15,1);
+        background: rgba(255,255,255,0.8);
         opacity: 0;
+        pointer-events: none;
         transition: all .2s ease;
         border-radius: 3px;
+        z-index: 1000;
         >nav {
           position: absolute;
-          bottom: 5%;
+          top: 50%;
+          transform: translateY(-50%);
         }
         h6 {
           color: $white-color;
@@ -606,9 +612,9 @@ h4.card-name {
           white-space: normal;
         }
         .nav>li>a {
-          color: rgba(255,255,255,.4);
+          color: rgba(0,0,0,.7);
           &:hover, &:focus {
-            color: $white-color;
+            color: $primary-color;
             background-color: transparent;
           }
 
@@ -619,7 +625,7 @@ h4.card-name {
 
         .overlay {
           opacity: 1;
-
+          pointer-events: auto;
         }
       }
     }

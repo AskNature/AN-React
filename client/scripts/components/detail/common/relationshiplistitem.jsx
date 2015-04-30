@@ -42,7 +42,6 @@ var MiniHero = React.createClass({
           <small>{this.props.subtitle}</small>
         </h4>
         <div className='overlay'>
-          <h6>{this.props.title}</h6>
           <Nav justified activeKey={0} bsStyle='pills' bsSize='large'>
             <NavItem
               eventKey={1}
@@ -88,8 +87,17 @@ var RelationshipListItem = React.createClass({
     }
   },
   showOptions: function() {
-    if(!this.state.showOptions) {
-      this.setState({showOptions: true});
+    var that = this;
+      function f() {
+      if(!that.state.showOptions) {
+        that.setState({showOptions: true});
+      }
+      }
+      setTimeout(f, 200);
+  },
+  hideOptions: function() {
+    if(this.state.showOptions) {
+      this.setState({showOptions: false});
     }
   },
 // This needs to be abstracted somehow:
@@ -175,7 +183,7 @@ var RelationshipListItem = React.createClass({
           <Button
             block
             onClick={this.showOptions}
-            onMouseEnter={this.toggleOptions} onMouseLeave={this.toggleOptions}
+            onMouseLeave={this.hideOptions}
             pullright >
             <MiniHero
               title={title}

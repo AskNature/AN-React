@@ -1,10 +1,15 @@
 'use strict';
 
+
 var Router = require('director').Router;
 var routes = require('./routes');
 var Dispatcher = require('./dispatchers/default');
 var pageConstants = require('./constants/page');
 var routesConstants = require('./constants/routes');
+
+var React = require('react');
+// Enable touch events
+React.initializeTouchEvents(true);
 
 // Setup router
 var router = new Router(routes);
@@ -50,5 +55,7 @@ Dispatcher.register(function(payload) {
 
     return true; // No errors.  Needed by promise in Dispatcher.
 });
+
+
 
 console.log('Welcome to AskNature');

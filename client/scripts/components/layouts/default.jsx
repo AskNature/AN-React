@@ -51,9 +51,29 @@ var DefaultComponent = React.createClass({
     componentDidMount: function() {
         pageStore.emitChange();
         window.addEventListener('resize', this.handleResize);
+        if(window.attachEvent) {
+          // Provides compatibility for IE <9
+          window.attachEvent('onresize', this.handleResize);
+        } else if(window.addEventListener) {
+          // Compatibility for everything else
+          window.addEventListener('resize', this.handleResize, true);
+        } else {
+          //The browser does not support Javascript event binding
+          console.log('The browser does not support Javascript event binding');
+        }
     },
     componentWillUnmount: function () {
-      window.removeEventListener('resize', this.handleResize);
+      if(window.detachEvent) {
+    window.detachEvent('onresize', this.handleResize);
+}
+else if(window.removeEventListener) {
+    window.removeEventListener('resize', this.handleResize);
+}
+else {
+    //The browser does not support Javascript event binding
+    console.log('The browser does not support Javascript event binding');
+
+}
     },
     handleDrawerToggleClick: function(e){
       this.setState({
