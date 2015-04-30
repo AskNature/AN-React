@@ -53,12 +53,7 @@ var DataTable = React.createClass({
                     {items[key] instanceof Array ? (
                         <List items={items[key]} />
                     ) : key !== 'status' && key !== 'license' ? (
-                          <TextArea
-                            item={items[key]}
-                            store={properties.store}
-                            actions={properties.actions}
-                            fieldName={key}
-                            editable={properties.editable} />
+                          <span>{items[key]}</span>
                       ) : (
                           <span>{items[key].masterid}</span>
                       )
