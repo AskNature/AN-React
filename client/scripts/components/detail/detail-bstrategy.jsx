@@ -40,7 +40,7 @@ var Template = React.createClass({
 
     var primaryTitle = data[primaryKey];
 
-    var split = primaryTitle.split(': ');
+    var split = primaryTitle ? primaryTitle.indexOf(': ') ? primaryTitle.split(': ') : '' : '';
     primaryTitle = split[0];
     var secondaryTitle = data.living_systems[0] && data.living_systems[0].common_name ? data.living_systems[0].common_name : split.length > 1 ? split[1] : '';
 

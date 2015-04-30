@@ -28,7 +28,7 @@ var Template = React.createClass({
     if(data.designedsystems[1]){
       secondaryTitle += ' & others';
     }
-    var descriptionKey = 'special_text';
+    var descriptionKey = 'description';
     return (
       /* jshint ignore:start */
       <div>

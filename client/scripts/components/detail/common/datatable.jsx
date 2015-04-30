@@ -6,7 +6,7 @@
 var React = require('react'),
 
 Link = require('../../modules/link.jsx'),
-TextField = require('../../modules/textfield.jsx'),
+TextArea = require('./textarea.jsx'),
 
 Table = require('react-bootstrap').Table,
 Panel = require('react-bootstrap').Panel,
@@ -52,12 +52,15 @@ var DataTable = React.createClass({
                   <td>
                     {items[key] instanceof Array ? (
                         <List items={items[key]} />
+                    ) : key !== 'status' && key !== 'license' ? (
+                          <TextArea
+                            item={items[key]}
+                            store={properties.store}
+                            actions={properties.actions}
+                            fieldName={key}
+                            editable={properties.editable} />
                       ) : (
-                        key !== 'status' && key !== 'license' ? (
-                          <TextField store={properties.store} actions={properties.actions} fieldName={key} initialValue={items[key]} editable={properties.editable}/>
-                        ) : (
                           <span>{items[key].masterid}</span>
-                        )
                       )
                     }
                   </td>

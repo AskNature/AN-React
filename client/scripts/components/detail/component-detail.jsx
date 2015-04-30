@@ -175,13 +175,11 @@ var DetailComponent = React.createClass({
         return Template;
       },
     render: function() {
-      console.log(this.state);
-      console.log(this.props);
       var Template = this.getTemplate();
       var style;
       var loader = [];
       if (!this.state.loaded) {
-        style = {position: 'relative', WebkitFilter: 'blur(0px) saturate(2)', height: this.state.windowHeight - 62, overflow: 'hidden'};
+        style = {position: 'relative', WebkitFilter: 'blur(2px) saturate(2)', height: this.state.windowHeight - 62, overflow: 'hidden'};
         loader.push(
           <Loader windowHeight={this.state.windowHeight - 22} error={this.state.error ? true : false} />
         );
