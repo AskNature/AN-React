@@ -7,6 +7,7 @@ var React = require('react'),
 
 FontAwesome = require('react-fontawesome'),
 
+Alert = require('react-bootstrap/Alert'),
 Panel = require('react-bootstrap/Panel'),
 Button = require('react-bootstrap').Button,
 Col = require('react-bootstrap/Col'),
@@ -179,13 +180,22 @@ var DropzoneComponent = React.createClass({displayName: 'DropzoneComponent',
                           <div className='media-body media-middle' style={{textAlign:'left'}}>
                             <h4>
                                 <strong> {f.name}</strong><br/>
-                                <small> {f.size} bytes</small>
+                                <small> {Math.ceil(f.size / 1000)} KB</small>
                             </h4>
+                            {f.size > 10000000 ? (
+                              <Alert bsStyle='warning'>
+                                <strong>Sorry, files must be smaller than 10 MB.</strong> Please try uploading a smaller file.
+                              </Alert>
+                            ) : ''}
                           </div>
                         </div>
                       </Col>
                       <Col xs={12} sm={4}>
-                          <Button bsStyle='success' block onClick={that.uploadHandler}>
+                          <Button
+                            bsStyle='success'
+                            block
+                            onClick={that.uploadHandler}
+                            disabled={f.size > 10000000 ? true : false} >
                             <FontAwesome
                             name='upload'
                             fixedWidth
