@@ -59,17 +59,12 @@ var MiniHero = React.createClass({
             </NavItem>
             </OverlayTrigger>
             <DropdownButton eventKey={3} title={<FontAwesome name='ellipsis-v' size='lg' fixedWidth />} navItem={true} noCaret pullRight>
-              
+
               <MenuItem eventKey='3.2'><FontAwesome name='flag' fixedWidth /> Report</MenuItem>
               {this.props.editable ? (
                 <MenuItem eventKey='3.4' onClick={this.props.remove}><FontAwesome name='trash' fixedWidth /> Remove</MenuItem>
               ) : ''}
             </DropdownButton>
-            <OverlayTrigger placement="top" delayShow={600} delayHide={150} overlay={<Tooltip><strong>Added by Username 2 weeks ago</strong></Tooltip>}>
-            <NavItem eventKey={4}>
-              <FontAwesome name='user' size='lg' fixedWidth />
-            </NavItem>
-          </OverlayTrigger>
           </Nav>
         </div>
       </div>
