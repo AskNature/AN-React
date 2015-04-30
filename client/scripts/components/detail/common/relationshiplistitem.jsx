@@ -87,13 +87,11 @@ var RelationshipListItem = React.createClass({
     }
   },
   showOptions: function() {
-    var that = this;
-      function f() {
-      if(!that.state.showOptions) {
-        that.setState({showOptions: true});
+
+      if(!this.state.showOptions) {
+        this.setState({showOptions: true});
       }
-      }
-      setTimeout(f, 200);
+
   },
   hideOptions: function() {
     if(this.state.showOptions) {
