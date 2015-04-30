@@ -13,8 +13,10 @@ var TextArea = React.createClass({
     if (this.props.item) {
     // item = item.replace(/<(?:.|\n)*?>/gm, '');
     // Remove backslashes:
-    item = item.replace(/\\/g, '');
-    item = item.replace(/&nbsp;/g, '');
+    if(item.replace) {
+        item = item.replace(/\\/g, '');
+	item = item.replace(/&nbsp;/g, '');
+    }	 
   }
 
     var title = this.props.title;
