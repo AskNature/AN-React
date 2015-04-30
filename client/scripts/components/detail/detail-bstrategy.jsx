@@ -218,8 +218,7 @@ var Template = React.createClass({
                   <RelationshipList
                     items={data.inspired_by}
                     editable={this.props.editable}
-                    titleField='headline'
-                    subtitleField='name'
+                    titleField='name'
                     onAdd={this.props.onRelationshipAdd.bind(null, 'inspired_by')}
                     onRemove={this.props.onRelationshipRemove.bind(null, 'inspired_by')}
                     field={'d.strategy'}

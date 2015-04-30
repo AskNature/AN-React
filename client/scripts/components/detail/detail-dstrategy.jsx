@@ -23,8 +23,8 @@ var Template = React.createClass({
     var routeNameSingle = 'd.strategy';
     var entityName = 'Bio-inspired Strategy';
     var data = this.props.data;
-    var primaryKey = 'headline';
-    var secondaryTitle = data.designedsystems[0] ? data.designedsystems[0].name : '';
+    var primaryKey = 'name';
+    var secondaryTitle = data.designedsystems[0] ? data.designedsystems[0].name : data.system;
     if(data.designedsystems[1]){
       secondaryTitle += ' & others';
     }

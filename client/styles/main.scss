@@ -40,10 +40,16 @@ $light-text: $gray-light;
     box-sizing: border-box;
   }
 
+html {
+  position: relative;
+}
 body {
   // Compensate for the 62px tall fixed navbar with padding-top
   padding-top: 62px;
+  position: relative;
   overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 
@@ -109,11 +115,6 @@ label, .label {
   box-shadow: none;
 }
 
-.overflow-scroll {
-  width: 100%;
-  display: block;
-  overflow: scroll;
-}
 
 /* ==========================================================================
 Media Uploads

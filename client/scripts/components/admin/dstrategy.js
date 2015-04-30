@@ -6,8 +6,9 @@ var List = {
     'slug': 'd.strategy',
     'columns' : [
       {columnName:'masterid', displayName:'id', type:'id'},
-      {columnName:'description', displayName:'Name', type:'link'},
-      {columnName:'name', displayName:'System', type:'text'},
+      {columnName:'name', displayName:'Name', type:'link'},
+      {columnName:'description', displayName:'Description', type:'text'},
+      {columnName:'system', displayName:'System', type:'text'},
       {columnName:'inspiredby', displayName:'Inspiration', type:'list'},
       {columnName:'mechanisms', displayName:'Mechanisms', type:'list'},
       {columnName:'outcomes', displayName:'Outcomes', type:'list'},

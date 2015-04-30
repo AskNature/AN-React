@@ -54,8 +54,7 @@ var User = new Model('Users',
 );
 var InspiredSolution = new Model('InspiredSolutions',
   [
-    'name',
-    'headline'
+    'name'
   ]
 );
 var BSystem = new Model('LivingSystem',

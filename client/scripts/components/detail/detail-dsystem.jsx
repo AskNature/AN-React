@@ -84,8 +84,7 @@ var Template = React.createClass({
                 <RelationshipList
                   items={data.has_dsystem}
                   editable={this.props.editable}
-                  titleField='headline'
-                  subtitleField='name'
+                  titleField='name'
                   onAdd={this.props.onRelationshipAdd.bind(null,'has_dsystem')}
                   onRemove={this.props.onRelationshipRemove.bind(null, 'has_dsystem')}
                   field={'d.strategy'}
