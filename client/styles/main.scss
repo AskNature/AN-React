@@ -673,6 +673,19 @@ Scribe
 .next {
   margin-top: 30px;
 }
+
+.upload-panel .media .media-left {
+  position: relative;
+   .status-indicator {
+    background: $primary-color;
+    opacity: .6;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+  }
+}
 /* ==========================================================================
 Hero
 ========================================================================== */

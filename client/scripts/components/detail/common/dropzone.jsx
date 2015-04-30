@@ -99,7 +99,9 @@ var Dropzone = React.createClass({
 var DropzoneComponent = React.createClass({displayName: 'DropzoneComponent',
     getInitialState: function () {
       return {
-        files: []
+        files: [],
+        upload_status : 'Upload',
+        upload_percent: ''
       };
     },
 
@@ -113,12 +115,21 @@ var DropzoneComponent = React.createClass({displayName: 'DropzoneComponent',
 
     onUploadProgress: function(percent, message) {
       console.log('Upload progress: ' + percent + '% ' + message);
+      this.setState({
+        upload_status: message,
+        upload_percent: percent
+      });
     },
 
     onUploadFinish: function(signResult) {
       var media_url = window.location.protocol + '//' + window.location.host + signResult.publicUrl;
       console.log("Upload finished: " + media_url);
       this.props.onUpload(media_url);
+      this.cancelHandler();
+      this.setState({
+        upload_status: 'Upload',
+        upload_percent: ''
+      });
     },
 
     onUploadError: function(message) {
@@ -139,16 +150,17 @@ var DropzoneComponent = React.createClass({displayName: 'DropzoneComponent',
       this.setState({
         files: []
       });
+      // Todo: Add an action to delete a file if the cancel button is clicked during an upload.
     },
 
     showFiles: function () {
-      if (this.state.files.length <= 0) {
+      if (this.state.files && this.state.files.length <= 0) {
         return '';
       } else if (this.state.files.length > 1) {
         return (
           <h4>Sorry, you may only upload one file per media item.</h4>
         );
-      }
+      } else {
 
       var files = this.state.files;
       var that = this;
@@ -156,12 +168,13 @@ var DropzoneComponent = React.createClass({displayName: 'DropzoneComponent',
         <div>
             {files.map(function (f, i) {
               return (
-                <Panel key={i}>
+                <Panel key={i} className='upload-panel'>
                     <Row>
                       <Col xs={12} sm={8}>
                         <div className='media'>
                           <div className='media-left media-middle'>
-                            <img src={f.preview} width='auto' height='100px' />
+                            <img src={f.preview} width='100px' height='auto' />
+                            <div style={{width: that.state.upload_percent ? that.state.upload_percent * 0.9 + '%' : ''}} className='status-indicator' />
                           </div>
                           <div className='media-body media-middle' style={{textAlign:'left'}}>
                             <h4>
@@ -177,7 +190,7 @@ var DropzoneComponent = React.createClass({displayName: 'DropzoneComponent',
                             name='upload'
                             fixedWidth
                             className='pull-left' />
-                            Upload
+                          {that.state.upload_status}
                           </Button>
                           <Button bsStyle='warning' block onClick={that.cancelHandler}>
                             <FontAwesome
@@ -194,6 +207,7 @@ var DropzoneComponent = React.createClass({displayName: 'DropzoneComponent',
         </div>
 
         );
+      }
     },
 
     render: function () {
