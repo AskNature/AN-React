@@ -9,6 +9,8 @@ Link = require('../../modules/link.jsx'),
 
 FontAwesome = require('react-fontawesome'),
 
+OverlayTrigger = require('react-bootstrap').OverlayTrigger,
+Tooltip = require('react-bootstrap').Tooltip,
 
 Glyphicon = require('react-bootstrap').Glyphicon,
 Button = require('react-bootstrap').Button,
@@ -43,22 +45,31 @@ var MiniHero = React.createClass({
         </h4>
         <div className='overlay'>
           <Nav justified activeKey={0} bsStyle='pills' bsSize='large'>
+            <OverlayTrigger placement="top" delayShow={600} delayHide={150} overlay={<Tooltip><strong>View in AskNature</strong></Tooltip>}>
             <NavItem
               eventKey={1}
               onClick={this.props.link}>
-              <FontAwesome name='search' size='lg' fixedWidth />
+
+                <FontAwesome name='search' size='lg' fixedWidth />
             </NavItem>
+            </OverlayTrigger>
+            <OverlayTrigger placement="top" delayShow={600} delayHide={150} overlay={<Tooltip><strong>Open External Source</strong></Tooltip>}>
             <NavItem eventKey={2}>
-              <FontAwesome name='link' size='lg' fixedWidth />
+              <FontAwesome name='globe' size='lg' fixedWidth />
             </NavItem>
+            </OverlayTrigger>
             <DropdownButton eventKey={3} title={<FontAwesome name='ellipsis-v' size='lg' fixedWidth />} navItem={true} noCaret pullRight>
-              <MenuItem eventKey='3.1' className='disabled'>Added by Username 2 weeks ago</MenuItem>
+              
               <MenuItem eventKey='3.2'><FontAwesome name='flag' fixedWidth /> Report</MenuItem>
               {this.props.editable ? (
                 <MenuItem eventKey='3.4' onClick={this.props.remove}><FontAwesome name='trash' fixedWidth /> Remove</MenuItem>
               ) : ''}
             </DropdownButton>
-
+            <OverlayTrigger placement="top" delayShow={600} delayHide={150} overlay={<Tooltip><strong>Added by Username 2 weeks ago</strong></Tooltip>}>
+            <NavItem eventKey={4}>
+              <FontAwesome name='user' size='lg' fixedWidth />
+            </NavItem>
+          </OverlayTrigger>
           </Nav>
         </div>
       </div>
