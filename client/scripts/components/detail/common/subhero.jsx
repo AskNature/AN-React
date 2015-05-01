@@ -132,6 +132,10 @@ var SubHero = React.createClass({
 
                       <div className='form-group'>
                         <label className="checkbox-inline">
+                          <input type='checkbox' checked={this.props.flags.flagDemo}
+                            onClick={this.props.onBooleanSet} id='flag_demo' /><FontAwesome name='eye'  fixedWidth />
+    		 	    </label>
+                        <label className="checkbox-inline">
                           <input type='checkbox' checked={this.props.flags.flagText}
                             onClick={this.props.onBooleanSet} id='flag_text' /><FontAwesome name='font'  fixedWidth />
                         </label>
@@ -180,6 +184,9 @@ var SubHero = React.createClass({
                       <Select editable={this.props.editable} selected={this.props.status.masterid} options={this.props.status.options} field='status' onRelationshipSet={this.props.onRelationshipSet} />
                     : ''}
                     <div className='form-group'>
+                      <label className="checkbox-inline">
+                        <input type='checkbox' checked={this.props.flags.flagDemo} id='flag_demo' /><FontAwesome name='eye'  fixedWidth />
+                      </label>
                       <label className="checkbox-inline">
                         <input type='checkbox' checked={this.props.flags.flagText} id='flag_text' /><FontAwesome name='font'  fixedWidth />
                       </label>

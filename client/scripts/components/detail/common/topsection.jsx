@@ -69,7 +69,7 @@ var TopSection = React.createClass({
           added_by={this.props.data.added_by}
           collaborators={this.props.data.collaborators}
           editorComments={this.props.data.editor_comments}
-          flags={{'flagText':this.props.data.flag_text, 'flagMedia':this.props.data.flag_media,'flagTags':this.props.data.flag_tags}} />
+          flags={{'flagText':this.props.data.flag_text, 'flagMedia':this.props.data.flag_media,'flagTags':this.props.data.flag_tags,'flagDemo':this.props.data.flag_demo}} />
       </div>
       /* jshint ignore:end */
     );

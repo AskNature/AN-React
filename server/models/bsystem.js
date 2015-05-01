@@ -5,7 +5,7 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'LivingSystem';
 
-var fields = ['name', 'taxon', 'common_name', 'gbif_id', 'other_names', 'taxon', 'parent_id', 'flag_text', 'flag_media', 'flag_tags', 'description'];
+var fields = ['name', 'taxon', 'common_name', 'gbif_id', 'other_names', 'taxon', 'parent_id', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo', 'description'];
 
 var Entity = new Model('Entity',
     [

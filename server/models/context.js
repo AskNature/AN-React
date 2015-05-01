@@ -7,7 +7,7 @@ var ListOptions = require('./constants/listoptions.js');
 // The name of the associated class in the database:
 var entityName = 'Context';
 
-var fields = ['name', 'description', 'flag_text', 'flag_media', 'flag_tags', 'editor_comments'];
+var fields = ['name', 'description', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo', 'editor_comments'];
 
 var Media = new Model('Media',
   [

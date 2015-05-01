@@ -6,7 +6,7 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'DSystem';
 
-var fields = ['name', 'flag_text', 'flag_media', 'flag_tags', 'description'];
+var fields = ['name', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo', 'description'];
 
 var Media = new Model('Media',
   [

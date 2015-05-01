@@ -7,7 +7,7 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Function';
 
-var fields = ['name', 'short_name', 'description', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'short_name', 'description', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo'];
 
 var Media = new Model('Media',
   [
