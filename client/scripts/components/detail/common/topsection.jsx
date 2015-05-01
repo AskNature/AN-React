@@ -46,7 +46,9 @@ var TopSection = React.createClass({
 	        name={this.props.data.name}
           masterid={this.props.masterid}
           innerimage={this.props.innerimage}
-          imgurl={this.props.imgurl} />
+          imgurl={this.props.imgurl}
+          description={this.props.description}
+          type={this.props.entityName}/>
         <SubHero
           description={this.props.description}
           descriptionlink={this.props.descriptionlink}
@@ -69,7 +71,9 @@ var TopSection = React.createClass({
           added_by={this.props.data.added_by}
           collaborators={this.props.data.collaborators}
           editorComments={this.props.data.editor_comments}
-          flags={{'flagText':this.props.data.flag_text, 'flagMedia':this.props.data.flag_media,'flagTags':this.props.data.flag_tags}} />
+          flags={{'flagText':this.props.data.flag_text, 'flagMedia':this.props.data.flag_media,'flagTags':this.props.data.flag_tags}}
+          type={this.props.entityName}
+          />
       </div>
       /* jshint ignore:end */
     );

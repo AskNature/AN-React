@@ -15,7 +15,8 @@ Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid');
 
-var Select = require('react-select');
+var Select = require('react-select'),
+parseDomain = require('parse-domain');
 
 var Template = React.createClass({
 
@@ -32,7 +33,9 @@ var Template = React.createClass({
     var entityName = 'Story';
     var data = this.props.data;
     var primaryKey = 'name';
-    var primaryTitle = data[primaryKey];
+    var secondaryKey = 'source_url';
+    var shortURL = data.source_url ? parseDomain(data.source_url) : '';
+    var secondaryTitle = data.source_url ?  shortURL.domain + '.' + shortURL.tld : '';
     var descriptionKey = 'description';
     var addedby = data.added_by;
     var default_avatar = 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/10383663_869350803096314_2369845013213041061_n.png?oh=2c010ce055331caa73a9506795239fd1&oe=55BDD82A&__gda__=1433772443_f5c43498047b8193dccc0a5554ba6ed1';
@@ -44,8 +47,11 @@ var Template = React.createClass({
             routename={routeNameSingle}
             entityName={entityName}
             primarytitle={data[primaryKey]}
-            primarydisplay={primaryTitle}
             primarykey={primaryKey}
+            primarylink={data[secondaryKey]}
+            secondarytitle={secondaryTitle}
+            secondarykey={secondaryKey}
+            secondarylink={data[secondaryKey]}
             description={data[descriptionKey]}
             descriptionKey={descriptionKey}
             />
@@ -110,26 +116,7 @@ var Template = React.createClass({
           		</Row>
        	    </Grid>
   	        <Grid>
-			        <Row>
-		            <Col xs={12}>
 
-                    <Gallery items={data} />
-                      {this.props.editable ? (
-                        <RelationshipList
-                          items={data.media}
-                          editable={this.props.editable}
-                          titleField='name'
-                          onAdd={this.props.onRelationshipAdd.bind(null, 'media')}
-                          onRemove={this.props.onRelationshipRemove.bind(null, 'media')}
-                          field={'media'}
-                          routeName={'media'}
-                          title={'Media'}
-                          fieldName={'Media'}
-                          media />
-                      ) : '' }
-
-	              </Col>
-              </Row>
               <Row>
 
 	              </Row>

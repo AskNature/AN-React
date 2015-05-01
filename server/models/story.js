@@ -5,7 +5,7 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Story';
 
-var fields = ['name', 'description', 'timestamp', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'description', 'source_url', 'timestamp', 'flag_text', 'flag_media', 'flag_tags'];
 
 // Models to link
 
@@ -34,7 +34,8 @@ var Media = new Model('Media',
     'filename',
     'name',
     'entity',
-    'description'
+    'description',
+    'media_url'
   ]
 );
 var User = new Model('Users',

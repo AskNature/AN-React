@@ -61,7 +61,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 * {
-  transition: all 0.5s ease;
+  transition: all 0.2s ease;
 }
 
 .content {
@@ -756,6 +756,76 @@ Hero
     width: 100%;
     height: 100%;
     background-image: url(../images/grid.png);
+}
+
+.hero-link {
+  > div {
+    padding-bottom: 0;
+    > .row > div, > .row > div > div {
+      padding: 0;
+    }
+    .hero-link-card {
+      border: 1px solid $gray-lighter;
+      border-radius: 3px;
+      margin: 0 10px;
+      background: $white-color;
+      position: relative;
+      .label {
+        cursor: pointer;
+      }
+      .hero-link-image {
+        padding: 0;
+        .hero {
+          border-top-left-radius: 3px;
+          border-top-right-radius: 3px;
+          &:before {
+            background: transparent;
+          }
+        }
+        @media (min-width: 768px) {
+          position: absolute;
+          height: 100%;
+          padding: 0;
+          .hero {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 3px;
+          }
+        }
+      }
+    }
+  }
+  .hero-link-card-expansion {
+    opacity: 0;
+    > div {
+      height: 0;
+    }
+  }
+  &.expanded {
+    .hero-link-card {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      @media (min-width: 768px) {
+        .hero-link-image .hero {
+          border-bottom-left-radius: 0;
+        }
+      }
+    }
+    .hero-link-card-expansion {
+      border-top-right-radius: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 3px;
+      border-top: 0;
+      padding: 20px 0;
+      opacity: 1;
+      > div {
+        height: auto;
+      }
+    }
+  }
 }
 
 // Bootstrap Customizations

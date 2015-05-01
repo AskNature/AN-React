@@ -52,6 +52,7 @@ var SubHero = React.createClass({
       <Grid>
         <Row>
           <Col xs={12} sm={8}>
+            {this.props.type != 'Story' ? (
             <h4>
               {this.props.first ? (
                 <strong>
@@ -82,6 +83,7 @@ var SubHero = React.createClass({
                 </span>
               )}
             </h4>
+          ) : ''}
           </Col>
           <Col xs={12} sm={4}>
             <Nav justified activeKey={0} bsStyle='pills' style={{"margin-top": "11.5px"}}>
@@ -119,10 +121,10 @@ var SubHero = React.createClass({
                         <FontAwesome name='undo'  fixedWidth /> Cancel
                       </Button>
                       {this.props.user.role === 'admin' ?
-                      <Button block bsStyle="danger" onClick={this.props.onDelete}>
-                        <FontAwesome name='trash'  fixedWidth /> Delete
-                      </Button>
-                      : ''}
+                        <Button block bsStyle="danger" onClick={this.props.onDelete}>
+                          <FontAwesome name='trash'  fixedWidth /> Delete
+                        </Button>
+                      : '' }
                     </ButtonGroup>
                     <hr/>
                     <fieldset>
@@ -191,8 +193,7 @@ var SubHero = React.createClass({
                       </label>
                     </div>
                   </fieldset>
-                  : ''
-                 }
+                : '' }
               </Col>
             </Row>
           </Grid>
