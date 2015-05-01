@@ -12,7 +12,8 @@ var fields = ['name', 'summary', 'special_text', 'brief', 'timestamp', 'created_
 var Expert = new Model('Expert',
   [
     'name',
-    'institution'
+    'institution',
+    'flag_demo'
   ]
 );
 
@@ -21,12 +22,14 @@ var Source = new Model('Sources',
   [
     'name',
     'publication_year',
-    'authors'
+    'authors',
+    'flag_demo'
   ]
 );
 var Entity = new Model('Entity',
   [
-    'name'
+    'name',
+    'flag_demo'
   ]
 );
 var Media = new Model('Media',
@@ -35,7 +38,8 @@ var Media = new Model('Media',
     'name',
     'entity',
     'description',
-    'media_url'
+    'media_url',
+    'flag_demo'
   ]
 );
 var User = new Model('Users',
@@ -43,7 +47,8 @@ var User = new Model('Users',
     'name',
     'first',
     'last',
-    'custom_avatar_url'
+    'custom_avatar_url',
+    'flag_demo'
   ],
   {'out_HasMedia':
     {
@@ -55,7 +60,8 @@ var User = new Model('Users',
 );
 var InspiredSolution = new Model('InspiredSolutions',
   [
-    'name'
+    'name',
+    'flag_demo'
   ],
   {'out_HasMedia':
     {
@@ -69,7 +75,8 @@ var LivingSystem = new Model('LivingSystem',
   [
     'name',
     'taxon',
-    'common_name'
+    'common_name',
+    'flag_demo'
   ]
 );
 var Condition = new Model('Condition',

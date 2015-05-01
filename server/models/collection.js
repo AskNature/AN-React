@@ -23,7 +23,8 @@ var User = new Model('Users',
     'name',
     'first',
     'last',
-    'custom_avatar_url'
+    'custom_avatar_url',
+    'flag_demo'
   ],
   {'out_HasMedia':
     {
@@ -36,7 +37,8 @@ var User = new Model('Users',
 var Entity = new Model('Entity',
     [
         'name',
-        '@class'
+        '@class',
+	'flag_demo'
     ]
 );
 var Status = new Model('ContentStatus',

@@ -14,7 +14,8 @@ var Media = new Model('Media',
     'filename',
     'name',
     'entity',
-    'description'
+    'description',
+    'flag_demo'
   ]
 );
 var User = new Model('Users',
@@ -22,7 +23,8 @@ var User = new Model('Users',
     'name',
     'first',
     'last',
-    'custom_avatar_url'
+    'custom_avatar_url',
+    'flag_demo'
   ],
   {'out_HasMedia':
     {
@@ -34,13 +36,15 @@ var User = new Model('Users',
 );
 var Context = new Model('Context',
     [
-        'name'
+        'name',
+	'flag_demo'
     ]
 );
 var Entity = new Model('Entity',
     [
         'name',
-        '@class'
+        '@class',
+	'flag_demo'
     ]
 );
 var Status = new Model('ContentStatus',

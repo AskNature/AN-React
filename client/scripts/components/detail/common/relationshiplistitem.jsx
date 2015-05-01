@@ -183,7 +183,7 @@ var RelationshipListItem = React.createClass({
       subTitle = this.props.item.description;
     }
     return (
-        <ButtonToolbar className='relationship-button'>
+        <ButtonToolbar className={'relationship-button' + (!this.props.item.flag_demo ? ' relationship-button--outside-demo' : '')}>
           <Button
             block
             onClick={this.showOptions}

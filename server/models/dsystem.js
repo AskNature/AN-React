@@ -33,7 +33,8 @@ var User = new Model('Users',
 );
 var Entity = new Model('Entity',
     [
-        'name'
+        'name',
+	'flag_demo'
     ]
 );
 var Status = new Model('ContentStatus',
@@ -46,13 +47,15 @@ var Source = new Model('Sources',
     [
         'name',
         'publication_year',
-        'authors'
+        'authors',
+	'flag_demo'
     ]
 );
 var Expert = new Model('Expert',
     [
         'name',
-        'institution'
+        'institution',
+	'flag_demo'
     ]
 );
 var Media = new Model('Media',

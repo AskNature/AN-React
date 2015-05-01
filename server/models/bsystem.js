@@ -9,17 +9,20 @@ var fields = ['name', 'taxon', 'common_name', 'gbif_id', 'other_names', 'taxon',
 
 var Entity = new Model('Entity',
     [
-        'name'
+        'name',
+	'flag_demo'
     ]
 );
 var LivingSystem = new Model('Outcome',
     [
-        'name', 'taxon'
+        'name', 'taxon',
+        'flag_demo'
     ]
 );
 var Collection = new Model('Mechanism',
     [
-        'name'
+        'name',
+        'flag_demo'
     ]
 );
 var Status = new Model('ContentStatus',
@@ -31,12 +34,14 @@ var Status = new Model('ContentStatus',
 var Source = new Model('Source',
   [
       'name',
-      'authors'
+      'authors',
+      'flag_demo'
   ]
 );
 var Team = new Model('Team',
   [
-      'name'
+      'name',
+      'flag_demo'
   ]
 );
 

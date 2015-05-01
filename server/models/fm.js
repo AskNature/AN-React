@@ -34,7 +34,8 @@ var User = new Model('Users',
 );
 var FM = new Model('FM',
     [
-        'name'
+        'name',
+	'flag_demo'
     ]
 );
 var Status = new Model('ContentStatus',
@@ -46,7 +47,8 @@ var Status = new Model('ContentStatus',
 var Entity = new Model('Entity',
     [
         'name',
-        '@class'
+        '@class',
+	'flag_demo'
   ]
 );
 
