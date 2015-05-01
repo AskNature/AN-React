@@ -123,7 +123,8 @@ var DropzoneComponent = React.createClass({displayName: 'DropzoneComponent',
     },
 
     onUploadFinish: function(signResult) {
-      var media_url = window.location.protocol + '//' + window.location.host + signResult.publicUrl;
+      //var media_url = window.location.protocol + '//' + window.location.host + signResult.publicUrl;
+      var media_url = signResult.s3Url;
       console.log("Upload finished: " + media_url);
       this.props.onUpload(media_url);
       this.cancelHandler();
