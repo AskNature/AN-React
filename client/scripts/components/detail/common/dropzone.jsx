@@ -138,20 +138,27 @@ var DropzoneComponent = React.createClass({displayName: 'DropzoneComponent',
     },
 
     uploadHandler: function() {
-      new S3Upload({
+      var upload = new S3Upload({
         rawFiles: this.state.files,
         signingUrl: '/s3/sign',
         onProgress: this.onUploadProgress,
         onFinishS3Put: this.onUploadFinish,
         onError: this.onUploadError
       });
+      this.setState({upload: upload});
     },
 
     cancelHandler: function () {
-      this.setState({
-        files: []
-      });
-      // Todo: Add an action to delete a file if the cancel button is clicked during an upload.
+      var that = this;
+      setTimeout(function() {
+      that.setState({
+        files: [],
+        upload_status: 'Upload',
+        upload_percent: ''
+      });}, 200);
+      if(this.state.upload) {
+        this.state.upload.abortUpload();
+      }
     },
 
     showFiles: function () {
