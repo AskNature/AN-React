@@ -8,7 +8,7 @@ var ListOptions = require('./constants/listoptions.js');
 // The name of the associated class in the database:
 var entityName = 'Collection';
 
-var fields = ['name', 'description', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'description', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo'];
 
 var Media = new Model('Media',
   [
@@ -23,7 +23,8 @@ var User = new Model('Users',
     'name',
     'first',
     'last',
-    'custom_avatar_url'
+    'custom_avatar_url',
+    'flag_demo'
   ],
   {'out_HasMedia':
     {
@@ -36,7 +37,8 @@ var User = new Model('Users',
 var Entity = new Model('Entity',
     [
         'name',
-        '@class'
+        '@class',
+	'flag_demo'
     ]
 );
 var Status = new Model('ContentStatus',

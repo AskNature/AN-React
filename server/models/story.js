@@ -7,12 +7,14 @@ var entityName = 'Story';
 
 var fields = ['name', 'description', 'source_url', 'timestamp', 'flag_text', 'flag_media', 'flag_tags'];
 
+
 // Models to link
 
 var Expert = new Model('Expert',
   [
     'name',
-    'institution'
+    'institution',
+    'flag_demo'
   ]
 );
 
@@ -21,12 +23,14 @@ var Source = new Model('Sources',
   [
     'name',
     'publication_year',
-    'authors'
+    'authors',
+    'flag_demo'
   ]
 );
 var Entity = new Model('Entity',
   [
-    'name'
+    'name',
+    'flag_demo'
   ]
 );
 var Media = new Model('Media',
@@ -55,19 +59,22 @@ var User = new Model('Users',
 );
 var InspiredSolution = new Model('InspiredSolutions',
   [
-    'name'
+    'name',
+    'flag_demo'
   ]
 );
 var BSystem = new Model('LivingSystem',
   [
     'name',
-    'taxon'
+    'taxon',
+    'flag_demo'
   ]
 );
 var DSystem = new Model('LivingSystem',
   [
     'name',
-    'taxon'
+    'taxon',
+    'flag_demo'
   ]
 );
 var Status = new Model('ContentStatus',

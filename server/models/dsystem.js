@@ -6,7 +6,7 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'DSystem';
 
-var fields = ['name', 'flag_text', 'flag_media', 'flag_tags', 'description'];
+var fields = ['name', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo', 'description'];
 
 var Media = new Model('Media',
   [
@@ -33,7 +33,8 @@ var User = new Model('Users',
 );
 var Entity = new Model('Entity',
     [
-        'name'
+        'name',
+	'flag_demo'
     ]
 );
 var Status = new Model('ContentStatus',
@@ -46,13 +47,15 @@ var Source = new Model('Sources',
     [
         'name',
         'publication_year',
-        'authors'
+        'authors',
+	'flag_demo'
     ]
 );
 var Expert = new Model('Expert',
     [
         'name',
-        'institution'
+        'institution',
+	'flag_demo'
     ]
 );
 var Media = new Model('Media',

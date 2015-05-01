@@ -5,14 +5,15 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Strategy';
 
-var fields = ['name', 'summary', 'special_text', 'brief', 'timestamp', 'created_by', 'entered_by', 'date_entered', 'additional_functions', 'keywords', 'common_name', 'scientific_name', 'other_names', 'additional_taxa', 'additional_reference', 'applications_sector', 'applications', 'source', 'source_citation', 'pages_of_excerpt', 'image_file_name', 'video_url', 'pdf_file_name', 'application_1', 'application_2', 'application_3', 'editor_comments', 'other_names', 'additional_taxa', 'general_strategy', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'summary', 'special_text', 'brief', 'timestamp', 'created_by', 'entered_by', 'date_entered', 'additional_functions', 'keywords', 'common_name', 'scientific_name', 'other_names', 'additional_taxa', 'additional_reference', 'applications_sector', 'applications', 'source', 'source_citation', 'pages_of_excerpt', 'image_file_name', 'video_url', 'pdf_file_name', 'application_1', 'application_2', 'application_3', 'editor_comments', 'other_names', 'additional_taxa', 'general_strategy', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo'];
 
 // Models to link
 
 var Expert = new Model('Expert',
   [
     'name',
-    'institution'
+    'institution',
+    'flag_demo'
   ]
 );
 
@@ -21,12 +22,14 @@ var Source = new Model('Sources',
   [
     'name',
     'publication_year',
-    'authors'
+    'authors',
+    'flag_demo'
   ]
 );
 var Entity = new Model('Entity',
   [
-    'name'
+    'name',
+    'flag_demo'
   ]
 );
 var Media = new Model('Media',
@@ -35,7 +38,8 @@ var Media = new Model('Media',
     'name',
     'entity',
     'description',
-    'media_url'
+    'media_url',
+    'flag_demo'
   ]
 );
 var User = new Model('Users',
@@ -43,7 +47,8 @@ var User = new Model('Users',
     'name',
     'first',
     'last',
-    'custom_avatar_url'
+    'custom_avatar_url',
+    'flag_demo'
   ],
   {'out_HasMedia':
     {
@@ -55,7 +60,8 @@ var User = new Model('Users',
 );
 var InspiredSolution = new Model('InspiredSolutions',
   [
-    'name'
+    'name',
+    'flag_demo'
   ],
   {'out_HasMedia':
     {
@@ -69,7 +75,8 @@ var LivingSystem = new Model('LivingSystem',
   [
     'name',
     'taxon',
-    'common_name'
+    'common_name',
+    'flag_demo'
   ]
 );
 var Condition = new Model('Condition',

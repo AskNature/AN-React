@@ -35,7 +35,8 @@ var User = new Model('Users',
 var Content = new Model('Content',
     [
         'name',
-        '@class'
+        '@class',
+	'flag_demo'
     ]
 );
 var Status = new Model('ContentStatus',

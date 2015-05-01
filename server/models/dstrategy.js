@@ -35,31 +35,36 @@ var User = new Model('Users',
 var Strategy = new Model('Strategies',
     [
         'name',
-        'summary'
+        'summary',
+	'flag_demo'
     ]
 );
 var Source = new Model('Sources',
     [
         'name',
         'publication_year',
-        'authors'
+        'authors',
+	'flag_demo'
     ]
 );
 var Concept = new Model('Concept',
     [
-        'name'
+        'name',
+	'flag_demo'
     ]
 );
 var Expert = new Model('Expert',
     [
         'name',
-        'institution'
+        'institution',
+	'flag_demo'
     ]
 );
 
 var DesignedSystem = new Model('DesignedSystem',
     [
-        'name'
+        'name',
+	'flag_demo'
     ]
 );
 var Status = new Model('ContentStatus',

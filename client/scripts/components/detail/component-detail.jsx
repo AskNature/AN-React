@@ -89,7 +89,8 @@ var DetailComponent = React.createClass({
 
       _onChange: function() {
           this.setState(getState());
-	        this.setState({'masterid': store.getMasterid()});
+	  var isOutsideDemo = (this.state.user.status && this.state.user.status.masterid === 'demo' && !this.state.object.flag_demo) ? true : false;
+	  this.setState({'masterid': store.getMasterid(), 'error':isOutsideDemo, 'loaded':!isOutsideDemo}); // TODO: replace this loaded/error with proper message
       },
       onRelationshipAdd: function(field, addedValue) {
           console.log(field + ' added ' + addedValue);
