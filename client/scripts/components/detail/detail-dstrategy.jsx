@@ -129,9 +129,18 @@ var Template = React.createClass({
           </Row>
           <Row>
             <Col xs={12} md={12}>
-              {data.challenges_solved || this.props.editable ? (
+              {data.summary || this.props.editable ? (
                 <TextArea
                   title='Summary'
+                  item={data.summary}
+                  store={this.props.store}
+                  actions={this.props.actions}
+                  fieldName={'summary'}
+                  editable={this.props.editable}/>
+              ) : '' }
+              {data.challenges_solved || this.props.editable ? (
+                <TextArea
+                  title='Challenges Solved'
                   item={data.challenges_solved}
                   store={this.props.store}
                   actions={this.props.actions}
