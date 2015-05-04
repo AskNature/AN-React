@@ -501,7 +501,8 @@ var SidebarComponent = React.createClass({
                         valueField='slug'
                         textField='label'
                         defaultValue='b.strategy'
-                        className='form-control'/>
+                        className='form-control'
+			onClick={this.props.onTypeSelect} />
                       <div onClick={this.props.onResultClick}>
                         {this.props.searchResultComponent ?
                           <this.props.searchResultComponent
