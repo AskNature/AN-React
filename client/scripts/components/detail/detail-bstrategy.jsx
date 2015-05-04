@@ -8,7 +8,7 @@ DefaultLayout = require('../layouts/default.jsx'),
 TopSection = require('./common/topsection.jsx'),
 
 TextArea = require('./common/textarea.jsx'),
-Gallery = require('./common/gallery.jsx'),
+Gallery = require('./common/inline-gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
 Col = require('react-bootstrap/Col'),
@@ -40,7 +40,7 @@ var Template = React.createClass({
 
     var primaryTitle = data[primaryKey];
 
-    var split = primaryTitle ? primaryTitle.indexOf(': ') ? primaryTitle.split(': ') : '' : '';
+    var split = primaryTitle ? primaryTitle.indexOf(': ') ? primaryTitle.split(': ') : [] : [];
     primaryTitle = split[0];
     var secondaryTitle = data.living_systems[0] && data.living_systems[0].common_name ? data.living_systems[0].common_name : split.length > 1 ? split[1] : '';
 

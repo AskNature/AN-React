@@ -11,7 +11,8 @@
     "animate.css": "~3.2.1",
     "spinkit": "~1.0.1",
     "bootstrap-sass": "~3.3.4",
-    "fontawesome": "~4.3.0"
+    "fontawesome": "~4.3.0",
+    "slick-carousel": "~1.5.2"
   },
   "devDependencies": {},
   "resolutions": {
