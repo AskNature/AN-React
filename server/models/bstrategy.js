@@ -39,6 +39,7 @@ var License = new Model('License',
     'masterid'
   ]
 );
+// NOTE: this is only here to serve the in_AddedMedia request in the Media model:
 var UserMedia = new Model('UserMedia',
   [
     'name',
@@ -59,6 +60,7 @@ var Media = new Model('Media',
     'source_url',
     'author'
   ],
+  // NOTE: this doesn't return values: 
   {'out_HasLicense':
     {
       model: License,
@@ -66,6 +68,7 @@ var Media = new Model('Media',
       edge: 'out("HasLicense")'
     }
   },
+  // NOTE: this doesn't even return an object:
   {'in_AddedMedia':
     {
       model: UserMedia,
