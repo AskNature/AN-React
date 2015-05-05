@@ -121,7 +121,7 @@ var Template = React.createClass({
                <Row>
                  <Col xs={12}>
 
-                     <Gallery items={data} />
+                   <Gallery items={data} title={data.name} windowHeight={this.props.windowHeight}/>
                        {this.props.editable ? (
                          <RelationshipList
                            items={data.media}
