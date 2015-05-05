@@ -50,6 +50,7 @@ var Template = React.createClass({
     var descriptionKey = 'summary';
     var addedby = data.added_by;
     var default_avatar = 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/10383663_869350803096314_2369845013213041061_n.png?oh=2c010ce055331caa73a9506795239fd1&oe=55BDD82A&__gda__=1433772443_f5c43498047b8193dccc0a5554ba6ed1';
+    console.log('windowheight:'+this.props.windowHeight);
     return (
       /* jshint ignore:start */
         <div>
@@ -119,7 +120,7 @@ var Template = React.createClass({
 			        <Row>
 		            <Col xs={12}>
 
-                    <Gallery items={data} />
+                    <Gallery items={data} title={data.name} windowHeight={this.props.windowHeight}/>
                       {this.props.editable ? (
                         <RelationshipList
                           items={data.media}

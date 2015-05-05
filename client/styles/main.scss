@@ -244,6 +244,60 @@ Loader
   }
 }
 
+/* ==========================================================================
+Modals
+========================================================================== */
+.modal-content {
+  box-shadow: none;
+  p {
+    font-weight: 700;
+    color: $white-color;
+    font-size: $font-size-large;
+  }
+  button.close {
+    color: $white-color;
+    font-weight: 900;
+    font-size: $font-size-h1;
+  }
+  .modal-header {
+    .modal-title {
+      color: $white-color;
+      font-weight: 900;
+    }
+  }
+}
+
+/* ==========================================================================
+Slick Slider
+========================================================================== */
+
+.an-gallery {
+  .slick-slide {
+    img {
+      width: auto;
+      height: auto;
+      margin-left: auto;
+      margin-right: auto;
+      padding-bottom: 20px;
+    }
+  }
+}
+
+.grid-sizer {
+  height: 120px;
+  width: 25%;
+}
+
+.gallery-item{
+  width: 25%;
+  height: 120px;
+
+.gallery-thumbnail {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+}
 
 /* ==========================================================================
 Top Navbar
@@ -253,7 +307,6 @@ Top Navbar
   background: $primary-color;
   height: 62px;
   box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  z-index: 10000;
   .navbar-brand {
     color: #333;
     margin-left: 0;

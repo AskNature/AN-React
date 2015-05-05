@@ -457,24 +457,24 @@ $modal-title-padding:         15px;
 $modal-title-line-height:     $line-height-base;
 
 //** Background color of modal content area
-$modal-content-bg:                             #fff;
+$modal-content-bg:                             transparent;
 //** Modal content border color
 $modal-content-border-color:                   transparent;
 //** Modal content border color **for IE8**
 $modal-content-fallback-border-color:          #999;
 
 //** Modal backdrop background color
-$modal-backdrop-bg:           #000;
+$modal-backdrop-bg:           $primary-color;
 //** Modal backdrop opacity
-$modal-backdrop-opacity:      .5;
+$modal-backdrop-opacity:      .85;
 //** Modal header border color
 $modal-header-border-color:   transparent;
 //** Modal footer border color
 $modal-footer-border-color:   $modal-header-border-color;
 
-$modal-lg:                    900px;
-$modal-md:                    600px;
-$modal-sm:                    300px;
+$modal-lg:                    80%;
+$modal-md:                    80%;
+$modal-sm:                    80%;
 
 
 
