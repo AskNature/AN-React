@@ -8,14 +8,50 @@ var entityName = 'InspiredSolutions';
 
 var fields = ['name', 'description', 'system', 'summary', 'challenges_solved', 'how_is_it_different', 'biomimicry_story', 'product_type', 'patent_name', 'availability', 'company', 'phase', 'patent_number', 'company_website', 'strategy', 'consumer_products', 'keywords', 'timestamp', 'flag_text', 'flag_media', 'flag_tags'];
 
+var License = new Model('License',
+  [
+    'info_url',
+    'name',
+    'masterid'
+  ]
+);
+// NOTE: this is only here to serve the in_AddedMedia request in the Media model:
+var UserMedia = new Model('UserMedia',
+  [
+    'name',
+    'first',
+    'last',
+    'custom_avatar_url',
+    'flag_demo'
+  ]
+);
 var Media = new Model('Media',
   [
     'filename',
     'name',
     'entity',
     'description',
-    'media_url'
-  ]
+    'media_url',
+    'flag_demo',
+    'source_url',
+    'author'
+  ],
+  // NOTE: this doesn't return values:
+  {'out_HasLicense':
+    {
+      model: License,
+      className: 'License',
+      edge: 'out("HasLicense")'
+    }
+  },
+  // NOTE: this doesn't even return an object:
+  {'in_AddedMedia':
+    {
+      model: UserMedia,
+      className: 'Users',
+      edge: 'both("AddedMedia")'
+    }
+  }
 );
 var User = new Model('Users',
   [
@@ -35,36 +71,31 @@ var User = new Model('Users',
 var Strategy = new Model('Strategies',
     [
         'name',
-        'summary',
-	'flag_demo'
+        'summary'
     ]
 );
 var Source = new Model('Sources',
     [
         'name',
         'publication_year',
-        'authors',
-	'flag_demo'
+        'authors'
     ]
 );
 var Concept = new Model('Concept',
     [
-        'name',
-	'flag_demo'
+        'name'
     ]
 );
 var Expert = new Model('Expert',
     [
         'name',
-        'institution',
-	'flag_demo'
+        'institution'
     ]
 );
 
 var DesignedSystem = new Model('DesignedSystem',
     [
-        'name',
-	'flag_demo'
+        'name'
     ]
 );
 var Status = new Model('ContentStatus',
