@@ -2,8 +2,6 @@
 
 var React = require('react'),
 
-PackeryMixin = require('react-packery-mixin'),
-
 Button = require('react-bootstrap').Button,
 ModalTrigger = require('react-bootstrap').ModalTrigger,
 Modal = require('react-bootstrap').Modal,
@@ -14,13 +12,6 @@ Grid = require('react-bootstrap/Grid');
 
 var Slider = require('react-slick');
 
-var packeryOptions = {
-    transitionDuration: 0,
-    itemSelector: '.gallery-item',
-    gutter: 0,
-    percentPosition: true,
-    columnWidth: '.grid-sizer'
-};
 
 var GalleryModal = React.createClass({
   render: function() {
@@ -46,7 +37,6 @@ var GalleryModal = React.createClass({
 
 var Gallery = React.createClass({
 
-  mixins: [new PackeryMixin('packeryContainer', packeryOptions)],
 
   render: function() {
 
@@ -112,8 +102,7 @@ var Gallery = React.createClass({
 
     return (
       <div>
-      <div ref='packeryContainer' className='grid-container'>
-        <div className='grid-sizer' style={galleryItemStyle}></div>
+      <div className='grid-container'>
         {childElements}
       </div>
 

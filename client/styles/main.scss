@@ -302,14 +302,10 @@ Slick Slider
 }
 .grid-container {
   margin: 0 -5px;
-  .grid-sizer {
-    height: 120px;
-    width: 25%;
-  }
   .gallery-item{
     width: 25%;
     height: 120px;
-
+    float: left;
     .gallery-thumbnail {
       width: 100%;
       height: 100%;
