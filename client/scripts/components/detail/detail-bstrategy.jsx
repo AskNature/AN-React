@@ -8,7 +8,7 @@ DefaultLayout = require('../layouts/default.jsx'),
 TopSection = require('./common/topsection.jsx'),
 
 TextArea = require('./common/textarea.jsx'),
-Gallery = require('./common/inline-gallery.jsx'),
+Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
 Col = require('react-bootstrap/Col'),
