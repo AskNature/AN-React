@@ -32,6 +32,22 @@ var Entity = new Model('Entity',
     'flag_demo'
   ]
 );
+var License = new Model('License',
+  [
+    'info_url',
+    'name',
+    'masterid'
+  ]
+);
+var UserMedia = new Model('UserMedia',
+  [
+    'name',
+    'first',
+    'last',
+    'custom_avatar_url',
+    'flag_demo'
+  ]
+);
 var Media = new Model('Media',
   [
     'filename',
@@ -39,8 +55,24 @@ var Media = new Model('Media',
     'entity',
     'description',
     'media_url',
-    'flag_demo'
-  ]
+    'flag_demo',
+    'source_url',
+    'author'
+  ],
+  {'out_HasLicense':
+    {
+      model: License,
+      className: 'License',
+      edge: 'out("HasLicense")'
+    }
+  },
+  {'in_AddedMedia':
+    {
+      model: UserMedia,
+      className: 'Users',
+      edge: 'both("AddedMedia")'
+    }
+  }
 );
 var User = new Model('Users',
   [
