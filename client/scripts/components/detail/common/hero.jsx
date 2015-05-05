@@ -164,10 +164,10 @@ var HeroComponent = React.createClass({
                 </div>
               ) : '' }
                 <div className='media-body'>
-                  <h6 className="animated fadeInDown" style={{textTransform:'uppercase',fontWeight:'800',color:'#ffffff', marginBottom: 0}}>
+                  <h6 style={{textTransform:'uppercase',fontWeight:'800',color:'#ffffff', marginBottom: 0}}>
                     {this.props.label}
                   </h6>
-                  <h2 className="animated fadeInDown" style={{marginTop: '8px', marginBottom: 0, fontWeight: '800'}}>
+                  <h2 style={{marginTop: '8px', marginBottom: 0, fontWeight: '800'}}>
                     {!this.props.editable && this.props.primarylink ? (
                       <Link url={this.props.primarylink}>
                       <TextArea

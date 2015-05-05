@@ -190,6 +190,7 @@ var DetailComponent = React.createClass({
                 {loader}
                 <div style={style} className='detail-single'>
                 <Template
+                    windowHeight={this.state.windowHeight}
                     masterid={this.props.masterid !== 'new' ? this.props.masterid : null}
                     type={this.props.type}
                     data={this.state.object}

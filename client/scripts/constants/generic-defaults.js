@@ -95,6 +95,9 @@ var Defaults = {
         outcomes: [],
         outcomes_id: [],
 
+        out_HasLicense: [],
+        in_AddedMedia: [],
+
         products: [],
         product_masterid: [],
 
