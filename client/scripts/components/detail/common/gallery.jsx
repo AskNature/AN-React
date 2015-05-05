@@ -55,13 +55,19 @@ var Gallery = React.createClass({
               <Col xs={12}>
                 <p className='gallery-caption' style={{display:'block', maxHeight: that.props.windowHeight*0.2,overflow:'scroll'}}>{image.description}</p>
               </Col>
-              <Col xs={12} sm={6}>
+              <Col xs={12} sm={4}>
+                <Well bsSize='small'>
+                  <h6><strong>Username</strong> shared this image 6 months ago</h6>
+                </Well>
+              </Col>
+
+              <Col xs={12} sm={4}>
                 <Well bsSize='small'>
                   <h6 className='heading'>License Type</h6>
                   <a href={image.out_HasLicense[0].info_url} target='_blank'>{image.out_HasLicense[0].name}</a>
                 </Well>
               </Col>
-              <Col xs={12} sm={6}>
+              <Col xs={12} sm={4}>
                 <Well bsSize='small'>
                   <h6 className='heading'>Original Attribution</h6>
                 <p>{image.author}</p>
