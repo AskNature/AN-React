@@ -88,22 +88,6 @@ label, .label {
   font-size: 85%;
 }
 
-.fullscreen {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #444;
-  .main-container > .content > .main-container > .container {
-    padding-bottom: 0;
-  }
-}
-
-#login-panel {
-  margin-top: 200px;
-}
-
 .container {
   max-width: 100%;
   padding-bottom: 50px;
@@ -118,6 +102,32 @@ label, .label {
   box-shadow: none;
 }
 
+/* ==========================================================================
+Login/Signup Panel
+========================================================================== */
+
+#login-panel {
+  background: lighten($primary-color, 5%);
+  a {
+    color: $white-color;
+  }
+  .control-label {
+    font-weight: 500;
+    padding: 0;
+  }
+  .btn {
+    box-shadow: none;
+    &.btn {
+      color: $white-color;
+      font-weight: 900;
+      background: rgba(255,255,255,.2);
+      border-color: lighten($primary-color, 5%);
+      &:hover {
+        background: $primary-color;
+      }
+    }
+  }
+}
 
 /* ==========================================================================
 Media Uploads
