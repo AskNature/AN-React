@@ -572,7 +572,7 @@ Design Insights & Ideas
 .design-insights {
   .media-body {
     padding-left: 15px;
-    > p {
+    > div {
       margin: 0;
       padding: 5px 10px;
       background: #fff;
@@ -580,6 +580,9 @@ Design Insights & Ideas
       position: relative;
       display: block;
       border: 1px solid #eee;
+      p {
+        margin: 0;
+      }
       &:before {
         content: '';
         position: absolute;

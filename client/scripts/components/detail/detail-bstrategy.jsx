@@ -169,42 +169,66 @@ var Template = React.createClass({
                         <li className='media'>
                           <div className='media-left media-middle'>
                             <a href='#'>
-                              <img src={default_avatar} alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
+                              <img src='http://lorempixel.com/30/30/people/1' alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                             </a>
                           </div>
                           <div className='media-body media-middle'>
-                            <p><a href='#'><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: data.application_1}} /></p>
+                            <div>
+                              <a href='#'><strong>Charlie Gupta </strong></a>
+                              <TextArea
+                                item={data.application_1}
+                                store={this.props.store}
+                                actions={this.props.actions}
+                                fieldName={'application_1'}
+                                editable={this.props.editable} />
+                            </div>
                           </div>
-                        </li>) : ''
-                    }
+                        </li>
+                      ) : ''}
                     {data.application_2 ? (
                       <li className='media'>
                         <div className='media-left media-middle'>
                           <a href='#'>
-                            <img src={default_avatar} alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
+                            <img src='http://lorempixel.com/30/30/people/2' alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                           </a>
                         </div>
                         <div className='media-body media-middle'>
-                          <p><a href='#'><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: data.application_2}} /></p>
+                          <div>
+                            <a href='#'><strong>Jean Francis </strong></a>
+                            <TextArea
+                              item={data.application_2}
+                              store={this.props.store}
+                              actions={this.props.actions}
+                              fieldName={'application_2'}
+                              editable={this.props.editable} />
+                          </div>
                         </div>
-                      </li>) : ''
-                    }
+                      </li>
+                    ) : ''}
                     {data.application_3 ? (
                       <li className='media'>
                         <div className='media-left media-middle'>
                           <a href='#'>
-                            <img src={default_avatar} alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
+                            <img src='http://lorempixel.com/30/30/people/3' alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                           </a>
                         </div>
                         <div className='media-body media-middle'>
-                          <p><a href='#'><strong>AskNature Team </strong></a><span dangerouslySetInnerHTML={{__html: data.application_3}} /></p>
+                          <div>
+                            <a href='#'><strong>Alex Randall </strong></a>
+                            <TextArea
+                              item={data.application_3}
+                              store={this.props.store}
+                              actions={this.props.actions}
+                              fieldName={'application_3'}
+                              editable={this.props.editable} />
+                          </div>
                         </div>
-                      </li>) : ''
-                    }
+                      </li>
+                    ) : ''}
                     <li className='media'>
                       <div className='media-left'>
                         <a href='#'>
-                          <img src={default_avatar} alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
+                          <img src='http://lorempixel.com/30/30/people/4' alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
                         </a>
                       </div>
                       <div className='media-body'>
