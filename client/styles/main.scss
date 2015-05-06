@@ -611,7 +611,8 @@ Design Insights & Ideas
       }
     }
     p > span {
-      font-size: 1.4em;
+      font-size: $font-size-h4;
+      line-height: $line-height-computed;
       font-weight: 100;
       display: block;
     }

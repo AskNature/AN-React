@@ -11,6 +11,7 @@ TextArea = require('./common/textarea.jsx'),
 Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
+Label = require('react-bootstrap/Label'),
 Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid');
@@ -162,8 +163,8 @@ var Template = React.createClass({
                   </Col>
 	              </Row>
                 <Row className='show-grid'>
-		              <Col xs={12}>
-                    <h6 className='heading'>Design Insights & Ideas</h6>
+		              <Col xs={12} sm={6} >
+                    <h6 className='heading'><Label>3</Label> Design Insights & Ideas</h6>
                     <ul className='design-insights media-list'>
                       {data.application_1 ? (
                         <li className='media'>
@@ -239,7 +240,7 @@ var Template = React.createClass({
                     </li>
                   </ul>
     				    </Col>
-    				    <Col xs={12}>
+    				    <Col xs={12} sm={6}>
                   <RelationshipList
                     items={data.inspired_by}
                     editable={this.props.editable}
