@@ -14,7 +14,10 @@ var Media = new Model('Media',
     'name',
     'entity',
     'description',
-    'media_url'
+    'media_url',
+    'flag_demo',
+    'source_url',
+    'author'
   ]
 );
 var User = new Model('Users',

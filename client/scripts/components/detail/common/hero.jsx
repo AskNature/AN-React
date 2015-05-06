@@ -142,7 +142,7 @@ var HeroComponent = React.createClass({
         };
       } else {
         heroStyle = {
-          backgroundImage: 'url(/images/lichen.JPG)',
+          backgroundImage: 'none',
           height: '300px !important'
         };
       }
