@@ -2,6 +2,8 @@
 
 var React = require('react'),
 
+FontAwesome = require('react-fontawesome'),
+
 Button = require('react-bootstrap').Button,
 ModalTrigger = require('react-bootstrap').ModalTrigger,
 Modal = require('react-bootstrap').Modal,
@@ -21,6 +23,7 @@ var GalleryModal = React.createClass({
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
+      prevArrow: <Button bsStyle='link' bsSize='lg'><FontAwesome name='arrow-left' /></Button>,
       initialSlide: this.props.mediaKey ? this.props.mediaKey : 0
     };
     return (

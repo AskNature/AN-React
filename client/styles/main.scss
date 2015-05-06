@@ -281,6 +281,21 @@ Slick Slider
 
 .an-gallery {
   padding-top: 0;
+  .slick-prev, .slick-next {
+    width: 50px;
+    top: 0;
+    height: 100%;
+    margin-top: 0;
+    &:before {
+      font-size: 48px;
+    }
+  }
+  .slick-prev {
+    left: -60px;
+  }
+  .slick-next {
+    right: -60px
+  }
   .slick-slide {
     img {
       width: auto;
