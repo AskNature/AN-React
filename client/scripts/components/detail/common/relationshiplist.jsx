@@ -21,6 +21,8 @@ var RelationshipList = React.createClass({
     this.props.onRemove(removed);
   },
   render: function() {
+    if(this.props.items && this.props.items.length > 0 || this.props.editable) {
+
     return (
       <div>
         <h6 className='heading heading-cards'>
@@ -54,6 +56,9 @@ var RelationshipList = React.createClass({
 
       </div>
     );
+  } else {
+    return <div />;
+  }
   }
 });
 

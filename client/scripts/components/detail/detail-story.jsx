@@ -11,6 +11,7 @@ TextArea = require('./common/textarea.jsx'),
 Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
+Label = require('react-bootstrap/Label'),
 Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid');
@@ -56,6 +57,7 @@ var Template = React.createClass({
             descriptionKey={descriptionKey}
             />
 	        <Grid>
+
   	        <Row className='show-grid'>
   		        <Col xs={12} sm={4}>
                 <RelationshipList

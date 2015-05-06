@@ -73,6 +73,7 @@ var TopSection = React.createClass({
           editorComments={this.props.data.editor_comments}
           flags={{'flagText':this.props.data.flag_text, 'flagMedia':this.props.data.flag_media,'flagTags':this.props.data.flag_tags, 'flagDemo':this.props.data.flag_demo}}
           type={this.props.entityName}
+          tempInsight={this.props.data.temp_insight}
           />
       </div>
       /* jshint ignore:end */

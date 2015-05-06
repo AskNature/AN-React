@@ -19,7 +19,9 @@ Nav = require('react-bootstrap').Nav,
 NavItem = require('react-bootstrap').NavItem,
 TabbedArea = require('react-bootstrap').TabbedArea,
 TabPane = require('react-bootstrap').TabPane,
+ButtonGroup = require('react-bootstrap').ButtonGroup,
 Button = require('react-bootstrap').Button,
+Label = require('react-bootstrap').Label,
 Input = require('react-bootstrap').Input,
 ButtonToolbar = require('react-bootstrap').ButtonToolbar,
 Tooltip = require('react-bootstrap').Tooltip,
@@ -83,7 +85,34 @@ var SubHero = React.createClass({
                 </span>
               )}
             </h4>
-          ) : ''}
+          ) :
+          <Row>
+            <Col xs={12}>
+              <h6 className='heading'><Label>1</Label> Insights & Ideas</h6>
+              <ul className='design-insights media-list'>
+
+                  <li className='media'>
+                    <div className='media-left media-middle'>
+                      <a href='#'>
+                        <img src='https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/10383663_869350803096314_2369845013213041061_n.png?oh=2c010ce055331caa73a9506795239fd1&oe=55BDD82A&__gda__=1433772443_f5c43498047b8193dccc0a5554ba6ed1' alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
+                      </a>
+                    </div>
+                    <div className='media-body media-middle'>
+                      <div>
+                        <h6><a href='#'><strong>AskNature Team </strong></a></h6>
+                          <TextArea
+                            item={this.props.tempInsight}
+                            store={this.props.store}
+                            actions={this.props.actions}
+                            fieldName={'temp_insight'}
+                            editable={this.props.editable} />
+                      </div>
+                    </div>
+                  </li>
+              </ul>
+              </Col>
+            </Row>
+          }
           </Col>
           <Col xs={12} sm={4}>
             <Nav justified activeKey={0} bsStyle='pills' style={{"margin-top": "11.5px"}}>

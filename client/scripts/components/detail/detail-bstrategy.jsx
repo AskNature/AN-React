@@ -164,7 +164,7 @@ var Template = React.createClass({
 	              </Row>
                 <Row className='show-grid'>
 		              <Col xs={12} sm={6} >
-                    <h6 className='heading'><Label>3</Label> Design Insights & Ideas</h6>
+                    <h6 className='heading'><Label>3</Label> Insights & Ideas</h6>
                     <ul className='design-insights media-list'>
                       {data.application_1 ? (
                         <li className='media'>
@@ -175,7 +175,7 @@ var Template = React.createClass({
                           </div>
                           <div className='media-body media-middle'>
                             <div>
-                              <a href='#'><strong>Charlie Gupta </strong></a>
+                              <h6><a href='#'><strong>Charlie Gupta </strong></a></h6>
                               <TextArea
                                 item={data.application_1}
                                 store={this.props.store}
@@ -195,7 +195,7 @@ var Template = React.createClass({
                         </div>
                         <div className='media-body media-middle'>
                           <div>
-                            <a href='#'><strong>Jean Francis </strong></a>
+                            <h6><a href='#'><strong>Jean Francis </strong></a></h6>
                             <TextArea
                               item={data.application_2}
                               store={this.props.store}
@@ -215,7 +215,7 @@ var Template = React.createClass({
                         </div>
                         <div className='media-body media-middle'>
                           <div>
-                            <a href='#'><strong>Alex Randall </strong></a>
+                            <h6><a href='#'><strong>Alex Randall </strong></a></h6>
                             <TextArea
                               item={data.application_3}
                               store={this.props.store}
