@@ -21,7 +21,6 @@ var RelationshipList = React.createClass({
     this.props.onRemove(removed);
   },
   render: function() {
-    if(this.props.items && this.props.items.length > 0 || this.props.editable) {
 
     return (
       <div>
@@ -56,9 +55,7 @@ var RelationshipList = React.createClass({
 
       </div>
     );
-  } else {
-    return <div />;
-  }
+  
   }
 });
 
