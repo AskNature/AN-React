@@ -208,7 +208,7 @@ var SubHero = React.createClass({
                       fieldName={'Collaborators'} />
                   </div>
 
-                : this.props.user.role === 'admin' ?
+                : this.props.credentials ?
 
                   <fieldset disabled>
                     {this.props.status ?

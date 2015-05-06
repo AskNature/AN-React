@@ -54,7 +54,7 @@ var TopSection = React.createClass({
           descriptionlink={this.props.descriptionlink}
           descriptionKey={this.props.descriptionKey}
           status={this.props.data.status}
-          credentials={this.props.user.role === 'admin' ? true : false}
+          credentials={this.props.user.loggedIn && this.props.user.role === 'admin' ? true : false}
           editable={this.props.editable}
           store={this.props.store}
           actions={this.props.actions}

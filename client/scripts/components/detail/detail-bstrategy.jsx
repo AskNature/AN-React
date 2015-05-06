@@ -164,7 +164,7 @@ var Template = React.createClass({
 	              </Row>
                 <Row className='show-grid'>
 		              <Col xs={12} sm={6} >
-                    <h6 className='heading'><Label>3</Label> Insights & Ideas</h6>
+                    <h6 className='heading'><Label>3</Label> Ideas & Insights</h6>
                     <ul className='design-insights media-list'>
                       {data.application_1 ? (
                         <li className='media'>
@@ -234,7 +234,7 @@ var Template = React.createClass({
                       </div>
                       <div className='media-body'>
                         <form>
-                          <Input type='text' className='input-sm' placeholder='Share Your Idea...' />
+                          <Input type='text' className='input-sm' placeholder='Share Your Idea or Insight...' />
                         </form>
                       </div>
                     </li>
