@@ -6,7 +6,7 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Experts';
 
-var fields = ['name', 'institution', 'timestamp', 'special_text', 'revision', 'timestamp', 'type', 'people', 'city', 'state', 'province', 'country', 'postal_code', 'url', 'flag_text', 'flag_media', 'flag_tags', 'editor_notes'];
+var fields = ['name', 'institution', 'timestamp', 'special_text', 'revision', 'type', 'people', 'city', 'state', 'province', 'country', 'postal_code', 'url', 'flag_text', 'flag_media', 'flag_tags', 'editor_notes'];
 
 var Media = new Model('Media',
   [
@@ -74,6 +74,11 @@ edge: 'in("AddedContent")'
 model: User,
 className: 'Users',
 edge: 'in("CollaboratedOn")'
+},
+'members': {
+  model: User,
+  className: 'Users',
+  edge: 'in("OnTeam")'
 }
 
 };
