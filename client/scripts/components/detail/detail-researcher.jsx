@@ -26,7 +26,7 @@ var Template = React.createClass({
     var primaryKey = 'name';
     var primaryLinkKey = 'url';
     var secondaryKey = 'institution';
-    var descriptionKey = 'special_text';
+    var descriptionKey = 'description';
 
     return (
       /* jshint ignore:start */
