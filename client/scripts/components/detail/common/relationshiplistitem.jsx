@@ -12,6 +12,7 @@ FontAwesome = require('react-fontawesome'),
 OverlayTrigger = require('react-bootstrap').OverlayTrigger,
 Tooltip = require('react-bootstrap').Tooltip,
 
+Col = require('react-bootstrap').Col,
 Glyphicon = require('react-bootstrap').Glyphicon,
 Button = require('react-bootstrap').Button,
 ButtonToolbar = require('react-bootstrap').ButtonToolbar,
@@ -183,6 +184,7 @@ var RelationshipListItem = React.createClass({
       subTitle = this.props.item.description;
     }
     return (
+      <Col xs={12} sm={this.props.narrow ? 4 : 12}>
         <ButtonToolbar className={'relationship-button' + (!this.props.item.flag_demo ? ' relationship-button--outside-demo' : '')}>
           <Button
             block
@@ -197,9 +199,11 @@ var RelationshipListItem = React.createClass({
               thumbs={this.props.item} link={this.clickHandler.bind(null,link)} masterid={item.masterid}
               showOverlay={this.state.showOptions}
               remove={this.props.onRemove.bind(null,item)}
-              editable={this.props.editable} />
+              editable={this.props.editable}
+              narrow={this.props.narrow} />
           </Button>
         </ButtonToolbar>
+      </Col>
     );
   }
 });

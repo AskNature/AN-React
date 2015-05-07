@@ -11,6 +11,7 @@ TextArea = require('./common/textarea.jsx'),
 Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
+Well = require('react-bootstrap/Well'),
 Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
 Grid = require('react-bootstrap/Grid');
@@ -43,7 +44,73 @@ var Template = React.createClass({
           description={data[descriptionKey]}
           descriptionKey={descriptionKey}
           />
+
         <Grid>
+          <Row>
+            <Col xs={12} className='card-nest'>
+            <Well bsSize='small' className='card-contexts'>
+              <RelationshipList
+                items={data.context}
+                editable={this.props.editable}
+                titleField='name'
+                onAdd={this.props.onRelationshipAdd.bind(null, 'context')}
+                onRemove={this.props.onRelationshipRemove.bind(null, 'context')}
+                field={'context'}
+                routeName={'context'}
+                title='Key Contexts'
+                fieldName={'Contexts'}
+                narrow />
+              <Well bsSize='small' className='card-systems'>
+              <Row>
+                <Col xs={12} sm={4}>
+                  <RelationshipList
+                    items={data.designedsystems}
+                    editable={this.props.editable}
+                    titleField={'name'}
+                    onAdd={this.props.onRelationshipAdd.bind(null, 'designedsystems')}
+                    onRemove={this.props.onRelationshipRemove.bind(null, 'designedsystems')}
+                    field={'d.system'}
+                    routeName={'d.system'}
+                    title={'Designed Systems'}
+                    fieldName={'Designed Systems'}/>
+                </Col>
+                <Col xs={12} sm={8}>
+                  <Well bsSize='small' className='card-fms'>
+                    <div className='arrow'></div>
+                    <Row>
+                    <Col xs={12} sm={6}>
+                      <RelationshipList
+                        items={data.mechanisms}
+                        editable={this.props.editable}
+                        titleField='name'
+                        onAdd={this.props.onRelationshipAdd.bind(null,'mechanisms')}
+                        onRemove={this.props.onRelationshipRemove.bind(null, 'mechanisms')}
+                        field={'fm'}
+                        routeName={'fm'}
+                        title={'Mechanisms'}
+                        fieldName={'Mechanisms'}/>
+                    </Col>
+                    <Col xs={12} sm={6}>
+                      <RelationshipList
+                        items={data.functions}
+                        editable={this.props.editable}
+                        titleField='name'
+                        onAdd={this.props.onRelationshipAdd.bind(null, 'functions')}
+                        onRemove={this.props.onRelationshipRemove.bind(null, 'functions')}
+                        field={'fm'}
+                        routeName={'fm'}
+                        title={'Functions'}
+                        fieldName={'Functions'}/>
+                    </Col>
+                    </Row>
+                  </Well>
+                </Col>
+              </Row>
+              </Well>
+            </Well>
+            </Col>
+          </Row>
+
           <Row>
             <Col xs={12}>
               <RelationshipList
@@ -57,55 +124,6 @@ var Template = React.createClass({
                 fieldName='Biological Strategy'
                 titleField='name' />
             </Col>
-          </Row>
-          <Row className='show-grid'>
-            <Col xs={12} sm={4}>
-              <RelationshipList
-                items={data.designedsystems}
-                editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'designedsystems')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'designedsystems')}
-                field='d.system'
-                routeName='d.system'
-                title='Designed Systems'
-                fieldName='Designed Systems'
-                titleField='name' />
-                <RelationshipList
-                  items={data.context}
-                  editable={this.props.editable}
-                  titleField='name'
-                  onAdd={this.props.onRelationshipAdd.bind(null, 'context')}
-                  onRemove={this.props.onRelationshipRemove.bind(null, 'context')}
-                  field='context'
-                  routeName='context'
-                  title='Contexts'
-                  fieldName='Contexts'/>
-            </Col>
-            <Col xs={6} sm={4}>
-              <RelationshipList
-                items={data.mechanisms}
-                editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'mechanisms')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'mechanisms')}
-                field='fm'
-                routeName='fm'
-                title='Mechanisms'
-                fieldName='Mechanisms'
-                titleField='name' />
-            </Col>
-            <Col xs={6} sm={4}>
-              <RelationshipList
-                items={data.functions}
-                editable={this.props.editable}
-                onAdd={this.props.onRelationshipAdd.bind(null, 'functions')}
-                onRemove={this.props.onRelationshipRemove.bind(null, 'functions')}
-                field='fm'
-                routeName='fm'
-                title='Functions'
-                fieldName='Functions'
-                titleField='name' />
-            </Col>
-
           </Row>
         </Grid>
         <Grid>
@@ -127,6 +145,8 @@ var Template = React.createClass({
                 ) : '' }
             </Col>
           </Row>
+        </Grid>
+        <Grid>
           <Row>
             <Col xs={12} md={12}>
               {data.summary || this.props.editable ? (

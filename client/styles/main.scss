@@ -103,6 +103,64 @@ label, .label {
 }
 
 /* ==========================================================================
+Card Nest
+========================================================================== */
+
+.card-nest .well {
+  background: rgb(252,252,252);
+  border-color: #eee;
+  border-width: 1px;
+  margin-bottom: 0;
+  border-radius: 3px;
+  &.card-contexts {
+    box-shadow: 0px 3px 15px rgba(0,0,0,.05);
+    margin-bottom: 15px;
+  }
+  &.card-systems {
+    margin-top: 5px;
+    background: rgb(253,253,253);
+  }
+  &.card-fms {
+    background: rgb(254,254,254);
+    .arrow {
+      border-right: 1px solid $gray-lighter;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+    &:before {
+      content: '';
+      position: absolute;
+      border-style: solid;
+      border-width: 10px 0 10px 10px;
+      border-color: transparent $gray-lighter;
+      display: block;
+      width: 0;
+      z-index: 0;
+      margin-top: -10px;
+      right: -11px;
+      top: 50%;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      border-style: solid;
+      border-width: 10px 0 10px 10px;
+      border-color: transparent rgb(254,254,254);
+      display: block;
+      width: 0;
+      z-index: 1;
+      margin-top: -10px;
+      right: -10px;
+      top: 50%;
+    }
+  }
+
+  }
+}
+
+/* ==========================================================================
 Login/Signup Panel
 ========================================================================== */
 

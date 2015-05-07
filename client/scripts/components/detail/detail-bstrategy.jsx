@@ -11,6 +11,7 @@ TextArea = require('./common/textarea.jsx'),
 Gallery = require('./common/gallery.jsx'),
 RelationshipList = require('./common/relationshiplist.jsx'),
 
+Well = require('react-bootstrap/Well'),
 Label = require('react-bootstrap/Label'),
 Col = require('react-bootstrap/Col'),
 Row = require('react-bootstrap/Row'),
@@ -67,58 +68,91 @@ var Template = React.createClass({
             description={data[descriptionKey]}
             descriptionKey={descriptionKey}
             />
-	        <Grid>
-  	        <Row className='show-grid'>
-  		        <Col xs={12} sm={4}>
-                <RelationshipList
-                  items={data.living_systems}
-                  editable={this.props.editable}
-                  titleField={'name'}
-                  onAdd={this.props.onRelationshipAdd.bind(null, 'living_systems')}
-                  onRemove={this.props.onRelationshipRemove.bind(null, 'living_systems')}
-                  field={'b.system'}
-                  routeName={'b.system'}
-                  title={'Biological Systems'}
-                  fieldName={'Biological Systems'}/>
-                <RelationshipList
-                  items={data.context}
-                  editable={this.props.editable}
-                  titleField='name'
-                  onAdd={this.props.onRelationshipAdd.bind(null, 'context')}
-                  onRemove={this.props.onRelationshipRemove.bind(null, 'context')}
-                  field={'context'}
-                  routeName={'context'}
-                  title={'Contexts'}
-                  fieldName={'Contexts'}/>
-      		    </Col>
-      		    <Col xs={6} sm={4}>
-                <RelationshipList
-                  items={data.mechanisms}
-                  editable={this.props.editable}
-                  titleField='name'
-                  onAdd={this.props.onRelationshipAdd.bind(null,'mechanisms')}
-                  onRemove={this.props.onRelationshipRemove.bind(null, 'mechanisms')}
-                  field={'fm'}
-                  routeName={'fm'}
-                  title={'Mechanisms'}
-                  fieldName={'Mechanisms'}/>
-        		    </Col>
-        		    <Col xs={6} sm={4}>
+
+            <Grid>
+              <Row>
+                <Col xs={12} className='card-nest'>
+                <Well bsSize='small' className='card-contexts'>
                   <RelationshipList
-                    items={data.functions}
+                    items={data.context}
                     editable={this.props.editable}
                     titleField='name'
-                    onAdd={this.props.onRelationshipAdd.bind(null, 'functions')}
-                    onRemove={this.props.onRelationshipRemove.bind(null, 'functions')}
-                    field={'fm'}
-                    routeName={'fm'}
-                    title={'Functions'}
-                    fieldName={'Functions'}/>
-        		    </Col>
-          		</Row>
-       	    </Grid>
+                    onAdd={this.props.onRelationshipAdd.bind(null, 'context')}
+                    onRemove={this.props.onRelationshipRemove.bind(null, 'context')}
+                    field={'context'}
+                    routeName={'context'}
+                    title='Key Contexts'
+                    fieldName={'Contexts'}
+                    narrow />
+                  <Well bsSize='small' className='card-systems'>
+                  <Row>
+                    <Col xs={12} sm={4}>
+                      <RelationshipList
+                        items={data.living_systems}
+                        editable={this.props.editable}
+                        titleField={'name'}
+                        onAdd={this.props.onRelationshipAdd.bind(null, 'living_systems')}
+                        onRemove={this.props.onRelationshipRemove.bind(null, 'living_systems')}
+                        field={'b.system'}
+                        routeName={'b.system'}
+                        title={'Biological Systems'}
+                        fieldName={'Biological Systems'}/>
+                    </Col>
+                    <Col xs={12} sm={8}>
+                      <Well bsSize='small' className='card-fms'>
+                        <div className='arrow'></div>
+                        <Row>
+                        <Col xs={12} sm={6}>
+                          <RelationshipList
+                            items={data.mechanisms}
+                            editable={this.props.editable}
+                            titleField='name'
+                            onAdd={this.props.onRelationshipAdd.bind(null,'mechanisms')}
+                            onRemove={this.props.onRelationshipRemove.bind(null, 'mechanisms')}
+                            field={'fm'}
+                            routeName={'fm'}
+                            title={'Mechanisms'}
+                            fieldName={'Mechanisms'}/>
+                        </Col>
+                        <Col xs={12} sm={6}>
+                          <RelationshipList
+                            items={data.functions}
+                            editable={this.props.editable}
+                            titleField='name'
+                            onAdd={this.props.onRelationshipAdd.bind(null, 'functions')}
+                            onRemove={this.props.onRelationshipRemove.bind(null, 'functions')}
+                            field={'fm'}
+                            routeName={'fm'}
+                            title={'Functions'}
+                            fieldName={'Functions'}/>
+                        </Col>
+                        </Row>
+                      </Well>
+                    </Col>
+                  </Row>
+                  </Well>
+                </Well>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12}>
+                  <RelationshipList
+                    items={data.inspired_by}
+                    editable={this.props.editable}
+                    titleField='name'
+                    onAdd={this.props.onRelationshipAdd.bind(null, 'inspired_by')}
+                    onRemove={this.props.onRelationshipRemove.bind(null, 'inspired_by')}
+                    field={'d.strategy'}
+                    routeName={'d.strategy'}
+                    title={'Bio-inspired Strategies'}
+                    fieldName={'Bio-inspired Strategies'}/>
+    				    </Col>
+              </Row>
+            </Grid>
+
   	        <Grid>
 			        <Row>
+
 		            <Col xs={12}>
 
                     <Gallery items={data} title={data.name} windowHeight={this.props.windowHeight}/>
@@ -138,6 +172,8 @@ var Template = React.createClass({
 
 	              </Col>
               </Row>
+            </Grid>
+            <Grid>
               <Row>
 		            <Col xs={12} md={12}>
                   {data.brief || this.props.editable ? (
@@ -242,15 +278,25 @@ var Template = React.createClass({
     				    </Col>
     				    <Col xs={12} sm={6}>
                   <RelationshipList
-                    items={data.inspired_by}
+                    items={data.collections}
                     editable={this.props.editable}
                     titleField='name'
-                    onAdd={this.props.onRelationshipAdd.bind(null, 'inspired_by')}
-                    onRemove={this.props.onRelationshipRemove.bind(null, 'inspired_by')}
-                    field={'d.strategy'}
-                    routeName={'d.strategy'}
-                    title={'Bio-inspired Strategies'}
-                    fieldName={'Bio-inspired Strategies'}/>
+                    onAdd={this.props.onRelationshipAdd.bind(null, 'collections')}
+                    onRemove={this.props.onRelationshipRemove.bind(null, 'collections')}
+                    field={'collection'}
+                    routeName={'collection'}
+                    title={'Collections'}
+                    fieldName={'Collections'}/>
+                    <RelationshipList
+                      items={data.stories}
+                      editable={this.props.editable}
+                      titleField='name'
+                      onAdd={this.props.onRelationshipAdd.bind(null, 'stories')}
+                      onRemove={this.props.onRelationshipRemove.bind(null, 'stories')}
+                      field={'story'}
+                      routeName={'story'}
+                      title={'In Linked Articles'}
+                      fieldName={'In Linked Articles'}/>
     				    </Col>
 	            </Row>
         			<Row className='show-grid'>
