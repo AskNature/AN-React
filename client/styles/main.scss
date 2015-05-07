@@ -720,28 +720,25 @@ h4.card-name {
 .relationship-button {
   .btn {
     margin-bottom: 10px;
-    box-shadow: 1px 6px 15px rgba(0,0,0,0.08);
+    box-shadow: 0px 6px 20px rgba(0,0,0,0.04);
     height: auto;
     border: none;
     text-transform: none;
     text-align: left;
     padding: 0;
     &:hover {
-      box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.08);
     }
     &:focus {
       outline: 0;
     }
     .minihero {
       position: relative;
-      padding: 13px 15px;
+      padding: 3px 15px;
       height: auto;
-      min-height: 65px;
       background: #fff;
       border-radius: 3px;
-      >h6 {
-        margin-top: 0;
-      }
+
       img {
         float: left;
         margin-left: -15px;
@@ -858,7 +855,7 @@ Hero
 .hero {
     position: relative;
     height: 300px;
-    background: white no-repeat center center;
+    background: $primary-color no-repeat center center;
     background-size: cover;
     color: #fff;
     &:before {
@@ -868,14 +865,7 @@ Hero
       left: 0px;
       width: 100%;
       height: 100%;
-      background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 27%, rgba(0,0,0,0.7) 82%, rgba(0,0,0,0.7) 100%); /* FF3.6+ */
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(27%,rgba(0,0,0,0)), color-stop(82%,rgba(0,0,0,0.7)), color-stop(100%,rgba(0,0,0,0.7))); /* Chrome,Safari4+ */
-      background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 27%,rgba(0,0,0,0.7) 82%,rgba(0,0,0,0.7) 100%); /* Chrome10+,Safari5.1+ */
-      background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 27%,rgba(0,0,0,0.7) 82%,rgba(0,0,0,0.7) 100%); /* Opera 11.10+ */
-      background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 27%,rgba(0,0,0,0.7) 82%,rgba(0,0,0,0.7) 100%); /* IE10+ */
-      background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 27%,rgba(0,0,0,0.7) 82%,rgba(0,0,0,0.7) 100%); /* W3C */
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#b3000000',GradientType=0 ); /* IE6-9 */
-      background: rgba(0,0,0,0.3);
+      background: rgba(0,0,0,.3);
 
     }
     .headline {
