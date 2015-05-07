@@ -78,7 +78,7 @@ var Template = React.createClass({
                   <Well bsSize='small' className='card-fms'>
                     <div className='arrow'></div>
                     <Row>
-                    <Col xs={12} sm={6}>
+                    <Col xs={6}>
                       <RelationshipList
                         items={data.mechanisms}
                         editable={this.props.editable}
@@ -90,7 +90,7 @@ var Template = React.createClass({
                         title={'Mechanisms'}
                         fieldName={'Mechanisms'}/>
                     </Col>
-                    <Col xs={12} sm={6}>
+                    <Col xs={6}>
                       <RelationshipList
                         items={data.functions}
                         editable={this.props.editable}
