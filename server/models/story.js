@@ -19,7 +19,7 @@ var Expert = new Model('Expert',
 );
 
 
-var Source = new Model('Sources',
+var Source = new Model('Source',
   [
     'name',
     'publication_year',

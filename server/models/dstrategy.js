@@ -74,7 +74,7 @@ var Strategy = new Model('Strategies',
         'summary'
     ]
 );
-var Source = new Model('Sources',
+var Source = new Model('Source',
     [
         'name',
         'publication_year',

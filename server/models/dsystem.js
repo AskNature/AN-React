@@ -43,7 +43,7 @@ var Status = new Model('ContentStatus',
       'name'
   ]
 );
-var Source = new Model('Sources',
+var Source = new Model('Source',
     [
         'name',
         'publication_year',
