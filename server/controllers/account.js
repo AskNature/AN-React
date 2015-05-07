@@ -175,7 +175,8 @@ var returnAccount = function(req, res, next) {
                 password: req.user.password,
                 role: req.user.role,
                 loggedIn: true,
-                status: u.status
+                status: u.status,
+		photo: u.photo
             });
         });
     } else {

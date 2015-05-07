@@ -4,7 +4,7 @@ var ListOptions = require('./constants/listoptions');
 
 var entityName = 'PassportUser';
 
-var fields = ['username', 'firstName', 'lastName', 'email', 'role', 'provider', 'password', 'passwordToken', 'passwordReset', 'verified', 'verifyToken', 'id'];
+var fields = ['username', 'firstName', 'lastName', 'email', 'role', 'provider', 'password', 'passwordToken', 'passwordReset', 'verified', 'verifyToken', 'id', 'photo'];
 
 var Status = new Model('UserStatus',
   [

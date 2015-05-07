@@ -18,6 +18,7 @@ var externalLoginFunc = function(database) { return function(accessToken, refres
                     firstName: profile.name.givenName,
                     lastName: profile.name.familyName,
                     email: profile.emails[0].value,
+		    photo: photos.length > 0 ? photos[0].value : '',
                     provider: profile.provider,
 		    role: 'user',
                     password: '',
