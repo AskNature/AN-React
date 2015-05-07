@@ -5,7 +5,7 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Story';
 
-var fields = ['name', 'description', 'source_url', 'timestamp', 'temp_insight', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'description', 'source_url', 'timestamp', 'temp_insight', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo'];
 
 
 // Models to link
