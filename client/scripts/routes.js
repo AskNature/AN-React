@@ -31,13 +31,15 @@ var AccountReset = React.createFactory(require('./components/account/reset.jsx')
 
 var Infinite = React.createFactory(require('./components/demo/infinite.jsx'));
 
+var NewSearch = React.createFactory(require('./components/layouts/new.jsx'));
+
 
 var render = function(Page, props) {
     React.render(new Page(props), document.getElementById('app-wrapper'));
 };
 
 var index = function() {
-    render(IndexPage);
+    render(NewSearch);
 };
 
 var list_component = function(type) {
@@ -146,6 +148,10 @@ var infinite_demo = function(query, id) {
     render(Infinite, {masterid: id, query: query});
 };
 
+var new_search = function(query, type, id) {
+    render(NewSearch, {query: decodeURI(query), masterid: id, type: type});
+};
+
 
 var routes = {
   '/': index,
@@ -154,6 +160,14 @@ var routes = {
 
 // How do we change the second '/' into another colon?? Remember that we're aiming for a path that contains a bunch of key/value pairs that look like: .../Type:masterid/...
   '/q/:type/:id': detail_component,
+
+  '/search': {
+      '/([^\/]+)\/([\\w-]+):([\\w-]+)': new_search,
+      '/([^\/]+)(?:[\/\\w-]+)?': new_search // TODO: handle improperly formatted URLs better
+  },
+
+  '/(?:query:)([^\/]+)\/([\\w-]+):([\\w-]+)': new_search,
+  '/(?:query:)([^\/]+)(?:[\/\\w-]+)?': new_search,
 
   '/b.strategy/:id': detail_bstrategy,
   '/d.strategy/:id': detail_dstrategy,
