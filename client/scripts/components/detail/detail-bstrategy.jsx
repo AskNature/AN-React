@@ -202,7 +202,7 @@ var Template = React.createClass({
 		              <Col xs={12} sm={6} >
                     <h6 className='heading'><Label>3</Label> Ideas & Insights</h6>
                     <ul className='design-insights media-list'>
-                      {data.application_1 ? (
+                      {data.application_1 || this.props.editable ? (
                         <li className='media'>
                           <div className='media-left media-middle'>
                             <a href='#'>
@@ -222,7 +222,7 @@ var Template = React.createClass({
                           </div>
                         </li>
                       ) : ''}
-                    {data.application_2 ? (
+                    {data.application_2 || this.props.editable ? (
                       <li className='media'>
                         <div className='media-left media-middle'>
                           <a href='#'>
@@ -242,7 +242,7 @@ var Template = React.createClass({
                         </div>
                       </li>
                     ) : ''}
-                    {data.application_3 ? (
+                    {data.application_3 || this.props.editable ? (
                       <li className='media'>
                         <div className='media-left media-middle'>
                           <a href='#'>
@@ -270,7 +270,7 @@ var Template = React.createClass({
                       </div>
                       <div className='media-body'>
                         <form>
-                          <Input type='text' className='input-sm' placeholder='Share Your Idea or Insight...' />
+                          <Input disabled type='text' className='input-sm' placeholder='Share Your Idea or Insight...' />
                         </form>
                       </div>
                     </li>
