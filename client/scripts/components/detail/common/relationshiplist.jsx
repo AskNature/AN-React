@@ -26,10 +26,6 @@ var RelationshipList = React.createClass({
     return (
       <div>
         <h6 className='heading heading-cards'>
-
-          <Label>
-            {this.props.items ? this.props.items.length : ''}
-          </Label>
           <OverlayTrigger placement="top" delayShow={300} delayHide={150} overlay={<Tooltip><strong>Term Definition</strong></Tooltip>}>
             <span> {this.props.title}</span>
           </OverlayTrigger>
