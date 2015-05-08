@@ -184,7 +184,7 @@ var RelationshipListItem = React.createClass({
       subTitle = this.props.item.description;
     }
     return (
-      <Col xs={12} sm={this.props.narrow ? 4 : 12}>
+      <Col xs={12} sm={this.props.narrow ? 4 : 12} className='relationship-column'>
         <ButtonToolbar className={'relationship-button' + (!this.props.item.flag_demo ? ' relationship-button--outside-demo' : '')}>
           <Button
             block

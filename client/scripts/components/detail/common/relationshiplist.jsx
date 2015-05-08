@@ -6,7 +6,6 @@ ListGroup = require('react-bootstrap').ListGroup,
 RelationshipListItem = require('./relationshiplistitem.jsx'),
 RelationshipListItemInput = require('./relationshiplistiteminput.jsx'),
 
-Row = require('react-bootstrap').Row,
 OverlayTrigger = require('react-bootstrap').OverlayTrigger,
 Tooltip = require('react-bootstrap').Tooltip,
 Label = require('react-bootstrap').Label;
@@ -25,12 +24,12 @@ var RelationshipList = React.createClass({
 
     return (
       <div>
-        <h6 className='heading heading-cards'>
+        <h6 className='heading'>
           <OverlayTrigger placement="top" delayShow={300} delayHide={150} overlay={<Tooltip><strong>Term Definition</strong></Tooltip>}>
-            <span> {this.props.title}</span>
+            <span>{this.props.title}</span>
           </OverlayTrigger>
         </h6>
-        <Row>
+
           {this.props.items ? this.props.items.map(function(item,i) {
             return <RelationshipListItem
               item={item}
@@ -40,11 +39,9 @@ var RelationshipList = React.createClass({
               editable={this.props.editable}
               titleField={item[this.props.titleField]}
               subtitleField={item[this.props.subtitleField]}
-              media={this.props.media}
-              narrow={this.props.narrow} />;
+              media={this.props.media} />;
             }, this) : ''
           }
-          </Row>
             <RelationshipListItemInput
               editable={this.props.editable}
               fieldName={this.props.fieldName}

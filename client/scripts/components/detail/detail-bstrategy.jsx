@@ -149,30 +149,28 @@ var Template = React.createClass({
     				    </Col>
               </Row>
             </Grid>
-
-  	        <Grid>
-			        <Row>
-
-		            <Col xs={12}>
-
-                    <Gallery items={data} title={data.name} windowHeight={this.props.windowHeight}/>
-                      {this.props.editable ? (
-                        <RelationshipList
-                          items={data.media}
-                          editable={this.props.editable}
-                          titleField='name'
-                          onAdd={this.props.onRelationshipAdd.bind(null, 'media')}
-                          onRemove={this.props.onRelationshipRemove.bind(null, 'media')}
-                          field={'media'}
-                          routeName={'media'}
-                          title={'Media'}
-                          fieldName={'Media'}
-                          media />
-                      ) : '' }
-
-	              </Col>
-              </Row>
-            </Grid>
+            {data.media && data.media.length > 0 || this.props.editable ? (
+    	        <Grid>
+  			        <Row>
+  		            <Col xs={12}>
+                      <Gallery items={data} title={data.name} windowHeight={this.props.windowHeight}/>
+                        {this.props.editable ? (
+                          <RelationshipList
+                            items={data.media}
+                            editable={this.props.editable}
+                            titleField='name'
+                            onAdd={this.props.onRelationshipAdd.bind(null, 'media')}
+                            onRemove={this.props.onRelationshipRemove.bind(null, 'media')}
+                            field={'media'}
+                            routeName={'media'}
+                            title={'Media'}
+                            fieldName={'Media'}
+                            media />
+                        ) : '' }
+  	              </Col>
+                </Row>
+              </Grid>
+            ) : ''}
             <Grid>
               <Row>
 		            <Col xs={12} md={12}>
@@ -200,7 +198,7 @@ var Template = React.createClass({
 	              </Row>
                 <Row className='show-grid'>
 		              <Col xs={12} sm={6} >
-                    <h6 className='heading'><Label>3</Label> Ideas & Insights</h6>
+                    <h6 className='heading'>Ideas & Insights</h6>
                     <ul className='design-insights media-list'>
                       {data.application_1 || this.props.editable ? (
                         <li className='media'>
@@ -295,8 +293,8 @@ var Template = React.createClass({
                       onRemove={this.props.onRelationshipRemove.bind(null, 'stories')}
                       field={'story'}
                       routeName={'story'}
-                      title={'In Linked Articles'}
-                      fieldName={'In Linked Articles'}/>
+                      title={'Related Links'}
+                      fieldName={'Related Links'}/>
     				    </Col>
 	            </Row>
         			<Row className='show-grid'>
