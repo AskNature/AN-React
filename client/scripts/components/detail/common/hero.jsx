@@ -71,7 +71,7 @@ var HeroLinkComponent = React.createClass({
           store={this.props.store}
           actions={this.props.actions}
           fieldName={this.props.secondarykey}
-          placeholder="Enter this link's source" />
+          placeholder="Enter the name of this link's source" />
       );
     return (
       /* jshint ignore:start */
@@ -99,17 +99,20 @@ var HeroLinkComponent = React.createClass({
     store={this.props.store}
     actions={this.props.actions}
     fieldName={this.props.primarylinkkey}
-    placeholder='Enter a link to this resource' />
+    placeholder='Enter a URL for this resource'
+    forceWrap
+    link
+    />
   : '' }
 
   <h2 style={{marginTop: '8px', marginBottom: 0, fontWeight: '800'}}>
     {!this.props.editable && this.props.primarylink ? (
       <a href={this.props.primarylink} target='_blank'>
-        {title}
+        {this.props.primarytitle}
       </a>
     ) : (
       <span>
-        {this.props.primarytitle}
+        {title}
       </span>
     ) }
   </h2>
