@@ -55,6 +55,24 @@ var HeroLinkComponent = React.createClass({
           </span>
         );
       }
+      var title = (
+        <TextArea
+          item={this.props.primarytitle}
+          editable={this.props.editable}
+          store={this.props.store}
+          actions={this.props.actions}
+          fieldName={this.props.primarykey}
+          placeholder='Add a title' />
+      );
+      var secondary_title = (
+        <TextArea
+          item={this.props.secondarytitle}
+          editable={this.props.editable}
+          store={this.props.store}
+          actions={this.props.actions}
+          fieldName={this.props.secondarykey}
+          placeholder="Enter this link's source" />
+      );
     return (
       /* jshint ignore:start */
       <div className={this.state.expanded || this.props.editable ? 'hero-link expanded' : 'hero-link'}>
@@ -74,37 +92,45 @@ var HeroLinkComponent = React.createClass({
   <h6 className='heading'>
     {this.props.label}
   </h6>
+  {this.props.editable ?
+  <TextArea
+    item={this.props.primarylink}
+    editable={this.props.editable}
+    store={this.props.store}
+    actions={this.props.actions}
+    fieldName={this.props.primarylinkkey}
+    placeholder='Enter a link to this resource' />
+  : '' }
+
   <h2 style={{marginTop: '8px', marginBottom: 0, fontWeight: '800'}}>
-      <a href={!this.props.editable && this.props.primarylink ? this.props.primarylink : '#'} target='_blank'>
-      <TextArea
-        item={this.props.primarytitle}
-        editable={this.props.editable}
-        store={this.props.store}
-        actions={this.props.actions}
-        fieldName={this.props.primarykey}
-        placeholder='Add a title' />
-    </a>
+    {!this.props.editable && this.props.primarylink ? (
+      <a href={this.props.primarylink} target='_blank'>
+        {title}
+      </a>
+    ) : (
+      <span>
+        {this.props.primarytitle}
+      </span>
+    ) }
   </h2>
   <h4 style={{marginTop:0}}>{shortDescription}
   </h4>
 
 <h5 style={{fontWeight: '400', color: '#999', marginTop: 0}}>
-  {!this.props.editable && this.props.secondarytitle ? (
-    <a href={this.props.secondarylink ? this.props.secondarylink : ''} target='_blank'>
-      {this.props.secondarytitle}
-    </a>
-  ) : (
-    <TextArea
-      item={this.props.secondarylink}
-      editable={this.props.editable}
-      store={this.props.store}
-      actions={this.props.actions}
-      fieldName={this.props.secondarykey}
-      placeholder='Enter a link to share' />
-  )
+  {!this.props.editable && this.props.primarylink ?
+      <a href={this.props.primarylink} target='_blank'>
+        {this.props.secondarytitle}
+      </a>
+     :
+     <span>
+       {secondary_title}
+     </span>
   }
 </h5>
 </Col>
+
+
+
           </Row>
           <Row className='hero-link-card hero-link-card-expansion'>
             <Col xs={12}>

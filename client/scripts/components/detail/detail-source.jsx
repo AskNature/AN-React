@@ -36,6 +36,7 @@ var Template = React.createClass({
     var data = this.props.data;
     var primaryKey = 'name';
     var secondaryKey = 'secondary_title';
+    var primaryLinkKey = 'url';
     var descriptionKey = 'abstract_excerpt';
     var addedby = data.added_by;
     var default_avatar = 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/10383663_869350803096314_2369845013213041061_n.png?oh=2c010ce055331caa73a9506795239fd1&oe=55BDD82A&__gda__=1433772443_f5c43498047b8193dccc0a5554ba6ed1';
@@ -48,14 +49,55 @@ var Template = React.createClass({
             entityName={entityName}
             primarytitle={data[primaryKey]}
             primarykey={primaryKey}
-            primarylink={data.url}
+            primarylink={data[primaryLinkKey]}
+            primarylinkkey={primaryLinkKey}
             secondarytitle={data[secondaryKey]}
             secondarykey={secondaryKey}
             description={data[descriptionKey]}
             descriptionKey={descriptionKey}
             />
 	        <Grid>
+            {data.authors || data.publication_year || data.publisher ? <hr/> : ''}
+            <Row>
 
+              {data.authors || this.props.editable ? (
+                <Col xs={12} sm={4}>
+                  <TextArea
+                    title='Author/s'
+                    item={data.authors}
+                    store={this.props.store}
+                    actions={this.props.actions}
+                    fieldName={'authors'}
+                    editable={this.props.editable}
+                    placeholder='Add authors' />
+                </Col>
+              ) : '' }
+              {data.publication_year || this.props.editable ? (
+                <Col xs={12} sm={4}>
+                  <TextArea
+                    title='Publication Year'
+                    item={data.publication_year}
+                    store={this.props.store}
+                    actions={this.props.actions}
+                    fieldName={'publication_year'}
+                    editable={this.props.editable}
+                    placeholder='Add year' />
+                </Col>
+              ) : '' }
+              {data.publisher || this.props.editable ? (
+                <Col xs={12} sm={4}>
+                  <TextArea
+                    title='Publisher'
+                    item={data.publisher}
+                    store={this.props.store}
+                    actions={this.props.actions}
+                    fieldName={'publisher'}
+                    editable={this.props.editable}
+                    placeholder='Add publisher' />
+                </Col>
+              ) : '' }
+              </Row>
+              {data.authors || data.publication_year || data.publisher ? <hr/> : ''}
               <Row>
                 <Col xs={12} className='card-nest'>
                 <Well bsSize='small' className='card-contexts'>
@@ -132,9 +174,6 @@ var Template = React.createClass({
               </Row>
 
 
-              <Row>
-
-	              </Row>
                 <Row className='show-grid'>
 		              <Col xs={12} sm={6}>
                     <RelationshipList
