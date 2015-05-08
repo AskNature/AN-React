@@ -47,7 +47,7 @@ var HeroLinkComponent = React.createClass({
         };
       }
       var shortDescription = this.props.description;
-      if(this.props.description.length >= 200){
+      if(shortDescription && shortDescription.length >= 200){
         shortDescription = (
           <span>
           {this.props.description.trunc(200,true)}
@@ -194,32 +194,32 @@ var HeroComponent = React.createClass({
                            />
                     )}
                   </h2>
-                  <h5 style={{fontWeight: '600', color: '#ffffff', fontStyle: 'italic', marginTop: 0}}>
-                    {!this.props.editable && this.props.secondarylink ? (
-                      <Link url={this.props.secondarylink}>
-                        <TextArea
+                  <h5 className='hero-secondary-title'>
+                    {this.props.secondaryprekey ?
+                          <TextArea
+                          item={this.props.secondarypretitle}
+                          editable={this.props.editable}
+                          store={this.props.store}
+                          actions={this.props.actions}
+                          fieldName={this.props.secondaryprekey}
+                          placeholder='Enter pretext' />
+                     : '' }
+                    {this.props.secondarykey ?
+                        <span style={this.props.type === 'b.system' ? {fontStyle: 'italic'} : {} } >
+                          <TextArea
                           item={this.props.secondarytitle}
                           editable={this.props.editable}
                           store={this.props.store}
                           actions={this.props.actions}
                           fieldName={this.props.secondarykey}
                           placeholder='Enter a subtitle' />
-                      </Link>
-                    ) : (
-                      this.props.secondarykey ?
-                      <TextArea
-                        item={this.props.secondarytitle}
-                        editable={this.props.editable}
-                        store={this.props.store}
-                        actions={this.props.actions}
-                        fieldName={this.props.secondarykey}
-                        placeholder='Enter a subtitle' />
-                      :
+                        </span>
+                     :
                       <TextArea
                         item={this.props.secondarytitle}
                         editable={false}
                        />
-                    ) }
+                     }
                   </h5>
                 </div>
               </div>
@@ -235,7 +235,7 @@ var HeroComponent = React.createClass({
 var Hero = React.createClass({
   render: function() {
     return (
-      this.props.type === 'Story' ? <HeroLinkComponent {...this.props} /> : <HeroComponent {...this.props} />
+      this.props.type === 'source' ? <HeroLinkComponent {...this.props} /> : <HeroComponent {...this.props} />
     );
   }
 });

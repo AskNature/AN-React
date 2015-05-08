@@ -54,7 +54,7 @@ var SubHero = React.createClass({
       <Grid>
         <Row>
           <Col xs={12} sm={8}>
-            {this.props.type != 'Story' ? (
+            {this.props.type != 'source' ? (
             <h4>
               {this.props.first ? (
                 <strong>

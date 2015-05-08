@@ -42,13 +42,15 @@ var TopSection = React.createClass({
           primarylink={this.props.primarylink}
           secondarytitle={this.props.secondarytitle}
           secondarykey={this.props.secondarykey}
+          secondarypretitle={this.props.secondaryPreTitle}
+          secondaryprekey={this.props.secondaryPreKey}
           secondarylink={this.props.secondarylink}
 	        name={this.props.data.name}
           masterid={this.props.masterid}
           innerimage={this.props.innerimage}
           imgurl={this.props.imgurl}
           description={this.props.description}
-          type={this.props.entityName}/>
+          type={this.props.routename}/>
         <SubHero
           description={this.props.description}
           descriptionlink={this.props.descriptionlink}
@@ -72,7 +74,7 @@ var TopSection = React.createClass({
           collaborators={this.props.data.collaborators}
           editorComments={this.props.data.editor_comments}
           flags={{'flagText':this.props.data.flag_text, 'flagMedia':this.props.data.flag_media,'flagTags':this.props.data.flag_tags, 'flagDemo':this.props.data.flag_demo}}
-          type={this.props.entityName}
+          type={this.props.routename}
           tempInsight={this.props.data.temp_insight}
           />
       </div>

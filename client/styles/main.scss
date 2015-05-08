@@ -950,6 +950,16 @@ Hero
       color: $white-color;
       padding-bottom:5px;
     }
+    h5 {
+      color: $white-color;
+      font-weight: 600;
+      margin-top: 0;
+      &.hero-secondary-title {
+        p, div, span {
+          display: inline;
+        }
+      }
+    }
     i {
         margin-left: 5px
     }
