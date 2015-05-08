@@ -55,7 +55,7 @@ var Expert = new Model('Expert',
     [
         'name',
         'institution',
-	'flag_demo'
+	       'flag_demo'
     ]
 );
 var Media = new Model('Media',
@@ -94,9 +94,9 @@ var relationships = {
   'studied_by': {
       model: Expert,
       className: 'Experts',
-      edge: 'in("StudiedBy")'
+      edge: 'out("StudiedBy")'
   },
-  'has_source': {
+  'sources': {
       model: Source,
       className: 'Source',
       edge: 'out("HasSource")'

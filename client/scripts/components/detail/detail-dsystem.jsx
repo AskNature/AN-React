@@ -94,11 +94,11 @@ var Template = React.createClass({
                 </Col>
                 <Col xs={6} sm={4}>
                   <RelationshipList
-                    items={data.has_source}
+                    items={data.sources}
                     editable={this.props.editable}
                     titleField='name'
-                    onAdd={this.props.onRelationshipAdd.bind(null, 'out_featuredin')}
-                    onRemove={this.props.onRelationshipRemove.bind(null, 'out_featuredin')}
+                    onAdd={this.props.onRelationshipAdd.bind(null, 'sources')}
+                    onRemove={this.props.onRelationshipRemove.bind(null, 'sources')}
                     field={'source'}
                     routeName={'source'}
                     title={'Sources'}
@@ -108,8 +108,8 @@ var Template = React.createClass({
                       items={data.studied_by}
                       editable={this.props.editable}
                       titleField='name'
-                      onAdd={this.props.onRelationshipAdd.bind(null, 'out_studiedby')}
-                      onRemove={this.props.onRelationshipRemove.bind(null, 'out_studiedby')}
+                      onAdd={this.props.onRelationshipAdd.bind(null, 'studied_by')}
+                      onRemove={this.props.onRelationshipRemove.bind(null, 'studied_by')}
                       field={'researcher'}
                       routeName={'researcher'}
                       title={'R&D Teams'}
