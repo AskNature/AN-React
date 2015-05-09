@@ -49,6 +49,7 @@ var Template = React.createClass({
           <Row>
             <Col xs={12} className='card-nest'>
             <Well bsSize='small' className='card-contexts'>
+              <Row>
               <RelationshipList
                 items={data.context}
                 editable={this.props.editable}
@@ -60,6 +61,7 @@ var Template = React.createClass({
                 title='Key Contexts'
                 fieldName={'Contexts'}
                 narrow />
+            </Row>
               <Well bsSize='small' className='card-systems'>
               <Row>
                 <Col xs={12} sm={4}>
