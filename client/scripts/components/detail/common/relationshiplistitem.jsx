@@ -123,7 +123,7 @@ var RelationshipListItem = React.createClass({
           'displayName' : 'Context',
           'route' : 'context'
         },
-        'Function' :
+      'Function' :
           {
             'displayName' : 'Function & Mechanism',
             'route' : 'fm'
@@ -142,6 +142,41 @@ var RelationshipListItem = React.createClass({
         {
           'displayName' : 'Original User',
           'route' : '1user'
+        },
+      'DSystem' :
+        {
+          'displayName' : 'Bio-inspired System',
+          'route' : 'd.system'
+        },
+      'BSystem' :
+        {
+          'displayName' : 'Biological System',
+          'route' : 'b.system'
+        },
+      'Expert' :
+        {
+          'displayName' : 'R&D Team',
+          'route' : 'researcher'
+        },
+      'Collection' :
+        {
+          'displayName' : 'Collection',
+          'route' : 'collection'
+        },
+      'Media' :
+        {
+          'displayName' : 'Media',
+          'route' : 'media'
+        },
+      'Image' :
+        {
+          'displayName' : 'Media: Image',
+          'route' : 'media'
+        },
+      'Default' :
+        {
+          'displayName' : '',
+          'route' : 'content'
         }
     };
     var lations;
@@ -157,8 +192,22 @@ var RelationshipListItem = React.createClass({
       lations = trans.Story;
     } else if(classname === 'Source') {
       lations = trans.Sources;
+    } else if(classname === 'Experts') {
+       lations = trans.Expert;
     } else if(classname === 'Users') {
       lations = trans.User;
+    } else if(classname === 'LivingSystem') {
+      lations = trans.BSystem;
+    } else if(classname === 'Dsystem') {
+      lations = trans.DSystem;
+    } else if(classname === 'Image') {
+      lations = trans.Image;
+    } else if(classname === 'Media') {
+      lations = trans.Media;
+    } else if(classname === 'Collection') {
+      lations = trans.Collection;
+    } else {
+      lations = trans.Default;
     }
     return lations;
   },
@@ -168,7 +217,7 @@ var RelationshipListItem = React.createClass({
     var routeName, itemLabel;
     if(this.props.routeName) {
       routeName = this.props.routeName;
-    } else if(this.props.item['@class']){
+    } else if(this.props.item['@class'] && this.props.item.length > 0){
       var translations = this.classTranslator(this.props.item['@class']);
       routeName = translations.route;
       itemLabel = translations.displayName;

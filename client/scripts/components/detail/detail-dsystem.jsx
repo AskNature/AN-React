@@ -117,29 +117,32 @@ var Template = React.createClass({
                 </Col>
               </Row>
              </Grid>
-             <Grid>
-               <Row>
-                 <Col xs={12}>
 
-                   <Gallery items={data} title={data.name} windowHeight={this.props.windowHeight}/>
-                       {this.props.editable ? (
-                         <RelationshipList
-                           items={data.media}
-                           editable={this.props.editable}
-                           titleField='name'
-                           onAdd={this.props.onRelationshipAdd.bind(null, 'media')}
-                           onRemove={this.props.onRelationshipRemove.bind(null, 'media')}
-                           field={'media'}
-                           routeName={'media'}
-                           title={'Media'}
-                           fieldName={'Media'}
-                           media />
-                       ) : '' }
+             {data.media && data.media.length > 0 || this.props.editable ? (
+               <Grid>
+                 <Row>
+                   <Col xs={12}>
+                       <Gallery items={data} title={data.name} windowHeight={this.props.windowHeight}/>
 
-                 </Col>
-               </Row>
-             </Grid>
-
+                   </Col>
+                   {this.props.editable ? (
+                     <Col xs={12}>
+                       <RelationshipList
+                         items={data.media}
+                         editable={this.props.editable}
+                         titleField='name'
+                         onAdd={this.props.onRelationshipAdd.bind(null, 'media')}
+                         onRemove={this.props.onRelationshipRemove.bind(null, 'media')}
+                         field={'media'}
+                         routeName={'media'}
+                         title={'Media'}
+                         fieldName={'Media'}
+                         media />
+                     </Col>
+                   ) : '' }
+                 </Row>
+               </Grid>
+             ) : ''}
       </div>
       /* jshint ignore:end */
     );

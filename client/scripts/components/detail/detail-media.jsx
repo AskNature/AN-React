@@ -175,20 +175,21 @@ var Template = React.createClass({
                 </Col>
               </Row>
               <hr/>
-
+{this.props.editable || data.has_media ?
               <Row>
                 <Col xs={12}>
                   <RelationshipList
                     items={data.has_media}
-                    editable={this.props.editable}
+                    editable={false}
                     onAdd={this.props.onRelationshipAdd.bind(null, 'has_media')}
                     onRemove={this.props.onRelationshipRemove.bind(null, 'has_media')}
-                    field={'Content'}
+                    field={'V'}
                     title={'Displayed as Media in'}
                     fieldName={'Displayed as Media in'}
                     titleField={'name'} />
                   </Col>
                 </Row>
+                : '' }
               </Grid>
 
 
