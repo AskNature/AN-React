@@ -145,7 +145,7 @@ var RelationshipListItem = React.createClass({
         },
       'DSystem' :
         {
-          'displayName' : 'Bio-inspired System',
+          'displayName' : 'Designed System',
           'route' : 'd.system'
         },
       'BSystem' :
@@ -198,7 +198,7 @@ var RelationshipListItem = React.createClass({
       lations = trans.User;
     } else if(classname === 'LivingSystem') {
       lations = trans.BSystem;
-    } else if(classname === 'Dsystem') {
+    } else if(classname === 'DSystem') {
       lations = trans.DSystem;
     } else if(classname === 'Image') {
       lations = trans.Image;
@@ -217,7 +217,7 @@ var RelationshipListItem = React.createClass({
     var routeName, itemLabel;
     if(this.props.routeName) {
       routeName = this.props.routeName;
-    } else if(this.props.item['@class'] && this.props.item.length > 0){
+    } else if(this.props.item['@class'] ){
       var translations = this.classTranslator(this.props.item['@class']);
       routeName = translations.route;
       itemLabel = translations.displayName;
