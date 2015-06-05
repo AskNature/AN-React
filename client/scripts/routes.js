@@ -50,9 +50,9 @@ var list_component = function(type) {
         list = DStrategyList;
     } else if(type === 'fm') {
         list = FMList;
-    } else if(type === 'users') {
+    } else if(type === 'user') {
         list = UserList;
-    } else if(type === 'collections') {
+    } else if(type === 'collection') {
         list = CollectionList;
     } else if(type === 'context') {
         list = ContextList;
@@ -62,11 +62,11 @@ var list_component = function(type) {
         list = DSystemList;
     } else if(type === 'media') {
         list = MediaList;
-    } else if(type === 'researchers') {
+    } else if(type === 'researcher') {
         list = ResearcherList;
-    } else if(type === 'sources') {
+    } else if(type === 'source') {
         list = SourceList;
-    } else if(type === '1users') {
+    } else if(type === '1user') {
         list = OneUserList;
     } else if(type === 'story') {
         list = StoryList;
@@ -103,20 +103,20 @@ var detail_context = function(id) {
 };
 
 var detail_source = function(id) {
-    render(DetailComponent, {masterid: id, type: 'sources'});
+    render(DetailComponent, {masterid: id, type: 'source'});
 };
 
 var detail_researcher = function(id) {
-    render(DetailComponent, {masterid: id, type: 'researchers'});};
+    render(DetailComponent, {masterid: id, type: 'researcher'});};
 
 var detail_collection = function(id) {
-    render(DetailComponent, {masterid: id, type: 'collections'});};
+    render(DetailComponent, {masterid: id, type: 'collection'});};
 
 var detail_user = function(id) {
-    render(DetailComponent, {masterid: id, type: 'users'});};
+    render(DetailComponent, {masterid: id, type: 'user'});};
 
 var detail_1user = function(id) {
-    render(DetailComponent, {masterid: id, type: '1users'});};
+    render(DetailComponent, {masterid: id, type: '1user'});};
 
 var detail_media = function(id) {
     render(DetailComponent, {masterid: id, type: 'media'});};

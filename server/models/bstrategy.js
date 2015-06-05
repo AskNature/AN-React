@@ -18,7 +18,7 @@ var Expert = new Model('Expert',
 );
 
 
-var Source = new Model('Sources',
+var Source = new Model('Source',
   [
     'name',
     'publication_year',
@@ -29,7 +29,8 @@ var Source = new Model('Sources',
 var Entity = new Model('Entity',
   [
     'name',
-    'flag_demo'
+    'flag_demo',
+    '@class'
   ]
 );
 var License = new Model('License',
@@ -60,7 +61,7 @@ var Media = new Model('Media',
     'source_url',
     'author'
   ],
-  // NOTE: this doesn't return values: 
+  // NOTE: this doesn't return values:
   {'out_HasLicense':
     {
       model: License,
@@ -140,6 +141,11 @@ var relationships = {
 	className: 'Sources',
 	edge: 'out("HasSource")'
     },
+    'stories': {
+	model: Entity,
+	className: 'Story',
+	edge: 'in("HasBStrategy")'
+    },
     'functions': {
 	model: Entity,
 	className: 'Function',
@@ -150,10 +156,10 @@ var relationships = {
 	className: 'Experts',
 	edge: 'out("StudiedBy")'
     },
-    'collectors': {
-	model: User,
-	className: 'Users',
-	edge: 'in("Bookmarked")'
+    'collections': {
+	model: Entity,
+	className: 'Content',
+	edge: 'out("InCollection")'
     },
     'media': {
 	model: Media,

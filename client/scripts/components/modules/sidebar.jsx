@@ -52,7 +52,7 @@ var listItems = [
     },
     {
         'label' : 'Collections',
-        'slug' : 'collections',
+        'slug' : 'collection',
         'faIcon' : 'bookmark'
     },
     {
@@ -65,7 +65,7 @@ var listItems = [
     },
     {
         'label' : 'Sources',
-        'slug' : 'sources',
+        'slug' : 'source',
         'faIcon' : 'book'
     },
     {
@@ -75,7 +75,7 @@ var listItems = [
     },
     {
         'label' : 'R&D Teams',
-        'slug' : 'researchers',
+        'slug' : 'researcher',
         'faIcon' : 'university'
     },
     {
@@ -104,12 +104,12 @@ var listItems = [
     },
     {
         'label' : 'Original Users',
-        'slug' : '1users',
+        'slug' : '1user',
         'faIcon' : 'users'
     },
     {
         'label' : 'Updated Users',
-        'slug' : 'users',
+        'slug' : 'user',
         'faIcon' : 'users'
     },
     {
@@ -148,7 +148,7 @@ var selectItems = [
     },
     {
         'label' : 'Biological Systems',
-        'slug' : 'b.system',
+        'slug' : '#',
         'faIcon' : 'tree',
     },
     {
@@ -168,7 +168,7 @@ var selectItems = [
     },
     {
         'label' : 'Collections',
-        'slug' : 'collections',
+        'slug' : 'collection',
         'faIcon' : 'bookmark'
     },
     {
@@ -178,17 +178,17 @@ var selectItems = [
     },
     {
         'label' : 'Sources',
-        'slug' : 'sources',
+        'slug' : 'source',
         'faIcon' : 'book'
     },
     {
         'label' : 'R&D Teams',
-        'slug' : 'researchers',
+        'slug' : 'researcher',
         'faIcon' : 'university'
     },
     {
         'label' : 'Original Users',
-        'slug' : '1users',
+        'slug' : '1user',
         'faIcon' : 'users'
     }
 

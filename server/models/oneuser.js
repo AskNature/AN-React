@@ -21,9 +21,14 @@ var Status = new Model('UserStatus',
 );
 var Media = new Model('Media',
   [
-    'masterid',
     'filename',
-    'entity'
+    'name',
+    'entity',
+    'description',
+    'media_url',
+    'flag_demo',
+    'source_url',
+    'author'
   ]
 );
 
@@ -34,10 +39,25 @@ var relationships = {
       className: 'Users',
       edge: 'out("Friends")'
       },
+      'bookmarked': {
+          model: Entity,
+          className: 'V',
+          edge: 'out("Bookmarked")'
+          },
       'media': {
       model: Media,
       className: 'Media',
      edge: 'out("HasMedia")'
+      },
+      'added_media': {
+      model: Media,
+      className: 'Media',
+     edge: 'out("AddedMedia")'
+      },
+      'added_content': {
+      model: Entity,
+      className: 'Content',
+     edge: 'out("AddedContent")'
       },
       'status': {
         model: Status,

@@ -54,7 +54,7 @@ var SubHero = React.createClass({
       <Grid>
         <Row>
           <Col xs={12} sm={8}>
-            {this.props.type != 'Story' ? (
+            {this.props.type != 'source' ? (
             <h4>
               {this.props.first ? (
                 <strong>
@@ -88,7 +88,7 @@ var SubHero = React.createClass({
           ) :
           <Row>
             <Col xs={12}>
-              <h6 className='heading'><Label>1</Label> Insights & Ideas</h6>
+              <h6 className='heading'>Insights & Ideas</h6>
               <ul className='design-insights media-list'>
 
                   <li className='media'>

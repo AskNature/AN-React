@@ -149,11 +149,11 @@ var DetailComponent = React.createClass({
           Template = DStrategyDetail;
         } else if(this.props.type === 'fm') {
           Template = FMDetail;
-        } else if(this.props.type === 'users') {
+        } else if(this.props.type === 'user') {
           Template = UserDetail;
-        }  else if(this.props.type === '1users') {
+        }  else if(this.props.type === '1user') {
             Template = OneUserDetail;
-        } else if(this.props.type === 'collections') {
+        } else if(this.props.type === 'collection') {
           Template = CollectionDetail;
         } else if(this.props.type === 'context') {
           Template = ContextDetail;
@@ -163,9 +163,9 @@ var DetailComponent = React.createClass({
           Template = DSystemDetail;
         } else if(this.props.type === 'media') {
           Template = MediaDetail;
-        } else if(this.props.type === 'researchers') {
+        } else if(this.props.type === 'researcher') {
           Template = ResearcherDetail;
-        } else if(this.props.type === 'sources') {
+        } else if(this.props.type === 'source') {
           Template = SourceDetail;
         } else if(this.props.type === 'story') {
           Template = StoryDetail;

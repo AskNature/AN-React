@@ -6,7 +6,7 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'InspiredSolutions';
 
-var fields = ['name', 'description', 'system', 'summary', 'challenges_solved', 'how_is_it_different', 'biomimicry_story', 'product_type', 'patent_name', 'availability', 'company', 'phase', 'patent_number', 'company_website', 'strategy', 'consumer_products', 'keywords', 'timestamp', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'description', 'system', 'summary', 'challenges_solved', 'how_is_it_different', 'biomimicry_story', 'product_type', 'patent_name', 'availability', 'company', 'phase', 'patent_number', 'company_website', 'strategy', 'consumer_products', 'keywords', 'timestamp', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo'];
 
 var License = new Model('License',
   [
@@ -74,7 +74,7 @@ var Strategy = new Model('Strategies',
         'summary'
     ]
 );
-var Source = new Model('Sources',
+var Source = new Model('Source',
     [
         'name',
         'publication_year',
