@@ -24,18 +24,16 @@ var RelationshipList = React.createClass({
 
     return (
       <div>
-        <h6 className='heading heading-cards'>
-
-          <Label>
-            {this.props.items ? this.props.items.length : ''}
-          </Label>
+        <h6 className='heading'>
           <OverlayTrigger placement="top" delayShow={300} delayHide={150} overlay={<Tooltip><strong>Term Definition</strong></Tooltip>}>
-            <span> {this.props.title}</span>
+            <span>{this.props.title}</span>
           </OverlayTrigger>
         </h6>
 
           {this.props.items ? this.props.items.map(function(item,i) {
-            return <RelationshipListItem
+            return (
+
+              <RelationshipListItem
               item={item}
               routeName={this.props.routeName}
               key={i}
@@ -43,7 +41,10 @@ var RelationshipList = React.createClass({
               editable={this.props.editable}
               titleField={item[this.props.titleField]}
               subtitleField={item[this.props.subtitleField]}
-              media={this.props.media} />;
+              media={this.props.media}
+              narrow={this.props.narrow} />
+
+            );
             }, this) : ''
           }
             <RelationshipListItemInput
@@ -55,7 +56,7 @@ var RelationshipList = React.createClass({
 
       </div>
     );
-  
+
   }
 });
 

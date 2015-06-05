@@ -14,7 +14,11 @@ var Media = new Model('Media',
     'filename',
     'name',
     'entity',
-    'description'
+    'description',
+    'media_url',
+    'flag_demo',
+    'source_url',
+    'author'
   ]
 );
 var User = new Model('Users',
@@ -89,8 +93,13 @@ var relationships = {
 	model: User,
 	className: 'Users',
 	edge: 'in("CollaboratedOn")'
-    }
-
+},
+'media':
+  {
+    model: Media,
+    className: 'Image',
+    edge:'out("HasMedia")'
+  }
 };
 
 var data = new Model(entityName, fields, relationships);

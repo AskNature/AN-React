@@ -12,6 +12,7 @@ FontAwesome = require('react-fontawesome'),
 OverlayTrigger = require('react-bootstrap').OverlayTrigger,
 Tooltip = require('react-bootstrap').Tooltip,
 
+Col = require('react-bootstrap').Col,
 Glyphicon = require('react-bootstrap').Glyphicon,
 Button = require('react-bootstrap').Button,
 ButtonToolbar = require('react-bootstrap').ButtonToolbar,
@@ -122,7 +123,7 @@ var RelationshipListItem = React.createClass({
           'displayName' : 'Context',
           'route' : 'context'
         },
-        'Function' :
+      'Function' :
           {
             'displayName' : 'Function & Mechanism',
             'route' : 'fm'
@@ -141,6 +142,41 @@ var RelationshipListItem = React.createClass({
         {
           'displayName' : 'Original User',
           'route' : '1user'
+        },
+      'DSystem' :
+        {
+          'displayName' : 'Designed System',
+          'route' : 'd.system'
+        },
+      'BSystem' :
+        {
+          'displayName' : 'Biological System',
+          'route' : 'b.system'
+        },
+      'Expert' :
+        {
+          'displayName' : 'R&D Team',
+          'route' : 'researcher'
+        },
+      'Collection' :
+        {
+          'displayName' : 'Collection',
+          'route' : 'collection'
+        },
+      'Media' :
+        {
+          'displayName' : 'Media',
+          'route' : 'media'
+        },
+      'Image' :
+        {
+          'displayName' : 'Media: Image',
+          'route' : 'media'
+        },
+      'Default' :
+        {
+          'displayName' : '',
+          'route' : 'content'
         }
     };
     var lations;
@@ -156,8 +192,22 @@ var RelationshipListItem = React.createClass({
       lations = trans.Story;
     } else if(classname === 'Source') {
       lations = trans.Sources;
+    } else if(classname === 'Experts') {
+       lations = trans.Expert;
     } else if(classname === 'Users') {
       lations = trans.User;
+    } else if(classname === 'LivingSystem') {
+      lations = trans.BSystem;
+    } else if(classname === 'DSystem') {
+      lations = trans.DSystem;
+    } else if(classname === 'Image') {
+      lations = trans.Image;
+    } else if(classname === 'Media') {
+      lations = trans.Media;
+    } else if(classname === 'Collection') {
+      lations = trans.Collection;
+    } else {
+      lations = trans.Default;
     }
     return lations;
   },
@@ -167,7 +217,7 @@ var RelationshipListItem = React.createClass({
     var routeName, itemLabel;
     if(this.props.routeName) {
       routeName = this.props.routeName;
-    } else if(this.props.item['@class']){
+    } else if(this.props.item['@class'] ){
       var translations = this.classTranslator(this.props.item['@class']);
       routeName = translations.route;
       itemLabel = translations.displayName;
@@ -183,6 +233,7 @@ var RelationshipListItem = React.createClass({
       subTitle = this.props.item.description;
     }
     return (
+      <Col xs={12} sm={this.props.narrow ? 4 : 12} className='relationship-column'>
         <ButtonToolbar className={'relationship-button' + (!this.props.item.flag_demo ? ' relationship-button--outside-demo' : '')}>
           <Button
             block
@@ -197,9 +248,11 @@ var RelationshipListItem = React.createClass({
               thumbs={this.props.item} link={this.clickHandler.bind(null,link)} masterid={item.masterid}
               showOverlay={this.state.showOptions}
               remove={this.props.onRemove.bind(null,item)}
-              editable={this.props.editable} />
+              editable={this.props.editable}
+              narrow={this.props.narrow} />
           </Button>
         </ButtonToolbar>
+      </Col>
     );
   }
 });

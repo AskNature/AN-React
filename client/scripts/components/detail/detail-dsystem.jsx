@@ -94,11 +94,11 @@ var Template = React.createClass({
                 </Col>
                 <Col xs={6} sm={4}>
                   <RelationshipList
-                    items={data.has_source}
+                    items={data.sources}
                     editable={this.props.editable}
                     titleField='name'
-                    onAdd={this.props.onRelationshipAdd.bind(null, 'out_featuredin')}
-                    onRemove={this.props.onRelationshipRemove.bind(null, 'out_featuredin')}
+                    onAdd={this.props.onRelationshipAdd.bind(null, 'sources')}
+                    onRemove={this.props.onRelationshipRemove.bind(null, 'sources')}
                     field={'source'}
                     routeName={'source'}
                     title={'Sources'}
@@ -108,8 +108,8 @@ var Template = React.createClass({
                       items={data.studied_by}
                       editable={this.props.editable}
                       titleField='name'
-                      onAdd={this.props.onRelationshipAdd.bind(null, 'out_studiedby')}
-                      onRemove={this.props.onRelationshipRemove.bind(null, 'out_studiedby')}
+                      onAdd={this.props.onRelationshipAdd.bind(null, 'studied_by')}
+                      onRemove={this.props.onRelationshipRemove.bind(null, 'studied_by')}
                       field={'researcher'}
                       routeName={'researcher'}
                       title={'R&D Teams'}
@@ -117,29 +117,32 @@ var Template = React.createClass({
                 </Col>
               </Row>
              </Grid>
-             <Grid>
-               <Row>
-                 <Col xs={12}>
 
-                   <Gallery items={data} title={data.name} windowHeight={this.props.windowHeight}/>
-                       {this.props.editable ? (
-                         <RelationshipList
-                           items={data.media}
-                           editable={this.props.editable}
-                           titleField='name'
-                           onAdd={this.props.onRelationshipAdd.bind(null, 'media')}
-                           onRemove={this.props.onRelationshipRemove.bind(null, 'media')}
-                           field={'media'}
-                           routeName={'media'}
-                           title={'Media'}
-                           fieldName={'Media'}
-                           media />
-                       ) : '' }
+             {data.media && data.media.length > 0 || this.props.editable ? (
+               <Grid>
+                 <Row>
+                   <Col xs={12}>
+                       <Gallery items={data} title={data.name} windowHeight={this.props.windowHeight}/>
 
-                 </Col>
-               </Row>
-             </Grid>
-
+                   </Col>
+                   {this.props.editable ? (
+                     <Col xs={12}>
+                       <RelationshipList
+                         items={data.media}
+                         editable={this.props.editable}
+                         titleField='name'
+                         onAdd={this.props.onRelationshipAdd.bind(null, 'media')}
+                         onRemove={this.props.onRelationshipRemove.bind(null, 'media')}
+                         field={'media'}
+                         routeName={'media'}
+                         title={'Media'}
+                         fieldName={'Media'}
+                         media />
+                     </Col>
+                   ) : '' }
+                 </Row>
+               </Grid>
+             ) : ''}
       </div>
       /* jshint ignore:end */
     );

@@ -6,14 +6,18 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'DSystem';
 
-var fields = ['name', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo', 'description'];
+var fields = ['name', 'description', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo'];
 
 var Media = new Model('Media',
   [
     'filename',
     'name',
     'entity',
-    'description'
+    'description',
+    'media_url',
+    'flag_demo',
+    'source_url',
+    'author'
   ]
 );
 var User = new Model('Users',
@@ -34,6 +38,7 @@ var User = new Model('Users',
 var Entity = new Model('Entity',
     [
         'name',
+        '@class',
 	'flag_demo'
     ]
 );
@@ -43,7 +48,7 @@ var Status = new Model('ContentStatus',
       'name'
   ]
 );
-var Source = new Model('Sources',
+var Source = new Model('Source',
     [
         'name',
         'publication_year',
@@ -55,16 +60,8 @@ var Expert = new Model('Expert',
     [
         'name',
         'institution',
-	'flag_demo'
+	       'flag_demo'
     ]
-);
-var Media = new Model('Media',
-  [
-    'filename',
-    'name',
-    'entity',
-    'description'
-  ]
 );
 
 
@@ -94,9 +91,9 @@ var relationships = {
   'studied_by': {
       model: Expert,
       className: 'Experts',
-      edge: 'in("StudiedBy")'
+      edge: 'out("StudiedBy")'
   },
-  'has_source': {
+  'sources': {
       model: Source,
       className: 'Source',
       edge: 'out("HasSource")'

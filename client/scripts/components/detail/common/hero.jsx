@@ -47,7 +47,7 @@ var HeroLinkComponent = React.createClass({
         };
       }
       var shortDescription = this.props.description;
-      if(this.props.description.length >= 200){
+      if(shortDescription && shortDescription.length >= 200){
         shortDescription = (
           <span>
           {this.props.description.trunc(200,true)}
@@ -55,6 +55,24 @@ var HeroLinkComponent = React.createClass({
           </span>
         );
       }
+      var title = (
+        <TextArea
+          item={this.props.primarytitle}
+          editable={this.props.editable}
+          store={this.props.store}
+          actions={this.props.actions}
+          fieldName={this.props.primarykey}
+          placeholder='Add a title' />
+      );
+      var secondary_title = (
+        <TextArea
+          item={this.props.secondarytitle}
+          editable={this.props.editable}
+          store={this.props.store}
+          actions={this.props.actions}
+          fieldName={this.props.secondarykey}
+          placeholder="Enter the name of this link's source" />
+      );
     return (
       /* jshint ignore:start */
       <div className={this.state.expanded || this.props.editable ? 'hero-link expanded' : 'hero-link'}>
@@ -74,37 +92,48 @@ var HeroLinkComponent = React.createClass({
   <h6 className='heading'>
     {this.props.label}
   </h6>
+  {this.props.editable ?
+  <TextArea
+    item={this.props.primarylink}
+    editable={this.props.editable}
+    store={this.props.store}
+    actions={this.props.actions}
+    fieldName={this.props.primarylinkkey}
+    placeholder='Enter a URL for this resource'
+    forceWrap
+    link
+    />
+  : '' }
+
   <h2 style={{marginTop: '8px', marginBottom: 0, fontWeight: '800'}}>
-      <a href={!this.props.editable && this.props.primarylink ? this.props.primarylink : '#'} target='_blank'>
-      <TextArea
-        item={this.props.primarytitle}
-        editable={this.props.editable}
-        store={this.props.store}
-        actions={this.props.actions}
-        fieldName={this.props.primarykey}
-        placeholder='Add a title' />
-    </a>
+    {!this.props.editable && this.props.primarylink ? (
+      <a href={this.props.primarylink} target='_blank'>
+        {this.props.primarytitle}
+      </a>
+    ) : (
+      <span>
+        {title}
+      </span>
+    ) }
   </h2>
   <h4 style={{marginTop:0}}>{shortDescription}
   </h4>
 
 <h5 style={{fontWeight: '400', color: '#999', marginTop: 0}}>
-  {!this.props.editable && this.props.secondarytitle ? (
-    <a href={this.props.secondarylink ? this.props.secondarylink : ''} target='_blank'>
-      {this.props.secondarytitle}
-    </a>
-  ) : (
-    <TextArea
-      item={this.props.secondarylink}
-      editable={this.props.editable}
-      store={this.props.store}
-      actions={this.props.actions}
-      fieldName={this.props.secondarykey}
-      placeholder='Enter a link to share' />
-  )
+  {!this.props.editable && this.props.primarylink ?
+      <a href={this.props.primarylink} target='_blank'>
+        {this.props.secondarytitle}
+      </a>
+     :
+     <span>
+       {secondary_title}
+     </span>
   }
 </h5>
 </Col>
+
+
+
           </Row>
           <Row className='hero-link-card hero-link-card-expansion'>
             <Col xs={12}>
@@ -142,7 +171,7 @@ var HeroComponent = React.createClass({
         };
       } else {
         heroStyle = {
-          backgroundImage: 'url(/images/lichen.JPG)',
+          backgroundImage: 'none',
           height: '300px !important'
         };
       }
@@ -194,32 +223,32 @@ var HeroComponent = React.createClass({
                            />
                     )}
                   </h2>
-                  <h5 style={{fontWeight: '600', color: '#ffffff', fontStyle: 'italic', marginTop: 0}}>
-                    {!this.props.editable && this.props.secondarylink ? (
-                      <Link url={this.props.secondarylink}>
-                        <TextArea
+                  <h5 className='hero-secondary-title'>
+                    {this.props.secondaryprekey ?
+                          <TextArea
+                          item={this.props.secondarypretitle}
+                          editable={this.props.editable}
+                          store={this.props.store}
+                          actions={this.props.actions}
+                          fieldName={this.props.secondaryprekey}
+                          placeholder='Enter pretext' />
+                     : '' }
+                    {this.props.secondarykey ?
+                        <span style={this.props.type === 'b.system' ? {fontStyle: 'italic'} : {} } >
+                          <TextArea
                           item={this.props.secondarytitle}
                           editable={this.props.editable}
                           store={this.props.store}
                           actions={this.props.actions}
                           fieldName={this.props.secondarykey}
                           placeholder='Enter a subtitle' />
-                      </Link>
-                    ) : (
-                      this.props.secondarykey ?
-                      <TextArea
-                        item={this.props.secondarytitle}
-                        editable={this.props.editable}
-                        store={this.props.store}
-                        actions={this.props.actions}
-                        fieldName={this.props.secondarykey}
-                        placeholder='Enter a subtitle' />
-                      :
+                        </span>
+                     :
                       <TextArea
                         item={this.props.secondarytitle}
                         editable={false}
                        />
-                    ) }
+                     }
                   </h5>
                 </div>
               </div>
@@ -235,7 +264,7 @@ var HeroComponent = React.createClass({
 var Hero = React.createClass({
   render: function() {
     return (
-      this.props.type === 'Story' ? <HeroLinkComponent {...this.props} /> : <HeroComponent {...this.props} />
+      this.props.type === 'source' ? <HeroLinkComponent {...this.props} /> : <HeroComponent {...this.props} />
     );
   }
 });

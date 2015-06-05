@@ -25,6 +25,9 @@ var ScribeTextField = React.createClass({
             function updateData() {
                 if(!that.state.gotUpdate) {
 		    var html = scribe.getHTML();
+		    if(html.indexOf('<p>') === 0) {
+		        html = html.substring(3, html.length - 4);
+		    }
                     var index = html.lastIndexOf("<br");
 		    var htmlClean = html.substring(0, (((html.length - index) <= 5 && index != -1) ? index : html.length));
                     that.setState({html: htmlClean});
