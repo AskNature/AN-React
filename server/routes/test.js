@@ -17,6 +17,11 @@ var routes = function (app) {
       console.log('id: ' + req.params[2]);
       res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
   });
+  app.get(/query:([^\/]+)\/([\\w-]+)/, function(req,res,next) {
+            console.log('type: ' + req.params[1]);
+      console.log('id: ' + req.params[2]);
+      res.sendFile(path.join(settings.staticAssets, '/index.html'), { root: settings.root });
+  });
   app.get(/query:([^\/]+)(?:\/([\w-]+):([\w-]+))?/, function(req, res, next) {
       console.log('query: ' + req.params[0]);
       console.log('type: ' + req.params[1]);

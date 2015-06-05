@@ -487,6 +487,9 @@ var BallastDemo = React.createClass({
 });
 
 var SidebarComponent = React.createClass({
+    onTypeChange: function(val) {
+        this.props.handleTypeChange(val);
+    },
     render: function() {
         return (
             /* jshint ignore:start */
@@ -501,7 +504,8 @@ var SidebarComponent = React.createClass({
                         valueField='slug'
                         textField='label'
                         defaultValue='b.strategy'
-                        className='form-control'/>
+                        className='form-control'
+			onChange={this.onTypeChange}/>
                       <div onClick={this.props.onResultClick}>
                         {this.props.searchResultComponent ?
                           <this.props.searchResultComponent

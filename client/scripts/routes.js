@@ -32,7 +32,7 @@ var AccountReset = React.createFactory(require('./components/account/reset.jsx')
 var Infinite = React.createFactory(require('./components/demo/infinite.jsx'));
 
 var NewSearch = React.createFactory(require('./components/layouts/new.jsx'));
-
+var DefaultSearch = React.createFactory(require('./components/demo/infinite.jsx'));
 
 var render = function(Page, props) {
     React.render(new Page(props), document.getElementById('app-wrapper'));
@@ -149,7 +149,7 @@ var infinite_demo = function(query, id) {
 };
 
 var new_search = function(query, type, id) {
-    render(NewSearch, {query: decodeURI(query), masterid: id, type: type});
+    if(!query) { render(NewSearch, {query: decodeURI(query), masterid: id, type: type}); } else { render(Infinite, {query: decodeURI(query), masterid: id, type: type}); }
 };
 
 
@@ -167,6 +167,7 @@ var routes = {
   },
 
   '/(?:query:)([^\/]+)\/([\\w-]+):([\\w-]+)': new_search,
+  '/(?:query:)([^\/]+)\/([\\w-]+)': new_search,
   '/(?:query:)([^\/]+)(?:[\/\\w-]+)?': new_search,
 
   '/b.strategy/:id': detail_bstrategy,

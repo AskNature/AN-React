@@ -16,7 +16,8 @@ var getState = function() {
     return {
         title: pageStore.get().title,
         account: accountStore.get(),
-        drawerOpen: drawerSwitch
+        drawerOpen: drawerSwitch,
+	type: 'b.strategy'
     };
 };
 
@@ -112,7 +113,7 @@ var DefaultComponent = React.createClass({
     },
 
     handleQueryChange: function(newQuery) {
-	routeActions.setRoute(newQuery ? '/query:'+newQuery : '/');
+	routeActions.setRoute(newQuery ? '/query:'+newQuery+'/'+this.state.type : '/');
     },
 
     defaultContent: (<div className="main-container">
@@ -127,6 +128,12 @@ var DefaultComponent = React.createClass({
                 </div>
                 </div>),
 
+    handleTypeChange: function(type) {
+        console.log("type changed");
+	this.setState({type: type.slug});
+	routeActions.setRoute('/query:'+this.props.searchQuery+'/'+type.slug);
+    },
+
     render: function() {
         return (
             /* jshint ignore:start */
@@ -140,9 +147,13 @@ var DefaultComponent = React.createClass({
 	        <Drawer
 	          open={this.state.drawerOpen}
 	          loggedIn={this.state.account.loggedIn}
-	          mobile={window.innerWidth < 768 ? true : false} />
+	          mobile={window.innerWidth < 768 ? true : false}
+		  searchResultElements={this.props.searchResultElements}
+		  searchResultComponent={this.props.searchResultComponent}
+		  searchResultHeight={this.props.searchResultHeight}
+		  handleTypeChange={this.handleTypeChange} />
  		<Detail narrow={this.state.drawerOpen} toggle={this.handleDrawerToggleClick}>
-                {!this.props.query ? this.defaultContent : <div className="container"><div className="jumbotron">{this.props.query}</div></div>}
+                {!this.props.children ? this.defaultContent : this.props.children}
 		</Detail>
             </div>
             /* jshint ignore:end */
