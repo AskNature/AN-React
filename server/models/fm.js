@@ -7,11 +7,39 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Function';
 
-var fields = ['name', 'short_name', 'description', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'short_name', 'description', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo'];
 
+var Media = new Model('Media',
+  [
+    'filename',
+    'name',
+    'entity',
+    'description',
+    'media_url',
+    'flag_demo',
+    'source_url',
+    'author'
+  ]
+);
+var User = new Model('Users',
+  [
+    'name',
+    'first',
+    'last',
+    'custom_avatar_url'
+  ],
+  {'out_HasMedia':
+    {
+      model: Media,
+      className: 'Media',
+      edge:'out("HasMedia")'
+    }
+  }
+);
 var FM = new Model('FM',
     [
-        'name'
+        'name',
+	'flag_demo'
     ]
 );
 var Status = new Model('ContentStatus',
@@ -23,29 +51,30 @@ var Status = new Model('ContentStatus',
 var Entity = new Model('Entity',
     [
         'name',
-        '@class'
+        '@class',
+	'flag_demo'
   ]
 );
 
 var relationships = {
     'parent': {
 	model: FM,
-	className: 'Parent',
+	className: 'Function',
 	edge: 'out("ChildOf")'
     },
     'children': {
         model: FM,
-        className: 'Children',
+        className: 'Function',
         edge: 'in("ChildOf")'
     },
-    'outcome': {
+    'function': {
         model: Entity,
-        className: 'Outcome',
+        className: 'Content',
         edge: 'in("HasFunction")'
     },
     'mechanism': {
         model: Entity,
-        className: 'Mechanism',
+        className: 'Content',
         edge: 'in("HasMechanism")'
     },
     'status': {
@@ -54,8 +83,23 @@ var relationships = {
         edge: 'out("HasStatus")',
         select: true,
         options: ListOptions.ContentStatus
-    }
-
+    },
+    'added_by': {
+	model: User,
+	className: 'Users',
+	edge: 'in("AddedContent")'
+    },
+    'collaborators': {
+	model: User,
+	className: 'Users',
+	edge: 'in("CollaboratedOn")'
+},
+'media':
+  {
+    model: Media,
+    className: 'Image',
+    edge:'out("HasMedia")'
+  }
 };
 
 var data = new Model(entityName, fields, relationships);

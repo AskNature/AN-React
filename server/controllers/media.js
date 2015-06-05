@@ -29,8 +29,8 @@ var loadindex = function(req, res, next) {
 
 var returnList1 = function(req, res, next) {
   var chain = db
-  .select('name, masterid, filename as media, entity as media_entity, "media" as entityType, timestamp, out("HasStatus").name as status, in("HasMedia").masterid as media_id, flag_text, flag_tags, flag_media')
-  .from('Media');
+  .select('name, masterid, filename as media, entity as media_entity, "media" as entityType, timestamp, out("HasStatus").name as status, in("HasMedia").masterid as media_id, media_url, flag_text, flag_tags, flag_media')
+  .from('Image');
 
   var limit = parseInt(req.query.limit);
   if(limit) {
@@ -54,7 +54,7 @@ var returnList1 = function(req, res, next) {
 
   mediaCache.getOrElse('count', Cached.deferred(function(done) {
       console.log('cache miss');
-      db.select('count(*)').from('Media')
+      db.select('count(*)').from('Image')
       .scalar().then(function(count) {
 	  done(null, count); // return Cached.deferred
       }).done();
@@ -144,13 +144,13 @@ var createMedia1 = function(req, res, next) {
         crypto.randomBytes(16, function(err, buf) {
 	    if(err) { return res.status(500).send(); }
             var masterid = buf.toString('hex');
-            db.select('count(*)').from('Media').where({masterid: masterid}).scalar()
+            db.select('count(*)').from('Image').where({masterid: masterid}).scalar()
             .then(function(count) {
                 if(count > 0) {
                     return createWithToken(); // overlapping masterid, try again recursively
                 } else {
                     // do the creation
-                    db.insert().into('Media')
+                    db.insert().into('Image')
                     .set({masterid: masterid, name: 'New media', status: 'raw'}) // TODO: Proper template
                     .all().then(function(results) {
                         // success!
@@ -174,7 +174,7 @@ var createMedia1 = function(req, res, next) {
 var updateMedia1 = function(req, res, next) {
     var newData = {name: req.body.name};
     console.log(JSON.stringify(newData));
-    db.update('Media').set(newData)
+    db.update('Image').set(newData)
         .where({masterid:req.params.id}).scalar().then(function(count) {
             console.log("media updated: " + count);
 	    res.status(200).send(req.body);
@@ -185,7 +185,7 @@ var returnItem1 = function(req, res, next) {
   console.log(req.params.id);
   db
   .select('name, secondary_title, masterid, status, type, in("FeaturedIn").size() as featured_count, in("FeaturedIn").name as featured_in, "media" as entityType, type, both("Added").name as added, timestamp')
-  .from('Media')
+  .from('Image')
   .where('masterid == "' + req.params.id + '"')
   .all()
   .then(function (results) {

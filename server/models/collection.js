@@ -8,12 +8,37 @@ var ListOptions = require('./constants/listoptions.js');
 // The name of the associated class in the database:
 var entityName = 'Collection';
 
-var fields = ['name', 'description', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'description', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo'];
 
+var Media = new Model('Media',
+  [
+    'filename',
+    'name',
+    'entity',
+    'description'
+  ]
+);
+var User = new Model('Users',
+  [
+    'name',
+    'first',
+    'last',
+    'custom_avatar_url',
+    'flag_demo'
+  ],
+  {'out_HasMedia':
+    {
+      model: Media,
+      className: 'Media',
+      edge:'out("HasMedia")'
+    }
+  }
+);
 var Entity = new Model('Entity',
     [
         'name',
-        '@class'
+        '@class',
+	'flag_demo'
     ]
 );
 var Status = new Model('ContentStatus',
@@ -36,7 +61,17 @@ var relationships = {
   edge: 'out("HasStatus")',
   select: true,
   options: ListOptions.ContentStatus
-  }
+},
+'added_by': {
+model: User,
+className: 'Users',
+edge: 'in("AddedContent")'
+},
+'collaborators': {
+model: User,
+className: 'Users',
+edge: 'in("CollaboratedOn")'
+}
 
 };
 

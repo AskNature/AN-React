@@ -4,9 +4,9 @@
 var Model = require('./model.js');
 var ListOptions = require('./constants/listoptions.js');
 
-var entityName = 'Media';
+var entityName = 'Image';
 
-var fields = ['name', 'filename', 'id', 'entity', 'timestamp', 'user_id', 'mime_type', 'file_type_id', 'author', 'author_url', 'source', 'source_url', 'license_id', 'description', 'deleted', 'keywords', 'featured', 'popup', 'sort_order', 'width', 'height', 'flag_text', 'flag_media', 'flag_tags', 'custom_url'];
+var fields = ['name', 'filename', 'media_url', 'id', 'entity', 'timestamp', 'user_id', 'mime_type', 'file_type_id', 'author', 'author_url', 'source', 'source_url', 'license_id', 'description', 'deleted', 'keywords', 'featured', 'popup', 'sort_order', 'width', 'height', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo'];
 
 var Entity = new Model('Entity',
     [
@@ -36,7 +36,7 @@ var Status = new Model('ContentStatus',
 var relationships = {
     'has_media': {
 	model: Entity,
-	className: 'Content',
+	className: 'V',
 	edge: 'in("HasMedia")'
     },
     'added_media': {

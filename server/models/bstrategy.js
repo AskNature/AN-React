@@ -5,14 +5,49 @@ var ListOptions = require('./constants/listoptions.js');
 
 var entityName = 'Strategy';
 
-var fields = ['name', 'summary', 'special_text', 'brief', 'timestamp', 'created_by', 'entered_by', 'date_entered', 'additional_functions', 'keywords', 'common_name', 'scientific_name', 'other_names', 'additional_taxa', 'additional_reference', 'applications_sector', 'applications', 'source', 'source_citation', 'pages_of_excerpt', 'image_file_name', 'video_url', 'pdf_file_name', 'application_1', 'application_2', 'application_3', 'editor_comments', 'other_names', 'additional_taxa', 'general_strategy', 'flag_text', 'flag_media', 'flag_tags'];
+var fields = ['name', 'summary', 'special_text', 'brief', 'timestamp', 'created_by', 'entered_by', 'date_entered', 'additional_functions', 'keywords', 'common_name', 'scientific_name', 'other_names', 'additional_taxa', 'additional_reference', 'applications_sector', 'applications', 'source', 'source_citation', 'pages_of_excerpt', 'image_file_name', 'video_url', 'pdf_file_name', 'application_1', 'application_2', 'application_3', 'editor_comments', 'other_names', 'additional_taxa', 'general_strategy', 'flag_text', 'flag_media', 'flag_tags', 'flag_demo'];
 
 // Models to link
 
 var Expert = new Model('Expert',
   [
     'name',
-    'institution'
+    'institution',
+    'flag_demo'
+  ]
+);
+
+
+var Source = new Model('Source',
+  [
+    'name',
+    'publication_year',
+    'authors',
+    'flag_demo'
+  ]
+);
+var Entity = new Model('Entity',
+  [
+    'name',
+    'flag_demo',
+    '@class'
+  ]
+);
+var License = new Model('License',
+  [
+    'info_url',
+    'name',
+    'masterid'
+  ]
+);
+// NOTE: this is only here to serve the in_AddedMedia request in the Media model:
+var UserMedia = new Model('UserMedia',
+  [
+    'name',
+    'first',
+    'last',
+    'custom_avatar_url',
+    'flag_demo'
   ]
 );
 var Media = new Model('Media',
@@ -20,13 +55,36 @@ var Media = new Model('Media',
     'filename',
     'name',
     'entity',
-    'description'
-  ]
+    'description',
+    'media_url',
+    'flag_demo',
+    'source_url',
+    'author'
+  ],
+  // NOTE: this doesn't return values:
+  {'out_HasLicense':
+    {
+      model: License,
+      className: 'License',
+      edge: 'out("HasLicense")'
+    }
+  },
+  // NOTE: this doesn't even return an object:
+  {'in_AddedMedia':
+    {
+      model: UserMedia,
+      className: 'Users',
+      edge: 'both("AddedMedia")'
+    }
+  }
 );
-var InspiredSolution = new Model('InspiredSolutions',
+var User = new Model('Users',
   [
     'name',
-    'headline'
+    'first',
+    'last',
+    'custom_avatar_url',
+    'flag_demo'
   ],
   {'out_HasMedia':
     {
@@ -36,24 +94,10 @@ var InspiredSolution = new Model('InspiredSolutions',
     }
   }
 );
-var Source = new Model('Sources',
+var InspiredSolution = new Model('InspiredSolutions',
   [
     'name',
-    'publication_year',
-    'authors'
-  ]
-);
-var Entity = new Model('Entity',
-  [
-    'name'
-  ]
-);
-var User = new Model('Users',
-  [
-    'name',
-    'first',
-    'last',
-    'custom_avatar_url'
+    'flag_demo'
   ],
   {'out_HasMedia':
     {
@@ -66,7 +110,9 @@ var User = new Model('Users',
 var LivingSystem = new Model('LivingSystem',
   [
     'name',
-    'taxon'
+    'taxon',
+    'common_name',
+    'flag_demo'
   ]
 );
 var Condition = new Model('Condition',
@@ -95,6 +141,11 @@ var relationships = {
 	className: 'Sources',
 	edge: 'out("HasSource")'
     },
+    'stories': {
+	model: Entity,
+	className: 'Story',
+	edge: 'in("HasBStrategy")'
+    },
     'functions': {
 	model: Entity,
 	className: 'Function',
@@ -105,10 +156,10 @@ var relationships = {
 	className: 'Experts',
 	edge: 'out("StudiedBy")'
     },
-    'collectors': {
-	model: User,
-	className: 'Users',
-	edge: 'in("Bookmarked")'
+    'collections': {
+	model: Entity,
+	className: 'Content',
+	edge: 'out("InCollection")'
     },
     'media': {
 	model: Media,
@@ -118,7 +169,12 @@ var relationships = {
     'added_by': {
 	model: User,
 	className: 'Users',
-	edge: 'in("AddedStrategy")'
+	edge: 'in("AddedContent")'
+    },
+    'collaborators': {
+	model: User,
+	className: 'Users',
+	edge: 'in("CollaboratedOn")'
     },
     'living_systems': {
 	model: LivingSystem,

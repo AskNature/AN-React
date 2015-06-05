@@ -17,11 +17,32 @@ DropdownButton = require('react-bootstrap').DropdownButton;
 
 var routeActions = require('../../actions/routes');
 
-var transitionRoute = function(eventKey, href) {
-    routeActions.setRoute(href);
-};
-
 var NavbarComponent = React.createClass({
+  transitionRoute: function(eventKey, href) {
+    routeActions.setRoute(href);
+  },
+  onKeyPress: function(e) {
+
+    if(e.charCode === 13) {
+        console.log("enter pressed");
+        /* Temp redirect for demo: */
+        if(e.target.value === 'buoyancy'){
+          routeActions.setRoute('/b.strategy/284ace1157963de879fdab2a2a5709cc');
+
+        } else {
+          routeActions.setRoute('/infinite_demo/'+e.target.value);
+        }
+
+    }
+  },
+  componentDidMount: function() {
+    this.refs.searchbar.getDOMNode().onKeyPress = this.onKeyPress;
+  },
+  onSubmit: function(e) {
+    console.log('submit');
+    console.log(e.target.value);
+    console.log(this.refs.searchbar.getDOMNode());
+  },
     render: function() {
       var brand = <Link url="/">AN</Link>;
       var account = this.props.account;
@@ -29,29 +50,35 @@ var NavbarComponent = React.createClass({
       var greeting = 'Howdy '+ (account.firstName ? account.firstName : account.email);
       console.log(this.props.account.firstName);
       var navLinks = account.loggedIn === true ? (
-        <Nav right navbar-header className="pull-right navbar-header">
-          <DropdownButton noCaret title={<Avatar size='40' round />} className='loggedin-menu'>
+        <Nav right className="pull-right navbar-header">
+          <DropdownButton noCaret title={<Avatar size='40' round src={account.photo} />} className='loggedin-menu'>
             <MenuItem eventKey='0' className='disabled'>{greeting}</MenuItem>
-            <MenuItem eventKey="1"><Link url={settingsurl}>My Account</Link></MenuItem>
+            <MenuItem eventKey="1" href={settingsurl} onClick={this.transitionRoute}>My Account</MenuItem>
             <MenuItem divider />
-            <MenuItem eventKey="2"><a href="#" onClick={this.props.accountActions.logoutUser}>Log Out</a></MenuItem>
+            <MenuItem eventKey="2" onClick={this.props.accountActions.logoutUser}>Log Out</MenuItem>
           </DropdownButton>
         </Nav>
       ) : (
         <Nav right navbar-header className="pull-right navbar-header">
-          <NavItem href="/login" onSelect={transitionRoute}>Sign In</NavItem>
+          <NavItem href="/login" onClick={this.transitionRoute}>Sign In</NavItem>
         </Nav>
       );
+
         return (
             /* jshint ignore:start */
             <Navbar fluid inverse fixedTop role="banner">
               {/* Temp button for left offcanvas menu */}
                   <Nav left navbar-header className="pull-left navbar-header">
                      <Button className="flat-button drawer-toggle" onClick={this.props.onDrawerToggleClick} bsSize="large"><FontAwesome name='bars'  fixedWidth /></Button>
-                  <Link className="navbar-brand" url="/">AN</Link>
-                  <form role="search" className='navbar-form navbar-left search'>
+                  <Link className="navbar-brand" url="/" />
+                  <form role="search" className='navbar-form navbar-left search' onSubmit={this.onSubmit}>
 
-                    <Input className='search-input' type="text" placeholder='Search AskNature' value={this.props.searchQuery} onFocus={this.props.onSearchFocus} onChange={this.props.searchQueryChange}/>
+                    <Input
+                      className='search-input'
+                      type="text"
+                      placeholder="How might we ..."
+                      defaultValue={this.props.searchQuery} onFocus={this.props.onSearchFocus} onChange={this.props.searchQueryChange} onKeyPress={this.onKeyPress}
+                      ref="searchbar" />
                       <label className='search-label'>
                         <FontAwesome name='search'  fixedWidth />
                       </label>

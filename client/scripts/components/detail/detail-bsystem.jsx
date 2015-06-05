@@ -24,19 +24,27 @@ var Template = React.createClass({
     var routeNameSingle = 'b.system';
     var entityName = 'Biological System';
     var data = this.props.data;
+    var primaryKey = 'common_name';
+    var secondaryKey = 'name';
+    var secondaryPreKey = 'taxon';
+    var primaryTitle = data[primaryKey] ? data[primaryKey] : 'Common Name (Placeholder)';
+    var descriptionKey = 'description';
     return (
       /* jshint ignore:start */
-      <div>
-        <TopSection
-          {...this.props}
-          routename={routeNameSingle}
-          entityName={entityName}
-          label={entityName+': Organism'}
-          primarytitle={this.props.data.common_name}
-          primarydisplay={this.props.data.common_name ? this.props.data.common_name : 'Common Name'}
-          secondarytitle={this.props.data.name}
-          secondarylink=''
-          description={data.description ? data.description : 'Description goes here'} />
+        <div>
+          <TopSection
+            {...this.props}
+            routename={routeNameSingle}
+            entityName={entityName}
+            primarytitle={primaryTitle}
+            primarykey={primaryKey}
+            secondaryPreTitle={data[secondaryPreKey] + ': '}
+            secondaryPreKey={secondaryPreKey}
+            secondarytitle={data[secondaryKey]}
+            secondarykey={secondaryKey}
+            description={data[descriptionKey]}
+            descriptionKey={descriptionKey}
+            />
           <Grid>
             <Row className='show-grid'>
               <Col xs={12} sm={4}>
@@ -48,8 +56,8 @@ var Template = React.createClass({
                   onRemove={this.props.onRelationshipRemove.bind(null, 'living_systems')}
                   field={'living_systems'}
                   routeName={'b.system'}
-                  title={'Higher Level System'}
-                  fieldName={'Higher Level System'}/>
+                  title={'More General Systems'}
+                  fieldName={'More General Systems'}/>
                   <Button bsStyle='link' block
                         disabled={true} >
                       <Glyphicon glyph='arrow-down' />
@@ -75,8 +83,8 @@ var Template = React.createClass({
                   onRemove={this.props.onRelationshipRemove.bind(null, 'living_systems')}
                   field={'living_systems'}
                   routeName={'b.system'}
-                  title={'Lower Level System'}
-                  fieldName={'Lower Level System'}/>
+                  title={'More Specific Systems'}
+                  fieldName={'More Specific Systems'}/>
               </Col>
               <Col xs={6} sm={4}>
                 <RelationshipList
@@ -110,8 +118,8 @@ var Template = React.createClass({
                       onRemove={this.props.onRelationshipRemove.bind(null, 'researchers')}
                       field={'researchers'}
                       routeName={'researchers'}
-                      title={'Studied by'}
-                      fieldName={'Studied by'}/>
+                      title={'R&D Teams'}
+                      fieldName={'R&D Teams'}/>
                 </Col>
               </Row>
              </Grid>

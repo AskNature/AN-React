@@ -3,9 +3,13 @@ var _ = require('lodash');
 
 var Strategy = require('../models/bstrategy');
 
+var SuperStrategy = require('../models/strategy');
+
 var Model = require('../models/model.js');
 
 var Product = Model('InspiredSolutions', ['name', 'headline']);
+
+var Account = require('../models/account.js');
 
 var relationships = {'InspiredSolutions':'in("InspiredBy")'};
 
@@ -76,9 +80,23 @@ var testControllerFind = function(req, res, next) {
 };
 
 var testControllerFindQuery = function(req, res, next) {
-    Strategy.findWithRelationships({name: req.params.query}, function(result) {
-        res.json(result);
-    });
+    var constraints = {name: req.params.query};
+    if(req.user) {
+	Account.getWithRelationships(req.user.masterid, function(u) {
+	    if(u) { 
+		if(u.status.masterid === 'demo') {
+		    constraints.flag_demo = true;
+		}
+	    }
+            Strategy.findWithRelationships(constraints, function(result) {
+		res.json(result);
+	    });
+	});
+    } else {
+	Strategy.findWithRelationships(constraints, function(result) {
+            res.json(result);
+        });
+    }
 };
 
 module.exports = {

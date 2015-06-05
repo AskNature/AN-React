@@ -20,13 +20,11 @@ var NoChromeComponent = React.createClass({
     render: function() {
         return (
             /* jshint ignore:start */
-                <div className="fullscreen">
                     <div className="main-container">
                         <div className="content">
                             {this.props.children}
                         </div>
                     </div>
-                </div>
             /* jshint ignore:end */
         );
     },

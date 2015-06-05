@@ -54,20 +54,21 @@ var BigListItem = React.createClass({
 var SidebarComponent = React.createClass({
     render: function() {
         return (
-        <div>
-            <Well onClick={this.props.onClickHandler.bind(null, this.props.num)} bsSize='small' className={this.props.current === this.props.num ? 'card active' : 'card'} key={this.props.num}>
-                <h6 className='card-label'>
-                    Biological Strategy
-                </h6>
-                <h4 className='card-name'>
-                    {this.props.data.name}
-                    <br/>
-                <small>
+          <div className='card-set'>
+              <Well onClick={this.props.onClickHandler.bind(null, this.props.num)} bsSize='small' className={this.props.current === this.props.num ? 'card card-parent active' : 'card card-parent'} key={this.props.num}>
+                  <h6 className='card-label'>
+                      Biological Strategy
+                  </h6>
+                  <h4 className='card-name'>
+                      {this.props.data.name}
+                      <br/>
+                  <small>
 
-                </small>
-              </h4>
-            </Well>
-        </div>
+                  </small>
+                </h4>
+              </Well>
+
+          </div>
     );
     }
 });

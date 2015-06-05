@@ -22,6 +22,7 @@ var getState = function() {
 };
 
 var Detail = React.createClass({
+
   render: function() {
     return (
         <div className={this.props.narrow ? 'default detail' : 'default'}>
@@ -30,7 +31,9 @@ var Detail = React.createClass({
                     {this.props.children}
                 </div>
             </div>
+            <div className={this.props.narrow ? 'disabled-overlay visible' : 'disabled-overlay'} onClick={this.props.toggle} ></div>
         </div>
+
     );
   }
 });
@@ -48,9 +51,29 @@ var DefaultComponent = React.createClass({
     componentDidMount: function() {
         pageStore.emitChange();
         window.addEventListener('resize', this.handleResize);
+        if(window.attachEvent) {
+          // Provides compatibility for IE <9
+          window.attachEvent('onresize', this.handleResize);
+        } else if(window.addEventListener) {
+          // Compatibility for everything else
+          window.addEventListener('resize', this.handleResize, true);
+        } else {
+          //The browser does not support Javascript event binding
+          console.log('The browser does not support Javascript event binding');
+        }
     },
     componentWillUnmount: function () {
-      window.removeEventListener('resize', this.handleResize);
+      if(window.detachEvent) {
+    window.detachEvent('onresize', this.handleResize);
+}
+else if(window.removeEventListener) {
+    window.removeEventListener('resize', this.handleResize);
+}
+else {
+    //The browser does not support Javascript event binding
+    console.log('The browser does not support Javascript event binding');
+
+}
     },
     handleDrawerToggleClick: function(e){
       this.setState({
@@ -94,8 +117,10 @@ var DefaultComponent = React.createClass({
 
             <Navbar searchQuery={this.props.searchQuery} searchQueryChange={this.props.searchQueryChange} account={this.state.account} onDrawerToggleClick={this.handleDrawerToggleClick}
               onSearchFocus={this.handleSearchFocus} accountActions={accountActions}  />
-            <Drawer open={this.state.drawerOpen} searchResultElements={this.props.searchResultElements} searchResultComponent={this.props.searchResultComponent} searchResultHeight={this.props.searchResultHeight} loggedIn={this.state.account.loggedIn} onResultClick={this.handleResultClick} />
-            <Detail narrow={this.state.drawerOpen} {...this.props}/>
+            <Drawer open={this.state.drawerOpen} searchResultElements={this.props.searchResultElements} searchResultComponent={this.props.searchResultComponent} searchResultHeight={this.props.searchResultHeight} loggedIn={this.state.account.loggedIn} onResultClick={this.handleResultClick}
+              master={this.props.master}
+              mobile={window.innerWidth < 768 ? true : false}/>
+            <Detail narrow={this.state.drawerOpen} toggle={this.handleDrawerToggleClick} {...this.props}/>
 
             </div>
             /* jshint ignore:end */

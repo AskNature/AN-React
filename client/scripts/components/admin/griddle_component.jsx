@@ -26,7 +26,7 @@ var LinkComponent = React.createClass({
             id = this.props.rowData.masterid;
           }
           if(this.props.rowData.media) {
-            i.src = 'http://www.asknature.org/images/uploads/' + this.props.rowData.media_entity + '/' + id + '/' + this.props.rowData.media;
+            i.src = this.props.rowData.media_url ? this.props.rowData.media_url : 'http://www.asknature.org/images/uploads/' + this.props.rowData.media_entity + '/' + id + '/' + this.props.rowData.media;
           } else if(this.props.rowData.first) {
             i.src = 'http://www.asknature.org/images/uploads/user/'+this.props.rowData.masterid+'/avatar/lg_avatar.jpg';
           } else {

@@ -9,9 +9,10 @@
     "es5-shim": "~3.4.0",
     "pace": "~1.0.2",
     "animate.css": "~3.2.1",
-    "components-font-awesome": "~4.3.0",
     "spinkit": "~1.0.1",
-    "bootstrap-sass": "~3.3.4"
+    "bootstrap-sass": "~3.3.4",
+    "fontawesome": "~4.3.0",
+    "slick-carousel": "~1.5.2"
   },
   "devDependencies": {},
   "resolutions": {

@@ -8,6 +8,7 @@ var React = require('react'),
 TextArea = require('./textarea.jsx'),
 TextField = require('../../modules/textfield.jsx'),
 RestrictOptions = require('../../modules/restrictoptions.jsx'),
+RelationshipList = require('../common/relationshiplist.jsx'),
 
 FontAwesome = require('react-fontawesome'),
 
@@ -18,7 +19,9 @@ Nav = require('react-bootstrap').Nav,
 NavItem = require('react-bootstrap').NavItem,
 TabbedArea = require('react-bootstrap').TabbedArea,
 TabPane = require('react-bootstrap').TabPane,
+ButtonGroup = require('react-bootstrap').ButtonGroup,
 Button = require('react-bootstrap').Button,
+Label = require('react-bootstrap').Label,
 Input = require('react-bootstrap').Input,
 ButtonToolbar = require('react-bootstrap').ButtonToolbar,
 Tooltip = require('react-bootstrap').Tooltip,
@@ -31,12 +34,27 @@ Select = require('../../modules/select.jsx');
 var Restrict = require('../../modules/restrict.jsx');
 
 var SubHero = React.createClass({
+
+  getInitialState: function() {
+    /* Temp placeholder for bookmark action */
+      return (
+        {
+          bookmarked: false
+        }
+      );
+  },
+
+  toggleBookmark: function() {
+    /* Temp placeholder for bookmark action */
+    this.setState({bookmarked: !this.state.bookmarked});
+  },
   render: function() {
     return (
       /* jshint ignore:start */
       <Grid>
         <Row>
           <Col xs={12} sm={8}>
+            {this.props.type != 'source' ? (
             <h4>
               {this.props.first ? (
                 <strong>
@@ -67,11 +85,39 @@ var SubHero = React.createClass({
                 </span>
               )}
             </h4>
+          ) :
+          <Row>
+            <Col xs={12}>
+              <h6 className='heading'>Insights & Ideas</h6>
+              <ul className='design-insights media-list'>
+
+                  <li className='media'>
+                    <div className='media-left media-middle'>
+                      <a href='#'>
+                        <img src='https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/10383663_869350803096314_2369845013213041061_n.png?oh=2c010ce055331caa73a9506795239fd1&oe=55BDD82A&__gda__=1433772443_f5c43498047b8193dccc0a5554ba6ed1' alt='Thumb' width='30px' height='30px' className='img-circle media-object' />
+                      </a>
+                    </div>
+                    <div className='media-body media-middle'>
+                      <div>
+                        <h6><a href='#'><strong>AskNature Team </strong></a></h6>
+                          <TextArea
+                            item={this.props.tempInsight}
+                            store={this.props.store}
+                            actions={this.props.actions}
+                            fieldName={'temp_insight'}
+                            editable={this.props.editable} />
+                      </div>
+                    </div>
+                  </li>
+              </ul>
+              </Col>
+            </Row>
+          }
           </Col>
           <Col xs={12} sm={4}>
             <Nav justified activeKey={0} bsStyle='pills' style={{"margin-top": "11.5px"}}>
               {/*<RestrictOptions user={this.props.user.status} options={{"EditStrategy": {'disabled': true, 'eventKey':1, onClick: this.props.toggleEditable}}}>*/}
-	      <NavItem
+	             <NavItem
                 eventKey={1}
                 onClick={this.props.toggleEditable}
                 disabled={
@@ -86,8 +132,8 @@ var SubHero = React.createClass({
               <NavItem eventKey={4}>
                 <FontAwesome name='print'  fixedWidth />
               </NavItem>
-              <NavItem eventKey={5}>
-                <FontAwesome name='bookmark-o'  fixedWidth />
+              <NavItem eventKey={5} onClick={this.toggleBookmark}>
+                <FontAwesome name={this.state.bookmarked ? 'bookmark' : 'bookmark-o'}  fixedWidth />
               </NavItem>
 
             </Nav>
@@ -104,10 +150,10 @@ var SubHero = React.createClass({
                         <FontAwesome name='undo'  fixedWidth /> Cancel
                       </Button>
                       {this.props.user.role === 'admin' ?
-                      <Button block bsStyle="danger" onClick={this.props.onDelete}>
-                        <FontAwesome name='trash'  fixedWidth /> Delete
-                      </Button>
-                      : ''}
+                        <Button block bsStyle="danger" onClick={this.props.onDelete}>
+                          <FontAwesome name='trash'  fixedWidth /> Delete
+                        </Button>
+                      : '' }
                     </ButtonGroup>
                     <hr/>
                     <fieldset>
@@ -116,6 +162,10 @@ var SubHero = React.createClass({
                       : ''}
 
                       <div className='form-group'>
+                        <label className="checkbox-inline">
+                          <input type='checkbox' checked={this.props.flags.flagDemo}
+                            onClick={this.props.onBooleanSet} id='flag_demo' /><FontAwesome name='eye'  fixedWidth />
+    		 	    </label>
                         <label className="checkbox-inline">
                           <input type='checkbox' checked={this.props.flags.flagText}
                             onClick={this.props.onBooleanSet} id='flag_text' /><FontAwesome name='font'  fixedWidth />
@@ -135,14 +185,39 @@ var SubHero = React.createClass({
                       actions={this.props.actions}
                       fieldName={'editor_comments'}
                       editable={this.props.editable} />
+                    <RelationshipList
+                      items={this.props.added_by}
+                      editable={this.props.editable}
+                      titleField='name'
+                      onAdd={this.props.onRelationshipAdd.bind(null, 'added_by')}
+                      onRemove={this.props.onRelationshipRemove.bind(null, 'added_by')}
+                      field={'oneuser'}
+                      routeName={'user1'}
+                      title={'Contributor'}
+                      fieldName={'Contributor'}
+                      limit='1' />
+                    <RelationshipList
+                      items={this.props.collaborators}
+                      editable={this.props.editable}
+                      titleField='name'
+                      onAdd={this.props.onRelationshipAdd.bind(null, 'collaborators')}
+                      onRemove={this.props.onRelationshipRemove.bind(null, 'collaborators')}
+                      field={'oneuser'}
+                      routeName={'user1'}
+                      title={'Collaborators'}
+                      fieldName={'Collaborators'} />
                   </div>
-                : this.props.user.role === 'admin' ?
+
+                : this.props.credentials ?
 
                   <fieldset disabled>
                     {this.props.status ?
                       <Select editable={this.props.editable} selected={this.props.status.masterid} options={this.props.status.options} field='status' onRelationshipSet={this.props.onRelationshipSet} />
                     : ''}
                     <div className='form-group'>
+                      <label className="checkbox-inline">
+                        <input type='checkbox' checked={this.props.flags.flagDemo} id='flag_demo' /><FontAwesome name='eye'  fixedWidth />
+                      </label>
                       <label className="checkbox-inline">
                         <input type='checkbox' checked={this.props.flags.flagText} id='flag_text' /><FontAwesome name='font'  fixedWidth />
                       </label>
@@ -154,8 +229,7 @@ var SubHero = React.createClass({
                       </label>
                     </div>
                   </fieldset>
-                  : ''
-                 }
+                : '' }
               </Col>
             </Row>
           </Grid>

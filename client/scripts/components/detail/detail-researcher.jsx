@@ -21,12 +21,12 @@ var Template = React.createClass({
 
   render: function() {
     var routeNameSingle = 'researcher';
-    var entityName = 'Team';
+    var entityName = 'R&D Team';
     var data = this.props.data;
     var primaryKey = 'name';
     var primaryLinkKey = 'url';
     var secondaryKey = 'institution';
-    var descriptionKey = 'special_text';
+    var descriptionKey = 'description';
 
     return (
       /* jshint ignore:start */
@@ -45,19 +45,66 @@ var Template = React.createClass({
           descriptionKey={descriptionKey}
           />
           <Grid>
-            <Row className='show-grid'>
+            <Row>
+              {data.url || this.props.editable ?
+                <Col xs={12}>
+                  <TextArea
+                    title='External Link'
+                    item={data.url}
+                    store={this.props.store}
+                    actions={this.props.actions}
+                    fieldName={'url'}
+                    editable={this.props.editable}
+                    placeholder="Add a URL for this team's external website"
+                    forceWrap
+                    link
+                     />
+                   <hr/>
+                </Col>
+              : '' }
               <Col xs={12}>
+                  <Gallery items={data} title={data.name} windowHeight={this.props.windowHeight}/>
+                    </Col>
+                    <Col xs={12}>
+                    {this.props.editable ? (
+                      <RelationshipList
+                        items={data.media}
+                        editable={this.props.editable}
+                        titleField='name'
+                        onAdd={this.props.onRelationshipAdd.bind(null, 'media')}
+                        onRemove={this.props.onRelationshipRemove.bind(null, 'media')}
+                        field={'media'}
+                        routeName={'media'}
+                        title={'Media'}
+                        fieldName={'Media'}
+                        media />
+                    ) : '' }
+
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12} sm={6}>
                 <RelationshipList
                   items={data.studied_by}
                   editable={this.props.editable}
                   onAdd={this.props.onRelationshipAdd.bind(null, 'studied_by')}
                   onRemove={this.props.onRelationshipRemove.bind(null, 'studied_by')}
                   field={'b.strategy'}
-                  title='Area/s of Expertise'
-                  fieldName='Area/s of Expertise'
+                  title='Connections'
+                  fieldName='Connections'
                   titleField={'name'} />
               </Col>
-              
+              <Col xs={12} sm={6}>
+                <RelationshipList
+                  items={data.members}
+                  editable={this.props.editable}
+                  onAdd={this.props.onRelationshipAdd.bind(null, 'members')}
+                  onRemove={this.props.onRelationshipRemove.bind(null, 'members')}
+                  field={'oneuser'}
+                  title='Team members on AskNature'
+                  fieldName='Team members on AskNature'
+                  titleField={'name'} />
+              </Col>
             </Row>
           </Grid>
 

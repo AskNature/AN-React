@@ -12,8 +12,6 @@ CreatorMast = require('./creatormast.jsx');
 
 var TopSection = React.createClass({
   render: function() {
-    console.log('TopSection Props:');
-    console.log(this.props.addedby);
     return (
       /* jshint ignore:start */
       <div>
@@ -27,7 +25,9 @@ var TopSection = React.createClass({
             img='https://lh5.googleusercontent.com/-rybUadmgv5g/AAAAAAAAAAI/AAAAAAAAABA/LDHYA7EFTuI/s120-c/photo.jpg'
             entityname={this.props.entityName}
             timestamp={this.props.data.timestamp}
-            addedby={this.props.addedby} />
+            added_by={this.props.data.added_by}
+            collaborators={this.props.data.collaborators}
+            />
         ) }
         <Hero
           editable={this.props.editable}
@@ -40,19 +40,24 @@ var TopSection = React.createClass({
           primarykey={this.props.primarykey}
           primarydisplay={this.props.primarydisplay}
           primarylink={this.props.primarylink}
+          primarylinkkey={this.props.primarylinkkey}
           secondarytitle={this.props.secondarytitle}
           secondarykey={this.props.secondarykey}
+          secondarypretitle={this.props.secondaryPreTitle}
+          secondaryprekey={this.props.secondaryPreKey}
           secondarylink={this.props.secondarylink}
 	        name={this.props.data.name}
           masterid={this.props.masterid}
           innerimage={this.props.innerimage}
-          imgurl={this.props.imgurl} />
+          imgurl={this.props.imgurl}
+          description={this.props.description}
+          type={this.props.routename}/>
         <SubHero
           description={this.props.description}
           descriptionlink={this.props.descriptionlink}
           descriptionKey={this.props.descriptionKey}
           status={this.props.data.status}
-          credentials={this.props.user.role === 'admin' ? true : false}
+          credentials={this.props.user.loggedIn && this.props.user.role === 'admin' ? true : false}
           editable={this.props.editable}
           store={this.props.store}
           actions={this.props.actions}
@@ -61,11 +66,18 @@ var TopSection = React.createClass({
           editFinish={this.props.editFinish}
           editCancel={this.props.editCancel}
           onDelete={this.props.onDelete}
+          onRelationshipAdd={this.props.onRelationshipAdd}
+          onRelationshipRemove={this.props.onRelationshipRemove}
           onRelationshipSet={this.props.onRelationshipSet}
           onBooleanSet={this.props.onBooleanSet}
           user={this.props.user}
+          added_by={this.props.data.added_by}
+          collaborators={this.props.data.collaborators}
           editorComments={this.props.data.editor_comments}
-          flags={{'flagText':this.props.data.flag_text, 'flagMedia':this.props.data.flag_media,'flagTags':this.props.data.flag_tags}} />
+          flags={{'flagText':this.props.data.flag_text, 'flagMedia':this.props.data.flag_media,'flagTags':this.props.data.flag_tags, 'flagDemo':this.props.data.flag_demo}}
+          type={this.props.routename}
+          tempInsight={this.props.data.temp_insight}
+          />
       </div>
       /* jshint ignore:end */
     );

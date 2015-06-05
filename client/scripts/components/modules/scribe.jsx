@@ -25,6 +25,9 @@ var ScribeTextField = React.createClass({
             function updateData() {
                 if(!that.state.gotUpdate) {
 		    var html = scribe.getHTML();
+		    if(html.indexOf('<p>') === 0) {
+		        html = html.substring(3, html.length - 4);
+		    }
                     var index = html.lastIndexOf("<br");
 		    var htmlClean = html.substring(0, (((html.length - index) <= 5 && index != -1) ? index : html.length));
                     that.setState({html: htmlClean});
@@ -51,8 +54,8 @@ var ScribeTextField = React.createClass({
     render: function() {
         return (
 	    <div>
-	        {this.state.html == "" ? <div style={{position: 'absolute', color: '#999'}}>{this.props.placeholder}</div> : ""}
-	        <div class="dotted" contentEditable="true" ref="scribe" style={{"outline" : "none", "border-bottom": "1px solid #ddd"}}/>
+	        {this.state.html == '' ? <div className='placeholder'>{this.props.placeholder}</div> : ''}
+	        <div className="editable" contentEditable="true" ref="scribe" />
 	    </div>
 	)
     }

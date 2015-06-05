@@ -7,11 +7,18 @@ var React = require('react'),
 routeActions = require('../../../actions/routes'),
 Link = require('../../modules/link.jsx'),
 
+FontAwesome = require('react-fontawesome'),
 
+OverlayTrigger = require('react-bootstrap').OverlayTrigger,
+Tooltip = require('react-bootstrap').Tooltip,
 
+Col = require('react-bootstrap').Col,
 Glyphicon = require('react-bootstrap').Glyphicon,
-SplitButton = require('react-bootstrap').SplitButton,
+Button = require('react-bootstrap').Button,
 ButtonToolbar = require('react-bootstrap').ButtonToolbar,
+Nav = require('react-bootstrap').Nav,
+NavItem = require('react-bootstrap').NavItem,
+DropdownButton = require('react-bootstrap').DropdownButton,
 MenuItem = require('react-bootstrap').MenuItem;
 
 var MiniHero = React.createClass({
@@ -25,7 +32,7 @@ var MiniHero = React.createClass({
       }
     }
     return (
-      <div className='minihero'>
+      <div className={this.props.showOverlay ? 'focused minihero' : 'minihero'}>
         {this.props.media ? (
           <img src={thumburl} width='100px' height='auto' />
         ) : ''}
@@ -37,7 +44,30 @@ var MiniHero = React.createClass({
           <br/>
           <small>{this.props.subtitle}</small>
         </h4>
+        <div className='overlay'>
+          <Nav justified activeKey={0} bsStyle='pills' bsSize='large'>
+            <OverlayTrigger placement="top" delayShow={600} delayHide={150} overlay={<Tooltip><strong>View in AskNature</strong></Tooltip>}>
+            <NavItem
+              eventKey={1}
+              onClick={this.props.link}>
 
+                <FontAwesome name='search' size='lg' fixedWidth />
+            </NavItem>
+            </OverlayTrigger>
+            <OverlayTrigger placement="top" delayShow={600} delayHide={150} overlay={<Tooltip><strong>Open External Source</strong></Tooltip>}>
+            <NavItem eventKey={2}>
+              <FontAwesome name='globe' size='lg' fixedWidth />
+            </NavItem>
+            </OverlayTrigger>
+            <DropdownButton eventKey={3} title={<FontAwesome name='ellipsis-v' size='lg' fixedWidth />} navItem={true} noCaret pullRight>
+
+              <MenuItem eventKey='3.2'><FontAwesome name='flag' fixedWidth /> Report</MenuItem>
+              {this.props.editable ? (
+                <MenuItem eventKey='3.4' onClick={this.props.remove}><FontAwesome name='trash' fixedWidth /> Remove</MenuItem>
+              ) : ''}
+            </DropdownButton>
+          </Nav>
+        </div>
       </div>
     );
   }
@@ -45,13 +75,35 @@ var MiniHero = React.createClass({
 
 
 var RelationshipListItem = React.createClass({
-  setFlag: function() {
-    alert('Flagged!');
-    console.log('Flagged');
+
+  getInitialState: function() {
+    return {
+      showOptions: false
+    };
   },
 
   clickHandler: function(link) {
     routeActions.setRoute(link);
+  },
+
+  toggleOptions: function() {
+    if(this.state.showOptions) {
+      this.setState({showOptions: false});
+    } else {
+      this.setState({showOptions: true});
+    }
+  },
+  showOptions: function() {
+
+      if(!this.state.showOptions) {
+        this.setState({showOptions: true});
+      }
+
+  },
+  hideOptions: function() {
+    if(this.state.showOptions) {
+      this.setState({showOptions: false});
+    }
   },
 // This needs to be abstracted somehow:
   classTranslator: function(classname) {
@@ -63,7 +115,7 @@ var RelationshipListItem = React.createClass({
         },
       'InspiredSolutions' :
         {
-          'displayName' : 'Designed Strategy',
+          'displayName' : 'Bio-inspired Strategy',
           'route' : 'd.strategy'
         },
       'Context' :
@@ -71,7 +123,7 @@ var RelationshipListItem = React.createClass({
           'displayName' : 'Context',
           'route' : 'context'
         },
-        'Function' :
+      'Function' :
           {
             'displayName' : 'Function & Mechanism',
             'route' : 'fm'
@@ -90,6 +142,41 @@ var RelationshipListItem = React.createClass({
         {
           'displayName' : 'Original User',
           'route' : '1user'
+        },
+      'DSystem' :
+        {
+          'displayName' : 'Designed System',
+          'route' : 'd.system'
+        },
+      'BSystem' :
+        {
+          'displayName' : 'Biological System',
+          'route' : 'b.system'
+        },
+      'Expert' :
+        {
+          'displayName' : 'R&D Team',
+          'route' : 'researcher'
+        },
+      'Collection' :
+        {
+          'displayName' : 'Collection',
+          'route' : 'collection'
+        },
+      'Media' :
+        {
+          'displayName' : 'Media',
+          'route' : 'media'
+        },
+      'Image' :
+        {
+          'displayName' : 'Media: Image',
+          'route' : 'media'
+        },
+      'Default' :
+        {
+          'displayName' : '',
+          'route' : 'content'
         }
     };
     var lations;
@@ -105,8 +192,22 @@ var RelationshipListItem = React.createClass({
       lations = trans.Story;
     } else if(classname === 'Source') {
       lations = trans.Sources;
+    } else if(classname === 'Experts') {
+       lations = trans.Expert;
     } else if(classname === 'Users') {
       lations = trans.User;
+    } else if(classname === 'LivingSystem') {
+      lations = trans.BSystem;
+    } else if(classname === 'DSystem') {
+      lations = trans.DSystem;
+    } else if(classname === 'Image') {
+      lations = trans.Image;
+    } else if(classname === 'Media') {
+      lations = trans.Media;
+    } else if(classname === 'Collection') {
+      lations = trans.Collection;
+    } else {
+      lations = trans.Default;
     }
     return lations;
   },
@@ -116,38 +217,42 @@ var RelationshipListItem = React.createClass({
     var routeName, itemLabel;
     if(this.props.routeName) {
       routeName = this.props.routeName;
-    } else if(this.props.item['@class']){
+    } else if(this.props.item['@class'] ){
       var translations = this.classTranslator(this.props.item['@class']);
       routeName = translations.route;
       itemLabel = translations.displayName;
-    }
-    function clickhandler() {
-      window.setInterval(function(){scrollTo(0, 0);},10000);
     }
     var link = '../' + routeName + '/' + item.masterid;
     var title = this.props.titleField;
     var subTitle= this.props.subtitleField;
     if (routeName === 'b.system')  {
-      title = 'Common Name';
+      title = this.props.item.common_name ? this.props.item.common_name : 'Common Name';
       subTitle = this.props.item.taxon + ': ' + this.props.item.name;
     }
     if (routeName === 'media') {
       subTitle = this.props.item.description;
     }
     return (
-        <ButtonToolbar className='relationship-button'>
-          <SplitButton
-            title={<MiniHero title={title} subtitle={subTitle} label={itemLabel} media={this.props.media} thumbs={this.props.item} masterid={item.masterid}/>}
-            onClick={this.clickHandler.bind(null,link)}
-            pullright>
-            <MenuItem eventKey="1" onClick={this.setFlag}><Glyphicon glyph='flag' /> Flag</MenuItem>
-            {this.props.editable ? (
-              <MenuItem eventKey="2" onClick={this.props.onRemove.bind(null, item)}><Glyphicon glyph='remove' /> Remove</MenuItem>
-            ) : (
-              <MenuItem eventKey="2" className='disabled'><Glyphicon glyph='remove' /> Remove</MenuItem>
-            ) }
-          </SplitButton>
+      <Col xs={12} sm={this.props.narrow ? 4 : 12} className='relationship-column'>
+        <ButtonToolbar className={'relationship-button' + (!this.props.item.flag_demo ? ' relationship-button--outside-demo' : '')}>
+          <Button
+            block
+            onClick={this.showOptions}
+            onMouseLeave={this.hideOptions}
+            pullright >
+            <MiniHero
+              title={title}
+              subtitle={subTitle}
+              label={itemLabel}
+              media={this.props.media}
+              thumbs={this.props.item} link={this.clickHandler.bind(null,link)} masterid={item.masterid}
+              showOverlay={this.state.showOptions}
+              remove={this.props.onRemove.bind(null,item)}
+              editable={this.props.editable}
+              narrow={this.props.narrow} />
+          </Button>
         </ButtonToolbar>
+      </Col>
     );
   }
 });

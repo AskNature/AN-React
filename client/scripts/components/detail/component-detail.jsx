@@ -26,7 +26,9 @@ ResearcherDetail = require('./detail-researcher.jsx'),
 SourceDetail = require('./detail-source.jsx'),
 BStrategyDetail = require('./detail-bstrategy.jsx'),
 UserDetail = require('./detail-user.jsx'),
-OneUserDetail = require('./detail-1user.jsx');
+OneUserDetail = require('./detail-1user.jsx'),
+StoryDetail = require('./detail-story.jsx');
+
 
 var getState = function() {
   return {
@@ -55,7 +57,7 @@ var Loader = React.createClass({
 
 var DetailComponent = React.createClass({
 
-      mixins: [store.mixin],
+      mixins: [store.mixin, accountStore.mixin],
 
       getInitialState: function() {
           return (
@@ -68,10 +70,12 @@ var DetailComponent = React.createClass({
       },
 
       componentWillMount: function(){
-          if(this.props.masterid !== 'new') {
-              actions.fetch(this.props.type,this.props.masterid);
-          } else if(this.props.masterid === 'new'){
-              actions.create(this.props.type);
+          var that = this;
+          actions.fetch(this.props.type,this.props.masterid);
+	  if(this.props.masterid === 'new'){
+              setTimeout(function() {
+	          actions.create(that.props.type);
+	      }, 1);
 	      var newState = getState();
 	      newState.editable = true;
 	      this.setState(newState);
@@ -85,7 +89,8 @@ var DetailComponent = React.createClass({
 
       _onChange: function() {
           this.setState(getState());
-	        this.setState({'masterid': store.getMasterid()});
+	  var isOutsideDemo = (this.state.user.status && this.state.user.status.masterid === 'demo' && !this.state.object.flag_demo) ? true : false;
+	  this.setState({'masterid': store.getMasterid(), 'error':isOutsideDemo, 'loaded':!isOutsideDemo}); // TODO: replace this loaded/error with proper message
       },
       onRelationshipAdd: function(field, addedValue) {
           console.log(field + ' added ' + addedValue);
@@ -144,11 +149,11 @@ var DetailComponent = React.createClass({
           Template = DStrategyDetail;
         } else if(this.props.type === 'fm') {
           Template = FMDetail;
-        } else if(this.props.type === 'users') {
+        } else if(this.props.type === 'user') {
           Template = UserDetail;
-        }  else if(this.props.type === '1users') {
+        }  else if(this.props.type === '1user') {
             Template = OneUserDetail;
-        } else if(this.props.type === 'collections') {
+        } else if(this.props.type === 'collection') {
           Template = CollectionDetail;
         } else if(this.props.type === 'context') {
           Template = ContextDetail;
@@ -158,10 +163,12 @@ var DetailComponent = React.createClass({
           Template = DSystemDetail;
         } else if(this.props.type === 'media') {
           Template = MediaDetail;
-        } else if(this.props.type === 'researchers') {
+        } else if(this.props.type === 'researcher') {
           Template = ResearcherDetail;
-        } else if(this.props.type === 'sources') {
+        } else if(this.props.type === 'source') {
           Template = SourceDetail;
+        } else if(this.props.type === 'story') {
+          Template = StoryDetail;
         }
         /*if(this.state.loaded === false) {
           actions.fetch(this.props.type,this.props.masterid);
@@ -169,22 +176,21 @@ var DetailComponent = React.createClass({
         return Template;
       },
     render: function() {
-      console.log(this.state);
-      console.log(this.props);
       var Template = this.getTemplate();
       var style;
       var loader = [];
       if (!this.state.loaded) {
-        style = {position: 'relative', WebkitFilter: 'blur(0px) saturate(2)', height: this.state.windowHeight - 62, overflow: 'hidden'};
+        style = {position: 'relative', WebkitFilter: 'blur(2px) saturate(2)', height: this.state.windowHeight - 62, overflow: 'hidden'};
         loader.push(
           <Loader windowHeight={this.state.windowHeight - 22} error={this.state.error ? true : false} />
         );
       }
         return (
-            <DefaultLayout>
+            <DefaultLayout master={this.props.masterid}>
                 {loader}
                 <div style={style} className='detail-single'>
                 <Template
+                    windowHeight={this.state.windowHeight}
                     masterid={this.props.masterid !== 'new' ? this.props.masterid : null}
                     type={this.props.type}
                     data={this.state.object}
