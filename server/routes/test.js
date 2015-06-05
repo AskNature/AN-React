@@ -11,6 +11,7 @@ var path = require('path');
 var routes = function (app) {
   app.get('/test', Controller.testController);
   app.get('/test/:query', Controller.testControllerQuery);
+  app.get('/tm', Controller.testModel);
   app.get(/search\/([^\/]+)(?:\/([\w-]+):([\w-]+))?/, function(req, res, next) {
       console.log('query: ' + req.params[0]);
       console.log('type: ' + req.params[1]);
