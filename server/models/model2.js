@@ -25,7 +25,7 @@ var ConstructModel = function(entityClass, fields, relationships) {
     var Model = function(masterid, attributes, rid) {
 	// sets all fields specified in the schema to null
 	_.forEach(fields, function(field) {
-	    console.log(field);
+	    //console.log(field);
 	    this[field] = null;
 	}, this);
 
@@ -44,7 +44,7 @@ var ConstructModel = function(entityClass, fields, relationships) {
 	    // although this breaks the ANQL
 	    // to fix, create Models inline here
 
-	    db.query('SELECT :rel_fields FROM :rel_name WHERE masterid in [:rel_ids]',
+	    /*db.query('SELECT :rel_fields FROM :rel_name WHERE masterid in [:rel_ids]',
                      {
 			 params: {
 			     rel_fields: ,
@@ -53,7 +53,7 @@ var ConstructModel = function(entityClass, fields, relationships) {
 			 }
 		     }).then(function(result) {
 			 // instantiate relationship model
-		     });
+		     });*/
 	};
 
 	this._performSave = function(object, callback) {
@@ -101,6 +101,27 @@ var ConstructModel = function(entityClass, fields, relationships) {
 
     Model.prototype.save = function(callback) {
 	this._performSave(this, callback);
+    };
+
+    Model.getNew = function(masterid, callback) {
+	var fieldsList =  _.toArray(_.pick(fields, _.isString)).join(', ');
+
+	console.log(fieldsList);
+
+	db.query('SELECT @class as class, masterid, '+fieldsList+' FROM '+entityClass+' WHERE masterid = :masterid',
+		 {
+		     params: {
+			 masterid: masterid
+		     },
+		     limit: 1
+		 }).all().then(function(results) {
+		     if(results[0]) {
+			 // deep fetch here
+			 callback(null, _.omit(results[0], ['@type', '@rid']));
+		     } else {
+			 callback("no record found with that masterid", null);
+		     }
+		 });
     };
 
     Model.get = function(masterid, callback) {

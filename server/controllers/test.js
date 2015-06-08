@@ -101,7 +101,7 @@ var TestStrategy = require('../models/teststrategy');
 
 var testModel = function(req, res, next) {
     //res.json(new TestStrategy('hello-world', {name: 'Hello World', description: 'yes', other: 'thing'}, {}));
-    TestStrategy.get('001274b75a7dd4f8fc46a5a4a0446489', function(err, result) {
+    TestStrategy.getNew('310834fb5fddfe1d45feb65884fc65fc', function(err, result) {
 	if(err) { res.send(err) } else { res.json(result); }
     });
 };
