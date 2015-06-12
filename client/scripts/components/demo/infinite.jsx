@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react'),
-DefaultLayout = require('../layouts/default.jsx'),
+DefaultLayout = require('../layouts/new.jsx'),
 Well = require('react-bootstrap').Well,
 InfiniteList = require('./infinitelist.jsx');
 var Scribe = require('../modules/scribe.jsx');
@@ -106,8 +106,8 @@ var Infinite = React.createClass({
         }, this);
         this.setState({elements: newElements, data: store.get(), index: index == -1 ? 0 : index});
 	var that = this;
-	if(index === -1) {
-	    setTimeout(function() { routeActions.setRoute("/infinite_demo/"+that.props.query+'/'+newElements[0].props.data.masterid)}, 300);
+	if(index === -1 && newElements.length > 0) {
+	    setTimeout(function() { routeActions.setRoute("/query:"+that.props.query+'/'+that.props.type+':'+newElements[0].props.data.masterid)}, 300);
 	}
     },
     setIndex: function(num) {

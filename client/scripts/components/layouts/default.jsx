@@ -46,7 +46,7 @@ var DefaultComponent = React.createClass({
         );
     },
     componentWillMount: function() {
-    accountActions.fetchUser();
+        accountActions.fetchUser();
     },
     componentDidMount: function() {
         pageStore.emitChange();
