@@ -107,7 +107,7 @@ var Infinite = React.createClass({
         this.setState({elements: newElements, data: store.get(), index: index == -1 ? 0 : index});
 	var that = this;
 	if(index === -1 && newElements.length > 0) {
-	    setTimeout(function() { routeActions.setRoute("/query:"+that.props.query+'/'+that.props.type+':'+newElements[0].props.data.masterid)}, 300);
+	    setTimeout(function() { routeActions.setRoute("/query:"+that.props.query+'/'+that.props.filterType+':'+that.props.filterId+'/'that.props.type+':'+newElements[0].props.data.masterid)}, 300);
 	}
     },
     setIndex: function(num) {

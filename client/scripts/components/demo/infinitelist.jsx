@@ -97,7 +97,7 @@ var InfiniteList = React.createClass({
     scrollCallback: function(num) {
         console.log(num);
 	console.log(this.state.elements[num].props.data.masterid);
-	if(this.props.routeOnScroll) { routeActions.setRoute('/infinite_demo/'+this.props.query+'/'+this.state.elements[num].props.data.masterid);}
+	if(this.props.routeOnScroll) { routeActions.setRoute('/query:'+this.props.query+'/'+this.props.filterName+':'+this.state.filterId+'/'+this.props.type+this.state.elements[num].props.data.masterid);}
 	if (this.props.scrollCallback) { this.props.scrollCallback(num) }
     },
 
