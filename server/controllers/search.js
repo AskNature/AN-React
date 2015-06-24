@@ -33,15 +33,14 @@ var classEdgeMap = {
 
 var searchWithQuery = function(req, res, next) {
     // graph search with req.params.query
-    var searchClass= 'Strategy'; // req.params.searchClass
+    var searchClass= req.params.searchClass;
     var searchModel= Model(searchClass, classEdgeMap[searchClass].fields);
-    var diffuseClass = 'Collection'; // req.params.groupClass
-    var diffuseSearchEdge = 'in("InCollection")';// classEdgeMap[searchClass][diffuseClass].diffuseSearchEdge
-    var diffuseTraverseEdge = 'in("ChildOf")';// classEdgeMap[searchClass][diffuseClass].diffuseTraverseEdge
-    var groupClass = 'Collection'//'Function';
+    var diffuseClass = req.params.groupClass;
+    var diffuseSearchEdge = classEdgeMap[searchClass][diffuseClass].diffuseSearchEdge;
+    var diffuseTraverseEdge = classEdgeMap[searchClass][diffuseClass].diffuseTraverseEdge;
+    var groupClass = diffuseClass;
     var groupModel = Model(groupClass, classEdgeMap[searchClass][diffuseClass].fields); 
-    //var groupEdge = 'out("HasFunction")';
-    var groupEdge = 'out("InCollection")';//classEdgeMap[searchClass][diffuseClass].groupEdge
+    var groupEdge = classEdgeMap[searchClass][diffuseClass].groupEdge;
     GraphSearch(req.params.query, searchClass, {class: diffuseClass, edge: diffuseSearchEdge, traverse: diffuseTraverseEdge}, groupEdge, function(graphSearchResults) {
 	//res.json(graphSearchResults.functions);
 	async.map(graphSearchResults.groupings, groupModel.getNew, function(err, results) {
