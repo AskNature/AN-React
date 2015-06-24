@@ -5,10 +5,6 @@ var async = require('async');
 
 var Model = require('../models/model2');
 
-var Function = Model('Function', ['name']);
-
-var Strategy = Model('Strategy', ['name', 'summary']);
-
 var GraphSearch = require('./graphsearch.js');
 
 var testSearch = function(req, res, next) {
@@ -17,14 +13,41 @@ var testSearch = function(req, res, next) {
     });
 };
 
+var classEdgeMap = {
+    'Strategy': {
+	'fields': ['name', 'summary'],
+	'Function': { // strategy grouped by function
+	    diffuseSearchEdge: 'in("HasFunction")',
+	    diffuseTraverseEdge: 'in("ChildOf")',
+	    groupEdge: 'out("HasFunction")',
+	    fields: ['name']
+	},
+	'Collection': {
+	    diffuseSearchEdge: 'in("InCollection")',
+	    diffuseTraverseEdge: 'in("ChildOf")',
+	    groupEdge: 'out("InCollection")',
+	    fields: ['name']
+	}
+    }
+};
+
 var searchWithQuery = function(req, res, next) {
     // graph search with req.params.query
-    GraphSearch(req.params.query, function(graphSearchResults) {
+    var searchClass= 'Strategy'; // req.params.searchClass
+    var searchModel= Model(searchClass, classEdgeMap[searchClass].fields);
+    var diffuseClass = 'Collection'; // req.params.groupClass
+    var diffuseSearchEdge = 'in("InCollection")';// classEdgeMap[searchClass][diffuseClass].diffuseSearchEdge
+    var diffuseTraverseEdge = 'in("ChildOf")';// classEdgeMap[searchClass][diffuseClass].diffuseTraverseEdge
+    var groupClass = 'Collection'//'Function';
+    var groupModel = Model(groupClass, classEdgeMap[searchClass][diffuseClass].fields); 
+    //var groupEdge = 'out("HasFunction")';
+    var groupEdge = 'out("InCollection")';//classEdgeMap[searchClass][diffuseClass].groupEdge
+    GraphSearch(req.params.query, searchClass, {class: diffuseClass, edge: diffuseSearchEdge, traverse: diffuseTraverseEdge}, groupEdge, function(graphSearchResults) {
 	//res.json(graphSearchResults.functions);
-	async.map(graphSearchResults.functions, Function.getNew, function(err, results) {
+	async.map(graphSearchResults.groupings, groupModel.getNew, function(err, results) {
 	    if(err) { res.send(err) } else { 
 		async.map(results, function(r, callback) {
-		    async.map(graphSearchResults.results[r.masterid] ? graphSearchResults.results[r.masterid] : [], Strategy.getNew, function(e, rf) {
+		    async.map(graphSearchResults.results[r.masterid] ? graphSearchResults.results[r.masterid] : [], searchModel.getNew, function(e, rf) {
 			r.children = rf;
 			callback(null, r);
 		    });

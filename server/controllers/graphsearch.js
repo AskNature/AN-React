@@ -18,9 +18,13 @@ var async = require('async');
 //var query = 'change buoyancy';
 //var query = 'float';
 
+// searchClass = 'Strategy'
+// searchRel = {class: 'Function', edge:'in("HasFunction")', traverse:'in("ChildOf")'}
+// groupEdge = out("HasFunction")
+
 var start = new Date().getTime();
-var GraphSearch = function(query, maincb) {
-    db.query('select masterid, $score as score from Function where name LUCENE "'+query+'"').all().then(function(results) {
+var GraphSearch = function(query, searchClass, searchRel, groupEdge, maincb) {
+    db.query('select masterid, $score as score from '+searchRel.class+' where name LUCENE "'+query+'"').all().then(function(results) {
 	/*_.each(results, function(r) {
 	  console.log(r.masterid + ': ' + r.score);
 	  });*/
@@ -29,7 +33,7 @@ var GraphSearch = function(query, maincb) {
 	async.each(results, function(r, callback) {
 	    //console.log(r.masterid + ': ' + r.score);
 	    r.masterid in funcMap ? funcMap[r.masterid] += r.score : funcMap[r.masterid] = r.score;
-	    db.query('select $depth as depth, masterid from (traverse in("ChildOf") from (select from Function where masterid = '+ r.masterid +')) where $depth > 0').all().then(function(rresults) {
+	    db.query('select $depth as depth, masterid from (traverse '+searchRel.traverse+' from (select from '+searchRel.class+' where masterid = '+ r.masterid +')) where $depth > 0').all().then(function(rresults) {
 		async.each(rresults, function(rr, cb) {
 		    rr.masterid in funcMap ? funcMap[rr.masterid] += r.score/rr.depth : funcMap[rr.masterid] = r.score;
 		    cb(null);
@@ -43,7 +47,7 @@ var GraphSearch = function(query, maincb) {
 	    } else {
 		//console.log(myMap);
 		async.each(Object.keys(funcMap), function(func, callback) {
-		    db.query('select in("HasFunction").masterid as verts from Function where masterid = "' + func + '"').all().then(function(vertices) {
+		    db.query('select '+searchRel.edge+'.masterid as verts from '+searchRel.class+' where masterid = "' + func + '"').all().then(function(vertices) {
 			console.log(func + ': ' + JSON.stringify(vertices[0].verts.length));
 			async.each(vertices[0].verts, function(v, cb) {
 			    v in vMap ? vMap[v] += funcMap[func] : vMap[v] = funcMap[func];
@@ -56,7 +60,7 @@ var GraphSearch = function(query, maincb) {
 		    // this does the real work
 		    console.log('real work done');
 		    console.log(vMap);
-		    db.query('select masterid, $score as score from Strategy where [name,summary] lucene "'+query+'"').all().then(function(strats) {
+		    db.query('select masterid, $score as score from '+searchClass+' where [name,summary] lucene "'+query+'"').all().then(function(strats) {
 			console.log(strats);
 			var funcTree = {};
 			async.each(strats, function(s, callback) {
@@ -72,7 +76,7 @@ var GraphSearch = function(query, maincb) {
 			    console.log(funcMap);
 			    async.each(sorted, function(str, callback) {
 				console.log(str[0]);
-				db.query('select out("HasFunction").masterid as masterid from Strategy where masterid = "' + str[0] + '"').all().then(function(funs) {
+				db.query('select '+groupEdge+'.masterid as masterid from '+searchClass+' where masterid = "' + str[0] + '"').all().then(function(funs) {
 				    if(!funs[0]) return callback("not work");
 				    async.each(funs[0].masterid, function(f, cb) {
 					f in funcMap ? funcMap[f] += str[1] : funcMap[f] = str[1];
@@ -95,7 +99,7 @@ var GraphSearch = function(query, maincb) {
 				var end = new Date().getTime();
 				var time = end - start;
 				console.log('Time: ' + time);
-				maincb({functions: _.map(sortedFunc, function(r) { return r[0] }), results: funcTree});
+				maincb({groupings: _.map(sortedFunc, function(r) { return r[0] }), results: funcTree});
 			    });
 			});
 		    });
